@@ -18,3 +18,14 @@ cert.key
 
 
 read me.txt
+env/
+
+
+local_settings.py
+
+.log
+.tmp
+
+node_modules/
+
+.egg/
