@@ -1,0 +1,824 @@
+/*--------------HERITAGE CSS ACCUEIL--------------*/
+body {
+    padding: 0;
+    box-sizing: border-box;
+    background-color: #95CFED;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+.information {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 30px;
+    border-radius: 15%;
+}
+.information:hover {
+    background-color: rgb(53, 152, 228);
+    color: white;
+}
+.compte:hover {
+    background-color: rgb(53, 152, 228);
+    color: white;
+}
+.image-principal {
+    background-image: url("../photo/principal.png");
+    background-size:cover ;
+    background-position: center;
+    max-height: 600px;
+    min-height:400px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    position: relative;
+}
+
+header h1 a {
+    text-decoration: none;
+    color: black;
+    font-size: 48px;
+}
+
+header a {
+    text-decoration: none;
+    color: black;
+    margin: 0 30px;
+}
+
+footer {
+    display:flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 0px;
+    bottom: 0;
+    margin-top: auto;
+}
+
+footer a {
+    text-decoration: none;
+    color: black;
+}
+
+/*--------------Block PRESENTATION--------------*/
+
+
+.presentation{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows:repeat(3, 1fr);
+    align-content: center;
+    width: 100%;
+}
+
+.presentation >div{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    position:relative;
+    margin-right:10%;
+    margin-left: 10%;
+}
+
+.presentation >div p{
+    flex:1;
+    text-align: flex-end;
+    flex: 1;
+}
+
+
+.presentation > div:nth-child(3) {
+    justify-content: flex-end;
+}
+
+.presentation > div:nth-child(1) p, .presentation > div:nth-child(3) p {
+    text-align: left;
+    font-size: 20px;
+}
+
+.presentation > div:nth-child(1) , .presentation > div:nth-child(3)  {
+    justify-content: flex-end;
+    flex-direction: row-reverse;
+}
+.presentation > div:nth-child(2) {
+    justify-content: flex-start;
+    flex-direction: row;
+}
+
+.presentation > div:nth-child(2) p {
+    text-align: left;
+    font-size: 20px;
+}
+
+.presentation img{
+    width: 45%;
+    height: 70%;
+    object-fit: cover;
+}
+
+
+
+/*-------------FIN -HERITAGE CSS ACCUEIL--------------*/
+
+/*--------------------------Menu--------------------------*/
+
+#menu-tab {
+    font-family: 'trebuchet ms', geneva;
+	font-size: 11pt;
+	color:black;
+    top: 3px
+	}
+.nav-link.active {
+    background-color: rgb(53, 152, 228);
+    color: white;
+    border: 1px solid rgb(53, 152, 228);
+    }
+/*--------------Dimensions tableau--------------*/
+
+#page-wrap {
+	width: 100%;
+    margin: 10px auto;
+	}
+
+/*-----------Gestion---des---Onglets--------------*/
+
+.tabs {
+    position: relative;
+    min-height: 500px;
+    clear: both;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 10px;
+    }
+    .tab {
+    float: left;
+
+    }
+    .tab label {
+    background: white;
+    padding: 10px;
+    position: relative;
+    left: 2px;
+    border-radius: 10px 10px 10px 10px;
+    box-shadow: 3px -3px 6px rgba(0, 0, 0, 0.71);
+    top: 8px;
+    }
+    .tab [type=radio] {
+    display: none;
+    }
+div.content {
+    display: grid;
+    justify-content: center;
+    position: absolute;
+    top: 28px;
+    left: 0;
+    background:  #95CFED;
+    right: 0;
+    bottom: 0;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px 10px 10px 10px;
+    box-shadow:6px 6px 10px rgba(0, 0, 0, 0.41);
+    overflow-x: scroll;
+    overflow-y: auto;
+    }
+    .tab [type=radio]:checked ~ label {
+    background: rgb(53, 152, 228);
+    color: white;
+    border-bottom: 1px solid white;
+    z-index: 2;
+    }
+
+    .tab [type=radio]:checked ~ label ~ .content {
+    z-index: 1;
+    }
+    .tab [type=radio]:checked ~ label ~ .content > * {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+    -moz-transform:    translateX(0);
+    -ms-transform:     translateX(0);
+    -o-transform:      translateX(0);
+    }
+/*--------------Contenant----des---onglets--------------*/
+::placeholder {
+    color: #000000;
+    }
+
+.content {
+    display:flex;
+    justify-content: center;
+    position: absolute;
+    top: 28px;
+    left: 0;
+    background:  #95CFED;
+    right: 0;
+    bottom: 0;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px 10px 10px 10px;
+    box-shadow:6px 6px 10px rgba(0, 0, 0, 0.41);
+    overflow-x: scroll;
+	overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #000000 #95CFED;
+    }
+
+/*--------------onglet----Trajet--------------*/
+
+/*formulaire de recherche*/
+#recherche_form {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+#recherche_form input{
+    text-align: center;
+    width: 150px;
+    height: 30px;
+    border:#000000 solid 1px;
+
+    }
+#recherche_form select{
+    text-align: center;
+    width: 150px;
+    height: 30px;
+    border-radius: 10px;
+
+    }
+#recherche_form button{
+    width: 150px;
+    height: 30px;
+
+    }
+#recherche_form label{
+    display: none;
+    }
+
+/*filtre recherche*/
+#filtre_form {
+    display: flex;
+    justify-content: center;
+    gap:5px;
+    margin-block: auto;
+    border-radius: 10px;
+    margin-top: 10px;
+
+}
+#filtre_form input{
+    text-align: center;
+    width: 150px;
+    height: 30px;
+    border-radius: 10px;
+
+    }
+#filtre_form select{
+    text-align: center;
+    width: 150px;
+    height: 30px;
+    border-radius: 10px;
+
+    }
+#filtre_form button{
+    width: 150px;
+    height: 30px;
+    border-radius: 10px;
+
+    }
+#filtre_form label{
+    display: none;
+    }
+/*--------------resultat----Trajet--------------*/
+.resultat{
+    justify-content: center;
+    padding: 0;
+}
+
+.resultat ul{
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 150px;
+    gap: 10px;
+}
+.resultat ul li{
+    display: flex;
+    border: 1px solid #ccc;
+    border-radius: 10px 10px 10px 10px;
+    box-shadow:6px 6px 10px rgba(0, 0, 0, 0.41);
+    list-style-type: none;
+    background-color: #6fc2ec;
+    padding: 10px;
+    justify-content: center;
+}
+.resultat ul li:hover{
+    background-color: rgb(53, 152, 228);
+    color: white;
+}
+
+/*--------------Contenu----Chauffeur--------------*/
+
+.flex{
+    display: flex;
+    flex-direction: column;
+}
+.flex1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    gap: 10px;
+    border-radius: 10px;
+
+}
+#trajet_form input{
+    text-align: center;
+    width: 150px;
+    height: 30px;
+    border-radius: 10px;
+
+    }
+#trajet_form select{
+    text-align: center;
+    width: 150px;
+    height: 30px;
+    border-radius: 10px;
+
+    }
+#trajet_form button{
+    width: 150px;
+    height: 30px;
+    border-radius: 10px;
+    margin-top: 10px;
+
+    }
+#trajet_form label{
+    display: none;
+    }
+
+div.content > ul {
+    display:flex;
+    gap: 10px;
+    padding:0;
+
+}
+div.content > ul > li {
+    display: flex;
+}
+div.content > ul > li > input [type=radio]:checked ~ label {
+    background: rgb(53, 152, 228);
+    color: white;
+    border-bottom: 1px solid white;
+    z-index: 1;
+    display: flex;
+    border: 1px solid #ccc;
+    border-radius: 10px 10px 10px 10px;
+    box-shadow:6px 6px 10px rgba(0, 0, 0, 0.41);
+    list-style-type: none;
+    width: 175px;
+    background-color: rgb(53, 152, 228);
+    margin-top:20px;
+    padding:10px;
+
+    }
+
+div.content >ul{
+    z-index: 1;
+
+}
+/*hover proposition de trajet*/
+div.content > ul > li> input[type=radio]:hover ~ label {
+    background-color: rgb(53, 152, 228);
+    color: white;
+
+}
+
+div.content > ul > li > input[type="radio"] {
+    display: none;
+}
+div.content > ul > li > input[type="radio"]input:hover {
+    background-color: rgb(53, 152, 228);
+    color: white;
+}
+
+div.content p {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+}
+
+/*--------------reservation---trajet-----------*/
+
+#selection_trajet{
+    justify-content: center;
+    gap: 10px;
+    border-radius: 10px;
+    z-index: 1;
+}
+
+form#selection_trajet > ul.resultat  {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+
+    }
+form#selection_trajet > ul.resultat > li{
+    display: flex;
+    }
+
+form#selection_trajet > div {
+    display: flex;
+    justify-content: center;
+    border-radius: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    }
+/*--------------Contenu----Profile--------------*/
+textarea#id_exigences_personnelles{
+    min-width: 200px;
+    max-width: 200px;
+    min-height: 22px;
+    max-height: 22px;
+    }
+
+#role_form{
+    display: flex;
+    margin-top:10px;
+    margin-bottom: 30px;
+    justify-content: center;
+    }
+#role_form label{
+        display:none;
+    }
+#role_form select{
+        text-align: center;
+        border-radius: 10px 0px 0px 10px;
+    }
+form#role_form > button#button_role{
+        border-radius: 0px 10px 10px 0px;
+    }
+
+#preference_form{
+        display: flex;
+        margin-top:10px;
+        margin-bottom: 30px;
+        justify-content: center;
+        }
+#preference_form label{
+            display:none;
+        }
+#preference_form select#id_fumeur,select#id_animaux{
+            text-align: center;
+        }
+
+form#preference_form > button#button_preferences{
+            border-radius: 10px;
+        }
+
+div.info_perso{
+        margin-top: 10px;
+        gap: 10px;
+    }
+div.info_perso >  li{
+        display: flex;
+        border: 1px solid #ccc;
+        border-radius: 10px 10px 10px 10px;
+        box-shadow:6px 6px 10px rgba(0, 0, 0, 0.41);
+        list-style-type: none;
+        background-color: #6fc2ec;
+        padding: 10px;
+        justify-content: center;
+    }
+form#voiture_form{
+        display: flex;
+        justify-content: center;
+
+        }
+
+#voiture_form input{
+    text-align: center;
+    border-radius: 10px;
+}
+
+#voiture_form button{
+    border-radius: 10px;
+    }
+#voiture_form label{
+    display: none;
+    }
+#voiture_form select{
+    text-align: center;
+    border-radius: 10px;
+
+    }
+select {
+    padding: 6px 14px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    margin-right: 0;
+    width: 200px;
+    height: 30px;
+    box-sizing: border-box;
+    background-color: white;
+    border-radius: 10px;
+
+}
+select :focus{
+    background-color: #6fc2ec;
+    color: rgb(255, 255, 255);
+    }
+
+select:hover{
+    background-color: rgb(53, 152, 228);
+    color: white;
+    }
+select option{
+    color: rgb(0, 0, 0);
+    background-color: #6fc2ec;
+    }
+select option:hover{
+    background-color: #6fc2ec;
+    color: white;
+    }
+.voiture_mere{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+input{
+    font-size: 16px;
+    border: 1px solid #ffffff;
+    margin-right: 0;
+    width: 200px;
+    height: 30px;
+    box-sizing: border-box;
+    background-color: rgb(255, 255, 255);
+}
+
+input:hover{
+    background-color: rgb(53, 152, 228);
+    color: white;
+
+    }
+
+#deconnexion{
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        width:200px;
+        height: 30px;
+        background-color: rgb(246, 175, 175);
+        margin-top:20px;
+        border-radius: 10px;
+    }
+
+#deconnexion a {
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+}
+#deconnexion:hover a {
+    color: white;
+    background-color:rgb(0, 0, 0) ;
+}
+#deconnexion:hover  {
+    color: white;
+    background-color:rgb(0, 0, 0) ;
+}
+
+
+
+
+
+
+
+
+
+
+
+/*--------------Contenu----covoiturage--------------*/
+/*--------------Contenu----chauffeur--------------*/
+
+div.content > div > form#etat_form > ul.resultat{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    }
+
+div.tab > div.content > div > form#etat_form > ul.resultat > li{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+    }
+
+#etat_form > ul.resultat > li.resultat{
+    z-index: 0;
+}
+
+form#etat_form{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    }
+form#etat_form ul.resultat{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    }
+form#etat_form ul > li{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+    }
+form#etat_form > ul >  button#id_statut{
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    flex-direction: column;
+    }
+    form#etat_form > label{
+        display: none;
+    }
+
+/*--------------Contenu--- passager--------------*/
+
+form#reservation_form{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    }
+form#reservation_form > label{
+    display: none;
+    }
+form#reservation_form ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    z-index: 0;
+    }
+form#reservation_form ul > li{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+    }
+
+
+
+/*--------------Contenu----Adresse--------------*/
+
+.photo_profile {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height: 130px;
+    border-radius: 15%;
+}
+input#id_photo{
+    display: flex;
+    }
+
+.photo-parent{
+    display:flex;
+    flex-direction: column;
+}
+div.photo-parent > div > img{
+    width: 200px;
+    height: 130px;
+    border-radius: 15%;
+    border: 1px solid #ccc;
+    margin-left: 51%
+}
+.photo-fille{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+#adresse_form img textarea {
+    display:none;
+    }
+#adresse_form label {
+    display: none;
+}
+#adresse_form input{
+    text-align: center;
+    border-radius: 10px;
+    }
+#adresse_form input:hover{
+    background-color: rgb(53, 152, 228);
+    color: white;
+    }
+
+
+form#adresse_form a{
+    display: none;
+    }
+form#adresse_form button{
+    border-radius: 10px;
+}
+
+#adresse_form select{
+    text-align: center;
+    border-radius: 10px;
+    }
+
+
+input[type="file"]::file-selector-button {
+    display: flex;
+    background-color: #ffffff;
+    color: rgb(1, 0, 0);
+    border: none;
+    width: 200px;
+    height: 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    justify-content: center;
+    align-items: center;
+}
+
+input[type="file"]::file-selector-button:hover {
+    background-color: rgb(53, 152, 228);
+    color: white;
+    display: flex;
+}
+
+/*-----Onglets actifs--------------*/
+
+    [type=radio]:checked ~ label {
+    background: rgb(53, 152, 228);
+    border-bottom: 1px solid white;
+    z-index: 2;
+
+    }
+    [type=radio]:checked ~ label ~ .content {
+    z-index: 1;
+
+    }
+    [type=radio]:checked ~ label ~ .content > * {
+    opacity: 1;
+    -webkit-transform: translateX(0);
+    -moz-transform:    translateX(0);
+    -ms-transform:     translateX(0);
+    -o-transform:      translateX(0);
+    }
+
+/*--------------Bouton--------------*/
+button {
+    justify-content: center;
+    font-size: 16px;
+    width:200px;
+    height: 30px;
+    box-sizing: border-box;
+    background-color: #0bd9f0;
+    border: 1px solid #ffffff;
+}
+div.content > div > div{
+    display: flex;
+    justify-content: center;
+}
+button:hover {
+    background-color: rgb(53, 152, 228);
+    color: white;
+}
+
+/*--------------Historique--------------*/
+div.content > div >  div > ul > li#historique{
+    display:flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    justify-content: center;padding: 0;
+}
+
+div.content > div >  div > ul {
+    padding:0;
+    flex-wrap: wrap;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+div.content > div >  div > li#historique{
+    display: flex;
+}
+div.content > div >  div {
+    display: flex;
+    flex-wrap: wrap;
+    gap:10px;
+}
