@@ -1,0 +1,22 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | {{ site_title|default:_('Django site admin') }}{% endblock %}
+
+{% block branding %}
+<div id="site-name"><a href="{% url 'admin:index' %}">Administration</a></div>
+
+{% if user.is_anonymous %}
+  {% include "admin/color_theme_toggle.html" %}
+{% endif %}
+
+{% endblock %}
+{% block nav-global %}
+<!--<div>
+  <link href="{% static 'css/accueil.css' %}" rel="stylesheet">
+  <img src="{% static 'photo/principal.png' %}" alt="Image principale" style="width: 200px; border-radius: 10px;">
+</div>-->
+{% endblock %}
+
+{% block nav-breadcrumbs %}
+{% endblock %}

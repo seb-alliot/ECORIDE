@@ -1,0 +1,45 @@
+    <p>Vous avez participez au covoiturage de :</p>
+        <div>
+            <ul>
+                {% for tjt in trajets %}
+                    {% if tjt.etat == "Terminé" or tjt.etat == "Annulé" %}
+                        <li id="historique">
+                            <label for="trajet_{{ tjt.id }}">
+                                Départ de :<br>{{ tjt.ville_depart }} pour {{ tjt.ville_arrivee }}<br>
+                                Le :<br> {{ tjt.date }}<br>
+                                À : {{ tjt.heure }} heure<br>
+                                Voiture choisie : <br>{{ tjt.voiture.marque }} {{ tjt.voiture.modele }}<br>
+                                Prix du covoiturage : {{ tjt.prix }}€<br>
+                                Places disponibles :
+                                {% if tjt.places %}
+                                {{ tjt.places }}
+                                {% else %}
+                                complet
+                                {% endif %}<br>
+                                Etat: {{ tjt.etat }}<br>
+                            </label>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            {% for res in reservation %}
+                {% if res.etat_reservation == "Annulé" %}
+                <li id="historique">
+                    <label for="trajet_{{ tjt.id }}">
+                        Départ de :<br>{{ res.trajet_reserver.ville_depart}} pour {{ res.trajet_reserver.ville_arrivee }}<br>
+                        Le :<br> {{ res.trajet_reserver.date }}<br>
+                        À : {{ res.trajet_reserver.heure|date:"h"}}h{{ res.trajet_reserver.heure|date:"i" }}min<br>
+                        Prix
+                        {% if res.etat_reservation == "Annulé" %}
+                        rembourser
+                        {% else %}
+                        payer
+                        {% endif %} :
+                        {{ res.prix_par_passager}}€<br>
+                        places : {{ res.trajet_reserver.places }}<br>
+                        Etat: {{ res.etat_reservation }}<br>
+                    </label>
+                </li>
+                {% endif %}
+            {% endfor %}
+        </div>

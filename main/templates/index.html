@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %}
+    <title>
+        EcoRide
+    </title>
+    {% endblock title %}
+    {% block style %}
+        <link href="{% static 'css/accueil.css' %}" rel="stylesheet">
+    {% endblock style %}
+</head>
+
+<header>
+    {% block headerContent %}
+    {% block logo %}
+        {% include "interface_utilisateur/reutilisable/accueil/_logo.html" %}
+    {% endblock logo %}
+
+    {% block messageinformation %}
+        {% include "interface_utilisateur/reutilisable/accueil/_msginfo.html" %}
+    {% endblock messageinformation %}
+
+    {% block connection %}
+            {% include "interface_utilisateur/reutilisable/accueil/_info_user.html" %}
+    {% endblock connection %}
+
+    {% endblock headerContent %}
+</header>
+
+<body>
+    {% block body %}
+        {% block fondbase %}
+        <div class="image-principal"></div>
+        {% endblock fondbase %}
+
+    {% block principal %}
+        {% include "interface_utilisateur/reutilisable/_trajet.html" %}
+    {% endblock principal %}
+        {% include "interface_utilisateur/reutilisable/accueil/_presentation.html" %}
+    {% endblock body %}
+
+    <footer>
+        {% block footerContent %}
+            {% include "interface_utilisateur/reutilisable/accueil/_footer.html" %}
+        {% endblock footerContent %}
+    </footer>
+</body>
+</html>

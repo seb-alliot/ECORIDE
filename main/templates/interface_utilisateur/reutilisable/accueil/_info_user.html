@@ -1,0 +1,9 @@
+{% if user.is_authenticated %}
+    {% if user.is_superuser %}
+        {% include "login/login_user/_admin_login.html" %}
+    {% else %}
+        {% include "login/login_user/_login_lambda.html" %}
+    {% endif %}
+{% else %}
+    {% include "login/login_user/_login_anonymous.html" %}
+{% endif %}

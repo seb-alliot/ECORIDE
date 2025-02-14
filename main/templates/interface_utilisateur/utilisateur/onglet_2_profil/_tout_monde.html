@@ -1,0 +1,7 @@
+<p>Votre profile actuel est {{ role.get_role_display }}</p>
+<form id="role_form"method="post">
+    {% csrf_token %}
+        <label for="role_form">Choisissez un profile</label>
+            {{ role_form.role}}
+    <button id="button_role"type="submit" name="form_soumis" value="role_form">Modifier mon profil</button>
+</form>

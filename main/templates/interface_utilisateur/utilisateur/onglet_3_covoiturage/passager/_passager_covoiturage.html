@@ -1,0 +1,49 @@
+<form id="reservation_form" method="post">
+    {% csrf_token %}
+    <ul>
+        {% for res in reservation %}
+            {% if res.etat_reservation == "Reserver" %}
+                {% if res.passager == request.user %}
+                    <li>
+                        <input
+                            type="radio"
+                            name="reservation_id"
+                            value="{{ res.id }}"
+                            id="trajet_{{ res.id }}"
+                            aria-labelledby="label_trajet_{{ res.id }}"
+                        >
+                        <label
+                        for="trajet_{{ res.id }}"
+                        >
+                            {% if res.trajet_reserver.chauffeur.adresse_user.photo %}
+                                <img src="{{ res.trajet_reserver.chauffeur.adresse_user.photo.url }}" alt="photo de profil" class="photo_profile">
+                            {% else %}
+                                <img src="{{ photo_default_url }}" alt="photo par défaut" class="photo_profile">
+                            {% endif %}
+                            Proposé par : {{ res.trajet_reserver.chauffeur }}<br><br>
+                            Départ de :<br>{{ res.trajet_reserver.ville_depart }} pour {{ res.trajet_reserver.ville_arrivee }}<br><br>
+                            Le : {{ res.trajet_reserver.date }}<br>
+                            À : {{ res.trajet_reserver.heure }} heure<br><br>
+                                Voiture : {{ res.trajet_reserver.voiture.marque }} {{ res.trajet_reserver.voiture.modele }}<br><br>
+                            Prix payer : {{ res.prix_par_passager }}€<br>
+                            Places disponibles :
+                            {% if res.trajet_reserver.places != 0 %}
+                            {{ res.trajet_reserver.places }}
+                            {% else %}
+                            Complet
+                            {% endif %}<br><br>
+                            Etat du trajet : {{ res.trajet_reserver.etat }}<br><br>
+                            {{ res.places }} places de reservée{{ res.places |pluralize }} <br>
+                            Etat de la reservation : {{ res.etat_reservation }}<br>
+                        </label>
+                    </li>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    </ul>
+    <label for="etat_reservation_{{ res.id }}">Modifier le statut :</label>
+            {{ reservation_form.etat_reservation}}
+        <button type="submit" name="form_soumis" value="reservation_form">
+            Modifier le statut
+        </button>
+</form>

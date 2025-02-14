@@ -1,0 +1,9 @@
+<a href="{% url 'MonCompte' %}">
+    <p>Votre compte</p>
+    <img src="{{ adresse_user.photo.url|default:photo_default_url }}" alt="photo de profil" class="photo_profile">
+</a>
+<br>
+<a href="{% url 'admin:index' %}">
+    {{ request.user.username }}<br>Gain de la plateforme : {{ credit.credit|floatformat:2 }} €<br>
+    Admin
+</a>

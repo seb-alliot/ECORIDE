@@ -1,0 +1,90 @@
+    <form id="recherche_form" method="GET">
+        {% csrf_token %}
+
+        <label for="ville_depart">Départ</label>
+            {{ recherche_form.ville_depart }}
+
+        <label for="ville_arrivee">Arrivée</label>
+            {{ recherche_form.ville_arrivee }}
+
+        <label for="date">Date</label>
+            {{ recherche_form.date }}
+
+        <button type="submit"name="form_trajet" value="recherche_form">Rechercher</button>
+    </form>
+
+    {% if resultat %}
+    <p>Voici les trajets correspondant à votre recherche</p>
+    <form id="selection_trajet" method="GET" action="{% url 'reservation' %}">
+        {% csrf_token %}
+        <ul class="resultat">
+            {% for resultat in resultat %}
+                <li class="resultat">
+                    <input
+                        type="radio"
+                        name="trajet_id"
+                        value="{{ resultat.id }}"
+                        id="trajet_{{ resultat.id }}"
+                        aria-labelledby="label_trajet_{{ resultat.id }}"
+                        >
+                    <label
+                        for="trajet_{{ resultat.id }}"
+                        >
+                        {% if resultat.chauffeur.adresse_user.photo %}
+                            <img src="{{ resultat.chauffeur.adresse_user.photo.url }}" alt="photo de profil" class="photo_profile">
+                        {% else %}
+                            <img src="{{ photo_default_url }}" alt="photo par default" class="photo_profile">
+                        {% endif %}
+                        {{ resultat.chauffeur }}<br>
+                        Départ de :<br>
+                        {{ resultat.ville_depart }} pour {{ resultat.ville_arrivee }}<br>
+                        Le :<br>
+                        {{ resultat.date }}<br>
+                        A : {{ resultat.heure }} heure<br>
+                        Moteur: {{ resultat.type_moteur }}<br>
+                        {% if resultat.voiture.type_moteur == 'Electrique' %}
+                            <p>Ce trajet est écolgique</p>
+                        {% endif %}
+                        Prix:  {{ resultat.prix }}€<br>
+                        Places disponibles:
+                            {% if resultat.places != 0 %}
+                                {{ resultat.places }}<br>
+                            {% else %}
+                                complet
+                            {% endif %}<br>
+                        statut: {{ resultat.etat }}<br>
+                        durée estimé: {{ resultat.temps_trajet }}<br>
+                        note:
+                        {% if resultat.chauffeur.note %}
+                        {{ chauffeur.note_moyenne|floatformat:1 }} / 5 ⭐
+                        {% else %}
+                            Pas encore noté
+                        {% endif %}
+                    </label>
+                </li>
+            {% endfor %}
+        </ul>
+        {% if resultat %}
+        <div>
+            <button type="submit">Réserver</button>
+        </div>
+        {% else %}
+            <p>Oups !! Choux blanc, essayer donc une autre date !!</p>
+        {% endif %}
+    </form>
+    {% endif %}
+
+    {% if resultat %}
+        <form id="filtre_form" method="GET">
+            {% csrf_token %}
+            <label for="note">Note du chauffeur</label>
+                {{ filtre_form.note }}
+            <label for="place">durée trajet</label>
+                {{ filtre_form.temps_trajet }}
+            <label for="prix">Prix maximum</label>
+            {{ filtre_form.prix }}
+            <button type="submit" name="form_trajet" value="filtre_form">Filtrer la recherche</button>
+        </form>
+    {% elif resultat is Null %}
+        <p>Vous n'avez pas trouvé de trajet vous correspondant, changé un critère qui s'est ^_* </p>
+    {% endif %}

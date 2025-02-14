@@ -1,0 +1,19 @@
+<p>Vos preferences actuel sont :
+    <br>
+        {{ preference.get_fumeur_display }} <br>
+        {{ preference.get_animaux_display }}<br>
+        {{ preference.get_exigences_particulieres_display }}<br>
+        {{ preference.exigences_personnelles }}
+    </p>
+<form id="preference_form" method="post">
+    {% csrf_token %}
+        <label for="preferences_form">Préférences</label>
+            {{ preference_form.fumeur }}
+            <label for="preferences_form">Animaux</label>
+            {{ preference_form.animaux }}
+        <label for="preferences_form">Exigences personnelles</label>
+            {{ preference_form.exigences_particulieres }}
+            <label for="preferences_form">Animaux</label>
+            {{ preference_form.exigences_personnelles }}
+        <button id="button_preferences" type="submit" name="form_soumis" value="preference_form">Modifier mes préférences</button>
+    </form>

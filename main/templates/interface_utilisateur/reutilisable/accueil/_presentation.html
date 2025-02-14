@@ -1,0 +1,20 @@
+{% load static %}
+
+<section id="presentation">
+    {% block content %}
+        <div class="presentation" >
+            <div>
+                <img src="{% static 'photo/route_corse1.jpg' %}" alt="route"  class="item1">
+                <p>Soucieux de l’environnement, EcoRide permet de limiter les émissions de CO₂ en favorisant le covoiturage.</p>
+            </div>
+            <div>
+                <img src="{% static 'photo/budget.jpg' %}" alt="budget"  class="item2" >
+                <p>Avec EcoRide, proposé, réservé et organisé vos déplacements en toute simplicité avec la sécurité en plus.</p>
+            </div>
+            <div>
+                <img src="{% static 'photo/covoiturage.jpg' %}" alt="covoiturage" class="item3" >
+                <p>En covoiturage, voyagez avec un portefeuille léger, où que vous soyez.</p>
+            </div>
+        </div>
+        {% endblock content %}
+    </section>

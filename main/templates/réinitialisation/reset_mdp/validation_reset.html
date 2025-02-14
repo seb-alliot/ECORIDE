@@ -1,0 +1,6 @@
+<form method="POST"class="recherche_form">
+    {% csrf_token %}
+        <label for='id_email' class="sr-only">Votre Email</label>
+        {{ form.email }}
+    <button type="submit">Envoyer</button>
+</form>

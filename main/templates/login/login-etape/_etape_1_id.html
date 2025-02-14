@@ -1,0 +1,7 @@
+<form method="POST"class="recherche_form">
+    {% csrf_token %}
+        <label for="recherche_form">Identifiant</label>
+        {{ form.username }}
+    <button type="submit">Se connecter</button>
+</form>
+    <a href="{% url 'inscription' %}">Vous créer un compte ?</a>

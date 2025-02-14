@@ -1,0 +1,25 @@
+
+<form  id="voiture_form" action="{% url 'MonCompte' %}" method="post">
+    {% csrf_token %}
+    <div class="voiture_mere">
+        <div>
+        <label for="Marque du véhicule">Marque</label>
+            {{ voiture_form.marque }}
+        <label for="Model du véhicule">Modele</label>
+            {{ voiture_form.modele  }}
+        <label for="Nombre de places">places</label>
+            {{ voiture_form.places }}
+        <label for="Immatriculation du véhicule">Immatriculation</label>
+            {{ voiture_form.immatriculation }}
+        </div>
+        <div>
+        <label for="annee">Année</label>
+            {{ voiture_form.annee }}
+        <label for="Couleur du véhicule">Couleur</label>
+            {{ voiture_form.couleur }}
+        <label for="Type de moteur">Motorisation</label>
+            {{ voiture_form.type_moteur }}
+        <button type="submit"name="form_soumis" value="voiture_form">Ajouter un véhicule</button>
+        </div>
+    </div>
+</form>

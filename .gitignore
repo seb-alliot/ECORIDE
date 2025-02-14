@@ -1,0 +1,20 @@
+*.env
+
+*.log
+*.tmp
+*.swp
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+venv/
+logs/
+
+cert.crt
+cert.key
+
+.vscode/
+
+static/
+read me.txt

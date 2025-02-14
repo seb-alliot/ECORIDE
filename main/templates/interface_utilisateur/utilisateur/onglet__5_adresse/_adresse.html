@@ -1,0 +1,59 @@
+<form id="adresse_form" action="{% url 'MonCompte' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+        <div class="photo-parent">
+            <div>
+                {{ form.subject.errors }}
+            {% if adresse_user.photo %}
+                <img src="{{ adresse_user.photo.url }}" alt="photo de profil" class="photo_profile">
+                    {{ adresse_form.photo }}
+            {% else %}
+                <img src="{{ photo_default_url }}" alt="photo par default" class="photo_profile">
+                {{ adresse_form.photo }}
+            {% endif %}
+            </div>
+            <div class="photo-fille">
+                {{ form.subject.errors }}
+            <label for="numero" >Numéro</label>
+                {{ adresse_form.numero }}
+                {{ form.subject.errors }}
+            <label for="type_Voie" >Type de rue</label>
+                {{ adresse_form.type_voie }}
+            </div>
+            <div class="photo-fille">
+                {{ form.subject.errors }}
+            <label for="nom_rue">Nom de la rue</label>
+                {{ adresse_form.nom_rue }}
+                {{ form.subject.errors }}
+            <label for="complement">Complément</label>
+                {{ adresse_form.complement }}
+            </div>
+            <div class="photo-fille">
+                {{ form.subject.errors }}
+            <label for="code_postal">Code postal</label>
+                {{ adresse_form.code_postal }}
+                {{ form.subject.errors }}
+            <label for="ville">Ville</label>
+                {{ adresse_form.ville }}
+            </div>
+            <div class="photo-fille">
+                {{ form.subject.errors }}
+            <label for="pays">Pays</label>
+                {{ adresse_form.pays }}
+                {{ form.subject.errors }}
+            <label for='telephone'>Téléphone</label>
+                {{ adresse_form.telephone }}
+            </div>
+            {{ form.subject.errors }}
+            <div class="photo-fille">
+                {{ form.subject.errors }}
+                {{ form.subject.errors }}
+            <label for='email'>Email</label>
+                {{ adresse_form.email }}
+                {%if adresse_user %}
+                <button type="submit" name="form_soumis" value="adresse_form">Modifier</button>
+            {% else %}
+                <button type="submit" name="form_soumis" value="adresse_form">Ajouter</button>
+            {% endif %}
+            </div>
+        </div>
+</form>

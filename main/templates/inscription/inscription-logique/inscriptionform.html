@@ -1,0 +1,15 @@
+<form id="recherche_form" action="{% url 'inscription' %}" method="POST">
+    {% csrf_token %}
+        <label for="identifiant">Identifiant</label>
+        {{ form.username }}
+
+        <label for='email'>Votre Email</label>
+        {{ form.email }}
+        <label for="password1">Mot de passe</label>
+        {{ form.password1 }}
+
+        <label for="password2">Confirmer le mot de passe</label>
+        {{ form.password2 }}
+    </div>
+    <button type="submit">Créer un compte</button>
+</form>

@@ -1,0 +1,12 @@
+<form method="post"class="form_identifiant">
+    {% csrf_token %}
+    <div >
+        <label for="id_new_password1" class='sr-only'>Nouveau mot de passe</label>
+        {{ form.new_password1 }}
+    </div>
+    <div>
+        <label for="id_new_password2" class='sr-only'>Confirmer le mot de passe</label>
+        {{ form.new_password2 }}
+    </div>
+    <button type="submit">Confirmer</button>
+</form>
