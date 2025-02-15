@@ -33,10 +33,9 @@ SECRET_KEY = env('DJANGO_SECRET_KEY', default='django-insecure-#&')
 # dans settings.py
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['ecoride-itsuki.it.com', 'www.ecoride-itsuki.it.com']
-
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -95,10 +94,15 @@ WSGI_APPLICATION = 'ECORIDE.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-'default': env.db('DATABASE_URL', default='postgres://itsuki:Studietudiant1.@147.93.90.211:5432/ecoride')
-
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'ECORIDE',  # Nom de la base de données
+        'USER': 'postgres',  # Nom d'utilisateur
+        'PASSWORD': 'Studietudiant1.',  # Mot de passe
+        'HOST': 'localhost',  # Adresse de l'hôte (l'IP de ton serveur PostgreSQL)
+        'PORT': '5432',  # Port (par défaut pour PostgreSQL)
+    }
 }
-
 
 
 
@@ -143,13 +147,11 @@ MEDIA_URL = '/main/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'main', 'profils_picture')  # Ou 'media/profils_picture'
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'ECORIDE', 'static'),
-    # os.path.join(BASE_DIR, 'main', 'static'),  # Supprimer si le dossier n'existe pas
+    os.path.join(BASE_DIR, 'static'),
 ]
-
 
 
 # Default primary key field type
@@ -164,7 +166,7 @@ LOGGING = {
         'file': {
             'level': 'ERROR',
             'class': 'logging.FileHandler',
-            'filename': '/home/itsuki/ECORIDE/logs/django_errors.log',
+            'filename': 'logs/django_error.log',  # Assure-toi que ce chemin est correct
         },
     },
     'loggers': {
@@ -198,13 +200,12 @@ LOGOUT_REDIRECT_URL = '/'
 
 SECURE_PROXY_SSL_HEADER =("HTTP_X_FORWARDED_PROTO","https")
 SECURE_SSL_REDIRECT = False
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-SECURE_BROWSER_XSS_FILTER = True
-SECURE_CONTENT_TYPE_NOSNIFF = True
-SECURE_HSTS_SECONDS = 31536000  # 1 an
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-SECURE_HSTS_PRELOAD = True
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
+SECURE_BROWSER_XSS_FILTER = False
+SECURE_CONTENT_TYPE_NOSNIFF = False
+SECURE_HSTS_SECONDS = 0  # 1 an
+SECURE_HSTS_INCLUDE_SUBDOMAINS = False
+SECURE_HSTS_PRELOAD = False
 
 # settings.py
-

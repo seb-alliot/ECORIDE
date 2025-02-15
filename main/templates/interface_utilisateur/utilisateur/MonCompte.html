@@ -4,6 +4,10 @@
     <link href="{% static 'css/MonCompte.css' %}" rel="stylesheet">
 {% endblock style %}
 
+{% block messageinformation %}
+    {% include "interface_utilisateur/reutilisable/accueil/_msginfo.html" %}
+{% endblock messageinformation %}
+
 {% block principal %}
     {% with role.get_role_display as user_role %}
         {% if user_role == "Chauffeur" %}

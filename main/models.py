@@ -350,7 +350,7 @@ class ChoixRole(models.Model):
         verbose_name_plural = "Roles utilisateurs"
 
     def __str__(self):
-        return f" role actuel { self.get_role_display()}."
+        return f"  { self.get_role_display()}"
 
 
 class Voiture(models.Model):

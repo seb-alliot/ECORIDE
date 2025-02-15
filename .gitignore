@@ -20,8 +20,8 @@ cert.key
 read me.txt
 env/
 
+server_settings.py
 
-local_settings.py
 
 .log
 .tmp

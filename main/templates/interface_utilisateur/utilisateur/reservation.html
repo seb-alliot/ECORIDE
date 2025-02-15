@@ -35,6 +35,12 @@
         <!--Section note et commentaires-->
 
         <div id="note_commentaire">
+            <p>Avis <br>{% for commentaire in commentaires %}
+                <p>{{ commentaire.passager__username }} : {{ commentaire.commentaire }}</p>
+            {% empty %}
+                <p>Aucun commentaire</p>
+            {% endfor %}
+
 
             <p>Note moyenne : {{  note_chauffeur.get_note_moyenne|floatformat:1 }} / 5 ⭐ </p>
             <p>{{ trajet.places }} places restantes</p>

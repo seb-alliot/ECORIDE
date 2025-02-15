@@ -14,7 +14,11 @@
     </form>
 
     {% if resultat %}
-    <p>Voici les trajets correspondant à votre recherche</p>
+
+    {% block message_resultat %}
+        {% include "interface_utilisateur/reutilisable/accueil/_msginfo.html" %}
+    {% endblock message_resultat %}
+
     <form id="selection_trajet" method="GET" action="{% url 'reservation' %}">
         {% csrf_token %}
         <ul class="resultat">
@@ -54,12 +58,6 @@
                             {% endif %}<br>
                         statut: {{ resultat.etat }}<br>
                         durée estimé: {{ resultat.temps_trajet }}<br>
-                        note:
-                        {% if resultat.chauffeur.note %}
-                        {{ chauffeur.note_moyenne|floatformat:1 }} / 5 ⭐
-                        {% else %}
-                            Pas encore noté
-                        {% endif %}
                     </label>
                 </li>
             {% endfor %}
@@ -68,8 +66,6 @@
         <div>
             <button type="submit">Réserver</button>
         </div>
-        {% else %}
-            <p>Oups !! Choux blanc, essayer donc une autre date !!</p>
         {% endif %}
     </form>
     {% endif %}
@@ -85,6 +81,4 @@
             {{ filtre_form.prix }}
             <button type="submit" name="form_trajet" value="filtre_form">Filtrer la recherche</button>
         </form>
-    {% elif resultat is Null %}
-        <p>Vous n'avez pas trouvé de trajet vous correspondant, changé un critère qui s'est ^_* </p>
     {% endif %}
