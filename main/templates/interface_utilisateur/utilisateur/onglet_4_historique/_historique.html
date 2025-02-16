@@ -23,7 +23,7 @@
                 {% endfor %}
             </ul>
             {% for res in reservation %}
-                {% if res.etat_reservation == "Annulé" %}
+                {% if res.etat_reservation == "Annulé" or res.etat_reservation == "Terminé" %}
                 <li id="historique">
                     <label for="trajet_{{ tjt.id }}">
                         Départ de :<br>{{ res.trajet_reserver.ville_depart}} pour {{ res.trajet_reserver.ville_arrivee }}<br>

@@ -488,16 +488,90 @@ class StatutReservationForm(forms.ModelForm):
 class AvisForm(forms.ModelForm):
     class Meta:
         model = NoteUser
-        fields = ["avis"]
+        fields = ["avis","note", "commentaire", "passager","chauffeur","trajet"]
         widgets = {
             "avis": forms.Select(choices=NoteUser.AVIS),
-        }
-
-class AvisPassagerForm(forms.ModelForm):
-    class Meta:
-        model = NoteUser
-        fields = ["note", "commentaire"]
-        widgets = {
             "note": forms.Select(choices=NoteUser.NOTE),
             "commentaire": forms.Textarea(attrs={"placeholder": "Votre commentaire"}),
+            "passager": forms.HiddenInput(),
+            "chauffeur": forms.HiddenInput(),
+            "trajet": forms.HiddenInput(),
         }
+
+    def clean_commentaire(self):
+        commentaire = self.cleaned_data.get("commentaire")
+        if len(commentaire) > 200:
+            raise forms.ValidationError("Le commentaire ne doit pas dépasser 200 caractères.")
+        return commentaire
+
+    def __init__(self, *args,user=None, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        if user and user.is_authenticated:
+            self.instance.passager = user
+            self.fields["passager"].initial = user.id
+            self.fields["passager"].widget = forms.HiddenInput()
+            self.fields["chauffeur"].widget = forms.HiddenInput()
+            self.fields["trajet"].widget = forms.HiddenInput()
+
+            if trajet:=self.initial.get("trajet"):
+                self.fields["trajet"].initial = trajet.id
+                self.fields["chauffeur"].initial = trajet.user.id
+
+                self.fields["chauffeur"].widget.attrs["readonly"] = True
+                self.fields["trajet"].widget.attrs["readonly"] = True
+                self.fields["passager"].widget.attrs["readonly"] = True
+                
+
+
+
+class ContactForm(forms.Form):
+
+    pseudo = forms.CharField(
+        max_length=100,
+        label="Prénom",
+        widget=forms.TextInput(attrs={"placeholder": "Votre prénom"}),
+        required=True,
+    )
+    email = forms.EmailField(
+        max_length=100,
+        label="Email",
+        widget=forms.EmailInput(attrs={"placeholder": "Votre email"}),
+        required=True,
+    )
+    telephone = forms.CharField(
+        max_length=10,
+        label="Téléphone",
+        widget=forms.TextInput(attrs={"placeholder": "Votre téléphone, facultatif"}),
+        required=True,
+    )
+    sujet = forms.CharField(
+        max_length=100,
+        label="Sujet",
+        widget=forms.TextInput(attrs={"placeholder": "Sujet"}),
+        required=True,
+    )
+    message = forms.CharField(
+        label="Message",
+        widget=forms.Textarea(attrs={"placeholder": "Votre message"}),
+        required=True,
+    )
+
+    def clean_message(self):
+        message = self.cleaned_data.get("message")
+        if len(message) > 200:
+            raise forms.ValidationError("Le message ne doit pas dépasser 200 caractères.")
+        return message
+
+    def __init__(self, *args,user=None, **kwargs):
+        #initialise le formulaire si l'utilisateur possede un compte et est connecté
+        super().__init__(*args, **kwargs)
+
+        if user and user.is_authenticated:
+            self.fields["pseudo"].initial = user.username
+            self.fields["email"].initial = user.email
+            self.fields["telephone"].initial = user.adresse_user.telephone
+
+            self.fields["pseudo"].widget.attrs["readonly"] = True
+            self.fields["email"].widget.attrs["readonly"] = True
+            self.fields["telephone"].widget.attrs["readonly"] = True

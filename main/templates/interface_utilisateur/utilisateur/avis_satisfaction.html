@@ -3,28 +3,11 @@
 
 {% block principal%}
     <p>Vous avez réservé un trajet avec {{ trajet.chauffeur }} le {{ trajet.date }} à {{ trajet.heure|date:"H\H:i" }}.</p>
-    <p>Comment évaluez-vous votre trajet?</p>
+    <p>Est ce que votre covoiturage c'est bien passé ?</p>
         <form method="POST">
             {% csrf_token %}
-            {{ avis_form.avis }}
+            {{ avis_form.as_p }}
+
             <button type="submit" value="avis_form">Envoyer</button>
         </form>
-        {% if avis_form == 'oui' %}
-            <p>Voulez vous laiser un commentaire ?</p><br>
-            <form id="avis_passager_positif" method="POST">
-                {% csrf_token %}
-            {{ avis_passager_positif.commentaire }}
-            {{ avis_passager_positif.note }}
-            <button type="submit" value="avis_passager_positif">Envoyer</button>
-            </form>
-        {% elif avis_form == 'non' %}
-            <p>Dite nous se qui vous a déplut, nous réglons le probleme pour vous !!</p><br>
-            <form id="avis_passager_negatif" method="POST">
-                {% csrf_token %}
-                {{ avis_passager_negatif.commentaire }}
-                {{ avis_passager_negatif.note }}
-            <button type="submit" value="avis_soumis">Envoyer</button>
-            </form>
-        {% endif %}
-
 {% endblock principal %}
