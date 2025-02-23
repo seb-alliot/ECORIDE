@@ -147,7 +147,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'ECORIDE', 'static'),
-    # os.path.join(BASE_DIR, 'main', 'static'),  # Supprimer si le dossier n'existe pas
+    os.path.join(BASE_DIR, 'main', 'static'),  # Supprimer si le dossier n'existe pas
 ]
 
 
@@ -186,6 +186,10 @@ EMAIL_HOST_USER = env('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
 
+MAIL_IMAP_SERVER = os.getenv("MAIL_IMAP_SERVER")
+MAIL_IMAP_PORT = os.getenv("MAIL_IMAP_PORT")
+MAIL_IMAP_USER = os.getenv("MAIL_IMAP_USER")
+MAIL_IMAP_PASSWORD = os.getenv("MAIL_IMAP_PASSWORD")
 
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
@@ -196,6 +200,7 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 LOGOUT_REDIRECT_URL = '/'
 LOGGING_URL = 'login/connection1.html'
+
 SECURE_PROXY_SSL_HEADER =("HTTP_X_FORWARDED_PROTO","https")
 SECURE_SSL_REDIRECT = False
 SESSION_COOKIE_SECURE = True
