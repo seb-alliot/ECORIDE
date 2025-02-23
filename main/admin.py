@@ -84,9 +84,35 @@ class UserAdmin(admin.ModelAdmin):
 
 @admin.register(NoteUser)
 class NoteUserAdmin(admin.ModelAdmin):
-    list_display = [ "passager", "chauffeur","note","note_attribuee","avis","avis_donne","commentaire","commentaire_attribuee","commentaire_moderer","decision_prise"]
-    search_fields = ["passager", "chauffeur", "note", "avis","commentaire",  "commentaire_moderer", "decision_prise"]
-    list_filter = ["passager", "chauffeur", "avis", "note","commentaire_moderer", "decision_prise"]
+    list_display = [
+        "passager",
+        "chauffeur",
+        "note",
+        "note_attribuee",
+        "avis",
+        "avis_donne",
+        "commentaire",
+        "commentaire_attribuee",
+        "commentaire_moderer",
+        "decision_prise",
+    ]
+    search_fields = [
+        "passager",
+        "chauffeur",
+        "note",
+        "avis",
+        "commentaire",
+        "commentaire_moderer",
+        "decision_prise",
+    ]
+    list_filter = [
+        "passager",
+        "chauffeur",
+        "avis",
+        "note",
+        "commentaire_moderer",
+        "decision_prise",
+    ]
     list_per_page = 10
 
 
@@ -145,7 +171,7 @@ class AdresseUserAdmin(admin.ModelAdmin):
 
 @admin.register(ChoixRole)
 class ChoixRoleAdmin(admin.ModelAdmin):
-    list_display = ["id","user", "role"]
+    list_display = ["id", "user", "role"]
     search_fields = ["role"]
     list_filter = ["role"]
     list_per_page = 10

@@ -5,5 +5,7 @@
 <br>
 <a href="{% url 'admin:index' %}">
     {{ request.user.username }}<br>Gain de la plateforme : {{ credit.credit|floatformat:2 }} €<br>
+    <a href="{% url 'moderation_email' %}">Modération des emails</a>
+
     Admin
 </a>

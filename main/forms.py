@@ -510,7 +510,6 @@ class AvisForm(forms.ModelForm):
             "trajet": forms.HiddenInput(),
         }
 
-
     def __init__(self, *args, user=None, **kwargs):
         super().__init__(*args, **kwargs)
 
@@ -586,15 +585,14 @@ class ContactForm(forms.Form):
 
 class ModerationTrajetForm(forms.ModelForm):
 
-    class Meta :
+    class Meta:
         model = NoteUser
-        fields = ["etat_paiement", "commentaire","commentaire_moderer"]
+        fields = ["etat_paiement", "commentaire", "commentaire_moderer"]
         widgets = {
             "etat_paiement": forms.Select(choices=ReservationTrajet.ETAT_PAIEMENT),
             "commentaire": forms.Textarea(),
             "commentaire_moderer": forms.CheckboxInput(),
-            }
-
+        }
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

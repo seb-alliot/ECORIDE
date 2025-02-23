@@ -84,7 +84,7 @@ class NoteUser(models.Model):
         null=True,
         verbose_name="Note",
     )
-    note_attribuee= models.BooleanField(default=False, verbose_name="Noté ?")
+    note_attribuee = models.BooleanField(default=False, verbose_name="Noté ?")
 
     avis = models.CharField(
         choices=AVIS,
@@ -97,7 +97,9 @@ class NoteUser(models.Model):
     commentaire = models.TextField(
         null=True, blank=True, verbose_name="Commentaire laissé"
     )
-    commentaire_attribuee = models.BooleanField(default=False, verbose_name="Commenté ?")
+    commentaire_attribuee = models.BooleanField(
+        default=False, verbose_name="Commenté ?"
+    )
 
     # Champs de modération
     commentaire_moderer = models.BooleanField(default=False)
@@ -110,7 +112,8 @@ class NoteUser(models.Model):
     )
     decision_prise = models.BooleanField(default=False, verbose_name="Administré ?")
 
-    token = models.UUIDField(default=uuid.uuid4,unique=True, editable=False)
+    token = models.UUIDField(default=uuid.uuid4, unique=True, editable=False)
+
     class Meta:
         verbose_name = "Note utilisateur"
         verbose_name_plural = "Notes utilisateurs"
@@ -809,14 +812,12 @@ class Preference(models.Model):
     FUMEUR = [
         ("Fumeur", "fumeur accepté"),
         ("Non\fumeur", "non fumeur"),
-
     ]
     ANIMAUX = [
         ("Animaux", "animaux autorisé"),
         ("Pas_d'animaux", "pas d'animaux"),
     ]
     EXIGENCES_PARTICULIERES = [
-
         ("silence", "Silence pendant le trajet"),
         ("bagages_limites", "Bagages limités"),
         ("musique", "Musique pendant le trajet"),

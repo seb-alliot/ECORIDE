@@ -60,10 +60,8 @@ from django.db.models.functions import Coalesce
 import random
 import imaplib, email
 from email.header import decode_header
-import os , quopri , re , uuid
+import os, quopri, re, uuid
 from bs4 import BeautifulSoup
-
-
 
 
 # ------------------------------------------------------------------------------------------
@@ -165,9 +163,7 @@ def accueil(request):
                     Q(chauffeur=request.user) | Q(etat="Terminé") | Q(etat="En cours")
                 )
             else:
-                resultat = resultat.exclude(
-                Q(etat="Terminé") | Q(etat="En cours")
-            )
+                resultat = resultat.exclude(Q(etat="Terminé") | Q(etat="En cours"))
 
             if resultat.exists():
                 messages.success(request, "Hey voici juste pour vous !!")
@@ -578,7 +574,7 @@ def MonCompte(request):
             if etat_form.is_valid():
                 token = None
                 if token is None:
-                            token = uuid.uuid4()
+                    token = uuid.uuid4()
 
                 # ______PARTIE CHAUFFEUR______
 
@@ -599,7 +595,7 @@ def MonCompte(request):
                         trajet.save()
 
                         messages.success(request, "Vous êtes arrivé à bon port !")
-                        Envoi_Email_Terminer(request, trajet_id, reservations,token)
+                        Envoi_Email_Terminer(request, trajet_id, reservations, token)
 
                     elif statut_trajet == "En cours":
                         trajet.etat = statut_trajet
@@ -694,7 +690,8 @@ def MonCompte(request):
                                         credit_admin.save()
                                     else:
                                         messages.error(
-                                            request, "L'administrateur n'a pas été trouvé."
+                                            request,
+                                            "L'administrateur n'a pas été trouvé.",
                                         )
                                 except Exception as e:
                                     messages.error(
@@ -725,10 +722,12 @@ def MonCompte(request):
             if reservation.reservation_rembourser:
                 messages.error(request, "La réservation a déjà été remboursée.")
                 return redirect("MonCompte")
-            else :
+            else:
                 if reservation_form.is_valid():
                     if request.user == reservation.passager:
-                        etat_reservation = reservation_form.cleaned_data["etat_reservation"]
+                        etat_reservation = reservation_form.cleaned_data[
+                            "etat_reservation"
+                        ]
 
                         if etat_reservation == "Annulé":
                             trajet = reservation.trajet_reserver
@@ -868,7 +867,7 @@ def MonCompte(request):
 
 def SelectionTrajet(request):
     user = request.user
-            # Récupération du trajet
+    # Récupération du trajet
     trajet_id = request.GET.get("trajet_id")
     trajet = get_object_or_404(TrajetProposer, id=trajet_id)
     chauffeur = trajet.chauffeur
@@ -878,7 +877,7 @@ def SelectionTrajet(request):
         )
         credits = credit_user.credit if credit_user else 0
     except CreditUser.DoesNotExist:
-            credits = 0
+        credits = 0
     try:
         random_commentaire = []
         commentaire_unique = []
@@ -902,80 +901,77 @@ def SelectionTrajet(request):
 
         # On creer une liste de commentaire par passager
     commentaire_unique = []
-        # On gere les doublons a l'affichage des commentaires pour en avoir un seul par passager
+    # On gere les doublons a l'affichage des commentaires pour en avoir un seul par passager
     vue_unique_passager = set()
-        # Puis on itères sur les commentaires pour les afficher
+    # Puis on itères sur les commentaires pour les afficher
 
-
-        # Récupération des notes du chauffeur
+    # Récupération des notes du chauffeur
     note_chauffeur = NoteUser.objects.filter(chauffeur=chauffeur).first()
 
-        # Vérification d'une réservation existante pour l'utilisateur
+    # Vérification d'une réservation existante pour l'utilisateur
     if not user.is_authenticated:
-            reservation = None
-            messages.info(request, "Veuillez vous connecter pour réserver ce trajet.")
+        reservation = None
+        messages.info(request, "Veuillez vous connecter pour réserver ce trajet.")
     else:
         reservation = ReservationTrajet.objects.filter(
             passager=user, trajet_reserver=trajet
         ).first()
 
-
         # Initialisation du formulaire
     reservation_form = ReservationTrajetForm(request.POST or None, instance=reservation)
 
-        # Logique de réservation uniquement pour les utilisateurs authentifiés
+    # Logique de réservation uniquement pour les utilisateurs authentifiés
     if request.method == "POST" and user.is_authenticated:
-            if reservation_form.is_valid():
-                places_reservees = reservation_form.cleaned_data["places"]
+        if reservation_form.is_valid():
+            places_reservees = reservation_form.cleaned_data["places"]
 
-                # Vérification du crédit suffisant
-                prix_total = trajet.prix * places_reservees
-                if credits < prix_total:
-                    messages.error(
-                        request, "Vos crédits sont insuffisant pour réserver ce trajet."
-                    )
-                    return redirect("interface_utilisateur/utilisateur/reservation.html")
+            # Vérification du crédit suffisant
+            prix_total = trajet.prix * places_reservees
+            if credits < prix_total:
+                messages.error(
+                    request, "Vos crédits sont insuffisant pour réserver ce trajet."
+                )
+                return redirect("interface_utilisateur/utilisateur/reservation.html")
 
-                # Vérification du nombre de places disponibles
-                if places_reservees > trajet.places:
-                    messages.error(
-                        request,
-                        "Le nombre de places est insuffisant actuellement pour vous.",
-                    )
-                    return redirect("interface_utilisateur/utilisateur/reservation.html")
+            # Vérification du nombre de places disponibles
+            if places_reservees > trajet.places:
+                messages.error(
+                    request,
+                    "Le nombre de places est insuffisant actuellement pour vous.",
+                )
+                return redirect("interface_utilisateur/utilisateur/reservation.html")
 
-                # Vérification et mise à jour de la réservation
-                if reservation:
-                    if reservation.etat_reservation == "Annulé":
-                        reservation = ReservationTrajet.objects.create(
-                            trajet_reserver=trajet,
-                            passager=user,
-                            prix_par_passager=prix_total,
-                            places=places_reservees,
-                        )
-                    else:
-                        reservation.places += places_reservees
-                        reservation.paiement_passager(places_reservees)
-                else:
+            # Vérification et mise à jour de la réservation
+            if reservation:
+                if reservation.etat_reservation == "Annulé":
                     reservation = ReservationTrajet.objects.create(
                         trajet_reserver=trajet,
                         passager=user,
                         prix_par_passager=prix_total,
                         places=places_reservees,
                     )
-                    credit_user.credit -= prix_total
-                    credit_user.save()
-
-                # Mise à jour des places restantes
-                trajet.places -= places_reservees
-                trajet.save()
-
-                messages.success(request, "La réservation est validée, bonne route !")
-                return redirect("MonCompte")
+                else:
+                    reservation.places += places_reservees
+                    reservation.paiement_passager(places_reservees)
             else:
-                messages.error(request, "Vos creédits sont insuffisants pour réserver.")
-                return redirect("reservation")
+                reservation = ReservationTrajet.objects.create(
+                    trajet_reserver=trajet,
+                    passager=user,
+                    prix_par_passager=prix_total,
+                    places=places_reservees,
+                )
+                credit_user.credit -= prix_total
+                credit_user.save()
 
+            # Mise à jour des places restantes
+            trajet.places -= places_reservees
+            trajet.save()
+
+            messages.success(request, "La réservation est validée, bonne route !")
+            return redirect("MonCompte")
+        else:
+            messages.error(request, "Vos creédits sont insuffisants pour réserver.")
+            return redirect("reservation")
 
     # Contexte pour le template
     context = {
@@ -1040,7 +1036,7 @@ def Envoi_Email_Annulation(request, trajet_id, reservations):
         )
 
 
-def Envoi_Email_Terminer(request, trajet_id, reservations,token):
+def Envoi_Email_Terminer(request, trajet_id, reservations, token):
     try:
         site_url = f"http://{get_current_site(request).domain}"
         avis_satisfaction_url = (
@@ -1089,18 +1085,26 @@ def Envoi_Email_Terminer(request, trajet_id, reservations,token):
 # ------------------------------------En cour-----------------------------------------------------
 
 
-def Envoi_Email_Avis_Trajet_Negatif(request,passager, trajet_id, reservations, commentaire, token):
+def Envoi_Email_Avis_Trajet_Negatif(
+    request, passager, trajet_id, reservations, commentaire, token
+):
     try:
         site_url = f"http://{get_current_site(request).domain}"
         avis_satisfaction_url = (
             f"{site_url}{reverse('AvisSatisfaction', args=[trajet_id, token])}"
         )
-        reservation = ReservationTrajet.objects.filter(trajet_reserver=trajet_id).first()
+        reservation = ReservationTrajet.objects.filter(
+            trajet_reserver=trajet_id
+        ).first()
         trajet = TrajetProposer.objects.get(id=trajet_id)
         reservations = ReservationTrajet.objects.filter(trajet_reserver=trajet_id)
         chauffeur = trajet.chauffeur
         try:
-            telephone = AdresseUser.objects.get(user=chauffeur).telephone if AdresseUser.objects.filter(user=chauffeur).exists() else None
+            telephone = (
+                AdresseUser.objects.get(user=chauffeur).telephone
+                if AdresseUser.objects.filter(user=chauffeur).exists()
+                else None
+            )
         except AdresseUser.DoesNotExist:
             telephone = None
         prix_total = reservation.prix_par_passager
@@ -1114,33 +1118,33 @@ def Envoi_Email_Avis_Trajet_Negatif(request,passager, trajet_id, reservations, c
         subject = f"Avis negatif {trajet_id}"
 
         context = {
-                "prix_total": prix_total,
-                "telephone": telephone,
-                "trajet": trajet,
-                "reservations": reservations,
-                "site_url": site_url,
-                "avis_satisfaction_url": avis_satisfaction_url,
-                "passager": passager,
-                "chauffeur": chauffeur,
-                "date": date,
-                "trajet_id": trajet_id,
-                "commentaire": commentaire,
-            }
+            "prix_total": prix_total,
+            "telephone": telephone,
+            "trajet": trajet,
+            "reservations": reservations,
+            "site_url": site_url,
+            "avis_satisfaction_url": avis_satisfaction_url,
+            "passager": passager,
+            "chauffeur": chauffeur,
+            "date": date,
+            "trajet_id": trajet_id,
+            "commentaire": commentaire,
+        }
 
-        message = render_to_string(
-                "style_email/_avis_negatif.html", context
-            )
+        message = render_to_string("style_email/_avis_negatif.html", context)
 
         email = EmailMessage(
-                subject=subject,
-                body=message,
-                from_email="staff.modo.ecoride@gmail.com",
-                to=["staff.modo.ecoride@gmail.com"],
-            )
+            subject=subject,
+            body=message,
+            from_email="staff.modo.ecoride@gmail.com",
+            to=["staff.modo.ecoride@gmail.com"],
+        )
         email.content_subtype = "html"
         email.send()
 
-        messages.success(request, "Votre avis a été envoyer, nous vous remercions pour votre retour.")
+        messages.success(
+            request, "Votre avis a été envoyer, nous vous remercions pour votre retour."
+        )
 
     except Exception as e:
         print(
@@ -1151,19 +1155,28 @@ def Envoi_Email_Avis_Trajet_Negatif(request,passager, trajet_id, reservations, c
             f"Erreur lors de l'envoi de l'e-mail de votre retour negatif: {str(e)}",
         )
 
-def Envoi_Email_Avis_Trajet_Positif(request, chauffeur, trajet_id, reservations, commentaire, token):
+
+def Envoi_Email_Avis_Trajet_Positif(
+    request, chauffeur, trajet_id, reservations, commentaire, token
+):
 
     try:
         site_url = f"http://{get_current_site(request).domain}"
         avis_satisfaction_url = (
             f"{site_url}{reverse('AvisSatisfaction', args=[trajet_id, token])}"
         )
-        reservation = ReservationTrajet.objects.filter(trajet_reserver=trajet_id).first()
+        reservation = ReservationTrajet.objects.filter(
+            trajet_reserver=trajet_id
+        ).first()
         trajet = TrajetProposer.objects.get(id=trajet_id)
         reservations = ReservationTrajet.objects.filter(trajet_reserver=trajet_id)
         chauffeur = trajet.chauffeur
         try:
-            telephone = AdresseUser.objects.get(user=chauffeur).telephone if AdresseUser.objects.filter(user=chauffeur).exists() else None
+            telephone = (
+                AdresseUser.objects.get(user=chauffeur).telephone
+                if AdresseUser.objects.filter(user=chauffeur).exists()
+                else None
+            )
         except AdresseUser.DoesNotExist:
             telephone = None
         prix_total = reservation.prix_par_passager
@@ -1177,33 +1190,33 @@ def Envoi_Email_Avis_Trajet_Positif(request, chauffeur, trajet_id, reservations,
         subject = f"Avis positif {trajet_id}"
 
         context = {
-                "prix_total": prix_total,
-                "telephone": telephone,
-                "trajet": trajet,
-                "reservations": reservations,
-                "site_url": site_url,
-                "avis_satisfaction_url": avis_satisfaction_url,
-                "passager": passager,
-                "chauffeur": chauffeur,
-                "date": date,
-                "trajet_id": trajet_id,
-                "commentaire": commentaire,
-            }
+            "prix_total": prix_total,
+            "telephone": telephone,
+            "trajet": trajet,
+            "reservations": reservations,
+            "site_url": site_url,
+            "avis_satisfaction_url": avis_satisfaction_url,
+            "passager": passager,
+            "chauffeur": chauffeur,
+            "date": date,
+            "trajet_id": trajet_id,
+            "commentaire": commentaire,
+        }
 
-        message = render_to_string(
-                "style_email/_avis_positif.html", context
-            )
+        message = render_to_string("style_email/_avis_positif.html", context)
 
         email = EmailMessage(
-                subject=subject,
-                body=message,
-                from_email="staff.modo.ecoride@gmail.com",
-                to=["staff.modo.ecoride@gmail.com"],
-            )
+            subject=subject,
+            body=message,
+            from_email="staff.modo.ecoride@gmail.com",
+            to=["staff.modo.ecoride@gmail.com"],
+        )
         email.content_subtype = "html"
         email.send()
 
-        messages.success(request, "Votre avis a été envoyer, nous vous remercions pour votre retour.")
+        messages.success(
+            request, "Votre avis a été envoyer, nous vous remercions pour votre retour."
+        )
 
     except Exception as e:
         print(
@@ -1214,6 +1227,7 @@ def Envoi_Email_Avis_Trajet_Positif(request, chauffeur, trajet_id, reservations,
             f"Erreur lors de l'envoi de l'e-mail de votre retour positif: {str(e)}",
         )
 
+
 @login_required
 def AvisSatisfaction(request, trajet_id, token):
 
@@ -1222,7 +1236,9 @@ def AvisSatisfaction(request, trajet_id, token):
     chauffeur = trajet.chauffeur
     passager = reservation.passager
 
-    note_existe = NoteUser.objects.filter(chauffeur=chauffeur, passager=passager, trajet=trajet, token=token).first()
+    note_existe = NoteUser.objects.filter(
+        chauffeur=chauffeur, passager=passager, trajet=trajet, token=token
+    ).first()
     if note_existe is None:
         pass
 
@@ -1238,45 +1254,59 @@ def AvisSatisfaction(request, trajet_id, token):
         nouvelle_note = avis_form.cleaned_data["note"]
         nouveau_commentaire = avis_form.cleaned_data["commentaire"]
 
-
         if note_existe:
 
-            if note_existe.note_attribuee and note_existe.commentaire_attribuee and note_existe.avis_donne:
-                messages.info(request, "Vous avez déjà donné une note et un commentaire pour ce trajet.")
+            if (
+                note_existe.note_attribuee
+                and note_existe.commentaire_attribuee
+                and note_existe.avis_donne
+            ):
+                messages.info(
+                    request,
+                    "Vous avez déjà donné une note et un commentaire pour ce trajet.",
+                )
                 return redirect("AvisSatisfaction", trajet_id=trajet_id)
             else:
                 # cas par cas
                 if note_existe.avis_donne:
-                    messages.info(request, "Vous avez déjà donné un avis pour ce trajet.")
+                    messages.info(
+                        request, "Vous avez déjà donné un avis pour ce trajet."
+                    )
                 else:
                     note_existe.avis_donne = True
                     messages.success(request, "Votre avis a bien été pris en compte.")
 
                 if note_existe.note_attribuee:
-                    messages.info(request, "Vous avez déjà donné une note pour ce trajet.")
+                    messages.info(
+                        request, "Vous avez déjà donné une note pour ce trajet."
+                    )
                 else:
                     note_existe.note = nouvelle_note
                     note_existe.note_attribuee = True
                     messages.success(request, "Votre note a bien été prise en compte.")
 
                 if note_existe.commentaire_attribuee:
-                    messages.info(request, "Vous avez déjà donné un commentaire pour ce trajet.")
+                    messages.info(
+                        request, "Vous avez déjà donné un commentaire pour ce trajet."
+                    )
                 else:
                     note_existe.commentaire = nouveau_commentaire
                     note_existe.commentaire_attribuee = True
-                    messages.success(request, "Votre commentaire a bien été pris en compte.")
+                    messages.success(
+                        request, "Votre commentaire a bien été pris en compte."
+                    )
 
                 note_existe.save()
         else:
 
             note_existe = NoteUser.objects.create(
-                    passager=request.user,
-                    chauffeur=chauffeur,
-                    trajet=trajet,
-                    note=nouvelle_note if nouvelle_note else None,
-                    commentaire=nouveau_commentaire if nouveau_commentaire else None,
-                    avis_donne=True if avis_soumis else False,
-                )
+                passager=request.user,
+                chauffeur=chauffeur,
+                trajet=trajet,
+                note=nouvelle_note if nouvelle_note else None,
+                commentaire=nouveau_commentaire if nouveau_commentaire else None,
+                avis_donne=True if avis_soumis else False,
+            )
             if nouvelle_note:
                 note_existe.note_attribuee = True
             if nouveau_commentaire:
@@ -1284,26 +1314,32 @@ def AvisSatisfaction(request, trajet_id, token):
             if avis_soumis:
                 note_existe.avis_donne = True
             note_existe.save()
-            messages.success(request, "Votre note et commentaire ont bien été pris en compte.")
+            messages.success(
+                request, "Votre note et commentaire ont bien été pris en compte."
+            )
 
-        if avis_soumis :
+        if avis_soumis:
             commentaire = note_existe.commentaire
             token = None
             if token is None:
                 token = uuid.uuid4()
 
-            if avis_soumis== "oui":
+            if avis_soumis == "oui":
                 chauffeur = trajet.chauffeur
                 credit_chauffeur = CreditUser.objects.get(user=chauffeur)
-                facture_passager= reservation.prix_par_passager
+                facture_passager = reservation.prix_par_passager
                 credit_chauffeur.credit += facture_passager
                 credit_chauffeur.save()
 
                 # suivant l'avis on envoi un mail different au modo pour un près triage
-                Envoi_Email_Avis_Trajet_Positif(request, chauffeur, trajet_id, reservation, commentaire,token)
+                Envoi_Email_Avis_Trajet_Positif(
+                    request, chauffeur, trajet_id, reservation, commentaire, token
+                )
 
             elif avis_soumis == "non":
-                Envoi_Email_Avis_Trajet_Negatif(request,request.user, trajet_id, reservation, commentaire,token)
+                Envoi_Email_Avis_Trajet_Negatif(
+                    request, request.user, trajet_id, reservation, commentaire, token
+                )
 
             return redirect("AvisSatisfaction", trajet_id=trajet_id, token=token)
 
@@ -1313,7 +1349,6 @@ def AvisSatisfaction(request, trajet_id, token):
         "chauffeur": chauffeur,
         "reservation": reservation,
         "avis_soumis": avis_soumis,
-
         "avis_form": avis_form,
         "messages": messages.get_messages(request),
     }
@@ -1323,155 +1358,167 @@ def AvisSatisfaction(request, trajet_id, token):
     )
 
 
-@login_required# Ajouter le decoration pour le staff
+@login_required  # Ajouter le decoration pour le staff
 def Fait_Ton_Taff_De_Modo(request):
-            print("Requête reçue :", request.method, request.POST)
+    print("Requête reçue :", request.method, request.POST)
 
-            # Connexion au serveur IMAP
-            # Même principe que email dans settings
-            mail = imaplib.IMAP4_SSL(os.getenv("MAIL_IMAP_SERVER"), int(os.getenv("MAIL_IMAP_PORT")))
-            mail.login(os.getenv("MAIL_IMAP_USER"), os.getenv("MAIL_IMAP_PASSWORD"))
-            #selectionne la boite de recception cibler a charger
-            mail.select("inbox")
+    # Connexion au serveur IMAP
+    # Même principe que email dans settings
+    mail = imaplib.IMAP4_SSL(
+        os.getenv("MAIL_IMAP_SERVER"), int(os.getenv("MAIL_IMAP_PORT"))
+    )
+    mail.login(os.getenv("MAIL_IMAP_USER"), os.getenv("MAIL_IMAP_PASSWORD"))
+    # selectionne la boite de recception cibler a charger
+    mail.select("inbox")
 
-            result, data = mail.search(None, "ALL")
-            if result != "OK":
-                return render(request, "admin/moderateur/moderation_email/moderation_email.html", {
-                    "error": "Il n'y a pas d'emails a modérer."})
+    result, data = mail.search(None, "ALL")
+    if result != "OK":
+        return render(
+            request,
+            "admin/moderateur/moderation_email/moderation_email.html",
+            {"error": "Il n'y a pas d'emails a modérer."},
+        )
 
-            mail_ids = data[0].split()
-            emails = []
-            selected_email = None
-            commentaire = "Aucon commentaire trouvé."
+    mail_ids = data[0].split()
+    emails = []
+    selected_email = None
+    commentaire = "Aucon commentaire trouvé."
 
-            # Récupération de l'email sélectionné (si existant)
-            email_id_selected = request.GET.get("email_id")
-            # Si pas d'email on fait en sorte de ne pas générer d'erreur
-            for email_id in mail_ids:
-                result, data = mail.fetch(email_id, "(RFC822)")
-                if result != "OK" or not data or not data[0]:
-                    continue
+    # Récupération de l'email sélectionné (si existant)
+    email_id_selected = request.GET.get("email_id")
+    # Si pas d'email on fait en sorte de ne pas générer d'erreur
+    for email_id in mail_ids:
+        result, data = mail.fetch(email_id, "(RFC822)")
+        if result != "OK" or not data or not data[0]:
+            continue
 
-                raw_email = data[0][1]
-                if raw_email is None:
-                    continue
+        raw_email = data[0][1]
+        if raw_email is None:
+            continue
 
-                message = email.message_from_bytes(raw_email)
-                subject, encoding = decode_header(message["Subject"])[0]
+        message = email.message_from_bytes(raw_email)
+        subject, encoding = decode_header(message["Subject"])[0]
 
-                if isinstance(subject, bytes) and encoding:
-                    subject = subject.decode(encoding if encoding else "utf-8")
+        if isinstance(subject, bytes) and encoding:
+            subject = subject.decode(encoding if encoding else "utf-8")
 
-                # on applique un filtre sur ce que l'on veux sur le template
-                sender = message.get("From")
-                if not (("Avis negatif" or "Avis positif" in subject) and ("staff.modo.ecoride@gmail.com" in sender)):
-                    continue
+        # on applique un filtre sur ce que l'on veux sur le template
+        sender = message.get("From")
+        if not (
+            ("Avis negatif" or "Avis positif" in subject)
+            and ("staff.modo.ecoride@gmail.com" in sender)
+        ):
+            continue
 
-                body = ""
-                # on autopsie l'email recu
-                if message.is_multipart():
-                    for part in message.walk():
-                        if part.get_content_type() == "text/plain":
-                            body = part.get_payload(decode=True).decode()
+        body = ""
+        # on autopsie l'email recu
+        if message.is_multipart():
+            for part in message.walk():
+                if part.get_content_type() == "text/plain":
+                    body = part.get_payload(decode=True).decode()
 
-                            break
-                else:
-                    body = message.get_payload(decode=True).decode()
+                    break
+        else:
+            body = message.get_payload(decode=True).decode()
 
-                # On extrait le commentaire du passager
+        # On extrait le commentaire du passager
 
-                email_data = {
-                    "id": email_id.decode(),
-                    "subject": subject,
-                    "sender": sender,
-                    "body": body
-                }
-                emails.append(email_data)
+        email_data = {
+            "id": email_id.decode(),
+            "subject": subject,
+            "sender": sender,
+            "body": body,
+        }
+        emails.append(email_data)
 
-                # Si l'email sélectionné correspond à celui-ci, on l'affiche
-                if email_id_selected and email_id_selected == email_data["id"]:
-                    selected_email = email_data
-                    extraire_commentaire = BeautifulSoup(body, "html.parser")
-                    div_commentaire = extraire_commentaire.find("div", class_="commentaire")
-                    # On extrait le commentaire du passager
-                    if div_commentaire and div_commentaire.p:
-                        commentaire = div_commentaire.p.get_text().replace("Commentaire: ", "").strip()
-                        # on fait sauter Commentaire : pour avoir juste le commentaire
-                    if commentaire.startswith("Commentaire :"):
-                        commentaire = commentaire.replace("Commentaire :","").strip()
+        # Si l'email sélectionné correspond à celui-ci, on l'affiche
+        if email_id_selected and email_id_selected == email_data["id"]:
+            selected_email = email_data
+            extraire_commentaire = BeautifulSoup(body, "html.parser")
+            div_commentaire = extraire_commentaire.find("div", class_="commentaire")
+            # On extrait le commentaire du passager
+            if div_commentaire and div_commentaire.p:
+                commentaire = (
+                    div_commentaire.p.get_text().replace("Commentaire: ", "").strip()
+                )
+                # on fait sauter Commentaire : pour avoir juste le commentaire
+            if commentaire.startswith("Commentaire :"):
+                commentaire = commentaire.replace("Commentaire :", "").strip()
 
+    moderation_form = ModerationTrajetForm(
+        request.POST or None, initial={"commentaire": commentaire}
+    )
 
-            moderation_form = ModerationTrajetForm(
-                    request.POST or None, initial={"commentaire": commentaire})
+    if moderation_form.is_valid():
+        choix_moderateur = moderation_form.cleaned_data["etat_paiement"]
 
-            if moderation_form.is_valid():
-                choix_moderateur = moderation_form.cleaned_data["etat_paiement"]
+        try:
+            trajet_id = selected_email["subject"].split(" ")[-1]
+            trajet = TrajetProposer.objects.get(id=trajet_id)
+            chauffeur = trajet.chauffeur
 
-                try:
-                    trajet_id = selected_email["subject"].split(" ")[-1]
-                    trajet = TrajetProposer.objects.get(id=trajet_id)
-                    chauffeur = trajet.chauffeur
+            reservation = ReservationTrajet.objects.filter(
+                trajet_reserver=trajet
+            ).first()
+            passager = reservation.passager if reservation else None
 
-                    reservation = ReservationTrajet.objects.filter(trajet_reserver=trajet).first()
-                    passager = reservation.passager if reservation else None
+            # Récupérer ou créer la note
+            note_chauffeur, created = NoteUser.objects.get_or_create(
+                chauffeur=trajet.chauffeur,
+                passager=passager,
+                trajet=trajet,
+            )
 
-                    # Récupérer ou créer la note
-                    note_chauffeur, created = NoteUser.objects.get_or_create(
-                        chauffeur=trajet.chauffeur,
-                        passager=passager,
-                        trajet=trajet,
-                    )
+            note_chauffeur.commentaire = moderation_form.cleaned_data["commentaire"]
+            note_chauffeur.commentaire_moderer = True
+            note_chauffeur.etat_paiement = choix_moderateur
+            note_chauffeur.decision_prise = True
+            note_chauffeur.save()
 
-                    note_chauffeur.commentaire = moderation_form.cleaned_data["commentaire"]
-                    note_chauffeur.commentaire_moderer = True
-                    note_chauffeur.etat_paiement = choix_moderateur
-                    note_chauffeur.decision_prise = True
-                    note_chauffeur.save()
+            messages.info(request, "Le commentaire a bien été enregistré.")
 
+            if choix_moderateur == "Payer":
+                reservation.etat_paiement = "Payer"
+                credit_chauffeur = CreditUser.objects.get(user=trajet.chauffeur)
+                facture_passager = reservation.prix_par_passager
+                credit_chauffeur.credit += facture_passager
+                credit_chauffeur.save()
 
-                    messages.info(request, "Le commentaire a bien été enregistré.")
+                reservation.trajet_payer = True
+                reservation.save()
+                messages.success(request, "Le paiement a été accordé.")
 
-                    if choix_moderateur == "Payer":
-                        reservation.etat_paiement = "Payer"
-                        credit_chauffeur = CreditUser.objects.get(user=trajet.chauffeur)
-                        facture_passager = reservation.prix_par_passager
-                        credit_chauffeur.credit += facture_passager
-                        credit_chauffeur.save()
+            elif choix_moderateur == "Refuser":
+                reservation.etat_paiement = "Refuser"
+                reservation.trajet_payer = True
+                reservation.save()
+                messages.success(
+                    request, "Vous avez bien refusé le paiement au chauffeur."
+                )
 
-                        reservation.trajet_payer = True
-                        reservation.save()
-                        messages.success(request, "Le paiement a été accordé.")
+        except TrajetProposer.DoesNotExist:
+            messages.error(request, "Trajet introuvable.")
+        except ReservationTrajet.DoesNotExist:
+            messages.error(request, "Réservation introuvable.")
+        except CreditUser.DoesNotExist:
+            messages.error(request, "Ce chauffeur n'existe plus.")
 
-                    elif choix_moderateur == "Refuser":
-                        reservation.etat_paiement = "Refuser"
-                        reservation.trajet_payer = True
-                        reservation.save()
-                        messages.success(request, "Vous avez bien refusé le paiement au chauffeur.")
+        # Déconnexion propre du serveur IMAP
+        mail.close()
+        mail.logout()
 
-                except TrajetProposer.DoesNotExist:
-                    messages.error(request, "Trajet introuvable.")
-                except ReservationTrajet.DoesNotExist:
-                    messages.error(request, "Réservation introuvable.")
-                except CreditUser.DoesNotExist:
-                    messages.error(request, "Ce chauffeur n'existe plus.")
-
-                # Déconnexion propre du serveur IMAP
-                mail.close()
-                mail.logout()
-
-
-            context = {
-            "emails": emails,
-            "selected_email": selected_email,
-            "messages": messages.get_messages(request),
-            "mail_ids": mail_ids,
-            "moderation_form": moderation_form,
-            "commentaire": commentaire,
-            }
-            context.update(initialisation_template(request))
-            return render(request, "admin/moderateur/moderation_email/moderation_email.html", context)
-
-
+    context = {
+        "emails": emails,
+        "selected_email": selected_email,
+        "messages": messages.get_messages(request),
+        "mail_ids": mail_ids,
+        "moderation_form": moderation_form,
+        "commentaire": commentaire,
+    }
+    context.update(initialisation_template(request))
+    return render(
+        request, "admin/moderateur/moderation_email/moderation_email.html", context
+    )
 
 
 # ------------------------------------A FAIRE------------------------------------------------------
