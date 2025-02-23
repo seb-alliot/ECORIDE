@@ -20,4 +20,4 @@ credit, created = CreditUser.objects.get_or_create(user=ITSUKI)
 # Ajouter du crédit
 credit.add_credit(0)
 
-print(f"Le nouveau solde de Setsuna est de : {credit.credit} €")
+print(f"Le nouveau solde de ITSUKI est de : {credit.credit} €, ils dois bosser se fainéant")

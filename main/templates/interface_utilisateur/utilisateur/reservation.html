@@ -25,35 +25,37 @@
         <p>{{ trajet.chauffeur }}</p>
         <p>Partant de :</p>
         <p>{{ trajet.ville_depart }} pour {{ trajet.ville_arrivee }}</p>
-        <p>Le :{{ trajet.date }}</p>
-        <p>A : {{ trajet.heure|date:"H\H:i" }}</p>
+        <p>Le {{ trajet.date }}</p>
+        <p>A  {{ trajet.heure|date:"H\H:i" }}</p>
         <p>avec la {{ trajet.voiture.marque}} {{ trajet.voiture.modele }}</p>
         <p>d'un montant de {{ trajet.prix }}€</p>
         </div>
-
-
         <!--Section note et commentaires-->
-
         <div id="note_commentaire">
             <p>Avis <br>{% for commentaire in commentaires %}
+
                 <p>{{ commentaire.passager__username }} : {{ commentaire.commentaire }}</p>
             {% empty %}
                 <p>Aucun commentaire</p>
             {% endfor %}
 
 
-            <p>Note moyenne : {{  note_chauffeur.get_note_moyenne|floatformat:1 }} / 5 ⭐ </p>
+            <p>Note moyenne :{% if note_chauffeur.get_note_moyenne == None %}
+                Pas encore noter
+                {% else %}
+                {{  note_chauffeur.get_note_moyenne|floatformat:1 }}/ 5 ⭐ </p>
+            {% endif %}
             <p>{{ trajet.places }} places restantes</p>
             <p>Combien de places voulez-vous réserver?</p>
 
         <!--Formulaire de réservation de place-->
         <form id="reservation_form" method="POST">
+            {% if user.is_authenticated %}
             {% csrf_token %}
             {{ reservation_form.places }}
-            {% if user.is_authenticated %}
         <button type="submit" value="reservation_form">Reserver</button>
         {% else %}
-        <a href="{% url 'inscription' %}"class="btn btn-primary">Connectez-vous pour réserver</a>
+        <a href="{% url 'inscription' %}"class="btn btn-primary">Inscrivez-vous pour réserver</a>
         {% endif %}
         </form>
     </div>

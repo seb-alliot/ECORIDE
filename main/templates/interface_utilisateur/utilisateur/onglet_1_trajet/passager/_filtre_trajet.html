@@ -1,0 +1,10 @@
+<form id="filtre_form" method="GET">
+    {% csrf_token %}
+    <label for="note">Note du chauffeur</label>
+        {{ filtre_form.note }}
+    <label for="place">durée trajet</label>
+        {{ filtre_form.temps_trajet }}
+    <label for="prix">Prix maximum</label>
+    {{ filtre_form.prix }}
+    <button type="submit" name="form_trajet" value="filtre_form">Filtrer la recherche</button>
+</form>

@@ -1,0 +1,30 @@
+{% if trajets is not None %}
+    <p>Voici  le{{ trajets|pluralize }} trajet{{ trajets|pluralize }} que vous proposez actuellement</p>
+        <ul>
+            {% for trajet in trajets %}
+                {% if trajet.etat == "Disponible" or trajet.etat == "En cour" %}
+                            <li>
+                                <input type="radio" name="trajet" value="{{ trajet.id }}" id="{{ trajet.id }}"/>
+                                <label for="{{ trajet.id }}">
+                                    Départ de :<br>{{ trajet.ville_depart }} pour {{ trajet.ville_arrivee }}<br>
+                                    Le :<br> {{ trajet.date }}<br>
+                                    A: {{ trajet.heure }} heures<br>
+                                    Voiture : <br>{{ trajet.voiture.marque}} {{ trajet.voiture.modele }}<br>
+                                    Moteur : {{ trajet.voiture.type_moteur }}
+                                    {% if trajet.voiture.type_moteur == 'Electrique' %}
+                                    <p>Vous proposez un covoiturage ecologique</p><br>
+                                    {% endif %}<br>
+                                    Prix du covoiturage: {{ trajet.prix }}€<br>
+                                    Nombre de place:{% if trajet.places != 0 %} {{ trajet.places }}
+                                    {% else %}
+                                    complet
+                                    {% endif %}<br>
+                                    Etat du trajet : {{ trajet.etat }}<br>
+                                </label>
+                            </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+{% else %}
+    <p>Vous n'avez pas encore proposé de trajet</p>
+{% endif %}

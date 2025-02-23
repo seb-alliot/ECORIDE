@@ -224,17 +224,29 @@ class RechercheTrajetForm(forms.Form):
         max_length=100,
         label="Ville de départ",
         widget=forms.TextInput(attrs={"placeholder": "Départ de..."}),
-        required=True,
+        required=False,
     )
     ville_arrivee = forms.CharField(
         max_length=100,
         label="Ville d'arrivée",
         widget=forms.TextInput(attrs={"placeholder": "Arrivée à..."}),
-        required=True,
+        required=False,
     )
     date = forms.DateField(
         label="Date", widget=forms.DateInput(attrs={"type": "date"}), required=True
     )
+    pseudo = forms.CharField(
+        max_length=100,
+        label="Chauffeur",
+        widget=forms.TextInput(attrs={"placeholder": "Chauffeur"}),
+        required=False,
+    )
+
+    def clean_pseudo(self):
+        pseudo = self.cleaned_data.get("pseudo")
+        if pseudo and not User.objects.filter(username=pseudo).exists():
+            raise forms.ValidationError("Ce chauffeur n'existe pas.")
+        return pseudo
 
     def clean_date(self):
         date = self.cleaned_data.get("date")
@@ -258,9 +270,9 @@ class FiltreTrajetForm(forms.Form):
     )
     note = forms.FloatField(
         label="Note",
-                widget=widgets.NumberInput(
-                    attrs={'placeholder': 'Filtrer par note'}),
-        required=False,)
+        widget=widgets.NumberInput(attrs={"placeholder": "Filtrer par note"}),
+        required=False,
+    )
 
     def clean_prix(self):
         prix = self.cleaned_data.get("prix")
@@ -488,7 +500,7 @@ class StatutReservationForm(forms.ModelForm):
 class AvisForm(forms.ModelForm):
     class Meta:
         model = NoteUser
-        fields = ["avis","note", "commentaire", "passager","chauffeur","trajet"]
+        fields = ["avis", "note", "commentaire", "passager", "chauffeur", "trajet"]
         widgets = {
             "avis": forms.Select(choices=NoteUser.AVIS),
             "note": forms.Select(choices=NoteUser.NOTE),
@@ -498,13 +510,8 @@ class AvisForm(forms.ModelForm):
             "trajet": forms.HiddenInput(),
         }
 
-    def clean_commentaire(self):
-        commentaire = self.cleaned_data.get("commentaire")
-        if len(commentaire) > 200:
-            raise forms.ValidationError("Le commentaire ne doit pas dépasser 200 caractères.")
-        return commentaire
 
-    def __init__(self, *args,user=None, **kwargs):
+    def __init__(self, *args, user=None, **kwargs):
         super().__init__(*args, **kwargs)
 
         if user and user.is_authenticated:
@@ -514,15 +521,13 @@ class AvisForm(forms.ModelForm):
             self.fields["chauffeur"].widget = forms.HiddenInput()
             self.fields["trajet"].widget = forms.HiddenInput()
 
-            if trajet:=self.initial.get("trajet"):
+            if trajet := self.initial.get("trajet"):
                 self.fields["trajet"].initial = trajet.id
                 self.fields["chauffeur"].initial = trajet.user.id
 
                 self.fields["chauffeur"].widget.attrs["readonly"] = True
                 self.fields["trajet"].widget.attrs["readonly"] = True
                 self.fields["passager"].widget.attrs["readonly"] = True
-                
-
 
 
 class ContactForm(forms.Form):
@@ -560,11 +565,13 @@ class ContactForm(forms.Form):
     def clean_message(self):
         message = self.cleaned_data.get("message")
         if len(message) > 200:
-            raise forms.ValidationError("Le message ne doit pas dépasser 200 caractères.")
+            raise forms.ValidationError(
+                "Le message ne doit pas dépasser 200 caractères."
+            )
         return message
 
-    def __init__(self, *args,user=None, **kwargs):
-        #initialise le formulaire si l'utilisateur possede un compte et est connecté
+    def __init__(self, *args, user=None, **kwargs):
+        # initialise le formulaire si l'utilisateur possede un compte et est connecté
         super().__init__(*args, **kwargs)
 
         if user and user.is_authenticated:
@@ -575,3 +582,33 @@ class ContactForm(forms.Form):
             self.fields["pseudo"].widget.attrs["readonly"] = True
             self.fields["email"].widget.attrs["readonly"] = True
             self.fields["telephone"].widget.attrs["readonly"] = True
+
+
+class ModerationTrajetForm(forms.ModelForm):
+
+    class Meta :
+        model = NoteUser
+        fields = ["etat_paiement", "commentaire","commentaire_moderer"]
+        widgets = {
+            "etat_paiement": forms.Select(choices=ReservationTrajet.ETAT_PAIEMENT),
+            "commentaire": forms.Textarea(),
+            "commentaire_moderer": forms.CheckboxInput(),
+            }
+
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["etat_paiement"].choices = [
+            (key, value)
+            for key, value in self.fields["etat_paiement"].choices
+            if key != "En attente"
+        ]
+        self.fields["commentaire"].widget.attrs["readonly"] = True
+
+    def clean_commentaire(self):
+        commentaire = self.cleaned_data.get("commentaire")
+        if len(commentaire) > 200:
+            raise forms.ValidationError(
+                "Le commentaire ne doit pas dépasser 200 caractères."
+            )
+        return commentaire

@@ -18,10 +18,12 @@
     {% block headerContent %}
     {% block logo %}
         {% include "interface_utilisateur/reutilisable/accueil/_logo.html" %}
+        <a href="{% url 'moderation_email' %}">Modération des emails</a>
+
     {% endblock logo %}
 
     {% block messageinformation %}
-        {% include "interface_utilisateur/reutilisable/accueil/_msginfo.html" %}
+    {% include "interface_utilisateur/reutilisable/accueil/_msginfo.html" %}
     {% endblock messageinformation %}
 
     {% block connection %}
@@ -38,7 +40,11 @@
         {% endblock fondbase %}
 
     {% block principal %}
-        {% include "interface_utilisateur/reutilisable/_trajet.html" %}
+        {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_form_recherche.html" %}
+        {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_resultat_recherche.html" %}
+        {% if resultat %}
+            {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_filtre_trajet.html" %}
+        {% endif %}
     {% endblock principal %}
         {% include "interface_utilisateur/reutilisable/accueil/_presentation.html" %}
     {% endblock body %}

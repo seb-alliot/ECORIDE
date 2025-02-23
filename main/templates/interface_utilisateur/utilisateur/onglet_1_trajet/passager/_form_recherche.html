@@ -1,0 +1,17 @@
+<form id="recherche_form" method="GET">
+    {% csrf_token %}
+
+    <label for="ville_depart">Départ</label>
+        {{ recherche_form.ville_depart }}
+
+    <label for="ville_arrivee">Arrivée</label>
+        {{ recherche_form.ville_arrivee }}
+
+    <label for="date">Date</label>
+        {{ recherche_form.date }}
+
+    <label for="chauffeur">Chauffeur</label>
+        {{ recherche_form.pseudo }}
+
+    <button type="submit"name="form_trajet" value="recherche_form">Rechercher</button>
+</form>

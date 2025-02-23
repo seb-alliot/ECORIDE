@@ -4,10 +4,6 @@
     <link href="{% static 'css/MonCompte.css' %}" rel="stylesheet">
 {% endblock style %}
 
-{% block messageinformation %}
-    {% include "interface_utilisateur/reutilisable/accueil/_msginfo.html" %}
-{% endblock messageinformation %}
-
 {% block principal %}
     {% with role.get_role_display as user_role %}
         {% if user_role == "Chauffeur" %}
@@ -32,13 +28,22 @@
 
         {% if user_role == "Chauffeur"%}
             {% if preference is Null %}
-                <p>Vous n'avez pas encore défini vos préférences pour proposer un covoiturage</p>
+                <p>Vous n'avez pas encore défini de préférence pour proposer un covoiturage</p>
             {% else %}
-                {% include "interface_utilisateur/utilisateur/onglet_1_trajet/_vue_chauffeur.html"%}
+            {% include "interface_utilisateur/utilisateur/onglet_1_trajet/chauffeur/_form_ajout_trajet.html" %}
+                {% if trajets %}
+                    {% include "interface_utilisateur/utilisateur/onglet_1_trajet/chauffeur/_trajet_proposer.html" %}
+                {% else %}
+                    <p>Vous n'avez pas encore proposé de trajet</p>
+                {% endif %}
             {% endif %}
 
         {% elif user_role == "Passager" %}
-            {% include "interface_utilisateur/reutilisable/_trajet.html" %}
+            {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_form_recherche.html" %}
+            {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_resultat_recherche.html" %}
+            {% if resultat %}
+                {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_filtre_trajet.html" %}
+            {% endif %}
         {% endif %}
 
     </div>
@@ -128,7 +133,7 @@
     </div>
     </div>
 
-    <!--Onglet 5  info user-->
+    <!--Onglet 5  info utilisateur-->
     <div class="tab">
         <input
         id="tab-5"
@@ -140,7 +145,7 @@
     <div class="content">
 
         <div>
-            {% include "interface_utilisateur/utilisateur/onglet__5_adresse/_adresse.html" %}
+            {% include "interface_utilisateur/utilisateur/onglet_5_adresse/_adresse.html" %}
         </div>
     </div>
     </div>

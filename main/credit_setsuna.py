@@ -12,10 +12,10 @@ from main.models import CreditUser, User
 from decimal import Decimal
 
 # Récupérer ou créer l'utilisateur
-ITSUKI, _ = User.objects.get_or_create(username="ITSUKI")
+setsuna, _ = User.objects.get_or_create(username="setsuna")
 
 # Récupérer ou créer le crédit
-credit, created = CreditUser.objects.get_or_create(user=ITSUKI)
+credit, created = CreditUser.objects.get_or_create(user=setsuna)
 
 # Ajouter du crédit
 credit.add_credit(1000000)

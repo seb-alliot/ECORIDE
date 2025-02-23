@@ -1,0 +1,33 @@
+<p>Proposez un covoiturage</p>
+<form id="trajet_form" method="POST">
+        {% csrf_token %}
+    <div class="flex">
+        <div class="flex1">
+        <label for="id_depart">Ville de départ</label>
+            {{ trajet_form.ville_depart }}
+        <label for="id_arrivee">Ville d'arrivée</label>
+            {{ trajet_form.ville_arrivee }}
+        <label for="id_date">Date de départ</label>
+            {{ trajet_form.date }}
+        </div>
+        <div class="flex1">
+        <label for="voiture">Voiture</label>
+            {{ trajet_form.voiture }}
+        <label for="place">Nombre de places</label>
+            {{ trajet_form.places }}
+        <label for="type_moteur">Motorisation</label>
+            {{ trajet_form.type_moteur }}
+        </div>
+        <div class="flex1">
+            <label for="id_heure">Heure de départ</label>
+                {{ trajet_form.heure }}
+            <label for="prix">Prix</label>
+                {{ trajet_form.prix }}
+            <label for="id_heure">durée estimé</label>
+                {{ trajet_form.temps_trajet }}
+        </div>
+        <div class="flex1">
+            <button id="propotion" type="submit"name="form_soumis" value="trajet_form">Proposez un trajet</button>
+        </div>
+    </div>
+</form>

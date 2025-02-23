@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avis positif de la part de {{ trajet.passager }}</title>
+</head>
+    <body>
+            <div class="email-container">
+                <p><strong>Passager :</strong> {{ passager.username }} {{ passager.email }}</p>
+                <p><strong>Chauffeur :</strong> {{ chauffeur.username }}
+                    {% if telephone %},
+                        {{ telephone }}
+                    {% else %}
+                        le numéro n'est pas renseigné
+                    {% endif %} ,
+                    {{ chauffeur.email }}</p>
+                <p><strong>Trajet :</strong> {{ trajet.ville_depart }} à {{ trajet.ville_arrivee }}</p>
+                <p><strong>Date de réservation :</strong> {{ trajet.date }}</p>
+
+                <div class="commentaire">
+                    <p><strong>Commentaire :</strong> {{ commentaire }}</p>
+                </div>
+                <p>Pour plus de détails, vous pouvez consulter la page de l'avis sur votre tableau de bord.</p>
+                <div class="footer">
+                </div>
+            </div>
+
+        </body>
+        </html>

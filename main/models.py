@@ -12,10 +12,19 @@ from django.db.models import Sum
 
 
 class CreditUser(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="credit", verbose_name="Utilisateur")
-    credit = models.DecimalField(
-        max_digits=10, decimal_places=2, default=Decimal("0.00"), verbose_name="Crédit actuel de l'utilisateur"
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        related_name="credit",
+        verbose_name="Utilisateur",
     )
+    credit = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=Decimal("0.00"),
+        verbose_name="Crédit actuel de l'utilisateur",
+    )
+
     class Meta:
         verbose_name = "Crédit utilisateur"
         verbose_name_plural = "Crédits utilisateurs"
@@ -41,52 +50,79 @@ class NoteUser(models.Model):
         ("oui", "oui"),
         ("non", "non"),
     ]
+
     passager = models.ForeignKey(
-        User, on_delete=models.SET_NULL, blank=True, null=True, related_name="jury", verbose_name="Passager"
+        User,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        related_name="jury",
+        verbose_name="Passager",
     )
     chauffeur = models.ForeignKey(
-        User, on_delete=models.SET_NULL, blank=True, null=True, related_name="accusé", verbose_name="Chauffeur"
+        User,
+        on_delete=models.SET_NULL,
+        blank=True,
+        null=True,
+        related_name="accusé",
+        verbose_name="Chauffeur",
     )
     trajet = models.ForeignKey(
         "TrajetProposer",
         on_delete=models.SET_NULL,
         blank=True,
         null=True,
-        related_name="bout_du_tunnel", verbose_name="Trajet concerné"
+        related_name="bout_du_tunnel",
+        verbose_name="Trajet concerné",
     )
+
     note = models.DecimalField(
         choices=NOTE,
         max_digits=2,
         decimal_places=1,
         blank=True,
         null=True,
-        default=Decimal(0), verbose_name="Note attribuée"
+        verbose_name="Note",
     )
-    avis = models.CharField(choices=AVIS, max_length=100, default="oui", verbose_name="sa c'est bien passé ?")
-    commentaire = models.TextField(null=True, blank=True, verbose_name="Commentaire du concerné")
-    # Rend l'avis unique (1er formulaire sans js) avec un commentaire et une  note unique(2eme formulaire) par trajet
-    unique_together = ['chauffeur', 'passager', 'trajet']
+    note_attribuee= models.BooleanField(default=False, verbose_name="Noté ?")
 
+    avis = models.CharField(
+        choices=AVIS,
+        max_length=100,
+        default="oui",
+        verbose_name="Ça s'est bien passé ?",
+    )
+    avis_donne = models.BooleanField(default=False, verbose_name="Avis donné ?")
 
+    commentaire = models.TextField(
+        null=True, blank=True, verbose_name="Commentaire laissé"
+    )
+    commentaire_attribuee = models.BooleanField(default=False, verbose_name="Commenté ?")
+
+    # Champs de modération
+    commentaire_moderer = models.BooleanField(default=False)
+
+    etat_paiement = models.CharField(
+        max_length=20,
+        choices=[("Payer", "Payer"), ("Refuser", "Refuser")],
+        default="Payer",
+        verbose_name="Statut du paiement",
+    )
+    decision_prise = models.BooleanField(default=False, verbose_name="Administré ?")
+
+    token = models.UUIDField(default=uuid.uuid4,unique=True, editable=False)
     class Meta:
         verbose_name = "Note utilisateur"
         verbose_name_plural = "Notes utilisateurs"
-
-
-    def add_note(self, note):
-        self.note += Decimal(note)
-        self.save()
-        return f"Note ajouté: {note} "
+        unique_together = ["chauffeur", "passager", "trajet"]
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        moyenne = NoteUser.objects.filter(chauffeur=self.chauffeur).aggregate(
-            models.Avg("note")
-        )["note__avg"]
-        if moyenne:
-            self.chauffeur.note = moyenne
-        else:
-            self.chauffeur.note = None
+        moyenne = NoteUser.objects.filter(
+            chauffeur=self.chauffeur, note__isnull=False
+        ).aggregate(models.Avg("note"))["note__avg"]
+
+        self.chauffeur.note = moyenne if moyenne else None
         self.chauffeur.save()
 
     @property
@@ -98,7 +134,6 @@ class NoteUser(models.Model):
 
     def __str__(self):
         return f"Note de {self.chauffeur}: {self.note} {self.commentaire} {self.avis} "
-
 
 
 class TokenValidation(models.Model):
@@ -136,7 +171,6 @@ class ActivationToken(models.Model):
 
     def __str__(self):
         return f"Token for {self.user.username}"
-
 
 
 class AdresseUser(models.Model):
@@ -285,7 +319,10 @@ class AdresseUser(models.Model):
         ("NO", "Norvège"),
     ]
     user = models.OneToOneField(
-        User, on_delete=models.DO_NOTHING, related_name="adresse_user", verbose_name="Utilisateur"
+        User,
+        on_delete=models.CASCADE,
+        related_name="adresse_user",
+        verbose_name="Utilisateur",
     )
     numero = models.CharField(max_length=10, verbose_name="Numéro du batiment")
     type_voie = models.CharField(max_length=100, choices=TYPE_VOIE)
@@ -320,14 +357,14 @@ class AdresseUser(models.Model):
         blank=True,
         verbose_name="Photo de profil",
     )
+
     class Meta:
         verbose_name = "Information sur l'utilisateur"
         verbose_name_plural = "Informations sur les utilisateurs"
 
-
     def save(self, *args, **kwargs):
         if self.pk:
-            vieille_image=AdresseUser.objects.get(pk=self.pk).photo
+            vieille_image = AdresseUser.objects.get(pk=self.pk).photo
             if vieille_image and vieille_image != self.photo:
                 vieille_image.delete(save=False)
         self.clean()
@@ -343,7 +380,9 @@ class ChoixRole(models.Model):
         ("passager", "Passager"),
     ]
     role = models.CharField(choices=ROLE, default="passager")
-    user = models.OneToOneField(User, on_delete=models.DO_NOTHING, related_name="role", verbose_name="Utilisateur")
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE, related_name="role", verbose_name="Utilisateur"
+    )
 
     class Meta:
         verbose_name = "Role utilisateur"
@@ -669,13 +708,21 @@ class Voiture(models.Model):
     marque = models.CharField(max_length=30, choices=MARQUE, default="Marque")
     modele = models.CharField(choices=MODELE, max_length=50, default="Modele")
     couleur = models.CharField(choices=COULEUR, max_length=50, default="Couleur")
-    type_moteur = models.CharField(choices=TYPE_MOTEUR, max_length=50, verbose_name="Moteur")
+    type_moteur = models.CharField(
+        choices=TYPE_MOTEUR, max_length=50, verbose_name="Moteur"
+    )
     places = models.CharField(choices=PLACES, default="Nombre de places")
     immatriculation = models.CharField(max_length=10)
     annee = models.IntegerField(choices=get_year_choices(), default=datetime.now().year)
     user = models.ForeignKey(
-        User, on_delete=models.SET_NULL, null=True, blank=True, related_name="voiture", verbose_name="Utilisateur"
+        User,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        related_name="voiture",
+        verbose_name="Utilisateur",
     )
+
     class Meta:
         verbose_name = "Voiture"
         verbose_name_plural = "Voitures"
@@ -716,9 +763,14 @@ class TrajetProposer(models.Model):
     date = models.DateField(default=date.today)
     heure = models.TimeField(blank=True, default=now)
     places = models.IntegerField(choices=PLACES)
-    type_moteur = models.CharField(choices=Voiture.TYPE_MOTEUR, max_length=15, verbose_name="Moteur")
+    type_moteur = models.CharField(
+        choices=Voiture.TYPE_MOTEUR, max_length=15, verbose_name="Moteur"
+    )
     prix = models.DecimalField(
-        max_digits=5, decimal_places=2, validators=[MinValueValidator(0)], verbose_name="Prix par passager"
+        max_digits=5,
+        decimal_places=2,
+        validators=[MinValueValidator(0)],
+        verbose_name="Prix par passager",
     )
     total_payer = models.DecimalField(
         max_digits=5, decimal_places=2, blank=True, null=True, default=Decimal("0.00")
@@ -726,7 +778,7 @@ class TrajetProposer(models.Model):
     temps_trajet = models.DurationField(blank=False, null=False)
     voiture = models.ForeignKey(
         "Voiture",
-        on_delete=models.SET_NULL,
+        on_delete=models.CASCADE,
         related_name="voiture",
         null=True,
         blank=True,
@@ -757,12 +809,14 @@ class Preference(models.Model):
     FUMEUR = [
         ("Fumeur", "fumeur accepté"),
         ("Non\fumeur", "non fumeur"),
+
     ]
     ANIMAUX = [
         ("Animaux", "animaux autorisé"),
-        ("Pas_d\'animaux", "pas d'animaux"),
+        ("Pas_d'animaux", "pas d'animaux"),
     ]
     EXIGENCES_PARTICULIERES = [
+
         ("silence", "Silence pendant le trajet"),
         ("bagages_limites", "Bagages limités"),
         ("musique", "Musique pendant le trajet"),
@@ -773,13 +827,21 @@ class Preference(models.Model):
     exigences_particulieres = models.CharField(
         choices=EXIGENCES_PARTICULIERES,
         max_length=50,
-        default="Pas d'exigences particulières", verbose_name="Preference en plus"
+        default="Pas d'exigences particulières",
+        verbose_name="Preference en plus",
     )
-    exigences_personnelles = models.TextField(max_length=500, null=True, blank=True, verbose_name="Preferences personnelles")
+    exigences_personnelles = models.TextField(
+        max_length=500, null=True, blank=True, verbose_name="Preferences personnelles"
+    )
     fumeur = models.CharField(choices=FUMEUR, max_length=50, default="Non_fumeur")
     animaux = models.CharField(choices=ANIMAUX, max_length=50, default="Animaux")
     user_preference = models.OneToOneField(
-        User, on_delete=models.SET_NULL,null=True, blank=True,  related_name="preference", verbose_name="Utilisateur concerné"
+        User,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="preference",
+        verbose_name="Utilisateur concerné",
     )
 
     class Meta:
@@ -787,10 +849,15 @@ class Preference(models.Model):
         verbose_name_plural = "Préférences des utilisateurs"
 
     def __str__(self):
-        return f"{self.user_preference.username} {self.fumeur} {self.animaux}{ self.get_fumeur_display() } { self.get_animaux_display() } {self.get_exigences_particulieres_display()}"
+        return f"{self.user_preference} {self.fumeur} {self.animaux}{ self.get_fumeur_display() } { self.get_animaux_display() } {self.get_exigences_particulieres_display()}"
 
 
 class ReservationTrajet(models.Model):
+    ETAT_PAIEMENT = [
+        ("Payer", "Payer"),
+        ("En attente", "En attente"),
+        ("Refuser", "Refuser"),
+    ]
 
     ETAT_RESERVATION = [
         ("Reserver", "Réservé"),
@@ -815,10 +882,22 @@ class ReservationTrajet(models.Model):
         max_digits=5, decimal_places=2, default=Decimal("0.00")
     )
     places = models.IntegerField(choices=TrajetProposer.PLACES, blank=True, null=True)
-    reservation_rembourser = models.BooleanField(default=False)
+
     etat_reservation = models.CharField(
-        choices=ETAT_RESERVATION, default="Reserver", max_length=20, verbose_name="Etat de la réservation"
+        choices=ETAT_RESERVATION,
+        default="Reserver",
+        max_length=20,
+        verbose_name="Etat de la réservation",
     )
+    reservation_rembourser = models.BooleanField(default=False)
+
+    etat_paiement = models.CharField(
+        choices=ETAT_PAIEMENT,
+        default="Payer",
+        max_length=20,
+        verbose_name="Etat du paiement",
+    )
+    trajet_payer = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -865,13 +944,17 @@ class ChangerStatutTrajet(models.Model):
         choices=TrajetProposer.ETAT, max_length=15, default="Disponible"
     )
     trajet = models.ForeignKey(
-        TrajetProposer, on_delete=models.SET_NULL, null=True, blank=True, related_name="statut"
+        TrajetProposer,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        related_name="statut",
     )
     modified_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         verbose_name = "Changer le statut du trajet"
-        verbose_name_plural = "Changer les statuts des trajets"
+        verbose_name_plural = "Changer le statut des trajets"
 
     def __str__(self):
         return f"Le statut du trajet {self.trajet} a été modifié en {self.statut} le {self.modified_at}"

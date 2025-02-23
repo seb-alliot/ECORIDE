@@ -49,7 +49,7 @@
                 {{ form.subject.errors }}
             <label for='email'>Email</label>
                 {{ adresse_form.email }}
-                {%if adresse_user %}
+            {%if adresse_user %}
                 <button type="submit" name="form_soumis" value="adresse_form">Modifier</button>
             {% else %}
                 <button type="submit" name="form_soumis" value="adresse_form">Ajouter</button>
