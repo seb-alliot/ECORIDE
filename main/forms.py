@@ -107,6 +107,12 @@ class MotDePasseForm(forms.Form):
         widget=forms.PasswordInput(attrs={"placeholder": "Votre mot de passe"}),
         required=True,
     )
+    token_connection = forms.CharField(
+        max_length=128,
+        label="Token de connexion",
+        widget=forms.TextInput(attrs={"placeholder": "Code de connexion"}),
+        required=True,
+    )
 
     def clean_password(self):
         password = self.cleaned_data.get("password")
@@ -392,6 +398,8 @@ class VoitureForm(forms.ModelForm):
             raise forms.ValidationError(
                 "L'immatriculation doit être de la forme XX-000-XX."
             )
+        if Voiture.objects.filter(immatriculation=immatriculation).exists():
+            raise forms.ValidationError("Cette immatriculation est déjà utilisée.")
         return immatriculation
 
 
@@ -429,6 +437,17 @@ class AdresseForm(forms.ModelForm):
             "email": forms.EmailInput(attrs={"placeholder": "Email"}),
             "photo": forms.FileInput(),
         }
+    # On va chercher l'email a l'inscription
+    def __init__(self, *args,user = None, **kwargs):
+        super().__init__(*args, **kwargs)
+        if user:
+            self.fields['email'].initial = user.email
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if User.objects.filter(email=email).exclude(pk=self.instance.user.pk).exists():
+            raise forms.ValidationError("Cet email est déjà utilisé.")
+        return email
+
 
     def clean_numero(self):
         numero = self.cleaned_data.get("numero")
@@ -443,6 +462,9 @@ class AdresseForm(forms.ModelForm):
         ):
             raise ValidationError("Le code postal doit contenir exactement 5 chiffres.")
         return code_postal
+
+
+
 
     def clean(self):
         cleaned_data = super().clean()

@@ -370,6 +370,10 @@ class AdresseUser(models.Model):
             vieille_image = AdresseUser.objects.get(pk=self.pk).photo
             if vieille_image and vieille_image != self.photo:
                 vieille_image.delete(save=False)
+
+            if self.email != self.user.email:
+                self.user.email = self.email
+                self.user.save()
         self.clean()
         super().save(*args, **kwargs)
 

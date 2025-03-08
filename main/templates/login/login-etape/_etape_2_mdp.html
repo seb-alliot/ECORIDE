@@ -2,7 +2,9 @@
     {% csrf_token %}
         <label for="id_Password">Mot de passe</label>
         {{ form.password }}
+        {{ form.token_connection}}
         {% if form.non_field_errors %}
+
         <div class="error">
             {% for error in form.non_field_errors %}
                 <p>{{ error }}</p>

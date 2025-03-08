@@ -2,8 +2,19 @@
 
 {% block principal %}
     <h1>Bon courage !!</h1>
-    <h2>Les emails à s'occuper</h2>
+
+
+    {% comment %} <form method="POST">
+    <h2>Choisisser le style d'email a moderer</h3>
+        <h3>Les emails à s'occuper</h2>
+        <select id="emailFilter">
+            <option value="Avis positif">Avis positif</option>
+            <option value="Avis negatif">Avis negatif</option>
+            <option value="Prise de contact">Prise de contact</option>
+        </select>
+    </form> {% endcomment %}
     <p>Vous avez {{ emails|length }} email{{ emails|pluralize }} à modérer.</p>
+
 
     <!-- Formulaire pour sélectionner un email -->
     <form method="GET">

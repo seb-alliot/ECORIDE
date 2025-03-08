@@ -1,7 +1,9 @@
 {% extends "index.html" %}
 
-
 {% block principal %}
+<form id="contact_form" method="POST">
+    {% csrf_token %}
     {{ contact_form.as_p }}
-    <button type="submit" class="btn btn-primary">Envoyer</button>
+    <button type="submit">Envoyer</button>
+</form>
 {% endblock principal %}

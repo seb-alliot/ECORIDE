@@ -60,7 +60,7 @@ from django.db.models.functions import Coalesce
 import random
 import imaplib, email
 from email.header import decode_header
-import os, quopri, re, uuid
+import os, quopri, re, uuid , secrets
 from bs4 import BeautifulSoup
 
 
@@ -99,32 +99,35 @@ def initialisation_template(request):
     return context
 
 
-def contact(request):
-    contact_form = ContactForm(user=request.user)
+def Contact(request):
+    user = request.user
+    adresse_user = None
+
+    if user.is_authenticated:
+        try:
+            adresse_user = AdresseUser.objects.get(user=user)
+            email = AdresseUser.objects.get(user=user).email
+        except AdresseUser.DoesNotExist:
+            email = user.email
+    elif user.is_anonymous:
+        email = None
+
+    contact_form = ContactForm(request.POST or None, user=user)
+
     if request.method == "POST":
         if contact_form.is_valid():
+            telephone = contact_form.cleaned_data["telephone"]
             pseudo = contact_form.cleaned_data["pseudo"]
-            emai_user = contact_form.cleaned_data["email"]
+            email_user = contact_form.cleaned_data["email"]
+            sujet = contact_form.cleaned_data["sujet"]
             message = contact_form.cleaned_data["message"]
             sujet = contact_form.cleaned_data["sujet"]
 
-            subject = f"Message de {pseudo} - {sujet}"
-            context = {
-                "pseudo": pseudo,
-                "email": emai_user,
-                "message": message,
-            }
-            message = render_to_string("style_email/contact.html", context)
-            email = EmailMessage(
-                subject=subject,
-                body=message,
-                from_email=emai_user,
-                to=["staff.modo.ecoride@gmail.com"],
-            )
-            email.content_subtype = "html"
-            email.send()
-            messages.success(request, "Votre message a bien été envoyé.")
+            envoi_email_prise_contact(request, telephone, pseudo, email_user, message, sujet)
+            return redirect("index")
+
     context = {
+        "adresse_user": adresse_user,
         "contact_form": contact_form,
     }
     context.update(initialisation_template(request))
@@ -245,7 +248,7 @@ class UserCreateView(CreateView):
         activation_token = ActivationToken.objects.create(user=user, token=token)
         activation_url = self.request.build_absolute_uri(
             reverse(
-                "activation", kwargs={"token": activation_token.token, "uidb64": uidb64}
+                "activation", kwargs={"token":token, "uidb64": uidb64}
             )
         )
         self.ActivationCompte(user, uidb64, activation_url)
@@ -334,8 +337,6 @@ class CustomResetPasswordConfirmView(PasswordResetConfirmView):
 
 # operation 1 : demande d'identifiant
 def connection1(request):
-    username = request.POST.get("username")
-    username = None
     form = IdentifiantForm()
 
     if request.method == "POST":
@@ -345,15 +346,21 @@ def connection1(request):
             try:
                 user = get_user_model().objects.get(username=username)
                 request.session["user_id"] = user.id
-                # gestio du token de session
-                token, created = TokenValidation.objects.get_or_create(
+                # gestion du token de session
+                # On le recupere ou renevouvel
+                token, created = TokenValidation.objects.update_or_create(
                     user=user, defaults={"token": get_random_string(32)}
                 )
                 request.session["token"] = token.token
+
+                email = User.objects.get(username=username).email
+
+                Deux_F_A(request, email, username)
                 return redirect("connection2")
             except get_user_model().DoesNotExist:
                 messages.error(request, "Utilisateur introuvable.")
                 return redirect("connection1")
+
     context = {
         "form": form,
     }
@@ -361,19 +368,24 @@ def connection1(request):
     return render(request, "login/connection1.html", context)
 
 
-# operation 2 : demande de mot de passe
+# operation 2 : demande de mot de passe et code connection 2fa
 
 
 def connection2(request):
     connected_users = request.session.get("connected_users", [])
     user_id = request.session.get("user_id")
     token = request.session.get("token")
+    token_connection_session = request.session.get("token_connection")
+
+    if not token:
+        return redirect("connection1")
 
     if request.method == "POST":
         form = MotDePasseForm(request.POST)
 
         if form.is_valid():
             password = form.cleaned_data["password"]
+            token_connection = form.cleaned_data["token_connection"]
             if user_id is None:
                 messages.error(request, "L'identifiant n'a pas étè trouvé.")
                 return redirect("connection1")
@@ -385,6 +397,10 @@ def connection2(request):
                 if user_id not in connected_users:
                     connected_users.append(user_id)
                     request.session["connected_users"] = connected_users
+                if token_connection_session != token_connection:
+                    messages.error(request, "Code de connexion incorrect.")
+                    return redirect("connection2")
+
                 TokenValidation.objects.filter(user=user).delete()
                 login(request, authenticated_user)
                 request.session.pop("user_id", None)
@@ -420,11 +436,7 @@ def logout_view(request):
 def MonCompte(request):
     # Récupération des données utilisateur
     user = request.user
-    adresse_user = (
-        get_object_or_404(AdresseUser, user=request.user) or None
-        if AdresseUser.objects.filter(user=request.user).exists()
-        else None
-    )
+
     role = ChoixRole.objects.filter(user=user).first()
     preference = Preference.objects.filter(user_preference=user).first()
     trajet = TrajetProposer.objects.filter(chauffeur=user).first()
@@ -432,9 +444,15 @@ def MonCompte(request):
     reservation = ReservationTrajet.objects.filter(passager=user)
     prix_total_paye = ReservationTrajet.paiement_total_passager(request.user, trajet)
     chauffeur = TrajetProposer.objects.filter(chauffeur=user).first()
+    adresse_user = AdresseUser.objects.filter().first()
+    if AdresseUser.objects.filter(user=user).exists():
+        adresse_user = AdresseUser.objects.get(user=user)
+    else:
+        adresse_form = AdresseForm(instance=adresse_user, user=user)
+
 
     # Initialisation des formulaires
-    adresse_form = AdresseForm(instance=adresse_user)
+    adresse_form = AdresseForm(instance=adresse_user, user=user)
     preference_form = PreferenceForm(instance=preference)
     role_form = ChoixRoleForm(instance=role)
     voiture_form = VoitureForm(request.POST)
@@ -456,7 +474,7 @@ def MonCompte(request):
         # __________ Formulaire d'ajout d'adresse___________
         if form_soumis == "adresse_form":
             adresse_form = AdresseForm(
-                request.POST, request.FILES, instance=adresse_user
+                request.POST, request.FILES, instance=adresse_user, user=user
             )
             if adresse_form.is_valid():
                 adresse = adresse_form.save(commit=False)
@@ -465,7 +483,10 @@ def MonCompte(request):
                 messages.success(request, "Vos informations  été mis à jour.")
                 return redirect("MonCompte")
             else:
-                messages.error(request, "Tous les champs sont obligatoires.")
+                if email:
+                    messages.error(request,"cette adresse email est déjà prise")
+                else:
+                    messages.error(request, "Tous les champs sont obligatoires.")
 
         # _________Formulaire de choix de rôle___________________
         elif form_soumis == "role_form":
@@ -509,10 +530,11 @@ def MonCompte(request):
                 messages.success(request, "Votre véhicule a bien été ajouté.")
                 return redirect("MonCompte")
             else:
-                messages.error(
-                    request,
-                    "Votre véhicule est bon pour la casse et a été refusé par la même occasion, désolé :'( ",
-                )
+                immatriculation = request.POST.get("immatriculation")
+                if Voiture.objects.filter(immatriculation=immatriculation).exists():
+                    messages.error(request, "Cette immatriculation est déjà prise.")
+                else:
+                    messages.error(request, "Une erreur est survenue lors de l'ajout de votre véhicule.")
 
         # __________Formulaire de proposition de trajet___
         elif form_soumis == "trajet_form":
@@ -536,7 +558,7 @@ def MonCompte(request):
                     # __on recupere l'admin__
                     superuser = User.objects.filter(is_superuser=True).first()
                     # __on recupere ses credit__
-                    credit_admin = CreditUser.objects.get(user=superuser)
+                    credit_admin, created = CreditUser.objects.get_or_create(user=superuser)
 
                     # __on ajoute la commission au credit admin__
                     credit_admin.credit += commission
@@ -990,99 +1012,331 @@ def SelectionTrajet(request):
     )
 
 
-def Envoi_Email_Annulation(request, trajet_id, reservations):
+@login_required
+def AvisSatisfaction(request, trajet_id, token):
 
-    try:
-        site_url = f"http://{get_current_site(request).domain}"
-        monprofile_url = f"{site_url}{reverse('MonCompte')}"
+    trajet = get_object_or_404(TrajetProposer, id=trajet_id)
+    reservation = ReservationTrajet.objects.filter(trajet_reserver=trajet).first()
+    chauffeur = trajet.chauffeur
+    passager = reservation.passager
 
-        reservations = ReservationTrajet.objects.filter(trajet_reserver=trajet_id)
-        for res in reservations:
-            passager = res.passager
-            chauffeur = res.trajet_reserver.chauffeur
-            date = res.trajet_reserver.date
-            trajet = res.trajet_reserver
-            subject = "Annulation de votre trajet"
+    note_existe = NoteUser.objects.filter(
+        chauffeur=chauffeur, passager=passager, trajet=trajet, token=token
+    ).first()
+    if note_existe is None:
+        pass
 
-            context = {
-                "reservations": reservations,
-                "site_url": site_url,
-                "monprofile_url": monprofile_url,
-                "passager": passager,
-                "chauffeur": chauffeur,
-                "date": date,
-                "trajet": trajet,
-            }
+    if request.user != passager:
+        messages.error(request, "Vous n'êtes pas autorisé à accéder à cette page.")
+        return redirect("index")  # Redirige vers une autre page
 
-            message = render_to_string(
-                "style_email/annulation_confirmation.html", context
+    avis_soumis = None
+    avis_form = AvisForm(request.POST)
+
+    if request.method == "POST" and avis_form.is_valid():
+        avis_soumis = avis_form.cleaned_data["avis"]
+        nouvelle_note = avis_form.cleaned_data["note"]
+        nouveau_commentaire = avis_form.cleaned_data["commentaire"]
+
+        if note_existe:
+
+            if (
+                note_existe.note_attribuee
+                and note_existe.commentaire_attribuee
+                and note_existe.avis_donne
+            ):
+                messages.info(
+                    request,
+                    "Vous avez déjà donné une note et un commentaire pour ce trajet.",
+                )
+                return redirect("AvisSatisfaction", trajet_id=trajet_id)
+            else:
+                # cas par cas
+                if note_existe.avis_donne:
+                    messages.info(
+                        request, "Vous avez déjà donné un avis pour ce trajet."
+                    )
+                else:
+                    note_existe.avis_donne = True
+                    messages.success(request, "Votre avis a bien été pris en compte.")
+
+                if note_existe.note_attribuee:
+                    messages.info(
+                        request, "Vous avez déjà donné une note pour ce trajet."
+                    )
+                else:
+                    note_existe.note = nouvelle_note
+                    note_existe.note_attribuee = True
+                    messages.success(request, "Votre note a bien été prise en compte.")
+
+                if note_existe.commentaire_attribuee:
+                    messages.info(
+                        request, "Vous avez déjà donné un commentaire pour ce trajet."
+                    )
+                else:
+                    note_existe.commentaire = nouveau_commentaire
+                    note_existe.commentaire_attribuee = True
+                    messages.success(
+                        request, "Votre commentaire a bien été pris en compte."
+                    )
+
+                note_existe.save()
+        else:
+
+            note_existe = NoteUser.objects.create(
+                passager=request.user,
+                chauffeur=chauffeur,
+                trajet=trajet,
+                note=nouvelle_note if nouvelle_note else None,
+                commentaire=nouveau_commentaire if nouveau_commentaire else None,
+                avis_donne=True if avis_soumis else False,
+            )
+            if nouvelle_note:
+                note_existe.note_attribuee = True
+            if nouveau_commentaire:
+                note_existe.commentaire_attribuee = True
+            if avis_soumis:
+                note_existe.avis_donne = True
+            note_existe.save()
+            messages.success(
+                request, "Votre note et commentaire ont bien été pris en compte."
             )
 
-            email = EmailMessage(
-                subject=subject,
-                body=message,
-                from_email="staff.modo.ecoride@gmail.com",
-                to=[passager.email],
-            )
-            email.content_subtype = "html"
-            email.send()
+        if avis_soumis:
+            commentaire = note_existe.commentaire
+            token = None
+            if token is None:
+                token = uuid.uuid4()
 
-        messages.success(request, "E-mail d'annulation envoyé avec succès.")
+            if avis_soumis == "oui":
+                chauffeur = trajet.chauffeur
+                credit_chauffeur = CreditUser.objects.get(user=chauffeur)
+                facture_passager = reservation.prix_par_passager
+                credit_chauffeur.credit += facture_passager
+                credit_chauffeur.save()
 
-    except Exception as e:
-        print(f"Erreur lors de l'envoi de l'e-mail d'annulation: {str(e)}")
-        messages.error(
-            request, f"Erreur lors de l'envoi de l'e-mail d'annulation : {str(e)}"
-        )
+                # suivant l'avis on envoi un mail different au modo pour un près triage
+                Envoi_Email_Avis_Trajet_Positif(
+                    request, chauffeur, trajet_id, reservation, commentaire, token
+                )
+
+            elif avis_soumis == "non":
+                Envoi_Email_Avis_Trajet_Negatif(
+                    request, request.user, trajet_id, reservation, commentaire, token
+                )
+
+            return redirect("AvisSatisfaction", trajet_id=trajet_id, token=token)
+
+    context = {
+        "note_existe": note_existe,
+        "trajet": trajet,
+        "chauffeur": chauffeur,
+        "reservation": reservation,
+        "avis_soumis": avis_soumis,
+        "avis_form": avis_form,
+        "messages": messages.get_messages(request),
+    }
+    context.update(initialisation_template(request))
+    return render(
+        request, "interface_utilisateur/utilisateur/avis_satisfaction.html", context
+    )
 
 
-def Envoi_Email_Terminer(request, trajet_id, reservations, token):
-    try:
-        site_url = f"http://{get_current_site(request).domain}"
-        avis_satisfaction_url = (
-            f"{site_url}{reverse('AvisSatisfaction', args=[trajet_id,token])}"
-        )
+# ________________Email à factoriser____________________
 
-        reservations = ReservationTrajet.objects.filter(trajet_reserver=trajet_id)
-        for res in reservations:
-            passager = res.passager
-            chauffeur = res.trajet_reserver.chauffeur
-            date = res.trajet_reserver.date
-            trajet = res.trajet_reserver
-            subject = "Confirmation de fin de covoiturage"
 
-            context = {
-                "reservations": reservations,
-                "site_url": site_url,
-                "avis_satisfaction_url": avis_satisfaction_url,
-                "passager": passager,
-                "chauffeur": chauffeur,
-                "date": date,
-                "trajet": trajet,
-            }
 
-            message = render_to_string("style_email/covoit_termine.html", context)
+@login_required  # Ajouter le decoration pour le staff
+def Fait_Ton_Taff_De_Modo(request):
 
-            email = EmailMessage(
-                subject=subject,
-                body=message,
-                from_email="staff.modo.ecoride@gmail.com",
-                to=[passager.email],
-            )
-            email.content_subtype = "html"
-            email.send()
+    # Connexion au serveur IMAP
+    # Même principe que email dans settings
+    mail = imaplib.IMAP4_SSL(
+        os.getenv("MAIL_IMAP_SERVER"), int(os.getenv("MAIL_IMAP_PORT"))
+    )
+    mail.login(os.getenv("MAIL_IMAP_USER"), os.getenv("MAIL_IMAP_PASSWORD"))
+    # selectionne la boite de recception cibler a charger
+    mail.select("inbox")
 
-    except Exception as e:
-        print(
-            f"Erreur lors de l'envoi de l'e-mail de confirmation de fin de covoiturage: {str(e)}"
-        )
-        messages.error(
+    result, data = mail.search(None, "ALL")
+    if result != "OK":
+        return render(
             request,
-            f"Erreur lors de l'envoi de l'e-mail de confirmation de fin de covoiturag : {str(e)}",
+            "admin/moderateur/moderation_email/moderation_email.html",
+            {"error": "Il n'y a pas d'emails a modérer."},
         )
 
+    mail_ids = data[0].split()
+    emails = []
+    selected_email = None
+    commentaire = "Aucon commentaire trouvé."
 
-# ------------------------------------En cour-----------------------------------------------------
+    # Récupération de l'email sélectionné (si existant)
+    email_id_selected = request.GET.get("email_id")
+    # Si pas d'email on fait en sorte de ne pas générer d'erreur
+    for email_id in mail_ids:
+        result, data = mail.fetch(email_id, "(RFC822)")
+        if result != "OK" or not data or not data[0]:
+            continue
+
+        raw_email = data[0][1]
+        if raw_email is None:
+            continue
+
+        message = email.message_from_bytes(raw_email)
+        subject, encoding = decode_header(message["Subject"])[0]
+
+        if isinstance(subject, bytes) and encoding:
+            subject = subject.decode(encoding if encoding else "utf-8")
+
+        # on applique un filtre sur ce que l'on veux sur le template
+        sender = message.get("From")
+        if not (
+            ("Avis negatif" in subject
+            or "Avis positif" in subject
+            or "Prise de contact" in subject)
+            and ("staff.modo.ecoride@gmail.com" in sender)
+        ):
+            continue
+
+        body = ""
+        # on autopsie l'email recu
+        if message.is_multipart():
+            for part in message.walk():
+                if part.get_content_type() == "text/plain":
+                    body = part.get_payload(decode=True).decode()
+
+                    break
+        else:
+            body = message.get_payload(decode=True).decode()
+
+        # On extrait le commentaire du passager
+
+        email_data = {
+            "id": email_id.decode(),
+            "subject": subject,
+            "sender": sender,
+            "body": body,
+        }
+        emails.append(email_data)
+
+        # Si l'email sélectionné correspond à celui-ci, on l'affiche
+        if email_id_selected and email_id_selected == email_data["id"]:
+            selected_email = email_data
+            extraire_commentaire = BeautifulSoup(body, "html.parser")
+            div_commentaire = extraire_commentaire.find("div", class_="commentaire")
+            # On extrait le commentaire du passager
+            if div_commentaire and div_commentaire.p:
+                commentaire = (
+                    div_commentaire.p.get_text().replace("Commentaire: ", "").strip()
+                )
+                # on fait sauter Commentaire : pour avoir juste le commentaire
+            if commentaire.startswith("Commentaire :"):
+                commentaire = commentaire.replace("Commentaire :", "").strip()
+
+    moderation_form = ModerationTrajetForm(
+        request.POST or None, initial={"commentaire": commentaire}
+    )
+
+    if moderation_form.is_valid():
+        choix_moderateur = moderation_form.cleaned_data["etat_paiement"]
+
+        try:
+            trajet_id = selected_email["subject"].split(" ")[-1]
+            trajet = TrajetProposer.objects.get(id=trajet_id)
+            chauffeur = trajet.chauffeur
+
+            reservation = ReservationTrajet.objects.filter(
+                trajet_reserver=trajet
+            ).first()
+            passager = reservation.passager if reservation else None
+
+            # Récupérer ou créer la note
+            note_chauffeur, created = NoteUser.objects.get_or_create(
+                chauffeur=trajet.chauffeur,
+                passager=passager,
+                trajet=trajet,
+            )
+
+            note_chauffeur.commentaire = moderation_form.cleaned_data["commentaire"]
+            note_chauffeur.commentaire_moderer = True
+            note_chauffeur.etat_paiement = choix_moderateur
+            note_chauffeur.decision_prise = True
+            note_chauffeur.save()
+
+            messages.info(request, "Le commentaire a bien été enregistré.")
+
+            if choix_moderateur == "Payer":
+                reservation.etat_paiement = "Payer"
+                credit_chauffeur = CreditUser.objects.get(user=trajet.chauffeur)
+                facture_passager = reservation.prix_par_passager
+                credit_chauffeur.credit += facture_passager
+                credit_chauffeur.save()
+
+                reservation.trajet_payer = True
+                reservation.save()
+                messages.success(request, "Le paiement a été accordé.")
+
+            elif choix_moderateur == "Refuser":
+                reservation.etat_paiement = "Refuser"
+                reservation.trajet_payer = True
+                reservation.save()
+                messages.success(
+                    request, "Vous avez bien refusé le paiement au chauffeur."
+                )
+
+        except TrajetProposer.DoesNotExist:
+            messages.error(request, "Trajet introuvable.")
+        except ReservationTrajet.DoesNotExist:
+            messages.error(request, "Réservation introuvable.")
+        except CreditUser.DoesNotExist:
+            messages.error(request, "Ce chauffeur n'existe plus.")
+
+        # Déconnexion propre du serveur IMAP
+        mail.close()
+        mail.logout()
+
+    context = {
+        "emails": emails,
+        "selected_email": selected_email,
+        "messages": messages.get_messages(request),
+        "mail_ids": mail_ids,
+        "moderation_form": moderation_form,
+        "commentaire": commentaire,
+    }
+    context.update(initialisation_template(request))
+    return render(
+        request, "admin/moderateur/moderation_email/moderation_email.html", context
+    )
+
+
+def envoi_email_prise_contact(request,sujet,  pseudo, email_user, message):
+    try:
+        site_url = f"http://{get_current_site(request).domain}"
+        contact_url = f"{site_url}{reverse('contact')}"
+        subject = "Prise de contact"
+        context = {
+            "contact_url": contact_url,
+            "sujet": sujet,
+            "pseudo": pseudo,
+            "email": email,
+            "message": message,
+            "site_url": site_url,
+        }
+        message = render_to_string("style_email/contact.html", context)
+        email = EmailMessage(
+            subject=subject,
+            body=message,
+            from_email="staff.modo.ecoride@gmail.com",
+            to=["staff.modo.ecoride@gmail.com"],
+        )
+        email.content_subtype = "html"
+        email.send()
+        message=request.POST.get("message")
+        messages.success(request, "Votre message a bien été envoyé.")
+    except Exception as e:
+        print(f"Erreur lors de l'envoi de l'e-mail de confirmation de fin de covoiturage: {str(e)}")
+        messages.error(request, f"Erreur lors de l'envoi de l'e-mail de votre retour positif: {str(e)}")
 
 
 def Envoi_Email_Avis_Trajet_Negatif(
@@ -1228,298 +1482,136 @@ def Envoi_Email_Avis_Trajet_Positif(
         )
 
 
-@login_required
-def AvisSatisfaction(request, trajet_id, token):
-
-    trajet = get_object_or_404(TrajetProposer, id=trajet_id)
-    reservation = ReservationTrajet.objects.filter(trajet_reserver=trajet).first()
-    chauffeur = trajet.chauffeur
-    passager = reservation.passager
-
-    note_existe = NoteUser.objects.filter(
-        chauffeur=chauffeur, passager=passager, trajet=trajet, token=token
-    ).first()
-    if note_existe is None:
-        pass
-
-    if request.user != passager:
-        messages.error(request, "Vous n'êtes pas autorisé à accéder à cette page.")
-        return redirect("index")  # Redirige vers une autre page
-
-    avis_soumis = None
-    avis_form = AvisForm(request.POST)
-
-    if request.method == "POST" and avis_form.is_valid():
-        avis_soumis = avis_form.cleaned_data["avis"]
-        nouvelle_note = avis_form.cleaned_data["note"]
-        nouveau_commentaire = avis_form.cleaned_data["commentaire"]
-
-        if note_existe:
-
-            if (
-                note_existe.note_attribuee
-                and note_existe.commentaire_attribuee
-                and note_existe.avis_donne
-            ):
-                messages.info(
-                    request,
-                    "Vous avez déjà donné une note et un commentaire pour ce trajet.",
-                )
-                return redirect("AvisSatisfaction", trajet_id=trajet_id)
-            else:
-                # cas par cas
-                if note_existe.avis_donne:
-                    messages.info(
-                        request, "Vous avez déjà donné un avis pour ce trajet."
-                    )
-                else:
-                    note_existe.avis_donne = True
-                    messages.success(request, "Votre avis a bien été pris en compte.")
-
-                if note_existe.note_attribuee:
-                    messages.info(
-                        request, "Vous avez déjà donné une note pour ce trajet."
-                    )
-                else:
-                    note_existe.note = nouvelle_note
-                    note_existe.note_attribuee = True
-                    messages.success(request, "Votre note a bien été prise en compte.")
-
-                if note_existe.commentaire_attribuee:
-                    messages.info(
-                        request, "Vous avez déjà donné un commentaire pour ce trajet."
-                    )
-                else:
-                    note_existe.commentaire = nouveau_commentaire
-                    note_existe.commentaire_attribuee = True
-                    messages.success(
-                        request, "Votre commentaire a bien été pris en compte."
-                    )
-
-                note_existe.save()
-        else:
-
-            note_existe = NoteUser.objects.create(
-                passager=request.user,
-                chauffeur=chauffeur,
-                trajet=trajet,
-                note=nouvelle_note if nouvelle_note else None,
-                commentaire=nouveau_commentaire if nouveau_commentaire else None,
-                avis_donne=True if avis_soumis else False,
-            )
-            if nouvelle_note:
-                note_existe.note_attribuee = True
-            if nouveau_commentaire:
-                note_existe.commentaire_attribuee = True
-            if avis_soumis:
-                note_existe.avis_donne = True
-            note_existe.save()
-            messages.success(
-                request, "Votre note et commentaire ont bien été pris en compte."
-            )
-
-        if avis_soumis:
-            commentaire = note_existe.commentaire
-            token = None
-            if token is None:
-                token = uuid.uuid4()
-
-            if avis_soumis == "oui":
-                chauffeur = trajet.chauffeur
-                credit_chauffeur = CreditUser.objects.get(user=chauffeur)
-                facture_passager = reservation.prix_par_passager
-                credit_chauffeur.credit += facture_passager
-                credit_chauffeur.save()
-
-                # suivant l'avis on envoi un mail different au modo pour un près triage
-                Envoi_Email_Avis_Trajet_Positif(
-                    request, chauffeur, trajet_id, reservation, commentaire, token
-                )
-
-            elif avis_soumis == "non":
-                Envoi_Email_Avis_Trajet_Negatif(
-                    request, request.user, trajet_id, reservation, commentaire, token
-                )
-
-            return redirect("AvisSatisfaction", trajet_id=trajet_id, token=token)
-
-    context = {
-        "note_existe": note_existe,
-        "trajet": trajet,
-        "chauffeur": chauffeur,
-        "reservation": reservation,
-        "avis_soumis": avis_soumis,
-        "avis_form": avis_form,
-        "messages": messages.get_messages(request),
-    }
-    context.update(initialisation_template(request))
-    return render(
-        request, "interface_utilisateur/utilisateur/avis_satisfaction.html", context
-    )
-
-
-@login_required  # Ajouter le decoration pour le staff
-def Fait_Ton_Taff_De_Modo(request):
-    print("Requête reçue :", request.method, request.POST)
-
-    # Connexion au serveur IMAP
-    # Même principe que email dans settings
-    mail = imaplib.IMAP4_SSL(
-        os.getenv("MAIL_IMAP_SERVER"), int(os.getenv("MAIL_IMAP_PORT"))
-    )
-    mail.login(os.getenv("MAIL_IMAP_USER"), os.getenv("MAIL_IMAP_PASSWORD"))
-    # selectionne la boite de recception cibler a charger
-    mail.select("inbox")
-
-    result, data = mail.search(None, "ALL")
-    if result != "OK":
-        return render(
-            request,
-            "admin/moderateur/moderation_email/moderation_email.html",
-            {"error": "Il n'y a pas d'emails a modérer."},
+def Envoi_Email_Terminer(request, trajet_id, reservations, token):
+    try:
+        site_url = f"http://{get_current_site(request).domain}"
+        avis_satisfaction_url = (
+            f"{site_url}{reverse('AvisSatisfaction', args=[trajet_id,token])}"
         )
 
-    mail_ids = data[0].split()
-    emails = []
-    selected_email = None
-    commentaire = "Aucon commentaire trouvé."
+        reservations = ReservationTrajet.objects.filter(trajet_reserver=trajet_id)
+        for res in reservations:
+            passager = res.passager
+            chauffeur = res.trajet_reserver.chauffeur
+            date = res.trajet_reserver.date
+            trajet = res.trajet_reserver
+            subject = "Confirmation de fin de covoiturage"
 
-    # Récupération de l'email sélectionné (si existant)
-    email_id_selected = request.GET.get("email_id")
-    # Si pas d'email on fait en sorte de ne pas générer d'erreur
-    for email_id in mail_ids:
-        result, data = mail.fetch(email_id, "(RFC822)")
-        if result != "OK" or not data or not data[0]:
-            continue
+            context = {
+                "reservations": reservations,
+                "site_url": site_url,
+                "avis_satisfaction_url": avis_satisfaction_url,
+                "passager": passager,
+                "chauffeur": chauffeur,
+                "date": date,
+                "trajet": trajet,
+            }
 
-        raw_email = data[0][1]
-        if raw_email is None:
-            continue
+            message = render_to_string("style_email/covoit_termine.html", context)
 
-        message = email.message_from_bytes(raw_email)
-        subject, encoding = decode_header(message["Subject"])[0]
+            email = EmailMessage(
+                subject=subject,
+                body=message,
+                from_email="staff.modo.ecoride@gmail.com",
+                to=[passager.email],
+            )
+            email.content_subtype = "html"
+            email.send()
 
-        if isinstance(subject, bytes) and encoding:
-            subject = subject.decode(encoding if encoding else "utf-8")
+    except Exception as e:
+        print(
+            f"Erreur lors de l'envoi de l'e-mail de confirmation de fin de covoiturage: {str(e)}"
+        )
+        messages.error(
+            request,
+            f"Erreur lors de l'envoi de l'e-mail de confirmation de fin de covoiturag : {str(e)}",
+        )
 
-        # on applique un filtre sur ce que l'on veux sur le template
-        sender = message.get("From")
-        if not (
-            ("Avis negatif" or "Avis positif" in subject)
-            and ("staff.modo.ecoride@gmail.com" in sender)
-        ):
-            continue
 
-        body = ""
-        # on autopsie l'email recu
-        if message.is_multipart():
-            for part in message.walk():
-                if part.get_content_type() == "text/plain":
-                    body = part.get_payload(decode=True).decode()
+def Envoi_Email_Annulation(request, trajet_id, reservations):
 
-                    break
-        else:
-            body = message.get_payload(decode=True).decode()
+    try:
+        site_url = f"http://{get_current_site(request).domain}"
+        monprofile_url = f"{site_url}{reverse('MonCompte')}"
 
-        # On extrait le commentaire du passager
+        reservations = ReservationTrajet.objects.filter(trajet_reserver=trajet_id)
+        for res in reservations:
+            passager = res.passager
+            chauffeur = res.trajet_reserver.chauffeur
+            date = res.trajet_reserver.date
+            trajet = res.trajet_reserver
+            subject = "Annulation de votre trajet"
 
-        email_data = {
-            "id": email_id.decode(),
-            "subject": subject,
-            "sender": sender,
-            "body": body,
-        }
-        emails.append(email_data)
+            context = {
+                "reservations": reservations,
+                "site_url": site_url,
+                "monprofile_url": monprofile_url,
+                "passager": passager,
+                "chauffeur": chauffeur,
+                "date": date,
+                "trajet": trajet,
+            }
 
-        # Si l'email sélectionné correspond à celui-ci, on l'affiche
-        if email_id_selected and email_id_selected == email_data["id"]:
-            selected_email = email_data
-            extraire_commentaire = BeautifulSoup(body, "html.parser")
-            div_commentaire = extraire_commentaire.find("div", class_="commentaire")
-            # On extrait le commentaire du passager
-            if div_commentaire and div_commentaire.p:
-                commentaire = (
-                    div_commentaire.p.get_text().replace("Commentaire: ", "").strip()
-                )
-                # on fait sauter Commentaire : pour avoir juste le commentaire
-            if commentaire.startswith("Commentaire :"):
-                commentaire = commentaire.replace("Commentaire :", "").strip()
-
-    moderation_form = ModerationTrajetForm(
-        request.POST or None, initial={"commentaire": commentaire}
-    )
-
-    if moderation_form.is_valid():
-        choix_moderateur = moderation_form.cleaned_data["etat_paiement"]
-
-        try:
-            trajet_id = selected_email["subject"].split(" ")[-1]
-            trajet = TrajetProposer.objects.get(id=trajet_id)
-            chauffeur = trajet.chauffeur
-
-            reservation = ReservationTrajet.objects.filter(
-                trajet_reserver=trajet
-            ).first()
-            passager = reservation.passager if reservation else None
-
-            # Récupérer ou créer la note
-            note_chauffeur, created = NoteUser.objects.get_or_create(
-                chauffeur=trajet.chauffeur,
-                passager=passager,
-                trajet=trajet,
+            message = render_to_string(
+                "style_email/annulation_confirmation.html", context
             )
 
-            note_chauffeur.commentaire = moderation_form.cleaned_data["commentaire"]
-            note_chauffeur.commentaire_moderer = True
-            note_chauffeur.etat_paiement = choix_moderateur
-            note_chauffeur.decision_prise = True
-            note_chauffeur.save()
+            email = EmailMessage(
+                subject=subject,
+                body=message,
+                from_email="staff.modo.ecoride@gmail.com",
+                to=[passager.email],
+            )
+            email.content_subtype = "html"
+            email.send()
 
-            messages.info(request, "Le commentaire a bien été enregistré.")
+        messages.success(request, "E-mail d'annulation envoyé avec succès.")
 
-            if choix_moderateur == "Payer":
-                reservation.etat_paiement = "Payer"
-                credit_chauffeur = CreditUser.objects.get(user=trajet.chauffeur)
-                facture_passager = reservation.prix_par_passager
-                credit_chauffeur.credit += facture_passager
-                credit_chauffeur.save()
+    except Exception as e:
+        print(f"Erreur lors de l'envoi de l'e-mail d'annulation: {str(e)}")
+        messages.error(
+            request, f"Erreur lors de l'envoi de l'e-mail d'annulation : {str(e)}"
+        )
 
-                reservation.trajet_payer = True
-                reservation.save()
-                messages.success(request, "Le paiement a été accordé.")
 
-            elif choix_moderateur == "Refuser":
-                reservation.etat_paiement = "Refuser"
-                reservation.trajet_payer = True
-                reservation.save()
-                messages.success(
-                    request, "Vous avez bien refusé le paiement au chauffeur."
-                )
+def Deux_F_A(request, email, username):
+    try:
+        site_url = f"http://{get_current_site(request).domain}"
+        connection2_url = f"{site_url}{reverse('connection2')}"
 
-        except TrajetProposer.DoesNotExist:
-            messages.error(request, "Trajet introuvable.")
-        except ReservationTrajet.DoesNotExist:
-            messages.error(request, "Réservation introuvable.")
-        except CreditUser.DoesNotExist:
-            messages.error(request, "Ce chauffeur n'existe plus.")
+        token_connection = str(secrets.randbelow(1000000)).zfill(6)
+        request.session["token_connection"] = token_connection
 
-        # Déconnexion propre du serveur IMAP
-        mail.close()
-        mail.logout()
+        subject = "Code de connection"
+        context = {
+            "username": username,
+            "email": email,
+            "token_connection": token_connection,
+            "site_url": site_url,
+            "connection2": connection2_url,
+        }
 
-    context = {
-        "emails": emails,
-        "selected_email": selected_email,
-        "messages": messages.get_messages(request),
-        "mail_ids": mail_ids,
-        "moderation_form": moderation_form,
-        "commentaire": commentaire,
-    }
-    context.update(initialisation_template(request))
-    return render(
-        request, "admin/moderateur/moderation_email/moderation_email.html", context
-    )
+        message = render_to_string(
+            "style_email/_2fa.html", context
+            )
 
+        email = EmailMessage(
+            subject=subject,
+            body=message,
+            from_email="staff.modo.ecoride@gmail.com",
+            to=[email],
+        )
+        email.content_subtype = "html"
+        email.send()
+
+        messages.success(request, "Votre code de connection vous a été envoyer par email.")
+        return redirect("connection2")
+
+    except Exception as e:
+        messages.error(request, f"Erreur lors de l'envoi de l'e-mail de confirmation de fin de covoiturag : {str(e)}")
+        return redirect("connection1")
+
+# ------------------------------------En cour-----------------------------------------------------
 
 # ------------------------------------A FAIRE------------------------------------------------------
 
