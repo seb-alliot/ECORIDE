@@ -173,7 +173,7 @@ def accueil(request):
             else:
                 messages.error(
                     request,
-                    "La déception ... Une autre fois peut-être, où une autre date qui sait ?",
+                    "La déception ... Une autre date peut-être ?",
                 )
 
         # Formulaire de filtrage de trajet
