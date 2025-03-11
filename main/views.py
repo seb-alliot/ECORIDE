@@ -29,6 +29,8 @@ from .forms import (
     AvisForm,
     ContactForm,
     ModerationTrajetForm,
+    ReponseForm,
+    ModerationAvisPositifForm,
 )
 from .models import (
     CreditUser,
@@ -106,13 +108,12 @@ def Contact(request):
     if user.is_authenticated:
         try:
             adresse_user = AdresseUser.objects.get(user=user)
-            email = AdresseUser.objects.get(user=user).email
+            contact_form = ContactForm(request.POST or None, user=user)
         except AdresseUser.DoesNotExist:
-            email = user.email
+            email = User.objects.get(username=user).email
+            contact_form = ContactForm(request.POST or None, initial={"email": email})
     elif user.is_anonymous:
-        email = None
-
-    contact_form = ContactForm(request.POST or None, user=user)
+        contact_form = ContactForm(request.POST or None)
 
     if request.method == "POST":
         if contact_form.is_valid():
@@ -121,9 +122,8 @@ def Contact(request):
             email_user = contact_form.cleaned_data["email"]
             sujet = contact_form.cleaned_data["sujet"]
             message = contact_form.cleaned_data["message"]
-            sujet = contact_form.cleaned_data["sujet"]
 
-            envoi_email_prise_contact(request, telephone, pseudo, email_user, message, sujet)
+            envoi_email_prise_contact(request, telephone, pseudo, email_user, sujet,message )
             return redirect("index")
 
     context = {
@@ -444,11 +444,9 @@ def MonCompte(request):
     reservation = ReservationTrajet.objects.filter(passager=user)
     prix_total_paye = ReservationTrajet.paiement_total_passager(request.user, trajet)
     chauffeur = TrajetProposer.objects.filter(chauffeur=user).first()
-    adresse_user = AdresseUser.objects.filter().first()
-    if AdresseUser.objects.filter(user=user).exists():
-        adresse_user = AdresseUser.objects.get(user=user)
-    else:
-        adresse_form = AdresseForm(instance=adresse_user, user=user)
+    adresse_user = AdresseUser.objects.filter(user=user).first()
+    if adresse_user is None:
+        adresse_user = AdresseUser(user=user)
 
 
     # Initialisation des formulaires
@@ -1027,7 +1025,7 @@ def AvisSatisfaction(request, trajet_id, token):
         pass
 
     if request.user != passager:
-        messages.error(request, "Vous n'êtes pas autorisé à accéder à cette page.")
+        messages.error(request, "Vous n'êtes pas sur le bon compte pour répondre à cet email.")
         return redirect("index")  # Redirige vers une autre page
 
     avis_soumis = None
@@ -1098,9 +1096,6 @@ def AvisSatisfaction(request, trajet_id, token):
             if avis_soumis:
                 note_existe.avis_donne = True
             note_existe.save()
-            messages.success(
-                request, "Votre note et commentaire ont bien été pris en compte."
-            )
 
         if avis_soumis:
             commentaire = note_existe.commentaire
@@ -1142,184 +1137,240 @@ def AvisSatisfaction(request, trajet_id, token):
     )
 
 
-# ________________Email à factoriser____________________
-
-
-
 @login_required  # Ajouter le decoration pour le staff
 def Fait_Ton_Taff_De_Modo(request):
 
-    # Connexion au serveur IMAP
-    # Même principe que email dans settings
-    mail = imaplib.IMAP4_SSL(
-        os.getenv("MAIL_IMAP_SERVER"), int(os.getenv("MAIL_IMAP_PORT"))
-    )
-    mail.login(os.getenv("MAIL_IMAP_USER"), os.getenv("MAIL_IMAP_PASSWORD"))
-    # selectionne la boite de recception cibler a charger
-    mail.select("inbox")
+            # Connexion au serveur IMAP
+            # Même principe que email dans settings
+            mail = imaplib.IMAP4_SSL(
+                os.getenv("MAIL_IMAP_SERVER"), int(os.getenv("MAIL_IMAP_PORT"))
+            )
+            mail.login(os.getenv("MAIL_IMAP_USER"), os.getenv("MAIL_IMAP_PASSWORD"))
+            # selectionne la boite de recception cibler a charger
+            mail.select("inbox")
 
-    result, data = mail.search(None, "ALL")
-    if result != "OK":
-        return render(
-            request,
-            "admin/moderateur/moderation_email/moderation_email.html",
-            {"error": "Il n'y a pas d'emails a modérer."},
-        )
-
-    mail_ids = data[0].split()
-    emails = []
-    selected_email = None
-    commentaire = "Aucon commentaire trouvé."
-
-    # Récupération de l'email sélectionné (si existant)
-    email_id_selected = request.GET.get("email_id")
-    # Si pas d'email on fait en sorte de ne pas générer d'erreur
-    for email_id in mail_ids:
-        result, data = mail.fetch(email_id, "(RFC822)")
-        if result != "OK" or not data or not data[0]:
-            continue
-
-        raw_email = data[0][1]
-        if raw_email is None:
-            continue
-
-        message = email.message_from_bytes(raw_email)
-        subject, encoding = decode_header(message["Subject"])[0]
-
-        if isinstance(subject, bytes) and encoding:
-            subject = subject.decode(encoding if encoding else "utf-8")
-
-        # on applique un filtre sur ce que l'on veux sur le template
-        sender = message.get("From")
-        if not (
-            ("Avis negatif" in subject
-            or "Avis positif" in subject
-            or "Prise de contact" in subject)
-            and ("staff.modo.ecoride@gmail.com" in sender)
-        ):
-            continue
-
-        body = ""
-        # on autopsie l'email recu
-        if message.is_multipart():
-            for part in message.walk():
-                if part.get_content_type() == "text/plain":
-                    body = part.get_payload(decode=True).decode()
-
-                    break
-        else:
-            body = message.get_payload(decode=True).decode()
-
-        # On extrait le commentaire du passager
-
-        email_data = {
-            "id": email_id.decode(),
-            "subject": subject,
-            "sender": sender,
-            "body": body,
-        }
-        emails.append(email_data)
-
-        # Si l'email sélectionné correspond à celui-ci, on l'affiche
-        if email_id_selected and email_id_selected == email_data["id"]:
-            selected_email = email_data
-            extraire_commentaire = BeautifulSoup(body, "html.parser")
-            div_commentaire = extraire_commentaire.find("div", class_="commentaire")
-            # On extrait le commentaire du passager
-            if div_commentaire and div_commentaire.p:
-                commentaire = (
-                    div_commentaire.p.get_text().replace("Commentaire: ", "").strip()
+            result, data = mail.search(None, "ALL")
+            if result != "OK":
+                return render(
+                    request,
+                    "admin/moderateur/moderation_email/moderation_email.html",
+                    {"error": "Il n'y a pas d'emails a modérer."},
                 )
-                # on fait sauter Commentaire : pour avoir juste le commentaire
-            if commentaire.startswith("Commentaire :"):
-                commentaire = commentaire.replace("Commentaire :", "").strip()
 
-    moderation_form = ModerationTrajetForm(
-        request.POST or None, initial={"commentaire": commentaire}
-    )
+            mail_ids = data[0].split()
+            emails = []
+            selected_email = None
+            commentaire = "Aucun commentaire trouvé."
+            reponse_modo = "Aucune réponse trouvée."
+            email_user = None
+            email_type = request.GET.get("email_type", "").strip()
 
-    if moderation_form.is_valid():
-        choix_moderateur = moderation_form.cleaned_data["etat_paiement"]
+            # Récupération de l'email sélectionné (si existant)
+            email_id_selected = request.GET.get("email_id")
+            # Si pas d'email on fait en sorte de ne pas générer d'erreur
+            for email_id in mail_ids:
+                result, data = mail.fetch(email_id, "(RFC822)")
+                if result != "OK" or not data or not data[0]:
+                    continue
 
-        try:
-            trajet_id = selected_email["subject"].split(" ")[-1]
-            trajet = TrajetProposer.objects.get(id=trajet_id)
-            chauffeur = trajet.chauffeur
+                raw_email = data[0][1]
+                if raw_email is None:
+                    continue
 
-            reservation = ReservationTrajet.objects.filter(
-                trajet_reserver=trajet
-            ).first()
-            passager = reservation.passager if reservation else None
+                message = email.message_from_bytes(raw_email)
+                subject, encoding = decode_header(message["Subject"])[0]
 
-            # Récupérer ou créer la note
-            note_chauffeur, created = NoteUser.objects.get_or_create(
-                chauffeur=trajet.chauffeur,
-                passager=passager,
-                trajet=trajet,
+                if isinstance(subject, bytes) and encoding:
+                    subject = subject.decode(encoding if encoding else "utf-8")
+
+                # on applique un filtre sur ce que l'on veux sur le template
+                sender = message.get("From")
+                if not (
+                    ("Avis negatif" in subject
+                    or "Avis positif" in subject
+                    or "Prise de contact" in subject)
+                    and ("staff.modo.ecoride@gmail.com" in sender)
+                ):
+                    continue
+                if email_type and email_type not in subject:
+                    continue
+
+                body = ""
+                # on autopsie l'email recu
+                if message.is_multipart():
+                    for part in message.walk():
+                        if part.get_content_type() == "text/plain":
+                            body = part.get_payload(decode=True).decode()
+
+                            break
+                else:
+                    body = message.get_payload(decode=True).decode()
+
+                # On extrait le commentaire du passager
+
+                email_data = {
+                    "id": email_id.decode(),
+                    "subject": subject,
+                    "sender": sender,
+                    "body": body,
+                }
+                emails.append(email_data)
+
+                # Si l'email sélectionné correspond à celui-ci, on l'affiche
+                if email_id_selected and email_id_selected == email_data["id"]:
+                    selected_email = email_data
+
+                    extraire = BeautifulSoup(body, "html.parser")
+
+                    li_list = extraire.find_all("li")
+                    for li in li_list:
+                        text = li.get_text(strip=True)
+                        match = re.search(r"Email:\s*(.*)", text)
+                        if match:
+                            email_user = match.group(1)
+                            print(email_user)
+                            break
+
+                    div_commentaire = extraire.find("div", class_="commentaire")
+                    # On extrait le commentaire du passager
+                    if div_commentaire and div_commentaire.p:
+                        commentaire = (
+                            div_commentaire.p.get_text().replace("Commentaire: ", "").strip()
+                        )
+                        # on fait sauter Commentaire : pour avoir juste le commentaire
+                    if commentaire.startswith("Commentaire :"):
+                        commentaire = commentaire.replace("Commentaire :", "").strip()
+
+            moderation_form = ModerationTrajetForm(
+                request.POST or None, initial={"commentaire": commentaire}
+            )
+            reponse_modo_form = ReponseForm(request.POST or None, initial={"email": email_user})
+            moderation_positive_form = ModerationAvisPositifForm(request.POST or None, initial={"commentaire": commentaire})
+
+            if email_type == "Avis negatif":
+                if moderation_form.is_valid():
+                    choix_moderateur = moderation_form.cleaned_data["etat_paiement"]
+                    try:
+                        trajet_id = selected_email["subject"].split(" ")[-1]
+                        trajet = TrajetProposer.objects.get(id=trajet_id)
+                        reservation = ReservationTrajet.objects.filter(
+                            trajet_reserver=trajet
+                        ).first()
+                        passager = reservation.passager if reservation else None
+
+                        # Récupérer ou créer la note
+                        note_chauffeur, created = NoteUser.objects.get_or_create(
+                            chauffeur=trajet.chauffeur,
+                            passager=passager,
+                            trajet=trajet,
+                        )
+
+                        note_chauffeur.commentaire = moderation_form.cleaned_data["commentaire"]
+                        note_chauffeur.commentaire_moderer = True
+                        note_chauffeur.etat_paiement = choix_moderateur
+                        note_chauffeur.decision_prise = True
+                        note_chauffeur.save()
+
+                        messages.info(request, "Le commentaire a bien été enregistré.")
+
+                        if choix_moderateur == "Payer":
+                            reservation.etat_paiement = "Payer"
+                            credit_chauffeur = CreditUser.objects.get(user=trajet.chauffeur)
+                            facture_passager = reservation.prix_par_passager
+                            credit_chauffeur.credit += facture_passager
+                            credit_chauffeur.save()
+
+                            reservation.trajet_payer = True
+                            reservation.save()
+                            messages.success(request, "Le paiement a été accordé.")
+
+                        elif choix_moderateur == "Refuser":
+                            reservation.etat_paiement = "Refuser"
+                            reservation.trajet_payer = True
+                            reservation.save()
+                            messages.success(
+                                request, "Vous avez bien refusé le paiement au chauffeur."
+                            )
+
+                    except TrajetProposer.DoesNotExist:
+                        messages.error(request, "Trajet introuvable.")
+                    except ReservationTrajet.DoesNotExist:
+                        messages.error(request, "Réservation introuvable.")
+                    except CreditUser.DoesNotExist:
+                        messages.error(request, "Ce chauffeur n'existe plus.")
+
+            elif email_type == "Avis positif":
+                if moderation_positive_form.is_valid():
+                    try:
+                        trajet_id = selected_email["subject"].split(" ")[-1]
+                        trajet = TrajetProposer.objects.get(id=trajet_id)
+                        reservation = ReservationTrajet.objects.filter(
+                            trajet_reserver=trajet
+                        ).first()
+                        passager = reservation.passager if reservation else None
+
+                        # Récupérer ou créer la note
+                        note_chauffeur, created = NoteUser.objects.get_or_create(
+                            chauffeur=trajet.chauffeur,
+                            passager=passager,
+                            trajet=trajet,
+                        )
+                        note_chauffeur.commentaire = moderation_positive_form.cleaned_data["commentaire"]
+                        note_chauffeur.commentaire_moderer = True
+                        note_chauffeur.decision_prise = True
+                        note_chauffeur.save()
+
+                        messages.info(request, "Le commentaire a bien été enregistré.")
+
+                    except TrajetProposer.DoesNotExist:
+                        messages.error(request, "Trajet introuvable.")
+                    except CreditUser.DoesNotExist:
+                        messages.error(request, "Ce chauffeur n'existe plus.")
+
+            elif email_type == "Prise de contact":
+                if reponse_modo_form.is_valid():
+                    reponse_modo = reponse_modo_form.cleaned_data["reponse"]
+                    Envoi_Reponse_Modo(request, email_user, reponse_modo)
+
+                # Déconnexion propre du serveur IMAP
+                if mail_ids:
+                    email_id = mail_ids[-1].decode()  # Prend le dernier email (ou un autre si besoin)
+                    mail.store(email_id, "+FLAGS", "\\Deleted")
+                    mail.expunge()  # Supprime définitivement
+                else:
+                    print("Aucun email à supprimer.")
+                mail.close()
+
+            context = {
+                "emails": emails,
+                "selected_email": selected_email,
+                "messages": messages.get_messages(request),
+                "mail_ids": mail_ids,
+                "commentaire": commentaire,
+                # Formulaire
+                "moderation_positive_form": moderation_positive_form,
+                "reponse_modo_form": reponse_modo_form,
+                "moderation_form": moderation_form,
+            }
+            context.update(initialisation_template(request))
+            return render(
+                request, "admin/moderateur/moderation_email/moderation_email.html", context
             )
 
-            note_chauffeur.commentaire = moderation_form.cleaned_data["commentaire"]
-            note_chauffeur.commentaire_moderer = True
-            note_chauffeur.etat_paiement = choix_moderateur
-            note_chauffeur.decision_prise = True
-            note_chauffeur.save()
-
-            messages.info(request, "Le commentaire a bien été enregistré.")
-
-            if choix_moderateur == "Payer":
-                reservation.etat_paiement = "Payer"
-                credit_chauffeur = CreditUser.objects.get(user=trajet.chauffeur)
-                facture_passager = reservation.prix_par_passager
-                credit_chauffeur.credit += facture_passager
-                credit_chauffeur.save()
-
-                reservation.trajet_payer = True
-                reservation.save()
-                messages.success(request, "Le paiement a été accordé.")
-
-            elif choix_moderateur == "Refuser":
-                reservation.etat_paiement = "Refuser"
-                reservation.trajet_payer = True
-                reservation.save()
-                messages.success(
-                    request, "Vous avez bien refusé le paiement au chauffeur."
-                )
-
-        except TrajetProposer.DoesNotExist:
-            messages.error(request, "Trajet introuvable.")
-        except ReservationTrajet.DoesNotExist:
-            messages.error(request, "Réservation introuvable.")
-        except CreditUser.DoesNotExist:
-            messages.error(request, "Ce chauffeur n'existe plus.")
-
-        # Déconnexion propre du serveur IMAP
-        mail.close()
-        mail.logout()
-
-    context = {
-        "emails": emails,
-        "selected_email": selected_email,
-        "messages": messages.get_messages(request),
-        "mail_ids": mail_ids,
-        "moderation_form": moderation_form,
-        "commentaire": commentaire,
-    }
-    context.update(initialisation_template(request))
-    return render(
-        request, "admin/moderateur/moderation_email/moderation_email.html", context
-    )
+# ________________Email à factoriser____________________
 
 
-def envoi_email_prise_contact(request,sujet,  pseudo, email_user, message):
+def envoi_email_prise_contact(request, telephone, pseudo, email_user, sujet,message ):
     try:
         site_url = f"http://{get_current_site(request).domain}"
         contact_url = f"{site_url}{reverse('contact')}"
         subject = "Prise de contact"
         context = {
+            "telephone": telephone,
             "contact_url": contact_url,
             "sujet": sujet,
             "pseudo": pseudo,
-            "email": email,
+            "email_user": email_user,
             "message": message,
             "site_url": site_url,
         }
@@ -1611,9 +1662,35 @@ def Deux_F_A(request, email, username):
         messages.error(request, f"Erreur lors de l'envoi de l'e-mail de confirmation de fin de covoiturag : {str(e)}")
         return redirect("connection1")
 
-# ------------------------------------En cour-----------------------------------------------------
 
-# ------------------------------------A FAIRE------------------------------------------------------
+def Envoi_Reponse_Modo(request, email_user, reponse_modo):
+    try:
+        site_url = f"http://{get_current_site(request).domain}"
+
+        subject = "Réponse à votre prise de contact"
+        context = {
+            "reponse_modo": reponse_modo,
+            "site_url": site_url,
+        }
+
+        message = render_to_string("style_email/_reponse_modo.html", context)
+
+        email = EmailMessage(
+            subject=subject,
+            body=message,
+            from_email="staff.modo.ecoride@gmail.com",
+            to=[email_user],
+        )
+        email.content_subtype = "html"
+        email.send()
+        messages.success(request, "Réponse envoyé.")
+    except Exception as e:
+        messages.error(request, f"Erreur est survenu : {str(e)}")
+# _________________En cour_________________
+
+#finition de l'administration des email
+
+# _________________A FAIRE_________________
 
 
 # --------Trouver comment ajouter la photo par default sur le reset mdp-----------------------------
@@ -1627,4 +1704,4 @@ def Deux_F_A(request, email, username):
 # --------ajout de voiture dynamique-------
 # --------confirmation de trajet dynamique-------
 
-# Pour plutart quand je serais a l'optimisation du site par tranche de defenition de fonction
+#factorisation du code quand j'aurai tout fini , dynamisme fonctionnalité op

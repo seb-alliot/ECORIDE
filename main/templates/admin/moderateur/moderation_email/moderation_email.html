@@ -2,22 +2,24 @@
 
 {% block principal %}
     <h1>Bon courage !!</h1>
-
-
-    {% comment %} <form method="POST">
-    <h2>Choisisser le style d'email a moderer</h3>
-        <h3>Les emails à s'occuper</h2>
-        <select id="emailFilter">
-            <option value="Avis positif">Avis positif</option>
-            <option value="Avis negatif">Avis negatif</option>
-            <option value="Prise de contact">Prise de contact</option>
-        </select>
-    </form> {% endcomment %}
+    <h2>Choisissez le style d'email à modérer</h2>
     <p>Vous avez {{ emails|length }} email{{ emails|pluralize }} à modérer.</p>
 
-
-    <!-- Formulaire pour sélectionner un email -->
+    <!-- Formulaire pour filtrer les emails -->
     <form method="GET">
+        <label for="email_type">Filtrer par type d'email :</label>
+        <select id="email_type" name="email_type" onchange="this.form.submit()">
+            <option value="">-- Tous les emails --</option>
+            <option value="Avis positif" {% if request.GET.email_type == "Avis positif" %}selected{% endif %}>Avis positif</option>
+            <option value="Avis negatif" {% if request.GET.email_type == "Avis negatif" %}selected{% endif %}>Avis négatif</option>
+            <option value="Prise de contact" {% if request.GET.email_type == "Prise de contact" %}selected{% endif %}>Prise de contact</option>
+        </select>
+        <noscript><button type="submit">Filtrer</button></noscript>
+    </form>
+
+    <!-- Selecte pour sélectionner un email, avec conservation du filtre -->
+    <form method="GET">
+        <input type="hidden" name="email_type" value="{{ request.GET.email_type }}">
         <label for="email_select">Sélectionner un email :</label>
         <select id="email_select" name="email_id" onchange="this.form.submit()">
             <option value="">-- Choisir un email --</option>
@@ -32,16 +34,37 @@
 
     <!-- Affichage de l'email sélectionné -->
     {% if selected_email %}
-        <h3>{{ selected_email.subject }}</h3>
         <p>{{ selected_email.body|safe }}</p>
 
-        <!-- Formulaire de modération -->
-        <form method="POST">
-            {% csrf_token %}
+        {% if request.GET.email_type == "Avis negatif" %}
+
+            <form method="POST">
+                {% csrf_token %}
                 {{ moderation_form.as_p }}
-            <button type="submit">Valider mon choix</button>
-        </form>
+                <button type="submit">Valider mon choix</button>
+            </form>
+
+        {% elif request.GET.email_type == "Avis positif" %}
+            <form method="POST">
+                {% csrf_token %}
+                {{ moderation_positive_form.as_p }}
+
+                <button type="submit">Valider mon choix</button>
+            </form>
+
+        {% elif request.GET.email_type == "Prise de contact" %}
+
+            <form method="POST">
+                {% csrf_token %}
+                {{ reponse_modo_form.as_p }}
+                <button type="submit">Répondre</button>
+            </form>
+
+        {% endif %}
+
     {% else %}
         <p>Aucun email sélectionné.</p>
     {% endif %}
+
+
 {% endblock %}

@@ -604,6 +604,42 @@ class ContactForm(forms.Form):
             self.fields["email"].widget.attrs["readonly"] = True
             self.fields["telephone"].widget.attrs["readonly"] = True
 
+class ReponseForm(forms.Form):
+    reponse = forms.CharField(
+        label="Reponse",
+        widget=forms.Textarea(attrs={"placeholder": "Votre réponse"}),
+        required=True,
+    )
+    email = forms.EmailField(
+        max_length=100,
+        label="Email",
+        widget=forms.EmailInput(attrs={"placeholder": "email utilisateur"}),
+        required=True,
+    )
+
+class ModerationAvisPositifForm(forms.ModelForm):
+
+    class Meta:
+        model = NoteUser
+        fields = ["commentaire", "commentaire_moderer"]
+        widgets = {
+            "commentaire": forms.Textarea(),
+            "commentaire_moderer": forms.CheckboxInput(),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["commentaire"].widget.attrs["readonly"] = True
+
+    def clean_commentaire(self):
+        commentaire = self.cleaned_data.get("commentaire")
+        if len(commentaire) > 200:
+            raise forms.ValidationError(
+                "Le commentaire ne doit pas dépasser 200 caractères."
+            )
+        return commentaire
+
+
 
 class ModerationTrajetForm(forms.ModelForm):
 
