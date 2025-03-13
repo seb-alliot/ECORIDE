@@ -133,7 +133,17 @@ def Contact(request):
     context.update(initialisation_template(request))
     return render(
         request,
-        "interface_utilisateur/reutilisable/accueil/footer/contact.html",
+        "interface_utilisateur/reutilisable/accueil/footer/_contact.html",
+        context,
+    )
+
+def mentions_legales(request):
+
+    context = {}
+    context.update(initialisation_template(request))
+    return render(
+        request,
+        "interface_utilisateur/reutilisable/accueil/footer/_faq.html",
         context,
     )
 
@@ -145,8 +155,9 @@ def accueil(request):
     adresse_form = TrajetForm()
     recherche_form = RechercheTrajetForm(request.GET)
     filtre_form = FiltreTrajetForm(request.GET)
-    resultat = None
     resultat_filtrer = None
+    first_result = None
+    second_result = None
 
     form_trajet = request.GET.get("form_trajet")
 
@@ -165,10 +176,13 @@ def accueil(request):
                 resultat = resultat.exclude(
                     Q(chauffeur=request.user) | Q(etat="Terminé") | Q(etat="En cours")
                 )
+                first_result= resultat.exclude(Q(type_moteur="Electrique") | Q(type_moteur="Hybride"))
+                second_result= resultat.exclude(Q(type_moteur="essence") | Q(type_moteur="diesel"))
             else:
                 resultat = resultat.exclude(Q(etat="Terminé") | Q(etat="En cours"))
-
-            if resultat.exists():
+                first_result= resultat.exclude(Q(type_moteur="Electrique") | Q(type_moteur="Hybride"))
+                second_result= resultat.exclude(Q(type_moteur="essence") | Q(type_moteur="diesel"))
+            if first_result.exists():
                 messages.success(request, "Hey voici juste pour vous !!")
             else:
                 messages.error(
@@ -179,7 +193,7 @@ def accueil(request):
         # Formulaire de filtrage de trajet
         elif form_trajet == "filtre_form" and filtre_form.is_valid():
             request.session.get("resultat_recherche") == resultat
-            resultat = TrajetProposer.objects.filter(
+            first_result = TrajetProposer.objects.filter(
                 id__in=request.session.get("resultat_recherche")
             )
 
@@ -212,7 +226,8 @@ def accueil(request):
         "adresse_form": adresse_form,
         "recherche_form": recherche_form,
         "filtre_form": filtre_form,
-        "resultat": resultat,
+        "first_result": first_result,
+        "second_result": second_result,
         "form_trajet": form_trajet,
         "resultat_filtrer": resultat_filtrer,
         "messages": messages.get_messages(request),
@@ -440,6 +455,7 @@ def MonCompte(request):
     role = ChoixRole.objects.filter(user=user).first()
     preference = Preference.objects.filter(user_preference=user).first()
     trajet = TrajetProposer.objects.filter(chauffeur=user).first()
+    # faire le calcul de l'heure de depart + durée trajet pour afficher l'heure d'arrivée
     voiture = Voiture.objects.filter(user=user)
     reservation = ReservationTrajet.objects.filter(passager=user)
     prix_total_paye = ReservationTrajet.paiement_total_passager(request.user, trajet)
@@ -1613,12 +1629,14 @@ def Deux_F_A(request, email, username):
 
 # ------------------------------------En cour-----------------------------------------------------
 
+# responsive
 # ------------------------------------A FAIRE------------------------------------------------------
 
+# la transition d'etat, la logique metier est presente mais pas le suivis de l'etat
 
 # --------Trouver comment ajouter la photo par default sur le reset mdp-----------------------------
 
-# ------------------------------------A Finir avec javascript------------------------------------------------------
+# ------------------------------------A faire avec javascript------------------------------------------------------
 
 
 # --------retour sur onglet actif dynamique-------

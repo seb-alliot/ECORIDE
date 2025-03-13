@@ -1,0 +1,20 @@
+form#filtre_form {
+    display: flex;
+    justify-content: center;
+}
+form#filtre_form label {
+    display: none;
+}
+input#id_note , input#id_prix , input#id_temps_trajet {
+    text-align: center;
+    border-radius: 10px;
+    width: 175px;
+    box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.41);
+}
+
+@media(max-width: 768px) {
+    input#id_note , input#id_prix , input#id_temps_trajet, button {
+        width: 70px;
+        font-size: 10px;
+    }
+}

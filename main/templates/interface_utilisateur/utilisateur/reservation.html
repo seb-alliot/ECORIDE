@@ -40,14 +40,18 @@
             {% endfor %}
 
 
-            <p>Note moyenne :{% if note_chauffeur.get_note_moyenne == None %}
+            <p>Note : {% if note_chauffeur.get_note_moyenne == None %}
                 Pas encore noter
                 {% else %}
                 {{  note_chauffeur.get_note_moyenne|floatformat:1 }}/ 5 ⭐ </p>
             {% endif %}
             <p>{{ trajet.places }} places restantes</p>
             <p>Combien de places voulez-vous réserver?</p>
-
+            <p>Preference</p><br>
+            <p>{{ trajet.chauffeur.preference.get_fumeur_display }}</p>
+            <p>{{ trajet.chauffeur.preference.get_animaux_display }}</p>
+            <p>{{ trajet.chauffeur.preference.get_exigences_particulieres_display }}</p>
+            <p>{{ trajet.chauffeur.preference.exigences_personnelles }}</p>
         <!--Formulaire de réservation de place-->
         <form id="reservation_form" method="POST">
             {% if user.is_authenticated %}

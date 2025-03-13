@@ -1,4 +1,4 @@
-<a href="{% url 'MonCompte' %}">
+<a href="{% url 'MonCompte' %}" class="doublon doublon2">
     <img src="{{ adresse_user.photo.url|default:photo_default_url }}" alt="photo de profil" class="photo_profile">
     {{ request.user.username }}<br>Crédits : {{ credit.credit|floatformat:2 }}
 </a>

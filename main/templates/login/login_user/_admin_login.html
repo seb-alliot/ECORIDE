@@ -1,6 +1,6 @@
-<a href="{% url 'MonCompte' %}">
+<a href="{% url 'MonCompte' %}" class="doublon doublon2">
     <p>Votre compte</p>
-    <img src="{{ adresse_user.photo.url|default:photo_default_url }}" alt="photo de profil" class="photo_profile">
+    <img src="{{ adresse_user.photo.url|default:photo_default_url }}" alt="photo de profil" class="photo_profile doublon2">
 </a>
 <br>
 <a href="{% url 'admin:index' %}">

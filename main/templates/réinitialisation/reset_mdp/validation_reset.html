@@ -1,4 +1,8 @@
-<form method="POST"class="recherche_form">
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/connecte/connection.css' %}">
+
+
+<form method="POST"class="connection">
     {% csrf_token %}
         <label for='id_email' class="sr-only">Votre Email</label>
         {{ form.email }}

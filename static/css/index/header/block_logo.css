@@ -1,0 +1,42 @@
+header {
+    justify-content: space-between;
+    padding: 10px 20px;
+    position: relative;
+}
+
+header h1 a {
+    color: black;
+    font-size: 48px;
+}
+header a {
+    color: black;
+    margin: 0 30px;
+}
+
+.photo_profile {
+    justify-content: center;
+    height: 130px;
+    border-radius: 15%;
+}
+
+.doublon {
+    display: flex;
+    align-items: center;
+}
+
+.doublon2 {
+    text-decoration: none;
+    flex-direction: column;
+}
+
+@media(max-width: 768px) {
+    header h1 a {
+        font-size: 30px;
+    }
+    header a {
+        margin: 0px -10px;
+    }
+    .photo_profile{
+        height: 100px;
+    }
+}

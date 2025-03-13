@@ -1,4 +1,7 @@
-<form id="recherche_form" action="{% url 'inscription' %}" method="POST">
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/connecte/connection.css' %}">
+
+<form id="inscription" action="{% url 'inscription' %}" method="POST" class="connection effet_ombre">
     {% csrf_token %}
         <label for="identifiant">Identifiant</label>
         {{ form.username }}

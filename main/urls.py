@@ -16,7 +16,8 @@ urlpatterns = [
     # UTILISATEURS
     # Création de compte
     path("", main_views.accueil, name="index"),
-    path("contact/", main_views.Contact, name="contact"),
+    path("contact/", main_views.Contact, name="_contact"),
+    path("faq/", main_views.mentions_legales, name="_faq"),
     path("inscription/", main_views.UserCreateView.as_view(), name="inscription"),
     path("activation/<token>/<uidb64>/", main_views.activation, name="activation"),
     # connexion en 2 étapes
