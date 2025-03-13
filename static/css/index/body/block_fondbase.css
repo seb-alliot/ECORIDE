@@ -1,0 +1,14 @@
+.image-principal {
+    background-image: url("../../../photo/principal.png");
+    background-size:cover ;
+    background-position: center;
+    height: 400px;
+    min-height: 200px;
+}
+
+@media(max-width: 768px) {
+    .image-principal {
+        max-height: 200px;
+        min-height: 100px ;
+    }
+}

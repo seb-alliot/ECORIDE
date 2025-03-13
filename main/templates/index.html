@@ -14,11 +14,14 @@
     {% endblock style %}
 </head>
 
-<header>
+<header class="doublon">
     {% block headerContent %}
     {% block logo %}
         {% include "interface_utilisateur/reutilisable/accueil/_logo.html" %}
     {% endblock logo %}
+    {% block msginfo %}
+        {% include "interface_utilisateur/reutilisable/accueil/_msginfo.html" %}
+    {% endblock msginfo %}
 
     {% block message_info %}
         {% include "interface_utilisateur/reutilisable/accueil/_msginfo.html" %}
@@ -33,21 +36,26 @@
 
 <body>
     {% block body %}
+
         {% block fondbase %}
-        <div class="image-principal"></div>
+            {% include "interface_utilisateur/reutilisable/accueil/_fondbase.html" %}
         {% endblock fondbase %}
 
-    {% block principal %}
-        {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_form_recherche.html" %}
-        {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_resultat_recherche.html" %}
-        {% if resultat %}
-            {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_filtre_trajet.html" %}
-        {% endif %}
-    {% endblock principal %}
+        {% block principal %}
+            {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_form_recherche.html" %}
+                {% if first_result or second_result %}
+                    {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_resultat_recherche.html" %}
+                    {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_filtre_trajet.html" %}
+                {% endif %}
+        {% endblock principal %}
+
+    {% block presentation %}
         {% include "interface_utilisateur/reutilisable/accueil/_presentation.html" %}
+    {% endblock presentation %}
+
     {% endblock body %}
 
-    <footer>
+    <footer class="footer_doublon">
         {% block footerContent %}
             {% include "interface_utilisateur/reutilisable/accueil/_footer.html" %}
         {% endblock footerContent %}

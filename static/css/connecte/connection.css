@@ -1,0 +1,51 @@
+.connection {
+    display:flex;
+    gap:0;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    font-size: 16px;
+    }
+    .connection input{
+        text-align: center;
+        border: 1px solid #000000;
+        border-radius: 10px;
+    }
+    .connection select{
+        text-align: center;
+    }
+    .connection label{
+        display: none;
+    }
+
+
+.connection > label {
+    display: none;
+}
+button {
+    height: 32px;
+}
+a {
+    text-decoration: none;
+    color: black;
+    display: flex;
+    justify-content: center;
+    margin-top:20px
+}
+a:hover {
+    color: rgb(255, 255, 255);
+}
+
+.effet_ombre {
+    box-shadow:6px 6px 10px rgba(0, 0, 0, 0.41);
+}
+
+/*--cas particulier--*/
+.connection > input#id_email {
+    border-radius: 10px;
+    border: 1px solid #6fc2ec;
+    width: 175px;
+    height: 30px;
+    box-shadow:6px 6px 10px rgba(0, 0, 0, 0.41);
+    border: 1px solid #000000;
+}

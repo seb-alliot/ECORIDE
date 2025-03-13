@@ -854,7 +854,7 @@ class Preference(models.Model):
         verbose_name_plural = "Préférences des utilisateurs"
 
     def __str__(self):
-        return f"{self.user_preference} {self.fumeur} {self.animaux}{ self.get_fumeur_display() } { self.get_animaux_display() } {self.get_exigences_particulieres_display()}"
+        return f"{self.fumeur} {self.animaux}{ self.get_fumeur_display() } { self.get_animaux_display() } {self.get_exigences_particulieres_display()} {self.exigences_personnelles}"
 
 
 class ReservationTrajet(models.Model):

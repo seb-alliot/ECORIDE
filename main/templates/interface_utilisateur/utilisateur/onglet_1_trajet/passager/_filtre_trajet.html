@@ -1,3 +1,7 @@
+{% load static %}
+<link href="{% static 'css/index/body/block_principal/filtre_trajet.css' %}" rel="stylesheet">
+
+
 <form id="filtre_form" method="GET">
     {% csrf_token %}
     <label for="note">Note du chauffeur</label>

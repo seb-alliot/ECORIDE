@@ -276,7 +276,7 @@ class FiltreTrajetForm(forms.Form):
     )
     note = forms.FloatField(
         label="Note",
-        widget=widgets.NumberInput(attrs={"placeholder": "Filtrer par note"}),
+        widget=widgets.NumberInput(attrs={"placeholder": "Par note"}),
         required=False,
     )
 
