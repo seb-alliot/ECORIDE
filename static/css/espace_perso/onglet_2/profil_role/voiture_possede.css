@@ -1,0 +1,25 @@
+
+div.info_perso {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: inherit;
+    margin-top: 10px;
+    }
+
+#voiture_posseder{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    display: flex;
+    border: 1px solid #ccc;
+    border-radius: 10px 10px 10px 10px;
+    box-shadow:6px 6px 10px rgba(0, 0, 0, 0.41);
+    list-style-type: none;
+    background-color: #6fc2ec;
+    padding: 10px;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+

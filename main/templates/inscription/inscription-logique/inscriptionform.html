@@ -1,7 +1,7 @@
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/connecte/connection.css' %}">
+<link rel="stylesheet" href="{% static 'css/inscription/inscription.css' %}">
 
-<form id="inscription" action="{% url 'inscription' %}" method="POST" class="connection effet_ombre">
+<form id="inscription" action="{% url 'inscription' %}" method="POST">
     {% csrf_token %}
         <label for="identifiant">Identifiant</label>
         {{ form.username }}

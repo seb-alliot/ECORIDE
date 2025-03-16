@@ -31,13 +31,13 @@ class Inscription(UserCreationForm):
     username = forms.CharField(
         max_length=20,
         label="Identifiant",
-        widget=forms.TextInput(attrs={"placeholder": "Votre identifiant"}),
+        widget=forms.TextInput(attrs={"placeholder": "Identifiant"}),
         required=True,
     )
     email = forms.EmailField(
         max_length=100,
         label="Email",
-        widget=forms.EmailInput(attrs={"placeholder": "Votre email"}),
+        widget=forms.EmailInput(attrs={"placeholder": "Email"}),
         required=True,
     )
     password1 = forms.CharField(

@@ -1,0 +1,54 @@
+form#voiture_form{
+    display: flex;
+    justify-content: center;
+    }
+
+#voiture_form input, #voiture_form select, #voiture_form button{
+    text-align: center;
+    border-radius: 10px;
+}
+
+#voiture_form button{
+border-radius: 10px;
+}
+#voiture_form label{
+display: none;
+}
+input#id_immatriculation {
+    border: solid 1px black;
+}
+
+
+@media(max-width: 768px){
+    #voiture_form input, #voiture_form select, #voiture_form button{
+        width: 110px;
+        height: 30px;
+        font-size: 10px;
+        gap:14px;
+    }
+    form#voiture_form{
+        margin-left:12.5%;
+        margin-right:12.5%
+    }
+    div.info_perso{
+        font-size: 10px;
+        margin-bottom: 5px;
+        margin-bottom:10px;
+        margin-left:0%;
+    }
+    div.info_perso > li{
+            width: 115px;
+            font-size: 10px;
+        }
+    div.voiture_mere{
+        display: flex;
+        justify-content: center;
+        gap:10px
+    }
+    div.voiture_mere > div {
+        justify-content: center;
+        display: flex;
+        flex-direction: column;
+        gap:2px;
+    }
+    }

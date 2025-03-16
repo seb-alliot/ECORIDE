@@ -2,7 +2,6 @@
 <link href="{% static 'css/index/body/block_principal/resultat.css' %}" rel="stylesheet">
 
 
-
 <form id="selection_trajet" method="GET" action="{% url 'reservation' %}">
     <div class="conteneur_recherche">
         <h2>Covoiturage non écologique</h2>
@@ -45,6 +44,8 @@
                 </label>
             </li>
         </ul>
+        {% empty %}
+            <p>Il n'y a pas de resultat  pour cette recherche</p>
         {% endfor %}
         </div>
     </div>
@@ -86,11 +87,13 @@
                     </label>
                 </li>
             </ul>
+            {% empty %}
+            <p>Il n'y a pas de resultat  pour cette recherche</p>
             {% endfor %}
         </div>
     </div>
     {% if resultat %}
-    <div>
+    <div id="bouton_reservation">
         <button type="submit">Réserver</button>
     </div>
     {% endif %}

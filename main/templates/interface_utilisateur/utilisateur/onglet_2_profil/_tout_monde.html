@@ -1,3 +1,7 @@
+{% load static %}
+<link href="{% static 'css/espace_perso/onglet_2/profil_role/form_role.css' %}" rel="stylesheet">
+
+
 <p>Votre profile actuel est {{ role.get_role_display }}</p>
 <form id="role_form"method="post">
     {% csrf_token %}

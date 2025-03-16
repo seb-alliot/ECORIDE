@@ -1,3 +1,7 @@
+{% load static %}
+<link href="{% static 'css/espace_perso/onglet_5/adresse.css' %}" rel="stylesheet">
+
+
 <form id="adresse_form" action="{% url 'MonCompte' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
         <div class="photo-parent">

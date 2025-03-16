@@ -10,11 +10,8 @@
                                     Le :<br> {{ trajet.date }}<br>
                                     A: {{ trajet.heure }} heures<br>
                                     Voiture : <br>{{ trajet.voiture.marque}} {{ trajet.voiture.modele }}<br>
-                                    Moteur : {{ trajet.voiture.type_moteur }}
-                                    {% if trajet.voiture.type_moteur == 'Electrique' %}
-                                    <p>Vous proposez un covoiturage ecologique</p><br>
-                                    {% endif %}<br>
-                                    Prix du covoiturage: {{ trajet.prix }}€<br>
+                                    Moteur : {{ trajet.voiture.type_moteur }}<br>
+                                    Prix : {{ trajet.prix }}€<br>
                                     Nombre de place:{% if trajet.places != 0 %} {{ trajet.places }}
                                     {% else %}
                                     complet

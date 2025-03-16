@@ -1,0 +1,34 @@
+form#reservation_form{
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    }
+form#reservation_form > label{
+    display: none;
+    }
+form#reservation_form ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    z-index: 0;
+    }
+form#reservation_form ul > li{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+    }
+    #reservation_form select {
+        text-align: center;
+    }
+
+@media(max-width: 768px){
+    #reservation_form select , #reservation_form button{
+        width: 100px;
+        font-size: 10px;
+    }
+    p {
+        font-size: 10px;
+    }
+}

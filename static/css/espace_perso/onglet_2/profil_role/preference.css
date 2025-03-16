@@ -1,0 +1,62 @@
+#preference_form input, #preference_form select, #preference_form button, textarea#id_exigences_personnelles{
+    width: 175px;
+    height: 30px;
+    text-align: center;
+    font-size: 15px;
+    border-radius: 10px;
+}
+textarea#id_exigences_personnelles{
+    font-size: 12px;
+}
+#preference_form{
+    display: flex;
+    margin-top:10px;
+    margin-bottom: 30px;
+    justify-content: center;
+    }
+p {
+    font-size: 18px;
+    }
+#preference_form label{
+        display:none;
+    }
+
+.preference_css{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+@media(max-width: 768px) {
+    #preference_form input, #preference_form select, #preference_form button, textarea#id_exigences_personnelles{
+        width: 150px;
+        font-size: 10px;
+    }
+    #preference_form {
+        display: flex;
+        flex-direction: column;
+        gap:2px;
+        align-items: center;
+    }
+    .preference_css{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        font-size: 14px;
+    }
+    .preference_css :nth-child(1){
+        margin-top: 10px;
+    }
+    p {
+        font-size: 15px;
+        justify-content: center;
+    }
+    .preference_css :nth-child(1), .preference_css :nth-child(2), .preference_css :nth-child(3), .preference_css :nth-child(4){
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+    }
+
+}

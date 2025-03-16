@@ -1,7 +1,10 @@
 {% extends 'index.html' %}
 {% load static %}
 {% block style %}
+    <link href="{% static 'css/accueil.css' %}" rel="stylesheet">
     <link href="{% static 'css/MonCompte.css' %}" rel="stylesheet">
+    <link href="{% static 'css/espace_perso/onglet_1/trajet_passager.css' %}" rel="stylesheet">
+
 {% endblock style %}
 
 {% block principal %}
@@ -40,8 +43,8 @@
 
         {% elif user_role == "Passager" %}
             {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_form_recherche.html" %}
-            {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_resultat_recherche.html" %}
             {% if resultat %}
+                {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_resultat_recherche.html" %}
                 {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_filtre_trajet.html" %}
             {% endif %}
         {% endif %}
@@ -70,7 +73,6 @@
         <div>
             {% if user_role == "Chauffeur" %}
                 {% include "interface_utilisateur/utilisateur/onglet_2_profil/chauffeur/_preference_chauffeur.html" %}
-
                 {% if user_role == "Chauffeur" and preference.get_animaux_display and preference.get_fumeur_display is not None  %}
                     {% include "interface_utilisateur/utilisateur/onglet_2_profil/chauffeur/_voiture_posseder.html" %}
                     {% include "interface_utilisateur/utilisateur/onglet_2_profil/chauffeur/_ajout_voiture.html" %}

@@ -158,6 +158,7 @@ def accueil(request):
     resultat_filtrer = None
     first_result = None
     second_result = None
+    resultat = None
 
     form_trajet = request.GET.get("form_trajet")
 
@@ -176,13 +177,16 @@ def accueil(request):
                 resultat = resultat.exclude(
                     Q(chauffeur=request.user) | Q(etat="Terminé") | Q(etat="En cours")
                 )
-                first_result= resultat.exclude(Q(type_moteur="Electrique") | Q(type_moteur="Hybride"))
-                second_result= resultat.exclude(Q(type_moteur="essence") | Q(type_moteur="diesel"))
             else:
                 resultat = resultat.exclude(Q(etat="Terminé") | Q(etat="En cours"))
-                first_result= resultat.exclude(Q(type_moteur="Electrique") | Q(type_moteur="Hybride"))
-                second_result= resultat.exclude(Q(type_moteur="essence") | Q(type_moteur="diesel"))
-            if first_result.exists():
+
+            request.session["resultat_recherche"] = list(
+            resultat.values_list("id", flat=True)
+                )
+
+            first_result= resultat.exclude(Q(type_moteur="Electrique") | Q(type_moteur="Hybride"))
+            second_result= resultat.exclude(Q(type_moteur="essence") | Q(type_moteur="diesel"))
+            if first_result.exists() or second_result.exists():
                 messages.success(request, "Hey voici juste pour vous !!")
             else:
                 messages.error(
@@ -193,7 +197,7 @@ def accueil(request):
         # Formulaire de filtrage de trajet
         elif form_trajet == "filtre_form" and filtre_form.is_valid():
             request.session.get("resultat_recherche") == resultat
-            first_result = TrajetProposer.objects.filter(
+            resultat = TrajetProposer.objects.filter(
                 id__in=request.session.get("resultat_recherche")
             )
 
@@ -204,10 +208,7 @@ def accueil(request):
                 ).filter(note_moyenne__gte=note_minimum)
 
                 for chauffeur in chauffeurs:
-                    print(
-                        f"Chauffeur: {chauffeur.username}, Note Moyenne: {chauffeur.note_moyenne}"
-                    )
-                resultat = resultat.filter(chauffeur__in=chauffeurs)
+                    resultat = resultat.filter(chauffeur__in=chauffeurs)
 
             if filtre_form.cleaned_data["temps_trajet"]:
                 resultat = resultat.filter(
@@ -217,19 +218,26 @@ def accueil(request):
             if filtre_form.cleaned_data["prix"]:
                 resultat = resultat.filter(prix__lte=filtre_form.cleaned_data["prix"])
 
+            first_result= resultat.exclude(Q(type_moteur="Electrique") | Q(type_moteur="Hybride"))
+            second_result= resultat.exclude(Q(type_moteur="essence") | Q(type_moteur="diesel"))
+
             if resultat.exists():
                 messages.success(request, "Vos exigences ont trouvé satisfaction.")
             elif not resultat.exists():
                 messages.error(request, "Oups !! La recherche n'a rien donné.")
 
     context = {
-        "adresse_form": adresse_form,
-        "recherche_form": recherche_form,
-        "filtre_form": filtre_form,
+        # resultat de recherche de covoiturage
+        "resultat": resultat,
         "first_result": first_result,
         "second_result": second_result,
+        # formulaire de la page
+        "adresse_form": adresse_form,
+        "filtre_form": filtre_form,
+        "recherche_form": recherche_form,
         "form_trajet": form_trajet,
         "resultat_filtrer": resultat_filtrer,
+        #envoie des message au template, inutile si balise message dans le template
         "messages": messages.get_messages(request),
     }
     context.update(initialisation_template(request))
@@ -467,7 +475,7 @@ def MonCompte(request):
 
     # Initialisation des formulaires
     adresse_form = AdresseForm(instance=adresse_user, user=user)
-    preference_form = PreferenceForm(instance=preference)
+    preference_form = PreferenceForm()
     role_form = ChoixRoleForm(instance=role)
     voiture_form = VoitureForm(request.POST)
     trajet_form = TrajetForm(user=user)
@@ -477,8 +485,9 @@ def MonCompte(request):
     filtre_form = FiltreTrajetForm(request.GET)
     recherche_form = RechercheTrajetForm(request.GET)
 
-    resultat = None
     resultat_filtrer = None
+    first_result = None
+    second_result = None
 
     form_trajet = request.GET.get("form_trajet")
     form_soumis = request.POST.get("form_soumis")
@@ -816,28 +825,32 @@ def MonCompte(request):
             # On utilise | pour un ou pour garder les 2 requetes distinctes, utilisateur connecté exclus et (ou) trajet etat exclus
             # puis pour le et on utilise & pour les deux etats exclus
 
-            resultat = resultat.exclude(
-                Q(chauffeur=request.user) | Q(etat="Terminé") | Q(etat="En cours")
-            )
+            if user.is_authenticated:
+                resultat = resultat.exclude(
+                    Q(chauffeur=request.user) | Q(etat="Terminé") | Q(etat="En cours")
+                )
+            else:
+                resultat = resultat.exclude(Q(etat="Terminé") | Q(etat="En cours"))
 
             request.session["resultat_recherche"] = list(
-                resultat.values_list("id", flat=True)
-            )
-            if resultat.exists():
+            resultat.values_list("id", flat=True)
+                )
+
+            first_result= resultat.exclude(Q(type_moteur="Electrique") | Q(type_moteur="Hybride"))
+            second_result= resultat.exclude(Q(type_moteur="essence") | Q(type_moteur="diesel"))
+            if first_result.exists() or second_result.exists():
                 messages.success(request, "Hey voici juste pour vous !!")
             else:
                 messages.error(
                     request,
-                    "La déception ... Une autre fois peut-être, où une autre date qui sait ?",
+                    "La déception ... Une autre date peut-être ?",
                 )
 
         # ______________FILTRE DE TRAJET____________________
 
         elif form_trajet == "filtre_form" and filtre_form.is_valid():
-            request.session.get("resultat_recherche") == resultat
-            resultat = TrajetProposer.objects.filter(
-                id__in=request.session.get("resultat_recherche")
-            )
+            resultat_ids = request.session.get("resultat_recherche", [])
+            resultat = TrajetProposer.objects.filter(id__in=resultat_ids) if resultat_ids else None
 
             if filtre_form.cleaned_data["note"]:
                 note_minimum = filtre_form.cleaned_data["note"]
@@ -845,10 +858,6 @@ def MonCompte(request):
                     note_moyenne=Avg("accusé__note")
                 ).filter(note_moyenne__gte=note_minimum)
 
-                for chauffeur in chauffeurs:
-                    print(
-                        f"Chauffeur: {chauffeur.username}, Note Moyenne: {chauffeur.note_moyenne}"
-                    )
                 resultat = resultat.filter(chauffeur__in=chauffeurs)
 
             if filtre_form.cleaned_data["temps_trajet"]:
@@ -859,10 +868,15 @@ def MonCompte(request):
             if filtre_form.cleaned_data["prix"]:
                 resultat = resultat.filter(prix__lte=filtre_form.cleaned_data["prix"])
 
+            first_result= resultat.exclude(Q(type_moteur="Electrique") | Q(type_moteur="Hybride"))
+            second_result= resultat.exclude(Q(type_moteur="essence") | Q(type_moteur="diesel"))
+
+
             if resultat.exists():
                 messages.success(request, "Vos exigences ont trouvé satisfaction.")
             elif not resultat.exists():
                 messages.error(request, "Oups !! La recherche n'a rien donné.")
+
 
     context = {
         # utilisateur
@@ -878,6 +892,8 @@ def MonCompte(request):
         "reservations": "reservations",
         # recherche et filtre
         "resultat": resultat,
+        "first_result": first_result,
+        "second_result": second_result,
         "resultat_filtrer": resultat_filtrer,
         # formulaire:
         # __utilisateur__

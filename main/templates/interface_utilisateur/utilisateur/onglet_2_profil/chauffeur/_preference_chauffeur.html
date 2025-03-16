@@ -1,10 +1,21 @@
-<p>Vos preferences actuel sont :
-    <br>
-        {{ preference.get_fumeur_display }} <br>
-        {{ preference.get_animaux_display }}<br>
-        {{ preference.get_exigences_particulieres_display }}<br>
-        {{ preference.exigences_personnelles }}
-    </p>
+{% load static %}
+<link href="{% static 'css/espace_perso/onglet_2/profil_role/preference.css' %}" rel="stylesheet">
+
+<p>Vos preferences actuel sont :</p>
+<div class="preference_css">
+    <div>
+        {{ preference.get_fumeur_display }},
+    </div>
+    <div>
+        {{ preference.get_animaux_display }},
+    </div>
+    <div>
+        {{ preference.get_exigences_particulieres_display }},
+    </div>
+    <div>
+        {{ preference.exigences_personnelles }}.
+    </div>
+</div>
 <form id="preference_form" method="post">
     {% csrf_token %}
         <label for="preferences_form">Préférences</label>

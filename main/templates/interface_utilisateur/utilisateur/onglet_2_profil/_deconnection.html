@@ -1,3 +1,6 @@
-<div>
+{% load static %}
+<link href="{% static 'css/espace_perso/onglet_2/profil_role/deconnection.css' %}" rel="stylesheet">
+
+<div id="bouton_deconnection">
     <button  id="deconnexion"><a href="{% url 'logout' %}">Se déconnecter</a></button>
 </div>

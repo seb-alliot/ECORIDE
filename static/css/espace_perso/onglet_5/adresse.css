@@ -1,0 +1,92 @@
+
+input#id_photo{
+    display: flex;
+    }
+
+.photo-parent{
+    display:flex;
+    flex-direction: column;
+}
+div.photo-parent > div > img{
+    width: 200px;
+    height: 130px;
+    border-radius: 15%;
+    border: 1px solid #ccc;
+    margin-left: 50%;
+    margin-top:30px;
+}
+.photo-fille{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+#adresse_form label, #adresse_form img textarea, form#adresse_form a {
+    display: none;
+}
+#adresse_form input, #adresse_form select, #adresse_form button, #adresse_form input[type="file"]::file-selector-button{
+    width: 200px;
+    height: 30px;
+    text-align: center;
+    border-radius: 10px;
+    border: solid black 1px;
+    }
+
+select {
+    border:solid black 1px;
+    background-color: white;
+}
+
+#adresse_form input:hover, select:hover, button:hover{
+    background-color: rgb(53, 152, 228);
+    color: white;
+    }
+
+
+#adresse_form button{
+    width: 200px;
+    height: 30px;
+    border-radius:10px;
+}
+
+input[type="file"]::file-selector-button {
+    display: flex;
+    background-color: #ffffff;
+    color: rgb(1, 0, 0);
+    border: none;
+    width: 200px;
+    height: 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    justify-content: center;
+    align-items: center;
+}
+
+input[type="file"]::file-selector-button:hover {
+    background-color: rgb(53, 152, 228);
+    color: white;
+    display: flex;
+}
+
+@media(max-width: 768px) {
+
+    form#adresse_form img.photo_profile{
+        margin-top: 15px;
+        width: 120px;
+        height: 80px;
+    }
+    #adresse_form img textarea{
+        font-size: 10px;
+    }
+    #adresse_form input, #adresse_form select, #adresse_form button, #adresse_form input[type="file"]::file-selector-button{
+        width: 125px;
+        height: 30px;
+        font-size: 10px;
+        box-shadow:6px 6px 10px rgba(0, 0, 0, 0.41);
+        border: solid black 1px;
+    }
+
+}

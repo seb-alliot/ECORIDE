@@ -54,10 +54,20 @@
     box-shadow:6px 6px 10px rgba(0, 0, 0, 0.41);
     padding: 10px;
 }
+form#selection_trajet > div#bouton_reservation {
+    display:flex;
+    justify-content: center;
+}
+form#selection_trajet > div > button {
+    margin-bottom:20px;
+}
 
 @media(max-width: 768px) {
     .resultat [type=radio]:checked ~ label{
         margin-top: 0px;
         width: 120px;
+    }
+    form#selection_trajet > div > button {
+        margin-bottom:10px;
     }
 }
