@@ -28,7 +28,7 @@ button:hover{
     background-color: rgb(53, 152, 228);
     color: white;
 }
-@media(min-width:320px) and (max-width: 767px){
+@media(max-width: 767px){
     input#id_email, form#inscription input, button{
         width: 65px;
         font-size: 10px;

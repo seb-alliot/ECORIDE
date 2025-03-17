@@ -71,7 +71,7 @@ input[type="file"]::file-selector-button:hover {
     display: flex;
 }
 
-@media(min-width:320px) and (max-width: 767px) {
+@media(max-width: 767px) {
     form#adresse_form img.photo_profile{
         margin-top: 15px;
         width: 120px;

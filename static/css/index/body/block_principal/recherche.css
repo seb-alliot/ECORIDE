@@ -46,11 +46,10 @@ button:hover {
     height: 10%;
     padding-right: 0px;
 }
-
-@media(min-width:768px) and (max-width: 900px) {
+@media(max-width: 767px) {
     #recherche_form input , #recherche_form button {
         text-align: center;
-        width: 100px;
+        width: 65px;
         height: 30px;
         font-size: 10px;
     }
@@ -61,10 +60,10 @@ button:hover {
         bottom: 0%;
     }
 }
-@media(min-width:320px) and (max-width: 767px) {
+@media(min-width:768px) and (max-width: 900px) {
     #recherche_form input , #recherche_form button {
         text-align: center;
-        width: 65px;
+        width: 100px;
         height: 30px;
         font-size: 10px;
     }

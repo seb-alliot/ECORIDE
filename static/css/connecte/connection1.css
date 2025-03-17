@@ -48,7 +48,7 @@ a:hover {
     border: 1px solid #000000;
 }
 
-@media(min-width:320px) and (max-width: 767px) {
+@media(max-width: 767px) {
     input#id_username, button{
         width: 100px;
         font-size: 10px;

@@ -71,7 +71,7 @@ div.content p {
     justify-content: center;
     margin: 0;
 }
-@media(min-width:320px) and (max-width: 767px) {
+@media(max-width: 767px) {
     #trajet_form input, #trajet_form select, #trajet_form button{
         width: 80px;
         font-size: 10px;
@@ -83,7 +83,7 @@ div.content p {
         gap:2px;
     }
 }
-@media(min-width:768px) and (max-width: 900px) {
+@media(min-width: 768px) and (max-width: 900px) {
     #trajet_form input, #trajet_form select, #trajet_form button{
         width: 100px;
         font-size: 12px;

@@ -43,7 +43,7 @@ a:hover {
 /*--cas particulier--*/
 
 
-@media(min-width:320px) and (max-width: 767px) {
+@media(max-width: 767px) {
     input#id_password, input#id_token_connection, button{
         width: 100px;
         font-size: 10px;

@@ -202,7 +202,7 @@ form#etat_form > ul >  button#id_statut{
     -o-transform:      translateX(0);
     }
 
-@media(min-width:320px) and (max-width: 767px){
+@media(max-width: 767px){
     .tabs {
         margin-left: 4%;
         margin-right: 4%;

@@ -49,7 +49,7 @@
     object-fit: cover;
 }
 
-@media(min-width:320px) and (max-width: 767px) {
+@media(max-width: 767px) {
     .presentation > div {
         margin-right: 50px;
         margin-left: 50px;

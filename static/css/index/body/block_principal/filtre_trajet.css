@@ -12,7 +12,7 @@ input#id_note , input#id_prix , input#id_temps_trajet {
     box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.41);
 }
 
-@media(min-width:320px) and (max-width: 767px){
+@media(max-width: 767px){
     input#id_note , input#id_prix , input#id_temps_trajet, button {
         width: 65px;
         font-size: 10px;

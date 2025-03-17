@@ -27,7 +27,7 @@ div.voiture_mere > div {
     gap:2px;
 }
 
-@media(min-width:320px) and (max-width: 767px){
+@media(max-width: 767px){
     #voiture_form input, #voiture_form select, #voiture_form button{
         width: 110px;
         height: 30px;

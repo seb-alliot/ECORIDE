@@ -30,7 +30,7 @@ footer a {
     align-items: center;
 }
 
-@media(min-width:320px) and (max-width: 767px){
+@media(max-width: 767px){
     .footer {
         width: 100px;
         height: 20px;

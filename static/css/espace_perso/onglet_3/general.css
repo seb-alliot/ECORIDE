@@ -23,12 +23,3 @@ form#reservation_form ul > li{
         text-align: center;
     }
 
-@media(min-width:320px) and (max-width: 900px){
-    #reservation_form select , #reservation_form button{
-        width: 100px;
-        font-size: 10px;
-    }
-    p {
-        font-size: 10px;
-    }
-}

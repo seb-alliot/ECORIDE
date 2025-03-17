@@ -5,7 +5,7 @@
     min-height: 200px;
 }
 
-@media(min-width:320px) and (max-width: 767px) {
+@media(max-width: 767px) {
     .image-principal {
         max-height: 150px;
         min-height: 100px ;
