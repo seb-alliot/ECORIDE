@@ -47,10 +47,10 @@ button:hover {
     padding-right: 0px;
 }
 
-@media(max-width: 768px) {
+@media(min-width:768px) and (max-width: 900px) {
     #recherche_form input , #recherche_form button {
         text-align: center;
-        width: 60px;
+        width: 100px;
         height: 30px;
         font-size: 10px;
     }
@@ -60,5 +60,18 @@ button:hover {
         font-size: 10px;
         bottom: 0%;
     }
-    
+}
+@media(min-width:320px) and (max-width: 767px) {
+    #recherche_form input , #recherche_form button {
+        text-align: center;
+        width: 65px;
+        height: 30px;
+        font-size: 10px;
+    }
+    .conteneur_recherche{
+        margin:10px auto;
+        padding-bottom: 10px;
+        font-size: 10px;
+        bottom: 0%;
+    }
 }

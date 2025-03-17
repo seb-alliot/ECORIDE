@@ -2,13 +2,19 @@
     background-image: url("../../../photo/principal.png");
     background-size:cover ;
     background-position: center;
-    height: 400px;
     min-height: 200px;
 }
 
-@media(max-width: 768px) {
+@media(min-width:320px) and (max-width: 767px) {
+    .image-principal {
+        max-height: 150px;
+        min-height: 100px ;
+    }
+}
+
+@media(min-width:768px) and (max-width: 900px) {
     .image-principal {
         max-height: 200px;
-        min-height: 100px ;
+        min-height: 150px ;
     }
 }

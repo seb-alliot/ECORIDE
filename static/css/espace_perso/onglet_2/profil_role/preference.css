@@ -29,7 +29,7 @@ p {
     font-size: 16px;
     margin-bottom: 15px;
 }
-@media(max-width: 768px) {
+@media(min-width:320px) and (max-width: 767px){
     #preference_form input, #preference_form select, #preference_form button, textarea#id_exigences_personnelles{
         width: 150px;
         font-size: 10px;
@@ -58,5 +58,16 @@ p {
         justify-content: center;
         margin-top: 10px;
     }
-
+}
+@media(min-width:768px) and (max-width: 900px){
+    form#preference_form{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap:2px;
+    }
+    #preference_form input, #preference_form select, #preference_form button, textarea#id_exigences_personnelles{
+        width: 175px;
+        font-size: 12px;
+    }
 }

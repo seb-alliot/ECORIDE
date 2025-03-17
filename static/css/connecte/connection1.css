@@ -39,8 +39,6 @@ a:hover {
 .effet_ombre {
     box-shadow:6px 6px 10px rgba(0, 0, 0, 0.41);
 }
-
-/*--cas particulier--*/
 .connection > input#id_email {
     border-radius: 10px;
     border: 1px solid #6fc2ec;
@@ -50,12 +48,21 @@ a:hover {
     border: 1px solid #000000;
 }
 
-@media(max-width: 768px) {
+@media(min-width:320px) and (max-width: 767px) {
     input#id_username, button{
         width: 100px;
         font-size: 10px;
     }
     a {
         font-size: 10px;
+    }
+}
+@media(min-width:768px) and (max-width: 900px) {
+    input#id_username, button{
+        width: 120px;
+        font-size: 12px;
+    }
+    a {
+        font-size: 12px;
     }
 }

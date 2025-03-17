@@ -49,13 +49,25 @@
     object-fit: cover;
 }
 
-@media(max-width: 768px) {
+@media(min-width:320px) and (max-width: 767px) {
     .presentation > div {
         margin-right: 50px;
         margin-left: 50px;
     }
     .presentation > div:nth-child(1) p,.presentation > div:nth-child(2) p,.presentation >  div:nth-child(3) p {
         font-size: 12px;
+    }
+    .presentation > div p {
+        padding: 20px;
+    }
+}
+@media(min-width:768px) and (max-width: 900px) {
+    .presentation > div {
+        margin-right: 50px;
+        margin-left: 50px;
+    }
+    .presentation > div:nth-child(1) p,.presentation > div:nth-child(2) p,.presentation >  div:nth-child(3) p {
+        font-size: 14px;
     }
     .presentation > div p {
         padding: 20px;

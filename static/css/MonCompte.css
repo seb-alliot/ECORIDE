@@ -103,99 +103,6 @@ div.content {
     scrollbar-width: thin;
     scrollbar-color: #000000 #95CFED;
     }
-
-
-/*--------------Contenu----Chauffeur--------------*/
-
-.flex{
-    display: flex;
-    flex-direction: column;
-}
-.flex1{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10px;
-    gap: 10px;
-    border-radius: 10px;
-
-}
-#trajet_form input{
-    text-align: center;
-    width: 150px;
-    height: 30px;
-    border-radius: 10px;
-
-    }
-#trajet_form select{
-    text-align: center;
-    width: 150px;
-    height: 30px;
-    border-radius: 10px;
-
-    }
-#trajet_form button{
-    width: 150px;
-    height: 30px;
-    border-radius: 10px;
-    margin-top: 10px;
-
-    }
-#trajet_form label{
-    display: none;
-    }
-
-div.content > ul {
-    display:flex;
-    gap: 10px;
-    padding:0;
-    justify-content: center;
-}
-div.content > ul > li {
-    display: flex;
-}
-div.content > ul > li > input [type=radio]:checked ~ label {
-    background: rgb(53, 152, 228);
-    color: white;
-    border-bottom: 1px solid white;
-    z-index: 1;
-    display: flex;
-    border: 1px solid #ccc;
-    border-radius: 10px 10px 10px 10px;
-    box-shadow:6px 6px 10px rgba(0, 0, 0, 0.41);
-    list-style-type: none;
-    width: 175px;
-    background-color: rgb(53, 152, 228);
-    margin-top:20px;
-    padding:10px;
-
-    }
-
-div.content >ul{
-    z-index: 1;
-
-}
-/*hover proposition de trajet*/
-div.content > ul > li> input[type=radio]:hover ~ label {
-    background-color: rgb(53, 152, 228);
-    color: white;
-
-}
-
-div.content > ul > li > input[type="radio"] {
-    display: none;
-}
-div.content > ul > li > input[type="radio"]input:hover {
-    background-color: rgb(53, 152, 228);
-    color: white;
-}
-
-div.content p {
-    display: flex;
-    justify-content: center;
-    margin: 0;
-}
-
 /*--------------reservation---trajet-----------*/
 
 #selection_trajet{
@@ -209,7 +116,6 @@ form#selection_trajet > ul.resultat  {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-
     }
 form#selection_trajet > ul.resultat > li{
     display: flex;
@@ -276,10 +182,6 @@ form#etat_form > ul >  button#id_statut{
         display: none;
     }
 
-/*--------------Contenu--- passager--------------*/
-
-
-
 /*-----Onglets actifs--------------*/
 
     [type=radio]:checked ~ label {
@@ -300,15 +202,27 @@ form#etat_form > ul >  button#id_statut{
     -o-transform:      translateX(0);
     }
 
-    @media(max-width: 768px){
-        .tabs {
-            margin-left: 4%;
-            margin-right: 4%;
-        }
-        .tab label {
-            font-size: 10px;
-            padding: 10px;
-            border-radius: 10px;
-            text-align: center;
-        }
+@media(min-width:320px) and (max-width: 767px){
+    .tabs {
+        margin-left: 4%;
+        margin-right: 4%;
     }
+    .tab label {
+        font-size: 10px;
+        padding: 10px;
+        border-radius: 10px;
+        text-align: center;
+    }
+}
+@media(min-width:768px) and (max-width: 900px){
+    .tabs {
+        margin-left: 6%;
+        margin-right: 6%;
+    }
+    .tab label {
+        font-size: 12px;
+        padding: 10px;
+        border-radius: 10px;
+        text-align: center;
+    }
+}

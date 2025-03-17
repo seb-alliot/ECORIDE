@@ -30,7 +30,7 @@ footer a {
     align-items: center;
 }
 
-@media(max-width: 768px) {
+@media(min-width:320px) and (max-width: 767px){
     .footer {
         width: 100px;
         height: 20px;
@@ -40,5 +40,17 @@ footer a {
     }
     footer{
         gap: 10px;
+    }
+}
+@media(min-width:768px) and (max-width: 900px){
+    .footer {
+        width: 150px;
+        height: 20px;
+    }
+    footer a {
+        font-size: 12px;
+    }
+    footer{
+        gap: 12px;
     }
 }

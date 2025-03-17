@@ -17,7 +17,7 @@
     width: 200px;
     height: 30px;
 }
-@media(max-width: 768px){
+@media(min-width:320px) and (max-width: 767px){
     #role_form select , #role_form button{
         width: 100px;
         font-size: 10px;
@@ -25,5 +25,15 @@
     }
     p {
         font-size: 14px;
+    }
+}
+@media(min-width:768px) and (max-width: 900px){
+    #role_form select , #role_form button{
+        width: 175px;
+        font-size: 12px;
+        height: 30px;
+    }
+    p {
+        font-size: 16px;
     }
 }

@@ -486,6 +486,7 @@ def MonCompte(request):
     recherche_form = RechercheTrajetForm(request.GET)
 
     resultat_filtrer = None
+    resultat = None
     first_result = None
     second_result = None
 
@@ -557,7 +558,8 @@ def MonCompte(request):
                 if Voiture.objects.filter(immatriculation=immatriculation).exists():
                     messages.error(request, "Cette immatriculation est déjà prise.")
                 else:
-                    messages.error(request, "Une erreur est survenue lors de l'ajout de votre véhicule.")
+                    if immatriculation:
+                        messages.error(request, "L'immatriculation n'a pas le bon format.")
 
         # __________Formulaire de proposition de trajet___
         elif form_soumis == "trajet_form":
