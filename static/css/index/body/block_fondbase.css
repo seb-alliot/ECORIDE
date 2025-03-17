@@ -2,7 +2,7 @@
     background-image: url("../../../photo/principal.png");
     background-size:cover ;
     background-position: center;
-    min-height: 400px;
+    min-height: 210px;
 }
 
 @media(max-width: 767px) {
