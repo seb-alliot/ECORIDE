@@ -1,7 +1,6 @@
 #role_form{
     display: flex;
     margin-top:10px;
-    margin-bottom: 30px;
     justify-content: center;
     }
 
@@ -26,6 +25,9 @@
     p {
         font-size: 14px;
     }
+    #role_form{
+        margin-bottom: 10px;
+    }
 }
 @media(min-width:768px) and (max-width: 900px){
     #role_form select , #role_form button{
@@ -35,5 +37,8 @@
     }
     p {
         font-size: 16px;
+    }
+    #role_form{
+        margin-bottom: 15px;
     }
 }

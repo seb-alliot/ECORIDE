@@ -72,7 +72,7 @@ input[type="file"]::file-selector-button:hover {
 }
 
 @media(max-width: 767px) {
-    form#adresse_form img.photo_profile{
+    form#adresse_form{
         margin-top: 15px;
         width: 120px;
         height: 80px;
@@ -103,5 +103,9 @@ input[type="file"]::file-selector-button:hover {
         background-color: rgb(53, 152, 228);
         color: white;
         display: flex;
+    }
+    div.photo-parent > div > img{
+        width: 175px;
+        height: 110px;
     }
 }

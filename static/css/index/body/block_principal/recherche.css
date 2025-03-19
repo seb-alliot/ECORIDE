@@ -63,14 +63,14 @@ button:hover {
 @media(min-width:768px) and (max-width: 900px) {
     #recherche_form input , #recherche_form button {
         text-align: center;
-        width: 100px;
+        width: 120px;
         height: 30px;
-        font-size: 10px;
+        font-size: 12px;
     }
     .conteneur_recherche{
         margin:10px auto;
         padding-bottom: 10px;
-        font-size: 10px;
+        font-size: 12px;
         bottom: 0%;
     }
 }

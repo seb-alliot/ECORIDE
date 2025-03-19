@@ -2,17 +2,21 @@
     background-image: url("../../../photo/principal.png");
     background-size:cover ;
     background-position: center;
-    min-height: 210px;
 }
 
-@media(max-width: 767px) {
+@media(max-width: 768px) {
     .image-principal {
-        min-height: 150px ;
+        min-height: 100px ;
     }
 }
 
 @media(min-width:768px) and (max-width: 900px) {
     .image-principal {
-        min-height: 150px ;
+        min-height: 200px ;
+    }
+}
+@media(min-width:901px) {
+    .image-principal {
+        min-height: 400px ;
     }
 }

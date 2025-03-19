@@ -85,7 +85,7 @@ div.content p {
 }
 @media(min-width: 768px) and (max-width: 900px) {
     #trajet_form input, #trajet_form select, #trajet_form button{
-        width: 100px;
+        width: 120px;
         font-size: 12px;
     }
     p {
@@ -93,5 +93,25 @@ div.content p {
     }
     .flex1{
         gap:4px;
+    }
+}
+
+@media(min-width: 900px){
+    #trajet_form input, #trajet_form select, #trajet_form button{
+        width: 200px;
+        font-size: 14px;
+    }
+    p {
+        margin:10px;
+        font-size: 14px;
+    }
+    .flex1{
+        gap:8px;
+    }
+    #trajet_form{
+        margin-bottom: 15px;
+    }
+    div.content p {
+        margin: 15px;
     }
 }

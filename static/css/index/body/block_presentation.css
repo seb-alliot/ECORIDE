@@ -67,9 +67,10 @@
         margin-left: 50px;
     }
     .presentation > div:nth-child(1) p,.presentation > div:nth-child(2) p,.presentation >  div:nth-child(3) p {
-        font-size: 14px;
+        font-size: 16px;
     }
     .presentation > div p {
         padding: 20px;
+        font-size: 12px;
     }
 }
