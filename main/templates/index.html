@@ -11,6 +11,11 @@
     {% endblock title %}
     {% block style %}
         <link href="{% static 'css/accueil.css' %}" rel="stylesheet">
+        <!-- Template trajet partager, pas le choix de les définir sur le template parent-->
+        <link href="{% static 'css/index/body/block_principal/index_trajet/filtre_trajet.css' %}" rel="stylesheet">
+        <link href="{% static 'css/index/body/block_principal/index_trajet/recherche.css' %}" rel="stylesheet">
+        <link href="{% static 'css/index/body/block_principal/index_trajet/resultat.css' %}" rel="stylesheet">
+        <!--fin template partager-->
     {% endblock style %}
 </head>
 

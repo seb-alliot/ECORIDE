@@ -1,29 +1,20 @@
 #recherche_form  {
     display:flex;
     gap:0;
-    align-items: center;
     justify-content: center;
-    padding: 10px;
     font-size: 16px;
-    box-shadow:6px 6px 10px rgba(0, 0, 0, 0.41);
     }
 
     #recherche_form input, #recherche_form select, #recherche_form button {
         text-align: center;
-        width: 150px;
+        width: 175px;
         height: 30px;
         }
 
     #recherche_form label{
         display: none;
         }
-button {
-        border:1px solid #6fc2ec;
-        width:150px;
-        height: 30px;
-        box-sizing: border-box;
-        background-color: #6fc2ec;
-    }
+
 
 button:hover {
     background-color: rgb(53, 152, 228);
@@ -38,6 +29,12 @@ button:hover {
     bottom: -2%;
     padding-bottom: 25px;
 }
+div.conteneur_recherche2 {
+    flex-wrap: wrap;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
 .conteneur_recherche2 {
     padding: 15px;
     padding-right: 15px;
@@ -49,7 +46,7 @@ button:hover {
 @media(max-width: 767px) {
     #recherche_form input , #recherche_form button {
         text-align: center;
-        width: 65px;
+        width: 60px;
         height: 30px;
         font-size: 10px;
     }
@@ -60,7 +57,7 @@ button:hover {
         bottom: 0%;
     }
 }
-@media(min-width:768px) and (max-width: 900px) {
+@media(min-width:767px) and (max-width: 900px) {
     #recherche_form input , #recherche_form button {
         text-align: center;
         width: 120px;

@@ -204,8 +204,8 @@ form#etat_form > ul >  button#id_statut{
 
 @media(max-width: 767px){
     .tabs {
-        margin-left: 4%;
-        margin-right: 4%;
+        margin-left: 2%;
+        margin-right: 2%;
     }
     .tab label {
         font-size: 10px;

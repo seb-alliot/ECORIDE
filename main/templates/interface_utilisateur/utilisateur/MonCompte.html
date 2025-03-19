@@ -3,8 +3,11 @@
 {% block style %}
     <link href="{% static 'css/accueil.css' %}" rel="stylesheet">
     <link href="{% static 'css/MonCompte.css' %}" rel="stylesheet">
-    <link href="{% static 'css/espace_perso/onglet_1/passager/trajet_passager.css' %}" rel="stylesheet">
-
+    <!-- Template trajet partager, pas le choix de les définir sur le template parent-->
+    <link href="{% static 'css/index/body/block_principal/mon_compte_trajet/filtre_trajet.css' %}" rel="stylesheet">
+    <link href="{% static 'css/index/body/block_principal/mon_compte_trajet/recherche.css' %}" rel="stylesheet">
+    <link href="{% static 'css/index/body/block_principal/mon_compte_trajet/resultat.css' %}" rel="stylesheet">
+    <!--fin template partager-->
 {% endblock style %}
 
 {% block principal %}
@@ -43,10 +46,10 @@
 
         {% elif user_role == "Passager" %}
             {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_form_recherche.html" %}
-            {% if resultat %}
-                {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_resultat_recherche.html" %}
-                {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_filtre_trajet.html" %}
-            {% endif %}
+                {% if first_result or second_result %}
+                    {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_resultat_recherche.html" %}
+                    {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_filtre_trajet.html" %}
+                {% endif %}
         {% endif %}
 
     </div>

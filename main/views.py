@@ -62,7 +62,7 @@ from django.db.models.functions import Coalesce
 import random
 import imaplib, email
 from email.header import decode_header
-import os, quopri, re, uuid , secrets
+import os, re, uuid , secrets
 from bs4 import BeautifulSoup
 
 
@@ -186,6 +186,7 @@ def accueil(request):
 
             first_result= resultat.exclude(Q(type_moteur="Electrique") | Q(type_moteur="Hybride"))
             second_result= resultat.exclude(Q(type_moteur="essence") | Q(type_moteur="diesel"))
+
             if first_result.exists() or second_result.exists():
                 messages.success(request, "Hey voici juste pour vous !!")
             else:

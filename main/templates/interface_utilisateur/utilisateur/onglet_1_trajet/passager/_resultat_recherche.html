@@ -1,5 +1,4 @@
-{% load static %}
-<link href="{% static 'css/index/body/block_principal/resultat.css' %}" rel="stylesheet">
+
 
 
 <form id="selection_trajet" method="GET" action="{% url 'reservation' %}">
@@ -28,6 +27,7 @@
                     Départ de :<br>
                     {{ resultat.ville_depart }} pour {{ resultat.ville_arrivee }}<br>
                     A : {{ resultat.heure|date:"H\H:i"  }}<br>
+                    le : {{ resultat.date|date:"d/m/Y" }}<br>
                     Moteur: {{ resultat.type_moteur }}<br>
                     {% if resultat.voiture.type_moteur == 'Electrique' %}
                         <p>Ce trajet est écolgique</p>
@@ -49,10 +49,13 @@
         {% endfor %}
         </div>
     </div>
+
+
     <div class="conteneur_recherche">
         <h2>Covoiturage écologique</h2>
         <div class="conteneur_recherche2">
             <ul class="resultat">
+
             {% for resultat in second_result %}
                 <li class="resultat">
                     <input
@@ -74,6 +77,7 @@
                         Départ de :<br>
                         {{ resultat.ville_depart }} pour {{ resultat.ville_arrivee }}<br>
                         A : {{ resultat.heure|date:"H\H:i"  }}<br>
+                        le : {{ resultat.date|date:"d/m/Y" }}<br>
                         Moteur: {{ resultat.type_moteur }}<br>
                         Prix:  {{ resultat.prix }}€<br>
                         Places disponibles:

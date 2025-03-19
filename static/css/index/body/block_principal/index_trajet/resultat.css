@@ -1,0 +1,70 @@
+.resultat{
+    display: flex;/*retirer le flex les aligne a l'horizontal*/
+    justify-content: center;
+    gap: 20px;
+}
+.resultat ul {
+    flex-direction: column;
+    gap: 20px;
+    list-style-type: none;
+
+}
+.resultat li > ul > li > input[type="radio"] {
+    display: none;
+}
+.resultat [type=radio]:checked ~ label {
+    background: rgb(53, 152, 228);
+    color: white;
+    border-bottom: 1px solid white;
+    z-index: 1;
+    display: flex;
+    border: 1px solid #ccc;
+    border-radius: 10px 10px 10px 10px;
+    box-shadow:6px 6px 10px rgba(0, 0, 0, 0.41);
+    list-style-type: none;
+    background-color: rgb(53, 152, 228);
+    }
+
+.resultat input[type="radio"]:hover ~ label {
+    background-color: rgb(53, 152, 228);
+    color: white;
+}
+.resultat  input[type="radio"]input:hover {
+    background-color: rgb(53, 152, 228);
+    color: white;
+}
+.resultat [type=radio]:hover ~ label {
+    background-color: rgb(53, 152, 228);
+    color: white;
+}
+.resultat input[type="radio"] {
+    display: none;
+}
+
+.resultat label {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 10px;
+    background-color: #6fc2ec;
+    border: 1px solid #6fc2ec;
+    box-shadow:6px 6px 10px rgba(0, 0, 0, 0.41);
+    padding: 10px;
+}
+form#selection_trajet > div#bouton_reservation {
+    display:flex;
+    justify-content: center;
+}
+form#selection_trajet > div > button {
+    margin-bottom:20px;
+}
+
+@media(min-width:320px) and (max-width: 900px) {
+    .resultat [type=radio]:checked ~ label{
+        margin-top: 0px;
+        width: 120px;
+    }
+    form#selection_trajet > div > button {
+        margin-bottom:10px;
+    }
+}

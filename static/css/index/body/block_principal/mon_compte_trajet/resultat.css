@@ -12,6 +12,7 @@
 .resultat li > ul > li > input[type="radio"] {
     display: none;
 }
+/*taille des labels donc resultat */
 .resultat [type=radio]:checked ~ label {
     background: rgb(53, 152, 228);
     color: white;
@@ -22,10 +23,7 @@
     border-radius: 10px 10px 10px 10px;
     box-shadow:6px 6px 10px rgba(0, 0, 0, 0.41);
     list-style-type: none;
-    width: 175px;
     background-color: rgb(53, 152, 228);
-    padding: 10px;
-    margin-top:20px;
     }
 
 .resultat input[type="radio"]:hover ~ label {
