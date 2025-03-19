@@ -50,7 +50,6 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "main",
     "simple_history",
-    "django_extensions",
 ]
 
 MIDDLEWARE = [

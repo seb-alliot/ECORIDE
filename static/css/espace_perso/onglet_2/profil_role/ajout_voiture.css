@@ -76,3 +76,17 @@ div.voiture_mere > div {
             gap:4px;
         }
         }
+
+@media(min-width:900px){
+    div.voiture_mere {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        div.voiture_mere > div {
+            display: flex;
+            gap: 2px;
+            flex-wrap: wrap;
+        }
+}

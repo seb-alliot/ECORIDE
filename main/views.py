@@ -470,7 +470,7 @@ def MonCompte(request):
     chauffeur = TrajetProposer.objects.filter(chauffeur=user).first()
     adresse_user = AdresseUser.objects.filter(user=user).first()
     if adresse_user is None:
-        adresse_user = AdresseUser(user=user)
+        adresse_user = AdresseUser(user=user, email=user.email)
 
 
     # Initialisation des formulaires

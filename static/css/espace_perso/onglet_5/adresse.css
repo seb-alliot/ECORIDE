@@ -75,7 +75,7 @@ input[type="file"]::file-selector-button:hover {
     form#adresse_form{
         margin-top: 15px;
         width: 120px;
-        height: 80px;
+        height: 0px;
     }
     #adresse_form img textarea{
         font-size: 10px;
@@ -83,11 +83,23 @@ input[type="file"]::file-selector-button:hover {
     #adresse_form input, #adresse_form select, #adresse_form button, #adresse_form input[type="file"]::file-selector-button{
         width: 125px;
         height: 30px;
-        font-size: 10px;
+        font-size: 12px;
         box-shadow:6px 6px 10px rgba(0, 0, 0, 0.41);
         border: solid black 1px;
     }
+    div.photo-parent > div > img{
+        width: 120px;
+        height: 90px;
+    }
+    .photo-parent{
+        align-items: center;
+    }
+    input#id_photo {
+        display: flex;
+        margin-left: -70px;
+    }
 }
+
 @media(min-width:768px) and (max-width: 900px) {
     #adresse_form img textarea{
         font-size: 12px;
