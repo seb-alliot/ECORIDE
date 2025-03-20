@@ -1,7 +1,7 @@
 
 #trajet_form select, #trajet_form button, #trajet_form input{
     text-align: center;
-    width: 150px;
+    width: 175px;
     height: 30px;
     border-radius: 10px;
     border:solid 1px black;
@@ -53,8 +53,10 @@ div.content > ul > li > input [type=radio]:checked ~ label {
     padding:10px;
     }
 
-div.content >ul{
+div.content > ul{
     z-index: 1;
+    display:flex;
+    flex-wrap: wrap;
 }
 
 div.content > ul > li> input[type=radio]:hover ~ label {
@@ -71,9 +73,15 @@ div.content p {
     justify-content: center;
     margin: 0;
 }
-@media(max-width: 767px) {
+@media(max-width:380px){
+    #p_pas_a_sa_place{
+        margin-left: 20%;
+        margin-right: 20%;
+    }
+}
+@media(min-width: 320px) and (max-width: 480px){
     #trajet_form input, #trajet_form select, #trajet_form button{
-        width: 80px;
+        width: 95px;
         font-size: 10px;
     }
     p {
@@ -82,10 +90,17 @@ div.content p {
     .flex1{
         gap:2px;
     }
+    div.content > ul {
+        font-size: 10px;
+    }
+    #p_pas_a_sa_place{
+        margin-top : 5px;
+        margin-bottom : 5px;
+    }
 }
-@media(min-width: 768px) and (max-width: 900px) {
+@media(min-width: 480px) and (max-width: 768px){
     #trajet_form input, #trajet_form select, #trajet_form button{
-        width: 120px;
+        width: 140px;
         font-size: 12px;
     }
     p {
@@ -94,16 +109,42 @@ div.content p {
     .flex1{
         gap:4px;
     }
+    div.content > ul {
+        font-size: 12px;
+    }
+    #p_pas_a_sa_place{
+        margin-top : 10px;
+        margin-bottom : 10px;
+    }
 }
-
-@media(min-width: 900px){
-    #trajet_form input, #trajet_form select, #trajet_form button{
-        width: 200px;
+@media(min-width: 768px) and (max-width: 900px) {
+    #trajet_form input, #trajet_form select, #trajet_form button {
+        width: 175px;
         font-size: 14px;
     }
     p {
-        margin:10px;
         font-size: 14px;
+    }
+    .flex1{
+        gap:6px;
+    }
+    div.content > ul {
+        font-size: 14px;
+    }
+    #p_pas_a_sa_place{
+        margin-top : 10px;
+        margin-bottom : 10px;
+    }
+}
+
+@media(min-width: 901px){
+    #trajet_form input, #trajet_form select, #trajet_form button{
+        width: 200px;
+        font-size: 16px;
+    }
+    p {
+        margin:10px;
+        font-size: 16px;
     }
     .flex1{
         gap:8px;
@@ -114,4 +155,11 @@ div.content p {
     div.content p {
         margin: 15px;
     }
+    #p_pas_a_sa_place{
+        margin-top : 15px;
+        margin-bottom : 15px;
+    }
 }
+
+
+/* trajet proposer */

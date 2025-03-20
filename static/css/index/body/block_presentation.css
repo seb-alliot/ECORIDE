@@ -3,15 +3,14 @@
     grid-template-columns: 1fr;
     grid-template-rows:repeat(3, 1fr);
     align-content: center;
-    width: 100%;
 }
 
 .presentation >div{
     display: flex;
     align-items: center;
     position:relative;
-    margin-right: 100px;
-    margin-left: 100px;
+    margin-right: 10%;
+    margin-left: 10%;
 }
 
 .presentation >div p{
@@ -48,11 +47,10 @@
     height: 70%;
     object-fit: cover;
 }
-
-@media(max-width: 767px) {
+@media(min-width:320px) and (max-width: 500px){
     .presentation > div {
-        margin-right: 50px;
-        margin-left: 50px;
+        margin-right: 10%;
+        margin-left: 10%;
     }
     .presentation > div:nth-child(1) p,.presentation > div:nth-child(2) p,.presentation >  div:nth-child(3) p {
         font-size: 12px;
@@ -61,16 +59,67 @@
         padding: 20px;
     }
 }
-@media(min-width:768px) and (max-width: 900px) {
+@media(min-width:500px) and (max-width: 768px){
     .presentation > div {
-        margin-right: 50px;
-        margin-left: 50px;
+        margin-right: 10%;
+        margin-left: 10%;
     }
+    .presentation > div:nth-child(1) p,.presentation > div:nth-child(2) p,.presentation >  div:nth-child(3) p {
+        font-size: 15px;
+    }
+    .presentation > div p {
+        padding: 20px;
+        font-size: 12px;
+    }
+
+}
+@media(min-width:768px) and (max-width: 900px) {
+
     .presentation > div:nth-child(1) p,.presentation > div:nth-child(2) p,.presentation >  div:nth-child(3) p {
         font-size: 16px;
     }
     .presentation > div p {
         padding: 20px;
-        font-size: 12px;
+        font-size: 15px;
+    }
+}
+@media(min-width:900px) and (max-width: 1024px) {
+
+    .presentation > div:nth-child(1) p,.presentation > div:nth-child(2) p,.presentation >  div:nth-child(3) p {
+        font-size: 18px;
+    }
+    .presentation > div p {
+        padding: 20px;
+        font-size: 15px;
+    }
+}
+@media(min-width:1024px) and (max-width: 1200px) {
+
+    .presentation > div:nth-child(1) p,.presentation > div:nth-child(2) p,.presentation >  div:nth-child(3) p {
+        font-size: 20px;
+    }
+    .presentation > div p {
+        padding: 20px;
+        font-size: 17px;
+    }
+}
+@media(min-width:1200px) and (max-width: 1600px) {
+
+    .presentation > div:nth-child(1) p,.presentation > div:nth-child(2) p,.presentation >  div:nth-child(3) p {
+        font-size: 22px;
+    }
+    .presentation > div p {
+        padding: 20px;
+        font-size: 17px;
+    }
+}
+@media(min-width:1600px) and (max-width: 1920px) {
+
+    .presentation > div:nth-child(1) p,.presentation > div:nth-child(2) p,.presentation >  div:nth-child(3) p {
+        font-size: 24px;
+    }
+    .presentation > div p {
+        padding: 20px;
+        font-size: 20px;
     }
 }

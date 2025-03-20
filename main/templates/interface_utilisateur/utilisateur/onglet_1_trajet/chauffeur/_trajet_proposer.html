@@ -1,6 +1,6 @@
 
 {% if trajets is not None %}
-    <p>Voici  le{{ trajets|pluralize }} trajet{{ trajets|pluralize }} que vous proposez actuellement</p>
+    <p id="p_pas_a_sa_place">Voici  le{{ trajets|pluralize }} trajet{{ trajets|pluralize }} que vous proposez actuellement</p>
         <ul>
             {% for trajet in trajets %}
                 {% if trajet.etat == "Disponible" or trajet.etat == "En cour" %}
@@ -9,7 +9,7 @@
                                 <label for="{{ trajet.id }}">
                                     Départ de :<br>{{ trajet.ville_depart }} pour {{ trajet.ville_arrivee }}<br>
                                     Le :<br> {{ trajet.date }}<br>
-                                    A: {{ trajet.heure }} heures<br>
+                                    A: {{ trajet.heure|date:"H\Hi" }}<br>
                                     Voiture : <br>{{ trajet.voiture.marque}} {{ trajet.voiture.modele }}<br>
                                     Moteur : {{ trajet.voiture.type_moteur }}<br>
                                     Prix : {{ trajet.prix }}€<br>

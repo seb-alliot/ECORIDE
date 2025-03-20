@@ -29,7 +29,7 @@ div.voiture_mere > div {
 
 @media(max-width: 767px){
     #voiture_form input, #voiture_form select, #voiture_form button{
-        width: 110px;
+        width: 125px;
         height: 30px;
         font-size: 10px;
         gap:14px;
@@ -41,7 +41,7 @@ div.voiture_mere > div {
         margin-left:0%;
     }
     div.info_perso > li{
-            width: 115px;
+            width: 125px;
             font-size: 10px;
         }
     div.voiture_mere{

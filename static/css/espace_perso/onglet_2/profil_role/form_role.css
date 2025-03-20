@@ -11,14 +11,9 @@
         text-align: center;
         border-radius: 10px 10px 10px 10px;
     }
-
-#role_form select ,#role_form button {
-    width: 200px;
-    height: 30px;
-}
-@media(max-width: 767px){
+@media(min-width:320px) and (max-width: 767px){
     #role_form select , #role_form button{
-        width: 100px;
+        width: 120px;
         font-size: 10px;
         height: 30px;
     }

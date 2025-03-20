@@ -24,9 +24,6 @@
 .tabs {
     position: relative;
     min-height: 500px;
-    clear: both;
-    margin-left: 10%;
-    margin-right: 10%;
     margin-top: 10px;
     }
     .tab {
@@ -202,27 +199,76 @@ form#etat_form > ul >  button#id_statut{
     -o-transform:      translateX(0);
     }
 
-@media(max-width: 767px){
-    .tabs {
+
+/*--------------Responsive--------------*/
+
+@media(max-width: 384px){
+    div.tabs {
+        margin-left: 2%;
+        margin-right: 2%;
+        }
+        #menu-tab {
+            font-size: 8pt;
+        }
+
+    div.content p{
+        font-size: 15px;
+        margin:5px;
+    }
+}
+@media(min-width:384px) and (max-width: 500px){
+    div.tabs {
         margin-left: 2%;
         margin-right: 2%;
     }
     .tab label {
-        font-size: 10px;
+        font-size: 13px;
         padding: 10px;
         border-radius: 10px;
-        text-align: center;
+    }
+    div.content p{
+        margin:10px;
     }
 }
-@media(min-width:768px) and (max-width: 900px){
-    .tabs {
-        margin-left: 6%;
-        margin-right: 6%;
+@media(min-width:500px) and (max-width: 900px){
+    div.tabs  {
+        margin-left: 4%;
+        margin-right: 4%;
     }
     .tab label {
-        font-size: 12px;
+        font-size: 14px;
         padding: 10px;
         border-radius: 10px;
-        text-align: center;
+    }
+    div.content p{
+        margin:10px;
+    }
+}
+@media(min-width:900px) and (max-width: 1200px){
+    div.tabs {
+        margin-left: 8%;
+        margin-right: 8%;
+    }
+    .tab label {
+        font-size: 15px;
+        padding: 10px;
+        border-radius: 10px;
+    }
+    div.content p{
+        margin:10px;
+    }
+}
+@media(min-width:1200px){
+    div.tabs {
+        margin-left: 8%;
+        margin-right: 8%;
+    }
+    .tab label {
+        font-size: 15px;
+        padding: 10px;
+        border-radius: 10px;
+    }
+    div.content p{
+        margin:10px;
     }
 }

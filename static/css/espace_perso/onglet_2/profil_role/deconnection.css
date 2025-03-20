@@ -28,7 +28,7 @@ background-color:rgb(0, 0, 0) ;
 @media(max-width: 767px){
     #deconnexion {
         display: flex;
-        width: 110px;
+        width: 125px;
         height: 30px;
         font-size: 10px;
     }

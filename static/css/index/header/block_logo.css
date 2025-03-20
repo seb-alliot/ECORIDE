@@ -28,8 +28,7 @@ header a {
     text-decoration: none;
     flex-direction: column;
 }
-
-@media(max-width: 768px) {
+@media(min-width:320px) and (max-width: 500px){
     header h1 a {
         font-size: 30px;
     }
@@ -37,17 +36,51 @@ header a {
         margin: 0px -10px;
     }
     .photo_profile {
-        height: 85px;
+        height: 80px;
     }
 }
-@media(min-width:768px) and (max-width: 900px) {
+
+@media(min-width:499px) and (max-width: 900px) {
     header h1 a {
-        font-size: 30px;
+        font-size: 40px;
     }
     header a {
         margin: 0px -10px;
     }
     .photo_profile {
         height: 100px;
+    }
+}
+@media(min-width:900px) and (max-width: 1200px) {
+    header h1 a {
+        font-size: 50px;
+    }
+    header a {
+        margin: 0px 10px;
+    }
+    .photo_profile {
+        height: 110px;
+    }
+}
+@media(min-width:1200px) and (max-width: 1400px) {
+    header h1 a {
+        font-size: 60px;
+    }
+    header a {
+        margin: 0px 10px;
+    }
+    .photo_profile {
+        height: 120px;
+    }
+}
+@media(min-width:1400px) and (max-width: 1800px) {
+    header h1 a {
+        font-size: 70px;
+    }
+    header a {
+        margin: 0px 10px;
+    }
+    .photo_profile {
+        height: 150px;
     }
 }
