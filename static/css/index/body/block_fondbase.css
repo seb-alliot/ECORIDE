@@ -1,5 +1,5 @@
 .image-principal {
-    background-image: url("../../../photo/principal.png");
+    background-image: url("../../../photo/principal.webp");
     background-size:cover ;
     background-position: center;
 }
@@ -44,13 +44,13 @@
         min-height: 600px;
     }
 }
-@media(min-width:2000px) and (max-width: 2500px) {
+@media(min-width:2000px) and (max-width: 3000px) {
     .image-principal {
         min-height: 700px;
     }
 }
-@media(min-width:2500px) {
+@media(min-width:3000px) {
     .image-principal {
-        min-height: 900px;
+        min-height: 950px;
     }
 }
