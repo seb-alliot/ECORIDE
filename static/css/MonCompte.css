@@ -198,7 +198,10 @@ form#etat_form > ul >  button#id_statut{
     -ms-transform:     translateX(0);
     -o-transform:      translateX(0);
     }
-
+    div.content p{
+        justify-content: center;
+        display: flex;
+    }
 
 /*--------------Responsive--------------*/
 

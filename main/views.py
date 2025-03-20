@@ -155,10 +155,14 @@ def accueil(request):
     adresse_form = TrajetForm()
     recherche_form = RechercheTrajetForm(request.GET)
     filtre_form = FiltreTrajetForm(request.GET)
+    chauffeur = TrajetProposer.objects.filter().first()
+    note_chauffeur = NoteUser.objects.filter().first()
+
     resultat_filtrer = None
     first_result = None
     second_result = None
     resultat = None
+
 
     form_trajet = request.GET.get("form_trajet")
 
@@ -228,6 +232,9 @@ def accueil(request):
                 messages.error(request, "Oups !! La recherche n'a rien donné.")
 
     context = {
+        # utilisateur
+        "note_chauffeur": note_chauffeur,
+        "chauffeur": chauffeur,
         # resultat de recherche de covoiturage
         "resultat": resultat,
         "first_result": first_result,
@@ -468,7 +475,10 @@ def MonCompte(request):
     voiture = Voiture.objects.filter(user=user)
     reservation = ReservationTrajet.objects.filter(passager=user)
     prix_total_paye = ReservationTrajet.paiement_total_passager(request.user, trajet)
-    chauffeur = TrajetProposer.objects.filter(chauffeur=user).first()
+
+    chauffeur = TrajetProposer.objects.filter().first()
+    note_chauffeur = NoteUser.objects.filter().first()
+
     adresse_user = AdresseUser.objects.filter(user=user).first()
     if adresse_user is None:
         adresse_user = AdresseUser(user=user, email=user.email)
@@ -482,6 +492,7 @@ def MonCompte(request):
     trajet_form = TrajetForm(user=user)
     etat_form = StatutTrajetForm(request.POST)
     reservation_form = StatutReservationForm(request.POST)
+
 
     filtre_form = FiltreTrajetForm(request.GET)
     recherche_form = RechercheTrajetForm(request.GET)
@@ -592,6 +603,8 @@ def MonCompte(request):
 
                     trajet.chauffeur = user
                     trajet.save()
+                    trajet_form = TrajetForm()
+
                     messages.success(
                         request,
                         "Votre covoiturage a bien été ajouté. Merci pour votre contribution !",
@@ -609,6 +622,7 @@ def MonCompte(request):
                     )
                     return redirect("MonCompte")
             else:
+                trajet_form = TrajetForm()
                 messages.error(
                     request,
                     "Une erreur est apparue lors de la proposition de covoiturage.",
@@ -883,6 +897,7 @@ def MonCompte(request):
 
     context = {
         # utilisateur
+        "note_chauffeur": note_chauffeur,
         "role": role,
         "preference": preference,
         "adresse_user": adresse_user,

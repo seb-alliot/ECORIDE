@@ -27,3 +27,7 @@ env/
 node_modules/
 
 .egg/
+
+credit_admin.py
+credit_sebastien.py
+credit_setsuna.py

@@ -2,20 +2,24 @@
 <link href="{% static 'css/espace_perso/onglet_2/profil_role/preference.css' %}" rel="stylesheet">
 
 <p>Vos preferences actuel sont :</p>
+{% if preference %}
 <div class="preference_css">
     <div>
-        {{ preference.get_fumeur_display }},
+        {{ preference.get_fumeur_display }}
     </div>
     <div>
-        {{ preference.get_animaux_display }},
+        {{ preference.get_animaux_display }}
     </div>
     <div>
-        {{ preference.get_exigences_particulieres_display }},
+        {{ preference.get_exigences_particulieres_display }}
     </div>
     <div>
-        {{ preference.exigences_personnelles }}.
+        {{ preference.exigences_personnelles }}
     </div>
 </div>
+{% else %}
+<p>Comme le reservoir , à remplir !!</p>
+{% endif %}
 <form id="preference_form" method="post">
     {% csrf_token %}
         <label for="preferences_form">Préférences</label>

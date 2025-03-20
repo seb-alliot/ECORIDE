@@ -68,6 +68,7 @@ urlpatterns = [
 ]
 urlpatterns += [
     re_path(r'^google59ae742b6eee40ef\.html$', serve, {'document_root': settings.STATIC_ROOT, 'path': 'google59ae742b6eee40ef.html'}),
+    re_path(r'^sitemap\.xml$', serve, {'document_root': settings.STATIC_ROOT, 'path': 'sitemap.xml'}),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
