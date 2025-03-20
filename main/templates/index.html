@@ -6,9 +6,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% block title %}
-    <title>
-        EcoRide
-    </title>
+        {% include "interface_utilisateur/reutilisable/accueil/_nom_du_site.html" %}
+        <p>    Ce site est un site de covoiturage developpé par un étudiant en reconversion professionnelle.<br>
+            Il est en cours de développement et n'est pas encore fonctionnel. Merci de votre compréhension.</p>
     {% endblock title %}
     {% block style %}
         <link href="{% static 'css/accueil.css' %}" rel="stylesheet">
