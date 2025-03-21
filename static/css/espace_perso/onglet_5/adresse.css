@@ -10,7 +10,7 @@ input#id_photo{
 div.photo-parent > div > img{
     border-radius: 15%;
     border: 1px solid #ccc;
-    margin-left: 50%;
+    margin-left: 51.5%;
     margin-top:30px;
 }
 .photo-fille{
@@ -87,7 +87,7 @@ input[type="file"]::file-selector-button:hover {
     }
     div.photo-parent > div > img{
         width: 120px;
-        height: 90px;
+        height: 95px;
     }
     .photo-parent{
         align-items: center;
@@ -115,7 +115,7 @@ input[type="file"]::file-selector-button:hover {
     }
     div.photo-parent > div > img{
         width: 150px;
-        height: 110px;
+        height: 125px;
     }
 }
 @media(min-width:768px) and (max-width: 900px) {
@@ -136,11 +136,11 @@ input[type="file"]::file-selector-button:hover {
     }
     div.photo-parent > div > img{
         width: 200px;
-        height: 110px;
+        height: 175px;
     }
 }
 
-@media(min-width:899px){
+@media(min-width:899px) and (max-width: 1024px) {
     #adresse_form img textarea{
         font-size: 18px;
     }
@@ -158,6 +158,49 @@ input[type="file"]::file-selector-button:hover {
     }
     div.photo-parent > div > img{
         width: 225px;
-        height: 135px;
+        height: 200px;
+    }
+}
+@media(min-width:1024px) and (max-width: 1920px) {
+    #adresse_form img textarea{
+        font-size: 18px;
+    }
+    #adresse_form input, #adresse_form select, #adresse_form button, #adresse_form input[type="file"]::file-selector-button{
+        width: 250px;
+        height: 30px;
+        font-size: 15px;
+        box-shadow:6px 6px 10px rgba(0, 0, 0, 0.41);
+        border: solid black 1px;
+    }
+    input[type="file"]::file-selector-button:hover {
+        background-color: rgb(53, 152, 228);
+        color: white;
+        display: flex;
+    }
+    div.photo-parent > div > img{
+        width: 250px;
+        height: 225px;
+    }
+}
+
+@media(min-width:1920px) {
+    #adresse_form img textarea{
+        font-size: 18px;
+    }
+    #adresse_form input, #adresse_form select, #adresse_form button, #adresse_form input[type="file"]::file-selector-button{
+        width: 325px;
+        height: 30px;
+        font-size: 15px;
+        box-shadow:6px 6px 10px rgba(0, 0, 0, 0.41);
+        border: solid black 1px;
+    }
+    input[type="file"]::file-selector-button:hover {
+        background-color: rgb(53, 152, 228);
+        color: white;
+        display: flex;
+    }
+    div.photo-parent > div > img{
+        width: 325px;
+        height: 300px;
     }
 }

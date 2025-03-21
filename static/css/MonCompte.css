@@ -23,8 +23,6 @@
 
 .tabs {
     position: relative;
-    min-height: 500px;
-    margin-top: 10px;
     }
     .tab {
     float: left;
@@ -45,19 +43,6 @@
 
 div.content {
     display: grid;
-    justify-content: center;
-    position: absolute;
-    top: 28px;
-    left: 0;
-    background:  #95CFED;
-    right: 0;
-    bottom: 0;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px 10px 10px 10px;
-    box-shadow:6px 6px 10px rgba(0, 0, 0, 0.41);
-    overflow-x: scroll;
-    overflow-y: auto;
     }
     .tab [type=radio]:checked ~ label {
     background: rgb(53, 152, 228);
@@ -83,10 +68,9 @@ div.content {
     }
 
 .content {
-    display:flex;
     justify-content: center;
     position: absolute;
-    top: 28px;
+    top: 25px;
     left: 0;
     background:  #95CFED;
     right: 0;
@@ -209,6 +193,7 @@ form#etat_form > ul >  button#id_statut{
     div.tabs {
         margin-left: 2%;
         margin-right: 2%;
+        margin-top: 15px;
         }
         #menu-tab {
             font-size: 8pt;
@@ -218,6 +203,10 @@ form#etat_form > ul >  button#id_statut{
         font-size: 15px;
         margin:5px;
     }
+    .tabs {
+        min-height: 450px;
+        margin-top: 10px;
+        }
 }
 @media(min-width:384px) and (max-width: 500px){
     div.tabs {
@@ -225,13 +214,17 @@ form#etat_form > ul >  button#id_statut{
         margin-right: 2%;
     }
     .tab label {
-        font-size: 13px;
+        font-size: 12px;
         padding: 10px;
         border-radius: 10px;
     }
     div.content p{
         margin:10px;
     }
+    .tabs {
+        min-height: 470px;
+        margin-top: 10px;
+        }
 }
 @media(min-width:500px) and (max-width: 900px){
     div.tabs  {
@@ -246,7 +239,12 @@ form#etat_form > ul >  button#id_statut{
     div.content p{
         margin:10px;
     }
+    .tabs {
+        min-height: 550px;
+        margin-top: 10px;
+        }
 }
+
 @media(min-width:900px) and (max-width: 1200px){
     div.tabs {
         margin-left: 8%;
@@ -260,6 +258,10 @@ form#etat_form > ul >  button#id_statut{
     div.content p{
         margin:10px;
     }
+    .tabs {
+        min-height: 550px;
+        margin-top: 10px;
+        }
 }
 @media(min-width:1200px){
     div.tabs {
@@ -274,4 +276,8 @@ form#etat_form > ul >  button#id_statut{
     div.content p{
         margin:10px;
     }
+    .tabs {
+        min-height: 600px;
+        margin-top: 10px;
+        }
 }

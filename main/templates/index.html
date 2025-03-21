@@ -1,23 +1,17 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <link rel="icon" href="{% static 'photo/logo.ico' %}" type="image/x-icon">
-    <meta name="google-site-verification" content="55hTLK2eHYbvixFbM_aq6D4SBMNeT9s7a7GurBqs9hM" />
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block meta %}
+        {% include "interface_utilisateur/reutilisable/accueil/_head_meta_donne.html" %}
+    {% endblock meta %}
     {% block title %}
         {% include "interface_utilisateur/reutilisable/accueil/_nom_du_site.html" %}
-        <p>    Ce site est un site de covoiturage developpé par un étudiant en reconversion professionnelle.<br>
-            Il est en cours de développement et n'est pas encore fonctionnel. Merci de votre compréhension.</p>
+            {% block user %}
+                {% include "interface_utilisateur/reutilisable/accueil/_info_utilisateur.html" %}
+            {% endblock user%}
     {% endblock title %}
     {% block style %}
-        <link href="{% static 'css/accueil.css' %}" rel="stylesheet">
-        <!-- Template trajet partager, pas le choix de les définir sur le template parent-->
-        <link href="{% static 'css/index/body/block_principal/index_trajet/filtre_trajet.css' %}" rel="stylesheet">
-        <link href="{% static 'css/index/body/block_principal/index_trajet/recherche.css' %}" rel="stylesheet">
-        <link href="{% static 'css/index/body/block_principal/index_trajet/resultat.css' %}" rel="stylesheet">
-        <!--fin template partager-->
+        {% include "css_html/_css_index.html" %}
     {% endblock style %}
 </head>
 

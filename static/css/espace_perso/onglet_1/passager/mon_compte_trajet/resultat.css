@@ -63,7 +63,6 @@ form#selection_trajet > div > button {
 @media(min-width:320px) and (max-width: 900px) {
     .resultat [type=radio]:checked ~ label{
         margin-top: 0px;
-        width: 120px;
     }
     form#selection_trajet > div > button {
         margin-bottom:10px;
