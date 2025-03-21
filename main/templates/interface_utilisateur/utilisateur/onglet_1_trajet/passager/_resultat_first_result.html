@@ -15,7 +15,7 @@
         {% else %}
             <img src="{{ photo_default_url }}" alt="photo par default" class="photo_profile">
         {% endif %}
-        {{ resultat.chauffeur }} : {{ note_chauffeur.get_note_moyenne|floatformat:1 }}/ 5 ⭐ </p>
+        {{ resultat.chauffeur }} : {{ note_chauffeur.get_note_moyenne|floatformat:1 }}/ 5 ⭐
         <br>
         Départ de :<br>
         {{ resultat.ville_depart }} pour {{ resultat.ville_arrivee }}<br>
