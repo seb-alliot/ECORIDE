@@ -77,9 +77,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'ECORIDE.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
-
 DATABASES = {
 'default': env.db('DATABASE_URL')
 }
