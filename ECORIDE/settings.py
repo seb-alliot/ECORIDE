@@ -26,8 +26,6 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['ecoride-itsuki.it.com', 'www.ecoride-itsuki.it.com']
 
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -81,9 +79,6 @@ DATABASES = {
 'default': env.db('DATABASE_URL')
 }
 
-
-
-
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
@@ -131,8 +126,6 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR,'static'),
 ]
 
-
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
@@ -176,8 +169,6 @@ MAIL_IMAP_PASSWORD = os.getenv("MAIL_IMAP_PASSWORD")
 SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
 SESSION_COOKIE_AGE = 60*60*24
 SESSION_EXPRIRE_AT_BROWSER_CLOSE = True
-CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
-CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 LOGOUT_REDIRECT_URL = '/'
 LOGGING_URL = 'login/connection1.html'
