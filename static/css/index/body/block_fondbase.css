@@ -24,7 +24,7 @@
 }
 @media(min-width:768px) and (max-width: 900px) {
     .image-principal {
-        background-image: url("../../../photo/principal.webp");
+        background-image: url("../../../photo/principal_mobile.webp");
         min-height: 200px ;
     }
 }
