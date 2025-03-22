@@ -30,37 +30,37 @@
 }
 @media(min-width:901px) and (max-width: 1200px) {
     .image-principal {
-        background-image: url("../../../photo/principal.webp");
+        background-image: url("../../../photo/principal.avif");
         min-height: 300px ;
     }
 }
 @media(min-width:1200px) and (max-width: 1400px) {
     .image-principal {
-        background-image: url("../../../photo/principal.webp");
+        background-image: url("../../../photo/principal.avif");
         min-height: 350px;
     }
 }
 @media(min-width:1400px) and (max-width: 1800px) {
     .image-principal {
-        background-image: url("../../../photo/principal.webp");
+        background-image: url("../../../photo/principal.avif");
         min-height: 500px;
     }
 }
 @media(min-width:1800px) and (max-width: 2000px) {
     .image-principal {
-        background-image: url("../../../photo/principal.webp");
+        background-image: url("../../../photo/principal.avif");
         min-height: 600px;
     }
 }
 @media(min-width:2000px) and (max-width: 3000px) {
     .image-principal {
-        background-image: url("../../../photo/principal.webp");
+        background-image: url("../../../photo/principal.avif");
         min-height: 700px;
     }
 }
 @media(min-width:3000px) {
     .image-principal {
-        background-image: url("../../../photo/principal.webp");
+        background-image: url("../../../photo/principal.avif");
         min-height: 950px;
     }
 }
