@@ -4,16 +4,23 @@
         <h2>Covoiturage non écologique</h2>
         <div class="conteneur_recherche2">
         <ul class="resultat">
-            {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_resultat_first_result.html" %}
+            {% for resultat in first_resultat %}
+            {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_contenu_resultat.html" %}
+                {% empty %}
+                <p>Il n'y a pas de resultat  pour cette recherche</p>
+            {% endfor %}
         </div>
     </div>
-
 
     <div class="conteneur_recherche">
         <h2>Covoiturage écologique</h2>
         <div class="conteneur_recherche2">
             <ul class="resultat">
-                {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_resultat_second_result.html" %}
+                {% for resultat in second_resultat %}
+                {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_contenu_resultat.html" %}
+                    {% empty %}
+                    <p>Il n'y a pas de resultat  pour cette recherche</p>
+                {% endfor %}
         </div>
     </div>
     {% if resultat %}

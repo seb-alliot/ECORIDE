@@ -155,18 +155,19 @@ def accueil(request):
     adresse_form = TrajetForm()
     recherche_form = RechercheTrajetForm(request.GET)
     filtre_form = FiltreTrajetForm(request.GET)
-    chauffeur = TrajetProposer.objects.filter().first()
-    note_chauffeur = NoteUser.objects.filter().first()
+
+    chauffeur = None
 
     resultat_filtrer = None
-    first_result = None
-    second_result = None
+    first_resultat = None
+    second_resultat = None
     resultat = None
 
 
     form_trajet = request.GET.get("form_trajet")
 
     if request.method == "GET":
+
         # Formulaire de recherche de trajet
         if form_trajet == "recherche_form" and recherche_form.is_valid():
             ville_depart = recherche_form.cleaned_data["ville_depart"]
@@ -188,10 +189,15 @@ def accueil(request):
             resultat.values_list("id", flat=True)
                 )
 
-            first_result= resultat.exclude(Q(type_moteur="Electrique") | Q(type_moteur="Hybride"))
-            second_result= resultat.exclude(Q(type_moteur="essence") | Q(type_moteur="diesel"))
+            first_resultat= resultat.exclude(Q(type_moteur="Electrique") | Q(type_moteur="Hybride"))
+            second_resultat= resultat.exclude(Q(type_moteur="essence") | Q(type_moteur="diesel"))
+            for trajet in resultat:
+                # Calcul de la note moyenne du chauffeur associé au trajet
+                note_moyenne = NoteUser.objects.filter(chauffeur=trajet.chauffeur).aggregate(Avg('note'))['note__avg']
+                # Ajouter cette information à chaque trajet (ou à un dictionnaire pour la transmettre dans le contexte)
+                trajet.note_moyenne = note_moyenne if note_moyenne else 'Pas encore évalué'
 
-            if first_result.exists() or second_result.exists():
+            if first_resultat.exists() or second_resultat.exists():
                 messages.success(request, "Hey voici juste pour vous !!")
             else:
                 messages.error(
@@ -201,7 +207,6 @@ def accueil(request):
 
         # Formulaire de filtrage de trajet
         elif form_trajet == "filtre_form" and filtre_form.is_valid():
-            request.session.get("resultat_recherche") == resultat
             resultat = TrajetProposer.objects.filter(
                 id__in=request.session.get("resultat_recherche")
             )
@@ -223,22 +228,20 @@ def accueil(request):
             if filtre_form.cleaned_data["prix"]:
                 resultat = resultat.filter(prix__lte=filtre_form.cleaned_data["prix"])
 
-            first_result= resultat.exclude(Q(type_moteur="Electrique") | Q(type_moteur="Hybride"))
-            second_result= resultat.exclude(Q(type_moteur="essence") | Q(type_moteur="diesel"))
+            first_resultat= resultat.exclude(Q(type_moteur="Electrique") | Q(type_moteur="Hybride"))
+            second_resultat= resultat.exclude(Q(type_moteur="essence") | Q(type_moteur="diesel"))
 
-            if resultat.exists():
+            if first_resultat.exists() or second_resultat.exists():
                 messages.success(request, "Vos exigences ont trouvé satisfaction.")
             elif not resultat.exists():
                 messages.error(request, "Oups !! La recherche n'a rien donné.")
 
     context = {
         # utilisateur
-        "note_chauffeur": note_chauffeur,
-        "chauffeur": chauffeur,
+
         # resultat de recherche de covoiturage
-        "resultat": resultat,
-        "first_result": first_result,
-        "second_result": second_result,
+        "first_resultat": first_resultat,
+        "second_resultat": second_resultat,
         # formulaire de la page
         "adresse_form": adresse_form,
         "filtre_form": filtre_form,

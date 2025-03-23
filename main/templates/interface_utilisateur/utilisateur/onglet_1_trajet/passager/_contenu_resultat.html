@@ -1,4 +1,4 @@
-{% for resultat in second_result %}
+
 <li class="resultat">
     <input
         type="radio"
@@ -15,7 +15,12 @@
         {% else %}
             <img src="{{ photo_default_url }}" alt="photo par default" class="photo_profile">
         {% endif %}
-        {{ resultat.chauffeur }} : {{ note_chauffeur.get_note_moyenne|floatformat:1 }}/ 5 ⭐
+        {{ resultat.chauffeur }} :
+        {% if trajet.note_moyenne == "Pas encore évalué" %}
+        {{ trajet.note_moyenne }}/ 5 ⭐
+        {% else %}
+            {{ trajet.note_moyenne|floatformat:1 }} / 5 ⭐
+        {% endif %}
         <br>
         Départ de :<br>
         {{ resultat.ville_depart }} pour {{ resultat.ville_arrivee }}<br>
@@ -34,6 +39,3 @@
     </label>
 </li>
 </ul>
-{% empty %}
-<p>Il n'y a pas de resultat  pour cette recherche</p>
-{% endfor %}
