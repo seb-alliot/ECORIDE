@@ -1,92 +1,84 @@
-#preference_form input, #preference_form select, #preference_form button, textarea#id_exigences_personnelles{
-    width: 175px;
-    height: 30px;
-    text-align: center;
-    font-size: 15px;
-    border-radius: 10px;
-}
+
 textarea#id_exigences_personnelles{
     font-size: 12px;
 }
 #preference_form{
-    display: flex;
     margin-top:10px;
-    justify-content: center;
     }
-p {
-    font-size: 18px;
-    }
+
 #preference_form label{
         display:none;
     }
 
 .preference_css{
-    display: flex;
-    justify-content: center;
     gap: 10px;
     margin-top: 10px;
     font-size: 16px;
     margin-bottom: 15px;
 }
+
 @media(max-width: 768px){
     #preference_form input, #preference_form select, #preference_form button, textarea#id_exigences_personnelles{
         width: 150px;
+        height: 30px;
         font-size: 10px;
     }
     #preference_form {
-        display: flex;
         flex-direction: column;
         gap:2px;
         align-items: center;
         margin-bottom:15px ;
     }
     .preference_css{
-        display: flex;
         flex-direction: column;
-        gap: 10px;
+        gap: 12px;
         font-size: 14px;
     }
     .preference_css :nth-child(1){
         margin-top: 10px;
     }
-    p {
-        font-size: 15px;
-        justify-content: center;
-    }
     .preference_css :nth-child(1), .preference_css :nth-child(2), .preference_css :nth-child(3), .preference_css :nth-child(4){
-        display: flex;
         justify-content: center;
         margin-top: 10px;
     }
 }
-@media(min-width:768px) and (max-width: 900px){
+
+@media(min-width:768px) and (max-width: 1200px){
     form#preference_form{
-        display: flex;
-        flex-direction: column;
         align-items: center;
         gap:4px;
         margin-bottom: 15px;
     }
     #preference_form input, #preference_form select, #preference_form button, textarea#id_exigences_personnelles{
         width: 200px;
-        font-size: 12px;
+        height: 30px;
+        font-size: 14px;
+    }
+    .preference_css{
+        gap: 14px;
+        font-size: 14px;
     }
 }
-@media(min-width:901px) and (max-width: 1200px){
-    #preference_form input, #preference_form select, #preference_form button, textarea#id_exigences_personnelles{
-        width: 150px;
-        font-size: 12px;
-    }
-}
+
 @media(min-width:1201px) and (max-width: 1400px){
     #preference_form input, #preference_form select, #preference_form button, textarea#id_exigences_personnelles{
-        width: 175px;
-        font-size: 14px;
+        width: 200px;
+        height: 30px;
+        font-size: 16px;
+    }
+    .preference_css{
+        gap: 14px;
+        font-size: 16px;
     }
 }
 @media(min-width:1401px){
     #preference_form input, #preference_form select, #preference_form button, textarea#id_exigences_personnelles{
-        width: 200px;
-        font-size: 16px;
+        width: 250px;
+        height: 30px;
+        font-size: 18px;
+    }
+    .preference_css{
+        gap: 14px;
+        font-size: 18px;
     }
 }

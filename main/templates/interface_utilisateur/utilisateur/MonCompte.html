@@ -12,7 +12,7 @@
 
 <div id="menu-tab">
     <div class="page-wrap">
-    <div class="tabs">
+    <div class="tabs position_relative">
 
     <!--1er onglet trajet-->
     <div class="tab">
@@ -24,7 +24,7 @@
         <label for="tab-1">
             Trajet
         </label>
-    <div class="content">
+    <div class="content position_relative">
 
         {% if user_role == "Chauffeur"%}
             {% if preference is Null %}
@@ -39,13 +39,13 @@
             {% endif %}
 
         {% elif user_role == "Passager" %}
+
             {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_form_recherche.html" %}
-                {% if first_result or second_result %}
+                {% if first_resultat or second_resultat %}
                     {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_resultat_recherche.html" %}
                     {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_filtre_trajet.html" %}
                 {% endif %}
         {% endif %}
-
     </div>
     </div>
 
@@ -141,7 +141,7 @@
         <label for="tab-5">
             Adresse
         </label>
-    <div class="content">
+    <div class="content display_grid class_justify_center">
 
         <div>
             {% include "interface_utilisateur/utilisateur/onglet_5_adresse/_adresse.html" %}

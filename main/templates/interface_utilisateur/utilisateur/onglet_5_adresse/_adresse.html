@@ -4,7 +4,7 @@
 
 <form id="adresse_form" action="{% url 'MonCompte' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
-        <div class="photo-parent">
+        <div class="photo-parent class_flex class_column">
             <div>
                 {{ form.subject.errors }}
             {% if adresse_user.photo %}
@@ -15,7 +15,7 @@
                 {{ adresse_form.photo }}
             {% endif %}
             </div>
-            <div class="photo-fille">
+            <div class="photo-fille class_flex class_justify_center class_aligne_items_center">
                 {{ form.subject.errors }}
             <label for="numero" >Numéro</label>
                 {{ adresse_form.numero }}
@@ -23,7 +23,7 @@
             <label for="type_Voie" >Type de rue</label>
                 {{ adresse_form.type_voie }}
             </div>
-            <div class="photo-fille">
+            <div class="photo-fille class_flex class_justify_center class_aligne_items_center">
                 {{ form.subject.errors }}
             <label for="nom_rue">Nom de la rue</label>
                 {{ adresse_form.nom_rue }}
@@ -31,7 +31,7 @@
             <label for="complement">Complément</label>
                 {{ adresse_form.complement }}
             </div>
-            <div class="photo-fille">
+            <div class="photo-fille class_flex class_justify_center class_aligne_items_center">
                 {{ form.subject.errors }}
             <label for="code_postal">Code postal</label>
                 {{ adresse_form.code_postal }}
@@ -39,7 +39,7 @@
             <label for="ville">Ville</label>
                 {{ adresse_form.ville }}
             </div>
-            <div class="photo-fille">
+            <div class="photo-fille class_flex class_justify_center class_aligne_items_center">
                 {{ form.subject.errors }}
             <label for="pays">Pays</label>
                 {{ adresse_form.pays }}
@@ -48,7 +48,7 @@
                 {{ adresse_form.telephone }}
             </div>
             {{ form.subject.errors }}
-            <div class="photo-fille">
+            <div class="photo-fille class_flex class_justify_center class_aligne_items_center">
                 {{ form.subject.errors }}
                 {{ form.subject.errors }}
             <label for='email'>Email</label>

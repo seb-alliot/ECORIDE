@@ -1,26 +1,41 @@
-form#filtre_form {
-    display: flex;
-    justify-content: center;
-}
+
 form#filtre_form label {
     display: none;
 }
-input#id_note , input#id_prix , input#id_temps_trajet {
-    text-align: center;
-    border-radius: 10px;
-    width: 175px;
-    box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.41);
-}
 
-@media(max-width: 767px){
+@media(min-width:320px) and (max-width: 480px) {
     input#id_note , input#id_prix , input#id_temps_trajet, button {
         width: 65px;
         font-size: 10px;
     }
 }
-@media(min-width:768px) and (max-width: 900px){
+@media(min-width:480px) and (max-width: 900px) {
     input#id_note , input#id_prix , input#id_temps_trajet, button {
         width: 100px;
-        font-size: 10px;
+        font-size: 12px;
+    }
+}
+@media(min-width:901px) and (max-width: 1024px) {
+    input#id_note , input#id_prix , input#id_temps_trajet, button {
+        width: 150px;
+        font-size: 12px;
+    }
+}
+@media(min-width:1025px) and (max-width: 1200px) {
+    input#id_note , input#id_prix , input#id_temps_trajet, button {
+        width: 175px;
+        font-size: 14px;
+    }
+}
+@media(min-width:1201px) and (max-width: 1400px) {
+    input#id_note , input#id_prix , input#id_temps_trajet, button {
+        width: 200px;
+        font-size: 16px;
+    }
+}
+@media(min-width:1401px) {
+    input#id_note , input#id_prix , input#id_temps_trajet, button {
+        width: 250px;
+        font-size: 18px;
     }
 }

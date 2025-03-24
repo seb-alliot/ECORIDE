@@ -1,0 +1,95 @@
+
+.class_flex {
+    display:flex;
+}
+.display_grid {
+    display: grid;
+}
+.class_flex_wrap {
+    flex-wrap: wrap;
+}
+.class_justify_center {
+    justify-content: center;
+}
+.class_aligne_items_center {
+    align-items: center;
+}
+.class_column {
+    flex-direction: column;
+}
+.class_shadow {
+    box-shadow:6px 6px 10px rgba(0, 0, 0, 0.41);
+}
+.class_border {
+    border: 1px solid #ffffff;
+}
+.class_border_radius {
+    border-radius: 10px;
+}
+.class_box_sizing {
+    box-sizing: border-box;
+}
+.text_decoration_none {
+    text-decoration: none;
+}
+
+.aligne_item_center {
+    align-items: center;
+}
+.aligne_content_center {
+    align-content: center;
+}
+.position_relative {
+    position: relative;
+}
+
+/*limitation de ligne de code*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #95CFED;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+}
+
+button, select, input {
+    justify-content: center;
+    box-sizing: border-box;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    box-shadow:6px 6px 10px rgba(0, 0, 0, 0.41);
+    text-align: center;
+}
+
+input:hover, button:hover, select:hover, .footer:hover, .resultat input[type="radio"]:hover ~ label{
+    background-color: rgb(53, 152, 228);
+    color: white;
+    }
+
+select {
+    background-color: white;
+}
+
+button{
+    background-color: #0bd9f0;
+    border: 1px solid #ffffff;
+    text-align: center;
+    border: solid 1px black;
+    box-sizing: border-box;
+    border-radius: 10px;
+    box-shadow:6px 6px 10px rgba(0, 0, 0, 0.41);
+}
+::placeholder {
+    color: #000000;
+    }
+
+#recherche_form label{
+    display: none;
+    }
+h1:hover{
+    color: white;
+    }

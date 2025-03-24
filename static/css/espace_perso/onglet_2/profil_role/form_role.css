@@ -1,24 +1,19 @@
 #role_form{
-    display: flex;
     margin-top:10px;
-    justify-content: center;
     }
 
 #role_form label{
         display:none;
     }
 #role_form select, #role_form button{
-        text-align: center;
         border-radius: 10px 10px 10px 10px;
     }
+
 @media(min-width:320px) and (max-width: 767px){
     #role_form select , #role_form button{
-        width: 120px;
-        font-size: 10px;
+        width: 150px;
         height: 30px;
-    }
-    p {
-        font-size: 14px;
+        font-size: 12px;
     }
     #role_form{
         margin-bottom: 10px;
@@ -27,7 +22,7 @@
 @media(min-width:768px) and (max-width: 900px){
     #role_form select , #role_form button{
         width: 175px;
-        font-size: 12px;
+        font-size: 14px;
         height: 30px;
     }
     p {
@@ -35,5 +30,33 @@
     }
     #role_form{
         margin-bottom: 15px;
+    }
+}
+
+@media(min-width:900px) and (max-width: 1200px){
+    #role_form select , #role_form button{
+        width: 200px;
+        font-size: 16px;
+        height: 30px;
+    }
+    p {
+        font-size: 18px;
+    }
+    #role_form{
+        margin-bottom: 20px;
+    }
+}
+
+@media(min-width:1200px){
+    #role_form select , #role_form button{
+        width: 250px;
+        font-size: 18px;
+        height: 30px;
+    }
+    p {
+        font-size: 20px;
+    }
+    #role_form{
+        margin-bottom: 25px;
     }
 }

@@ -15,7 +15,7 @@
     {% endblock style %}
 </head>
 
-<header class="doublon">
+<header class="class_flex class_aligne_items_center position_relative">
     {% block headerContent %}
     {% block logo %}
         {% include "interface_utilisateur/reutilisable/accueil/_logo.html" %}
@@ -31,7 +31,7 @@
     {% endblock headerContent %}
 </header>
 
-<body>
+<body class="class_flex class_column class_box_sizing ">
     {% block body %}
 
         {% block fondbase %}
@@ -52,10 +52,10 @@
 
     {% endblock body %}
 
-    <footer class="footer_doublon">
+<footer class="class_flex class_justify_center class_aligne_items_center">
         {% block footerContent %}
             {% include "interface_utilisateur/reutilisable/accueil/_footer.html" %}
         {% endblock footerContent %}
-    </footer>
+</footer>
 </body>
 </html>

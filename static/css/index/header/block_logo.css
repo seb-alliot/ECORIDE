@@ -1,33 +1,23 @@
 header {
     justify-content: space-between;
     padding: 10px 20px;
-    position: relative;
 }
 
 header h1 a {
     color: black;
-    font-size: 48px;
 }
 header a {
     color: black;
     margin: 0 30px;
 }
+header a:hover {
+    color: white;
+}
 
 .photo_profile {
-    justify-content: center;
-    height: 130px;
     border-radius: 15%;
 }
 
-.doublon {
-    display: flex;
-    align-items: center;
-}
-
-.doublon2 {
-    text-decoration: none;
-    flex-direction: column;
-}
 @media(min-width:320px) and (max-width: 500px){
     header h1 a {
         font-size: 30px;

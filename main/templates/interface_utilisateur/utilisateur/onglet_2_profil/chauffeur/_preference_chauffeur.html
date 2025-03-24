@@ -1,26 +1,25 @@
-{% load static %}
-<link href="{% static 'css/espace_perso/onglet_2/profil_role/preference.css' %}" rel="stylesheet">
 
-<p>Vos preferences actuel sont :</p>
+<p class="class_flex class_justify_center">Vos preferences actuel sont :</p>
 {% if preference %}
-<div class="preference_css">
-    <div>
+<div class="preference_css class_flex class_justify_center">
+    <div class="class_flex class_justify_center">
         {{ preference.get_fumeur_display }}
     </div>
-    <div>
+    <div class="class_flex class_justify_center">
         {{ preference.get_animaux_display }}
     </div>
-    <div>
+    <div class="class_flex class_justify_center">
         {{ preference.get_exigences_particulieres_display }}
     </div>
-    <div>
+    <div class="class_flex class_justify_center">
         {{ preference.exigences_personnelles }}
     </div>
 </div>
 {% else %}
-<p>Comme le reservoir , à remplir !!</p>
+    <p class="class_flex class_justify_center">Comme le réservoir , à remplir !!</p>
 {% endif %}
-<form id="preference_form" method="post">
+
+<form id="preference_form" method="post" class="class_flex class_justify_center">
     {% csrf_token %}
         <label for="preferences_form">Préférences</label>
             {{ preference_form.fumeur }}

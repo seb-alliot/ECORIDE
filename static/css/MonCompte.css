@@ -1,4 +1,3 @@
-
 /*--------------------------Menu--------------------------*/
 
 #menu-tab {
@@ -21,29 +20,23 @@
 
 /*-----------Gestion---des---Onglets--------------*/
 
-.tabs {
-    position: relative;
-    }
     .tab {
     float: left;
 
     }
     .tab label {
-    background: white;
-    padding: 10px;
-    position: relative;
-    left: 2px;
-    border-radius: 10px 10px 10px 10px;
-    box-shadow: 3px -3px 6px rgba(0, 0, 0, 0.71);
-    top: 8px;
+        background: white;
+        padding: 10px;
+        position: relative;
+        left: 2px;
+        border-radius: 10px 10px 10px 10px;
+        box-shadow: 3px -3px 6px rgba(0, 0, 0, 0.71);
+        top: 8px;
     }
     .tab [type=radio] {
     display: none;
     }
 
-div.content {
-    display: grid;
-    }
     .tab [type=radio]:checked ~ label {
     background: rgb(53, 152, 228);
     color: white;
@@ -63,12 +56,9 @@ div.content {
     }
 
 /*--------------Contenant----des---onglets--------------*/
-::placeholder {
-    color: #000000;
-    }
+
 
 .content {
-    justify-content: center;
     position: absolute;
     top: 25px;
     left: 0;
@@ -76,7 +66,6 @@ div.content {
     right: 0;
     bottom: 0;
     padding: 20px;
-    border: 1px solid #ccc;
     border-radius: 5px 10px 10px 10px;
     box-shadow:6px 6px 10px rgba(0, 0, 0, 0.41);
     overflow-x: scroll;
@@ -109,9 +98,6 @@ form#selection_trajet > div {
     margin-top: 10px;
     margin-bottom: 10px;
     }
-
-
-
 
 /*--------------Contenu----covoiturage--------------*/
 /*--------------Contenu----chauffeur--------------*/
@@ -169,7 +155,6 @@ form#etat_form > ul >  button#id_statut{
     background: rgb(53, 152, 228);
     border-bottom: 1px solid white;
     z-index: 2;
-
     }
     [type=radio]:checked ~ label ~ .content {
     z-index: 1;
@@ -182,12 +167,8 @@ form#etat_form > ul >  button#id_statut{
     -ms-transform:     translateX(0);
     -o-transform:      translateX(0);
     }
-    div.content p{
-        justify-content: center;
-        display: flex;
-    }
 
-/*--------------Responsive--------------*/
+/*--------------Responsive conteneur--------------*/
 
 @media(max-width: 384px){
     div.tabs {
@@ -199,10 +180,6 @@ form#etat_form > ul >  button#id_statut{
             font-size: 8pt;
         }
 
-    div.content p{
-        font-size: 15px;
-        margin:5px;
-    }
     .tabs {
         min-height: 450px;
         margin-top: 10px;
@@ -218,9 +195,6 @@ form#etat_form > ul >  button#id_statut{
         padding: 10px;
         border-radius: 10px;
     }
-    div.content p{
-        margin:10px;
-    }
     .tabs {
         min-height: 470px;
         margin-top: 10px;
@@ -235,9 +209,6 @@ form#etat_form > ul >  button#id_statut{
         font-size: 14px;
         padding: 10px;
         border-radius: 10px;
-    }
-    div.content p{
-        margin:10px;
     }
     .tabs {
         min-height: 550px;
@@ -255,9 +226,6 @@ form#etat_form > ul >  button#id_statut{
         padding: 10px;
         border-radius: 10px;
     }
-    div.content p{
-        margin:10px;
-    }
     .tabs {
         min-height: 550px;
         margin-top: 10px;
@@ -272,9 +240,6 @@ form#etat_form > ul >  button#id_statut{
         font-size: 15px;
         padding: 10px;
         border-radius: 10px;
-    }
-    div.content p{
-        margin:10px;
     }
     .tabs {
         min-height: 600px;

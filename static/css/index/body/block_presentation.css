@@ -1,14 +1,10 @@
 .presentation{
-    display: grid;
     grid-template-columns: 1fr;
     grid-template-rows:repeat(3, 1fr);
     align-content: center;
 }
 
 .presentation >div{
-    display: flex;
-    align-items: center;
-    position:relative;
     margin-right: 10%;
     margin-left: 10%;
 }
@@ -48,10 +44,6 @@
     object-fit: cover;
 }
 @media(min-width:320px) and (max-width: 500px){
-    .presentation > div {
-        margin-right: 10%;
-        margin-left: 10%;
-    }
     .presentation > div:nth-child(1) p,.presentation > div:nth-child(2) p,.presentation >  div:nth-child(3) p {
         font-size: 12px;
     }

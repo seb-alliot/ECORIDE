@@ -1,5 +1,6 @@
 
-<li class="resultat">
+<li class="resultat class_flex class_justify_center
+">
     <input
         type="radio"
         name="trajet_id"
@@ -8,13 +9,14 @@
         aria-labelledby="label_trajet_{{ resultat.id }}"
         >
     <label
+        class="class_column class_justify_center class_shadow class_border"
         for="trajet_{{ resultat.id }}"
         >
         {% if resultat.chauffeur.adresse_user.photo %}
             <img src="{{ resultat.chauffeur.adresse_user.photo.url }}" alt="photo de profil" class="photo_profile">
         {% else %}
             <img src="{{ photo_default_url }}" alt="photo par default" class="photo_profile">
-        {% endif %}
+        {% endif %}<br>
         {{ resultat.chauffeur }} :
         {% if trajet.note_moyenne == "Pas encore évalué" %}
         {{ trajet.note_moyenne }}/ 5 ⭐

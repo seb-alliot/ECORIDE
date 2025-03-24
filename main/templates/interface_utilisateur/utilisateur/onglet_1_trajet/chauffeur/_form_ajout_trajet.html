@@ -3,11 +3,11 @@
 
 
 
-<p>Proposez un covoiturage</p>
+<p class="class_flex class_justify_center">Proposez un covoiturage</p>
 <form id="trajet_form" method="POST">
         {% csrf_token %}
-    <div class="flex">
-        <div class="flex1">
+    <div class="flex class_flex class_column">
+        <div class="flex1 class_flex class_justify_center class_aligne_items_center">
         <label for="id_depart">Ville de départ</label>
             {{ trajet_form.ville_depart }}
         <label for="id_arrivee">Ville d'arrivée</label>
@@ -15,7 +15,7 @@
         <label for="id_date">Date de départ</label>
             {{ trajet_form.date }}
         </div>
-        <div class="flex1">
+        <div class="flex1 class_flex class_justify_center class_aligne_items_center">
         <label for="voiture">Voiture</label>
             {{ trajet_form.voiture }}
         <label for="place">Nombre de places</label>
@@ -23,7 +23,7 @@
         <label for="type_moteur">Motorisation</label>
             {{ trajet_form.type_moteur }}
         </div>
-        <div class="flex1">
+        <div class="flex1 class_flex class_justify_center class_aligne_items_center">
             <label for="id_heure">Heure de départ</label>
                 {{ trajet_form.heure }}
             <label for="prix">Prix</label>
@@ -31,7 +31,7 @@
             <label for="id_heure">durée estimé</label>
                 {{ trajet_form.temps_trajet }}
         </div>
-        <div class="flex1">
+        <div class="flex1 class_flex class_justify_center class_aligne_items_center">
             <button id="propotion" type="submit"name="form_soumis" value="trajet_form">Proposez un trajet</button>
         </div>
     </div>

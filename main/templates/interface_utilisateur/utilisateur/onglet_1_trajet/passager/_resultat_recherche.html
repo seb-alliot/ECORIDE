@@ -2,7 +2,7 @@
 <form id="selection_trajet" method="GET" action="{% url 'reservation' %}">
     <div class="conteneur_recherche">
         <h2>Covoiturage non écologique</h2>
-        <div class="conteneur_recherche2">
+        <div class="conteneur_recherche2 class_flex class_flex_wrap class_justify_center">
         <ul class="resultat">
             {% for resultat in first_resultat %}
             {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_contenu_resultat.html" %}
@@ -12,9 +12,9 @@
         </div>
     </div>
 
-    <div class="conteneur_recherche">
+    <div class="conteneur_recherche position_relative">
         <h2>Covoiturage écologique</h2>
-        <div class="conteneur_recherche2">
+        <div class="conteneur_recherche2 class_flex class_flex_wrap class_justify_center">
             <ul class="resultat">
                 {% for resultat in second_resultat %}
                 {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_contenu_resultat.html" %}
@@ -23,8 +23,8 @@
                 {% endfor %}
         </div>
     </div>
-    {% if resultat %}
-    <div id="bouton_reservation">
+    {% if first_resultat or second_resultat %}
+    <div class="class_flex class_justify_center">
         <button type="submit">Réserver</button>
     </div>
     {% endif %}

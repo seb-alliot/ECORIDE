@@ -1,10 +1,7 @@
-{% load static %}
-<link href="{% static 'css/espace_perso/onglet_2/profil_role/ajout_voiture.css' %}" rel="stylesheet">
 
-
-<form  id="voiture_form" action="{% url 'MonCompte' %}" method="post">
+<form  class="class_flex class_justify_center" id="voiture_form" action="{% url 'MonCompte' %}" method="post">
     {% csrf_token %}
-    <div class="voiture_mere">
+    <div class="voiture_mere class_flex class_justify_center">
         <div>
         <label for="Marque du véhicule">Marque</label>
             {{ voiture_form.marque }}
