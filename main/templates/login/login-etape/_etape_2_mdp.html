@@ -1,7 +1,7 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/connecte/connection2.css' %}">
 
-<form method="POST"class="connection2 effet_ombre">
+<form method="POST" class="connection2 class_shadow class_flex class_border class_justify_center .class_aligne_items_center">
     {% csrf_token %}
         <label for="id_Password">Mot de passe</label>
         {{ form.password }}

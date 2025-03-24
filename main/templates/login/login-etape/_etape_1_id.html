@@ -2,7 +2,8 @@
 <link rel="stylesheet" href="{% static 'css/connecte/connection1.css' %}">
 
 
-<form method="POST" class="connection effet_ombre">
+<form method="POST" class="connection class_shadow class_flex class_border class_justify_center class_aligne_items_center">
+
     {% csrf_token %}
         <label for="recherche_form">Identifiant</label>
         {{ form.username }}

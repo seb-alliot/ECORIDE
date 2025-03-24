@@ -1,15 +1,12 @@
 .connection {
-    display:flex;
     gap:0;
-    align-items: center;
-    justify-content: center;
     padding: 10px;
     font-size: 16px;
     }
     .connection input{
         text-align: center;
-        border: 1px solid #000000;
         border-radius: 10px;
+        height: 30px;
     }
     .connection select{
         text-align: center;
@@ -17,7 +14,6 @@
     .connection label{
         display: none;
     }
-
 
 .connection > label {
     display: none;
@@ -32,13 +28,7 @@ a {
     justify-content: center;
     margin-top:20px
 }
-a:hover {
-    color: rgb(255, 255, 255);
-}
 
-.effet_ombre {
-    box-shadow:6px 6px 10px rgba(0, 0, 0, 0.41);
-}
 .connection > input#id_email {
     border-radius: 10px;
     border: 1px solid #6fc2ec;
@@ -48,13 +38,22 @@ a:hover {
     border: 1px solid #000000;
 }
 
-@media(max-width: 767px) {
+@media(min-width:320px) and (max-width: 480px) {
     input#id_username, button{
         width: 100px;
         font-size: 10px;
     }
     a {
         font-size: 10px;
+    }
+}
+@media(min-width:480px) and (max-width: 768px) {
+    input#id_username, button{
+        width: 120px;
+        font-size: 12px;
+    }
+    a {
+        font-size: 12px;
     }
 }
 @media(min-width:768px) and (max-width: 900px) {
@@ -66,12 +65,23 @@ a:hover {
         font-size: 14px;
     }
 }
-@media(min-width:900px) {
+@media(min-width:900px) and (max-width: 1200px) {
     input#id_username, button{
         width: 175px;
         font-size: 16px;
     }
     a {
         font-size: 16px;
+    }
+}
+
+
+@media(min-width:1200px) {
+    input#id_username, button{
+        width: 250px;
+        font-size: 20px;
+    }
+    a {
+        font-size: 20px;
     }
 }

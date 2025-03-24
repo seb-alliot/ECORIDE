@@ -21,7 +21,7 @@
     box-shadow:6px 6px 10px rgba(0, 0, 0, 0.41);
 }
 .class_border {
-    border: 1px solid #ffffff;
+    border: 1px solid black;
 }
 .class_border_radius {
     border-radius: 10px;
@@ -90,6 +90,6 @@ button{
 #recherche_form label{
     display: none;
     }
-h1:hover{
+h1:hover , a:hover {
     color: white;
     }
