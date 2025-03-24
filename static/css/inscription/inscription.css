@@ -49,7 +49,7 @@ button:hover{
     }
 }
 
-@media(min-width:768px) and (max-width: 900px) {
+@media(min-width:768px) and (max-width: 1024px) {
     input#id_email, form#inscription input, button{
         width: 150px;
         font-size: 14px;
@@ -59,7 +59,7 @@ button:hover{
     }
 }
 
-@media(min-width:900px) and (max-width: 1200px) {
+@media(min-width:1024px) and (max-width: 1200px) {
     input#id_email, form#inscription input, button{
         width: 175px;
         font-size: 16px;
@@ -69,12 +69,39 @@ button:hover{
     }
 }
 
-@media(min-width:1200px) {
+@media(min-width:1200px) and (max-width: 1400px) {
     input#id_email, form#inscription input, button{
-        width: 200px;
+        width: 180px;
         font-size: 18px;
     }
     a {
         font-size: 18px;
+    }
+}
+@media(min-width:1400px) and (max-width: 1800px) {
+    input#id_email, form#inscription input, button{
+        width: 180px;
+        font-size: 20px;
+    }
+    a {
+        font-size: 20px;
+    }
+}
+@media(min-width:1800px) and (max-width: 2000px) {
+    input#id_email, form#inscription input, button{
+        width: 200px;
+        font-size: 20px;
+    }
+    a {
+        font-size: 20px;
+    }
+}
+@media(min-width:2000px){
+    input#id_email, form#inscription input, button{
+        width: 225px;
+        font-size: 20px;
+    }
+    a {
+        font-size: 20px;
     }
 }

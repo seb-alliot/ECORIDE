@@ -31,11 +31,7 @@
                 <p>Vous n'avez pas encore défini de préférence pour proposer un covoiturage</p>
             {% else %}
             {% include "interface_utilisateur/utilisateur/onglet_1_trajet/chauffeur/_form_ajout_trajet.html" %}
-                {% if trajets %}
-                    {% include "interface_utilisateur/utilisateur/onglet_1_trajet/chauffeur/_trajet_proposer.html" %}
-                {% else %}
-                    <p>Vous n'avez pas encore proposé de trajet</p>
-                {% endif %}
+            {% include "interface_utilisateur/utilisateur/onglet_1_trajet/chauffeur/_trajet_proposer.html" %}
             {% endif %}
 
         {% elif user_role == "Passager" %}

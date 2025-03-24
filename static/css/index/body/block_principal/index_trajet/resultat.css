@@ -44,20 +44,7 @@ form#selection_trajet > div > button {
         margin-bottom:10px;
     }
 }
-@media(min-width:320px) and (max-width: 480px) {
-    button{
-        width: 65px;
-        height: 30px;
-        font-size: 10px;
-    }
-    .resultat [type=radio]:checked ~ label{
-        margin-top: 0px;
-    }
-    form#selection_trajet > div > button {
-        margin-bottom:10px;
-    }
-}
-@media(min-width:480px) and (max-width: 900px) {
+@media(min-width:480px) and (max-width: 768px) {
     button{
         width: 100px;
         height: 30px;
@@ -70,7 +57,7 @@ form#selection_trajet > div > button {
         margin-bottom:10px;
     }
 }
-@media(min-width:901px) and (max-width: 1024px) {
+@media(min-width:768px) and (max-width: 1024px) {
     button{
         width: 150px;
         height: 30px;
@@ -83,7 +70,7 @@ form#selection_trajet > div > button {
         margin-bottom:10px;
     }
 }
-@media(min-width:1025px) and (max-width: 1200px) {
+@media(min-width:1024px) and (max-width: 1200px) {
     button{
         width: 175px;
         height: 30px;
@@ -96,9 +83,9 @@ form#selection_trajet > div > button {
         margin-bottom:10px;
     }
 }
-@media(min-width:1201px) and (max-width: 1400px) {
+@media(min-width:1200px) and (max-width: 1400px) {
     button{
-        width: 200px;
+        width: 175px;
         height: 30px;
         font-size: 14px;
     }
@@ -109,7 +96,33 @@ form#selection_trajet > div > button {
         margin-bottom:10px;
     }
 }
-@media(min-width:1401px){
+@media(min-width:1400px) and (max-width: 1800px) {
+    button{
+        width: 180px;
+        height: 30px;
+        font-size: 20px;
+    }
+    .resultat [type=radio]:checked ~ label{
+        margin-top: 0px;
+    }
+    form#selection_trajet > div > button {
+        margin-bottom:10px;
+    }
+}
+@media(min-width:1800px) and (max-width: 200px) {
+    button{
+        width: 200px;
+        height: 30px;
+        font-size: 20px;
+    }
+    .resultat [type=radio]:checked ~ label{
+        margin-top: 0px;
+    }
+    form#selection_trajet > div > button {
+        margin-bottom:10px;
+    }
+}
+@media(min-width:2000px){
     button{
         width: 225px;
         height: 30px;

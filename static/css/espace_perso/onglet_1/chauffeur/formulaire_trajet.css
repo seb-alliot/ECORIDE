@@ -44,7 +44,7 @@ div.content > ul > li > input[type="radio"] {
 }
 @media(min-width: 320px) and (max-width: 480px){
     #trajet_form input, #trajet_form select, #trajet_form button{
-        width: 95px;
+        width: 88px;
         font-size: 10px;
     }
     p {
@@ -79,9 +79,9 @@ div.content > ul > li > input[type="radio"] {
         margin-bottom : 10px;
     }
 }
-@media(min-width: 768px) and (max-width: 900px) {
+@media(min-width:768px) and (max-width: 1024px) {
     #trajet_form input, #trajet_form select, #trajet_form button {
-        width: 175px;
+        width: 150px;
         font-size: 14px;
     }
     p {
@@ -103,10 +103,10 @@ div.content > ul > li > input[type="radio"] {
     }
 }
 
-@media(min-width: 901px) and (max-width: 1200px) {
+@media(min-width:1024px) and (max-width: 1200px) {
     #trajet_form input, #trajet_form select, #trajet_form button{
-        width: 200px;
-        font-size: 16px;
+        width: 180px;
+        font-size: 14px;
     }
     p {
         margin:14px;
@@ -126,11 +126,11 @@ div.content > ul > li > input[type="radio"] {
         margin-bottom : 15px;
     }
 }
-@media(min-width: 1201px) {
+@media(min-width:1200px) and (max-width: 1400px) {
     #trajet_form input, #trajet_form select, #trajet_form button{
-        width: 250px;
-        font-size: 18px;
-    }
+        width: 180px;
+        font-size: 14px;
+        }
     p {
         margin:20px;
         font-size: 20px;
@@ -146,7 +146,63 @@ div.content > ul > li > input[type="radio"] {
         margin-bottom : 20px;
     }
 }
-
-
-
-/* trajet proposer */
+@media(min-width:1400px) and (max-width: 1800px) {
+    #trajet_form input, #trajet_form select, #trajet_form button{
+        width: 180px;
+        font-size: 20px;
+        }
+    p {
+        margin:20px;
+        font-size: 22px;
+    }
+    .flex1{
+        gap:10px;
+    }
+    div.content > ul {
+        font-size: 20px;
+    }
+    #p_pas_a_sa_place{
+        margin-top : 20px;
+        margin-bottom : 20px;
+    }
+}
+@media(min-width:1800px) and (max-width: 2000px) {
+    #trajet_form input, #trajet_form select, #trajet_form button{
+        width: 200px;
+        font-size: 20px;
+        }
+    p {
+        margin:20px;
+        font-size: 22px;
+    }
+    .flex1{
+        gap:10px;
+    }
+    div.content > ul {
+        font-size: 20px;
+    }
+    #p_pas_a_sa_place{
+        margin-top : 20px;
+        margin-bottom : 20px;
+    }
+}
+@media(min-width:2000px){
+    #trajet_form input, #trajet_form select, #trajet_form button{
+        width: 225px;
+        font-size: 20px;
+        }
+    p {
+        margin:20px;
+        font-size: 22px;
+    }
+    .flex1{
+        gap:10px;
+    }
+    div.content > ul {
+        font-size: 20px;
+    }
+    #p_pas_a_sa_place{
+        margin-top : 20px;
+        margin-bottom : 20px;
+    }
+}

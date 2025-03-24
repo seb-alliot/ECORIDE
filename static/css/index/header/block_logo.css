@@ -30,7 +30,7 @@ header a:hover {
     }
 }
 
-@media(min-width:499px) and (max-width: 900px) {
+@media(min-width:320px) and (max-width: 480px) {
     header h1 a {
         font-size: 40px;
     }
@@ -41,7 +41,7 @@ header a:hover {
         height: 100px;
     }
 }
-@media(min-width:900px) and (max-width: 1200px) {
+@media(min-width:480px) and (max-width: 768px) {
     header h1 a {
         font-size: 50px;
     }
@@ -52,7 +52,18 @@ header a:hover {
         height: 110px;
     }
 }
-@media(min-width:1200px) and (max-width: 1400px) {
+@media(min-width:768px) and (max-width: 1024px) {
+    header h1 a {
+        font-size: 55px;
+    }
+    header a {
+        margin: 0px 10px;
+    }
+    .photo_profile {
+        height: 110px;
+    }
+}
+@media(min-width:1024px) and (max-width: 1200px) {
     header h1 a {
         font-size: 60px;
     }
@@ -63,9 +74,42 @@ header a:hover {
         height: 120px;
     }
 }
-@media(min-width:1400px) and (max-width: 1800px) {
+@media(min-width:1200px) and (max-width: 1400px) {
     header h1 a {
         font-size: 70px;
+    }
+    header a {
+        margin: 0px 10px;
+    }
+    .photo_profile {
+        height: 120px;
+    }
+}
+@media(min-width:1400px) and (max-width: 1800px) {
+    header h1 a {
+        font-size: 80px;
+    }
+    header a {
+        margin: 0px 10px;
+    }
+    .photo_profile {
+        height: 150px;
+    }
+}
+@media(min-width:1800px) and (max-width: 200px) {
+    header h1 a {
+        font-size: 90px;
+    }
+    header a {
+        margin: 0px 10px;
+    }
+    .photo_profile {
+        height: 150px;
+    }
+}
+@media(min-width:2000px){
+    header h1 a {
+        font-size: 100px;
     }
     header a {
         margin: 0px 10px;

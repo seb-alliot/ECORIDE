@@ -76,9 +76,39 @@ a {
 }
 
 
-@media(min-width:1200px) {
+@media(min-width:1200px) and (max-width: 1400px) {
     input#id_username, button{
-        width: 250px;
+        width: 180px;
+        font-size: 20px;
+    }
+    a {
+        font-size: 20px;
+    }
+}
+
+@media(min-width:1400px) and (max-width: 1800px) {
+    input#id_username, button{
+        width: 180px;
+        font-size: 20px;
+    }
+    a {
+        font-size: 20px;
+    }
+}
+
+@media(min-width:1800px) and (max-width: 2000px) {
+    input#id_username, button{
+        width: 200px;
+        font-size: 20px;
+    }
+    a {
+        font-size: 20px;
+    }
+}
+
+@media(min-width:2000px){
+    input#id_username, button{
+        width: 225px;
         font-size: 20px;
     }
     a {

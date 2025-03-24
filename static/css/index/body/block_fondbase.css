@@ -3,31 +3,32 @@
     background-position: center;
 }
 
-@media(min-width:320px) and (max-width: 400px) {
+@media(min-width:320px) and (max-width: 480px) {
     .image-principal {
         background-image: url("../../../photo/principal_mobile.avif");
         min-height: 100px ;
     }
 }
-@media(min-width:400px) and (max-width: 500px) {
+@media(min-width:479px) and (max-width: 768px) {
     .image-principal {
         background-image: url("../../../photo/principal_mobile.avif");
         min-height: 150px ;
     }
 }
-@media(min-width:500px) and (max-width: 768px) {
-    .image-principal {
-        background-image: url("../../../photo/principal_mobile.avif");
-        min-height: 180px ;
-    }
-}
-@media(min-width:768px) and (max-width: 900px) {
+
+@media(min-width:480px) and (max-width: 768px) {
     .image-principal {
         background-image: url("../../../photo/principal_mobile.avif");
         min-height: 200px ;
     }
 }
-@media(min-width:901px) and (max-width: 1200px) {
+@media(min-width:768px) and (max-width: 1024px) {
+    .image-principal {
+        background-image: url("../../../photo/principal.avif");
+        min-height: 250px ;
+    }
+}
+@media(min-width:1024px) and (max-width: 1199px) {
     .image-principal {
         background-image: url("../../../photo/principal.avif");
         min-height: 300px ;
@@ -42,10 +43,10 @@
 @media(min-width:1400px) and (max-width: 1800px) {
     .image-principal {
         background-image: url("../../../photo/principal.avif");
-        min-height: 500px;
+        min-height: 400px;
     }
 }
-@media(min-width:1800px) and (max-width: 2000px) {
+@media(min-width:1800px) and (max-width: 200px) {
     .image-principal {
         background-image: url("../../../photo/principal.avif");
         min-height: 600px;

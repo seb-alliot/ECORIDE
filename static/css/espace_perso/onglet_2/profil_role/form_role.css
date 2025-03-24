@@ -9,8 +9,8 @@
         border-radius: 10px 10px 10px 10px;
     }
 
-@media(min-width:320px) and (max-width: 767px){
-    #role_form select , #role_form button{
+@media(min-width:320px) and (max-width: 480px) {
+        #role_form select , #role_form button{
         width: 150px;
         height: 30px;
         font-size: 12px;
@@ -19,9 +19,22 @@
         margin-bottom: 10px;
     }
 }
-@media(min-width:768px) and (max-width: 900px){
+@media(min-width:480px) and (max-width: 768px) {
     #role_form select , #role_form button{
-        width: 175px;
+        width: 150px;
+        font-size: 14px;
+        height: 30px;
+    }
+    p {
+        font-size: 14px;
+    }
+    #role_form{
+        margin-bottom: 10px;
+    }
+}
+@media(min-width:768px) and (max-width: 1024px) {
+    #role_form select , #role_form button{
+        width: 150px;
         font-size: 14px;
         height: 30px;
     }
@@ -33,9 +46,9 @@
     }
 }
 
-@media(min-width:900px) and (max-width: 1200px){
+@media(min-width:1024px) and (max-width: 1200px) {
     #role_form select , #role_form button{
-        width: 200px;
+        width: 180px;
         font-size: 16px;
         height: 30px;
     }
@@ -46,11 +59,49 @@
         margin-bottom: 20px;
     }
 }
-
-@media(min-width:1200px){
+@media(min-width:1200px) and (max-width: 1400px) {
     #role_form select , #role_form button{
-        width: 250px;
+        width: 180px;
+        font-size: 14px;
+        height: 30px;
+    }
+    p {
         font-size: 18px;
+    }
+    #role_form{
+        margin-bottom: 20px;
+    }
+}
+@media(min-width:1400px) and (max-width: 1800px) {
+    #role_form select , #role_form button{
+        width: 180px;
+        font-size: 18px;
+        height: 30px;
+    }
+    p {
+        font-size: 20px;
+    }
+    #role_form{
+        margin-bottom: 25px;
+    }
+}
+@media(min-width:1800px) and (max-width: 2000px) {
+    #role_form select , #role_form button{
+        width: 200px;
+        font-size: 20px;
+        height: 30px;
+    }
+    p {
+        font-size: 20px;
+    }
+    #role_form{
+        margin-bottom: 25px;
+    }
+}
+@media(min-width:2000px){
+    #role_form select , #role_form button{
+        width: 225px;
+        font-size: 20px;
         height: 30px;
     }
     p {

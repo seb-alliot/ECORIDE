@@ -3,7 +3,10 @@
     padding: 10px;
     font-size: 16px;
     }
-
+    #recherche_form label{
+        display: none;
+        }
+        
 .conteneur_recherche {
     background-color: #f9f9f9;
     width: 100%;
@@ -22,7 +25,7 @@ div.conteneur_recherche2 {
     height: 10%;
     padding-right: 0px;
 }
-@media(min-width:320px) and (max-width: 479px) {
+@media(min-width:320px) and (max-width: 480px) {
     #recherche_form input , #recherche_form button {
         width: 60px;
         height: 30px;
@@ -36,7 +39,7 @@ div.conteneur_recherche2 {
     }
 }
 
-@media(min-width:479px) and (max-width: 768px) {
+@media(min-width:480px) and (max-width: 768px) {
     #recherche_form input , #recherche_form button {
         width: 90px;
         height: 30px;
@@ -50,7 +53,7 @@ div.conteneur_recherche2 {
     }
 }
 
-@media(min-width:768px) and (max-width: 900px) {
+@media(min-width:768px) and (max-width: 1024px) {
     #recherche_form input , #recherche_form button {
         width: 120px;
         height: 30px;
@@ -63,7 +66,7 @@ div.conteneur_recherche2 {
         bottom: 0%;
     }
 }
-@media(min-width:900px) and (max-width: 1200px) {
+@media(min-width:1024px) and (max-width: 1200px) {
     #recherche_form input , #recherche_form button {
         width: 150px;
         height: 30px;
@@ -89,9 +92,37 @@ div.conteneur_recherche2 {
         bottom: 0%;
     }
 }
-@media(min-width:1400px) {
+@media(min-width:1400px) and (max-width: 1800px) {
     #recherche_form input , #recherche_form button {
-        width: 250px;
+        width: 180px;
+        height: 30px;
+        font-size: 20px;
+    }
+    .conteneur_recherche{
+        margin:10px auto;
+        padding-bottom: 10px;
+        font-size: 20px;
+        bottom: 0%;
+    }
+}
+
+@media(min-width:1800px) and (max-width: 200px) {
+    #recherche_form input , #recherche_form button {
+        width: 200px;
+        height: 30px;
+        font-size: 20px;
+    }
+    .conteneur_recherche{
+        margin:10px auto;
+        padding-bottom: 10px;
+        font-size: 20px;
+        bottom: 0%;
+    }
+}
+
+@media(min-width:2000px){
+    #recherche_form input , #recherche_form button {
+        width: 225px;
         height: 30px;
         font-size: 20px;
     }
