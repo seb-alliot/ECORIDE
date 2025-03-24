@@ -148,7 +148,7 @@ div.content > ul > li > input[type="radio"] {
 }
 @media(min-width:1400px) and (max-width: 1800px) {
     #trajet_form input, #trajet_form select, #trajet_form button{
-        width: 180px;
+        width: 200px;
         font-size: 20px;
         }
     p {

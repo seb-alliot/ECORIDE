@@ -13,13 +13,13 @@ input#id_note , input#id_prix , input#id_temps_trajet {
 }
 
 @media(max-width: 767px){
-    input#id_note , input#id_prix , input#id_temps_trajet, button {
+    input#id_note , input#id_prix , input#id_temps_trajet{
         width: 65px;
         font-size: 10px;
     }
 }
 @media(min-width:768px) and (max-width: 900px){
-    input#id_note , input#id_prix , input#id_temps_trajet, button {
+    input#id_note , input#id_prix , input#id_temps_trajet{
         width: 100px;
         font-size: 10px;
     }

@@ -28,7 +28,7 @@ input[type="file"]::file-selector-button {
     align-items: center;
 }
 
-@media(max-width: 450px) {
+@media(min-width:320px) and (max-width: 480px) {
     form#adresse_form{
         margin-top: 15px;
         width: 120px;
@@ -55,7 +55,7 @@ input[type="file"]::file-selector-button {
         margin-left: -70px;
     }
 }
-@media(min-width:450px) and (max-width: 768px) {
+@media(min-width:480px) and (max-width: 768px) {
     #adresse_form img textarea{
         font-size: 12px;
     }
@@ -74,7 +74,7 @@ input[type="file"]::file-selector-button {
         height: 125px;
     }
 }
-@media(min-width:768px) and (max-width: 900px) {
+@media(min-width:768px) and (max-width: 1024px) {
     #adresse_form img textarea{
         font-size: 12px;
     }
@@ -90,16 +90,35 @@ input[type="file"]::file-selector-button {
     }
     div.photo-parent > div > img{
         width: 200px;
+        height: 150px;
+    }
+}
+
+@media(min-width:1024px) and (max-width: 1200px) {
+    #adresse_form img textarea{
+        font-size: 18px;
+    }
+    #adresse_form input, #adresse_form select, #adresse_form button, #adresse_form input[type="file"]::file-selector-button{
+        width: 225px;
+        height: 30px;
+        font-size: 15px;
+    }
+    input[type="file"]::file-selector-button:hover {
+        background-color: rgb(53, 152, 228);
+        color: white;
+        display: flex;
+    }
+    div.photo-parent > div > img{
+        width: 225px;
         height: 175px;
     }
 }
-
-@media(min-width:899px) and (max-width: 1024px) {
+@media(min-width:1024px) and (max-width: 1800px) {
     #adresse_form img textarea{
         font-size: 18px;
     }
     #adresse_form input, #adresse_form select, #adresse_form button, #adresse_form input[type="file"]::file-selector-button{
-        width: 225px;
+        width: 250px;
         height: 30px;
         font-size: 15px;
     }
@@ -109,36 +128,17 @@ input[type="file"]::file-selector-button {
         display: flex;
     }
     div.photo-parent > div > img{
-        width: 225px;
+        width: 250px;
         height: 200px;
     }
 }
-@media(min-width:1024px) and (max-width: 1920px) {
-    #adresse_form img textarea{
-        font-size: 18px;
-    }
-    #adresse_form input, #adresse_form select, #adresse_form button, #adresse_form input[type="file"]::file-selector-button{
-        width: 250px;
-        height: 30px;
-        font-size: 15px;
-    }
-    input[type="file"]::file-selector-button:hover {
-        background-color: rgb(53, 152, 228);
-        color: white;
-        display: flex;
-    }
-    div.photo-parent > div > img{
-        width: 250px;
-        height: 225px;
-    }
-}
 
-@media(min-width:1920px) {
+@media(min-width:1800px) {
     #adresse_form img textarea{
         font-size: 18px;
     }
     #adresse_form input, #adresse_form select, #adresse_form button, #adresse_form input[type="file"]::file-selector-button{
-        width: 325px;
+        width: 225px;
         height: 30px;
         font-size: 15px;
     }
@@ -148,7 +148,7 @@ input[type="file"]::file-selector-button {
         display: flex;
     }
     div.photo-parent > div > img{
-        width: 325px;
-        height: 300px;
+        width: 225px;
+        height: 175px;
     }
 }

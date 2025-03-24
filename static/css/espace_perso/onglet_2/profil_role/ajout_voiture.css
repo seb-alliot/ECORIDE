@@ -21,16 +21,6 @@ div.voiture_mere > div {
         font-size: 10px;
         gap:14px;
     }
-    div.info_perso{
-        font-size: 10px;
-        margin-bottom: 5px;
-        margin-bottom:10px;
-        margin-left:0%;
-    }
-    div.info_perso > li{
-            width: 95px;
-            font-size: 10px;
-        }
     div.voiture_mere{
         display: flex;
         justify-content: center;
@@ -45,21 +35,11 @@ div.voiture_mere > div {
     }
 @media(min-width:480px) and (max-width: 768px) {
         #voiture_form input, #voiture_form select, #voiture_form button{
-        width: 150px;
+        width: 140px;
         height: 30px;
         font-size: 12px;
         gap:14px;
     }
-    div.info_perso{
-        font-size: 10px;
-        margin-bottom: 5px;
-        margin-bottom:10px;
-        margin-left:0%;
-    }
-    div.info_perso > li{
-            width: 125px;
-            font-size: 10px;
-        }
     div.voiture_mere{
         display: flex;
         justify-content: center;
@@ -73,19 +53,13 @@ div.voiture_mere > div {
     }
     }
 
-@media(min-width:767px) and (max-width: 1024px) {
+@media(min-width:768px) and (max-width: 1024px) {
         #voiture_form input, #voiture_form select, #voiture_form button{
             width: 150px;
             height: 30px;
             font-size: 12px;
             gap:14px;
         }
-        div.info_perso{
-            font-size: 12px;
-        }
-        div.info_perso > li{
-                font-size: 12px;
-            }
         div.voiture_mere > div {
             display: flex;
             flex-direction: column;
