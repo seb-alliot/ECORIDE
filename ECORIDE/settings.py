@@ -24,7 +24,7 @@ SECRET_KEY = env('DJANGO_SECRET_KEY', default='django-insecure-#&')
 
 DEBUG = False
 
-ALLOWED_HOSTS = ['ecoride-itsuki.it.com', 'www.ecoride-itsuki.it.com']
+ALLOWED_HOSTS = ['www.ecoride-itsuki.it.com' , 'ecoride-itsuki.it.com']
 
 # Application definition
 
