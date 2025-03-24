@@ -28,7 +28,7 @@ div.info_perso {
         }
     }
 
-@media(min-width:480px) and (max-width: 768px) {
+@media(min-width:479px) and (max-width: 768px) {
     div.info_perso{
         font-size: 10px;
         margin-bottom: 5px;
@@ -40,7 +40,7 @@ div.info_perso {
             font-size: 12px;
         }
     }
-@media(min-width:768px) and (max-width: 1024px) {
+@media(min-width:767px) and (max-width: 1024px) {
     div.info_perso{
         font-size: 12px;
         margin-bottom: 5px;
@@ -52,7 +52,7 @@ div.info_perso {
             font-size: 14px;
         }
     }
-@media(min-width:1024px) and (max-width: 1200px) {
+@media(min-width:1023px) and (max-width: 1200px) {
     div.info_perso{
         font-size: 12px;
         margin-bottom: 5px;
@@ -65,7 +65,7 @@ div.info_perso {
         }
     }
 
-@media(min-width:1200px) and (max-width: 1400px){
+@media(min-width:1199px) and (max-width: 1400px){
     div.info_perso{
         font-size: 12px;
         margin-bottom: 5px;
@@ -77,7 +77,7 @@ div.info_perso {
             font-size: 14px;
         }
     }
-@media(min-width:1400px) and (max-width: 1800px) {
+@media(min-width:1399px) and (max-width: 1800px) {
     div.info_perso{
         font-size: 12px;
         margin-bottom: 5px;
@@ -89,7 +89,7 @@ div.info_perso {
             font-size: 16px;
         }
     }
-@media(min-width:1800px) and (max-width: 2000px) {
+@media(min-width:1799px) and (max-width: 2000px) {
     div.info_perso{
         font-size: 12px;
         margin-bottom: 5px;
@@ -102,7 +102,7 @@ div.info_perso {
         }
     }
 
-@media(min-width:2000px){
+@media(min-width:1999px){
     div.info_perso{
         font-size: 12px;
         margin-bottom: 5px;

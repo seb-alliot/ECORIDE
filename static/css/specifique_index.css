@@ -1,3 +1,44 @@
 #recherche_form {
     box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.41);
 }
+body {
+    background-color: #95CFED;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+}
+
+button, select, input {
+    justify-content: center;
+    box-sizing: border-box;
+    border: 1px solid #000000;
+    border-radius: 10px;
+    box-shadow:6px 6px 10px rgba(0, 0, 0, 0.41);
+    text-align: center;
+}
+
+input:hover, button:hover, select:hover, .footer:hover, .resultat input[type="radio"]:hover ~ label{
+    background-color: rgb(53, 152, 228);
+    color: white;
+    }
+
+select {
+    background-color: white;
+}
+
+button{
+    background-color: #0bd9f0;
+    border: 1px solid #ffffff;
+    text-align: center;
+    border: solid 1px black;
+    box-sizing: border-box;
+    border-radius: 10px;
+    box-shadow:6px 6px 10px rgba(0, 0, 0, 0.41);
+}
+::placeholder {
+    color: #000000;
+    }
+
+
+h1:hover , a:hover {
+    color: white;
+    }

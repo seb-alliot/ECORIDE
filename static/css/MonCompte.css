@@ -170,7 +170,7 @@ form#etat_form > ul >  button#id_statut{
 
 /*--------------Responsive conteneur--------------*/
 
-@media(max-width: 384px){
+@media(max-width: 380px){
     div.tabs {
         margin-left: 2%;
         margin-right: 2%;
@@ -185,7 +185,7 @@ form#etat_form > ul >  button#id_statut{
         margin-top: 10px;
         }
 }
-@media(min-width:384px) and (max-width: 500px){
+@media(min-width:379px) and (max-width: 500px){
     div.tabs {
         margin-left: 2%;
         margin-right: 2%;
@@ -200,7 +200,7 @@ form#etat_form > ul >  button#id_statut{
         margin-top: 10px;
         }
 }
-@media(min-width:500px) and (max-width: 900px){
+@media(min-width:499px) and (max-width: 900px){
     div.tabs  {
         margin-left: 4%;
         margin-right: 4%;
@@ -216,7 +216,7 @@ form#etat_form > ul >  button#id_statut{
         }
 }
 
-@media(min-width:900px) and (max-width: 1200px){
+@media(min-width:899px) and (max-width: 1200px){
     div.tabs {
         margin-left: 8%;
         margin-right: 8%;
@@ -231,7 +231,7 @@ form#etat_form > ul >  button#id_statut{
         margin-top: 10px;
         }
 }
-@media(min-width:1200px){
+@media(min-width:1199px){
     div.tabs {
         margin-left: 8%;
         margin-right: 8%;

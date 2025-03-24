@@ -51,7 +51,7 @@
         padding: 20px;
     }
 }
-@media(min-width:480px) and (max-width: 768px) {
+@media(min-width:479px) and (max-width: 768px) {
     .presentation > div {
         margin-right: 10%;
         margin-left: 10%;
@@ -65,7 +65,7 @@
     }
 
 }
-@media(min-width:768px) and (max-width: 1024px) {
+@media(min-width:767px) and (max-width: 1024px) {
 
     .presentation > div:nth-child(1) p,.presentation > div:nth-child(2) p,.presentation >  div:nth-child(3) p {
         font-size: 16px;
@@ -75,7 +75,7 @@
         font-size: 15px;
     }
 }
-@media(min-width:1024px) and (max-width: 1200px) {
+@media(min-width:1023px) and (max-width: 1200px) {
 
     .presentation > div:nth-child(1) p,.presentation > div:nth-child(2) p,.presentation >  div:nth-child(3) p {
         font-size: 18px;
@@ -85,7 +85,7 @@
         font-size: 15px;
     }
 }
-@media(min-width:1200px) and (max-width: 1400px) {
+@media(min-width:1199px) and (max-width: 1400px) {
 
     .presentation > div:nth-child(1) p,.presentation > div:nth-child(2) p,.presentation >  div:nth-child(3) p {
         font-size: 20px;
@@ -95,7 +95,7 @@
         font-size: 17px;
     }
 }
-@media(min-width:1400px) and (max-width: 1800px) {
+@media(min-width:1399px) and (max-width: 1800px) {
 
     .presentation > div:nth-child(1) p,.presentation > div:nth-child(2) p,.presentation >  div:nth-child(3) p {
         font-size: 22px;
@@ -105,7 +105,7 @@
         font-size: 17px;
     }
 }
-@media(min-width:1800px) and (max-width: 2000px) {
+@media(min-width:1799px) and (max-width: 2000px) {
 
     .presentation > div:nth-child(1) p,.presentation > div:nth-child(2) p,.presentation >  div:nth-child(3) p {
         font-size: 24px;
@@ -116,7 +116,7 @@
     }
 }
 
-@media(min-width:2000px){
+@media(min-width:1999px){
     .presentation > div:nth-child(1) p,.presentation > div:nth-child(2) p,.presentation >  div:nth-child(3) p {
         font-size: 26px;
     }

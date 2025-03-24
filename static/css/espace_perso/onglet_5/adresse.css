@@ -55,7 +55,7 @@ input[type="file"]::file-selector-button {
         margin-left: -70px;
     }
 }
-@media(min-width:480px) and (max-width: 768px) {
+@media(min-width:479px) and (max-width: 768px) {
     #adresse_form img textarea{
         font-size: 12px;
     }
@@ -74,7 +74,7 @@ input[type="file"]::file-selector-button {
         height: 125px;
     }
 }
-@media(min-width:768px) and (max-width: 1024px) {
+@media(min-width:767px) and (max-width: 1024px) {
     #adresse_form img textarea{
         font-size: 12px;
     }
@@ -94,7 +94,7 @@ input[type="file"]::file-selector-button {
     }
 }
 
-@media(min-width:1024px) and (max-width: 1200px) {
+@media(min-width:1023px) and (max-width: 1200px) {
     #adresse_form img textarea{
         font-size: 18px;
     }
@@ -113,7 +113,7 @@ input[type="file"]::file-selector-button {
         height: 175px;
     }
 }
-@media(min-width:1024px) and (max-width: 1800px) {
+@media(min-width:1023px) and (max-width: 1800px) {
     #adresse_form img textarea{
         font-size: 18px;
     }
@@ -133,7 +133,7 @@ input[type="file"]::file-selector-button {
     }
 }
 
-@media(min-width:1800px) {
+@media(min-width:1799px) {
     #adresse_form img textarea{
         font-size: 18px;
     }

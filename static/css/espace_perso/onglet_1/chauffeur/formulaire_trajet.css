@@ -35,13 +35,6 @@ div.content > ul > li > input[type="radio"] {
     display: none;
 }
 
-
-@media(max-width:380px){
-    #p_pas_a_sa_place{
-        margin-left: 20%;
-        margin-right: 20%;
-    }
-}
 @media(min-width: 320px) and (max-width: 480px){
     #trajet_form input, #trajet_form select, #trajet_form button{
         width: 88px;
@@ -59,7 +52,7 @@ div.content > ul > li > input[type="radio"] {
     }
 
 }
-@media(min-width: 480px) and (max-width: 768px){
+@media(min-width: 479px) and (max-width: 768px){
     #trajet_form input, #trajet_form select, #trajet_form button{
         width: 140px;
         font-size: 12px;
@@ -79,7 +72,7 @@ div.content > ul > li > input[type="radio"] {
         margin-bottom : 10px;
     }
 }
-@media(min-width:768px) and (max-width: 1024px) {
+@media(min-width:767px) and (max-width: 1024px) {
     #trajet_form input, #trajet_form select, #trajet_form button {
         width: 150px;
         font-size: 14px;
@@ -94,16 +87,12 @@ div.content > ul > li > input[type="radio"] {
     div.content > ul {
         font-size: 14px;
     }
-    #p_pas_a_sa_place{
-        margin-top : 10px;
-        margin-bottom : 10px;
-    }
     p {
         font-size: 18px;
     }
 }
 
-@media(min-width:1024px) and (max-width: 1200px) {
+@media(min-width:1023px) and (max-width: 1200px) {
     #trajet_form input, #trajet_form select, #trajet_form button{
         width: 180px;
         font-size: 14px;
@@ -121,12 +110,8 @@ div.content > ul > li > input[type="radio"] {
     div.content p {
         margin: 15px;
     }
-    #p_pas_a_sa_place{
-        margin-top : 15px;
-        margin-bottom : 15px;
-    }
 }
-@media(min-width:1200px) and (max-width: 1400px) {
+@media(min-width:1199px) and (max-width: 1400px) {
     #trajet_form input, #trajet_form select, #trajet_form button{
         width: 180px;
         font-size: 14px;
@@ -141,12 +126,24 @@ div.content > ul > li > input[type="radio"] {
     div.content > ul {
         font-size: 18px;
     }
-    #p_pas_a_sa_place{
-        margin-top : 20px;
-        margin-bottom : 20px;
+}
+@media(min-width:1399px) and (max-width: 1800px) {
+    #trajet_form input, #trajet_form select, #trajet_form button{
+        width: 200px;
+        font-size: 20px;
+        }
+    p {
+        margin:20px;
+        font-size: 22px;
+    }
+    .flex1{
+        gap:10px;
+    }
+    div.content > ul {
+        font-size: 20px;
     }
 }
-@media(min-width:1400px) and (max-width: 1800px) {
+@media(min-width:1799px) and (max-width: 2000px) {
     #trajet_form input, #trajet_form select, #trajet_form button{
         width: 200px;
         font-size: 20px;
@@ -166,27 +163,7 @@ div.content > ul > li > input[type="radio"] {
         margin-bottom : 20px;
     }
 }
-@media(min-width:1800px) and (max-width: 2000px) {
-    #trajet_form input, #trajet_form select, #trajet_form button{
-        width: 200px;
-        font-size: 20px;
-        }
-    p {
-        margin:20px;
-        font-size: 22px;
-    }
-    .flex1{
-        gap:10px;
-    }
-    div.content > ul {
-        font-size: 20px;
-    }
-    #p_pas_a_sa_place{
-        margin-top : 20px;
-        margin-bottom : 20px;
-    }
-}
-@media(min-width:2000px){
+@media(min-width:1999px){
     #trajet_form input, #trajet_form select, #trajet_form button{
         width: 225px;
         font-size: 20px;
@@ -200,9 +177,5 @@ div.content > ul > li > input[type="radio"] {
     }
     div.content > ul {
         font-size: 20px;
-    }
-    #p_pas_a_sa_place{
-        margin-top : 20px;
-        margin-bottom : 20px;
     }
 }
