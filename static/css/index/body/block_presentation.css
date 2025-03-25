@@ -1,7 +1,6 @@
 .presentation{
     grid-template-columns: 1fr;
     grid-template-rows:repeat(3, 1fr);
-    align-content: center;
 }
 
 .presentation >div{
@@ -10,13 +9,7 @@
 }
 
 .presentation >div p{
-    flex:1;
     padding: 40px;
-    flex: 1;
-}
-
-.presentation > div:nth-child(3) {
-    justify-content: flex-end;
 }
 
 .presentation > div:nth-child(1) p, .presentation > div:nth-child(3) p {
@@ -37,7 +30,9 @@
     text-align: left;
     font-size: 20px;
 }
-
+.presentation > div p {
+    padding: 20px;
+}
 .presentation img{
     width: 45%;
     height: 70%;
@@ -46,9 +41,6 @@
 @media(min-width:320px) and (max-width: 480px) {
     .presentation > div:nth-child(1) p,.presentation > div:nth-child(2) p,.presentation >  div:nth-child(3) p {
         font-size: 12px;
-    }
-    .presentation > div p {
-        padding: 20px;
     }
 }
 @media(min-width:479px) and (max-width: 768px) {
@@ -60,7 +52,6 @@
         font-size: 15px;
     }
     .presentation > div p {
-        padding: 20px;
         font-size: 12px;
     }
 
@@ -71,7 +62,6 @@
         font-size: 16px;
     }
     .presentation > div p {
-        padding: 20px;
         font-size: 15px;
     }
 }
@@ -81,7 +71,6 @@
         font-size: 18px;
     }
     .presentation > div p {
-        padding: 20px;
         font-size: 15px;
     }
 }
@@ -91,37 +80,33 @@
         font-size: 20px;
     }
     .presentation > div p {
-        padding: 20px;
         font-size: 17px;
     }
 }
 @media(min-width:1399px) and (max-width: 1800px) {
 
     .presentation > div:nth-child(1) p,.presentation > div:nth-child(2) p,.presentation >  div:nth-child(3) p {
-        font-size: 22px;
+        font-size: 26px;
     }
     .presentation > div p {
-        padding: 20px;
         font-size: 17px;
     }
 }
 @media(min-width:1799px) and (max-width: 2000px) {
 
     .presentation > div:nth-child(1) p,.presentation > div:nth-child(2) p,.presentation >  div:nth-child(3) p {
-        font-size: 24px;
+        font-size: 28px;
     }
     .presentation > div p {
-        padding: 20px;
         font-size: 20px;
     }
 }
 
 @media(min-width:1999px){
     .presentation > div:nth-child(1) p,.presentation > div:nth-child(2) p,.presentation >  div:nth-child(3) p {
-        font-size: 26px;
+        font-size: 34px;
     }
     .presentation > div p {
-        padding: 20px;
         font-size: 20px;
     }
 }

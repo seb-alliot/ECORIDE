@@ -2,9 +2,8 @@
 
 #menu-tab {
     font-family: 'trebuchet ms', geneva;
-	font-size: 11pt;
 	color:black;
-    top: 3px;
+    margin-top:10px;
 	}
 .nav-link.active {
     background-color: rgb(53, 152, 228);
@@ -22,16 +21,16 @@
 
     .tab {
     float: left;
-
     }
     .tab label {
-        background: white;
         padding: 10px;
+        background: white;
+        border: solid 1px black;
         position: relative;
         left: 2px;
-        border-radius: 10px 10px 10px 10px;
-        box-shadow: 3px -3px 6px rgba(0, 0, 0, 0.71);
-        top: 8px;
+        top: 4px;
+        margin-bottom: 10px;
+        border-radius: 10px;
     }
     .tab [type=radio] {
     display: none;
@@ -41,7 +40,7 @@
     background: rgb(53, 152, 228);
     color: white;
     border-bottom: 1px solid white;
-    z-index: 2;
+    z-index: 1;
     }
 
     .tab [type=radio]:checked ~ label ~ .content {
@@ -75,29 +74,7 @@
     }
 /*--------------reservation---trajet-----------*/
 
-#selection_trajet{
-    justify-content: center;
-    gap: 10px;
-    border-radius: 10px;
-    z-index: 1;
-}
 
-form#selection_trajet > ul.resultat  {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    }
-form#selection_trajet > ul.resultat > li{
-    display: flex;
-    }
-
-form#selection_trajet > div {
-    display: flex;
-    justify-content: center;
-    border-radius: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    }
 
 /*--------------Contenu----covoiturage--------------*/
 /*--------------Contenu----chauffeur--------------*/
@@ -151,11 +128,6 @@ form#etat_form > ul >  button#id_statut{
 
 /*-----Onglets actifs--------------*/
 
-    [type=radio]:checked ~ label {
-    background: rgb(53, 152, 228);
-    border-bottom: 1px solid white;
-    z-index: 2;
-    }
     [type=radio]:checked ~ label ~ .content {
     z-index: 1;
 
@@ -170,11 +142,10 @@ form#etat_form > ul >  button#id_statut{
 
 /*--------------Responsive conteneur--------------*/
 
-@media(max-width: 380px){
+@media(min-width:320px) and (max-width: 480px) {
     div.tabs {
         margin-left: 2%;
         margin-right: 2%;
-        margin-top: 15px;
         }
         #menu-tab {
             font-size: 8pt;
@@ -184,8 +155,11 @@ form#etat_form > ul >  button#id_statut{
         min-height: 450px;
         margin-top: 10px;
         }
+    .tab label {
+        top: 8px;
+    }
 }
-@media(min-width:379px) and (max-width: 500px){
+@media(min-width:479px) and (max-width: 768px) {
     div.tabs {
         margin-left: 2%;
         margin-right: 2%;
@@ -193,14 +167,13 @@ form#etat_form > ul >  button#id_statut{
     .tab label {
         font-size: 12px;
         padding: 10px;
-        border-radius: 10px;
     }
     .tabs {
         min-height: 470px;
         margin-top: 10px;
         }
 }
-@media(min-width:499px) and (max-width: 900px){
+@media(min-width:767px) and (max-width: 900px) {
     div.tabs  {
         margin-left: 4%;
         margin-right: 4%;
@@ -208,7 +181,6 @@ form#etat_form > ul >  button#id_statut{
     .tab label {
         font-size: 14px;
         padding: 10px;
-        border-radius: 10px;
     }
     .tabs {
         min-height: 550px;
@@ -224,7 +196,6 @@ form#etat_form > ul >  button#id_statut{
     .tab label {
         font-size: 15px;
         padding: 10px;
-        border-radius: 10px;
     }
     .tabs {
         min-height: 550px;
@@ -239,7 +210,6 @@ form#etat_form > ul >  button#id_statut{
     .tab label {
         font-size: 15px;
         padding: 10px;
-        border-radius: 10px;
     }
     .tabs {
         min-height: 600px;

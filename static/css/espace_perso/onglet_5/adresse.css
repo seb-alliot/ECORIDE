@@ -16,7 +16,9 @@ div.photo-parent > div > img{
 #adresse_form label, #adresse_form img textarea, form#adresse_form a {
     display: none;
 }
-
+input#id_photo {
+    display: flex;
+}
 input[type="file"]::file-selector-button {
     display: flex;
     background-color: #ffffff;
@@ -29,11 +31,6 @@ input[type="file"]::file-selector-button {
 }
 
 @media(min-width:320px) and (max-width: 480px) {
-    form#adresse_form{
-        margin-top: 15px;
-        width: 120px;
-        height: 0px;
-    }
     #adresse_form img textarea{
         font-size: 10px;
     }
@@ -52,8 +49,8 @@ input[type="file"]::file-selector-button {
     }
     input#id_photo {
         display: flex;
-        margin-left: -70px;
-    }
+        margin-left: -55%;
+        }
 }
 @media(min-width:479px) and (max-width: 768px) {
     #adresse_form img textarea{
@@ -92,6 +89,7 @@ input[type="file"]::file-selector-button {
         width: 200px;
         height: 150px;
     }
+
 }
 
 @media(min-width:1023px) and (max-width: 1200px) {
@@ -113,12 +111,12 @@ input[type="file"]::file-selector-button {
         height: 175px;
     }
 }
-@media(min-width:1023px) and (max-width: 1800px) {
+@media(min-width:1199px) and (max-width: 1800px) {
     #adresse_form img textarea{
         font-size: 18px;
     }
     #adresse_form input, #adresse_form select, #adresse_form button, #adresse_form input[type="file"]::file-selector-button{
-        width: 250px;
+        width: 225px;
         height: 30px;
         font-size: 15px;
     }
@@ -128,8 +126,8 @@ input[type="file"]::file-selector-button {
         display: flex;
     }
     div.photo-parent > div > img{
-        width: 250px;
-        height: 200px;
+        width: 225px;
+        height: 175px;
     }
 }
 

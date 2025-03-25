@@ -1,27 +1,13 @@
 /*formulaire de recherche*/
 #recherche_form {
-    display: flex;
-    justify-content: center;
     margin-bottom: 10px;
 }
 #recherche_form input{
-    text-align: center;
-    width: 150px;
-    height: 30px;
     border:#000000 solid 1px;
 
     }
 #recherche_form select{
-    text-align: center;
-    width: 150px;
-    height: 30px;
     border-radius: 10px;
-
-    }
-#recherche_form button{
-    width: 150px;
-    height: 30px;
-
     }
 #recherche_form label{
     display: none;
@@ -29,8 +15,6 @@
 
 /*filtre recherche*/
 #filtre_form {
-    display: flex;
-    justify-content: center;
     gap:5px;
     margin-block: auto;
     border-radius: 10px;
@@ -38,18 +22,11 @@
 
 }
 #filtre_form input{
-    text-align: center;
-    width: 150px;
-    height: 30px;
     border-radius: 10px;
 
     }
 #filtre_form select{
-    text-align: center;
-    width: 150px;
-    height: 30px;
     border-radius: 10px;
-
     }
 #filtre_form button{
     width: 150px;

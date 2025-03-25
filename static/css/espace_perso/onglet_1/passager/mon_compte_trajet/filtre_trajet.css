@@ -1,26 +1,43 @@
 form#filtre_form {
-    display: flex;
-    justify-content: center;
+    height: 30px;
 }
 form#filtre_form label {
     display: none;
 }
-input#id_note , input#id_prix , input#id_temps_trajet {
-    text-align: center;
-    border-radius: 10px;
-    width: 175px;
-    box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.41);
-}
 
-@media(max-width: 767px){
-    input#id_note , input#id_prix , input#id_temps_trajet{
-        width: 65px;
+@media(min-width:320px) and (max-width: 480px) {
+    input#id_note , input#id_prix , input#id_temps_trajet, button {
+        width: 60px;
         font-size: 10px;
     }
 }
-@media(min-width:767px) and (max-width: 900px){
-    input#id_note , input#id_prix , input#id_temps_trajet{
-        width: 100px;
+@media(min-width:479px) and (max-width: 768px) {
+    input#id_note , input#id_prix , input#id_temps_trajet, button {
+        width: 90px;
         font-size: 10px;
+    }
+}
+@media(min-width:767px) and (max-width: 900px) {
+    input#id_note , input#id_prix , input#id_temps_trajet , button {
+        width: 120px;
+        font-size: 12px;
+    }
+}
+@media(min-width:899px) and (max-width: 1200px) {
+    input#id_note , input#id_prix , input#id_temps_trajet, button {
+        width: 140px;
+        font-size: 14px;
+    }
+}
+@media(min-width:1199px) and (max-width: 1400px) {
+    input#id_note , input#id_prix , input#id_temps_trajet, button {
+        width: 175px;
+        font-size: 18px;
+    }
+}
+@media(min-width:1399px) {
+    input#id_note , input#id_prix , input#id_temps_trajet, button {
+        width: 225px;
+        font-size: 20px;
     }
 }

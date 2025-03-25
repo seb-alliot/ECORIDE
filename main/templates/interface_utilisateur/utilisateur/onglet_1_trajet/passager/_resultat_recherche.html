@@ -7,8 +7,8 @@
             {% for resultat in first_resultat %}
             {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_contenu_resultat.html" %}
                 {% empty %}
-                <p>Il n'y a pas de resultat  pour cette recherche</p>
-            {% endfor %}
+                    <p>Il n'y a pas de resultat  pour cette recherche, essayer un autre date !</p>
+                {% endfor %}
         </div>
     </div>
 
@@ -19,13 +19,13 @@
                 {% for resultat in second_resultat %}
                 {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_contenu_resultat.html" %}
                     {% empty %}
-                    <p>Il n'y a pas de resultat  pour cette recherche</p>
+                    <p>Il n'y a pas de resultat  pour cette recherche, essayer un autre date !</p>
                 {% endfor %}
         </div>
     </div>
     {% if first_resultat or second_resultat %}
-    <div class="class_flex class_justify_center">
-        <button type="submit">Réserver</button>
-    </div>
+        <div class="class_flex class_justify_center">
+            <button type="submit">Réserver</button>
+        </div>
     {% endif %}
 </form>
