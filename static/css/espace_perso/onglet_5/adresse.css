@@ -27,7 +27,10 @@ input[type="file"]::file-selector-button {
     justify-content: center;
     align-items: center;
 }
-
+input[type="file"]::file-selector-button:hover {
+    background-color: #B7D8F4;
+    display: flex;
+}
 
 @media(min-width:320px) and (max-width: 480px) {
     #adresse_form img textarea{
@@ -60,11 +63,7 @@ input[type="file"]::file-selector-button {
         height: 30px;
         font-size: 12px;
     }
-    input[type="file"]::file-selector-button:hover {
-        background-color: rgb(53, 152, 228);
-        color: white;
-        display: flex;
-    }
+
     div.photo-parent > div > img{
         width: 150px;
         height: 125px;
@@ -78,11 +77,6 @@ input[type="file"]::file-selector-button {
         width: 200px;
         height: 30px;
         font-size: 12px;
-    }
-    input[type="file"]::file-selector-button:hover {
-        background-color: rgb(53, 152, 228);
-        color: white;
-        display: flex;
     }
     div.photo-parent > div > img{
         width: 200px;
@@ -100,11 +94,6 @@ input[type="file"]::file-selector-button {
         height: 30px;
         font-size: 15px;
     }
-    input[type="file"]::file-selector-button:hover {
-        background-color: rgb(53, 152, 228);
-        color: white;
-        display: flex;
-    }
     div.photo-parent > div > img{
         width: 225px;
         height: 175px;
@@ -118,11 +107,6 @@ input[type="file"]::file-selector-button {
         width: 225px;
         height: 30px;
         font-size: 15px;
-    }
-    input[type="file"]::file-selector-button:hover {
-        background-color: rgb(53, 152, 228);
-        color: white;
-        display: flex;
     }
     div.photo-parent > div > img{
         width: 225px;
@@ -138,11 +122,6 @@ input[type="file"]::file-selector-button {
         width: 225px;
         height: 30px;
         font-size: 15px;
-    }
-    input[type="file"]::file-selector-button:hover {
-        background-color: rgb(53, 152, 228);
-        color: white;
-        display: flex;
     }
     div.photo-parent > div > img{
         width: 225px;

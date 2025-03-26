@@ -16,11 +16,6 @@ button, select, input {
     text-align: center;
 }
 
-input:hover, button:hover, select:hover, .footer:hover, .resultat input[type="radio"]:hover ~ label{
-    background-color: rgb(53, 152, 228);
-    color: white;
-    }
-
 select {
     background-color: white;
 }
@@ -40,5 +35,5 @@ button{
 
 
 h1:hover , a:hover {
-    color: white;
+    color: #A7C7A5 ;
     }

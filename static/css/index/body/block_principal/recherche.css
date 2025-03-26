@@ -6,7 +6,11 @@
     #recherche_form label{
         display: none;
         }
-
+        #recherche_form button{
+            background-color: #7D6E63;
+            border: 1px solid black;
+            color: white;
+        }
 .conteneur_recherche {
     background-color: #f9f9f9;
     width: 100%;

@@ -56,7 +56,7 @@
 }
 
 body {
-    background-color: #95CFED;
+    background-color: #FAF3E0;
     font-family: Arial, sans-serif;
     min-height: 100vh;
 }
@@ -70,9 +70,9 @@ button, select, input {
     text-align: center;
 }
 
-input:hover, button:hover, select:hover, .footer:hover, .resultat input[type="radio"]:hover ~ label{
-    background-color: rgb(53, 152, 228);
-    color: white;
+input:hover, button:hover, .footer:hover, .resultat input[type="radio"]:hover ~ label{
+    background-color: #B7D8F4;
+    color: black;
     }
 
 select {
@@ -80,16 +80,11 @@ select {
 }
 
 button{
-    background-color: #0bd9f0;
-    border: 1px solid #ffffff;
+    background-color: #FAF3E0;
+    border: 1px solid black;
 }
 ::placeholder {
     color: #000000;
-    }
-
-
-h1:hover , a:hover {
-    color: white;
     }
 
 .p_deco{

@@ -1,5 +1,4 @@
 footer {
-    
     gap: 30px;
     padding: 0px;
     margin-top: auto;
@@ -11,8 +10,9 @@ footer a {
     height: 30px;
 }
 .footer {
-    background-color: #6fc2ec;
     border-radius: 10px;
+    background-color: #7D6E63;
+    color: white;
 }
 
 @media(min-width:320px) and (max-width: 500px){
