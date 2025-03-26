@@ -8,11 +8,11 @@
             aria-labelledby="label_trajet_{{ tjt.id }}"
             >
             <label for="trajet_{{ tjt.id }}">
-            Départ de :<br>{{ tjt.ville_depart }} pour {{ tjt.ville_arrivee }}<br>
+            Départ de :<br>{{ tjt.ville_depart }} -> {{ tjt.ville_arrivee }}<br>
             Le :<br> {{ tjt.date }}<br>
-            À : {{ tjt.heure }} heure<br>
+            À : {{ tjt.heure|date:"H\H:i" }}<br>
             Voiture choisie : <br>{{ tjt.voiture.marque }} {{ tjt.voiture.modele }}<br>
-            Prix demander : {{ tjt.prix }}€<br>
+            Prix : {{ tjt.prix }}€<br>
             Places disponibles :
             {% if tjt.places %}
             {{ tjt.places }}

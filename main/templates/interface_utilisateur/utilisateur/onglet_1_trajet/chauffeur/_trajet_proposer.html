@@ -13,7 +13,7 @@
                                     Voiture : <br>{{ trajet.voiture.marque}} {{ trajet.voiture.modele }}<br>
                                     Moteur : {{ trajet.voiture.type_moteur }}<br>
                                     Prix : {{ trajet.prix }}€<br>
-                                    Nombre de place:{% if trajet.places != 0 %} {{ trajet.places }}
+                                    Place:{% if trajet.places != 0 %} {{ trajet.places }}
                                     {% else %}
                                     complet
                                     {% endif %}<br>
