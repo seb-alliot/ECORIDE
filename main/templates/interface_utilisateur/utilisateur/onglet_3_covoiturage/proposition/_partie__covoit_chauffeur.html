@@ -1,0 +1,8 @@
+    <p class="class_flex class_justify_center">Vos covoiturages proposés</p>
+        <div>
+            <ul class="class_flex class_scroll">
+                {% for tjt in trajet4 %}
+                    {% include "interface_utilisateur/utilisateur/onglet_3_covoiturage/proposition/_contenu_covoit_chauffeur.html" %}
+                {% endfor %}
+            </ul>
+        </div>

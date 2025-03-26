@@ -1,0 +1,16 @@
+<li id="historique">
+    <label for="trajet_{{ tjt.id }}">
+        Départ de :<br>{{ res.trajet_reserver.ville_depart}} pour {{ res.trajet_reserver.ville_arrivee }}<br>
+        Le :<br> {{ res.trajet_reserver.date }}<br>
+        À : {{ res.trajet_reserver.heure|"H\H:i"}}<br>
+        Prix
+        {% if res.etat_reservation == "Annulé" %}
+        rembourser
+        {% else %}
+        payer
+        {% endif %} :
+        {{ res.prix_par_passager}}€<br>
+        places : {{ res.trajet_reserver.places }}<br>
+        Etat: {{ res.etat_reservation }}<br>
+    </label>
+</li>

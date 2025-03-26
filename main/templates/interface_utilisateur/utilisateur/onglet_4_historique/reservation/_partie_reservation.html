@@ -1,0 +1,24 @@
+<div class="class_flex">
+    {% if reservation == "Terminé" %}
+        <p class="class_flex class_justify_center">Vos reservation terminé</p>
+            <div>
+                <ul class="class_scroll">
+                    {% for res in reservation1 %}
+                        {% include "interface_utilisateur/utilisateur/onglet_4_historique/reservation/_contenu_reservation.html" %}
+                    {% endfor %}
+                </ul>
+            </div>
+    {% endif %}
+</div>
+<div>
+    {% if reservation == "annulé" %}
+        <p class="class_flex class_justify_center">Vos reservations effectuées</p>
+            <div>
+                <ul class="class_scroll">
+                    {% for res in reservation2 %}
+                        {% include "interface_utilisateur/utilisateur/onglet_4_historique/reservation/_contenu_reservation.html" %}
+                    {% endfor %}
+                </ul>
+            </div>
+    {% endif %}
+</div>

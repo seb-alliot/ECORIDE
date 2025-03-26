@@ -1,0 +1,24 @@
+
+    <li class="resultat class_flex">
+        <input
+            type="radio"
+            name="trajet_id"
+            value="{{ tjt.id }}"
+            id="trajet_{{ tjt.id }}"
+            aria-labelledby="label_trajet_{{ tjt.id }}"
+            >
+            <label for="trajet_{{ tjt.id }}">
+            Départ de :<br>{{ tjt.ville_depart }} pour {{ tjt.ville_arrivee }}<br>
+            Le :<br> {{ tjt.date }}<br>
+            À : {{ tjt.heure }} heure<br>
+            Voiture choisie : <br>{{ tjt.voiture.marque }} {{ tjt.voiture.modele }}<br>
+            Prix demander : {{ tjt.prix }}€<br>
+            Places disponibles :
+            {% if tjt.places %}
+            {{ tjt.places }}
+            {% else %}
+            complet
+            {% endif %}<br>
+            Etat: {{ tjt.etat }}<br>
+            </label>
+    </li>

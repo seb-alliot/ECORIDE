@@ -1,0 +1,18 @@
+<p class="class_flex class_justify_center">
+    Vous pouvez gérer le statut de
+    {% if trajets|length > 1 %} vos {% else %} votre {% endif %} covoiturage{% if trajets|length > 1 %}s{% endif %} ici.
+</p>
+<div>
+    <form id="etat_form" method="post">
+        {% csrf_token %}
+            {% include "interface_utilisateur/utilisateur/onglet_3_covoiturage/proposition/_partie__covoit_chauffeur.html" %}
+            {% include "interface_utilisateur/utilisateur/onglet_3_covoiturage/reservation/partie_resa_passager.html" %}
+            <label for="etat_trajet"></label>
+                {{ etat_form.statut }}
+                <div class="class_flex class_justify_center">
+                <button type="submit" name="form_soumis" value="etat_form">
+                    Modifier le statut
+                </button>
+            </div>
+    </form>
+</div>

@@ -79,52 +79,6 @@
 /*--------------Contenu----covoiturage--------------*/
 /*--------------Contenu----chauffeur--------------*/
 
-div.content > div > form#etat_form > ul.resultat{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-    }
-
-div.tab > div.content > div > form#etat_form > ul.resultat > li{
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 10px;
-    }
-
-#etat_form > ul.resultat > li.resultat{
-    z-index: 0;
-}
-
-form#etat_form{
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-    }
-form#etat_form ul.resultat{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-    }
-form#etat_form ul > li{
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 10px;
-    }
-form#etat_form > ul >  button#id_statut{
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10px;
-    flex-direction: column;
-    }
-    form#etat_form > label{
-        display: none;
-    }
 
 /*-----Onglets actifs--------------*/
 

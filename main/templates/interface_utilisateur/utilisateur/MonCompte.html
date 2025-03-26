@@ -93,19 +93,7 @@
     <div class="content">
 
         <div>
-            {% if user_role == "Chauffeur" %}
-                <p>
-                    Vous pouvez gérer le{% if trajets|length > 1 %}s{% endif %} statut de
-                    {% if trajets|length > 1 %} vos {% else %} votre {% endif %} covoiturage{% if trajets|length > 1 %}s{% endif %} ici.
-                </p>
-                {% include "interface_utilisateur/utilisateur/onglet_3_covoiturage/chauffeur/_chauffeur_covoiturage.html" %}
-
-            {% elif  user_role == "Passager" %}
-                <p>Vous pouvez annuler votre réservation ici</p>
-                {% include "interface_utilisateur/utilisateur/onglet_3_covoiturage/passager/_passager_covoiturage.html" %}
-            {% else %}
-                <p>Vous n'avez pas de réservation en cours</p>
-            {% endif %}
+            {% include "interface_utilisateur/utilisateur/onglet_3_covoiturage/covoiturage.html" %}
         </div>
     </div>
     </div>
@@ -121,7 +109,6 @@
             Historique
         </label>
     <div class="content">
-
         <div>
             {% include "interface_utilisateur/utilisateur/onglet_4_historique/_historique.html" %}
         </div>

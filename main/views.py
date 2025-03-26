@@ -474,9 +474,16 @@ def MonCompte(request):
     role = ChoixRole.objects.filter(user=user).first()
     preference = Preference.objects.filter(user_preference=user).first()
     trajet = TrajetProposer.objects.filter(chauffeur=user).first()
+    trajet1 = TrajetProposer.objects.filter(chauffeur=user ,etat="Terminé")
+    trajet2 = TrajetProposer.objects.filter(chauffeur=user , etat="Annulé")
+    trajet3 = TrajetProposer.objects.filter(chauffeur=user , etat="En cours")
+    trajet4 = TrajetProposer.objects.filter(chauffeur=user , etat="Disponible")
     # faire le calcul de l'heure de depart + durée trajet pour afficher l'heure d'arrivée
     voiture = Voiture.objects.filter(user=user)
     reservation = ReservationTrajet.objects.filter(passager=user)
+    reservation1 = reservation.filter(etat_reservation="Terminé", passager=user)
+    reservation2 = reservation.filter(etat_reservation="annulé", passager=user)
+    reservation3 = reservation.filter(etat_reservation="Reserver", passager=user)
     prix_total_paye = ReservationTrajet.paiement_total_passager(request.user, trajet)
 
     chauffeur = TrajetProposer.objects.filter().first()
@@ -908,8 +915,14 @@ def MonCompte(request):
         # trajet
         "prix_total_paye": prix_total_paye,
         "trajet": trajet,
+        "trajet1": trajet1,
+        "trajet2": trajet2,
+        "trajet3": trajet3,
+        "trajet4": trajet4,
         "reservation": reservation,
-        "reservations": "reservations",
+        "reservation1": reservation1,
+        "reservation2": reservation2,
+        "reservation3": reservation3,
         # recherche et filtre
         "resultat": resultat,
         "first_resultat": first_resultat,
@@ -1738,12 +1751,14 @@ def Envoi_Reponse_Modo(request, email_user, reponse_modo):
         messages.success(request, "Réponse envoyé.")
     except Exception as e:
         messages.error(request, f"Erreur est survenu : {str(e)}")
+
+
 # _________________En cour_________________
 
-#finition de l'administration des email
+# responsive
+
 
 # _________________A FAIRE_________________
-# responsive
 # ------------------------------------A FAIRE------------------------------------------------------
 
 # la transition d'etat, la logique metier est presente mais pas le suivis de l'etat

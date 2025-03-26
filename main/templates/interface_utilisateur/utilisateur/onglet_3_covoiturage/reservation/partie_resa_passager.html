@@ -1,0 +1,8 @@
+    <p class="class_flex class_justify_center">Vos reservations</p>
+        <div>
+            <ul class="class_flex class_scroll">
+                {% for res in reservation3 %}
+                    {% include "interface_utilisateur/utilisateur/onglet_3_covoiturage/reservation/_contenu_resa_passager.html" %}
+                {% endfor %}
+            </ul>
+        </div>

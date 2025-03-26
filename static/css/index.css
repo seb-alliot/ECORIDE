@@ -43,6 +43,12 @@
     position: relative;
 }
 
+.class_scroll{
+    overflow-y: auto;
+    width: 100%;
+}
+
+
 /*limitation de ligne de code*/
 * {
     margin: 0;
