@@ -1,17 +1,7 @@
-div.content > div >  div > ul > li#historique{
-    display:flex;
-    margin-top: 10px;
-    justify-content: center;
-    padding: 0;
-}
+
 
 div.content > div >  div > ul {
-    padding:0;
-    display: flex;
     gap: 10px;
-}
-div.content > div >  div > li#historique{
-    display: flex;
 }
 
 
@@ -20,11 +10,17 @@ div.content > div >  div > li#historique{
         height: auto;
         width: 110px;
     }
+    div.content > div >  div > ul {
+        padding-left:15px;
+    }
 }
 @media(min-width:479px) and (max-width: 768px) {
     #label_historique{
         height: auto;
         width: 120px;
+    }
+    div.content > div >  div > ul {
+        padding-left:25px;
     }
 }
 @media(min-width:767px) and (max-width: 900px) {

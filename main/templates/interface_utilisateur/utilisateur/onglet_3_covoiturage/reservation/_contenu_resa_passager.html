@@ -17,7 +17,7 @@
         {% endif %}<br>
         Chauffeur : {{ res.trajet_reserver.chauffeur }}<br>
         Départ de :<br>{{ res.trajet_reserver.ville_depart }} -> {{ res.trajet_reserver.ville_arrivee }}<br>
-        Le : {{ res.trajet_reserver.date }}<br>
+        Le {{ res.trajet_reserver.date }}<br>
         À : {{ res.trajet_reserver.heure|date:"H\H:i" }} <br>
         Voiture : {{ res.trajet_reserver.voiture.marque }} {{ res.trajet_reserver.voiture.modele }}<br>
         Prix payer : {{ res.prix_par_passager }}€<br>

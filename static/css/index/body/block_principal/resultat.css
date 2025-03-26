@@ -3,7 +3,6 @@
 }
 
 .resultat [type=radio]:checked ~ label {
-    background: rgb(53, 152, 228);
     color: white;
     border-bottom: 1px solid white;
     z-index: 1;

@@ -52,7 +52,6 @@
 /*limitation de ligne de code*/
 * {
     margin: 0;
-    padding: 0;
     box-sizing: border-box;
 }
 
@@ -92,3 +91,8 @@ button{
 h1:hover , a:hover {
     color: white;
     }
+
+.p_deco{
+    box-shadow: 6px 6px 10px beige;
+    background-color: rgba(215, 250, 222, 0.71);
+}

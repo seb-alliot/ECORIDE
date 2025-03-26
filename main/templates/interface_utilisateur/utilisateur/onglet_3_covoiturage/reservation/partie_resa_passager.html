@@ -1,4 +1,5 @@
-    <p class="class_flex class_justify_center">Vos reservations</p>
+{% if reservation3 %}
+    <p class="class_flex class_justify_center p_deco">Vos réservations</p>
         <div>
             <ul class="class_flex class_scroll">
                 {% for res in reservation3 %}
@@ -6,3 +7,4 @@
                 {% endfor %}
             </ul>
         </div>
+{% endif %}

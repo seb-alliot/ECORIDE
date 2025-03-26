@@ -1,6 +1,6 @@
 
 {% if trajets %}
-    <p class="class_flex class_justify_center" id="p_pas_a_sa_place">Voici  le{{ trajets|pluralize }} trajet{{ trajets|pluralize }} que vous proposez actuellement</p>
+    <p class="class_flex class_justify_center p_deco" id="p_pas_a_sa_place">Voici  le{{ trajets|pluralize }} trajet{{ trajets|pluralize }} que vous proposez actuellement</p>
         <ul class="class_flex class_scroll">
             {% for trajet in trajets %}
                 {% if trajet.etat == "Disponible" or trajet.etat == "En cour" %}
@@ -24,5 +24,5 @@
             {% endfor %}
         </ul>
 {% else %}
-    <p class="class_flex class_justify_center">Vous n'avez pas encore proposé de trajet</p>
+    <p class="class_flex class_justify_center p_deco">Vous n'avez pas encore proposé de trajet</p>
 {% endif %}

@@ -464,8 +464,6 @@ class AdresseForm(forms.ModelForm):
         return code_postal
 
 
-
-
     def clean(self):
         cleaned_data = super().clean()
         required_fields = [
@@ -638,7 +636,6 @@ class ModerationAvisPositifForm(forms.ModelForm):
                 "Le commentaire ne doit pas dépasser 200 caractères."
             )
         return commentaire
-
 
 
 class ModerationTrajetForm(forms.ModelForm):

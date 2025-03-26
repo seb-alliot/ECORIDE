@@ -1,7 +1,12 @@
     {% if trajets %}
-        <p class="class_flex class_justify_center">Vos covoiturages terminé</p>
+        <p class="class_flex class_justify_center p_deco">Vos covoiturages terminé</p>
             <div>
-                <ul class="class_scroll">
+                <ul class="class_scroll class_flex">
+                    {% for tjt in trajets %}
+                        {% if tjt.etat == "Terminé" %}
+                            {% include "interface_utilisateur/utilisateur/onglet_4_historique/covoiturage/_contenu_covoiturage.html" %}
+                        {% endif %}
+                    {% endfor %}
                     {% for tjt in trajet1 %}
                             {% include "interface_utilisateur/utilisateur/onglet_4_historique/covoiturage/_contenu_covoiturage.html" %}
                     {% endfor %}
@@ -9,9 +14,9 @@
             </div>
         {% endif %}
         {% if trajets %}
-        <p class="class_flex class_justify_center">Vos covoiturages annulés</p>
+        <p class="class_flex class_justify_center p_deco">Vos covoiturages annulés</p>
             <div>
-                <ul class="class_scroll">
+                <ul class="class_scroll class_flex">
                     {% for tjt in trajets %}
                         {% if tjt.etat == "Annulé" %}
                             {% include "interface_utilisateur/utilisateur/onglet_4_historique/covoiturage/_contenu_covoiturage.html" %}

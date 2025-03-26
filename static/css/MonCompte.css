@@ -29,8 +29,9 @@
         position: relative;
         left: 2px;
         top: 4px;
-        margin-bottom: 10px;
+        margin-bottom: 12px;
         border-radius: 10px;
+        box-shadow: 6px 6px 10px beige;
     }
     .tab [type=radio] {
     display: none;
@@ -120,7 +121,6 @@
     }
     .tab label {
         font-size: 12px;
-        padding: 10px;
     }
     .tabs {
         min-height: 470px;
@@ -134,7 +134,6 @@
     }
     .tab label {
         font-size: 14px;
-        padding: 10px;
     }
     .tabs {
         min-height: 550px;
@@ -149,7 +148,6 @@
     }
     .tab label {
         font-size: 15px;
-        padding: 10px;
     }
     .tabs {
         min-height: 550px;
@@ -163,7 +161,6 @@
     }
     .tab label {
         font-size: 15px;
-        padding: 10px;
     }
     .tabs {
         min-height: 600px;
