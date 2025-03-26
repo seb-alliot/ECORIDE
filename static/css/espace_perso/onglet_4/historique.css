@@ -17,25 +17,25 @@ div.content > div >  div > li#historique{
 
 @media(min-width:320px) and (max-width: 480px) {
     #label_historique{
-        height: 130px;
+        height: auto;
         width: 110px;
     }
 }
 @media(min-width:479px) and (max-width: 768px) {
     #label_historique{
-        height: 145px;
+        height: auto;
         width: 120px;
     }
 }
 @media(min-width:767px) and (max-width: 900px) {
     #label_historique{
-        height: 165px;
-        width: 135px;
+        height: auto;
+        width: 150px;
     }
 }
 @media(min-width:900px) {
     #label_historique{
-        height: 180px;
+        height: auto;
         width: 150px;
     }
 }
