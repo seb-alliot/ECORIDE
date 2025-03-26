@@ -818,7 +818,7 @@ class Preference(models.Model):
         ("Non\fumeur", "non fumeur"),
     ]
     ANIMAUX = [
-        ("Animaux", "animaux autorisé"),
+        ("Animaux", "animaux autorisés"),
         ("Pas_d'animaux", "pas d'animaux"),
     ]
     EXIGENCES_PARTICULIERES = [

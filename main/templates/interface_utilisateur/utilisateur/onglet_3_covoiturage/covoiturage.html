@@ -3,29 +3,33 @@
     {% if trajets|length > 1 %} vos {% else %} votre {% endif %} covoiturage{% if trajets|length > 1 %}s{% endif %} ici :
 </p>
 <div>
-    <form class="display_grid" id="etat_form" method="post">
-        {% csrf_token %}
-            {% include "interface_utilisateur/utilisateur/onglet_3_covoiturage/proposition/_partie__covoit_chauffeur.html" %}
-            <label for="etat_trajet">changement de statut</label>
-                {{ etat_form.statut }}
-                <div class="class_flex class_justify_center">
-                <button type="submit" name="form_soumis" value="etat_form">
-                    Modifier le statut
-                </button>
-            </div>
-    </form>
+    {% if trajet4 %}
+        <form class="display_grid" id="etat_form" method="post">
+            {% csrf_token %}
+                {% include "interface_utilisateur/utilisateur/onglet_3_covoiturage/proposition/_partie__covoit_chauffeur.html" %}
+                <label for="etat_trajet">changement de statut</label>
+                    {{ etat_form.statut }}
+                    <div class="class_flex class_justify_center">
+                    <button type="submit" name="form_soumis" value="etat_form">
+                        Modifier le statut
+                    </button>
+                </div>
+        </form>
+    {% endif %}
 </div>
 
 <div>
-    <form class="display_grid" id="reservation_form" method="post">
-        {% csrf_token %}
-            {% include "interface_utilisateur/utilisateur/onglet_3_covoiturage/reservation/partie_resa_passager.html" %}
-        <label for="etat_reservation_{{ res.id }}">Modifier le statut :</label>
-                {{ reservation_form.etat_reservation}}
-                <div class="class_flex class_justify_center">
-                    <button type="submit" name="form_soumis" value="reservation_form">
-                    Modifier le statut
-                </button>
-            </div>
-    </form>
+    {% if reservation3 %}
+        <form class="display_grid" id="reservation_form" method="post">
+            {% csrf_token %}
+                {% include "interface_utilisateur/utilisateur/onglet_3_covoiturage/reservation/partie_resa_passager.html" %}
+            <label for="etat_reservation_{{ res.id }}">Modifier le statut :</label>
+                    {{ reservation_form.etat_reservation}}
+                    <div class="class_flex class_justify_center">
+                        <button type="submit" name="form_soumis" value="reservation_form">
+                        Modifier le statut
+                    </button>
+                </div>
+        </form>
+    {% endif %}
 </div>
