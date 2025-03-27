@@ -1,5 +1,5 @@
 
-<li class="resultat class_flex class_justify_center"
+<li class="resultat class_flex"
 >
     <input
         type="radio"
@@ -9,13 +9,14 @@
         aria-labelledby="label_trajet_{{ resultat.id }}"
         >
     <label
-        class="class_column class_justify_center class_shadow class_border"
+        id="resultat_recherche"
+        class="class_shadow class_flex class_column class_border"
         for="trajet_{{ resultat.id }}"
         >
         {% if resultat.chauffeur.adresse_user.photo %}
-            <img src="{{ resultat.chauffeur.adresse_user.photo.url }}" alt="photo de profil" class="photo_profile">
+            <img src="{{ resultat.chauffeur.adresse_user.photo.url }}" alt="photo de profil">
         {% else %}
-            <img src="{{ photo_default_url }}" alt="photo par default" class="photo_profile">
+            <img src="{{ photo_default_url }}" alt="photo par default">
         {% endif %}<br>
         {{ resultat.chauffeur }} :
         {% if trajet.note_moyenne == "Pas encore évalué" %}
@@ -28,7 +29,7 @@
         {{ resultat.ville_depart }} pour {{ resultat.ville_arrivee }}<br>
         A : {{ resultat.heure|date:"H\H:i"  }}<br>
         le : {{ resultat.date|date:"d/m/Y" }}<br>
-        Moteur: {{ resultat.type_moteur }}<br>
+        Moteur: {{ resultat.voiture.type_moteur }}<br>
         Prix:  {{ resultat.prix }}€<br>
         Places disponibles:
             {% if resultat.places != 0 %}
@@ -37,7 +38,7 @@
                 complet
             {% endif %}<br>
         statut: {{ resultat.etat }}<br>
-        durée estimé: {{ resultat.temps_trajet }}<br>
+        durée estimé: <br>{{ resultat.temps_trajet }}
     </label>
 </li>
 </ul>

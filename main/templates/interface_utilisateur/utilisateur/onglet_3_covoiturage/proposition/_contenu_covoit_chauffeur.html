@@ -1,5 +1,5 @@
-
-    <li  class="resultat class_flex">
+<div>
+    <li class="resultat class_flex">
         <input
             type="radio"
             name="trajet_id"
@@ -8,11 +8,12 @@
             aria-labelledby="label_trajet_{{ tjt.id }}"
             >
             <label
+            id ="covoit_proposer"
             for="trajet_{{ tjt.id }}">
             Départ de :<br>{{ tjt.ville_depart }} -> {{ tjt.ville_arrivee }}<br>
             Le {{ tjt.date }}<br>
             À : {{ tjt.heure|date:"H\H:i" }}<br>
-            Voiture : {{ tjt.voiture.marque }} {{ tjt.voiture.modele }}<br>
+            Voiture : <br>{{ tjt.voiture.marque }} {{ tjt.voiture.modele }}<br>
             Prix : {{ tjt.prix }}€<br>
             Places disponibles :
             {% if tjt.places %}
@@ -23,3 +24,4 @@
             Etat: {{ tjt.etat }}<br>
             </label>
     </li>
+</div>

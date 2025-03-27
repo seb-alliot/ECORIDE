@@ -1,0 +1,7 @@
+<div>
+    {% if trajet.chauffeur.adresse_user.photo %}
+    <img src="{{ trajet.chauffeur.adresse_user.photo.url }}" alt="photo de profil" class="photo_profile">
+{% else %}
+    <img src="{{ photo_default_url }}" alt="photo par default" class="photo_profile">
+{% endif %}
+</div>

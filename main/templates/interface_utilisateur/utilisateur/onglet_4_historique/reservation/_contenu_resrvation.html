@@ -1,15 +1,26 @@
-<li id="historique" class="class_flex">
-    <label for="trajet_{{ tjt.id }}">
+
+<li  class="class_flex">
+    <label
+    id="historique"
+    class="class_flex class_column class_justify_center"
+    for="trajet_{{ tjt.id }}">
+        {% if res.trajet_reserver.chauffeur.adresse_user.photo %}
+            <img src="{{ res.trajet_reserver.chauffeur.adresse_user.photo.url }}" alt="photo de profil" class="photo_profile">
+        {% else %}
+            <img src="{{ photo_default_url }}" alt="photo par défaut" class="photo_profile">
+        {% endif %}<br>
+        {{ res.trajet_reserver.chauffeur }}<br>
         Départ de :<br>{{ res.trajet_reserver.ville_depart}} ->  {{ res.trajet_reserver.ville_arrivee }}<br>
         Le  {{ res.trajet_reserver.date }}<br>
-        À : {{ res.trajet_reserver.heure|date:"H\H:i"  }}<br>
+        À  {{ res.trajet_reserver.heure|date:"H\H:i"  }}<br>
+        véhicule :<br>{{ res.trajet_reserver.voiture.marque }} {{ res.trajet_reserver.voiture.modele }}<br>
         {% if res.etat_reservation == "Terminé" %}
         Prix
         {% elif res.etat_reservation == "Annulé" %}
         remboursement
         {% endif %} :
         {{ res.prix_par_passager}}€<br>
-        places : {{ res.trajet_reserver.places }}<br>
+        places : {{ res.places }}<br>
         {{ res.etat_reservation }}<br>
     </label>
 </li>

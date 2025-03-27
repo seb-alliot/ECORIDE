@@ -1,17 +1,17 @@
 
 {% if trajets %}
     <p class="class_flex class_justify_center p_deco">Voici  le{{ trajets|pluralize }} trajet{{ trajets|pluralize }} que vous proposez actuellement</p>
-        <ul class="class_flex class_justify_center class_scroll">
+        <ul class="class_flex class_scroll">
             {% for trajet in trajets %}
                 {% if trajet.etat == "Disponible" or trajet.etat == "En cour" %}
                             <li class="class_flex">
                                 <input type="radio" name="trajet" value="{{ trajet.id }}" id="{{ trajet.id }}"/>
                                 <label id="label_proposition" class="position_relation" for="{{ trajet.id }}">
                                     Départ de :<br>{{ trajet.ville_depart }} pour {{ trajet.ville_arrivee }}<br>
-                                    Le :<br> {{ trajet.date }}<br>
-                                    A: {{ trajet.heure|date:"H\Hi" }}<br>
+                                    Le  {{ trajet.date|date }}<br>
+                                    A: {{ trajet.heure|date:"H\H:i" }}<br>
                                     Voiture : <br>{{ trajet.voiture.marque}} {{ trajet.voiture.modele }}<br>
-                                    Moteur : {{ trajet.voiture.type_moteur }}<br>
+                                    Moteur :  {{ trajet.voiture.type_moteur }}<br>
                                     Prix : {{ trajet.prix }}€<br>
                                     Place:{% if trajet.places != 0 %} {{ trajet.places }}
                                     {% else %}

@@ -161,7 +161,6 @@ class TrajetForm(forms.ModelForm):
             "date",
             "heure",
             "places",
-            "type_moteur",
             "prix",
             "voiture",
             "temps_trajet",
@@ -172,7 +171,6 @@ class TrajetForm(forms.ModelForm):
             "date": forms.DateInput(attrs={"type": "date"}),
             "heure": forms.TimeInput(format="%H:%M", attrs={"type": "time"}),
             "places": forms.Select(choices=TrajetProposer.PLACES),
-            "type_moteur": forms.Select(choices=Voiture.TYPE_MOTEUR),
             "prix": forms.NumberInput(attrs={"placeholder": "Prix"}),
             "temps_trajet": forms.TextInput(attrs={"placeholder": "Durée: 1h30m"}),
         }

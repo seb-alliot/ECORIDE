@@ -43,11 +43,15 @@
     position: relative;
 }
 
+
 .class_scroll{
     overflow-y: auto;
     width: 100%;
     scrollbar-color: rgba(150, 200, 150, 1) rgba(220, 220, 220, 0);
+    padding-bottom: 10px;
 }
+
+/*Début général*/
 
 * {
     margin: 0;
@@ -72,7 +76,7 @@ input:focus, select:focus, textarea:focus, button:focus {
     outline: none;
 }
 
-input:hover, button:hover, .footer:hover, option:hover , #recherche_form button:hover {
+input:hover, button:hover, .footer:hover, option:hover , #recherche_form button:hover, input:hover, button:hover, .footer:hover, option:hover , #recherche_form button:hover{
     background-color: rgb(200, 240, 200);
     color: black;
     }
@@ -107,3 +111,565 @@ button{
 h1:hover , a:hover {
     color: #A7C7A5 ;
     }
+
+/*--image principal--*/
+.image-principal {
+    background-size:cover ;
+    background-position: center;
+}
+
+
+/*--header--*/
+header {
+    justify-content: space-between;
+    padding: 10px 20px;
+}
+
+header h1 a {
+    color: black;
+}
+header a {
+    color: black;
+}
+
+.photo_profile {
+    border-radius: 15%;
+}
+
+#logo {
+    display: flex;
+}
+
+/*--bloque presentation--*/
+.presentation{
+    grid-template-columns: 1fr;
+    grid-template-rows:repeat(3, 1fr);
+    align-content: center;
+}
+
+.presentation >div{
+    margin-right: 10%;
+    margin-left: 10%;
+}
+
+.presentation >div p{
+    flex:1;
+    padding: 40px;
+    flex: 1;
+}
+.presentation > div:nth-child(1) p,.presentation > div:nth-child(2) p,.presentation >  div:nth-child(3) p {
+    padding: 20px;
+}
+.presentation > div:nth-child(3) {
+    justify-content: flex-end;
+}
+
+.presentation > div:nth-child(1) p, .presentation > div:nth-child(3) p {
+    text-align: left;
+}
+
+.presentation > div:nth-child(1) , .presentation > div:nth-child(3)  {
+    justify-content: flex-end;
+    flex-direction: row-reverse;
+}
+.presentation > div:nth-child(2) {
+    justify-content: flex-start;
+    flex-direction: row;
+}
+
+.presentation > div:nth-child(2) p {
+    text-align: left;
+}
+
+.presentation img{
+    width: 45%;
+    height: 70%;
+    object-fit: cover;
+}
+
+/*--footer--*/
+footer {
+    gap: 30px;
+    padding: 0px;
+    margin-top: auto;
+    margin-bottom: 5px;
+}
+
+footer a {
+    color: black;
+    height: 30px;
+}
+.footer {
+    border-radius: 10px;
+    background-color: #7D6E63;
+    color: white;
+}
+
+/*--bloque recherche--*/
+/*--recherche--*/
+#recherche_form  {
+    gap:0;
+    padding: 10px;
+    font-size: 16px;
+    }
+    #recherche_form label{
+        display: none;
+        }
+        button {
+            background-color: #7D6E63;
+            border: 1px solid black;
+            color: white;
+        }
+.conteneur_recherche {
+    width: 100%;
+    margin: 20px auto;
+    bottom: -2%;}
+div.conteneur_recherche2 {
+    gap: 10px;
+}
+.conteneur_recherche2 {
+    background-color: #B19A8B;
+    margin-bottom: 5px;
+}
+
+/*--resultat--*/
+.resultat{
+    gap: 20px;
+}
+.resultat [type=radio]:checked ~ label,#covoit_proposer [type=radio]:checked ~ label, #label_proposition  [type=radio]:checked ~ label, #covoit_proposer [type=radio]:checked, #covoit_reserver [type=radio]:checked, #label_proposition [type=radio]:checked, #resultat_recherche [type=radio]:checked
+{
+    color: black;
+    border-bottom: 1px solid white;
+    z-index: 1;
+    display: flex;
+    border-radius: 10px 10px 10px 10px;
+    list-style-type: none;
+    background-color: rgb(200, 240, 200);
+    }
+
+.resultat input[type="radio"] {
+    display: none;
+}
+
+.resultat label {
+    border-radius: 10px;
+    background-color: #F8F9FA;
+    padding: 10px;
+}
+label#resultat_recherche img{
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    margin-bottom: 10px;
+    border-radius: 15%;
+}
+form#selection_trajet > div#bouton_reservation {
+    display:flex;
+    justify-content: center;
+}
+form#selection_trajet > div > button {
+    margin-bottom:20px;
+}
+
+/*--filtre--*/
+
+form#filtre_form label {
+    display: none;
+}
+
+
+form#selection_trajet > div > button {
+    margin-bottom:10px;
+}
+
+/*--responsive--*/
+
+@media(min-width:320px) and (max-width: 480px) {
+    #logo, .photo_profile {
+        height: 80px;
+        width: 80px;
+    }
+    .image-principal {
+        background-image: url("../photo/principal_mobile.avif");
+        min-height: 100px ;
+    }
+    .presentation > div:nth-child(1) p,.presentation > div:nth-child(2) p,.presentation >  div:nth-child(3) p {
+        font-size: 12px;
+    }
+    footer a{
+        font-size: 12px;
+        width: 80px;
+    }
+    #info_user{
+        font-size: 12px;
+        margin-bottom: 10px;
+    }
+    #recherche_form input , #recherche_form button, form#selection_trajet > div > button,input#id_note , input#id_prix , input#id_temps_trajet, #recherche_form button {
+        width: 60px;
+        height: 30px;
+        font-size: 10px;
+    }
+    .conteneur_recherche{
+        margin:10px auto;
+        padding-bottom: 10px;
+        bottom: 0%;
+    }
+    #resultat_recherche{
+        width: 115px;
+        height: auto;
+        font-size: 10px;
+        margin-top: 10px;
+    }
+    label#resultat_recherche img{
+        width: 100px;
+        height: 80px;
+    }
+}
+
+@media(min-width:479px) and (max-width: 768px) {
+    .photo_profile, #logo {
+        height: 90px;
+        width: 90px;
+    }
+    .image-principal {
+        background-image: url("../photo/principal_mobile.avif");
+        min-height: 150px ;
+    }
+    .presentation > div {
+        margin-right: 10%;
+        margin-left: 10%;
+    }
+    .presentation > div:nth-child(1) p,.presentation > div:nth-child(2) p,.presentation >  div:nth-child(3) p {
+        font-size: 15px;
+    }
+    footer a{
+        font-size: 15px;
+        width: 100px;
+    }
+    #info_user{
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+    #recherche_form input , button,input#id_note , input#id_prix , input#id_temps_trajet , #recherche_form button {
+        width: 85px;
+        height: 30px;
+        font-size: 10px;
+    }
+    .conteneur_recherche{
+        margin:10px auto;
+        padding-bottom: 10px;
+        bottom: 0%;
+    }
+    #resultat_recherche{
+        width: 130px;
+        height: auto;
+        font-size: 12px;
+        margin-top: 10px;
+    }
+    label#resultat_recherche img{
+        width: 110px;
+        height: 80px;
+    }
+}
+
+
+@media(min-width:767px) and (max-width: 1024px) {
+    .photo_profile, #logo {
+        height: 110px;
+        width: 110px;
+    }
+    .image-principal {
+        background-image: url("../photo/principal.avif");
+        min-height: 250px ;
+    }
+    .presentation > div:nth-child(1) p,.presentation > div:nth-child(2) p,.presentation >  div:nth-child(3) p {
+        font-size: 20px;
+    }
+    footer a{
+        font-size: 15px;
+        width: 120px;
+    }
+    #info_user{
+        font-size: 22px;
+        margin-bottom: 15px;
+    }
+    #recherche_form input , #recherche_form button {
+        width: 145px;
+        height: 30px;
+        font-size: 12px;
+    }
+    .conteneur_recherche{
+        margin:10px auto;
+        padding-bottom: 10px;
+        bottom: 0%;
+    }
+    #resultat_recherche{
+        width: 140px;
+        height: auto;
+        font-size: 14px;
+        margin-top: 10px;
+    }
+    label#resultat_recherche img{
+        width: 125px;
+        height: 80px;
+    }
+}
+
+
+
+@media(min-width:1023px) and (max-width: 1200px) {
+    .photo_profile , #logo {
+        height: 120px;
+        width: 120px;
+    }
+    .image-principal {
+        background-image: url("../photo/principal.avif");
+        min-height: 300px ;
+    }
+    footer a{
+        font-size: 15px;
+        width: 150px;
+    }
+    #info_user{
+        font-size: 25px;
+        margin-bottom: 20px;
+    }
+    #recherche_form input , #recherche_form button,input#id_note , input#id_prix , input#id_temps_trajet, button{
+        width: 175px;
+        height: 30px;
+        font-size: 14px;
+    }
+    .conteneur_recherche{
+        margin:10px auto;
+        padding-bottom: 10px;
+        bottom: 0%;
+    }
+    .presentation > div:nth-child(1) p,.presentation > div:nth-child(2) p,.presentation >  div:nth-child(3) p {
+        font-size: 24px;
+    }
+    #resultat_recherche{
+        width: 150px;
+        height: auto;
+        font-size: 15px;
+        margin-top: 10px;
+    }
+    label#resultat_recherche img{
+        width: 135px;
+        height: 90px;
+    }
+}
+
+
+@media(min-width:1199px) and (max-width: 1400px) {
+    .photo_profile , #logo {
+        height: 120px;
+        width: 120px;
+    }
+    .image-principal {
+        background-image: url("../photo/principal.avif");
+        min-height: 310px;
+    }
+    #recherche_form input , #recherche_form button, form#selection_trajet > div > button ,input#id_note , input#id_prix , input#id_temps_trajet, button{
+        width: 175px;
+        height: 30px;
+        font-size: 18px;
+    }
+    .conteneur_recherche{
+        margin:10px auto;
+        padding-bottom: 10px;
+        bottom: 0%;
+    }
+    .presentation > div:nth-child(1) p,.presentation > div:nth-child(2) p,.presentation >  div:nth-child(3) p {
+        font-size: 26px;
+    }
+    footer a{
+        font-size: 20px;
+        width: 180px;
+    }
+    #resultat_recherche{
+        width: 160px;
+        height: auto;
+        font-size: 16px;
+        margin-top: 10px;
+    }
+    label#resultat_recherche img{
+        width: 145px;
+        height: 100px;
+    }
+}
+
+
+@media(min-width:1399px) and (max-width: 1800px) {
+    .photo_profile ,#logo {
+        height: 150px;
+        width: 150px;
+    }
+    .image-principal {
+        background-image: url("../photo/principal.avif");
+        min-height: 400px;
+    }
+    footer a{
+        font-size: 20px;
+        width: 200px;
+    }
+    footer{
+        margin-bottom: 10px;
+    }
+    #info_user{
+        font-size: 30px;
+        margin-bottom: 20px;
+    }
+    #recherche_form input , #recherche_form button , input#id_note , input#id_prix , input#id_temps_trajet, button {
+        width: 180px;
+        height: 30px;
+        font-size: 20px;
+    }
+    .conteneur_recherche{
+        margin:10px auto;
+        padding-bottom: 10px;
+        bottom: 0%;
+    }
+    .presentation > div:nth-child(1) p,.presentation > div:nth-child(2) p,.presentation >  div:nth-child(3) p {
+        font-size: 28px;
+    }
+    #resultat_recherche{
+        width: 160px;
+        height: auto;
+        font-size: 16px;
+        margin-top: 10px;
+    }
+    label#resultat_recherche img{
+        width: 145px;
+        height: 100px;
+    }
+}
+
+
+@media(min-width:1799px) and (max-width: 2000px) {
+    .image-principal {
+        background-image: url("../photo/principal.avif");
+        min-height: 600px;
+    }
+    .presentation > div:nth-child(1) p,.presentation > div:nth-child(2) p,.presentation >  div:nth-child(3) p {
+        font-size: 28px;
+    }
+    input#id_note , input#id_prix , input#id_temps_trajet, button {
+        width: 200px;
+        font-size: 20px;
+    }
+    .conteneur_recherche{
+        margin:10px auto;
+        padding-bottom: 10px;
+        bottom: 0%;
+    }
+    #resultat_recherche{
+        width: 170px;
+        height: auto;
+        font-size: 18px;
+        margin-top: 10px;
+    }
+    label#resultat_recherche img{
+        width: 170px;
+        height: 105px;
+    }
+}
+
+@media(min-width:1999px) and (max-width: 3000px) {
+    .image-principal {
+        background-image: url("../photo/principal.avif");
+        min-height: 700px;
+    }
+    header h1 a {
+        font-size: 80px;
+    }
+    .photo_profile {
+        height: 140px;
+    }
+    #logo {
+        height: 160px;
+        width: 160px;
+    }
+    #recherche_form input , #recherche_form button {
+        width: 200px;
+        height: 30px;
+        font-size: 20px;
+    }
+    .conteneur_recherche{
+        margin:10px auto;
+        padding-bottom: 10px;
+        bottom: 0%;
+    }
+    .presentation > div:nth-child(1) p,.presentation > div:nth-child(2) p,.presentation >  div:nth-child(3) p {
+        font-size: 30px;
+    }
+    input#id_note , input#id_prix , input#id_temps_trajet, button {
+        width: 225px;
+        font-size: 20px;
+    }
+    #resultat_recherche{
+        width: 150px;
+        height: auto;
+        font-size: 15px;
+        margin-top: 10px;
+    }
+    label#resultat_recherche img{
+        width: 135px;
+        height: 80px;
+    }
+    #resultat_recherche{
+        width: 180px;
+        height: auto;
+        font-size: 18px;
+        margin-top: 10px;
+    }
+    label#resultat_recherche img{
+        width: 170px;
+        height: 110px;
+    }
+}
+
+
+@media(min-width:2999px) {
+    .image-principal {
+        background-image: url("../photo/principal.avif");
+        min-height: 950px;
+    }
+    #recherche_form input , #recherche_form button {
+        width: 225px;
+        height: 30px;
+        font-size: 20px;
+    }
+    .conteneur_recherche{
+        margin:10px auto;
+        padding-bottom: 10px;
+        font-size: 20px;
+        bottom: 0%;
+    }
+    header h1 a {
+        font-size: 80px;
+    }
+    .photo_profile {
+        height: 140px;
+    }
+    #logo {
+        height: 160px;
+        width: 160px;
+    }
+    #recherche_form input , #recherche_form button {
+        width: 200px;
+        height: 30px;
+        font-size: 20px;
+    }
+    .conteneur_recherche{
+        margin:10px auto;
+        padding-bottom: 10px;
+        bottom: 0%;
+    }
+    .presentation > div:nth-child(1) p,.presentation > div:nth-child(2) p,.presentation >  div:nth-child(3) p {
+        font-size: 30px;
+    }
+    input#id_note , input#id_prix , input#id_temps_trajet, button {
+        width: 225px;
+        font-size: 20px;
+    }
+}

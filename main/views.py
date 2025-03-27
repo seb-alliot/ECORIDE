@@ -147,7 +147,6 @@ def mentions_legales(request):
         context,
     )
 
-
 def accueil(request):
 
     user = request.user
@@ -155,8 +154,7 @@ def accueil(request):
     adresse_form = TrajetForm()
     recherche_form = RechercheTrajetForm(request.GET)
     filtre_form = FiltreTrajetForm(request.GET)
-
-    chauffeur = None
+    type_moteur = Voiture.objects.filter(type_moteur=user)
 
     resultat_filtrer = None
     first_resultat = None
@@ -180,10 +178,10 @@ def accueil(request):
             )
             if user.is_authenticated:
                 resultat = resultat.exclude(
-                    Q(chauffeur=request.user) | Q(etat="Terminé") | Q(etat="En cours")
+                    Q(chauffeur=request.user) | (Q(etat="Terminé") | Q(etat="En cours") | Q(etat="Annulé"))
                 )
-            else:
-                resultat = resultat.exclude(Q(etat="Terminé") | Q(etat="En cours"))
+            elif user.is_anonymous:
+                resultat = resultat.exclude((Q(etat="Terminé") | Q(etat="En cours") | Q(etat="Annulé")))
 
             request.session["resultat_recherche"] = list(
             resultat.values_list("id", flat=True)
@@ -191,11 +189,6 @@ def accueil(request):
 
             first_resultat= resultat.exclude(Q(type_moteur="Electrique") | Q(type_moteur="Hybride"))
             second_resultat= resultat.exclude(Q(type_moteur="essence") | Q(type_moteur="diesel"))
-            for trajet in resultat:
-                # Calcul de la note moyenne du chauffeur associé au trajet
-                note_moyenne = NoteUser.objects.filter(chauffeur=trajet.chauffeur).aggregate(Avg('note'))['note__avg']
-                # Ajouter cette information à chaque trajet (ou à un dictionnaire pour la transmettre dans le contexte)
-                trajet.note_moyenne = note_moyenne if note_moyenne else 'Pas encore évalué'
 
             if first_resultat.exists() or second_resultat.exists():
                 messages.success(request, "Hey voici juste pour vous !!")
@@ -238,7 +231,7 @@ def accueil(request):
 
     context = {
         # utilisateur
-
+        "type_moteur": type_moteur,
         # resultat de recherche de covoiturage
         "first_resultat": first_resultat,
         "second_resultat": second_resultat,
@@ -480,6 +473,7 @@ def MonCompte(request):
     trajet4 = TrajetProposer.objects.filter(chauffeur=user , etat="Disponible")
     # faire le calcul de l'heure de depart + durée trajet pour afficher l'heure d'arrivée
     voiture = Voiture.objects.filter(user=user)
+    type_moteur = Voiture.objects.filter(type_moteur=user)
     reservation = ReservationTrajet.objects.filter(passager=user)
     reservation1 = reservation.filter(etat_reservation="Terminé", passager=user)
     reservation2 = reservation.filter(etat_reservation="Annulé", passager=user)
@@ -857,7 +851,7 @@ def MonCompte(request):
                     Q(chauffeur=request.user) | Q(etat="Terminé") | Q(etat="En cours")
                 )
             else:
-                resultat = resultat.exclude(Q(etat="Terminé") | Q(etat="En cours"))
+                resultat = resultat.filter(etat="Disponible")
 
             request.session["resultat_recherche"] = list(
             resultat.values_list("id", flat=True)
@@ -913,6 +907,7 @@ def MonCompte(request):
         "voiture": voiture,
         "chauffeur": chauffeur,
         # trajet
+        "type_moteur": type_moteur,
         "prix_total_paye": prix_total_paye,
         "trajet": trajet,
         "trajet1": trajet1,
@@ -1071,7 +1066,7 @@ def SelectionTrajet(request):
     }
     context.update(initialisation_template(request))
     return render(
-        request, "interface_utilisateur/utilisateur/reservation.html", context
+        request, "interface_utilisateur/utilisateur/reservation/reservation.html", context
     )
 
 

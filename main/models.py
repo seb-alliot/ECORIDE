@@ -738,7 +738,7 @@ class Voiture(models.Model):
         return self.places - self.places_reserver
 
     def __str__(self):
-        return f"{ self.marque} {self.modele}"
+        return f"{ self.marque} {self.modele} {self.couleur} {self.type_moteur}"
 
 
 class TrajetProposer(models.Model):

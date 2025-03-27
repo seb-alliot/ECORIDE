@@ -6,21 +6,16 @@
 }
 
 .conteneur_recherche {
-    background-color: rgb(120, 180, 120);
     width: 100%;
     position: relative;
     bottom: -2%;
 }
-div.conteneur_recherche2 {
-    gap: 10px;
 
-}
 .conteneur_recherche2 {
-    padding: 15px;
     background-color: #B19A8B;
-    width: 100%;
-    padding-right: 0px;
-}
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    }
 
 @media(min-width:320px) and (max-width: 480px) {
     #recherche_form input , #recherche_form button {
@@ -31,7 +26,6 @@ div.conteneur_recherche2 {
     .conteneur_recherche{
         margin:10px auto;
         padding-bottom: 10px;
-        font-size: 10px;
     }
 }
 
@@ -44,7 +38,6 @@ div.conteneur_recherche2 {
     .conteneur_recherche{
         margin:10px auto;
         padding-bottom: 10px;
-        font-size: 10px;
     }
 }
 
@@ -57,7 +50,6 @@ div.conteneur_recherche2 {
     .conteneur_recherche{
         margin:10px auto;
         padding-bottom: 10px;
-        font-size: 12px;
     }
 }
 @media(min-width:899px) and (max-width: 1200px) {
@@ -69,7 +61,6 @@ div.conteneur_recherche2 {
     .conteneur_recherche{
         margin:10px auto;
         padding-bottom: 10px;
-        font-size: 12px;
     }
 }
 @media(min-width:1199px) and (max-width: 1400px) {
@@ -81,18 +72,15 @@ div.conteneur_recherche2 {
     .conteneur_recherche{
         margin:20px auto;
         padding-bottom: 20px;
-        font-size: 12px;
     }
 }
 @media(min-width:1399px) {
     #recherche_form input , #recherche_form button {
         width: 225px;
         height: 30px;
-        font-size: 20px;
     }
     .conteneur_recherche{
         margin:20px auto;
         padding-bottom: 24px;
-        font-size: 14px;
     }
 }

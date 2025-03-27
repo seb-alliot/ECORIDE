@@ -2,11 +2,6 @@
 #trajet_form select, #trajet_form button, #trajet_form input{
     height: 30px;
     }
-
-#trajet_form button{
-    margin-top: 10px;
-    }
-
 #trajet_form label{
     display: none;
     }
@@ -18,13 +13,12 @@
 
 div.content > ul {
     gap: 10px;
-    padding:0;
 }
 
 div.content > ul{
     z-index: 1;
 }
-div.content > ul > li> input[type=radio]:hover ~ label , #label_proposition{
+#label_proposition{
     background-color: rgb(200, 240, 200);
     color: black;
 }
@@ -50,6 +44,8 @@ div.content > ul > li > input[type="radio"] {
     }
 
 }
+
+
 @media(min-width: 479px) and (max-width: 768px){
     #trajet_form input, #trajet_form select, #trajet_form button{
         width: 140px;
@@ -64,10 +60,6 @@ div.content > ul > li > input[type="radio"] {
     }
     div.content > ul {
         font-size: 12px;
-    }
-    #p_pas_a_sa_place{
-        margin-top : 10px;
-        margin-bottom : 10px;
     }
 }
 @media(min-width:767px) and (max-width: 1024px) {
@@ -105,9 +97,7 @@ div.content > ul > li > input[type="radio"] {
     #trajet_form{
         margin-bottom: 15px;
     }
-    div.content p {
-        margin: 15px;
-    }
+
 }
 @media(min-width:1199px) and (max-width: 1400px) {
     #trajet_form input, #trajet_form select, #trajet_form button{
@@ -155,10 +145,6 @@ div.content > ul > li > input[type="radio"] {
     }
     div.content > ul {
         font-size: 20px;
-    }
-    #p_pas_a_sa_place{
-        margin-top : 20px;
-        margin-bottom : 20px;
     }
 }
 @media(min-width:1999px){

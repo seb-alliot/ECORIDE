@@ -27,15 +27,10 @@
     <div class="content position_relative">
 
         {% if user_role == "Chauffeur"%}
-            {% if preference is Null %}
-                <p class="preference_css class_flex class_justify_center">Vous n'avez pas encore défini de préférence pour proposer un covoiturage</p>
-            {% else %}
             {% include "interface_utilisateur/utilisateur/onglet_1_trajet/chauffeur/_form_ajout_trajet.html" %}
             {% include "interface_utilisateur/utilisateur/onglet_1_trajet/chauffeur/_trajet_proposer.html" %}
-            {% endif %}
 
         {% elif user_role == "Passager" %}
-
             {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_form_recherche.html" %}
                 {% if first_resultat or second_resultat %}
                     {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_resultat_recherche.html" %}

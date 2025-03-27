@@ -1,0 +1,24 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block style %}
+{% include "css_html/_reservation.html" %}
+
+{% endblock style %}
+
+{% block principal %}
+    <div id="reservation">
+        <!--Section photo chauffeur-->
+        {% include "interface_utilisateur/utilisateur/reservation/contenu_reservation/_photo_chauffeur.html" %}
+        <!--Section information trajet-->
+        {% include "interface_utilisateur/utilisateur/reservation/contenu_reservation/_information_trajet.html" %}
+        <!--Section note et commentaires-->
+        <div>
+        {% include "interface_utilisateur/utilisateur/reservation/contenu_reservation/_avis_passager.html" %}
+        <!--Section note et commentaires-->
+        {% include "interface_utilisateur/utilisateur/reservation/contenu_reservation/_form_reservation.html" %}
+        <!--Formulaire de réservation de place-->
+        </div>
+</div>
+
+{% endblock principal %}

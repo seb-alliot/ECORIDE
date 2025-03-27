@@ -8,18 +8,20 @@
         aria-labelledby="label_trajet_{{ res.id }}"
     >
     <label
+    class="class_column"
+    id="covoit_reserver"
     for="trajet_{{ res.id }}"
     >
         {% if res.trajet_reserver.chauffeur.adresse_user.photo %}
             <img src="{{ res.trajet_reserver.chauffeur.adresse_user.photo.url }}" alt="photo de profil" class="photo_profile">
         {% else %}
             <img src="{{ photo_default_url }}" alt="photo par défaut" class="photo_profile">
-        {% endif %}<br>
+        {% endif %}<br><br>
         Chauffeur : {{ res.trajet_reserver.chauffeur }}<br>
         Départ de :<br>{{ res.trajet_reserver.ville_depart }} -> {{ res.trajet_reserver.ville_arrivee }}<br>
         Le {{ res.trajet_reserver.date }}<br>
-        À : {{ res.trajet_reserver.heure|date:"H\H:i" }} <br>
-        Voiture : {{ res.trajet_reserver.voiture.marque }} {{ res.trajet_reserver.voiture.modele }}<br>
+        À {{ res.trajet_reserver.heure|date:"H\H:i" }}<br>
+        Voiture :<br>{{ res.trajet_reserver.voiture.marque }} {{ res.trajet_reserver.voiture.modele }}<br>
         Prix payer : {{ res.prix_par_passager }}€<br>
         Places disponibles :
         {% if res.trajet_reserver.places != 0 %}

@@ -1,0 +1,9 @@
+<form id="reservation_form" method="POST">
+    {% if user.is_authenticated %}
+        {% csrf_token %}
+            {{ reservation_form.places }}
+        <button type="submit" value="reservation_form">Reserver</button>
+    {% else %}
+        <a href="{% url 'inscription' %}"class="btn btn-primary">Inscrivez-vous pour réserver</a>
+    {% endif %}
+</form>

@@ -1,0 +1,9 @@
+<div id="info_trajet">
+    <p>{{ trajet.chauffeur }}</p>
+    <p>Partant de :</p>
+    <p>{{ trajet.ville_depart }} pour {{ trajet.ville_arrivee }}</p>
+    <p>Le {{ trajet.date }}</p>
+    <p>A  {{ trajet.heure|date:"H\H:i" }}</p>
+    <p>avec la {{ trajet.voiture.marque}} {{ trajet.voiture.modele }}</p>
+    <p>d'un montant de {{ trajet.prix }}€</p>
+</div>
