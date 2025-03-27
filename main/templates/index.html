@@ -18,12 +18,13 @@
     {% block logo %}
         {% include "interface_utilisateur/reutilisable/accueil/_logo.html" %}
     {% endblock logo %}
+
     {% block msginfo %}
         {% include "interface_utilisateur/reutilisable/accueil/_msginfo.html" %}
     {% endblock msginfo %}
 
     {% block connection %}
-            {% include "interface_utilisateur/reutilisable/accueil/_info_user.html" %}
+        {% include "interface_utilisateur/reutilisable/accueil/_info_user.html" %}
     {% endblock connection %}
 
     {% endblock headerContent %}
@@ -42,15 +43,16 @@
                     {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_resultat_recherche.html" %}
                     {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_filtre_trajet.html" %}
                 {% endif %}
-
         {% endblock principal %}
 
     {% block presentation %}
         {% include "interface_utilisateur/reutilisable/accueil/_presentation.html" %}
     {% endblock presentation %}
-            {% block user %}
-                {% include "interface_utilisateur/reutilisable/accueil/_info_utilisateur.html" %}
-            {% endblock user%}
+
+    {% block user %}
+        {% include "interface_utilisateur/reutilisable/accueil/_info_utilisateur.html" %}
+    {% endblock user%}
+    
     {% endblock body %}
 
 <footer class="class_flex class_justify_center class_aligne_items_center">

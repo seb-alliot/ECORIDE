@@ -6,17 +6,18 @@
 }
 
 .conteneur_recherche {
-    background-color: #f9f9f9;
+    background-color: rgb(120, 180, 120);
     width: 100%;
     position: relative;
     bottom: -2%;
 }
 div.conteneur_recherche2 {
     gap: 10px;
+
 }
 .conteneur_recherche2 {
     padding: 15px;
-    background-color: #95CFED;
+    background-color: #B19A8B;
     width: 100%;
     padding-right: 0px;
 }

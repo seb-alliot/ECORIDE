@@ -19,16 +19,14 @@
 div.content > ul {
     gap: 10px;
     padding:0;
-    justify-content: center;
 }
 
 div.content > ul{
     z-index: 1;
 }
-
-div.content > ul > li> input[type=radio]:hover ~ label {
-    background-color: rgb(53, 152, 228);
-    color: white;
+div.content > ul > li> input[type=radio]:hover ~ label , #label_proposition{
+    background-color: rgb(200, 240, 200);
+    color: black;
 }
 
 div.content > ul > li > input[type="radio"] {

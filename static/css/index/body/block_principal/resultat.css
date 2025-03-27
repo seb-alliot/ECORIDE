@@ -3,13 +3,13 @@
 }
 
 .resultat [type=radio]:checked ~ label {
-    color: white;
+    color: black;
     border-bottom: 1px solid white;
     z-index: 1;
     display: flex;
     border-radius: 10px 10px 10px 10px;
     list-style-type: none;
-    background-color: rgb(53, 152, 228);
+    background-color: rgb(200, 240, 200);
     }
 
 .resultat input[type="radio"] {

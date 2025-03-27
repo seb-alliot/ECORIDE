@@ -28,7 +28,7 @@
 
         {% if user_role == "Chauffeur"%}
             {% if preference is Null %}
-                <p>Vous n'avez pas encore défini de préférence pour proposer un covoiturage</p>
+                <p class="preference_css class_flex class_justify_center">Vous n'avez pas encore défini de préférence pour proposer un covoiturage</p>
             {% else %}
             {% include "interface_utilisateur/utilisateur/onglet_1_trajet/chauffeur/_form_ajout_trajet.html" %}
             {% include "interface_utilisateur/utilisateur/onglet_1_trajet/chauffeur/_trajet_proposer.html" %}

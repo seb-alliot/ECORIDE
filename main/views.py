@@ -482,7 +482,7 @@ def MonCompte(request):
     voiture = Voiture.objects.filter(user=user)
     reservation = ReservationTrajet.objects.filter(passager=user)
     reservation1 = reservation.filter(etat_reservation="Terminé", passager=user)
-    reservation2 = reservation.filter(etat_reservation="annulé", passager=user)
+    reservation2 = reservation.filter(etat_reservation="Annulé", passager=user)
     reservation3 = reservation.filter(etat_reservation="Reserver", passager=user)
     prix_total_paye = ReservationTrajet.paiement_total_passager(request.user, trajet)
 

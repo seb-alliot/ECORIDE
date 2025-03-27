@@ -46,10 +46,9 @@
 .class_scroll{
     overflow-y: auto;
     width: 100%;
+    scrollbar-color: rgba(150, 200, 150, 1) rgba(220, 220, 220, 0);
 }
 
-
-/*limitation de ligne de code*/
 * {
     margin: 0;
     box-sizing: border-box;
@@ -69,11 +68,19 @@ button, select, input {
     box-shadow:6px 6px 10px rgba(0, 0, 0, 0.41);
     text-align: center;
 }
+input:focus, select:focus, textarea:focus, button:focus {
+    outline: none;
+}
 
-input:hover, button:hover, .footer:hover, .resultat input[type="radio"]:hover ~ label{
-    background-color: #B7D8F4;
+input:hover, button:hover, .footer:hover, option:hover , #recherche_form button:hover {
+    background-color: rgb(200, 240, 200);
     color: black;
     }
+
+.resultat input[type="radio"]:hover ~ label {
+    background: #7D6E63;
+    color: white;
+}
 
 select {
     background-color: white;
@@ -81,7 +88,11 @@ select {
 
 button{
     background-color: #FAF3E0;
-    border: 1px solid black;
+    text-align: center;
+    border: solid 1px black;
+    box-sizing: border-box;
+    border-radius: 10px;
+    box-shadow:6px 6px 10px rgba(0, 0, 0, 0.41);
 }
 ::placeholder {
     color: #000000;
@@ -89,5 +100,10 @@ button{
 
 .p_deco{
     box-shadow: 6px 6px 10px beige;
-    background-color: rgba(215, 250, 222, 0.71);
+    background-color: rgb(120, 180, 120);
+    color: blanchedalmond;
+    text-shadow: 1px 1px 2px black;
 }
+h1:hover , a:hover {
+    color: #A7C7A5 ;
+    }

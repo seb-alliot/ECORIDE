@@ -39,7 +39,7 @@ textarea#id_exigences_personnelles{
     #preference_form input, #preference_form select, #preference_form button, textarea#id_exigences_personnelles{
         width: 150px;
         height: 30px;
-        font-size: 10px;
+        font-size: 12px;
     }
     #preference_form {
         flex-direction: column;

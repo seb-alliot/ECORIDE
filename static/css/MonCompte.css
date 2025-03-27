@@ -34,10 +34,10 @@
     }
 
     .tab [type=radio]:checked ~ label {
-    background: #7D6E63;
-    color: white;
-    border-bottom: 1px solid white;
-    z-index: 0;
+        background: #7D6E63;
+        color: white;
+        z-index: 0;
+        border-bottom: 1px solid white;
     }
 
     .tab [type=radio]:checked ~ label ~ .content {
@@ -67,14 +67,13 @@
     overflow-x: scroll;
 	overflow-y: auto;
     scrollbar-width: thin;
-    scrollbar-color: #000000 #95CFED;
-    }
-/*--------------reservation---trajet-----------*/
+    scrollbar-color: rgba(150, 200, 150, 1) rgba(220, 220, 220, 0);
+}
 
-
-
-/*--------------Contenu----covoiturage--------------*/
-/*--------------Contenu----chauffeur--------------*/
+#adresse_form option, #trajet_form option, form#etat_form option , #id_etat_reservation option ,#role_form option , #voiture_form option, #preference_form option {
+    background-color: rgb(200, 240, 200);
+    border:solid 3px black;
+}
 
 
 /*-----Onglets actifs--------------*/

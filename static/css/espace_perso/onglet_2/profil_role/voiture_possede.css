@@ -1,6 +1,6 @@
 
 div.info_perso {
-    gap: 10px;
+    gap: 20px;
     flex-wrap: inherit;
     margin-top: 10px;
     }
@@ -10,7 +10,7 @@ div.info_perso {
     border: 1px solid #ccc;
     border-radius: 10px 10px 10px 10px;
     list-style-type: none;
-    background-color: #6fc2ec;
+    background-color: rgb(200, 240, 200);
     padding: 10px;
     margin-bottom: 15px;
     box-shadow: 6px 6px 10px beige;

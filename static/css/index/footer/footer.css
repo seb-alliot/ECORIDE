@@ -20,11 +20,19 @@ footer a {
         font-size: 12px;
         width: 80px;
     }
+    #info_user{
+        font-size: 12px;
+        margin-bottom: 10px;
+    }
 }
 @media(min-width:499px) and (max-width: 768px){
     footer a{
         font-size: 15px;
         width: 100px;
+    }
+    #info_user{
+        font-size: 16px;
+        margin-bottom: 10px;
     }
 }
 @media(min-width:767px) and (max-width: 900px){
@@ -32,11 +40,19 @@ footer a {
         font-size: 15px;
         width: 120px;
     }
+    #info_user{
+        font-size: 22px;
+        margin-bottom: 15px;
+    }
 }
 @media(min-width:899px) and (max-width: 1500px){
     footer a{
         font-size: 15px;
         width: 150px;
+    }
+    #info_user{
+        font-size: 25px;
+        margin-bottom: 20px;
     }
 }
 @media(min-width:1499px){
@@ -46,5 +62,9 @@ footer a {
     }
     footer{
         margin-bottom: 10px;
+    }
+    #info_user{
+        font-size: 30px;
+        margin-bottom: 20px;
     }
 }
