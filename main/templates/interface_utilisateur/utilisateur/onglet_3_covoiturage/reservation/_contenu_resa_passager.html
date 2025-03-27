@@ -16,7 +16,7 @@
             <img src="{{ res.trajet_reserver.chauffeur.adresse_user.photo.url }}" alt="photo de profil" class="photo_profile">
         {% else %}
             <img src="{{ photo_default_url }}" alt="photo par défaut" class="photo_profile">
-        {% endif %}<br><br>
+        {% endif %}<br>
         Chauffeur : {{ res.trajet_reserver.chauffeur }}<br>
         Départ de :<br>{{ res.trajet_reserver.ville_depart }} -> {{ res.trajet_reserver.ville_arrivee }}<br>
         Le {{ res.trajet_reserver.date }}<br>

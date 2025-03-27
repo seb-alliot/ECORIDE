@@ -1,22 +1,22 @@
 {% if preference is Null %}
-<p class="preference_css class_flex class_justify_center">Vous n'avez pas encore défini de préférence pour proposer un covoiturage</p>
+    <p class="preference_css class_flex class_justify_center">Vous n'avez pas encore défini de préférence pour proposer un covoiturage</p>
 {% else %}
-<p class="class_flex class_justify_center p_deco">Vos préferences actuelles sont :</p>
+    <p class="class_flex class_justify_center p_deco">Vos préferences actuelles sont :</p>
 {% if preference %}
-<div class="preference_css class_flex class_justify_center">
-    <div class="class_flex class_justify_center">
-        {{ preference.get_fumeur_display }}
+    <div class="preference_css class_flex class_justify_center">
+        <div class="class_flex class_justify_center">
+            {{ preference.get_fumeur_display }}
+        </div>
+        <div class="class_flex class_justify_center">
+            {{ preference.get_animaux_display }}
+        </div>
+        <div class="class_flex class_justify_center">
+            {{ preference.get_exigences_particulieres_display }}
+        </div>
+        <div class="class_flex class_justify_center">
+            {{ preference.exigences_personnelles }}
+        </div>
     </div>
-    <div class="class_flex class_justify_center">
-        {{ preference.get_animaux_display }}
-    </div>
-    <div class="class_flex class_justify_center">
-        {{ preference.get_exigences_particulieres_display }}
-    </div>
-    <div class="class_flex class_justify_center">
-        {{ preference.exigences_personnelles }}
-    </div>
-</div>
 {% else %}
     <p class="class_flex class_justify_center">Comme le réservoir , à remplir !!</p>
 {% endif %}
@@ -25,11 +25,11 @@
     {% csrf_token %}
         <label for="preferences_form">Préférences</label>
             {{ preference_form.fumeur }}
-            <label for="preferences_form">Animaux</label>
+                <label for="preferences_form">Animaux</label>
             {{ preference_form.animaux }}
         <label for="preferences_form">Exigences personnelles</label>
             {{ preference_form.exigences_particulieres }}
-            <label for="preferences_form">Préferences personnelles</label>
+                <label for="preferences_form">Préferences personnelles</label>
             {{ preference_form.exigences_personnelles }}
         <button id="button_preferences" type="submit" name="form_soumis" value="preference_form">Modifier</button>
     </form>
