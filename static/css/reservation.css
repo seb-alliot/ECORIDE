@@ -1,28 +1,25 @@
-
-
 /*--------------Block RESERVATION--------------*/
-div#reservation{
+div#reservation {
     display: flex;
     flex-wrap: wrap;
     margin-top: 20px;
     justify-content: center;
 }
 
-div#reservation > div{
+div#reservation > div {
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: #B19A8B;
     box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.41);
-    border:solid 2px black;
+    border: solid 2px black;
     width: 300px;
     height: 300px;
 }
 
-
 /**----Photo chauffeur------*/
 
-div#reservation > div > img.photo_profile{
+div#reservation > div > img.photo_profile {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -30,13 +27,14 @@ div#reservation > div > img.photo_profile{
     height: 100%;
     border-radius: 15% 0 0 15%;
 }
-div#reservation > div:nth-child(1){
+
+div#reservation > div:nth-child(1) {
     border-radius: 15% 0 0 15%;
 }
 
 /*--- Partie info trajet ---*/
 
-#chauffeur_trajet{
+#chauffeur_trajet {
     margin-bottom: 8%;
     border: solid;
     width: 100%;
@@ -44,7 +42,8 @@ div#reservation > div:nth-child(1){
     display: flex;
     background-color: rgb(200, 240, 200);
 }
-#prix_trajet{
+
+#prix_trajet {
     border: solid;
     width: 100%;
     justify-content: center;
@@ -57,255 +56,300 @@ div#reservation > div:nth-child(1){
     display: flex;
     align-items: center;
     flex-direction: column;
-    /*1500px*/
-    /*margin: 5px;*/
-    color:white;
+    color: white;
 }
 
-div#info_trajet > div#info_trajet{
-    margin:20%;
+div#info_trajet > div#info_trajet {
+    margin: 20%;
 }
 
 /*--- Partie info chauffeur ---*/
 
-div#reservation > div:nth-child(3){
+div#reservation > div:nth-child(3) {
     border-radius: 0 15% 15% 0;
 }
 
-
-
 /*---formulaire de selection de place---*/
 
-
-/*#place_a_reserver, #div_avis  {
-    margin-top:15px;
-    margin-bottom: 10px;
-}--
-#avis {
-    margin-top: 15px;
-
-}
-#avis , #note , #preference {
-    margin: 5px;
-}
-
-div#preference {
-    gap:10px;
-}
-*/
-@media(min-width:320px) and (max-width: 480px) {
-
-    div#reservation > div > img.photo_profile{
-        width: 100%;
-        height: 100%;
+@media(min-width: 320px) and (max-width: 480px) {
+    div#reservation > div > img.photo_profile {
         width: 100px;
         height: 100px;
     }
-    div#reservation > div{
+
+    div#reservation > div {
         width: 100px;
         height: 100px;
     }
-    #prix_trajet , #chauffeur_trajet , #info_trajet > div > p{
+
+    #prix_trajet,
+    #chauffeur_trajet,
+    #info_trajet > div > p {
         font-size: 8px;
     }
+
     div#info_trajet {
         margin: -8px;
     }
+
     #div_avis {
-        font-size : 6px;
+        font-size: 6px;
         width: 70%;
         margin-top: 5px;
     }
+
     #dive_preference {
         margin: 5px;
         font-size: 5px;
     }
+
     #place_a_reserver {
         font-size: 8px;
         margin: 5px;
     }
 }
 
-
-@media(min-width:479px) and (max-width: 767px) {
-
-    div#reservation > div > img.photo_profile{
-        width: 100%;
-        height: 100%;
+@media(min-width: 479px) and (max-width: 767px) {
+    div#reservation > div > img.photo_profile {
         width: 150px;
         height: 150px;
     }
-    div#reservation > div{
+
+    div#reservation > div {
         width: 150px;
         height: 150px;
     }
-    #prix_trajet , #chauffeur_trajet , #info_trajet > div > p{
+
+    #prix_trajet,
+    #chauffeur_trajet,
+    #info_trajet > div > p {
         font-size: 10px;
     }
+
     div#info_trajet {
         margin: 2%;
     }
+
     #div_avis {
-        font-size : 9px;
+        font-size: 9px;
         width: 80%;
         margin-top: 4px;
     }
-    #dive_preference, #note {
+
+    #dive_preference,
+    #note {
         margin: 5px;
         font-size: 9px;
     }
+
     #preference {
         margin-top: 10px;
-        font-size: 9px;;
+        font-size: 9px;
     }
+
     #place_a_reserver {
         font-size: 10px;
         margin: 10px;
     }
 }
 
-@media(min-width:767px) and (max-width: 1024px) {
-    div#reservation > div > img.photo_profile{
-        width: 100%;
-        height: 100%;
+@media(min-width: 767px) and (max-width: 1024px) {
+    div#reservation > div > img.photo_profile {
         width: 250px;
         height: 250px;
     }
-    div#reservation > div{
+
+    div#reservation > div {
         width: 250px;
         height: 250px;
     }
-    #prix_trajet , #chauffeur_trajet , #info_trajet > div > p{
+
+    #prix_trajet,
+    #chauffeur_trajet,
+    #info_trajet > div > p {
         font-size: 14px;
-        margin:5px;
+        margin: 5px;
     }
+
     div#info_trajet {
         margin: 3%;
     }
+
     #div_avis {
         width: 90%;
     }
-    #note, #div_avis, #preference  {
+
+    #note,
+    #div_avis,
+    #preference {
         font-size: 12px;
     }
-    div#div_avis > div, div#place_a_reserver > div,  div#place_a_reserver{
+
+    div#div_avis > div,
+    div#place_a_reserver > div,
+    div#place_a_reserver {
         margin: 7px;
     }
-    div#preference p{
+
+    div#preference p {
         margin: 4px;
     }
+
     #place_a_reserver {
         font-size: 14px;
     }
 }
 
-@media(min-width:1023px) and (max-width: 1200px) {
+@media(min-width: 1023px) and (max-width: 1200px) {
     div#div_avis > div > p {
         font-size: 14px;
     }
-    div#reservation > div > img.photo_profile{
-        width: 100%;
-        height: 100%;
+
+    div#reservation > div > img.photo_profile {
         width: 300px;
         height: 300px;
     }
-    div#reservation > div{
+
+    div#reservation > div {
         width: 300px;
         height: 300px;
     }
-    #prix_trajet , #chauffeur_trajet , #info_trajet > div > p{
+
+    #prix_trajet,
+    #chauffeur_trajet,
+    #info_trajet > div > p {
         font-size: 16px;
-        margin:6px;
+        margin: 6px;
     }
+
     div#info_trajet {
         margin: 4%;
     }
+
     #div_avis {
         width: 90%;
     }
-    #note, #div_avis, #preference  {
+
+    #note,
+    #div_avis,
+    #preference {
         font-size: 12px;
     }
-    div#div_avis > div, div#place_a_reserver > div,  div#place_a_reserver{
+
+    div#div_avis > div,
+    div#place_a_reserver > div,
+    div#place_a_reserver {
         margin: 10px;
     }
-    div#preference p{
+
+    div#preference p {
         margin: 4px;
     }
+
     #place_a_reserver {
         font-size: 16px;
     }
 }
 
-@media(min-width:1199px) and (max-width: 1400px) {
+@media(min-width: 1199px) and (max-width: 1400px) {
     div#div_avis > div > p {
         font-size: 14px;
     }
-    div#reservation > div > img.photo_profile{
-        width: 100%;
-        height: 100%;
+
+    div#reservation > div > img.photo_profile {
         width: 300px;
         height: 300px;
     }
-    div#reservation > div{
+
+    div#reservation > div {
         width: 300px;
         height: 300px;
     }
-    #prix_trajet , #chauffeur_trajet , #info_trajet > div > p{
+
+    #prix_trajet,
+    #chauffeur_trajet,
+    #info_trajet > div > p {
         font-size: 16px;
-        margin:6px;
+        margin: 6px;
     }
+
     div#info_trajet {
         margin: 4%;
     }
+
     #div_avis {
         width: 90%;
     }
-    #note, #div_avis, #preference  {
+
+    #note,
+    #div_avis,
+    #preference {
         font-size: 12px;
     }
-    div#div_avis > div, div#place_a_reserver > div,  div#place_a_reserver{
+
+    div#div_avis > div,
+    div#place_a_reserver > div,
+    div#place_a_reserver {
         margin: 10px;
     }
-    div#preference p{
+
+    div#preference p {
         margin: 4px;
     }
+
     #place_a_reserver {
         font-size: 16px;
     }
 }
 
-@media(min-width:1399px){
-    div#div_avis > div > p ,div#place_a_reserver > div > p {
+@media(min-width: 1399px) {
+    div#div_avis > div > p,
+    div#place_a_reserver > div > p {
         font-size: 16px;
     }
-    div#reservation > div > img.photo_profile{
-        width: 100%;
-        height: 100%;
+
+    div#reservation > div > img.photo_profile {
         width: 350px;
         height: 350px;
     }
-    div#reservation > div{
+
+    div#reservation > div {
         width: 350px;
         height: 350px;
     }
-    #prix_trajet , #chauffeur_trajet , #info_trajet > div > p{
+
+    #prix_trajet,
+    #chauffeur_trajet,
+    #info_trajet > div > p {
         font-size: 18px;
-        margin:6px;
+        margin: 6px;
     }
+
     div#info_trajet {
         margin: 7%;
     }
+
     #div_avis {
         width: 90%;
     }
-    #note, #div_avis, #preference  {
+
+    #note,
+    #div_avis,
+    #preference {
         font-size: 12px;
     }
-    div#div_avis > div, div#place_a_reserver > div,  div#place_a_reserver{
+
+    div#div_avis > div,
+    div#place_a_reserver > div,
+    div#place_a_reserver {
         margin: 10px;
     }
-    div#preference p{
+
+    div#preference p {
         margin: 4px;
+    }
+
+    #place_a_reserver {
+        font-size: 16px;
     }
 }
