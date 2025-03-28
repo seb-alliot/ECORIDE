@@ -13,12 +13,10 @@
         <!--Section information trajet-->
         {% include "interface_utilisateur/utilisateur/reservation/contenu_reservation/_information_trajet.html" %}
         <!--Section note et commentaires-->
-        <div>
         {% include "interface_utilisateur/utilisateur/reservation/contenu_reservation/_avis_passager.html" %}
         <!--Section note et commentaires-->
-        {% include "interface_utilisateur/utilisateur/reservation/contenu_reservation/_form_reservation.html" %}
-        <!--Formulaire de réservation de place-->
-        </div>
-</div>
+    </div>
+{% include "interface_utilisateur/utilisateur/reservation/contenu_reservation/_form_reservation.html" %}
+<!--Formulaire de réservation de place-->
 
 {% endblock principal %}

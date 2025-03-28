@@ -1,9 +1,19 @@
-<div id="info_trajet">
-    <p>{{ trajet.chauffeur }}</p>
-    <p>Partant de :</p>
-    <p>{{ trajet.ville_depart }} pour {{ trajet.ville_arrivee }}</p>
-    <p>Le {{ trajet.date }}</p>
-    <p>A  {{ trajet.heure|date:"H\H:i" }}</p>
-    <p>avec la {{ trajet.voiture.marque}} {{ trajet.voiture.modele }}</p>
-    <p>d'un montant de {{ trajet.prix }}€</p>
+<div class="class_justify_center">
+    <div id="chauffeur_trajet">
+        <p>{{ trajet.chauffeur }}</p>
+    </div>
+    <div id="info_trajet">
+        <div class="class_flex class_justify_center class_column"        >
+            <p>Partant de :</p>
+            <p>{{ trajet.ville_depart }} pour {{ trajet.ville_arrivee }}</p>
+            <p>Le</p>
+            <p>{{ trajet.date }}</p>
+            <p>A</p>
+            <p>{{ trajet.heure|date:"H\H:i" }}</p>
+            <p>avec la {{ trajet.voiture.marque}} {{ trajet.voiture.modele }}</p>
+        </div>
+    </div>
+    <div id="prix_trajet">
+        <p>Prix de la place : {{ trajet.prix }}€</p>
+    </div>
 </div>

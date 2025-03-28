@@ -1,9 +1,15 @@
-<form id="reservation_form" method="POST">
-    {% if user.is_authenticated %}
-        {% csrf_token %}
-            {{ reservation_form.places }}
-        <button type="submit" value="reservation_form">Reserver</button>
-    {% else %}
-        <a href="{% url 'inscription' %}"class="btn btn-primary">Inscrivez-vous pour réserver</a>
-    {% endif %}
-</form>
+<div id="place_a_reserver" class="class_flex class_column class_aligne_items_center p_deco">
+    <p>{{ trajet.places }} places restantes</p><br>
+    <p>Combien de places voulez-vous réserver?</p><br>
+</div>
+<div class="class_flex class_justify_center">
+    <form id="reservation_form" method="POST">
+        {% if user.is_authenticated %}
+            {% csrf_token %}
+                {{ reservation_form.places }}
+            <button type="submit" value="reservation_form">Reserver</button>
+        {% else %}
+            <a href="{% url 'inscription' %}"class="btn btn-primary">Inscrivez-vous pour réserver</a>
+        {% endif %}
+    </form>
+</div>

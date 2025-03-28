@@ -14,6 +14,7 @@
 .class_aligne_items_center {
     align-items: center;
 }
+
 .class_column {
     flex-direction: column;
 }
@@ -75,7 +76,7 @@ input:focus, select:focus, textarea:focus, button:focus {
     outline: none;
 }
 
-input:hover, button:hover, .footer:hover, option:hover , #recherche_form button:hover, input:hover, button:hover, .footer:hover, option:hover , #recherche_form button:hover{
+input:hover, button:hover, .footer:hover, option:hover , #recherche_form button:hover, input:hover, button:hover, .footer:hover, option:hover , #recherche_form button:hover, div#reservation > div > form#reservation_form > select:hover, #reservation_form select option:focus-hover {
     background-color: rgb(200, 240, 200);
     color: black;
     }
@@ -302,6 +303,10 @@ textarea#id_message {
 /*--responsive--*/
 
 @media(min-width:320px) and (max-width: 480px) {
+    header {
+        display: flex;
+        flex-direction: column;
+    }
     #logo, .photo_profile {
         height: 80px;
         width: 80px;
@@ -317,7 +322,7 @@ textarea#id_message {
         font-size: 12px;
         margin-bottom: 10px;
     }
-    #recherche_form input , #recherche_form button, form#selection_trajet > div > button,input#id_note , input#id_prix , input#id_temps_trajet, #recherche_form button, footer a, #contact_form button {
+    #recherche_form input , #recherche_form button, form#selection_trajet > div > button,input#id_note , input#id_prix , input#id_temps_trajet, #recherche_form button, footer a, #contact_form button , #reservation_form select,  #reservation_form button{
         width: 60px;
         height: 30px;
         font-size: 10px;
@@ -368,7 +373,7 @@ textarea#id_message {
         font-size: 16px;
         margin-bottom: 10px;
     }
-    #recherche_form input , button,input#id_note , input#id_prix , input#id_temps_trajet , #recherche_form button, footer a, #contact_form button {
+    #recherche_form input , button,input#id_note , input#id_prix , input#id_temps_trajet , #recherche_form button, footer a, #contact_form button, #reservation_form select, #reservation_form button {
         width: 85px;
         height: 30px;
         font-size: 10px;
@@ -417,7 +422,7 @@ textarea#id_message {
         font-size: 22px;
         margin-bottom: 15px;
     }
-    #recherche_form input , #recherche_form button, footer a ,#contact_form button{
+    #recherche_form input , #recherche_form button, footer a ,#contact_form button, #reservation_form select, #reservation_form button {
         width: 145px;
         height: 30px;
         font-size: 12px;
@@ -465,7 +470,7 @@ textarea#id_message {
         font-size: 25px;
         margin-bottom: 20px;
     }
-    #recherche_form input , #recherche_form button,input#id_note , input#id_prix , input#id_temps_trajet, button, footer a,#contact_form button{
+    #recherche_form input , #recherche_form button,input#id_note , input#id_prix , input#id_temps_trajet, button, footer a,#contact_form button , #reservation_form select, #reservation_form button {
         width: 175px;
         height: 30px;
         font-size: 14px;
@@ -508,11 +513,15 @@ textarea#id_message {
         height: 120px;
         width: 120px;
     }
+    #info_user{
+        font-size: 25px;
+        margin-bottom: 20px;
+    }
     .image-principal {
         background-image: url("../photo/principal.avif");
         min-height: 310px;
     }
-    #recherche_form input , #recherche_form button, form#selection_trajet > div > button ,input#id_note , input#id_prix , input#id_temps_trajet, button, footer a,#contact_form button{
+    #recherche_form input , #recherche_form button, form#selection_trajet > div > button ,input#id_note , input#id_prix , input#id_temps_trajet, button, footer a,#contact_form button , #reservation_form select, #reservation_form button {
         width: 175px;
         height: 30px;
         font-size: 18px;
@@ -536,7 +545,7 @@ textarea#id_message {
         height: 100px;
     }
     #contact_form input{
-        width: 210px;
+        width: 200px;
         height: 30px;
         font-size: 15px;
     }
@@ -566,7 +575,7 @@ textarea#id_message {
         font-size: 30px;
         margin-bottom: 20px;
     }
-    #recherche_form input , #recherche_form button , input#id_note , input#id_prix , input#id_temps_trajet, button , footer a ,#contact_form button{
+    #recherche_form input , #recherche_form button , input#id_note , input#id_prix , input#id_temps_trajet, button , footer a ,#contact_form button , #reservation_form select , #reservation_form button {
         width: 180px;
         height: 30px;
         font-size: 20px;
@@ -616,7 +625,7 @@ textarea#id_message {
     .presentation > div:nth-child(1) p,.presentation > div:nth-child(2) p,.presentation >  div:nth-child(3) p {
         font-size: 28px;
     }
-    input#id_note , input#id_prix , input#id_temps_trajet, button, footer a, #contact_form button {
+    input#id_note , input#id_prix , input#id_temps_trajet, button, footer a, #contact_form button , #reservation_form select, #reservation_form button {
         width: 200px;
         font-size: 20px;
     }
@@ -668,7 +677,7 @@ textarea#id_message {
         height: 160px;
         width: 160px;
     }
-    #recherche_form input , #recherche_form button , footer a , #contact_form button {
+    #recherche_form input , #recherche_form button , footer a , #contact_form button , #reservation_form select , #reservation_form button {
         width: 200px;
         height: 30px;
         font-size: 20px;
@@ -746,7 +755,7 @@ textarea#id_message {
         height: 160px;
         width: 160px;
     }
-    #recherche_form input , #recherche_form button, footer a , #contact_form button{
+    #recherche_form input , #recherche_form button, footer a , #contact_form button , #reservation_form select , #reservation_form button{
         width: 200px;
         height: 30px;
         font-size: 20px;
