@@ -53,8 +53,11 @@
 
 /*Début général*/
 html, body {
-    -webkit-text-size-adjust: 100%; /* Empêche Safari d'agrandir le texte automatiquement */
-    }
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
 * {
     margin: 0;
     box-sizing: border-box;
