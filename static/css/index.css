@@ -52,7 +52,9 @@
 }
 
 /*Début général*/
-
+html, body {
+    -webkit-text-size-adjust: 100%; /* Empêche Safari d'agrandir le texte automatiquement */
+    }
 * {
     margin: 0;
     box-sizing: border-box;
