@@ -303,10 +303,6 @@ textarea#id_message {
 /*--responsive--*/
 
 @media(min-width:320px) and (max-width: 480px) {
-    header {
-        display: flex;
-        flex-direction: column;
-    }
     #logo, .photo_profile {
         height: 80px;
         width: 80px;
