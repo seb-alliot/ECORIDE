@@ -1,5 +1,9 @@
 {% extends "index.html" %}
 
+{% load static %}
+
+{% include "css_html/_reservation.html" %}
+
 {% block principal %}
 <form id="contact_form" method="POST">
     {% csrf_token %}

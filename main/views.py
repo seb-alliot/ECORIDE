@@ -133,7 +133,7 @@ def Contact(request):
     context.update(initialisation_template(request))
     return render(
         request,
-        "interface_utilisateur/reutilisable/accueil/footer/_contact.html",
+        "interface_utilisateur/utilisateur/footer/_contact.html",
         context,
     )
 
@@ -143,7 +143,7 @@ def mentions_legales(request):
     context.update(initialisation_template(request))
     return render(
         request,
-        "interface_utilisateur/reutilisable/accueil/footer/_faq.html",
+        "interface_utilisateur/utilisateur/footer/_faq.html",
         context,
     )
 

@@ -212,9 +212,6 @@ footer a {
     padding: 10px;
     font-size: 16px;
     }
-    #recherche_form label{
-        display: none;
-        }
         button {
             background-color: #7D6E63;
             border: 1px solid black;
@@ -247,9 +244,9 @@ div.conteneur_recherche2 {
     background-color: rgb(200, 240, 200);
     }
 
-.resultat input[type="radio"] {
+.resultat input[type="radio"] , form#filtre_form label, #recherche_form label{
     display: none;
-}
+    }
 
 .resultat label {
     border-radius: 10px;
@@ -271,13 +268,6 @@ form#selection_trajet > div > button {
     margin-bottom:20px;
 }
 
-/*--filtre--*/
-
-form#filtre_form label {
-    display: none;
-}
-
-
 form#selection_trajet > div > button {
     margin-bottom:10px;
 }
@@ -296,15 +286,11 @@ form#selection_trajet > div > button {
     .presentation > div:nth-child(1) p,.presentation > div:nth-child(2) p,.presentation >  div:nth-child(3) p {
         font-size: 12px;
     }
-    footer a{
-        font-size: 12px;
-        width: 80px;
-    }
     #info_user{
         font-size: 12px;
         margin-bottom: 10px;
     }
-    #recherche_form input , #recherche_form button, form#selection_trajet > div > button,input#id_note , input#id_prix , input#id_temps_trajet, #recherche_form button {
+    #recherche_form input , #recherche_form button, form#selection_trajet > div > button,input#id_note , input#id_prix , input#id_temps_trajet, #recherche_form button, footer a {
         width: 60px;
         height: 30px;
         font-size: 10px;
@@ -342,15 +328,11 @@ form#selection_trajet > div > button {
     .presentation > div:nth-child(1) p,.presentation > div:nth-child(2) p,.presentation >  div:nth-child(3) p {
         font-size: 15px;
     }
-    footer a{
-        font-size: 15px;
-        width: 100px;
-    }
     #info_user{
         font-size: 16px;
         margin-bottom: 10px;
     }
-    #recherche_form input , button,input#id_note , input#id_prix , input#id_temps_trajet , #recherche_form button {
+    #recherche_form input , button,input#id_note , input#id_prix , input#id_temps_trajet , #recherche_form button, footer a {
         width: 85px;
         height: 30px;
         font-size: 10px;
@@ -385,15 +367,11 @@ form#selection_trajet > div > button {
     .presentation > div:nth-child(1) p,.presentation > div:nth-child(2) p,.presentation >  div:nth-child(3) p {
         font-size: 20px;
     }
-    footer a{
-        font-size: 15px;
-        width: 120px;
-    }
     #info_user{
         font-size: 22px;
         margin-bottom: 15px;
     }
-    #recherche_form input , #recherche_form button {
+    #recherche_form input , #recherche_form button, footer a {
         width: 145px;
         height: 30px;
         font-size: 12px;
@@ -416,7 +394,6 @@ form#selection_trajet > div > button {
 }
 
 
-
 @media(min-width:1023px) and (max-width: 1200px) {
     .photo_profile , #logo {
         height: 120px;
@@ -426,15 +403,11 @@ form#selection_trajet > div > button {
         background-image: url("../photo/principal.avif");
         min-height: 300px ;
     }
-    footer a{
-        font-size: 15px;
-        width: 150px;
-    }
     #info_user{
         font-size: 25px;
         margin-bottom: 20px;
     }
-    #recherche_form input , #recherche_form button,input#id_note , input#id_prix , input#id_temps_trajet, button{
+    #recherche_form input , #recherche_form button,input#id_note , input#id_prix , input#id_temps_trajet, button, footer a{
         width: 175px;
         height: 30px;
         font-size: 14px;
@@ -469,7 +442,7 @@ form#selection_trajet > div > button {
         background-image: url("../photo/principal.avif");
         min-height: 310px;
     }
-    #recherche_form input , #recherche_form button, form#selection_trajet > div > button ,input#id_note , input#id_prix , input#id_temps_trajet, button{
+    #recherche_form input , #recherche_form button, form#selection_trajet > div > button ,input#id_note , input#id_prix , input#id_temps_trajet, button, footer a{
         width: 175px;
         height: 30px;
         font-size: 18px;
@@ -481,10 +454,6 @@ form#selection_trajet > div > button {
     }
     .presentation > div:nth-child(1) p,.presentation > div:nth-child(2) p,.presentation >  div:nth-child(3) p {
         font-size: 26px;
-    }
-    footer a{
-        font-size: 20px;
-        width: 180px;
     }
     #resultat_recherche{
         width: 160px;
@@ -508,10 +477,6 @@ form#selection_trajet > div > button {
         background-image: url("../photo/principal.avif");
         min-height: 400px;
     }
-    footer a{
-        font-size: 20px;
-        width: 200px;
-    }
     footer{
         margin-bottom: 10px;
     }
@@ -519,7 +484,7 @@ form#selection_trajet > div > button {
         font-size: 30px;
         margin-bottom: 20px;
     }
-    #recherche_form input , #recherche_form button , input#id_note , input#id_prix , input#id_temps_trajet, button {
+    #recherche_form input , #recherche_form button , input#id_note , input#id_prix , input#id_temps_trajet, button , footer a{
         width: 180px;
         height: 30px;
         font-size: 20px;
@@ -553,7 +518,7 @@ form#selection_trajet > div > button {
     .presentation > div:nth-child(1) p,.presentation > div:nth-child(2) p,.presentation >  div:nth-child(3) p {
         font-size: 28px;
     }
-    input#id_note , input#id_prix , input#id_temps_trajet, button {
+    input#id_note , input#id_prix , input#id_temps_trajet, button, footer a {
         width: 200px;
         font-size: 20px;
     }
@@ -589,7 +554,7 @@ form#selection_trajet > div > button {
         height: 160px;
         width: 160px;
     }
-    #recherche_form input , #recherche_form button {
+    #recherche_form input , #recherche_form button , footer a {
         width: 200px;
         height: 30px;
         font-size: 20px;
@@ -655,7 +620,7 @@ form#selection_trajet > div > button {
         height: 160px;
         width: 160px;
     }
-    #recherche_form input , #recherche_form button {
+    #recherche_form input , #recherche_form button, footer a {
         width: 200px;
         height: 30px;
         font-size: 20px;

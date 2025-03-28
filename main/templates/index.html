@@ -2,10 +2,10 @@
 <html lang="fr">
 <head>
     {% block meta %}
-        {% include "interface_utilisateur/reutilisable/accueil/_head_meta_donne.html" %}
+        {% include "interface_utilisateur/reutilisable/_head_meta_donne.html" %}
     {% endblock meta %}
     {% block title %}
-        {% include "interface_utilisateur/reutilisable/accueil/_nom_du_site.html" %}
+        {% include "interface_utilisateur/reutilisable/_nom_du_site.html" %}
     {% endblock title %}
 
     {% block style %}
@@ -16,15 +16,15 @@
 <header class="class_flex class_aligne_items_center position_relative">
     {% block headerContent %}
     {% block logo %}
-        {% include "interface_utilisateur/reutilisable/accueil/_logo.html" %}
+        {% include "interface_utilisateur/reutilisable/_logo.html" %}
     {% endblock logo %}
 
     {% block msginfo %}
-        {% include "interface_utilisateur/reutilisable/accueil/_msginfo.html" %}
+        {% include "interface_utilisateur/reutilisable/_msginfo.html" %}
     {% endblock msginfo %}
 
     {% block connection %}
-        {% include "interface_utilisateur/reutilisable/accueil/_info_user.html" %}
+        {% include "interface_utilisateur/reutilisable/_info_user.html" %}
     {% endblock connection %}
 
     {% endblock headerContent %}
@@ -34,7 +34,7 @@
     {% block body %}
 
         {% block fondbase %}
-            {% include "interface_utilisateur/reutilisable/accueil/_fondbase.html" %}
+            {% include "interface_utilisateur/reutilisable/_fondbase.html" %}
         {% endblock fondbase %}
 
         {% block principal %}
@@ -46,18 +46,18 @@
         {% endblock principal %}
 
     {% block presentation %}
-        {% include "interface_utilisateur/reutilisable/accueil/_presentation.html" %}
+        {% include "interface_utilisateur/reutilisable/_presentation.html" %}
     {% endblock presentation %}
 
     {% block user %}
-        {% include "interface_utilisateur/reutilisable/accueil/_info_utilisateur.html" %}
+        {% include "interface_utilisateur/reutilisable/_info_utilisateur.html" %}
     {% endblock user%}
 
     {% endblock body %}
 
 <footer class="class_flex class_justify_center class_aligne_items_center">
         {% block footerContent %}
-            {% include "interface_utilisateur/reutilisable/accueil/_footer.html" %}
+            {% include "interface_utilisateur/reutilisable/_footer.html" %}
         {% endblock footerContent %}
 </footer>
 </body>
