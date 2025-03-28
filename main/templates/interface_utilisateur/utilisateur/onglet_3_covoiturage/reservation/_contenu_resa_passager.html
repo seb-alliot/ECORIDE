@@ -23,13 +23,13 @@
         À {{ res.trajet_reserver.heure|date:"H\H:i" }}<br>
         Voiture :<br>{{ res.trajet_reserver.voiture.marque }} {{ res.trajet_reserver.voiture.modele }}<br>
         Prix payer : {{ res.prix_par_passager }}€<br>
-        Places disponibles :
+        Places disponibles
         {% if res.trajet_reserver.places != 0 %}
         {{ res.trajet_reserver.places }}
         {% else %}
         Complet
         {% endif %}<br>
-        Trajet : {{ res.trajet_reserver.etat }}<br>
+        Etat : {{ res.trajet_reserver.etat }}<br>
         {{ res.places }} places de reservée{{ res.places |pluralize }} <br>
     </label>
 </li>

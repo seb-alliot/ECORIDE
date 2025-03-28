@@ -2,12 +2,13 @@
 
 {% load static %}
 
-{% include "css_html/_reservation.html" %}
 
 {% block principal %}
-<form id="contact_form" method="POST">
-    {% csrf_token %}
-    {{ contact_form.as_p }}
-    <button type="submit">Envoyer</button>
-</form>
+    <div id="contact_form">
+        <form id="contact_form" method="POST">
+            {% csrf_token %}
+            {{ contact_form.as_p }}
+                <button type="submit">Envoyer</button>
+        </form>
+    </div>
 {% endblock principal %}
