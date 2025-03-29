@@ -36,7 +36,7 @@ div#reservation > div:nth-child(1) {
 
 #chauffeur_trajet {
     margin-bottom: 8%;
-    border: solid;
+    border: solid 1px black;
     width: 100%;
     justify-content: center;
     display: flex;
@@ -44,7 +44,7 @@ div#reservation > div:nth-child(1) {
 }
 
 #prix_trajet {
-    border: solid;
+    border: solid 1px black;
     width: 100%;
     justify-content: center;
     display: flex;
@@ -82,16 +82,16 @@ div#reservation > div:nth-child(3) {
         height: 135px;
     }
 
-    #prix_trajet,
-    #chauffeur_trajet,
-    #info_trajet > div > p {
+    #chauffeur_trajet  > p , #prix_trajet > p {
         font-size: 12px;
     }
 
     div#info_trajet {
-        margin: -8px;
+        margin: -4px;
     }
-
+    div#info_trajet > div > p {
+        font-size: 12px;
+    }
     #div_avis {
         font-size: 8px;
         width: 70%;
