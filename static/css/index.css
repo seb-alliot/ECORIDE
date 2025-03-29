@@ -348,13 +348,13 @@ textarea#id_message {
         height: 80px;
     }
     #contact_form input,#contact_form button, #contact_form input {
-        width: 170px;
+        width: 150px;
         height: 30px;
         font-size: 12px;
     }
     #id_message {
-        min-width: 200px;
-        min-height: 100px;
+        width: 250px;
+        height: 100px;
     }
 }
 
