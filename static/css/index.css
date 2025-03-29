@@ -53,11 +53,15 @@
 
 /*Début général*/
 html, body {
-    text-size-adjust: 100%;
-    -webkit-text-size-adjust: 100%;
-    -moz-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%;
-}
+    text-size-adjust: none;
+    -webkit-text-size-adjust: none; /* Pour Safari et Chrome */
+    -ms-text-size-adjust: none; /* Pour les anciennes versions d'Edge */
+    }
+    @supports (-moz-appearance:none) {
+        html, body {
+            text-size-adjust: none;
+        }
+    }
 * {
     margin: 0;
     box-sizing: border-box;
