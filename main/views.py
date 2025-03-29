@@ -991,7 +991,6 @@ def SelectionTrajet(request):
     # Vérification d'une réservation existante pour l'utilisateur
     if not user.is_authenticated:
         reservation = None
-        messages.info(request, "Veuillez vous connecter pour réserver ce trajet.")
     else:
         reservation = ReservationTrajet.objects.filter(
             passager=user, trajet_reserver=trajet

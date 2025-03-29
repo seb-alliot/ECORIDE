@@ -1,16 +1,16 @@
 <div id="note_commentaire" class="class_flex class_column">
     <div id="div_avis" >
-        <div class="class_flex p_deco class_justify_center">
+        <div class="class_flex p_deco class_border_radius class_justify_center">
             <p>Avis</p>
         </div>
-        <div class="class_flex class_aligne_items_center class_column">
+        <div class="class_flex class_aligne_items_center  class_column">
             {% for commentaire in commentaires %}
                 <p id="avis">{{ commentaire.passager__username }} : {{ commentaire.commentaire }}</p>
             {% empty %}
                 <p>Aucun commentaire</p>
             {% endfor %}
         </div>
-        <div class="class_flex p_deco class_justify_center">
+        <div class="class_flex p_deco  class_border_radius class_justify_center">
             <p>Note</p>
         </div>
         <div class="class_flex class_aligne_items_center class_column">
@@ -20,7 +20,7 @@
                 <p id="note">Aucune note</p>
             {% endif %}
         </div>
-        <div class="class_flex p_deco  class_aligne_items_center class_justify_center">
+        <div class="class_flex p_deco  class_aligne_items_center class_border_radius class_justify_center">
             <p>préférences</p>
         </div>
         <div id="preference" class="class_flex class_aligne_items_center class_column">

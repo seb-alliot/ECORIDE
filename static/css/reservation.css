@@ -35,7 +35,6 @@ div#reservation > div:nth-child(1) {
 /*--- Partie info trajet ---*/
 
 #chauffeur_trajet {
-    margin-bottom: 8%;
     border: solid 2px black;
     width: 100%;
     justify-content: center;
@@ -71,7 +70,7 @@ div#reservation > div:nth-child(3) {
 
 /*---formulaire de selection de place---*/
 
-@media(min-width: 320px) and (max-width: 480px) {
+@media(min-width: 320px) and (max-width: 479px) {
     div#reservation > div > img.photo_profile {
         width: 97px;
         height: 135px;
@@ -90,7 +89,7 @@ div#reservation > div:nth-child(3) {
     }
     #div_avis {
         font-size: 8px;
-        width: 70%;
+        width: 90%;
         margin-top: 5px;
     }
 
@@ -100,12 +99,18 @@ div#reservation > div:nth-child(3) {
     }
 
     #place_a_reserver {
-        font-size: 8px;
+        font-size: 10px;
         margin: 5px;
+    }
+    #chauffeur_trajet {
+        margin-bottom: 10%;
+    }
+    #prix_trajet {
+        margin-top: 10%;
     }
 }
 
-@media(min-width: 479px) and (max-width: 767px) {
+@media(min-width: 479px) and (max-width: 768px) {
     div#reservation > div > img.photo_profile {
         width: 150px;
         height: 150px;
@@ -119,7 +124,7 @@ div#reservation > div:nth-child(3) {
     #prix_trajet,
     #chauffeur_trajet,
     #info_trajet > div > p {
-        font-size: 10px;
+        font-size: 12px;
     }
 
     div#info_trajet {
@@ -146,6 +151,12 @@ div#reservation > div:nth-child(3) {
     #place_a_reserver {
         font-size: 10px;
         margin: 10px;
+    }
+    #chauffeur_trajet {
+        margin-bottom: 3.5%;
+    }
+    #prix_trajet {
+        margin-top: 3.5%;
     }
 }
 
@@ -188,10 +199,11 @@ div#reservation > div:nth-child(3) {
 
     div#preference p {
         margin: 4px;
+        font-size: 10px;
     }
 
     #place_a_reserver {
-        font-size: 14px;
+        font-size: 15px;
     }
 }
 
@@ -242,7 +254,7 @@ div#reservation > div:nth-child(3) {
     }
 
     #place_a_reserver {
-        font-size: 16px;
+        font-size: 18px;
     }
 }
 
@@ -293,7 +305,7 @@ div#reservation > div:nth-child(3) {
     }
 
     #place_a_reserver {
-        font-size: 16px;
+        font-size: 20px;
     }
 }
 
@@ -345,6 +357,6 @@ div#reservation > div:nth-child(3) {
     }
 
     #place_a_reserver {
-        font-size: 16px;
+        font-size: 22px;
     }
 }
