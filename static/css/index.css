@@ -52,16 +52,7 @@
 }
 
 /*Début général*/
-html, body {
-    text-size-adjust: none;
-    -webkit-text-size-adjust: none; /* Pour Safari et Chrome */
-    -ms-text-size-adjust: none; /* Pour les anciennes versions d'Edge */
-    }
-    @supports (-moz-appearance:none) {
-        html, body {
-            text-size-adjust: none;
-        }
-    }
+
 * {
     margin: 0;
     box-sizing: border-box;
@@ -143,10 +134,19 @@ header a {
 
 .photo_profile {
     border-radius: 15%;
+    margin-right: 1%;
 }
-
+.photo_default {
+    height: 120px;
+    width: 120px;
+    border-radius: 15%;
+    background-image:url("../photo/photo_default.jpg");
+    background-size: cover;
+    margin-right: 1%;
+}
 #logo {
     display: flex;
+    margin-left: 4%;
 }
 
 /*--bloque presentation--*/
@@ -312,7 +312,7 @@ textarea#id_message {
 /*--responsive--*/
 
 @media(min-width:320px) and (max-width: 480px) {
-    #logo, .photo_profile {
+    #logo, .photo_profile, .photo_default {
         height: 80px;
         width: 80px;
     }
@@ -359,7 +359,7 @@ textarea#id_message {
 }
 
 @media(min-width:479px) and (max-width: 767px) {
-    .photo_profile, #logo {
+    .photo_profile, #logo ,.photo_default  {
         height: 90px;
         width: 90px;
     }
@@ -412,7 +412,7 @@ textarea#id_message {
 
 
 @media(min-width:767px) and (max-width: 1024px) {
-    .photo_profile, #logo {
+    .photo_profile, #logo, .photo_default {
         height: 110px;
         width: 110px;
     }
@@ -463,7 +463,7 @@ textarea#id_message {
 
 
 @media(min-width:1023px) and (max-width: 1200px) {
-    .photo_profile , #logo {
+    .photo_profile , #logo, .photo_default {
         height: 120px;
         width: 120px;
     }
@@ -514,7 +514,7 @@ textarea#id_message {
 
 
 @media(min-width:1199px) and (max-width: 1400px) {
-    .photo_profile , #logo {
+    .photo_profile , #logo, .photo_default {
         height: 120px;
         width: 120px;
     }
@@ -565,7 +565,7 @@ textarea#id_message {
 
 
 @media(min-width:1399px) and (max-width: 1800px) {
-    .photo_profile ,#logo {
+    .photo_profile ,#logo , .photo_default {
         height: 150px;
         width: 150px;
     }
@@ -661,6 +661,10 @@ textarea#id_message {
         max-height: 200px;
         font-size: 17px;
     }
+    #logo , .photo_default, .photo_profile {
+        height: 150px;
+        width: 150px;
+    }
 }
 
 @media(min-width:1999px) and (max-width: 3000px) {
@@ -675,10 +679,7 @@ textarea#id_message {
     header h1 a {
         font-size: 80px;
     }
-    .photo_profile {
-        height: 140px;
-    }
-    #logo {
+    #logo , .photo_default, .photo_profile {
         height: 160px;
         width: 160px;
     }
@@ -753,10 +754,8 @@ textarea#id_message {
     header h1 a {
         font-size: 80px;
     }
-    .photo_profile {
-        height: 140px;
-    }
-    #logo {
+
+    #logo , .photo_default, .photo_profile {
         height: 160px;
         width: 160px;
     }

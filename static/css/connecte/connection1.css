@@ -26,9 +26,10 @@ a {
     color: black;
     display: flex;
     justify-content: center;
-    margin-top:20px
 }
-
+#creer_compte {
+    margin-top:20px;
+}
 .connection > input#id_email {
     border-radius: 10px;
     border: 1px solid #6fc2ec;
