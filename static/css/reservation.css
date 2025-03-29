@@ -88,6 +88,12 @@ div#reservation > div:nth-child(3) {
     div#info_trajet > div > p {
         font-size: 10px;
     }
+    @-moz-document url-prefix() {
+        div#info_trajet > div > p {
+            font-size: 10px;
+            margin: -0.7%;
+        }
+    }
     #div_avis {
         font-size: 8px;
         width: 70%;
@@ -165,6 +171,12 @@ div#reservation > div:nth-child(3) {
     #info_trajet > div > p {
         font-size: 14px;
         margin: 5px;
+    }
+    @-moz-document url-prefix() {
+        div#info_trajet > div > p {
+            font-size: 14px;
+            margin: 1px;
+        }
     }
 
     div#info_trajet {

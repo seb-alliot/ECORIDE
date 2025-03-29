@@ -404,8 +404,8 @@ textarea#id_message {
         font-size: 13px;
     }
     #id_message {
-        min-width: 250px;
-        min-height: 100px;
+        width: 250px;
+        height: 100px;
         font-size: 13px;
     }
 }
