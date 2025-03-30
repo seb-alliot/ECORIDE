@@ -1,0 +1,119 @@
+:root {
+    --logo-size: 80px;
+    --font-size-base: 10px;
+    --input-width: 60px;
+    --image-height: 120px;
+}
+.image-principal {
+    background-image: url("../../photo/principal_mobile.avif");
+    min-height: var(--image-height);
+}
+#logo, .photo_profile, .photo_default {
+    height: var(--logo-size);
+    width: var(--logo-size);
+}
+#inscription input,
+#inscription button,
+#recherche_form input,
+#recherche_form button,
+#reservation_form button,
+#form_trajet input,
+#form_trajet button,
+#filtre_form input,
+#filtre_form button,
+#filtre_form select,
+#selection_trajet button,
+#id_places,
+footer a
+    {
+    width: var(--input-width);
+    font-size: var(--font-size-base);
+}
+#login1 input,
+#login1 button,
+#login2 input,
+#login2 button,
+#reset_mdp input,
+#reset_mdp button,
+#validation_email input,
+#validation_email button{
+    width: var(--image-height);
+    font-size: var(--font-size-base);
+}
+#creer_compte a , #mot_de_passe_oublie a {
+    font-size: var(--font-size-base);
+    margin-top: var(--spacing-md);
+}
+#resultat_recherche {
+    width: 115px;
+    height: auto;
+    font-size: var(--font-size-base);
+    margin-top: var(--spacing-md)
+}
+label#resultat_recherche img {
+    width: 95px;
+    height: 80px;
+}
+.presentation > div:nth-child(1) p,
+.presentation > div:nth-child(2) p,
+.presentation > div:nth-child(3) p {
+    font-size: 12px;
+}
+#info_user {
+    font-size: 12px;
+    margin-bottom: var(--spacing-sm);
+}
+#resultat_recherche {
+    font-size: var(--font-size-base)
+}
+#contact_form input {
+    font-size: 12px;
+}
+h1, h2, h3 { font-size: 14px; }
+h4, h5, h6 { font-size: 12px; }
+#contact_form textarea {
+    font-size: 12px;
+    width: 250px;
+    height: var(--image-height)
+}
+#contact_form input,
+#contact_form button {
+    font-size: 12px;
+    width: 125px;
+}
+
+/*---carte de selection de trajet---*/
+
+div#reservation > div > img.photo_profile , div#reservation > div {
+    width: 97px;
+    height: 135px;
+}
+#chauffeur_trajet  > p , #prix_trajet > p {
+    font-size: 12px;
+}
+div#info_trajet > div > p {
+    font-size: 9px;
+}
+#div_avis {
+    font-size: 8px;
+    width: 90%;
+    margin-top: 5px;
+}
+
+#dive_preference {
+    margin: 5px;
+    font-size: 5px;
+}
+
+#place_a_reserver {
+    font-size: var(--font-size-base);
+    margin: 5px;
+}
+#chauffeur_trajet {
+    margin-bottom: 9%;
+}
+#prix_trajet {
+    margin-top: 9%;
+}
+
+

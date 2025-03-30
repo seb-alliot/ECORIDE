@@ -1,19 +1,30 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    {% block meta %}
-        {% include "interface_utilisateur/reutilisable/_head_meta_donne.html" %}
-    {% endblock meta %}
-    {% block title %}
-        {% include "interface_utilisateur/reutilisable/_nom_du_site.html" %}
-    {% endblock title %}
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="EcoRide est une plateforme innovante de covoiturage qui vous permet de partager vos trajets en voiture...">
+        <meta name="google-site-verification" content="55hTLK2eHYbvixFbM_aq6D4SBMNeT9s7a7GurBqs9hM" />
 
-    {% block style %}
-        {% include "css_html/_css_index.html" %}
-    {% endblock style %}
-</head>
+        <link rel="icon" href="{% static 'photo/logo.ico' %}" type="image/x-icon">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+        <link rel="preload" href="{% static 'css/main.css' %}" as="style">
 
-<header class="class_flex class_aligne_items_center position_relative">
+        <link rel="stylesheet" href="{% static 'css/main.css' %}">
+
+        {% block title %}
+            {% include "interface_utilisateur/reutilisable/_nom_du_site.html" %}
+        {% endblock title %}
+
+        {% block style %}
+            {% include "css_html/_css_index.html" %}
+        {% endblock style %}
+    </head>
+
+
+<header class="generic position_relative">
     {% block headerContent %}
     {% block logo %}
         {% include "interface_utilisateur/reutilisable/_logo.html" %}
@@ -30,7 +41,7 @@
     {% endblock headerContent %}
 </header>
 
-<body class="class_flex class_column class_box_sizing ">
+<body class="generix1 class_box_sizing ">
     {% block body %}
 
         {% block fondbase %}
@@ -55,7 +66,7 @@
 
     {% endblock body %}
 
-<footer class="class_flex class_justify_center class_aligne_items_center">
+<footer class="generix2">
         {% block footerContent %}
             {% include "interface_utilisateur/reutilisable/_footer.html" %}
         {% endblock footerContent %}

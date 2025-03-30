@@ -1,0 +1,122 @@
+
+    :root {
+        --logo-size: 250px;
+        --font-size-base: 36px;
+        --input-width: 300px;
+        --image-height: 900px;
+    }
+    .image-principal {
+        background-image: url("../../photo/principal.avif");
+        min-height: var(--image-height);
+    }
+    #logo, .photo_profile, .photo_default {
+        height: var(--logo-size);
+        width: var(--logo-size);
+    }
+    #recherche_form input,
+    #recherche_form button,
+    #reservation_form button,
+    #form_trajet input,
+    #form_trajet button,
+    #filtre_form input,
+    #filtre_form button,
+    #filtre_form select,
+    #selection_trajet button,
+    #id_places,
+    #inscription input,
+    #inscription button,
+    #login1 input,
+    #login1 button,
+    #login2 input,
+    #login2 button,
+    #reset_mdp input,
+    #reset_mdp button,
+    #validation_email input,
+    #validation_email button,
+    footer a{
+        width: var(--input-width);
+        font-size: var(--font-size-base);
+        height: 45px;
+    }
+    #creer_compte a , #mot_de_passe_oublie a {
+        font-size: var(--font-size-base);
+        margin-top: var(--spacing-lg);
+    }
+    #resultat_recherche {
+        width: 170px;
+        height: auto;
+        font-size: 18px;
+        margin-top: 10px;
+    }
+    label#resultat_recherche img {
+        width: 150px;
+        height: 100px;
+    }
+    #info_user, .presentation p{
+        font-size: 50px;
+    }
+    div.conteneur_recherche > div , #info_user ,#selection_trajet button{
+        margin-bottom: var(--spacing-lg);
+    }
+    h1, h2, h3,#contact_form input,#contact_form button,#contact_form textarea{
+        font-size: 28px;
+    }
+    #contact_form textarea {
+        width: 600px;
+        height: 300px;
+    }
+    #contact_form input,
+    #contact_form button {
+        width: 250px;
+        height: 30px;
+    }
+    .presentation > div {
+        margin-right: 25%;
+        margin-left: 25%;
+    }
+    #selection_trajet{
+        margin-left:15%;
+        margin-right:15%;
+    }
+    #recherche_form,#login1,#login2,#reset_mdp,#validation_email{
+        height: 70px;;
+    }
+
+/*---carte de selection de trajet---*/
+div#div_avis > div > p,
+div#place_a_reserver > div > p {
+    font-size: 16px;
+}
+div#reservation > div > img.photo_profile , div#reservation > div{
+    width: 350px;
+    height: 350px;
+}
+#prix_trajet,
+#chauffeur_trajet,
+#info_trajet > div > p {
+    font-size: 18px;
+    margin: 6px;
+}
+div#info_trajet {
+    margin: 4%;
+    }
+#div_avis {
+    width: 90%;
+}
+#note,
+#div_avis,
+#preference {
+    font-size: 12px;
+}
+div#div_avis > div,
+div#place_a_reserver > div,
+div#place_a_reserver {
+    margin: var(--spacing-md);
+}
+div#preference p {
+    margin: 4px;
+}
+#place_a_reserver {
+    font-size: 22px;
+}
+
