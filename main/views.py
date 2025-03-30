@@ -187,8 +187,8 @@ def accueil(request):
             resultat.values_list("id", flat=True)
                 )
 
-            first_resultat= resultat.exclude(Q(type_moteur="Electrique") | Q(type_moteur="Hybride"))
-            second_resultat= resultat.exclude(Q(type_moteur="essence") | Q(type_moteur="diesel"))
+            first_resultat= resultat.exclude(Q(voiture__type_moteur="Electrique") | Q(voiture__type_moteur="Hybride"))
+            second_resultat= resultat.exclude(Q(voiture__type_moteur="essence") | Q(voiture__type_moteur="diesel"))
 
             if first_resultat.exists() or second_resultat.exists():
                 messages.success(request, "Hey voici juste pour vous !!")

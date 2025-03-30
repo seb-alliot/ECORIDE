@@ -17,9 +17,9 @@
         <div class="conteneur_recherche2 class_flex">
             <ul class="resultat class_scroll">
                 {% for resultat in second_resultat %}
-                {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_contenu_resultat.html" %}
-                    {% empty %}
-                        <p class="class_flex class_justify_center">Il n'y a pas de resultat  pour cette recherche. Essayez une autre date !</p>
+                    {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_contenu_resultat.html" %}
+                {% empty %}
+                    <p class="class_flex class_justify_center">Il n'y a pas de resultat  pour cette recherche. Essayez une autre date !</p>
                 {% endfor %}
             </ul>
         </div>

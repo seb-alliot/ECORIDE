@@ -2,11 +2,10 @@
 <link rel="stylesheet" href="{% static 'css/connecte/connection1.css' %}">
 
 
-<form method="POST" class="connection class_shadow class_flex class_border class_justify_center class_aligne_items_center">
-
+<form method="POST" class="connection connection-form">
     {% csrf_token %}
-        <label for="recherche_form">Identifiant</label>
-        {{ form.username }}
+    <label for="recherche_form" class="label-hidden">Identifiant</label>
+    {{ form.username }}
     <button type="submit">Se connecter</button>
 </form>
     <a id="creer_compte" href="{% url 'inscription' %}">Vous créer un compte ?</a>

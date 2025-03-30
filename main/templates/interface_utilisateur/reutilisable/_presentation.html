@@ -1,21 +1,21 @@
 {% load static %}
 
 
-<section id="presentation ">
+<section id="presentation">
     {% block content %}
-        <div class="presentation aligne_content_center display_grid" >
-            <div class="class_flex position_relation class_aligne_items_center">
-                <img class="class_border_radius" src="{% static 'photo/route_corse1.avif' %}" alt="Un covoiturage pour réduire les émissions de CO2 et favoriser l'écologie">
-                <p>Soucieux de l’environnement, EcoRide permet de limiter les émissions de CO₂ en favorisant le covoiturage.</p>
+        <div class="presentation">
+            <div class="presentation-flex">
+                <img src="{% static 'photo/route_corse1.avif' %}" alt="Un covoiturage pour réduire les émissions de CO2 et favoriser l'écologie">
+                <p>Soucieux de l'environnement, EcoRide permet de limiter les émissions de CO₂ en favorisant le covoiturage.</p>
             </div>
-            <div class="class_flex position_relation class_aligne_items_center">
-                <img class="class_border_radius" src="{% static 'photo/budget.avif' %}" alt="Trajet économique pour un budget réduit et des déplacements simplifiés">
+            <div class="presentation-flex-reverse">
+                <img src="{% static 'photo/budget.avif' %}" alt="Trajet économique pour un budget réduit et des déplacements simplifiés">
                 <p>Avec EcoRide, proposé, réservé et organisé vos déplacements en toute simplicité avec la sécurité en plus.</p>
             </div>
-            <div class="class_flex position_relation class_aligne_items_center">
-                <img class="class_border_radius" src="{% static 'photo/covoiturage.avif' %}" alt="Voyager de manière économique et responsable grâce au transport partagé">
+            <div class="presentation-flex">
+                <img src="{% static 'photo/covoiturage.avif' %}" alt="Voyager de manière économique et responsable grâce au transport partagé">
                 <p>En covoiturage, voyagez avec un portefeuille léger, où que vous soyez.</p>
             </div>
         </div>
-        {% endblock content %}
-    </section>
+    {% endblock content %}
+</section>

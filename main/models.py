@@ -9,6 +9,7 @@ from datetime import date, datetime, timedelta
 from decimal import Decimal
 import uuid
 from django.db.models import Sum
+from django.db.models import Q
 
 
 class CreditUser(models.Model):
@@ -738,7 +739,7 @@ class Voiture(models.Model):
         return self.places - self.places_reserver
 
     def __str__(self):
-        return f"{ self.marque} {self.modele} {self.couleur} {self.type_moteur}"
+        return f"{ self.marque} {self.modele}"
 
 
 class TrajetProposer(models.Model):
@@ -770,9 +771,6 @@ class TrajetProposer(models.Model):
     date = models.DateField(default=date.today)
     heure = models.TimeField(blank=True, default=now)
     places = models.IntegerField(choices=PLACES)
-    type_moteur = models.CharField(
-        choices=Voiture.TYPE_MOTEUR, max_length=15, verbose_name="Moteur"
-    )
     prix = models.DecimalField(
         max_digits=5,
         decimal_places=2,

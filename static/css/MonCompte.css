@@ -45,10 +45,7 @@
     }
     .tab [type=radio]:checked ~ label ~ .content > * {
     opacity: 1;
-    -webkit-transform: translateX(0);
-    -moz-transform:    translateX(0);
-    -ms-transform:     translateX(0);
-    -o-transform:      translateX(0);
+    transform: translateX(0);
     }
 
 /*--------------Contenant----des---onglets--------------*/
@@ -91,10 +88,7 @@
     }
     [type=radio]:checked ~ label ~ .content > * {
     opacity: 1;
-    -webkit-transform: translateX(0);
-    -moz-transform:    translateX(0);
-    -ms-transform:     translateX(0);
-    -o-transform:      translateX(0);
+    transform: translateX(0);
     }
 /*--autre--*/
 #modification_satut{
@@ -104,8 +98,7 @@
 
 @media(min-width:320px) and (max-width: 480px) {
     div.tabs {
-        margin-left: 2%;
-        margin-right: 2%;
+        margin: 10px 2%;
         }
         #menu-tab {
             font-size: 8pt;
@@ -118,7 +111,7 @@
         top: 8px;
     }
     #label img, #covoit_proposer img, #covoit_reserver img , #historique img, #label_proposition img, label#resultat_recherche > img{
-        width: 100px;
+        width: 95px;
         height: 80px;
     }
     #label_proposition , #covoit_proposer, #covoit_reserver, #historique, #label_proposition, #resultat_recherche{
@@ -129,8 +122,7 @@
 
 @media(min-width:479px) and (max-width: 768px) {
     div.tabs {
-        margin-left: 2%;
-        margin-right: 2%;
+        margin: 10px 2%;
     }
     .tab label {
         font-size: 12px;
@@ -151,8 +143,7 @@
 
 @media(min-width:767px) and (max-width: 1024px) {
     div.tabs  {
-        margin-left: 4%;
-        margin-right: 4%;
+        margin: 10px 4%;
     }
     .tab label {
         font-size: 14px;
@@ -162,7 +153,7 @@
         margin-top: 10px;
         }
         #label img, #covoit_proposer img, #covoit_reserver img , #historique img, #label_proposition img, label#resultat_recherche > img{
-            width: 125px;
+            width: 120px;
             height: 80px;
         }
         #label_proposition , #covoit_proposer, #covoit_reserver, #historique, #label_proposition, #resultat_recherche{
@@ -173,8 +164,7 @@
 
 @media(min-width:1023px) and (max-width: 1200px) {
     div.tabs  {
-        margin-left: 4%;
-        margin-right: 4%;
+        margin: 10px 4%;
     }
     .tab label {
         font-size: 15px;
@@ -184,7 +174,7 @@
         margin-top: 10px;
         }
         #label img, #covoit_proposer img, #covoit_reserver img , #historique img, #label_proposition img, label#resultat_recherche > img{
-            width: 135px;
+            width: 130px;
             height: 90px;
         }
         #label_proposition , #covoit_proposer, #covoit_reserver, #historique, #label_proposition, #resultat_recherche{
@@ -195,8 +185,7 @@
 
 @media(min-width:1199px) and (max-width: 1400px) {
     div.tabs  {
-        margin-left: 4%;
-        margin-right: 4%;
+        margin: 10px 4%;
     }
     .tab label {
         font-size: 16px;
@@ -206,7 +195,7 @@
         margin-top: 10px;
         }
         #label img, #covoit_proposer img, #covoit_reserver img , #historique img, #label_proposition img, label#resultat_recherche > img{
-            width: 145px;
+            width: 140px;
             height: 100px;
         }
         #label_proposition , #covoit_proposer, #covoit_reserver, #historique, #label_proposition, #resultat_recherche{
@@ -216,8 +205,7 @@
 }
 @media(min-width:1399px) and (max-width: 1800px) {
     div.tabs  {
-        margin-left: 6%;
-        margin-right: 6%;
+        margin: 10px 6%;
     }
     .tab label {
         font-size: 16px;
@@ -227,7 +215,7 @@
         margin-top: 10px;
         }
         #label img, #covoit_proposer img, #covoit_reserver img , #historique img, #label_proposition img, label#resultat_recherche > img{
-            width: 145px;
+            width: 140px;
             height: 100px;
         }
         #label_proposition , #covoit_proposer, #covoit_reserver, #historique, #label_proposition, #resultat_recherche{
@@ -238,8 +226,7 @@
 
 @media(min-width:1799px) and (max-width: 2000px) {
     div.tabs  {
-        margin-left: 8%;
-        margin-right: 8%;
+        margin: 10px 8%;
     }
     .tab label {
         font-size: 18px;
@@ -260,8 +247,7 @@
 
 @media(min-width:1799px){
     div.tabs  {
-        margin-left: 10%;
-        margin-right: 10%;
+        margin: 10px 10%;
     }
     .tab label {
         font-size: 18px;
@@ -271,7 +257,7 @@
         margin-top: 10px;
         }
         #label img, #covoit_proposer img, #covoit_reserver img , #historique img, #label_proposition img, label#resultat_recherche > img{
-            width: 170px;
+            width: 160px;
             height: 110px;
         }
         #label_proposition , #covoit_proposer, #covoit_reserver, #historique, #label_proposition, #resultat_recherche{

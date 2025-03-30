@@ -1,21 +1,20 @@
 {% load static %}
 <link rel="stylesheet" href="{% static 'css/connecte/connection2.css' %}">
 
-<form method="POST" class="connection2 class_shadow class_flex class_border class_justify_center .class_aligne_items_center">
+<form method="POST" class="connection2 connection-form">
     {% csrf_token %}
-        <label for="id_Password">Mot de passe</label>
-        {{ form.password }}
-        {{ form.token_connection}}
-        {% if form.non_field_errors %}
-
+    <label for="id_Password" class="label-hidden">Mot de passe</label>
+    {{ form.password }}
+    {{ form.token_connection}}
+    {% if form.non_field_errors %}
         <div class="error">
             {% for error in form.non_field_errors %}
                 <p>{{ error }}</p>
             {% endfor %}
         </div>
     {% endif %}
-        <button type="submit">Se connecter</button>
+    <button type="submit">Se connecter</button>
 </form>
 
-    <a id="mot_de_passe_oublie" href="{% url 'password_reset' %}">Mot de passe oublier ?</a>
+<a id="mot_de_passe_oublie" href="{% url 'password_reset' %}">Mot de passe oublier ?</a>
 </div>

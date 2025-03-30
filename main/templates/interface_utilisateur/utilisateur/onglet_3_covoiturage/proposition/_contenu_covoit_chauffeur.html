@@ -15,7 +15,7 @@
             À : {{ tjt.heure|date:"H\H:i" }}<br>
             Voiture : <br>{{ tjt.voiture.marque }} {{ tjt.voiture.modele }}<br>
             Prix : {{ tjt.prix }}€<br>
-            Places disponibles :
+            Places libres:
             {% if tjt.places %}
             {{ tjt.places }}
             {% else %}

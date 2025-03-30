@@ -2,14 +2,14 @@
 <link rel="stylesheet" href="{% static 'css/connecte/connection.css' %}">
 
 
-<form method="post"class="connection">
+<form method="post" class="connection connection-form">
     {% csrf_token %}
-    <div >
-        <label for="id_new_password1" class='sr-only'>Nouveau mot de passe</label>
+    <div>
+        <label for="id_new_password1" class="label-hidden">Nouveau mot de passe</label>
         {{ form.new_password1 }}
     </div>
     <div>
-        <label for="id_new_password2" class='sr-only'>Confirmer le mot de passe</label>
+        <label for="id_new_password2" class="label-hidden">Confirmer le mot de passe</label>
         {{ form.new_password2 }}
     </div>
     <button type="submit">Confirmer</button>

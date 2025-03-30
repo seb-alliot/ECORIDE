@@ -1,10 +1,10 @@
-<a href="{% url 'MonCompte' %}" class="class_flex text_decoration_none class_column">
+<a href="{% url 'MonCompte' %}" class="account-link">
     <p>Votre compte</p>
-    <img src="{{ adresse_user.photo.url|default:photo_default_url }}" alt="photo de profil" class="photo_profile text_decoration_none">
+    <img src="{{ adresse_user.photo.url|default:photo_default_url }}" alt="photo de profil" class="photo_profile">
 </a>
 <br>
-<a href="{% url 'admin:index' %}">
+<a href="{% url 'admin:index' %}" class="admin-link">
     {{ request.user.username }}<br>Gain de la plateforme : {{ credit.credit|floatformat:2 }} €<br>
-    <a href="{% url 'moderation_email' %}">Modération des emails</a>
+    <a href="{% url 'moderation_email' %}" class="admin-link">Modération des emails</a>
     Admin
 </a>

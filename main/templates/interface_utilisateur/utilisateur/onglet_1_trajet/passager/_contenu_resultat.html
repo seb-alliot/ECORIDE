@@ -1,5 +1,5 @@
 
-<li class="resultat class_flex"
+<li class="class_flex"
 >
     <input
         type="radio"
@@ -17,7 +17,7 @@
             <img src="{{ resultat.chauffeur.adresse_user.photo.url }}" alt="photo de profil">
         {% else %}
             <img src="{{ photo_default_url }}" alt="photo par default">
-        {% endif %}<br>
+        {% endif %}
         {{ resultat.chauffeur }} :
         {% if trajet.note_moyenne == "Pas encore évalué" %}
         {{ trajet.note_moyenne }}/ 5 ⭐
@@ -31,14 +31,12 @@
         le : {{ resultat.date|date:"d/m/Y" }}<br>
         Moteur: {{ resultat.voiture.type_moteur }}<br>
         Prix:  {{ resultat.prix }}€<br>
-        Places disponibles:
-            {% if resultat.places != 0 %}
-                {{ resultat.places }}
-            {% else %}
-                complet
-            {% endif %}<br>
+        {% if resultat.places != 0 %}
+            Place{{ resultat.places|pluralize }} libre{{ resultat.places|pluralize }} : {{ resultat.places }}
+        {% else %}
+            complet
+        {% endif %}
         statut: {{ resultat.etat }}<br>
         durée estimé: <br>{{ resultat.temps_trajet }}
     </label>
 </li>
-</ul>

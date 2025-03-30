@@ -1,791 +1,862 @@
+/* Variables CSS */
+:root {
+    --color-primary: #7D6E63;
+    --color-secondary: #B19A8B;
+    --color-background: #FAF3E0;
+    --color-hover: rgb(200, 240, 200);
+    --color-text: #000000;
+    --color-light: #F8F9FA;
 
-.class_flex {
-    display:flex;
-}
-.display_grid {
-    display: grid;
-}
-.class_flex_wrap {
-    flex-wrap: wrap;
-}
-.class_justify_center {
-    justify-content: center;
-}
-.class_aligne_items_center {
-    align-items: center;
-}
+    --border-radius-sm: 10px;
+    --border-radius-lg: 15%;
+    --box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.41);
 
-.class_column {
-    flex-direction: column;
-}
-.class_shadow {
-    box-shadow:6px 6px 10px rgba(0, 0, 0, 0.41);
-}
-.class_border {
-    border: 1px solid black;
-}
-.class_border_radius {
-    border-radius: 10px;
-}
-.class_box_sizing {
-    box-sizing: border-box;
-}
-.text_decoration_none {
-    text-decoration: none;
+    --spacing-sm: 5px;
+    --spacing-md: 10px;
+    --spacing-lg: 20px;
+
+    --font-main: Arial, sans-serif;
 }
 
-.aligne_item_center {
-    align-items: center;
-}
-.aligne_content_center {
-    align-content: center;
-}
-.position_relative {
-    position: relative;
-}
+/* Classes utilitaires */
+.class_flex { display: flex; }
+.display_grid { display: grid; }
+.class_flex_wrap { flex-wrap: wrap; }
+.class_justify_center { justify-content: center; }
+.classe_row_reverse { flex-direction: row-reverse; }
+.class_aligne_items_center, .aligne_item_center { align-items: center; }
+.aligne_content_center { align-content: center; }
+.class_column { flex-direction: column; }
+.class_shadow { box-shadow: var(--box-shadow); }
+.class_border { border: 1px solid var(--color-text); }
+.class_border_radius { border-radius: var(--border-radius-sm); }
+.class_box_sizing { box-sizing: border-box; }
+.text_decoration_none { text-decoration: none; }
+.position_relative { position: relative; }
 
-.class_scroll{
+/* Scrollbar personnalisée */
+.class_scroll {
     overflow-y: auto;
     width: 100%;
     scrollbar-color: rgba(150, 200, 150, 1) rgba(220, 220, 220, 0);
-    padding-bottom: 10px;
+    padding-bottom: var(--spacing-md);
 }
 
-/*Début général*/
-
+/* Reset et base */
 * {
     margin: 0;
     box-sizing: border-box;
 }
 
 body {
-    background-color: #FAF3E0;
-    font-family: Arial, sans-serif;
+    background-color: var(--color-background);
+    font-family: var(--font-main);
     min-height: 100vh;
 }
 
+/* Éléments de formulaire */
 button, select, input {
     justify-content: center;
     box-sizing: border-box;
-    border: 1px solid #000000;
-    border-radius: 10px;
-    box-shadow:6px 6px 10px rgba(0, 0, 0, 0.41);
+    border: 1px solid var(--color-text);
+    border-radius: var(--border-radius-sm);
+    box-shadow: var(--box-shadow);
     text-align: center;
 }
+
+button {
+    background-color: var(--color-primary); /* #7D6E63 marron */
+    color: white;
+}
+
+select { background-color: white; }
+input { background-color: white; }
+
 input:focus, select:focus, textarea:focus, button:focus {
     outline: none;
 }
 
-input:hover, button:hover, .footer:hover, option:hover , #recherche_form button:hover, input:hover, button:hover, .footer:hover, option:hover , #recherche_form button:hover, div#reservation > div > form#reservation_form > select:hover, #reservation_form select option:focus-hover {
-    background-color: rgb(200, 240, 200);
-    color: black;
-    }
+/* États de survol */
+input:hover, button:hover, .footer:hover, option:hover, select:hover, selection_trajet:hover,
+#recherche_form button:hover, div#reservation > div > form#reservation_form > select:hover {
+    background-color: var(--color-hover);
+    color: var(--color-text);
+}
 
-.resultat input[type="radio"]:hover ~ label {
-    background: #7D6E63;
+/* Composants spécifiques */
+.resultat input[type="radio"]:hover ~ label#resultat_recherche,
+#covoit_proposer input[type="radio"]:hover ~ label,
+.conteneur_recherche2 .resultat input[type="radio"]:hover ~ label#resultat_recherche ,  #covoit_proposer:hover, #covoit_reserver:hover{
+    background: var(--color-primary);
     color: white;
 }
 
-select {
-    background-color: white;
-}
+::placeholder { color: var(--color-text); }
 
-button{
-    background-color: #FAF3E0;
-    text-align: center;
-    border: solid 1px black;
-    box-sizing: border-box;
-    border-radius: 10px;
-    box-shadow:6px 6px 10px rgba(0, 0, 0, 0.41);
-}
-::placeholder {
-    color: #000000;
-    }
-
-.p_deco{
+.p_deco {
     box-shadow: 6px 6px 10px beige;
     background-color: rgb(120, 180, 120);
     color: blanchedalmond;
     text-shadow: 1px 1px 2px black;
 }
-h1:hover , a:hover {
-    color: #A7C7A5 ;
-    }
 
-/*--image principal--*/
+h1:hover, a:hover { color: #A7C7A5; }
+
+/* Layout principal */
 .image-principal {
-    background-size:cover ;
+    background-size: cover;
     background-position: center;
 }
 
-
-/*--header--*/
+/* Header */
 header {
     justify-content: space-between;
-    padding: 10px 20px;
+    padding: var(--spacing-md) var(--spacing-lg);
 }
 
-header h1 a {
-    color: black;
-}
-header a {
-    color: black;
+header h1 a, header a { color: var(--color-text); }
+
+.photo_profile, .photo_default, label#resultat_recherche img {
+    border-radius: var(--border-radius-lg);
 }
 
-.photo_profile {
-    border-radius: 15%;
-    margin-right: 1%;
-}
 .photo_default {
     height: 120px;
     width: 120px;
-    border-radius: 15%;
-    background-image:url("../photo/photo_default.jpg");
+    background-image: url("../photo/photo_default.jpg");
     background-size: cover;
-    margin-right: 1%;
 }
+
 #logo {
     display: flex;
     margin-left: 4%;
 }
 
-/*--bloque presentation--*/
-.presentation{
+/* Section présentation */
+.presentation {
+    display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows:repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
     align-content: center;
 }
 
-.presentation >div{
+.presentation > div {
     margin-right: 10%;
     margin-left: 10%;
 }
 
-.presentation >div p{
-    flex:1;
-    padding: 40px;
+.presentation > div p {
+    padding: var(--spacing-lg);
     flex: 1;
 }
-.presentation > div:nth-child(1) p,.presentation > div:nth-child(2) p,.presentation >  div:nth-child(3) p {
-    padding: 20px;
-}
-.presentation > div:nth-child(3) {
-    justify-content: flex-end;
-}
 
-.presentation > div:nth-child(1) p, .presentation > div:nth-child(3) p {
-    text-align: left;
-}
-
-.presentation > div:nth-child(1) , .presentation > div:nth-child(3)  {
-    justify-content: flex-end;
-    flex-direction: row-reverse;
-}
-.presentation > div:nth-child(2) {
-    justify-content: flex-start;
-    flex-direction: row;
-}
-
-.presentation > div:nth-child(2) p {
-    text-align: left;
-}
-
-.presentation img{
+.presentation img {
     width: 45%;
     height: 70%;
     object-fit: cover;
+    border-radius: var(--border-radius-sm);
+}
+/*connection*/
+/* Ajouter ces classes */
+.account-link {
+    display: flex;
+    text-decoration: none;
+    flex-direction: column;
 }
 
-/*--footer--*/
+.admin-link {
+    text-decoration: none;
+    color: var(--color-text);  /* Si vous voulez garder la couleur par défaut */
+}
+.connection-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--color-text);
+    box-shadow: var(--box-shadow);
+}
+/* Footer */
 footer {
     gap: 30px;
-    padding: 0px;
+    padding: 0;
     margin-top: auto;
-    margin-bottom: 5px;
+    margin-bottom: var(--spacing-sm);
 }
 
 footer a {
-    color: black;
+    color: var(--color-text);
     height: 30px;
 }
+
 .footer {
-    border-radius: 10px;
-    background-color: #7D6E63;
+    border-radius: var(--border-radius-sm);
+    background-color: var(--color-primary);
     color: white;
 }
-
-/*--bloque recherche--*/
-/*--recherche--*/
-#recherche_form  {
-    gap:0;
-    padding: 10px;
+.footer-link {
+    text-decoration: none;
+    box-shadow: var(--box-shadow);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* Formulaire de recherche */
+#recherche_form {
+    gap: 0;
+    padding: var(--spacing-md);
     font-size: 16px;
+    margin-bottom: var(--spacing-lg);
     }
-        button {
-            background-color: #7D6E63;
-            border: 1px solid black;
-            color: white;
-        }
+
 .conteneur_recherche {
     width: 100%;
-    margin: 20px auto;
-    bottom: -2%;}
-div.conteneur_recherche2 {
-    gap: 10px;
 }
+
 .conteneur_recherche2 {
-    background-color: #B19A8B;
-    margin-bottom: 5px;
+    background-color: var(--color-secondary);
+    margin-bottom: var(--spacing-sm);
+    gap: var(--spacing-md);
 }
 
-/*--resultat--*/
-.resultat{
-    gap: 20px;
+/* Résultats */
+.resultat {
+    gap: var(--spacing-lg);
 }
-.resultat [type=radio]:checked ~ label,#covoit_proposer [type=radio]:checked ~ label, #label_proposition  [type=radio]:checked ~ label, #covoit_proposer [type=radio]:checked, #covoit_reserver [type=radio]:checked, #label_proposition [type=radio]:checked, #resultat_recherche [type=radio]:checked
-{
-    color: black;
+
+/* Styles des radios et labels */
+.resultat input[type="radio"],
+form#filtre_form label,
+#recherche_form label {
+    display: none;
+}
+
+/* Style de base pour les labels */
+label#resultat_recherche {
+    border-radius: var(--border-radius-sm);
+    background-color: var(--color-light);
+    padding: var(--spacing-md);
+}
+
+/* État checked */
+.resultat [type=radio]:checked ~ label#resultat_recherche {
+    color: var(--color-text);
     border-bottom: 1px solid white;
+    background-color: var(--color-hover);
+    border-radius: var(--border-radius-sm);
+    display: flex;
     z-index: 1;
-    display: flex;
-    border-radius: 10px 10px 10px 10px;
-    list-style-type: none;
-    background-color: rgb(200, 240, 200);
-    }
-
-.resultat input[type="radio"] , form#filtre_form label, #recherche_form label{
-    display: none;
-    }
-
-.resultat label {
-    border-radius: 10px;
-    background-color: #F8F9FA;
-    padding: 10px;
 }
-label#resultat_recherche img{
+
+/* Formulaire de contact */
+#contact_form {
     display: flex;
     flex-direction: column;
+    margin-top: var(--spacing-lg);
     align-self: center;
-    margin-bottom: 10px;
-    border-radius: 15%;
-}
-form#selection_trajet > div#bouton_reservation {
-    display:flex;
-    justify-content: center;
-}
-form#selection_trajet > div > button {
-    margin-bottom:20px;
 }
 
-form#selection_trajet > div > button {
-    margin-bottom:10px;
-}
-/* template contact */
-#contact_form p label{
-    display: none;
-}
-
-#contact_form  {
-    display: flex;
-    flex-direction: column;
-}
+#contact_form p label { display: none; }
 
 #contact_form button {
     display: flex;
     align-self: center;
     align-items: center;
-    margin-top: 10px;
+    margin-top: var(--spacing-md);
 }
 
-#contact_form {
-    margin-top:20px;
-    align-self: center;
-}
-#id_message::placeholder {
-    display: flex;
-    text-align: center;
-}
-textarea#id_message {
-    text-align: center;
+/* Bouton réserver et formulaire trajet */
+#reservation_form button, #form_trajet button {
+    background-color: var(--color-primary);
+    color: white;
 }
 
-/*--responsive--*/
-
+/* Media Queries - version complète */
 @media(min-width:320px) and (max-width: 480px) {
-    #logo, .photo_profile, .photo_default {
-        height: 80px;
-        width: 80px;
+    :root {
+        --logo-size: 80px;
+        --font-size-base: 10px;
+        --input-width: 60px;
+        --image-height: 100px;
     }
     .image-principal {
         background-image: url("../photo/principal_mobile.avif");
-        min-height: 100px ;
+        min-height: var(--image-height);
     }
-    .presentation > div:nth-child(1) p,.presentation > div:nth-child(2) p,.presentation >  div:nth-child(3) p {
-        font-size: 12px;
+    #logo, .photo_profile, .photo_default {
+        height: var(--logo-size);
+        width: var(--logo-size);
     }
-    #info_user{
-        font-size: 12px;
-        margin-bottom: 10px;
-    }
-    #recherche_form input , #recherche_form button, form#selection_trajet > div > button,input#id_note , input#id_prix , input#id_temps_trajet, #recherche_form button, footer a, #contact_form button , #reservation_form select,  #reservation_form button{
-        width: 60px;
+    #recherche_form input,
+    #recherche_form button,
+    #reservation_form button,
+    #form_trajet input,
+    #form_trajet button,
+    #filtre_form input,
+    #filtre_form button,
+    #filtre_form select,
+    #selection_trajet button,
+    #id_places,
+    footer a,
+    .connection input,
+    .connection button,
+    .connection2 input,
+    .connection2 button {
+        width: var(--input-width);
         height: 30px;
-        font-size: 10px;
+        font-size: var(--font-size-base);
     }
-    .conteneur_recherche{
-        margin:10px auto;
-        padding-bottom: 10px;
-        bottom: 0%;
-    }
-    #resultat_recherche{
+    #resultat_recherche {
         width: 115px;
         height: auto;
         font-size: 10px;
         margin-top: 10px;
     }
-    label#resultat_recherche img{
-        width: 100px;
+    label#resultat_recherche img {
+        width: 95px;
         height: 80px;
     }
-    #contact_form input,#contact_form button, #contact_form input {
-        width: 150px;
-        height: 30px;
+    .presentation > div:nth-child(1) p,
+    .presentation > div:nth-child(2) p,
+    .presentation > div:nth-child(3) p {
         font-size: 12px;
     }
-    #id_message {
-        width: 250px;
-        height: 100px;
+    #info_user {
+        font-size: 12px;
+        margin-bottom: 10px;
     }
+    #recherche_form input,
+    #recherche_form button,
+    form#selection_trajet > div > button,
+    input#id_note,
+    input#id_prix,
+    input#id_temps_trajet,
+    footer a,
+    #contact_form button,
+    #reservation_form select,
+    #reservation_form button {
+        font-size: 10px;
+    }
+    #resultat_recherche {
+        font-size: 10px;
+    }
+    #contact_form input {
+        font-size: 12px;
+    }
+    h1, h2, h3 { font-size: 14px; }
+    h4, h5, h6 { font-size: 12px; }
 }
 
 @media(min-width:479px) and (max-width: 767px) {
-    .photo_profile, #logo ,.photo_default  {
-        height: 90px;
-        width: 90px;
+    :root {
+        --logo-size: 90px;
+        --font-size-base: 12px;
+        --input-width: 85px;
+        --image-height: 150px;
     }
     .image-principal {
         background-image: url("../photo/principal_mobile.avif");
-        min-height: 150px ;
+        min-height: var(--image-height);
     }
-    .presentation > div {
-        margin-right: 10%;
-        margin-left: 10%;
+    #logo, .photo_profile, .photo_default {
+        height: var(--logo-size);
+        width: var(--logo-size);
     }
-    .presentation > div:nth-child(1) p,.presentation > div:nth-child(2) p,.presentation >  div:nth-child(3) p {
-        font-size: 15px;
-    }
-    #info_user{
-        font-size: 16px;
-        margin-bottom: 10px;
-    }
-    #recherche_form input , button,input#id_note , input#id_prix , input#id_temps_trajet , #recherche_form button, footer a, #contact_form button, #reservation_form select, #reservation_form button {
-        width: 85px;
+    #recherche_form input,
+    #recherche_form button,
+    #reservation_form button,
+    #form_trajet input,
+    #form_trajet button,
+    #filtre_form input,
+    #filtre_form button,
+    #filtre_form select,
+    #selection_trajet button,
+    #id_places,
+    footer a,
+    .connection input,
+    .connection button,
+    .connection2 input,
+    .connection2 button {
+        width: var(--input-width);
         height: 30px;
-        font-size: 10px;
+        font-size: var(--font-size-base);
     }
-    .conteneur_recherche{
-        margin:10px auto;
-        padding-bottom: 10px;
-        bottom: 0%;
-    }
-    #resultat_recherche{
+    #resultat_recherche {
         width: 130px;
         height: auto;
         font-size: 12px;
         margin-top: 10px;
     }
-    label#resultat_recherche img{
+    label#resultat_recherche img {
         width: 110px;
         height: 80px;
     }
-    #contact_form input {
-        width: 180px;
-        height: 30px;
-        font-size: 13px;
+    .presentation p {
+        font-size: 15px;
     }
-    #id_message {
-        width: 250px;
-        height: 100px;
-        font-size: 13px;
+    #info_user {
+        font-size: 16px;
     }
+    h1, h2, h3 { font-size: 16px; }
+    h4, h5, h6 { font-size: 14px; }
 }
 
-
 @media(min-width:767px) and (max-width: 1024px) {
-    .photo_profile, #logo, .photo_default {
-        height: 110px;
-        width: 110px;
+    :root {
+        --logo-size: 110px;
+        --font-size-base: 14px;
+        --input-width: 145px;
+        --image-height: 250px;
     }
     .image-principal {
         background-image: url("../photo/principal.avif");
-        min-height: 250px ;
+        min-height: var(--image-height);
     }
-    .presentation > div:nth-child(1) p,.presentation > div:nth-child(2) p,.presentation >  div:nth-child(3) p {
-        font-size: 20px;
+    #logo, .photo_profile, .photo_default {
+        height: var(--logo-size);
+        width: var(--logo-size);
     }
-    #info_user{
-        font-size: 22px;
-        margin-bottom: 15px;
-    }
-    #recherche_form input , #recherche_form button, footer a ,#contact_form button, #reservation_form select, #reservation_form button {
-        width: 145px;
+    #recherche_form input,
+    #recherche_form button,
+    #reservation_form button,
+    #form_trajet input,
+    #form_trajet button,
+    #filtre_form input,
+    #filtre_form button,
+    #filtre_form select,
+    #selection_trajet button,
+    #id_places,
+    footer a,
+    .connection input,
+    .connection button,
+    .connection2 input,
+    .connection2 button {
+        width: var(--input-width);
         height: 30px;
-        font-size: 12px;
+        font-size: var(--font-size-base);
     }
-    .conteneur_recherche{
-        margin:10px auto;
-        padding-bottom: 10px;
-        bottom: 0%;
-    }
-    #resultat_recherche{
+    #resultat_recherche {
         width: 140px;
         height: auto;
         font-size: 14px;
         margin-top: 10px;
     }
-    label#resultat_recherche img{
-        width: 125px;
+    label#resultat_recherche img {
+        width: 120px;
         height: 80px;
     }
-    #contact_form input {
-        width: 210px;
-        height: 30px;
+    .presentation p {
+        font-size: var(--font-size-base);
+    }
+    h1, h2, h3 { font-size: 18px; }
+    h4, h5, h6 { font-size: 16px; }
+    #recherche_form input,
+    #recherche_form button,
+    #reservation_form button,
+    #form_trajet input,
+    #form_trajet button,
+    #filtre_form input,
+    #filtre_form button,
+    #filtre_form select,
+    #selection_trajet button,
+    #id_places,
+    footer a {
+        font-size: 12px;
+    }
+    #resultat_recherche {
         font-size: 14px;
     }
-    #id_message {
-        min-width: 420px;
-        max-width: 420px;
-        min-height: 150px;
-        max-height: 150px;
-        font-size: 14px;
+    .presentation p {
+        font-size: 20px;
+    }
+    #info_user {
+        font-size: 22px;
+        margin-bottom: var(--spacing-lg);
     }
 }
-
 
 @media(min-width:1023px) and (max-width: 1200px) {
-    .photo_profile , #logo, .photo_default {
-        height: 120px;
-        width: 120px;
+    :root {
+        --logo-size: 120px;
+        --font-size-base: 14px;
+        --input-width: 175px;
+        --image-height: 300px;
+        --font-size-base--p: 24px;
     }
     .image-principal {
         background-image: url("../photo/principal.avif");
-        min-height: 300px ;
+        min-height: var(--image-height);
     }
-    #info_user{
-        font-size: 25px;
-        margin-bottom: 20px;
+    #logo, .photo_profile, .photo_default {
+        height: var(--logo-size);
+        width: var(--logo-size);
     }
-    #recherche_form input , #recherche_form button,input#id_note , input#id_prix , input#id_temps_trajet, button, footer a,#contact_form button , #reservation_form select, #reservation_form button {
-        width: 175px;
+    #recherche_form input,
+    #recherche_form button,
+    #reservation_form button,
+    #form_trajet input,
+    #form_trajet button,
+    #filtre_form input,
+    #filtre_form button,
+    #filtre_form select,
+    #selection_trajet button,
+    #id_places,
+    footer a,
+    .connection input,
+    .connection button,
+    .connection2 input,
+    .connection2 button {
+        width: var(--input-width);
         height: 30px;
-        font-size: 14px;
+        font-size: var(--font-size-base);
     }
-    .conteneur_recherche{
-        margin:10px auto;
-        padding-bottom: 10px;
-        bottom: 0%;
-    }
-    .presentation > div:nth-child(1) p,.presentation > div:nth-child(2) p,.presentation >  div:nth-child(3) p {
-        font-size: 24px;
-    }
-    #resultat_recherche{
+    #resultat_recherche {
         width: 150px;
         height: auto;
         font-size: 15px;
         margin-top: 10px;
     }
-    label#resultat_recherche img{
-        width: 135px;
+    label#resultat_recherche img {
+        width: 130px;
         height: 90px;
     }
-    #contact_form input {
-        width: 210px;
-        height: 30px;
+    .presentation p {
+        font-size: var(--font-size-base--p);
+    }
+    h1, h2, h3 { font-size: 20px; }
+    h4, h5, h6 { font-size: 18px; }
+    #recherche_form input,
+    #recherche_form button,
+    #reservation_form button,
+    #form_trajet input,
+    #form_trajet button,
+    #filtre_form input,
+    #filtre_form button,
+    #filtre_form select,
+    #selection_trajet button,
+    #id_places,
+    footer a {
+        font-size: 14px;
+    }
+    #resultat_recherche {
         font-size: 15px;
     }
-    #id_message {
-        min-width: 420px;
-        max-width: 420px;
-        min-height: 150px;
-        max-height: 150px;
-        font-size: 15px;
+    #info_user {
+        font-size: var(--font-size-base--p);
+        margin-bottom: var(--spacing-lg);
+    }
+    div.conteneur_recherche {
+        margin-bottom: var(--spacing-lg);
     }
 }
-
 
 @media(min-width:1199px) and (max-width: 1400px) {
-    .photo_profile , #logo, .photo_default {
-        height: 120px;
-        width: 120px;
-    }
-    #info_user{
-        font-size: 25px;
-        margin-bottom: 20px;
+    :root {
+        --logo-size: 120px;
+        --font-size-base: 20px;
+        --input-width: 175px;
+        --image-height: 310px;
+        --font-size-base--p: 24px;
     }
     .image-principal {
         background-image: url("../photo/principal.avif");
-        min-height: 310px;
+        min-height: var(--image-height);
     }
-    #recherche_form input , #recherche_form button, form#selection_trajet > div > button ,input#id_note , input#id_prix , input#id_temps_trajet, button, footer a,#contact_form button , #reservation_form select, #reservation_form button {
-        width: 175px;
+    #logo, .photo_profile, .photo_default {
+        height: var(--logo-size);
+        width: var(--logo-size);
+    }
+    #recherche_form input,
+    #recherche_form button,
+    #reservation_form button,
+    #form_trajet input,
+    #form_trajet button,
+    #filtre_form input,
+    #filtre_form button,
+    #filtre_form select,
+    #selection_trajet button,
+    #id_places,
+    footer a,
+    .connection input,
+    .connection button,
+    .connection2 input,
+    .connection2 button {
+        width: var(--input-width);
         height: 30px;
-        font-size: 18px;
+        font-size: var(--font-size-base);
     }
-    .conteneur_recherche{
-        margin:10px auto;
-        padding-bottom: 10px;
-        bottom: 0%;
-    }
-    .presentation > div:nth-child(1) p,.presentation > div:nth-child(2) p,.presentation >  div:nth-child(3) p {
-        font-size: 26px;
-    }
-    #resultat_recherche{
-        width: 160px;
+    #resultat_recherche {
+        width: 150px;
         height: auto;
-        font-size: 16px;
+        font-size: 15px;
         margin-top: 10px;
     }
-    label#resultat_recherche img{
-        width: 145px;
-        height: 100px;
+    label#resultat_recherche img {
+        width: 130px;
+        height: 90px;
     }
-    #contact_form input{
-        width: 200px;
-        height: 30px;
+    .presentation p {
+        font-size: var(--font-size-base--p);
+    }
+    h1, h2, h3 { font-size: 20px; }
+    h4, h5, h6 { font-size: 18px; }
+    #recherche_form input,
+    #recherche_form button,
+    #reservation_form button,
+    #form_trajet input,
+    #form_trajet button,
+    #filtre_form input,
+    #filtre_form button,
+    #filtre_form select,
+    #selection_trajet button,
+    #id_places,
+    footer a {
+        font-size: 14px;
+    }
+    #resultat_recherche {
         font-size: 15px;
     }
-    #id_message {
-        min-width: 420px;
-        max-width: 420px;
-        min-height: 150px;
-        max-height: 150px;
-        font-size: 15px;
+    #info_user {
+        font-size: var(--font-size-base--p);
+        margin-bottom: var(--spacing-lg);
+    }
+    div.conteneur_recherche > div , #info_user ,#selection_trajet button{
+        margin-bottom: var(--spacing-lg);
     }
 }
-
 
 @media(min-width:1399px) and (max-width: 1800px) {
-    .photo_profile ,#logo , .photo_default {
-        height: 150px;
-        width: 150px;
+    :root {
+        --logo-size: 150px;
+        --font-size-base: 20px;
+        --input-width: 180px;
+        --image-height: 400px;
     }
     .image-principal {
         background-image: url("../photo/principal.avif");
-        min-height: 400px;
+        min-height: var(--image-height);
     }
-    footer{
-        margin-bottom: 10px;
+    #logo, .photo_profile, .photo_default {
+        height: var(--logo-size);
+        width: var(--logo-size);
     }
-    #info_user{
-        font-size: 30px;
-        margin-bottom: 20px;
-    }
-    #recherche_form input , #recherche_form button , input#id_note , input#id_prix , input#id_temps_trajet, button , footer a ,#contact_form button , #reservation_form select , #reservation_form button {
-        width: 180px;
+    #recherche_form input,
+    #recherche_form button,
+    #reservation_form button,
+    #form_trajet input,
+    #form_trajet button,
+    #filtre_form input,
+    #filtre_form button,
+    #filtre_form select,
+    #selection_trajet button,
+    #id_places,
+    footer a,
+    .connection input,
+    .connection button,
+    .connection2 input,
+    .connection2 button {
+        width: var(--input-width);
         height: 30px;
-        font-size: 20px;
+        font-size: var(--font-size-base);
     }
-    .conteneur_recherche{
-        margin:10px auto;
-        padding-bottom: 10px;
-        bottom: 0%;
-    }
-    .presentation > div:nth-child(1) p,.presentation > div:nth-child(2) p,.presentation >  div:nth-child(3) p {
-        font-size: 28px;
-    }
-    #resultat_recherche{
+    #resultat_recherche {
         width: 160px;
         height: auto;
         font-size: 16px;
         margin-top: 10px;
     }
-    label#resultat_recherche img{
-        width: 145px;
+    .presentation > div p {
+        font-size: 26px;
+    }
+    label#resultat_recherche img {
+        width: 140px;
         height: 100px;
     }
-    #contact_form input{
-        width: 250px;
-        height: 30px;
-        font-size: 17px;
+    h1, h2, h3, .presentation p { font-size: 22px; }
+    h4, h5, h6 { font-size: 20px; }
+    div.conteneur_recherche2 {
+        margin-bottom: var(--spacing-lg);
     }
-    #id_message {
-        min-width: 470px;
-        max-width: 470px;
-        min-height: 170px;
-        max-height: 170px;
-        font-size: 17px;
+    #info_user {
+        font-size: 25px;
     }
+    div.conteneur_recherche > div , #info_user ,#selection_trajet button{
+        margin-bottom: var(--spacing-lg);
+    }
+
 }
 
-
 @media(min-width:1799px) and (max-width: 2000px) {
-    #info_user{
-        font-size: 30px;
-        margin-bottom: 20px;
+    :root {
+        --logo-size: 150px;
+        --font-size-base: 20px;
+        --input-width: 200px;
+        --image-height: 600px;
     }
     .image-principal {
         background-image: url("../photo/principal.avif");
-        min-height: 600px;
+        min-height: var(--image-height);
     }
-    .presentation > div:nth-child(1) p,.presentation > div:nth-child(2) p,.presentation >  div:nth-child(3) p {
-        font-size: 28px;
+    #logo, .photo_profile, .photo_default {
+        height: var(--logo-size);
+        width: var(--logo-size);
     }
-    input#id_note , input#id_prix , input#id_temps_trajet, button, footer a, #contact_form button , #reservation_form select, #reservation_form button {
-        width: 200px;
-        font-size: 20px;
+    #recherche_form input,
+    #recherche_form button,
+    #reservation_form button,
+    #form_trajet input,
+    #form_trajet button,
+    #filtre_form input,
+    #filtre_form button,
+    #filtre_form select,
+    #selection_trajet button,
+    #id_places,
+    footer a,
+    .connection input,
+    .connection button,
+    .connection2 input,
+    .connection2 button {
+        width: var(--input-width);
+        height: 30px;
+        font-size: var(--font-size-base);
     }
-    .conteneur_recherche{
-        margin:10px auto;
-        padding-bottom: 10px;
-        bottom: 0%;
-    }
-    #resultat_recherche{
+    #resultat_recherche {
         width: 170px;
         height: auto;
         font-size: 18px;
         margin-top: 10px;
     }
-    label#resultat_recherche img{
-        width: 170px;
-        height: 105px;
-    }
-    #contact_form input {
-        width: 220px;
-        height: 30px;
-        font-size: 15px;
-    }
-    #id_message {
-        min-width: 500px;
-        max-width: 500px;
-        min-height: 200px;
-        max-height: 200px;
-        font-size: 17px;
-    }
-    #logo , .photo_default, .photo_profile {
-        height: 150px;
+    label#resultat_recherche img {
         width: 150px;
+        height: 100px;
+    }
+    #info_user, .presentation p{
+        font-size: 28px;
+    }
+    div.conteneur_recherche > div , #info_user ,#selection_trajet button{
+        margin-bottom: var(--spacing-lg);
     }
 }
 
 @media(min-width:1999px) and (max-width: 3000px) {
-    #info_user{
-        font-size: 30px;
-        margin-bottom: 20px;
+    :root {
+        --logo-size: 160px;
+        --font-size-base: 20px;
+        --input-width: 200px;
+        --image-height: 700px;
     }
     .image-principal {
         background-image: url("../photo/principal.avif");
-        min-height: 700px;
+        min-height: var(--image-height);
     }
-    header h1 a {
-        font-size: 80px;
+    #logo, .photo_profile, .photo_default {
+        height: var(--logo-size);
+        width: var(--logo-size);
     }
-    #logo , .photo_default, .photo_profile {
-        height: 160px;
-        width: 160px;
-    }
-    #recherche_form input , #recherche_form button , footer a , #contact_form button , #reservation_form select , #reservation_form button {
-        width: 200px;
+    #recherche_form input,
+    #recherche_form button,
+    #reservation_form button,
+    #form_trajet input,
+    #form_trajet button,
+    #filtre_form input,
+    #filtre_form button,
+    #filtre_form select,
+    #selection_trajet button,
+    #id_places,
+    footer a,
+    .connection input,
+    .connection button,
+    .connection2 input,
+    .connection2 button {
+        width: var(--input-width);
         height: 30px;
-        font-size: 20px;
+        font-size: var(--font-size-base);
     }
-    .conteneur_recherche{
-        margin:10px auto;
-        padding-bottom: 10px;
-        bottom: 0%;
-    }
-    .presentation > div:nth-child(1) p,.presentation > div:nth-child(2) p,.presentation >  div:nth-child(3) p {
-        font-size: 30px;
-    }
-    input#id_note , input#id_prix {
-        width: 225px;
-        font-size: 20px;
-    }
-    #resultat_recherche{
-        width: 150px;
-        height: auto;
-        font-size: 15px;
-        margin-top: 10px;
-    }
-    #resultat_recherche{
-        width: 180px;
+    #resultat_recherche {
+        width: 170px;
         height: auto;
         font-size: 18px;
         margin-top: 10px;
     }
-    label#resultat_recherche img{
-        width: 170px;
-        height: 110px;
+    label#resultat_recherche img {
+        width: 150px;
+        height: 100px;
     }
-    #contact_form input {
-        width: 250px;
-        height: 30px;
-        font-size: 17px;
+    #info_user, .presentation p{
+        font-size: 28px;
     }
-    #id_message {
-        min-width: 500px;
-        max-width: 500px;
-        min-height: 200px;
-        max-height: 200px;
-        font-size: 17px;
+    div.conteneur_recherche > div , #info_user ,#selection_trajet button{
+        margin-bottom: var(--spacing-lg);
     }
 }
 
-
 @media(min-width:2999px) {
-    #info_user{
-        font-size: 30px;
-        margin-bottom: 20px;
+    :root {
+        --logo-size: 160px;
+        --font-size-base: 20px;
+        --input-width: 225px;
+        --image-height: 950px;
     }
     .image-principal {
         background-image: url("../photo/principal.avif");
-        min-height: 950px;
+        min-height: var(--image-height);
     }
-    #recherche_form input , #recherche_form button {
-        width: 225px;
+    #logo, .photo_profile, .photo_default {
+        height: var(--logo-size);
+        width: var(--logo-size);
+    }
+    #recherche_form input,
+    #recherche_form button,
+    #reservation_form button,
+    #form_trajet input,
+    #form_trajet button,
+    #filtre_form input,
+    #filtre_form button,
+    #filtre_form select,
+    #selection_trajet button,
+    #id_places,
+    footer a,
+    .connection input,
+    .connection button,
+    .connection2 input,
+    .connection2 button {
+        width: var(--input-width);
         height: 30px;
-        font-size: 20px;
+        font-size: var(--font-size-base);
     }
-    .conteneur_recherche{
-        margin:10px auto;
-        padding-bottom: 10px;
-        font-size: 20px;
-        bottom: 0%;
+    #resultat_recherche {
+        width: 170px;
+        height: auto;
+        font-size: 18px;
+        margin-top: 10px;
     }
-    header h1 a {
-        font-size: 80px;
+    label#resultat_recherche img {
+        width: 150px;
+        height: 100px;
     }
+    #info_user, .presentation p{
+        font-size: 32px;
+    }
+    div.conteneur_recherche > div , #info_user ,#selection_trajet button{
+        margin-bottom: var(--spacing-lg);
+    }
+}
 
-    #logo , .photo_default, .photo_profile {
-        height: 160px;
-        width: 160px;
-    }
-    #recherche_form input , #recherche_form button, footer a , #contact_form button , #reservation_form select , #reservation_form button{
-        width: 200px;
-        height: 30px;
-        font-size: 20px;
-    }
-    .conteneur_recherche{
-        margin:10px auto;
-        padding-bottom: 10px;
-        bottom: 0%;
-    }
-    .presentation > div:nth-child(1) p,.presentation > div:nth-child(2) p,.presentation >  div:nth-child(3) p {
-        font-size: 30px;
-    }
-    input#id_note , input#id_prix , input#id_temps_trajet, button {
-        width: 225px;
-        font-size: 20px;
-    }
-    #contact_form input {
-        width: 250px;
-        height: 30px;
-        font-size: 20px;
-    }
-    #id_message {
-        min-width: 600px;
-        max-width: 600px;
-        min-height: 200px;
-        max-height: 200px;
-        font-size: 20px;
-    }
+/* Ajout du margin-bottom pour filtre_form */
+
+/* Ajouter seulement ces nouvelles classes */
+.presentation-flex {
+    display: flex;
+    position: relative;
+    align-items: center;
+}
+
+.presentation-flex-reverse {
+    display: flex;
+    position: relative;
+    align-items: center;
+    flex-direction: row-reverse;
+}
+
+.label-hidden {
+    display: none;
 }
