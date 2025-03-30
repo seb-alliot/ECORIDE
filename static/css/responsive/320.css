@@ -2,7 +2,7 @@
     --logo-size: 80px;
     --font-size-base: 10px;
     --input-width: 60px;
-    --image-height: 120px;
+    --image-height: 80px;
 }
 .image-principal {
     background-image: url("../../photo/principal_mobile.avif");
@@ -23,7 +23,7 @@
 #filtre_form button,
 #filtre_form select,
 #selection_trajet button,
-#id_places,
+select#id_places,
 footer a
     {
     width: var(--input-width);
@@ -71,15 +71,15 @@ label#resultat_recherche img {
 }
 h1, h2, h3 { font-size: 14px; }
 h4, h5, h6 { font-size: 12px; }
-#contact_form textarea {
-    font-size: 12px;
+form#contact_form textarea {
+    font-size: 10px;
     width: 250px;
     height: var(--image-height)
 }
-#contact_form input,
-#contact_form button {
-    font-size: 12px;
-    width: 125px;
+form#contact_form input,
+form#contact_form button {
+    font-size: 10px;
+    width: 150px;
 }
 
 /*---carte de selection de trajet---*/
@@ -115,5 +115,10 @@ div#info_trajet > div > p {
 #prix_trajet {
     margin-top: 9%;
 }
-
-
+#creer_compte {
+    margin-top: var(--spacing-md);
+}
+.presentation > div {
+    margin-right: 10%;
+    margin-left: 10%;
+}

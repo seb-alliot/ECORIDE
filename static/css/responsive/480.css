@@ -1,9 +1,9 @@
     :root {
-        --logo-size: 80px;
+        --logo-size: 100px;
         --font-size-base: 12px;
         --input-width: 85px;
         --input-width--other: 95px;
-        --image-height: 150px;
+        --image-height: 100px;
     }
     .image-principal {
         background-image: url("../../photo/principal_mobile.avif");
@@ -22,7 +22,7 @@
     #filtre_form button,
     #filtre_form select,
     #selection_trajet button,
-    #id_places
+    select#id_places
         {
         width: var(--input-width);
         font-size: var(--font-size-base);
@@ -64,20 +64,23 @@
     }
     h1, h2, h3 { font-size: 16px; }
     h4, h5, h6 { font-size: 14px; }
-    #contact_form textarea {
-        font-size: var(--font-size-base);
+    form#contact_form textarea {
+        font-size: 10px;
         width: 300px;
-        height: 100px;
+        height: var(--image-height)
     }
-    #contact_form input,
-    #contact_form button {
-        font-size: var(--font-size-base);
-        width: var(--image-height);
+    form#contact_form input,
+    form#contact_form button {
+        font-size: 10px;
+        width: 150px;
     }
 /*---carte de selection de trajet---*/
     div#reservation > div > img.photo_profile, div#reservation > div {
-        width: var(--image-height);
-        height: var(--image-height);
+        width: 140px;
+        height: 140px;
+        }
+        div#info_trajet > div > p {
+            font-size: 11px;
         }
     #prix_trajet,
     #chauffeur_trajet,
@@ -88,18 +91,18 @@
         margin: 4px;
     }
     #div_avis {
-        font-size: 9px;
+        font-size: 8px;
         width: 80%;
         margin-top: 4px;
     }
     #dive_preference,
     #note {
         margin: var(--spacing-sm);
-        font-size: 9px;
+        font-size: 8px;
     }
     #preference {
-        margin-top: var(--spacing-md);
-        font-size: 9px;
+        margin-top: 6px;
+        font-size: 8px;
     }
     #place_a_reserver {
         font-size: var(--spacing-md);
@@ -111,4 +114,10 @@
     #prix_trajet {
         margin-top: -1.5%;
     }
-
+    #creer_compte {
+        margin-top: var(--font-size-base);
+    }
+    .presentation > div {
+        margin-right: 12.5%;
+        margin-left: 12.5%;
+    }

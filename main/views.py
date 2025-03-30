@@ -221,8 +221,8 @@ def accueil(request):
             if filtre_form.cleaned_data["prix"]:
                 resultat = resultat.filter(prix__lte=filtre_form.cleaned_data["prix"])
 
-            first_resultat= resultat.exclude(Q(type_moteur="Electrique") | Q(type_moteur="Hybride"))
-            second_resultat= resultat.exclude(Q(type_moteur="essence") | Q(type_moteur="diesel"))
+            first_resultat= resultat.exclude(Q(voiture__type_moteur="Electrique") | Q(voiture__type_moteur="Hybride"))
+            second_resultat= resultat.exclude(Q(voiture__type_moteur="essence") | Q(voiture__type_moteur="diesel"))
 
             if first_resultat.exists() or second_resultat.exists():
                 messages.success(request, "Vos exigences ont trouvé satisfaction.")
@@ -857,8 +857,8 @@ def MonCompte(request):
             resultat.values_list("id", flat=True)
                 )
 
-            first_resultat= resultat.exclude(Q(type_moteur="Electrique") | Q(type_moteur="Hybride"))
-            second_resultat= resultat.exclude(Q(type_moteur="essence") | Q(type_moteur="diesel"))
+            first_resultat= resultat.exclude(Q(voiture__type_moteur="Electrique") | Q(voiture__type_moteur="Hybride"))
+            second_resultat= resultat.exclude(Q(voiture__type_moteur="essence") | Q(voiture__type_moteur="diesel"))
             if first_resultat.exists() or second_resultat.exists():
                 messages.success(request, "Hey voici juste pour vous !!")
             else:
@@ -889,8 +889,8 @@ def MonCompte(request):
             if filtre_form.cleaned_data["prix"]:
                 resultat = resultat.filter(prix__lte=filtre_form.cleaned_data["prix"])
 
-            first_resultat= resultat.exclude(Q(type_moteur="Electrique") | Q(type_moteur="Hybride"))
-            second_resultat= resultat.exclude(Q(type_moteur="essence") | Q(type_moteur="diesel"))
+            first_resultat= resultat.exclude(Q(voiture__type_moteur="Electrique") | Q(voiture__type_moteur="Hybride"))
+            second_resultat= resultat.exclude(Q(voiture__type_moteur="essence") | Q(voiture__type_moteur="diesel"))
 
             if resultat.exists():
                 messages.success(request, "Vos exigences ont trouvé satisfaction.")

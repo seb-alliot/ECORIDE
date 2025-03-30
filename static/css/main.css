@@ -103,8 +103,6 @@ header h1 a, header a { color: var(--color-text); }
 }
 
 .photo_default {
-    height: 120px;
-    width: 120px;
     background-image: url("../photo/photo_default.jpg");
     background-size: cover;
 }
@@ -231,10 +229,6 @@ h1:hover, a:hover { color: #A7C7A5; }
     align-content: center;
 }
 
-.presentation > div {
-    margin-right: 10%;
-    margin-left: 10%;
-}
 
 .presentation > div p {
     padding: var(--spacing-lg);
@@ -254,7 +248,9 @@ h1:hover, a:hover { color: #A7C7A5; }
     text-decoration: none;
     flex-direction: column;
 }
-
+h2{
+    border-radius: 10px 10px 0 0;
+}
 .admin-link {
     text-decoration: none;
     color: var(--color-text);  /* Si vous voulez garder la couleur par défaut */
@@ -288,6 +284,7 @@ h1:hover, a:hover { color: #A7C7A5; }
     background-color: var(--color-secondary);
     margin-bottom: var(--spacing-md);
     gap: var(--spacing-md);
+    border-radius: 0px 0px 10px 10px;
 }
 #selection_trajet {
     margin-bottom: var(--spacing-lg);
@@ -375,8 +372,6 @@ div#reservation > div {
     background-color: var(--color-secondary);
     box-shadow: var(--box-shadow);
     border: solid 2px black;
-    width: 300px;
-    height: 300px;
 }
 
 /**----Photo chauffeur------*/
@@ -409,7 +404,6 @@ div#reservation > div:nth-child(1) {
     width: 100%;
     justify-content: center;
     display: flex;
-    margin-top: 9%;
     background-color:var(--color-hover);
 }
 

@@ -3,7 +3,7 @@
         --font-size-base: 20px;
         --input-width: 200px;
         --image-height: 310px;
-        --font-size-base--p: 24px;
+        --font-size-base--p: 22px;
     }
     .image-principal {
         background-image: url("../../photo/principal.avif");
@@ -13,26 +13,26 @@
         height: var(--logo-size);
         width: var(--logo-size);
     }
-    #recherche_form input,
-    #recherche_form button,
-    #reservation_form button,
-    #form_trajet input,
-    #form_trajet button,
-    #filtre_form input,
-    #filtre_form button,
-    #filtre_form select,
-    #selection_trajet button,
-    #id_places,
-    #inscription input,
-    #inscription button,
-    #login1 input,
-    #login1 button,
-    #login2 input,
-    #login2 button,
-    #reset_mdp input,
-    #reset_mdp button,
-    #validation_email input,
-    #validation_email button,
+    form#recherche_form input,
+    form#recherche_form button,
+    form#reservation_form button,
+    form#form_trajet input,
+    form#form_trajet button,
+    form#filtre_form input,
+    form#filtre_form button,
+    form#filtre_form select,
+    form#selection_trajet button,
+    select#id_places,
+    form#inscription input,
+    form#inscription button,
+    form#login1 input,
+    form#login1 button,
+    form#login2 input,
+    form#login2 button,
+    form#reset_mdp input,
+    form#reset_mdp button,
+    form#validation_email input,
+    form#validation_email button,
     footer a       {
         width: var(--input-width);
         font-size: var(--font-size-base);
@@ -66,13 +66,15 @@
     div.conteneur_recherche > div , #info_user ,#selection_trajet button{
         margin-bottom: var(--spacing-lg);
     }
-    #contact_form textarea {
+    form#contact_form textarea {
         width: 500px;
-        height: var(--input-width);
+        height: 175px;
+        font-size: 16px;
     }
-    #contact_form input,
-    #contact_form button {
-        width: 200px;
+    form#contact_form input,
+    form#contact_form button {
+        width: 225px;
+        font-size: 16px;
     }
 /*---carte de selection de trajet---*/
 div#div_avis > div > p {
@@ -106,4 +108,15 @@ div#preference p {
 }
 #place_a_reserver {
     font-size: var(--spacing-lg);
+}
+#creer_compte {
+    margin-top: var(--spacing-lg);
+}
+#creer_compte {
+    margin-top: var(--spacing-lg);
+    font-size: var(--font-size-base);
+}
+.presentation > div {
+    margin-right: 15%;
+    margin-left: 15%;
 }

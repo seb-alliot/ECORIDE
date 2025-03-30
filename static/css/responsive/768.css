@@ -1,7 +1,7 @@
 
     :root {
         --logo-size: 110px;
-        --font-size-base: 14px;
+        --font-size-base: 12px;
         --input-width: 145px;
         --image-height: 250px;
     }
@@ -13,26 +13,26 @@
         height: var(--logo-size);
         width: var(--logo-size);
     }
-    #recherche_form input,
-    #recherche_form button,
-    #reservation_form button,
-    #form_trajet input,
-    #form_trajet button,
-    #filtre_form input,
-    #filtre_form button,
-    #filtre_form select,
-    #selection_trajet button,
-    #id_places,
-    #inscription input,
-    #inscription button,
-    #login1 input,
-    #login1 button,
-    #login2 input,
-    #login2 button,
-    #reset_mdp input,
-    #reset_mdp button,
-    #validation_email input,
-    #validation_email button,
+    form#recherche_form input,
+    form#recherche_form button,
+    form#reservation_form button,
+    form#form_trajet input,
+    form#form_trajet button,
+    form#filtre_form input,
+    form#filtre_form button,
+    form#filtre_form select,
+    form#selection_trajet button,
+    select#id_places,
+    form#inscription input,
+    form#inscription button,
+    form#login1 input,
+    form#login1 button,
+    form#login2 input,
+    form#login2 button,
+    form#reset_mdp input,
+    form#reset_mdp button,
+    form#validation_email input,
+    form#validation_email button,
     footer a
         {
         width: var(--input-width);
@@ -61,19 +61,20 @@
     h4, h5, h6 { font-size: 16px; }
 
     .presentation p{
-        font-size: 20px;
+        font-size: 18px;
     }
     #info_user {
         font-size: 22px;
         margin-bottom: var(--spacing-lg);
     }
-    #contact_form textarea {
+    form#contact_form textarea {
         width: 350px;
         height: 175px;
     }
-    #contact_form input,
-    #contact_form button {
+    form#contact_form input,
+    form#contact_form button {
         width: 175px;
+        font-size: var(--font-size-base);
     }
 /*---carte de selection de trajet---*/
     div#reservation > div > img.photo_profile , div#reservation > div {
@@ -83,7 +84,7 @@
     #prix_trajet,
     #chauffeur_trajet,
     #info_trajet > div > p {
-        font-size: var(--font-size-base);
+        font-size: 14px;
         margin: var(--spacing-sm);
     }
     div#info_trajet {
@@ -112,4 +113,10 @@
     div#div_avis > div > p {
         font-size: var(--font-size-base);
     }
-
+    #creer_compte {
+        margin-top: var(--font-size-base);
+    }
+    .presentation > div {
+        margin-right: 12.5%;
+        margin-left: 12.5%;
+    }
