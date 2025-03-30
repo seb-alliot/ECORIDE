@@ -344,6 +344,17 @@ label#resultat_recherche {
     }
     h1, h2, h3 { font-size: 14px; }
     h4, h5, h6 { font-size: 12px; }
+    #contact_form textarea {
+        font-size: 12px;
+        width: 250px;
+        height: 100px;
+    }
+    #contact_form input,
+    #contact_form button {
+        font-size: 12px;
+        width: 125px;
+        height: 30px;
+    }
 }
 
 @media(min-width:479px) and (max-width: 767px) {
@@ -398,6 +409,17 @@ label#resultat_recherche {
     }
     h1, h2, h3 { font-size: 16px; }
     h4, h5, h6 { font-size: 14px; }
+    #contact_form textarea {
+        font-size: 12px;
+        width: 300px;
+        height: 100px;
+    }
+    #contact_form input,
+    #contact_form button {
+        font-size: 12px;
+        width: 150px;
+        height: 30px;
+    }
 }
 
 @media(min-width:767px) and (max-width: 1024px) {
@@ -437,7 +459,6 @@ label#resultat_recherche {
     #resultat_recherche {
         width: 140px;
         height: auto;
-        font-size: 14px;
         margin-top: 10px;
     }
     label#resultat_recherche img {
@@ -462,15 +483,27 @@ label#resultat_recherche {
     footer a {
         font-size: 12px;
     }
-    #resultat_recherche {
+    #resultat_recherche,
+    #contact_form input,
+    #contact_form button,
+    #contact_form textarea {
         font-size: 14px;
     }
-    .presentation p {
+    .presentation p{
         font-size: 20px;
     }
     #info_user {
         font-size: 22px;
         margin-bottom: var(--spacing-lg);
+    }
+    #contact_form textarea {
+        width: 350px;
+        height: 175px;
+    }
+    #contact_form input,
+    #contact_form button {
+        width: 175px;
+        height: 30px;
     }
 }
 
@@ -519,7 +552,10 @@ label#resultat_recherche {
         width: 130px;
         height: 90px;
     }
-    .presentation p {
+    .presentation p ,
+    #contact_form input,
+    #contact_form button,
+    #contact_form textarea{
         font-size: var(--font-size-base--p);
     }
     h1, h2, h3 { font-size: 20px; }
@@ -537,7 +573,10 @@ label#resultat_recherche {
     footer a {
         font-size: 14px;
     }
-    #resultat_recherche {
+    #resultat_recherche,
+    #contact_form input,
+    #contact_form button,
+    #contact_form textarea {
         font-size: 15px;
     }
     #info_user {
@@ -547,6 +586,31 @@ label#resultat_recherche {
     div.conteneur_recherche {
         margin-bottom: var(--spacing-lg);
     }
+    #contact_form textarea {
+        width: 400px;
+        height: 150px;
+    }
+    #contact_form input,
+    #contact_form button {
+        width: 200px;
+        height: 30px;
+    }
+}
+.presentation-flex {
+    display: flex;
+    position: relative;
+    align-items: center;
+}
+
+.presentation-flex-reverse {
+    display: flex;
+    position: relative;
+    align-items: center;
+    flex-direction: row-reverse;
+}
+
+.label-hidden {
+    display: none;
 }
 
 @media(min-width:1199px) and (max-width: 1400px) {
@@ -597,7 +661,7 @@ label#resultat_recherche {
     .presentation p {
         font-size: var(--font-size-base--p);
     }
-    h1, h2, h3 { font-size: 20px; }
+    h1, h2, h3,#contact_form input,#contact_form button,#contact_form textarea { font-size: 20px; }
     h4, h5, h6 { font-size: 18px; }
     #recherche_form input,
     #recherche_form button,
@@ -621,6 +685,15 @@ label#resultat_recherche {
     }
     div.conteneur_recherche > div , #info_user ,#selection_trajet button{
         margin-bottom: var(--spacing-lg);
+    }
+    #contact_form textarea {
+        width: 500px;
+        height: 200px;
+    }
+    #contact_form input,
+    #contact_form button {
+        width: 200px;
+        height: 30px;
     }
 }
 
@@ -671,7 +744,7 @@ label#resultat_recherche {
         width: 140px;
         height: 100px;
     }
-    h1, h2, h3, .presentation p { font-size: 22px; }
+    h1, h2, h3,#contact_form input,#contact_form button,#contact_form textarea, .presentation p { font-size: 20px; }
     h4, h5, h6 { font-size: 20px; }
     div.conteneur_recherche2 {
         margin-bottom: var(--spacing-lg);
@@ -681,6 +754,15 @@ label#resultat_recherche {
     }
     div.conteneur_recherche > div , #info_user ,#selection_trajet button{
         margin-bottom: var(--spacing-lg);
+    }
+    #contact_form textarea {
+        width: 500px;
+        height: 200px;
+    }
+    #contact_form input,
+    #contact_form button {
+        width: 200px;
+        height: 30px;
     }
 
 }
@@ -729,11 +811,21 @@ label#resultat_recherche {
         width: 150px;
         height: 100px;
     }
-    #info_user, .presentation p{
-        font-size: 28px;
+    h1, h2, h3,#contact_form input,#contact_form button,#contact_form textarea, .presentation p,
+    #info_user{
+        font-size: 24px;
     }
     div.conteneur_recherche > div , #info_user ,#selection_trajet button{
         margin-bottom: var(--spacing-lg);
+    }
+    #contact_form textarea {
+        width: 500px;
+        height: 200px;
+    }
+    #contact_form input,
+    #contact_form button {
+        width: 225px;
+        height: 30px;
     }
 }
 
@@ -781,11 +873,21 @@ label#resultat_recherche {
         width: 150px;
         height: 100px;
     }
-    #info_user, .presentation p{
-        font-size: 28px;
+    h1, h2, h3,#contact_form input,#contact_form button,#contact_form textarea, .presentation p,
+    #info_user{
+        font-size: 26px;
     }
     div.conteneur_recherche > div , #info_user ,#selection_trajet button{
         margin-bottom: var(--spacing-lg);
+    }
+    #contact_form textarea {
+        width: 500px;
+        height: 200px;
+    }
+    #contact_form input,
+    #contact_form button {
+        width: 250px;
+        height: 30px;
     }
 }
 
@@ -839,24 +941,16 @@ label#resultat_recherche {
     div.conteneur_recherche > div , #info_user ,#selection_trajet button{
         margin-bottom: var(--spacing-lg);
     }
-}
-
-/* Ajout du margin-bottom pour filtre_form */
-
-/* Ajouter seulement ces nouvelles classes */
-.presentation-flex {
-    display: flex;
-    position: relative;
-    align-items: center;
-}
-
-.presentation-flex-reverse {
-    display: flex;
-    position: relative;
-    align-items: center;
-    flex-direction: row-reverse;
-}
-
-.label-hidden {
-    display: none;
+    h1, h2, h3,#contact_form input,#contact_form button,#contact_form textarea{
+        font-size: 28px;
+    }
+    #contact_form textarea {
+        width: 600px;
+        height: 300px;
+    }
+    #contact_form input,
+    #contact_form button {
+        width: 250px;
+        height: 30px;
+    }
 }

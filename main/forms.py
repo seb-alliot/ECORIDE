@@ -564,7 +564,7 @@ class ContactForm(forms.Form):
     telephone = forms.CharField(
         max_length=10,
         label="Téléphone",
-        widget=forms.TextInput(attrs={"placeholder": "Votre téléphone, facultatif"}),
+        widget=forms.TextInput(attrs={"placeholder": "Votre téléphone"}),
         required=True,
     )
     sujet = forms.CharField(
