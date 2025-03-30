@@ -552,19 +552,19 @@ class ContactForm(forms.Form):
     pseudo = forms.CharField(
         max_length=100,
         label="Prénom",
-        widget=forms.TextInput(attrs={"placeholder": "Votre prénom"}),
+        widget=forms.TextInput(attrs={"placeholder": "Prénom"}),
         required=True,
     )
     email = forms.EmailField(
         max_length=100,
         label="Email",
-        widget=forms.EmailInput(attrs={"placeholder": "Votre email"}),
+        widget=forms.EmailInput(attrs={"placeholder": "Email"}),
         required=True,
     )
     telephone = forms.CharField(
         max_length=10,
         label="Téléphone",
-        widget=forms.TextInput(attrs={"placeholder": "Votre téléphone"}),
+        widget=forms.TextInput(attrs={"placeholder": "Téléphone"}),
         required=True,
     )
     sujet = forms.CharField(
@@ -575,7 +575,7 @@ class ContactForm(forms.Form):
     )
     message = forms.CharField(
         label="Message",
-        widget=forms.Textarea(attrs={"placeholder": "Votre message"}),
+        widget=forms.Textarea(attrs={"placeholder": "Message"}),
         required=True,
     )
 
@@ -603,7 +603,7 @@ class ContactForm(forms.Form):
 class ReponseForm(forms.Form):
     reponse = forms.CharField(
         label="Reponse",
-        widget=forms.Textarea(attrs={"placeholder": "Votre réponse"}),
+        widget=forms.Textarea(attrs={"placeholder": "Répondre"}),
         required=True,
     )
     email = forms.EmailField(

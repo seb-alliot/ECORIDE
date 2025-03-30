@@ -63,7 +63,31 @@ button, select, input {
     box-shadow: var(--box-shadow);
     text-align: center;
 }
-
+#recherche_form input,
+#recherche_form button,
+#reservation_form button,
+#form_trajet input,
+#form_trajet button,
+#filtre_form input,
+#filtre_form button,
+#filtre_form select,
+#selection_trajet button,
+#id_places,
+#inscription input,
+#inscription button,
+#login1 input,
+#login1 button,
+#login2 input,
+#login2 button,
+#reset_mdp input,
+#reset_mdp button,
+#validation_email input,
+#validation_email button,
+#contact_form input,
+#contact_form button,
+footer a{
+    height: 30px;
+}
 button {
     background-color: var(--color-primary); /* #7D6E63 marron */
     color: white;
@@ -168,12 +192,17 @@ header h1 a, header a { color: var(--color-text); }
     text-decoration: none;
     color: var(--color-text);  /* Si vous voulez garder la couleur par défaut */
 }
-.connection-form {
+#inscription label{
+    display: none;
+}
+
+#inscription ,#login1, #login2 , #reset_mdp, #validation_email{
     display: flex;
     justify-content: center;
     align-items: center;
     border: 1px solid var(--color-text);
     box-shadow: var(--box-shadow);
+    height: 50px;
 }
 /* Footer */
 footer {
@@ -187,7 +216,12 @@ footer a {
     color: var(--color-text);
     height: 30px;
 }
-
+a {
+    text-decoration: none;
+    color: black;
+    display: flex;
+    justify-content: center;
+}
 .footer {
     border-radius: var(--border-radius-sm);
     background-color: var(--color-primary);
@@ -217,7 +251,23 @@ footer a {
     margin-bottom: var(--spacing-sm);
     gap: var(--spacing-md);
 }
+/* block présentation */
+.presentation-flex {
+    display: flex;
+    position: relative;
+    align-items: center;
+}
 
+.presentation-flex-reverse {
+    display: flex;
+    position: relative;
+    align-items: center;
+    flex-direction: row-reverse;
+}
+
+.label-hidden {
+    display: none;
+}
 /* Résultats */
 .resultat {
     gap: var(--spacing-lg);
@@ -286,6 +336,8 @@ label#resultat_recherche {
         height: var(--logo-size);
         width: var(--logo-size);
     }
+    #inscription input,
+    #inscription button,
     #recherche_form input,
     #recherche_form button,
     #reservation_form button,
@@ -296,20 +348,31 @@ label#resultat_recherche {
     #filtre_form select,
     #selection_trajet button,
     #id_places,
-    footer a,
-    .connection input,
-    .connection button,
-    .connection2 input,
-    .connection2 button {
+    footer a
+        {
         width: var(--input-width);
-        height: 30px;
         font-size: var(--font-size-base);
+    }
+    #login1 input,
+    #login1 button,
+    #login2 input,
+    #login2 button,
+    #reset_mdp input,
+    #reset_mdp button,
+    #validation_email input,
+    #validation_email button{
+        width: var(--image-height);
+        font-size: var(--font-size-base);
+    }
+    a {
+        font-size: var(--font-size-base);
+        margin-top: var(--spacing-md);
     }
     #resultat_recherche {
         width: 115px;
         height: auto;
-        font-size: 10px;
-        margin-top: 10px;
+        font-size: var(--font-size-base);
+        margin-top: var(--spacing-md)
     }
     label#resultat_recherche img {
         width: 95px;
@@ -322,22 +385,10 @@ label#resultat_recherche {
     }
     #info_user {
         font-size: 12px;
-        margin-bottom: 10px;
-    }
-    #recherche_form input,
-    #recherche_form button,
-    form#selection_trajet > div > button,
-    input#id_note,
-    input#id_prix,
-    input#id_temps_trajet,
-    footer a,
-    #contact_form button,
-    #reservation_form select,
-    #reservation_form button {
-        font-size: 10px;
+        margin-bottom: var(--spacing-sm);
     }
     #resultat_recherche {
-        font-size: 10px;
+        font-size: var(--font-size-base)
     }
     #contact_form input {
         font-size: 12px;
@@ -347,21 +398,21 @@ label#resultat_recherche {
     #contact_form textarea {
         font-size: 12px;
         width: 250px;
-        height: 100px;
+        height: var(--image-height)
     }
     #contact_form input,
     #contact_form button {
         font-size: 12px;
         width: 125px;
-        height: 30px;
     }
 }
 
 @media(min-width:479px) and (max-width: 767px) {
     :root {
-        --logo-size: 90px;
+        --logo-size: 80px;
         --font-size-base: 12px;
         --input-width: 85px;
+        --input-width--other: 95px;
         --image-height: 150px;
     }
     .image-principal {
@@ -381,20 +432,34 @@ label#resultat_recherche {
     #filtre_form button,
     #filtre_form select,
     #selection_trajet button,
-    #id_places,
-    footer a,
-    .connection input,
-    .connection button,
-    .connection2 input,
-    .connection2 button {
+    #id_places
+        {
         width: var(--input-width);
-        height: 30px;
         font-size: var(--font-size-base);
+    }
+    #inscription input,
+    #inscription button,
+    #login1 input,
+    #login1 button,
+    #login2 input,
+    #login2 button,
+    #reset_mdp input,
+    #reset_mdp button,
+    #validation_email input,
+    #validation_email button,
+    footer a
+    {
+        width: var(--input-width--other);
+        font-size: var(--font-size-base);
+    }
+    a {
+        font-size: var(--font-size-base);
+        margin-top: var(--spacing-md);
     }
     #resultat_recherche {
         width: 130px;
         height: auto;
-        font-size: 12px;
+        font-size: var(--font-size-base);
         margin-top: 10px;
     }
     label#resultat_recherche img {
@@ -410,15 +475,14 @@ label#resultat_recherche {
     h1, h2, h3 { font-size: 16px; }
     h4, h5, h6 { font-size: 14px; }
     #contact_form textarea {
-        font-size: 12px;
+        font-size: var(--font-size-base);
         width: 300px;
         height: 100px;
     }
     #contact_form input,
     #contact_form button {
-        font-size: 12px;
-        width: 150px;
-        height: 30px;
+        font-size: var(--font-size-base);
+        width: var(--image-height);
     }
 }
 
@@ -430,7 +494,7 @@ label#resultat_recherche {
         --image-height: 250px;
     }
     .image-principal {
-        background-image: url("../photo/principal.avif");
+        background-image: url("../photo/principal_mobile.avif");
         min-height: var(--image-height);
     }
     #logo, .photo_profile, .photo_default {
@@ -447,14 +511,24 @@ label#resultat_recherche {
     #filtre_form select,
     #selection_trajet button,
     #id_places,
-    footer a,
-    .connection input,
-    .connection button,
-    .connection2 input,
-    .connection2 button {
+    #inscription input,
+    #inscription button,
+    #login1 input,
+    #login1 button,
+    #login2 input,
+    #login2 button,
+    #reset_mdp input,
+    #reset_mdp button,
+    #validation_email input,
+    #validation_email button,
+    footer a
+        {
         width: var(--input-width);
-        height: 30px;
         font-size: var(--font-size-base);
+    }
+    a {
+        font-size: var(--font-size-base);
+        margin-top: var(--spacing-md);
     }
     #resultat_recherche {
         width: 140px;
@@ -462,33 +536,18 @@ label#resultat_recherche {
         margin-top: 10px;
     }
     label#resultat_recherche img {
-        width: 120px;
+        width: var(--logo-size);
         height: 80px;
-    }
-    .presentation p {
-        font-size: var(--font-size-base);
-    }
-    h1, h2, h3 { font-size: 18px; }
-    h4, h5, h6 { font-size: 16px; }
-    #recherche_form input,
-    #recherche_form button,
-    #reservation_form button,
-    #form_trajet input,
-    #form_trajet button,
-    #filtre_form input,
-    #filtre_form button,
-    #filtre_form select,
-    #selection_trajet button,
-    #id_places,
-    footer a {
-        font-size: 12px;
     }
     #resultat_recherche,
     #contact_form input,
     #contact_form button,
-    #contact_form textarea {
-        font-size: 14px;
+    #contact_form textarea  {
+        font-size: var(--font-size-base);
     }
+    h1, h2, h3 { font-size: 18px; }
+    h4, h5, h6 { font-size: 16px; }
+
     .presentation p{
         font-size: 20px;
     }
@@ -503,20 +562,19 @@ label#resultat_recherche {
     #contact_form input,
     #contact_form button {
         width: 175px;
-        height: 30px;
     }
 }
 
 @media(min-width:1023px) and (max-width: 1200px) {
     :root {
         --logo-size: 120px;
-        --font-size-base: 14px;
-        --input-width: 175px;
+        --font-size-base: 20px;
+        --input-width: 210px;
         --image-height: 300px;
         --font-size-base--p: 24px;
     }
     .image-principal {
-        background-image: url("../photo/principal.avif");
+        background-image: url("../photo/principal_mobile.avif");
         min-height: var(--image-height);
     }
     #logo, .photo_profile, .photo_default {
@@ -533,19 +591,28 @@ label#resultat_recherche {
     #filtre_form select,
     #selection_trajet button,
     #id_places,
-    footer a,
-    .connection input,
-    .connection button,
-    .connection2 input,
-    .connection2 button {
+    #inscription input,
+    #inscription button,
+    #login1 input,
+    #login1 button,
+    #login2 input,
+    #login2 button,
+    #reset_mdp input,
+    #reset_mdp button,
+    #validation_email input,
+    #validation_email button,
+    footer a       {
         width: var(--input-width);
-        height: 30px;
         font-size: var(--font-size-base);
+    }
+    a {
+        font-size: var(--font-size-base);
+        margin-top: var(--spacing-lg);
     }
     #resultat_recherche {
         width: 150px;
         height: auto;
-        font-size: 15px;
+        font-size: var(--font-size-base);
         margin-top: 10px;
     }
     label#resultat_recherche img {
@@ -560,25 +627,6 @@ label#resultat_recherche {
     }
     h1, h2, h3 { font-size: 20px; }
     h4, h5, h6 { font-size: 18px; }
-    #recherche_form input,
-    #recherche_form button,
-    #reservation_form button,
-    #form_trajet input,
-    #form_trajet button,
-    #filtre_form input,
-    #filtre_form button,
-    #filtre_form select,
-    #selection_trajet button,
-    #id_places,
-    footer a {
-        font-size: 14px;
-    }
-    #resultat_recherche,
-    #contact_form input,
-    #contact_form button,
-    #contact_form textarea {
-        font-size: 15px;
-    }
     #info_user {
         font-size: var(--font-size-base--p);
         margin-bottom: var(--spacing-lg);
@@ -593,31 +641,15 @@ label#resultat_recherche {
     #contact_form input,
     #contact_form button {
         width: 200px;
-        height: 30px;
     }
 }
-.presentation-flex {
-    display: flex;
-    position: relative;
-    align-items: center;
-}
 
-.presentation-flex-reverse {
-    display: flex;
-    position: relative;
-    align-items: center;
-    flex-direction: row-reverse;
-}
-
-.label-hidden {
-    display: none;
-}
 
 @media(min-width:1199px) and (max-width: 1400px) {
     :root {
         --logo-size: 120px;
         --font-size-base: 20px;
-        --input-width: 175px;
+        --input-width: 200px;
         --image-height: 310px;
         --font-size-base--p: 24px;
     }
@@ -639,20 +671,29 @@ label#resultat_recherche {
     #filtre_form select,
     #selection_trajet button,
     #id_places,
-    footer a,
-    .connection input,
-    .connection button,
-    .connection2 input,
-    .connection2 button {
+    #inscription input,
+    #inscription button,
+    #login1 input,
+    #login1 button,
+    #login2 input,
+    #login2 button,
+    #reset_mdp input,
+    #reset_mdp button,
+    #validation_email input,
+    #validation_email button,
+    footer a       {
         width: var(--input-width);
-        height: 30px;
         font-size: var(--font-size-base);
+    }
+    a {
+        font-size: var(--font-size-base);
+        margin-top: var(--spacing-lg);
     }
     #resultat_recherche {
         width: 150px;
         height: auto;
         font-size: 15px;
-        margin-top: 10px;
+        margin-top: var(--spacing-sm);
     }
     label#resultat_recherche img {
         width: 130px;
@@ -663,19 +704,6 @@ label#resultat_recherche {
     }
     h1, h2, h3,#contact_form input,#contact_form button,#contact_form textarea { font-size: 20px; }
     h4, h5, h6 { font-size: 18px; }
-    #recherche_form input,
-    #recherche_form button,
-    #reservation_form button,
-    #form_trajet input,
-    #form_trajet button,
-    #filtre_form input,
-    #filtre_form button,
-    #filtre_form select,
-    #selection_trajet button,
-    #id_places,
-    footer a {
-        font-size: 14px;
-    }
     #resultat_recherche {
         font-size: 15px;
     }
@@ -688,12 +716,11 @@ label#resultat_recherche {
     }
     #contact_form textarea {
         width: 500px;
-        height: 200px;
+        height: var(--input-width);
     }
     #contact_form input,
     #contact_form button {
         width: 200px;
-        height: 30px;
     }
 }
 
@@ -701,7 +728,7 @@ label#resultat_recherche {
     :root {
         --logo-size: 150px;
         --font-size-base: 20px;
-        --input-width: 180px;
+        --input-width: 200px;
         --image-height: 400px;
     }
     .image-principal {
@@ -722,14 +749,23 @@ label#resultat_recherche {
     #filtre_form select,
     #selection_trajet button,
     #id_places,
-    footer a,
-    .connection input,
-    .connection button,
-    .connection2 input,
-    .connection2 button {
+    #inscription input,
+    #inscription button,
+    #login1 input,
+    #login1 button,
+    #login2 input,
+    #login2 button,
+    #reset_mdp input,
+    #reset_mdp button,
+    #validation_email input,
+    #validation_email button,
+    footer a       {
         width: var(--input-width);
-        height: 30px;
         font-size: var(--font-size-base);
+    }
+    a {
+        font-size: var(--font-size-base);
+        margin-top: var(--spacing-lg);
     }
     #resultat_recherche {
         width: 160px;
@@ -762,7 +798,6 @@ label#resultat_recherche {
     #contact_form input,
     #contact_form button {
         width: 200px;
-        height: 30px;
     }
 
 }
@@ -770,9 +805,9 @@ label#resultat_recherche {
 @media(min-width:1799px) and (max-width: 2000px) {
     :root {
         --logo-size: 150px;
-        --font-size-base: 20px;
-        --input-width: 200px;
-        --image-height: 600px;
+        --font-size-base: 24px;
+        --input-width: 220px;
+        --image-height: 480px;
     }
     .image-principal {
         background-image: url("../photo/principal.avif");
@@ -792,14 +827,23 @@ label#resultat_recherche {
     #filtre_form select,
     #selection_trajet button,
     #id_places,
-    footer a,
-    .connection input,
-    .connection button,
-    .connection2 input,
-    .connection2 button {
+    #inscription input,
+    #inscription button,
+    #login1 input,
+    #login1 button,
+    #login2 input,
+    #login2 button,
+    #reset_mdp input,
+    #reset_mdp button,
+    #validation_email input,
+    #validation_email button,
+    footer a{
         width: var(--input-width);
-        height: 30px;
         font-size: var(--font-size-base);
+    }
+    a {
+        font-size: var(--font-size-base);
+        margin-top: var(--spacing-lg);
     }
     #resultat_recherche {
         width: 170px;
@@ -813,7 +857,7 @@ label#resultat_recherche {
     }
     h1, h2, h3,#contact_form input,#contact_form button,#contact_form textarea, .presentation p,
     #info_user{
-        font-size: 24px;
+        font-size: 30px;
     }
     div.conteneur_recherche > div , #info_user ,#selection_trajet button{
         margin-bottom: var(--spacing-lg);
@@ -825,15 +869,14 @@ label#resultat_recherche {
     #contact_form input,
     #contact_form button {
         width: 225px;
-        height: 30px;
     }
 }
 
 @media(min-width:1999px) and (max-width: 3000px) {
     :root {
         --logo-size: 160px;
-        --font-size-base: 20px;
-        --input-width: 200px;
+        --font-size-base: 25px;
+        --input-width: 230px;
         --image-height: 700px;
     }
     .image-principal {
@@ -854,14 +897,23 @@ label#resultat_recherche {
     #filtre_form select,
     #selection_trajet button,
     #id_places,
-    footer a,
-    .connection input,
-    .connection button,
-    .connection2 input,
-    .connection2 button {
+    #inscription input,
+    #inscription button,
+    #login1 input,
+    #login1 button,
+    #login2 input,
+    #login2 button,
+    #reset_mdp input,
+    #reset_mdp button,
+    #validation_email input,
+    #validation_email button,
+    footer a       {
         width: var(--input-width);
-        height: 30px;
         font-size: var(--font-size-base);
+    }
+    a {
+        font-size: var(--font-size-base);
+        margin-top: var(--spacing-lg);
     }
     #resultat_recherche {
         width: 170px;
@@ -875,7 +927,7 @@ label#resultat_recherche {
     }
     h1, h2, h3,#contact_form input,#contact_form button,#contact_form textarea, .presentation p,
     #info_user{
-        font-size: 26px;
+        font-size: 34px;
     }
     div.conteneur_recherche > div , #info_user ,#selection_trajet button{
         margin-bottom: var(--spacing-lg);
@@ -893,10 +945,10 @@ label#resultat_recherche {
 
 @media(min-width:2999px) {
     :root {
-        --logo-size: 160px;
-        --font-size-base: 20px;
-        --input-width: 225px;
-        --image-height: 950px;
+        --logo-size: 250px;
+        --font-size-base: 36px;
+        --input-width: 300px;
+        --image-height: 900px;
     }
     .image-principal {
         background-image: url("../photo/principal.avif");
@@ -916,14 +968,24 @@ label#resultat_recherche {
     #filtre_form select,
     #selection_trajet button,
     #id_places,
-    footer a,
-    .connection input,
-    .connection button,
-    .connection2 input,
-    .connection2 button {
+    #inscription input,
+    #inscription button,
+    #login1 input,
+    #login1 button,
+    #login2 input,
+    #login2 button,
+    #reset_mdp input,
+    #reset_mdp button,
+    #validation_email input,
+    #validation_email button,
+    footer a{
         width: var(--input-width);
-        height: 30px;
         font-size: var(--font-size-base);
+        height: 45px;
+    }
+    a {
+        font-size: var(--font-size-base);
+        margin-top: var(--spacing-lg);
     }
     #resultat_recherche {
         width: 170px;
@@ -936,7 +998,7 @@ label#resultat_recherche {
         height: 100px;
     }
     #info_user, .presentation p{
-        font-size: 32px;
+        font-size: 50px;
     }
     div.conteneur_recherche > div , #info_user ,#selection_trajet button{
         margin-bottom: var(--spacing-lg);
@@ -952,5 +1014,16 @@ label#resultat_recherche {
     #contact_form button {
         width: 250px;
         height: 30px;
+    }
+    .presentation > div {
+        margin-right: 25%;
+        margin-left: 25%;
+    }
+    #selection_trajet{
+        margin-left:15%;
+        margin-right:15%;
+    }
+    #recherche_form,#login1,#login2,#reset_mdp,#validation_email{
+        height: 70px;;
     }
 }

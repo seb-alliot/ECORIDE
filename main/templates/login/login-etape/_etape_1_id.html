@@ -1,8 +1,6 @@
-{% load static %}
-<link rel="stylesheet" href="{% static 'css/connecte/connection1.css' %}">
 
 
-<form method="POST" class="connection connection-form">
+<form method="POST" id="login1">
     {% csrf_token %}
     <label for="recherche_form" class="label-hidden">Identifiant</label>
     {{ form.username }}
