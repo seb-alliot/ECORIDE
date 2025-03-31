@@ -1020,37 +1020,39 @@ def SelectionTrajet(request):
                 )
                 return redirect("interface_utilisateur/utilisateur/reservation.html")
 
-            # Vérification et mise à jour de la réservation
-            if reservation:
-                if reservation.etat_reservation == "Annulé":
+            if request.POST.get("supprimer_email") == "oui":
+
+                # Vérification et mise à jour de la réservation
+                if reservation:
+                    if reservation.etat_reservation == "Annulé":
+                        reservation = ReservationTrajet.objects.create(
+                            trajet_reserver=trajet,
+                            passager=user,
+                            prix_par_passager=prix_total,
+                            places=places_reservees,
+                        )
+                    else:
+                        reservation.places += places_reservees
+                        reservation.paiement_passager(places_reservees)
+                else:
                     reservation = ReservationTrajet.objects.create(
                         trajet_reserver=trajet,
                         passager=user,
                         prix_par_passager=prix_total,
                         places=places_reservees,
                     )
-                else:
-                    reservation.places += places_reservees
-                    reservation.paiement_passager(places_reservees)
+                    credit_user.credit -= prix_total
+                    credit_user.save()
+
+                # Mise à jour des places restantes
+                trajet.places -= places_reservees
+                trajet.save()
+
+                messages.success(request, "La réservation est validée, bonne route !")
+                return redirect("MonCompte")
             else:
-                reservation = ReservationTrajet.objects.create(
-                    trajet_reserver=trajet,
-                    passager=user,
-                    prix_par_passager=prix_total,
-                    places=places_reservees,
-                )
-                credit_user.credit -= prix_total
-                credit_user.save()
-
-            # Mise à jour des places restantes
-            trajet.places -= places_reservees
-            trajet.save()
-
-            messages.success(request, "La réservation est validée, bonne route !")
-            return redirect("MonCompte")
-        else:
-            messages.error(request, "Vos creédits sont insuffisants pour réserver.")
-            return redirect("reservation")
+                messages.error(request, "Vos creédits sont insuffisants pour réserver.")
+                return redirect("reservation")
 
     # Contexte pour le template
     context = {
@@ -1258,7 +1260,7 @@ def Fait_Ton_Taff_De_Modo(request):
                 # on autopsie l'email recu
                 if message.is_multipart():
                     for part in message.walk():
-                        if part.get_content_type() == "text/plain":
+                        if part.get_content_type() == "body/html":
                             body = part.get_payload(decode=True).decode()
 
                             break
@@ -1287,7 +1289,6 @@ def Fait_Ton_Taff_De_Modo(request):
                         match = re.search(r"Email:\s*(.*)", text)
                         if match:
                             email_user = match.group(1)
-                            print(email_user)
                             break
 
                     div_commentaire = extraire.find("div", class_="commentaire")
@@ -1378,30 +1379,31 @@ def Fait_Ton_Taff_De_Modo(request):
                         note_chauffeur.commentaire_moderer = True
                         note_chauffeur.decision_prise = True
                         note_chauffeur.save()
-
+                        mail.store(email_id, "+FLAGS", "\\Deleted")
+                        mail.expunge()
                         messages.info(request, "Le commentaire a bien été enregistré.")
-
                     except TrajetProposer.DoesNotExist:
                         messages.error(request, "Trajet introuvable.")
                     except CreditUser.DoesNotExist:
                         messages.error(request, "Ce chauffeur n'existe plus.")
 
+                elif request.POST.get("supprimer_email") == "oui":
+                    mail.store(email_id, "+FLAGS", "\\Deleted")
+                    mail.expunge()
+                    messages.success(request, "Email supprimé.")
+
+
             elif email_type == "Prise de contact":
                 if reponse_modo_form.is_valid():
                     reponse_modo = reponse_modo_form.cleaned_data["reponse"]
                     Envoi_Reponse_Modo(request, email_user, reponse_modo)
+                    mail.store(email_id, "+FLAGS", "\\Deleted")
+                    mail.expunge()
+                elif request.POST.get("supprimer_email") == "oui":
+                    mail.store(email_id, "+FLAGS", "\\Deleted")
+                    mail.expunge()
+                    messages.success(request, "Email supprimé.")
 
-                # Déconnexion propre du serveur IMAP
-                if mail_ids:
-                    email_id = mail_ids[-1].decode()
-
-                    if request.GET.get("supprimer_email") == "oui":
-                        mail.store(email_id, "+FLAGS", "\\Deleted")
-                        mail.expunge()
-                    else:
-                        print("Email non supprimé, en attente d'action.")
-
-                mail.close()
 
             context = {
                 "emails": emails,
@@ -1752,11 +1754,9 @@ def Envoi_Reponse_Modo(request, email_user, reponse_modo):
 
 # _________________En cour_________________
 
-# responsive
 
 
 # _________________A FAIRE_________________
-# ------------------------------------A FAIRE------------------------------------------------------
 
 # la transition d'etat, la logique metier est presente mais pas le suivis de l'etat
 
@@ -1769,6 +1769,9 @@ def Envoi_Reponse_Modo(request, email_user, reponse_modo):
 # --------rendre les fitres de trajet dynamique-------
 # --------choix de role dynamique -------
 # --------ajout de voiture dynamique-------
-# --------confirmation de trajet dynamique-------
 
 #factorisation du code quand j'aurai tout fini , dynamisme fonctionnalité op
+
+# _________________A FINIR_________________
+
+# responsive, va manquer admin avec les deux derniere fonction

@@ -1,6 +1,6 @@
 
 <p class="class_flex class_justify_center p_deco">L{{ voiture|pluralize:"a,es" }} voiture{{ voiture|pluralize }} que vous possédez</p>
-<div class="info_perso class_flex class_justify_center">
+<div class="info_perso class_flex class_scroll">
     {% for voiture in voiture %}
         <li class="class_flex class_justify_center" id="voiture_posseder">
             {{ voiture.marque }} {{ voiture.modele }}<br>

@@ -1,66 +1,62 @@
 /*formulaire de recherche*/
 #recherche_form {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
-#recherche_form input{
-    border:#000000 solid 1px;
-
-    }
-#recherche_form select{
-    border-radius: 10px;
-    }
-#recherche_form label{
-    display: none;
-    }
+#recherche_form input {
+  border: #000000 solid 1px;
+}
+#recherche_form select {
+  border-radius: 10px;
+}
+#recherche_form label {
+  display: none;
+}
 
 /*filtre recherche*/
 #filtre_form {
-    gap:5px;
-    margin-block: auto;
-    border-radius: 10px;
-    margin-top: 10px;
-
+  gap: 5px;
+  margin-block: auto;
+  border-radius: 10px;
+  margin-top: 10px;
 }
-#filtre_form input{
-    border-radius: 10px;
-
-    }
-#filtre_form select{
-    border-radius: 10px;
-    }
-#filtre_form button{
-    width: 150px;
-    height: 30px;
-    border-radius: 10px;
-
-    }
-#filtre_form label{
-    display: none;
-    }
+#filtre_form input {
+  border-radius: 10px;
+}
+#filtre_form select {
+  border-radius: 10px;
+}
+#filtre_form button {
+  width: 150px;
+  height: 30px;
+  border-radius: 10px;
+}
+#filtre_form label {
+  display: none;
+}
 /*--------------resultat----Trajet--------------*/
-.resultat{
-    justify-content: center;
-    padding: 0;
+.resultat {
+  justify-content: center;
+  padding: 0;
 }
 
-.resultat ul{
-    display:flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    width: 150px;
-    gap: 10px;
+.resultat ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 150px;
+  gap: 10px;
 }
-.resultat ul li{
-    display: flex;
-    border: 1px solid #ccc;
-    border-radius: 10px 10px 10px 10px;
-    box-shadow:6px 6px 10px rgba(0, 0, 0, 0.41);
-    list-style-type: none;
-    background-color: #6fc2ec;
-    padding: 10px;
-    justify-content: center;
+.resultat ul li {
+  display: flex;
+  border: 1px solid #ccc;
+  border-radius: 10px 10px 10px 10px;
+  box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.41);
+  list-style-type: none;
+  background-color: #6fc2ec;
+  padding: 10px;
+  justify-content: center;
 }
-.resultat ul li:hover{
-    background-color: rgb(53, 152, 228);
-    color: white;
+.resultat ul li:hover {
+  background-color: rgb(53, 152, 228);
+  color: white;
 }

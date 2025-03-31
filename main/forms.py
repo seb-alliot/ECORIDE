@@ -49,7 +49,7 @@ class Inscription(UserCreationForm):
     password2 = forms.CharField(
         max_length=20,
         label="Confirmer le mot de passe",
-        widget=forms.PasswordInput(attrs={"placeholder": "valider le mot de passe"}),
+        widget=forms.PasswordInput(attrs={"placeholder": "Mot de passe"}),
         required=True,
     )
 
@@ -89,7 +89,7 @@ class IdentifiantForm(forms.Form):
     username = forms.CharField(
         max_length=100,
         label="Identifiant",
-        widget=forms.TextInput(attrs={"placeholder": "Votre identifiant"}),
+        widget=forms.TextInput(attrs={"placeholder": "Identifiant"}),
         required=True,
     )
 
@@ -104,7 +104,7 @@ class MotDePasseForm(forms.Form):
     password = forms.CharField(
         max_length=128,
         label="Mot de passe",
-        widget=forms.PasswordInput(attrs={"placeholder": "Votre mot de passe"}),
+        widget=forms.PasswordInput(attrs={"placeholder": "Mot de passe"}),
         required=True,
     )
     token_connection = forms.CharField(
@@ -127,7 +127,7 @@ class ConfirmEmailForm(PasswordResetForm):
     email = forms.EmailField(
         max_length=100,
         label="Email",
-        widget=forms.EmailInput(attrs={"placeholder": "Votre email"}),
+        widget=forms.EmailInput(attrs={"placeholder": "Email"}),
         required=True,
     )
 

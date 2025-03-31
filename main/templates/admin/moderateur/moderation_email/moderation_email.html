@@ -48,10 +48,15 @@
             <form method="POST">
                 {% csrf_token %}
                 {{ moderation_positive_form.as_p }}
-
                 <button type="submit">Valider mon choix</button>
             </form>
-
+            <form method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="supprimer_email" value="oui">
+                <button type="submit" onclick="return confirm('Voulez-vous vraiment supprimer cet email ?');">
+                    Supprimer l'email
+                </button>
+            </form>
         {% elif request.GET.email_type == "Prise de contact" %}
 
             <form method="POST">
@@ -59,7 +64,13 @@
                 {{ reponse_modo_form.as_p }}
                 <button type="submit">Répondre</button>
             </form>
-
+            <form method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="supprimer_email" value="oui">
+                <button type="submit" onclick="return confirm('Voulez-vous vraiment supprimer cet email ?');">
+                    Supprimer l'email
+                </button>
+            </form>
         {% endif %}
 
     {% else %}

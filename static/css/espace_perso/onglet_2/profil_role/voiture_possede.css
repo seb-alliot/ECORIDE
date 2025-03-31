@@ -1,119 +1,115 @@
-
 div.info_perso {
-    gap: 20px;
-    flex-wrap: inherit;
-    margin-top: 10px;
-    }
-
-#voiture_posseder{
-    gap: 10px;
-    border: 1px solid #ccc;
-    border-radius: 10px 10px 10px 10px;
-    list-style-type: none;
-    background-color: rgb(200, 240, 200);
-    padding: 10px;
-    margin-bottom: 15px;
-    box-shadow: 6px 6px 10px beige;
+  gap: 20px;
+  margin-top: 10px;
 }
 
-@media(min-width:320px) and (max-width: 480px) {
-    div.info_perso{
-        font-size: 10px;
-        margin-bottom: 5px;
-        margin-bottom:10px;
-        margin-left:0%;
-    }
-    div.info_perso > li{
-            width: 111px;
-            font-size: 10px;
-        }
-    }
+#voiture_posseder {
+  gap: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px 10px 10px 10px;
+  list-style-type: none;
+  background-color: rgb(200, 240, 200);
+  padding: 10px;
+  margin-bottom: 15px;
+  box-shadow: 6px 6px 10px beige;
+}
 
-@media(min-width:479px) and (max-width: 768px) {
-    div.info_perso{
-        font-size: 10px;
-        margin-bottom: 5px;
-        margin-bottom:10px;
-        margin-left:0%;
-    }
-    div.info_perso > li{
-            width: 140px;
-            font-size: 12px;
-        }
-    }
-@media(min-width:767px) and (max-width: 1024px) {
-    div.info_perso{
-        font-size: 12px;
-        margin-bottom: 5px;
-        margin-bottom:10px;
-        margin-left:0%;
-        }
-    div.info_perso > li{
-            width: 150px;
-            font-size: 14px;
-        }
-    }
-@media(min-width:1023px) and (max-width: 1200px) {
-    div.info_perso{
-        font-size: 12px;
-        margin-bottom: 5px;
-        margin-bottom:10px;
-        margin-left:0%;
-        flex-direction: inherit;
-        }
-    }
-    div.info_perso > li{
-            width: 180px;
-            font-size: 14px;
-        }
-    
+@media (min-width: 320px) and (max-width: 480px) {
+  div.info_perso {
+    font-size: 10px;
+    margin-bottom: 5px;
+    margin-bottom: 10px;
+    margin-left: 0%;
+  }
+  div.info_perso > li {
+    width: 111px;
+    font-size: 10px;
+  }
+}
 
-@media(min-width:1199px) and (max-width: 1400px){
-    div.info_perso{
-        font-size: 12px;
-        margin-bottom: 5px;
-        margin-bottom:10px;
-        margin-left:0%;
-    }
-    div.info_perso > li{
-            width: 180px;
-            font-size: 14px;
-        }
-    }
-@media(min-width:1399px) and (max-width: 1800px) {
-    div.info_perso{
-        font-size: 12px;
-        margin-bottom: 5px;
-        margin-bottom:10px;
-        margin-left:0%;
-    }
-    div.info_perso > li{
-            width: 180px;
-            font-size: 16px;
-        }
-    }
-@media(min-width:1799px) and (max-width: 2000px) {
-    div.info_perso{
-        font-size: 12px;
-        margin-bottom: 5px;
-        margin-bottom:10px;
-        margin-left:0%;
-    }
-    div.info_perso > li{
-            width: 200px;
-            font-size: 16px;
-        }
-    }
+@media (min-width: 479px) and (max-width: 768px) {
+  div.info_perso {
+    font-size: 10px;
+    margin-bottom: 5px;
+    margin-bottom: 10px;
+    margin-left: 0%;
+  }
+  div.info_perso > li {
+    width: 140px;
+    font-size: 12px;
+  }
+}
+@media (min-width: 767px) and (max-width: 1024px) {
+  div.info_perso {
+    font-size: 12px;
+    margin-bottom: 5px;
+    margin-bottom: 10px;
+    margin-left: 0%;
+  }
+  div.info_perso > li {
+    width: 150px;
+    font-size: 14px;
+  }
+}
+@media (min-width: 1023px) and (max-width: 1200px) {
+  div.info_perso {
+    font-size: 12px;
+    margin-bottom: 5px;
+    margin-bottom: 10px;
+    margin-left: 0%;
+  }
+}
+div.info_perso > li {
+  width: 180px;
+  font-size: 14px;
+}
 
-@media(min-width:1999px){
-    div.info_perso{
-        font-size: 12px;
-        margin-bottom: 5px;
-        margin-bottom:10px;
-        margin-left:0%;
-    }
-    div.info_perso > li{
-            width: 200px;
-            font-size: 16px;
-        }
-    }
+@media (min-width: 1199px) and (max-width: 1400px) {
+  div.info_perso {
+    font-size: 12px;
+    margin-bottom: 5px;
+    margin-bottom: 10px;
+    margin-left: 0%;
+  }
+  div.info_perso > li {
+    width: 180px;
+    font-size: 14px;
+  }
+}
+@media (min-width: 1399px) and (max-width: 1800px) {
+  div.info_perso {
+    font-size: 12px;
+    margin-bottom: 5px;
+    margin-bottom: 10px;
+    margin-left: 0%;
+  }
+  div.info_perso > li {
+    width: 180px;
+    font-size: 16px;
+  }
+}
+@media (min-width: 1799px) and (max-width: 2000px) {
+  div.info_perso {
+    font-size: 12px;
+    margin-bottom: 5px;
+    margin-bottom: 10px;
+    margin-left: 0%;
+  }
+  div.info_perso > li {
+    width: 200px;
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1999px) {
+  div.info_perso {
+    font-size: 12px;
+    margin-bottom: 5px;
+    margin-bottom: 10px;
+    margin-left: 0%;
+  }
+  div.info_perso > li {
+    width: 200px;
+    font-size: 16px;
+  }
+}

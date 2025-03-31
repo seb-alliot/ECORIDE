@@ -7,7 +7,13 @@
         {% if user.is_authenticated %}
             {% csrf_token %}
                 {{ reservation_form.places }}
-            <button type="submit" value="reservation_form">Reserver</button>
+                <form method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="supprimer_email" value="oui">
+                    <button type="submit" onclick="return confirm('Confirmer la réservation?');">
+                        Réserver
+                    </button>
+                </form>
         {% else %}
             <a href="{% url 'inscription' %}"class="btn btn-primary">Inscrivez-vous pour réserver</a>
         {% endif %}

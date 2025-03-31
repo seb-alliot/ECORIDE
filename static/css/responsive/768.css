@@ -1,122 +1,133 @@
+:root {
+  --logo-size: 110px;
+  --font-size-base: 12px;
+  --input-width: 145px;
+  --image-height: 250px;
+}
+.image-principal {
+  background-image: url("../../photo/principal_mobile.avif");
+  min-height: var(--image-height);
+}
+#logo,
+.photo_profile,
+.photo_default {
+  height: var(--logo-size);
+  width: var(--logo-size);
+}
+form#recherche_form input,
+form#recherche_form button,
+form#reservation_form button,
+form#form_trajet input,
+form#form_trajet button,
+form#filtre_form input,
+form#filtre_form button,
+form#filtre_form select,
+form#selection_trajet button,
+select#id_places,
+form#inscription input,
+form#inscription button,
+form#login1 input,
+form#login1 button,
+form#login2 input,
+form#login2 button,
+form#reset_mdp input,
+form#reset_mdp button,
+form#validation_email input,
+form#validation_email button,
+footer a {
+  width: 125px;
+  font-size: var(--font-size-base);
+}
+#creer_compte a,
+#mot_de_passe_oublie a {
+  font-size: var(--font-size-base);
+  margin-top: var(--spacing-md);
+}
+#resultat_recherche {
+  width: 140px;
+  height: auto;
+  margin-top: 10px;
+}
+label#resultat_recherche img {
+  width: var(--logo-size);
+  height: 80px;
+}
+#resultat_recherche,
+#contact_form input,
+#contact_form button,
+#contact_form textarea {
+  font-size: var(--font-size-base);
+}
+h1,
+h2,
+h3 {
+  font-size: 18px;
+}
+h4,
+h5,
+h6 {
+  font-size: 16px;
+}
 
-    :root {
-        --logo-size: 110px;
-        --font-size-base: 12px;
-        --input-width: 145px;
-        --image-height: 250px;
-    }
-    .image-principal {
-        background-image: url("../../photo/principal_mobile.avif");
-        min-height: var(--image-height);
-    }
-    #logo, .photo_profile, .photo_default {
-        height: var(--logo-size);
-        width: var(--logo-size);
-    }
-    form#recherche_form input,
-    form#recherche_form button,
-    form#reservation_form button,
-    form#form_trajet input,
-    form#form_trajet button,
-    form#filtre_form input,
-    form#filtre_form button,
-    form#filtre_form select,
-    form#selection_trajet button,
-    select#id_places,
-    form#inscription input,
-    form#inscription button,
-    form#login1 input,
-    form#login1 button,
-    form#login2 input,
-    form#login2 button,
-    form#reset_mdp input,
-    form#reset_mdp button,
-    form#validation_email input,
-    form#validation_email button,
-    footer a
-        {
-        width: var(--input-width);
-        font-size: var(--font-size-base);
-    }
-    #creer_compte a , #mot_de_passe_oublie a {
-        font-size: var(--font-size-base);
-        margin-top: var(--spacing-md);
-    }
-    #resultat_recherche {
-        width: 140px;
-        height: auto;
-        margin-top: 10px;
-    }
-    label#resultat_recherche img {
-        width: var(--logo-size);
-        height: 80px;
-    }
-    #resultat_recherche,
-    #contact_form input,
-    #contact_form button,
-    #contact_form textarea  {
-        font-size: var(--font-size-base);
-    }
-    h1, h2, h3 { font-size: 18px; }
-    h4, h5, h6 { font-size: 16px; }
-
-    .presentation p{
-        font-size: 18px;
-    }
-    #info_user {
-        font-size: 22px;
-        margin-bottom: var(--spacing-lg);
-    }
-    form#contact_form textarea {
-        width: 450px;
-        height: 175px;
-    }
-    form#contact_form input,
-    form#contact_form button {
-        width: 175px;
-        font-size: var(--font-size-base);
-    }
+.presentation p {
+  font-size: 18px;
+}
+#info_user {
+  font-size: 22px;
+  margin-bottom: var(--spacing-lg);
+}
+form#contact_form textarea {
+  width: 450px;
+  height: 175px;
+}
+form#contact_form input,
+form#contact_form button {
+  width: 175px;
+  font-size: var(--font-size-base);
+}
 /*---carte de selection de trajet---*/
-    div#reservation > div > img.photo_profile , div#reservation > div {
-        width: 250px;
-        height: 250px;
-    }
-    #prix_trajet,
-    #chauffeur_trajet,
-    #info_trajet > div > p {
-        font-size: 14px;
-        margin: var(--spacing-sm);
-    }
-    div#info_trajet {
-        margin: -2%;
-    }
-    #div_avis {
-        width: 90%;
-    }
-    #note,
-    #div_avis,
-    #preference {
-        font-size: 12px;
-    }
-    div#div_avis > div,
-    div#place_a_reserver > div,
-    div#place_a_reserver {
-        margin: 7px;
-    }
-    div#preference p {
-        margin: 4px;
-        font-size: var(--spacing-md);
-    }
-    #place_a_reserver {
-        font-size: 15px;
-    }
-    div#div_avis > div > p {
-        font-size: var(--font-size-base);
-    }
-    #creer_compte {
-        margin-top: var(--font-size-base);
-    }
-    .presentation > div {
-        margin-right: 12.5%;
-        margin-left: 12.5%;
-    }
+div#reservation > div > img.photo_profile,
+div#reservation > div {
+  width: 250px;
+  height: 250px;
+}
+#prix_trajet,
+#chauffeur_trajet,
+#info_trajet > div > p {
+  font-size: 14px;
+  margin: var(--spacing-sm);
+}
+div#info_trajet {
+  margin: -2%;
+}
+#div_avis {
+  width: 90%;
+}
+#note,
+#div_avis,
+#preference {
+  font-size: 12px;
+}
+div#div_avis > div,
+div#place_a_reserver > div,
+div#place_a_reserver {
+  margin: 7px;
+}
+div#preference p {
+  margin: 4px;
+  font-size: var(--spacing-md);
+}
+#place_a_reserver {
+  font-size: 15px;
+}
+div#div_avis > div > p {
+  font-size: var(--font-size-base);
+}
+#creer_compte,
+#mot_de_passe_oublie {
+  margin-top: var(--font-size-base);
+}
+.presentation > div {
+  margin-right: 12.5%;
+  margin-left: 12.5%;
+}

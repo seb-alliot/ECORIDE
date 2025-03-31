@@ -1,155 +1,198 @@
-
 /* responsive design */
-@import url("responsive/320.css") screen and (min-width: 320px) and (max-width: 480px);
-@import url("responsive/480.css") screen and (min-width: 479px) and (max-width: 767px);
-@import url("responsive/768.css") screen and (min-width: 767px) and (max-width: 1024px);
-@import url("responsive/1024.css") screen and (min-width: 1023px) and (max-width: 1200px);
-@import url("responsive/1200.css") screen and (min-width: 1199px) and (max-width: 1400px);
-@import url("responsive/1400.css") screen and (min-width: 1399px) and (max-width: 1800px);
-@import url("responsive/1800.css") screen and (min-width: 1799px) and (max-width: 2000px);
-@import url("responsive/2000.css") screen and (min-width: 1999px) and (max-width: 3000px);
+@import url("responsive/320.css") screen and (min-width: 320px) and
+  (max-width: 480px);
+@import url("responsive/480.css") screen and (min-width: 479px) and
+  (max-width: 767px);
+@import url("responsive/768.css") screen and (min-width: 767px) and
+  (max-width: 1024px);
+@import url("responsive/1024.css") screen and (min-width: 1023px) and
+  (max-width: 1200px);
+@import url("responsive/1200.css") screen and (min-width: 1199px) and
+  (max-width: 1400px);
+@import url("responsive/1400.css") screen and (min-width: 1399px) and
+  (max-width: 1800px);
+@import url("responsive/1800.css") screen and (min-width: 1799px) and
+  (max-width: 2000px);
+@import url("responsive/2000.css") screen and (min-width: 1999px) and
+  (max-width: 3000px);
 @import url("responsive/3000.css") screen and (min-width: 2999px);
 
 /* Variables CSS */
 :root {
-    --color-primary: #7D6E63;
-    --color-secondary: #B19A8B;
-    --color-background: #FAF3E0;
-    --color-hover: rgb(200, 240, 200);
-    --color-text: #000000;
-    --color-light: #F8F9FA;
+  --color-primary: #7d6e63;
+  --color-secondary: #b19a8b;
+  --color-background: #faf3e0;
+  --color-hover: rgb(200, 240, 200);
+  --color-text: #000000;
+  --color-light: #f8f9fa;
 
-    --border-radius-sm: 10px;
-    --border-radius-lg: 15%;
-    --box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.41);
+  --border-radius-sm: 10px;
+  --border-radius-lg: 15%;
+  --box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.41);
 
-    --spacing-sm: 5px;
-    --spacing-md: 10px;
-    --spacing-lg: 20px;
+  --spacing-sm: 5px;
+  --spacing-md: 10px;
+  --spacing-lg: 20px;
 
-    --font-main: Arial, sans-serif;
+  --font-main: Arial, sans-serif;
 }
 
 /* Classes utilitaires */
-.class_flex { display: flex; }
-.display_grid { display: grid; }
-.class_flex_wrap { flex-wrap: wrap; }
-.class_justify_center { justify-content: center; }
-.classe_row_reverse { flex-direction: row-reverse; }
-.class_aligne_items_center, .aligne_item_center { align-items: center; }
-.aligne_content_center { align-content: center; }
-.class_column { flex-direction: column; }
-.class_shadow { box-shadow: var(--box-shadow); }
-.class_border { border: 1px solid var(--color-text); }
-.class_border_radius { border-radius: var(--border-radius-sm); }
-.class_box_sizing { box-sizing: border-box; }
-.text_decoration_none { text-decoration: none; }
-.position_relative { position: relative; }
+.class_flex {
+  display: flex;
+}
+.display_grid {
+  display: grid;
+}
+.class_flex_wrap {
+  flex-wrap: wrap;
+}
+.class_justify_center {
+  justify-content: center;
+}
+.classe_row_reverse {
+  flex-direction: row-reverse;
+}
+.class_aligne_items_center,
+.aligne_item_center {
+  align-items: center;
+}
+.aligne_content_center {
+  align-content: center;
+}
+.class_column {
+  flex-direction: column;
+}
+.class_shadow {
+  box-shadow: var(--box-shadow);
+}
+.class_border {
+  border: 1px solid var(--color-text);
+}
+.class_border_radius {
+  border-radius: var(--border-radius-sm);
+}
+.class_box_sizing {
+  box-sizing: border-box;
+}
+.text_decoration_none {
+  text-decoration: none;
+}
+.position_relative {
+  position: relative;
+}
 
 .generic {
-    display:flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 .generix1 {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .generix2 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .generix3 {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 .generix4 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
 }
 
 /* Scrollbar personnalisée */
 .class_scroll {
-    overflow-y: auto;
-    width: 100%;
-    scrollbar-color: rgba(150, 200, 150, 1) rgba(220, 220, 220, 0);
-    padding-bottom: var(--spacing-md);
+  overflow-y: auto;
+  width: 100%;
+  scrollbar-color: rgba(150, 200, 150, 1) rgba(220, 220, 220, 0);
+  padding-bottom: var(--spacing-md);
 }
 
 /* Reset et base */
 * {
-    margin: 0;
-    box-sizing: border-box;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 body {
-    background-color: var(--color-background);
-    font-family: var(--font-main);
-    min-height: 100vh;
+  background-color: var(--color-background);
+  font-family: var(--font-main);
+  min-height: 100vh;
 }
 /* Header */
 header {
-    justify-content: space-between;
-    padding: var(--spacing-md) var(--spacing-lg);
+  justify-content: space-between;
+  padding: var(--spacing-md) var(--spacing-lg);
 }
 
-header h1 a, header a { color: var(--color-text); }
+header h1 a,
+header a {
+  color: var(--color-text);
+}
 
-.photo_profile, .photo_default, label#resultat_recherche img {
-    border-radius: var(--border-radius-lg);
+.photo_profile,
+.photo_default,
+label#resultat_recherche img {
+  border-radius: var(--border-radius-lg);
 }
 
 .photo_default {
-    background-image: url("../photo/photo_default.jpg");
-    background-size: cover;
+  background-image: url("../photo/photo_default.jpg");
+  background-size: cover;
 }
 
 #logo {
-    display: flex;
-    margin-left: 4%;
+  display: flex;
+  margin-left: 4%;
 }
 /* Footer */
 footer {
-    gap: 30px;
-    padding: 0;
-    margin-top: auto;
-    margin-bottom: var(--spacing-sm);
+  gap: 30px;
+  padding: 0;
+  margin-top: auto;
+  margin-bottom: var(--spacing-sm);
 }
 
 footer a {
-    color: var(--color-text);
-    height: 30px;
+  color: var(--color-text);
+  height: 30px;
 }
 a {
-    text-decoration: none;
-    color: black;
-    display: flex;
-    justify-content: center;
+  text-decoration: none;
+  color: black;
+  display: flex;
+  justify-content: center;
 }
 .footer {
-    border-radius: var(--border-radius-sm);
-    background-color: var(--color-primary);
-    color: white;
+  border-radius: var(--border-radius-sm);
+  background-color: var(--color-primary);
+  color: white;
 }
 .footer-link {
-    text-decoration: none;
-    box-shadow: var(--box-shadow);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  text-decoration: none;
+  box-shadow: var(--box-shadow);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Éléments de formulaire */
-button, select, input {
-    justify-content: center;
-    box-sizing: border-box;
-    border: 1px solid var(--color-text);
-    border-radius: var(--border-radius-sm);
-    box-shadow: var(--box-shadow);
-    text-align: center;
+button,
+select,
+input {
+  justify-content: center;
+  box-sizing: border-box;
+  border: 1px solid var(--color-text);
+  border-radius: var(--border-radius-sm);
+  box-shadow: var(--box-shadow);
+  text-align: center;
 }
 #recherche_form input,
 #recherche_form button,
@@ -173,257 +216,285 @@ button, select, input {
 #validation_email button,
 #contact_form input,
 #contact_form button,
-footer a{
-    height: 30px;
+footer a {
+  height: 30px;
 }
 button {
-    background-color: var(--color-primary); /* #7D6E63 marron */
-    color: var(--color-light);
+  background-color: var(--color-primary); /* #7D6E63 marron */
+  color: var(--color-light);
 }
 
-select { background-color:var(--color-light);}
-input { background-color: var(--color-light); }
+select {
+  background-color: var(--color-light);
+}
+input {
+  background-color: var(--color-light);
+}
 
-input:focus, select:focus, textarea:focus, button:focus {
-    outline: none;
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline: none;
 }
 
 /* États de survol */
-input:hover, button:hover, .footer:hover, option:hover, select:hover, selection_trajet:hover,
-#recherche_form button:hover, div#reservation > div > form#reservation_form > select:hover {
-    background-color: var(--color-hover);
-    color: var(--color-text);
+input:hover,
+button:hover,
+.footer:hover,
+option:hover,
+select:hover,
+selection_trajet:hover,
+#recherche_form button:hover,
+div#reservation > div > form#reservation_form > select:hover {
+  background-color: var(--color-hover);
+  color: var(--color-text);
 }
 
 /* Composants spécifiques */
 .resultat input[type="radio"]:hover ~ label#resultat_recherche,
 #covoit_proposer input[type="radio"]:hover ~ label,
-.conteneur_recherche2 .resultat input[type="radio"]:hover ~ label#resultat_recherche ,  #covoit_proposer:hover, #covoit_reserver:hover{
-    background: var(--color-primary);
-    color:var(--color-light);
+.conteneur_recherche2
+  .resultat
+  input[type="radio"]:hover
+  ~ label#resultat_recherche,
+#covoit_proposer:hover,
+#covoit_reserver:hover {
+  background: var(--color-primary);
+  color: var(--color-light);
 }
 
-::placeholder { color: var(--color-text); }
+::placeholder {
+  color: var(--color-text);
+}
 
 .p_deco {
-    box-shadow: 6px 6px 10px beige;
-    background-color: rgb(120, 180, 120);
-    color: blanchedalmond;
-    text-shadow: 1px 1px 2px black;
+  box-shadow: 6px 6px 10px beige;
+  background-color: rgb(120, 180, 120);
+  color: blanchedalmond;
+  text-shadow: 1px 1px 2px black;
 }
 
-h1:hover, a:hover { color: #A7C7A5; }
+h1:hover,
+a:hover {
+  color: #a7c7a5;
+}
 
 /* Layout principal */
 .image-principal {
-    background-size: cover;
-    background-position: center;
+  background-size: cover;
+  background-position: center;
 }
-
 
 /* Section présentation */
 .presentation {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(3, 1fr);
-    align-content: center;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(3, 1fr);
+  align-content: center;
 }
 
-
 .presentation > div p {
-    padding: var(--spacing-lg);
-    flex: 1;
+  padding: var(--spacing-lg);
+  flex: 1;
 }
 
 .presentation img {
-    width: 45%;
-    height: 70%;
-    object-fit: cover;
-    border-radius: var(--border-radius-sm);
+  width: 45%;
+  height: 70%;
+  object-fit: cover;
+  border-radius: var(--border-radius-sm);
 }
 /*connection*/
 /* Ajouter ces classes */
 .account-link {
-    display: flex;
-    text-decoration: none;
-    flex-direction: column;
+  display: flex;
+  text-decoration: none;
+  flex-direction: column;
 }
-h2{
-    border-radius: 10px 10px 0 0;
+h2 {
+  border-radius: 10px 10px 0 0;
 }
 .admin-link {
-    text-decoration: none;
-    color: var(--color-text);  /* Si vous voulez garder la couleur par défaut */
+  text-decoration: none;
+  color: var(--color-text); /* Si vous voulez garder la couleur par défaut */
 }
-#inscription label{
-    display: none;
+#inscription label {
+  display: none;
 }
 
-#inscription ,#login1, #login2 , #reset_mdp, #validation_email{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid var(--color-text);
-    box-shadow: var(--box-shadow);
-    height: 50px;
+#inscription,
+#login1,
+#login2,
+#reset_mdp,
+#validation_email {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--color-text);
+  box-shadow: var(--box-shadow);
+  height: 50px;
 }
 
 /* Formulaire de recherche */
 #recherche_form {
-    gap: 0;
-    padding: var(--spacing-md);
-    font-size: 16px;
-    margin-bottom: var(--spacing-lg);
-    }
+  gap: 0;
+  padding: var(--spacing-md);
+  font-size: 16px;
+  margin-bottom: var(--spacing-lg);
+}
 
 .conteneur_recherche {
-    width: 100%;
+  width: 100%;
 }
 
 .conteneur_recherche2 {
-    background-color: var(--color-secondary);
-    margin-bottom: var(--spacing-md);
-    gap: var(--spacing-md);
-    border-radius: 0px 0px 10px 10px;
+  background-color: var(--color-secondary);
+  margin-bottom: var(--spacing-md);
+  gap: var(--spacing-md);
+  border-radius: 0px 0px 10px 10px;
 }
 #selection_trajet {
-    margin-bottom: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
 }
 /* block présentation */
 .presentation-flex {
-    display: flex;
-    position: relative;
-    align-items: center;
+  display: flex;
+  position: relative;
+  align-items: center;
 }
 
 .presentation-flex-reverse {
-    display: flex;
-    position: relative;
-    align-items: center;
-    flex-direction: row-reverse;
+  display: flex;
+  position: relative;
+  align-items: center;
+  flex-direction: row-reverse;
 }
 
 .label-hidden {
-    display: none;
+  display: none;
 }
 /* Résultats */
 .resultat {
-    gap: var(--spacing-lg);
+  gap: var(--spacing-lg);
 }
 
 /* Styles des radios et labels */
 .resultat input[type="radio"],
 form#filtre_form label,
 #recherche_form label {
-    display: none;
+  display: none;
 }
 
 /* Style de base pour les labels */
 label#resultat_recherche {
-    border-radius: var(--border-radius-sm);
-    background-color: var(--color-light);
-    padding: var(--spacing-md);
+  border-radius: var(--border-radius-sm);
+  background-color: var(--color-light);
+  padding: var(--spacing-md);
 }
 
 /* État checked */
-.resultat [type=radio]:checked ~ label#resultat_recherche {
-    color: var(--color-text);
-    border-bottom: 1px solid white;
-    background-color: var(--color-hover);
-    border-radius: var(--border-radius-sm);
-    display: flex;
-    z-index: 1;
+.resultat [type="radio"]:checked ~ label#resultat_recherche {
+  color: var(--color-text);
+  border-bottom: 1px solid white;
+  background-color: var(--color-hover);
+  border-radius: var(--border-radius-sm);
+  display: flex;
+  z-index: 1;
 }
 
 /* Formulaire de contact */
 #contact_form {
-    display: flex;
-    flex-direction: column;
-    margin-top: var(--spacing-lg);
-    align-self: center;
+  display: flex;
+  flex-direction: column;
+  margin-top: var(--spacing-lg);
+  align-self: center;
 }
 
-#contact_form p label { display: none; }
+#contact_form p label {
+  display: none;
+}
 
 #contact_form button {
-    display: flex;
-    align-self: center;
-    align-items: center;
-    margin-top: var(--spacing-md);
+  display: flex;
+  align-self: center;
+  align-items: center;
+  margin-top: var(--spacing-md);
 }
 
 /* Bouton réserver et formulaire trajet */
-#reservation_form button, #form_trajet button {
-    background-color: var(--color-primary);
-    color: white;
+#reservation_form button,
+#form_trajet button {
+  background-color: var(--color-primary);
+  color: white;
 }
 /*--------------Block RESERVATION--------------*/
 div#reservation {
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: var(--spacing-lg);
-    justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: var(--spacing-lg);
+  justify-content: center;
 }
 
 div#reservation > div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: var(--color-secondary);
-    box-shadow: var(--box-shadow);
-    border: solid 2px black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--color-secondary);
+  box-shadow: var(--box-shadow);
+  border: solid 2px black;
 }
 
 /**----Photo chauffeur------*/
 
 div#reservation > div > img.photo_profile {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    border-radius: 15% 0 0 15%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 15% 0 0 15%;
 }
 
 div#reservation > div:nth-child(1) {
-    border-radius: 15% 0 0 15%;
+  border-radius: 15% 0 0 15%;
 }
 
 /*--- Partie info trajet ---*/
 
 #chauffeur_trajet {
-    border: solid 2px var(--color-text);
-    width: 100%;
-    justify-content: center;
-    display: flex;
-    background-color: var(--color-hover);
+  border: solid 2px var(--color-text);
+  width: 100%;
+  justify-content: center;
+  display: flex;
+  background-color: var(--color-hover);
 }
 
 #prix_trajet {
-    border: solid 2px var(--color-text);
-    width: 100%;
-    justify-content: center;
-    display: flex;
-    background-color:var(--color-hover);
+  border: solid 2px var(--color-text);
+  width: 100%;
+  justify-content: center;
+  display: flex;
+  background-color: var(--color-hover);
 }
 
 #info_trajet > div > p {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    color: var(--color-light);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  color: var(--color-light);
 }
 
 div#info_trajet > div#info_trajet {
-    margin: 20%;
+  margin: 20%;
 }
 
 /*--- Partie info chauffeur ---*/
 
 div#reservation > div:nth-child(3) {
-    border-radius: 0 15% 15% 0;
+  border-radius: 0 15% 15% 0;
 }
 
 form#reservation_form > div > ul {
-    gap:20px;
+  gap: 20px;
 }
