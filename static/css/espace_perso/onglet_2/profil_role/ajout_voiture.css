@@ -175,7 +175,7 @@ div.voiture_mere > div {
   }
 }
 
-@media(min-width:2048px) and (max-widht:2560px){
+@media(min-width:2048px) and (max-width:2560px){
     div.voiture_mere {
       display: flex;
       flex-direction: column;
