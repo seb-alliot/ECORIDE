@@ -24,6 +24,8 @@
 #filtre_form button,
 #filtre_form select,
 #selection_trajet button,
+form#email_filter_form select,
+form#email_select_form select,
 select#id_places {
   width: var(--input-width);
   font-size: var(--font-size-base);

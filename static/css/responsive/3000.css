@@ -34,6 +34,8 @@ form#reset_mdp input,
 form#reset_mdp button,
 form#validation_email input,
 form#validation_email button,
+form#email_filter_form select,
+form#email_select_form select,
 footer a {
   width: var(--input-width);
   font-size: var(--font-size-base);

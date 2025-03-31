@@ -74,7 +74,7 @@ div.voiture_mere > div {
   }
 }
 
-@media (min-width: 1023px) and (max-width: 1200px) {
+@media (min-width: 1024px) and (max-width: 1280px) {
   div.voiture_mere {
     display: flex;
     gap: 10px;
@@ -94,7 +94,7 @@ div.voiture_mere > div {
     gap: 14px;
   }
 }
-@media (min-width: 1199px) and (max-width: 1400px) {
+@media (min-width: 1280px) and (max-width: 1366px) {
   div.voiture_mere {
     display: flex;
     gap: 10px;
@@ -114,7 +114,7 @@ div.voiture_mere > div {
     gap: 14px;
   }
 }
-@media (min-width: 1399px) and (max-width: 1800px) {
+@media (min-width: 1366px) and (max-width: 1760px) {
   div.voiture_mere {
     display: flex;
     gap: 10px;
@@ -134,7 +134,7 @@ div.voiture_mere > div {
     gap: 14px;
   }
 }
-@media (min-width: 1799px) and (max-width: 2000px) {
+@media (min-width: 1760px) and (max-width: 1920px) {
   div.voiture_mere {
     display: flex;
     gap: 10px;
@@ -154,7 +154,7 @@ div.voiture_mere > div {
     gap: 14px;
   }
 }
-@media (min-width: 1999px) {
+@media(min-width:1920px) and (max-widht:2048px){
   div.voiture_mere {
     display: flex;
     gap: 10px;
@@ -174,3 +174,44 @@ div.voiture_mere > div {
     gap: 14px;
   }
 }
+
+@media(min-width:2048px) and (max-widht:2560px){
+    div.voiture_mere {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    div.voiture_mere > div {
+      display: flex;
+      gap: 2px;
+    }
+    #voiture_form input,
+    #voiture_form select,
+    #voiture_form button {
+      width: 225px;
+      height: 30px;
+      font-size: 16px;
+      gap: 14px;
+    }
+  }
+@media(min-width:2560px){
+    div.voiture_mere {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    div.voiture_mere > div {
+      display: flex;
+      gap: 2px;
+    }
+    #voiture_form input,
+    #voiture_form select,
+    #voiture_form button {
+      width: 225px;
+      height: 30px;
+      font-size: 16px;
+      gap: 14px;
+    }
+  }

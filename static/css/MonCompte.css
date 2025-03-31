@@ -135,7 +135,7 @@ label#resultat_recherche img {
   }
 }
 
-@media (min-width: 479px) and (max-width: 768px) {
+@media (min-width: 480px) and (max-width: 768px) {
   div.tabs {
     margin: 10px 4%;
   }
@@ -166,7 +166,7 @@ label#resultat_recherche img {
   }
 }
 
-@media (min-width: 767px) and (max-width: 1024px) {
+@media (min-width: 768px) and (max-width: 1024px) {
   div.tabs {
     margin: 10px 6%;
   }
@@ -197,7 +197,7 @@ label#resultat_recherche img {
   }
 }
 
-@media (min-width: 1023px) and (max-width: 1200px) {
+@media (min-width: 1024px) and (max-width: 1280px) {
   div.tabs {
     margin: 10px 8%;
   }
@@ -228,7 +228,7 @@ label#resultat_recherche img {
   }
 }
 
-@media (min-width: 1199px) and (max-width: 1400px) {
+@media (min-width: 1280px) and (max-width: 1440px) {
   div.tabs {
     margin: 10px 10%;
   }
@@ -258,7 +258,7 @@ label#resultat_recherche img {
     height: auto;
   }
 }
-@media (min-width: 1399px) and (max-width: 1800px) {
+@media (min-width: 1440px) and (max-width: 1760px) {
   div.tabs {
     margin: 20px 12%;
   }
@@ -289,7 +289,7 @@ label#resultat_recherche img {
   }
 }
 
-@media (min-width: 1799px) and (max-width: 2000px) {
+@media (min-width: 1760px) and (max-width: 1920px) {
   div.tabs {
     margin: 25px 14%;
   }
@@ -320,7 +320,7 @@ label#resultat_recherche img {
   }
 }
 
-@media (min-width: 1799px) and (max-width: 2000px) {
+@media (min-width: 1920px) and (max-width: 2048px) {
   div.tabs {
     margin: 25px 14%;
   }
@@ -350,7 +350,7 @@ label#resultat_recherche img {
     height: auto;
   }
 }
-@media (min-width: 1999px) {
+@media (min-width: 2048px) and (max-width:2560px){
   div.tabs {
     margin: 30px 16%;
   }
@@ -380,3 +380,34 @@ label#resultat_recherche img {
     height: auto;
   }
 }
+@media (min-width:2560px){
+  div.tabs {
+    margin: 30px 20%;
+  }
+  .tab label {
+    font-size: 20px;
+  }
+  .tabs {
+    min-height: 700px;
+    margin-top: 10px;
+  }
+  #label img,
+  #covoit_proposer img,
+  #covoit_reserver img,
+  #historique img,
+  #label_proposition img,
+  label#resultat_recherche > img {
+    width: 170px;
+    height: 120px;
+  }
+  #label_proposition,
+  #covoit_proposer,
+  #covoit_reserver,
+  #historique,
+  #label_proposition,
+  #resultat_recherche {
+    width: 200px;
+    height: auto;
+  }
+}
+

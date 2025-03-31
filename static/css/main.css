@@ -1,19 +1,19 @@
 /* responsive design */
 @import url("responsive/320.css") screen and (min-width: 320px) and
   (max-width: 480px);
-@import url("responsive/480.css") screen and (min-width: 479px) and
-  (max-width: 767px);
-@import url("responsive/768.css") screen and (min-width: 767px) and
+@import url("responsive/480.css") screen and (min-width: 480px) and
+  (max-width: 768px);
+@import url("responsive/768.css") screen and (min-width: 768px) and
   (max-width: 1024px);
-@import url("responsive/1024.css") screen and (min-width: 1023px) and
-  (max-width: 1200px);
-@import url("responsive/1200.css") screen and (min-width: 1199px) and
-  (max-width: 1400px);
-@import url("responsive/1400.css") screen and (min-width: 1399px) and
-  (max-width: 1800px);
-@import url("responsive/1800.css") screen and (min-width: 1799px) and
-  (max-width: 2000px);
-@import url("responsive/2000.css") screen and (min-width: 1999px) and
+@import url("responsive/1024.css") screen and (min-width: 1024px) and
+  (max-width: 1280px);
+@import url("responsive/1200.css") screen and (min-width: 1280px) and
+  (max-width: 1440px);
+@import url("responsive/1400.css") screen and (min-width: 1440px) and
+  (max-width: 1760px);
+@import url("responsive/1800.css") screen and (min-width: 1760px) and
+  (max-width: 1920px);
+@import url("responsive/2000.css") screen and (min-width: 1920px) and
   (max-width: 3000px);
 @import url("responsive/3000.css") screen and (min-width: 2999px);
 
@@ -216,7 +216,10 @@ input {
 #validation_email button,
 #contact_form input,
 #contact_form button,
-footer a {
+footer a,
+form#email_filter_form select,
+form#email_select_form select
+  {
   height: 30px;
 }
 button {
@@ -244,7 +247,7 @@ button:hover,
 .footer:hover,
 option:hover,
 select:hover,
-selection_trajet:hover,
+#selection_trajet:hover,
 #recherche_form button:hover,
 div#reservation > div > form#reservation_form > select:hover {
   background-color: var(--color-hover);
@@ -317,7 +320,7 @@ h2 {
 }
 .admin-link {
   text-decoration: none;
-  color: var(--color-text); /* Si vous voulez garder la couleur par défaut */
+  color: var(--color-text);
 }
 #inscription label {
   display: none;
@@ -333,7 +336,6 @@ h2 {
   align-items: center;
   border: 1px solid var(--color-text);
   box-shadow: var(--box-shadow);
-  height: 50px;
 }
 
 /* Formulaire de recherche */

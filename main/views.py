@@ -1260,7 +1260,7 @@ def Fait_Ton_Taff_De_Modo(request):
                 # on autopsie l'email recu
                 if message.is_multipart():
                     for part in message.walk():
-                        if part.get_content_type() == "body/html":
+                        if part.get_content_type() == "text/plain":
                             body = part.get_payload(decode=True).decode()
 
                             break
