@@ -80,16 +80,7 @@ label#resultat_recherche img {
 #contact_form input {
   font-size: 12px;
 }
-h1,
-h2,
-h3 {
-  font-size: 14px;
-}
-h4,
-h5,
-h6 {
-  font-size: 12px;
-}
+
 form#contact_form textarea {
   font-size: 10px;
   width: 300px;
@@ -143,4 +134,11 @@ div#info_trajet > div > p {
 .presentation > div {
   margin-right: 10%;
   margin-left: 10%;
+}
+h1,
+h2,
+h3,
+h4{
+  font-size: 14px;
+  margin: var(--spacing-md);
 }

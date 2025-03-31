@@ -58,19 +58,21 @@ label#resultat_recherche img {
   width: 140px;
   height: 100px;
 }
-h1,
-h2,
-h3,
+
 #contact_form input,
 #contact_form button,
 #contact_form textarea,
 .presentation p {
   font-size: 20px;
 }
+h1,
+h2,
+h3,
 h4,
 h5,
 h6 {
-  font-size: 20px;
+  font-size: 22px;
+  margin:var(--spacing-md);
 }
 div.conteneur_recherche2,
 div.conteneur_recherche > div,

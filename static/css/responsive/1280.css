@@ -62,15 +62,9 @@ label#resultat_recherche img {
 h1,
 h2,
 h3,
-#contact_form input,
-#contact_form button,
-#contact_form textarea {
-  font-size: 20px;
-}
-h4,
-h5,
-h6 {
-  font-size: 18px;
+h4{
+  font-size: var(--font-size-base);
+  margin: var(--spacing-md);
 }
 #resultat_recherche {
   font-size: 15px;

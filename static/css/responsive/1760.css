@@ -16,7 +16,6 @@
 }
 form#recherche_form input,
 form#recherche_form button,
-form#reservation_form button,
 form#form_trajet input,
 form#form_trajet button,
 form#filtre_form input,
@@ -55,9 +54,7 @@ label#resultat_recherche img {
   width: 150px;
   height: 100px;
 }
-h1,
-h2,
-h3,
+
 #contact_form input,
 #contact_form button,
 #contact_form textarea,
@@ -126,4 +123,11 @@ div#preference p {
 .presentation > div {
   margin-right: 20%;
   margin-left: 20%;
+}
+h1,
+h2,
+h3,
+h4{
+  font-size: var(--font-size-base);
+  margin:var(--spacing-md);
 }

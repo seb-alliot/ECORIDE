@@ -69,15 +69,11 @@ label#resultat_recherche img {
 }
 h1,
 h2,
-h3 {
+h3,
+h4{
   font-size: 18px;
+  margin: var(--spacing-md);
 }
-h4,
-h5,
-h6 {
-  font-size: 16px;
-}
-
 .presentation p {
   font-size: 18px;
 }

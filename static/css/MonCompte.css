@@ -199,7 +199,7 @@ label#resultat_recherche img {
 
 @media (min-width: 1024px) and (max-width: 1280px) {
   div.tabs {
-    margin: 10px 8%;
+    margin: 15px 8%;
   }
   .tab label {
     font-size: 15px;
@@ -230,7 +230,7 @@ label#resultat_recherche img {
 
 @media (min-width: 1280px) and (max-width: 1440px) {
   div.tabs {
-    margin: 10px 10%;
+    margin: 20px 10%;
   }
   .tab label {
     font-size: 16px;
@@ -295,6 +295,7 @@ label#resultat_recherche img {
   }
   .tab label {
     font-size: 18px;
+    top:2px;
   }
   .tabs {
     min-height: 550px;
@@ -386,6 +387,7 @@ label#resultat_recherche img {
   }
   .tab label {
     font-size: 20px;
+    top:0px;
   }
   .tabs {
     min-height: 700px;
@@ -410,4 +412,3 @@ label#resultat_recherche img {
     height: auto;
   }
 }
-
