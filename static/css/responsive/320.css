@@ -73,8 +73,8 @@ h1, h2, h3 { font-size: 14px; }
 h4, h5, h6 { font-size: 12px; }
 form#contact_form textarea {
     font-size: 10px;
-    width: 250px;
-    height: var(--image-height)
+    width: 300px;
+    height: 150px;
 }
 form#contact_form input,
 form#contact_form button {

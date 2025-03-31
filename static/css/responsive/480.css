@@ -67,7 +67,7 @@
     form#contact_form textarea {
         font-size: 10px;
         width: 300px;
-        height: var(--image-height)
+        height: 150px;
     }
     form#contact_form input,
     form#contact_form button {

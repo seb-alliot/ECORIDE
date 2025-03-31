@@ -1393,11 +1393,14 @@ def Fait_Ton_Taff_De_Modo(request):
 
                 # Déconnexion propre du serveur IMAP
                 if mail_ids:
-                    email_id = mail_ids[-1].decode()  # Prend le dernier email (ou un autre si besoin)
-                    mail.store(email_id, "+FLAGS", "\\Deleted")
-                    mail.expunge()  # Supprime définitivement
-                else:
-                    print("Aucun email à supprimer.")
+                    email_id = mail_ids[-1].decode()
+
+                    if request.GET.get("supprimer_email") == "oui":
+                        mail.store(email_id, "+FLAGS", "\\Deleted")
+                        mail.expunge()
+                    else:
+                        print("Email non supprimé, en attente d'action.")
+
                 mail.close()
 
             context = {
@@ -1422,7 +1425,7 @@ def Fait_Ton_Taff_De_Modo(request):
 def envoi_email_prise_contact(request, telephone, pseudo, email_user, sujet,message ):
     try:
         site_url = f"http://{get_current_site(request).domain}"
-        contact_url = f"{site_url}{reverse('contact')}"
+        contact_url = f"{site_url}{reverse('_contact')}"
         subject = "Prise de contact"
         context = {
             "telephone": telephone,
