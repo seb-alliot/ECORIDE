@@ -1,5 +1,5 @@
 {% if reservation1 %}
-<p class="class_flex class_justify_center p_deco">Vos réservations terminés</p>
+<h3 class="class_flex class_justify_center p_deco">Vos réservations terminés</h3>
     <div>
         <ul class="class_flex class_scroll">
             {% for res in reservation1 %}
@@ -9,7 +9,7 @@
     </div>
 {% endif %}
 {% if reservation2 %}
-<p class="class_flex class_justify_center p_deco">Vos réservations annulées</p>
+<h4 class="class_flex class_justify_center p_deco">Vos réservations annulées</h4>
     <div>
         <ul class="class_flex class_scroll">
             {% for res in reservation2 %}
