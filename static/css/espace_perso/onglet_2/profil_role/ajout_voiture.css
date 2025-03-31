@@ -36,7 +36,7 @@ div.voiture_mere > div {
     gap: 2px;
   }
 }
-@media (min-width: 479px) and (max-width: 768px) {
+@media (min-width: 480px) and (max-width: 768px) {
   #voiture_form input,
   #voiture_form select,
   #voiture_form button {
@@ -58,7 +58,7 @@ div.voiture_mere > div {
   }
 }
 
-@media (min-width: 767px) and (max-width: 1023px) {
+@media (min-width: 768px) and (max-width: 1024px) {
   #voiture_form input,
   #voiture_form select,
   #voiture_form button {
