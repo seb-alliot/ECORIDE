@@ -77,7 +77,7 @@ h2,
 h3,
 h4{
   font-size: 16px;
-  margin: var(--spacing-md);
+  margin-top: var(--spacing-md);
 }
 form#contact_form textarea {
   font-size: 10px;
@@ -136,4 +136,11 @@ div#info_trajet {
 .presentation > div {
   margin-right: 12.5%;
   margin-left: 12.5%;
+}
+#recherche_form,
+#login1,
+#login2,
+#reset_mdp,
+#validation_email {
+  height: 40px;
 }

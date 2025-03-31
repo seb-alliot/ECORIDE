@@ -1,8 +1,10 @@
 {% if preference is Null %}
-    <h2 class="preference_css class_flex class_justify_center">Vous n'avez pas encore défini de préférence pour proposer un covoiturage</h2>
+    <p class="preference_css class_flex class_justify_center">Vous n'avez pas encore défini de préférence pour proposer un covoiturage</p>
 {% else %}
     <p class="class_flex class_justify_center p_deco">Vos préferences actuelles sont :</p>
-{% if preference %}
+{% endif %}
+
+{% if preference is not Null %}
     <div class="preference_css class_flex class_justify_center">
         <div class="class_flex class_justify_center">
             {{ preference.get_fumeur_display }}
@@ -17,8 +19,6 @@
             {{ preference.exigences_personnelles }}
         </div>
     </div>
-{% else %}
-    <p class="class_flex class_justify_center">Comme le réservoir , à remplir !!</p>
 {% endif %}
 
 <form id="preference_form" method="post" class="class_flex class_justify_center">
@@ -33,4 +33,3 @@
             {{ preference_form.exigences_personnelles }}
         <button id="button_preferences" type="submit" name="form_soumis" value="preference_form">Modifier</button>
     </form>
-{% endif %}

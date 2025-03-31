@@ -130,5 +130,12 @@ h2,
 h3,
 h4{
   font-size: var(--font-size-base);
-  margin: 15px;
+  margin-top: 15px;
+}
+#recherche_form,
+#login1,
+#login2,
+#reset_mdp,
+#validation_email {
+  height: 50px;
 }

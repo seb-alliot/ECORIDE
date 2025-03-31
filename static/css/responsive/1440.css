@@ -68,11 +68,9 @@ label#resultat_recherche img {
 h1,
 h2,
 h3,
-h4,
-h5,
-h6 {
+h4{
   font-size: 22px;
-  margin:var(--spacing-md);
+  margin-top:var(--spacing-md);
 }
 div.conteneur_recherche2,
 div.conteneur_recherche > div,
@@ -138,4 +136,11 @@ div#preference p {
 .presentation > div {
   margin-right: 20%;
   margin-left: 20%;
+}
+#recherche_form,
+#login1,
+#login2,
+#reset_mdp,
+#validation_email {
+  height: 45px;
 }

@@ -1,3 +1,4 @@
+{% if preference %}
 <h4 class="class_flex class_justify_center p_deco">Ajouter un véhicule</h4>
 <form  class="class_flex class_justify_center" id="voiture_form" action="{% url 'MonCompte' %}" method="post">
     {% csrf_token %}
@@ -23,3 +24,6 @@
         </div>
     </div>
 </form>
+{% else %}
+    <p class="class_flex class_justify_center">Comme le réservoir à remplir</p>
+{% endif %}

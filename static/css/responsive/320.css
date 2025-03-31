@@ -140,5 +140,12 @@ h2,
 h3,
 h4{
   font-size: 14px;
-  margin: var(--spacing-md);
+  margin-top: var(--spacing-md);
+}
+#recherche_form,
+#login1,
+#login2,
+#reset_mdp,
+#validation_email {
+  height: 40px;
 }

@@ -61,11 +61,10 @@
         <div>
             {% if user_role == "Chauffeur" %}
                 {% include "interface_utilisateur/utilisateur/onglet_2_profil/chauffeur/_preference_chauffeur.html" %}
-                {% if user_role == "Chauffeur" and preference.get_animaux_display and preference.get_fumeur_display is not None  %}
                     {% include "interface_utilisateur/utilisateur/onglet_2_profil/chauffeur/_voiture_posseder.html" %}
                     {% include "interface_utilisateur/utilisateur/onglet_2_profil/chauffeur/_ajout_voiture.html" %}
                 {% else %}
-                    <p>Vous n'avez pas le profile nécessaire à l'ajout de véhicule</p>
+                    <p class="class_flex class_justify_center">Vous n'avez pas le profile nécessaire à l'ajout de véhicule</p>
                 {% endif %}
             {% endif %}
 

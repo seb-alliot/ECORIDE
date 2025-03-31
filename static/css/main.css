@@ -314,9 +314,7 @@ a:hover {
   text-decoration: none;
   flex-direction: column;
 }
-h2 {
-  border-radius: 10px 10px 0 0;
-}
+
 .admin-link {
   text-decoration: none;
   color: var(--color-text);
