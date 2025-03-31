@@ -11,7 +11,7 @@ div.content > div > div > ul {
     padding-left: 15px;
   }
 }
-@media (min-width: 479px) and (max-width: 768px) {
+@media (min-width: 480px) and (max-width: 768px) {
   #label_historique {
     height: auto;
     width: 120px;
@@ -20,13 +20,7 @@ div.content > div > div > ul {
     padding-left: 25px;
   }
 }
-@media (min-width: 767px) and (max-width: 900px) {
-  #label_historique {
-    height: auto;
-    width: 150px;
-  }
-}
-@media (min-width: 900px) {
+@media (min-width: 768px){
   #label_historique {
     height: auto;
     width: 150px;

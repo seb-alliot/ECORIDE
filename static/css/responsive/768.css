@@ -40,6 +40,13 @@ footer a {
   width: 125px;
   font-size: var(--font-size-base);
 }
+#inscription,
+#login1,
+#login2,
+#reset_mdp,
+#validation_email {
+  height: 55px;
+}
 #creer_compte a,
 #mot_de_passe_oublie a {
   font-size: var(--font-size-base);

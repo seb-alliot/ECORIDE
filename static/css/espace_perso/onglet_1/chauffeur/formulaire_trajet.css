@@ -47,7 +47,7 @@ div.content > ul > li > input[type="radio"] {
   }
 }
 
-@media (min-width: 479px) and (max-width: 768px) {
+@media (min-width: 480px) and (max-width: 768px) {
   #trajet_form input,
   #trajet_form select,
   #trajet_form button {
@@ -65,7 +65,7 @@ div.content > ul > li > input[type="radio"] {
     font-size: 12px;
   }
 }
-@media (min-width: 767px) and (max-width: 1024px) {
+@media (min-width: 768px) and (max-width: 1024px) {
   #trajet_form input,
   #trajet_form select,
   #trajet_form button {
@@ -87,7 +87,7 @@ div.content > ul > li > input[type="radio"] {
   }
 }
 
-@media (min-width: 1023px) and (max-width: 1200px) {
+@media (min-width: 1024px) and (max-width: 1280px) {
   #trajet_form input,
   #trajet_form select,
   #trajet_form button {
@@ -105,7 +105,7 @@ div.content > ul > li > input[type="radio"] {
     margin-bottom: 15px;
   }
 }
-@media (min-width: 1199px) and (max-width: 1400px) {
+@media (min-width: 1280px) and (max-width: 1440px) {
   #trajet_form input,
   #trajet_form select,
   #trajet_form button {
@@ -123,7 +123,7 @@ div.content > ul > li > input[type="radio"] {
     font-size: 18px;
   }
 }
-@media (min-width: 1399px) and (max-width: 1800px) {
+@media (min-width: 1440px) and (max-width: 1760px) {
   #trajet_form input,
   #trajet_form select,
   #trajet_form button {
@@ -141,7 +141,7 @@ div.content > ul > li > input[type="radio"] {
     font-size: 20px;
   }
 }
-@media (min-width: 1799px) and (max-width: 2000px) {
+@media (min-width: 1760px) and (max-width: 1920px) {
   #trajet_form input,
   #trajet_form select,
   #trajet_form button {
@@ -159,7 +159,7 @@ div.content > ul > li > input[type="radio"] {
     font-size: 20px;
   }
 }
-@media (min-width: 1999px) {
+@media(min-width:1920px){
   #trajet_form input,
   #trajet_form select,
   #trajet_form button {

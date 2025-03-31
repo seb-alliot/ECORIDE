@@ -38,21 +38,21 @@
   }
 }
 
-@media (min-width: 1023px) and (max-width: 1200px) {
+@media (min-width: 1024px) and (max-width: 1280px) {
   #deconnexion {
     width: 180px;
     height: 30px;
     font-size: 14px;
   }
 }
-@media (min-width: 1199px) and (max-width: 1400px) {
+@media (min-width: 1280px) and (max-width: 1440px) {
   #deconnexion {
     width: 180px;
     height: 30px;
     font-size: 14px;
   }
 }
-@media (min-width: 1399px) and (max-width: 1800px) {
+@media (min-width: 1440px) and (max-width: 1760px) {
   #deconnexion {
     width: 180px;
     height: 30px;
@@ -60,7 +60,7 @@
   }
 }
 
-@media (min-width: 1799px) and (max-width: 2000px) {
+@media (min-width: 1760px) and (max-width: 1920px) {
   #deconnexion {
     width: 200px;
     height: 30px;
@@ -68,7 +68,7 @@
   }
 }
 
-@media (min-width: 1999px) {
+@media(min-width:1920px){
   #deconnexion {
     width: 225px;
     height: 30px;

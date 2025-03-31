@@ -94,7 +94,7 @@ div.voiture_mere > div {
     gap: 14px;
   }
 }
-@media (min-width: 1280px) and (max-width: 1366px) {
+@media (min-width: 1280px) and (max-width: 1440px) {
   div.voiture_mere {
     display: flex;
     gap: 10px;
@@ -114,7 +114,7 @@ div.voiture_mere > div {
     gap: 14px;
   }
 }
-@media (min-width: 1366px) and (max-width: 1760px) {
+@media (min-width: 1440px) and (max-width: 1760px) {
   div.voiture_mere {
     display: flex;
     gap: 10px;
@@ -137,8 +137,8 @@ div.voiture_mere > div {
 @media (min-width: 1760px) and (max-width: 1920px) {
   div.voiture_mere {
     display: flex;
+    flex-direction: column;
     gap: 10px;
-    flex-wrap: wrap;
     justify-content: center;
   }
   div.voiture_mere > div {
@@ -154,11 +154,11 @@ div.voiture_mere > div {
     gap: 14px;
   }
 }
-@media(min-width:1920px) and (max-widht:2048px){
+@media(min-width:1920px) and (max-width:2048px){
   div.voiture_mere {
     display: flex;
+    flex-direction: column;
     gap: 10px;
-    flex-wrap: wrap;
     justify-content: center;
   }
   div.voiture_mere > div {
@@ -178,8 +178,8 @@ div.voiture_mere > div {
 @media(min-width:2048px) and (max-widht:2560px){
     div.voiture_mere {
       display: flex;
+      flex-direction: column;
       gap: 10px;
-      flex-wrap: wrap;
       justify-content: center;
     }
     div.voiture_mere > div {
@@ -199,8 +199,8 @@ div.voiture_mere > div {
     div.voiture_mere {
       display: flex;
       gap: 10px;
-      flex-wrap: wrap;
       justify-content: center;
+      flex-direction: column;
     }
     div.voiture_mere > div {
       display: flex;

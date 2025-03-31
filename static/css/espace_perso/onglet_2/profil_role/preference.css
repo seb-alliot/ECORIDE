@@ -40,7 +40,7 @@ textarea#id_exigences_personnelles {
     margin-top: 10px;
   }
 }
-@media (min-width: 479px) and (max-width: 768px) {
+@media (min-width: 480px) and (max-width: 768px) {
   #preference_form input,
   #preference_form select,
   #preference_form button,
@@ -72,7 +72,7 @@ textarea#id_exigences_personnelles {
   }
 }
 
-@media (min-width: 767px) and (max-width: 1024px) {
+@media (min-width: 768px) and (max-width: 1024px) {
   form#preference_form {
     align-items: center;
     gap: 4px;
@@ -93,7 +93,7 @@ textarea#id_exigences_personnelles {
   }
 }
 
-@media (min-width: 1023px) and (max-width: 1200px) {
+@media (min-width: 1024px) and (max-width: 1280px) {
   #preference_form input,
   #preference_form select,
   #preference_form button,
@@ -108,7 +108,7 @@ textarea#id_exigences_personnelles {
     margin: 20px;
   }
 }
-@media (min-width: 1199px) and (max-width: 1400px) {
+@media (min-width: 1280px) and (max-width: 1440px) {
   #preference_form input,
   #preference_form select,
   #preference_form button,
@@ -123,7 +123,7 @@ textarea#id_exigences_personnelles {
     margin: 20px;
   }
 }
-@media (min-width: 1399px) and (max-width: 1800px) {
+@media (min-width: 1440px) and (max-width: 1760px) {
   #preference_form input,
   #preference_form select,
   #preference_form button,
@@ -138,7 +138,7 @@ textarea#id_exigences_personnelles {
     margin: 20px;
   }
 }
-@media (min-width: 1799px) and (max-width: 2000px) {
+@media (min-width: 1760px) and (max-width: 1920px) {
   #preference_form input,
   #preference_form select,
   #preference_form button,
@@ -153,7 +153,7 @@ textarea#id_exigences_personnelles {
     margin: 20px;
   }
 }
-@media (min-width: 1999px) {
+@media(min-width:1920px){
   #preference_form input,
   #preference_form select,
   #preference_form button,

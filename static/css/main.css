@@ -7,15 +7,15 @@
   (max-width: 1024px);
 @import url("responsive/1024.css") screen and (min-width: 1024px) and
   (max-width: 1280px);
-@import url("responsive/1200.css") screen and (min-width: 1280px) and
+@import url("responsive/1280.css") screen and (min-width: 1280px) and
   (max-width: 1440px);
-@import url("responsive/1400.css") screen and (min-width: 1440px) and
+@import url("responsive/1440.css") screen and (min-width: 1440px) and
   (max-width: 1760px);
-@import url("responsive/1800.css") screen and (min-width: 1760px) and
+@import url("responsive/1760.css") screen and (min-width: 1760px) and
   (max-width: 1920px);
-@import url("responsive/2000.css") screen and (min-width: 1920px) and
-  (max-width: 3000px);
-@import url("responsive/3000.css") screen and (min-width: 2999px);
+@import url("responsive/1920.css") screen and (min-width: 1920px) and
+  (max-width: 3072px);
+@import url("responsive/3072.css") screen and (min-width: 3072px);
 
 /* Variables CSS */
 :root {
@@ -386,6 +386,16 @@ h2 {
 form#filtre_form label,
 #recherche_form label {
   display: none;
+}
+.resultat label {
+  border-radius: 10px;
+  background-color: #f8f9fa;
+  padding: 10px;
+}
+
+form#selection_trajet button {
+  height: 30px;
+  margin-bottom: 15px;
 }
 
 /* Style de base pour les labels */

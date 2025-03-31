@@ -29,7 +29,7 @@ form#etat_form select,
     font-size: 10px;
   }
 }
-@media (min-width: 479px) and (max-width: 768px) {
+@media (min-width: 480px) and (max-width: 768px) {
   form#etat_form select,
   form#etat_form button,
   #reservation_form select,
@@ -39,7 +39,7 @@ form#etat_form select,
     font-size: 10px;
   }
 }
-@media (min-width: 767px) and (max-width: 1024px) {
+@media (min-width: 768px) and (max-width: 1024px) {
   form#etat_form select,
   form#etat_form button,
   #reservation_form select,
@@ -49,7 +49,7 @@ form#etat_form select,
     font-size: 12px;
   }
 }
-@media (min-width: 1023px) and (max-width: 1200px) {
+@media (min-width: 1024px) and (max-width: 1280px) {
   form#etat_form select,
   form#etat_form button,
   #reservation_form select,
@@ -59,7 +59,7 @@ form#etat_form select,
     font-size: 14px;
   }
 }
-@media (min-width: 1199px) and (max-width: 1400px) {
+@media (min-width: 1280px) and (max-width: 1440px) {
   form#etat_form select,
   form#etat_form button,
   #reservation_form select,
@@ -69,7 +69,7 @@ form#etat_form select,
     font-size: 14px;
   }
 }
-@media (min-width: 1399px) and (max-width: 1800px) {
+@media (min-width: 1440px) and (max-width: 1760px) {
   form#etat_form select,
   form#etat_form button,
   #reservation_form select,
@@ -79,7 +79,7 @@ form#etat_form select,
     font-size: 16px;
   }
 }
-@media (min-width: 1799px) and (max-width: 2000px) {
+@media (min-width: 1760px) and (max-width: 1920px) {
   form#etat_form select,
   form#etat_form button,
   #reservation_form select,
@@ -89,7 +89,7 @@ form#etat_form select,
     font-size: 16px;
   }
 }
-@media (min-width: 1999px) {
+@media(min-width:1920px){
   form#etat_form select,
   form#etat_form button,
   #reservation_form select,
