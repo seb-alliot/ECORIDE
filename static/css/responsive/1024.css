@@ -1,6 +1,7 @@
 :root {
   --logo-size: 120px;
   --font-size-base: 20px;
+  --font-size-other: 16px;
   --input-width: 165px;
   --image-height: 300px;
 }
@@ -14,6 +15,11 @@
   height: var(--logo-size);
   width: var(--logo-size);
 }
+#reservation_annulé,
+form#etat_form select,
+form#etat_form button,
+#reservation_form select,
+#reservation_form button,
 #deux_choix,
 #bouton_terminer,
 select#id_etat,
@@ -58,7 +64,7 @@ footer a {
 #resultat_recherche {
   width: 150px;
   height: auto;
-  font-size: var(--font-size-base);
+  font-size: var(--font-size-other);
   margin-top: 10px;
 }
 label#resultat_recherche img {
@@ -88,12 +94,12 @@ div.conteneur_recherche {
 form#contact_form textarea {
   width: 500px;
   height: 175px;
-  font-size: 16px;
+  font-size: var(--font-size-other)
 }
 form#contact_form input,
 form#contact_form button {
   width: 225px;
-  font-size: 16px;
+  font-size: var(--font-size-other)
 }
 /*---carte de selection de trajet---*/
 div#reservation > div > img.photo_profile,

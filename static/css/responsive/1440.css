@@ -14,6 +14,11 @@
   height: var(--logo-size);
   width: var(--logo-size);
 }
+#reservation_annulé,
+form#etat_form select,
+form#etat_form button,
+#reservation_form select,
+#reservation_form button,
 #deux_choix,
 #bouton_terminer,
 select#id_etat,
@@ -49,19 +54,18 @@ footer a {
   margin-top: var(--spacing-lg);
 }
 #resultat_recherche {
-  width: 160px;
+  width: 180px;
   height: auto;
-  font-size: 16px;
+  font-size: var(--font-size-base);
   margin-top: 10px;
+}
+label#resultat_recherche img {
+  width: 160px;
+  height: 90px;
 }
 .presentation > div p {
   font-size: 24px;
 }
-label#resultat_recherche img {
-  width: 140px;
-  height: 100px;
-}
-
 #contact_form input,
 #contact_form button,
 #contact_form textarea,

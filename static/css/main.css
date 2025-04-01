@@ -5,7 +5,7 @@
   (max-width: 768px);
 @import url("responsive/768.css") screen and (min-width: 768px) and
   (max-width: 1024px);
-@import url("responsive/1024.css") screen and (min-width: 1024px) and
+@import url("responsive/1024.css") screen and (min-width: 1023px) and
   (max-width: 1280px);
 @import url("responsive/1280.css") screen and (min-width: 1280px) and
   (max-width: 1440px);
@@ -120,6 +120,9 @@ select#id_etat{
 ul.class_flex {
   gap:var(--spacing-md);
 }
+ul.resultat {
+  display: flex;
+}
 /* Reset et base */
 * {
   margin: 0;
@@ -225,7 +228,8 @@ input {
 #contact_form button,
 footer a,
 form#email_filter_form select,
-form#email_select_form select
+form#email_select_form select,
+#reservation_form select
   {
   height: 30px;
 }
@@ -512,4 +516,28 @@ div#reservation > div:nth-child(3) {
 
 form#reservation_form > div > ul {
   gap: 20px;
+}
+
+/*--covoiturage mon_compte--*/
+
+form#etat_form > label,
+#reservation_form > label {
+  display: none;
+}
+#reservation_form > ul {
+  margin: 0px;
+}
+form#etat_form > div > ul {
+  gap: 20px;
+}
+form#etat_form select,
+form#etat_form button,
+#reservation_form select,
+#reservation_form button {
+  margin: 5px;
+}
+form#etat_form select,
+#reservation_form select {
+  display: flex;
+  justify-self: center;
 }

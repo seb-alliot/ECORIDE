@@ -18,7 +18,7 @@ ITSUKI, _ = User.objects.get_or_create(username="ITSUKI")
 credit, created = CreditUser.objects.get_or_create(user=ITSUKI)
 
 # Ajouter du crédit
-credit.add_credit(0)
+credit.add_credit(100000)
 
 print(
     f"Le nouveau solde de ITSUKI est de : {credit.credit} €, ils dois bosser se fainéant"

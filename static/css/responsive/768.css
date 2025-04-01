@@ -14,6 +14,11 @@
   height: var(--logo-size);
   width: var(--logo-size);
 }
+#reservation_annulé,
+form#etat_form select,
+form#etat_form button,
+#reservation_form select,
+#reservation_form button,
 #deux_choix,
 #bouton_terminer,
 select#id_etat,
@@ -56,7 +61,7 @@ footer a {
   margin-top: var(--spacing-md);
 }
 #resultat_recherche {
-  width: 140px;
+  width: 130px;
   height: auto;
   margin-top: 10px;
 }

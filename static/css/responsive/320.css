@@ -14,8 +14,8 @@
   height: var(--logo-size);
   width: var(--logo-size);
 }
-#deux_choix,
-#bouton_terminer,
+
+
 #inscription input,
 #inscription button,
 #recherche_form input,
@@ -34,6 +34,14 @@ footer a {
   width: var(--input-width);
   font-size: var(--font-size-base);
 }
+#reservation_annulé,
+select#id_etat,
+#deux_choix,
+#bouton_terminer,
+form#etat_form select,
+form#etat_form button,
+#reservation_form select,
+#reservation_form button,
 #login1 input,
 #login1 button,
 #login2 input,
@@ -141,7 +149,7 @@ h1,
 h2,
 h3,
 h4{
-  font-size: 14px;
+  font-size: 13px;
   margin-top: var(--spacing-md);
 }
 #recherche_form,
@@ -149,5 +157,5 @@ h4{
 #login2,
 #reset_mdp,
 #validation_email {
-  height: 40px;
+  height: 45px;
 }

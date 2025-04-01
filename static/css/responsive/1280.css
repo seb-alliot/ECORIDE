@@ -15,6 +15,11 @@
   height: var(--logo-size);
   width: var(--logo-size);
 }
+#reservation_annulé,
+form#etat_form select,
+form#etat_form button,
+#reservation_form select,
+#reservation_form button,
 #deux_choix,
 #bouton_terminer,
 select#id_etat,
@@ -50,13 +55,13 @@ footer a {
   margin-top: var(--spacing-lg);
 }
 #resultat_recherche {
-  width: 150px;
+  width: 180px;
   height: auto;
-  font-size: 15px;
-  margin-top: var(--spacing-sm);
+  font-size: 18px;
+  margin-top: 10px;
 }
 label#resultat_recherche img {
-  width: 130px;
+  width: 160px;
   height: 90px;
 }
 .presentation p {
@@ -69,9 +74,7 @@ h4{
   font-size: var(--font-size-base);
   margin-top: var(--spacing-lg);
 }
-#resultat_recherche {
-  font-size: 15px;
-}
+
 #info_user {
   font-size: var(--font-size-base--p);
   margin-bottom: var(--spacing-lg);

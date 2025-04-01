@@ -1,8 +1,8 @@
 <form id="selection_trajet" method="GET" action="{% url 'reservation' %}">
     <div class="conteneur_recherche">
         <h2 class="p_deco class_justify_center class_flex">Covoiturage non écologique</h2>
-        <div class="conteneur_recherche2 class_scroll class_flex">
-            <ul class="resultat class_flex">
+        <div class="conteneur_recherche2 class_scroll">
+            <ul class="resultat ">
                 {% for resultat in first_resultat %}
                     {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_contenu_resultat.html" %}
                 {% empty %}
