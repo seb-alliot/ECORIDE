@@ -16,7 +16,6 @@
 }
 form#recherche_form input,
 form#recherche_form button,
-form#reservation_form button,
 form#form_trajet input,
 form#form_trajet button,
 form#filtre_form input,
@@ -132,7 +131,7 @@ div#place_a_reserver {
 div#preference p {
   margin: 4px;
 }
-#place_a_reserver {
+#place_a_reserver, #resultat_ecolo , #resultat_non_ecolo {
   font-size: 22px;
 }
 #creer_compte {
@@ -145,4 +144,7 @@ h3,
 h4{
   font-size: 28px;
   margin-top: 15px;
+}
+form#trajet_form , #ajout_voiture,#reservation_faite, #covoiturage_proposer, #trajet_proposer, #reservion_fini , #reservation_annulé, #covoiturage_annulé {
+  margin-bottom:10px;
 }

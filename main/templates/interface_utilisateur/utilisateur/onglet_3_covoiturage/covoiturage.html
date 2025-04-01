@@ -4,7 +4,7 @@
 </h1>
 <div>
     {% if trajet4 %}
-    <h2 class="class_flex class_justify_center p_deco">Vos covoiturages proposés</h2>
+    <h2 id="covoiturage_proposer" class="class_flex class_justify_center p_deco">Vos covoiturages proposés</h2>
         <form class="display_grid" id="etat_form" method="post">
             {% csrf_token %}
                 {% include "interface_utilisateur/utilisateur/onglet_3_covoiturage/proposition/_partie__covoit_chauffeur.html" %}
@@ -21,7 +21,7 @@
 
 <div >
     {% if reservation3 %}
-    <h3 class="class_flex class_justify_center p_deco">Vos réservations</h3>
+    <h3 id="reservation_faite" class="class_flex class_justify_center p_deco">Vos réservations</h3>
         <form class="display_grid" id="reservation_form" method="post">
             {% csrf_token %}
                 {% include "interface_utilisateur/utilisateur/onglet_3_covoiturage/reservation/partie_resa_passager.html" %}

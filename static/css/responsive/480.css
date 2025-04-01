@@ -120,7 +120,7 @@ div#info_trajet {
   margin-top: 6px;
   font-size: 8px;
 }
-#place_a_reserver {
+#place_a_reserver, #resultat_ecolo , #resultat_non_ecolo {
   font-size: var(--spacing-md);
   margin: var(--spacing-md);
 }

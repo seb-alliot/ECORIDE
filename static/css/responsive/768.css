@@ -122,7 +122,7 @@ div#preference p {
   margin: 4px;
   font-size: var(--spacing-md);
 }
-#place_a_reserver {
+#place_a_reserver, #resultat_ecolo , #resultat_non_ecolo {
   font-size: 15px;
 }
 div#div_avis > div > p {
@@ -142,4 +142,7 @@ div#div_avis > div > p {
 #reset_mdp,
 #validation_email {
   height: 45px;
+}
+form#trajet_form {
+  margin-bottom: 15px;
 }

@@ -1,6 +1,6 @@
 
 {% if trajets %}
-    <h2 class="class_flex class_justify_center p_deco">Le{{ trajets|pluralize }} trajet{{ trajets|pluralize }} que vous proposez</h2>
+    <h2 id="trajet_proposer" class="class_flex class_justify_center p_deco">Le{{ trajets|pluralize }} trajet{{ trajets|pluralize }} que vous proposez</h2>
         <ul class="class_flex class_scroll">
             {% for trajet in trajets %}
                 {% if trajet.etat == "Disponible" or trajet.etat == "En cour" %}

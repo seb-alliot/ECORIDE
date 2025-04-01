@@ -247,7 +247,6 @@ button:hover,
 .footer:hover,
 option:hover,
 select:hover,
-#selection_trajet:hover,
 #recherche_form button:hover,
 div#reservation > div > form#reservation_form > select:hover {
   background-color: var(--color-hover);
@@ -351,7 +350,6 @@ a:hover {
   background-color: var(--color-secondary);
   margin-bottom: var(--spacing-md);
   gap: var(--spacing-md);
-  border-radius: 0px 0px 10px 10px;
 }
 #selection_trajet {
   margin-bottom: var(--spacing-lg);

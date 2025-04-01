@@ -117,7 +117,7 @@ div#info_trajet > div > p {
   font-size: 5px;
 }
 
-#place_a_reserver {
+#place_a_reserver, #resultat_ecolo , #resultat_non_ecolo {
   font-size: var(--font-size-base);
   margin: 5px;
 }
