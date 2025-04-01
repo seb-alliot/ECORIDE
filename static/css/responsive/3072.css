@@ -14,6 +14,12 @@
   height: var(--logo-size);
   width: var(--logo-size);
 }
+#deux_choix,
+#bouton_terminer,
+#deux_choix,
+#bouton_terminer,
+select#id_etat,
+#pop_up_confirmation,
 form#recherche_form input,
 form#recherche_form button,
 form#form_trajet input,

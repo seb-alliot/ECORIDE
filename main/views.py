@@ -31,6 +31,8 @@ from .forms import (
     ModerationTrajetForm,
     ReponseForm,
     ModerationAvisPositifForm,
+    TerminerTrajetForm,
+    Demarrer_ou_annulerForm,
 )
 from .models import (
     CreditUser,
@@ -494,9 +496,9 @@ def MonCompte(request):
     role_form = ChoixRoleForm(instance=role)
     voiture_form = VoitureForm(request.POST)
     trajet_form = TrajetForm(user=user)
-    etat_form = StatutTrajetForm(request.POST)
     reservation_form = StatutReservationForm(request.POST)
-
+    trajet_terminer_form = TerminerTrajetForm(request.POST)
+    demarrer_ou_annuler_form= Demarrer_ou_annulerForm(request.POST)
 
     filtre_form = FiltreTrajetForm(request.GET)
     recherche_form = RechercheTrajetForm(request.GET)
@@ -633,11 +635,11 @@ def MonCompte(request):
                 )
                 return redirect("MonCompte")
 
-        # Formulaire de changement de statut de trajet
-        elif form_soumis == "etat_form":
-            etat_form = StatutTrajetForm(request.POST)
+        # Formulaire de trajet terminé
+        elif form_soumis == "trajet_terminer_form":
+            trajet_terminer_form = TerminerTrajetForm(request.POST)
             trajet_id = request.POST.get("trajet_id")
-            if etat_form.is_valid():
+            if trajet_terminer_form.is_valid():
                 token = None
                 if token is None:
                     token = uuid.uuid4()
@@ -647,11 +649,7 @@ def MonCompte(request):
                 if request.user == trajet.chauffeur:
                     trajet = get_object_or_404(TrajetProposer, id=trajet_id)
                     # bien mettre trajet.chauffeur et non pas role.chauffeur  ou display comme en html sa ne fonctionne pas, erreur muette
-                    statut_trajet = etat_form.cleaned_data["statut"]
-                    Changer_statut = ChangerStatutTrajet.objects.create(
-                        trajet=trajet,
-                        statut=statut_trajet,
-                    )
+                    statut_trajet = trajet_terminer_form.cleaned_data["etat"]
                     if statut_trajet == "Terminé":
                         reservations = ReservationTrajet.objects.filter(
                             trajet_reserver=trajet
@@ -663,13 +661,32 @@ def MonCompte(request):
                         messages.success(request, "Vous êtes arrivé à bon port !")
                         Envoi_Email_Terminer(request, trajet_id, reservations, token)
 
-                    elif statut_trajet == "En cours":
+        # Formulaire de changement de statut de trajet
+        elif form_soumis == "demarrer_ou_annuler_form":
+            demarrer_ou_annuler_form = Demarrer_ou_annulerForm(request.POST)
+            trajet_id = request.POST.get("trajet_id")
+            if demarrer_ou_annuler_form.is_valid():
+                token = None
+                if token is None:
+                    token = uuid.uuid4()
+
+                # ______PARTIE CHAUFFEUR______
+
+                if request.user == trajet.chauffeur:
+                    trajet = get_object_or_404(TrajetProposer, id=trajet_id)
+                    # bien mettre trajet.chauffeur et non pas role.chauffeur  ou display comme en html sa ne fonctionne pas, erreur muette
+                    statut_trajet = demarrer_ou_annuler_form.cleaned_data["etat"]
+                    Changer_statut = ChangerStatutTrajet.objects.create(
+                        trajet=trajet,
+                        statut=statut_trajet,
+                    )
+
+                    if statut_trajet == "En cours":
                         trajet.etat = statut_trajet
                         reservations = ReservationTrajet.objects.filter(
                             trajet_reserver=trajet
                         )
                         reservations.update(etat_reservation="En cours")
-
                         trajet.save()
                         messages.success(request, "Trajet démarré, bon voyage !")
 
@@ -930,12 +947,13 @@ def MonCompte(request):
         "role_form": role_form,
         "voiture_form": voiture_form,
         # __trajet__
+        "demarrer_ou_annuler_form": demarrer_ou_annuler_form,
+        "trajet_terminer_form": trajet_terminer_form,
         "trajet_form": trajet_form,
         "filtre_form": filtre_form,
         "recherche_form": recherche_form,
         # __reservation__
         "reservation_form": reservation_form,
-        "etat_form": etat_form,
         "messages": messages.get_messages(request),
     }
     context.update(initialisation_template(request))

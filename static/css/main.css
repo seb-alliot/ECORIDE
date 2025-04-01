@@ -106,7 +106,10 @@
   align-items: center;
   margin-top: 10px;
 }
-
+select#id_etat{
+  display: flex;
+  justify-self: center;
+}
 /* Scrollbar personnalisée */
 .class_scroll {
   overflow-y: auto;
@@ -114,7 +117,9 @@
   scrollbar-color: rgba(150, 200, 150, 1) rgba(220, 220, 220, 0);
   padding-bottom: var(--spacing-md);
 }
-
+ul.class_flex {
+  gap:var(--spacing-md);
+}
 /* Reset et base */
 * {
   margin: 0;
@@ -194,6 +199,8 @@ input {
   box-shadow: var(--box-shadow);
   text-align: center;
 }
+#deux_choix,
+#bouton_terminer,
 #recherche_form input,
 #recherche_form button,
 #reservation_form button,
@@ -318,7 +325,7 @@ a:hover {
   text-decoration: none;
   color: var(--color-text);
 }
-#inscription label {
+#inscription label, form#trajet_terminer_form > label, form#demarrer_ou_annuler_form > label {
   display: none;
 }
 
@@ -388,7 +395,8 @@ form#filtre_form label,
   padding: 10px;
 }
 
-form#selection_trajet button {
+form#selection_trajet button, select#id_etat
+{
   height: 30px;
   margin-bottom: 15px;
 }

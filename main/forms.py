@@ -514,6 +514,29 @@ class StatutReservationForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         self.fields["etat_reservation"].choices = [("Annulé", "Annulé")]
 
+class TerminerTrajetForm(forms.ModelForm):
+    class Meta:
+        model = TrajetProposer
+        fields = ["etat"]
+        widgets = {
+            "etat": forms.Select(choices=TrajetProposer.ETAT)
+        }
+
+    def __init__(self, *args, user=None, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["etat"].choices = [("Terminé", "Terminé")]
+
+class Demarrer_ou_annulerForm(forms.ModelForm):
+    class Meta:
+        model = TrajetProposer
+        fields = ["etat"]
+        widgets = {
+            "etat": forms.Select(choices=TrajetProposer.ETAT)
+        }
+
+    def __init__(self, *args, user=None, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["etat"].choices = [("Annulé", "Annuler"),("En cours", "Demarrer")]
 
 class AvisForm(forms.ModelForm):
     class Meta:

@@ -15,6 +15,8 @@
   height: var(--logo-size);
   width: var(--logo-size);
 }
+#deux_choix,
+#bouton_terminer,
 #recherche_form input,
 #recherche_form button,
 #reservation_form button,

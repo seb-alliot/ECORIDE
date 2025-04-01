@@ -961,3 +961,4 @@ class ChangerStatutTrajet(models.Model):
 
     def __str__(self):
         return f"Le statut du trajet {self.trajet} a été modifié en {self.statut} le {self.modified_at}"
+
