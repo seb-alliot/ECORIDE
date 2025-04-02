@@ -1,13 +1,13 @@
 :root {
   --logo-size: 100px;
   --font-size-base: 12px;
-  --input-width: 85px;
+  --input-width: 80px;
   --input-width--other: 95px;
   --image-height: 100px;
 }
 .image-principal {
   background-image: url("../../photo/principal_mobile.avif");
-  min-height: var(--image-height);
+  min-height: 180px;
 }
 #logo,
 .photo_profile,
@@ -31,7 +31,7 @@ select#id_places {
   width: var(--input-width);
   font-size: var(--font-size-base);
 }
-#reservation_annulé,
+#reservation_annuler,
 select#id_etat,
 #deux_choix,
 #bouton_terminer,
@@ -86,7 +86,6 @@ h2,
 h3,
 h4{
   font-size: 16px;
-  margin-top: var(--spacing-md);
 }
 form#contact_form textarea {
   font-size: 10px;
@@ -152,4 +151,7 @@ div#info_trajet {
 #reset_mdp,
 #validation_email {
   height: 40px;
+}
+#bouton_terminer ,#deux_choix {
+  margin-bottom: 15px;
 }

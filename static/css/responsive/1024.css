@@ -15,7 +15,7 @@
   height: var(--logo-size);
   width: var(--logo-size);
 }
-#reservation_annulé,
+#reservation_annuler,
 form#etat_form select,
 form#etat_form button,
 #reservation_form select,
@@ -82,7 +82,6 @@ h2,
 h3,
 h4{
   font-size: var(--font-size-base);
-  margin-top: var(--spacing-md);
 }
 #info_user {
   font-size: var(--font-size-base--p);
@@ -157,4 +156,7 @@ div#preference p {
 
 form#trajet_form , #ajout_voiture,#reservation_faite, #covoiturage_proposer, #trajet_proposer, #reservion_fini , #reservation_annulé, #covoiturage_annulé {
   margin-bottom:10px;
+}
+#bouton_terminer ,#deux_choix {
+  margin-bottom: 15px;
 }

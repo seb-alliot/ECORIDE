@@ -21,7 +21,6 @@ from .forms import (
     TrajetForm,
     RechercheTrajetForm,
     FiltreTrajetForm,
-    StatutTrajetForm,
     CustomSetPasswordForm,
     ConfirmEmailForm,
     ReservationTrajetForm,
@@ -163,7 +162,6 @@ def accueil(request):
     second_resultat = None
     resultat = None
 
-
     form_trajet = request.GET.get("form_trajet")
 
     if request.method == "GET":
@@ -257,37 +255,60 @@ class UserCreateView(CreateView):
     template_name = "inscription/inscription.html"
     success_url = reverse_lazy("index")
 
-    # Faire apparaitre l'image par default dans le template
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        photo_default_url = settings.MEDIA_URL + "photo_default/photo_default.jpg"
-        context["photo_default_url"] = photo_default_url
-        return context
-
     def form_valid(self, form):
-        user = form.save(commit=False)
-        user.is_active = False
-        user.save()
 
-        role = ChoixRole.objects.create(role="passager", user=user)
-        credit_user = CreditUser.objects.create(user=user)
+        try:
+            user = form.save(commit=False)
+            user.is_active = False
+            user.save()
 
-        uidb64 = urlsafe_base64_encode(str(user.pk).encode("utf-8"))
-        token = default_token_generator.make_token(user)
-        activation_token = ActivationToken.objects.create(user=user, token=token)
-        activation_url = self.request.build_absolute_uri(
-            reverse(
-                "activation", kwargs={"token":token, "uidb64": uidb64}
+            ChoixRole.objects.create(role="passager", user=user)
+            CreditUser.objects.create(user=user)
+
+            uidb64 = urlsafe_base64_encode(str(user.pk).encode("utf-8"))
+            token = default_token_generator.make_token(user)
+            ActivationToken.objects.create(user=user, token=token)
+
+            activation_url = self.request.build_absolute_uri(
+                reverse("activation", kwargs={"token": token, "uidb64": uidb64})
             )
-        )
-        self.ActivationCompte(user, uidb64, activation_url)
-        return redirect(self.success_url)
+            self.ActivationCompte(user, uidb64, activation_url)
+
+            messages.success(self.request, "Votre compte a été créé avec succès.")
+            return redirect(self.success_url)
+        except Exception as e:
+            messages.error(self.request, f"Une erreur est survenue : {e}")
+            return self.form_invalid(form)
+
+    def form_invalid(self, form):
+
+        username = form.data.get("username")
+        email = form.cleaned_data.get("email")
+        password1 = form.data.get("password1")
+        password2 = form.data.get("password2")
+
+        if username and User.objects.filter(username=username).exists():
+            messages.error(self.request, "Ce nom d'utilisateur est déjà pris.")
+
+        if email and User.objects.filter(email=email).exists():
+            messages.error(self.request, "Cette adresse e-mail est déjà utilisée.")
+
+        if password1 and password2:
+            if password1 != password2:
+                messages.error(self.request, "Les mots de passe ne correspondent pas.")
+            elif not re.match(r"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$", password1):
+                messages.error(
+                    self.request,
+                    "Le mot de passe doit comporter au moins 8 caractères, avec une majuscule, une minuscule et un chiffre."
+                )
+
+        return super().form_invalid(form)
 
     def ActivationCompte(self, user, uidb64, activation_url):
 
         subject = "Activation de votre compte EcoRide"
         context = {"user": user, "activation_url": activation_url, "uidb64": uidb64}
-        message = render_to_string("inscription/activation_email.html", context)
+        message = render_to_string("style_email/activation_email.html", context)
         email = EmailMessage(
             subject=subject,
             body=message,
@@ -323,46 +344,33 @@ def activation(request, uidb64, token):
 
 # ----------------------------reset passaword----------------------------------------------
 
-
 class CustomPasswordResetView(PasswordResetView):
     form_class = ConfirmEmailForm
     template_name = "réinitialisation/password_reset_form.html"
     success_url = reverse_lazy("index")
 
-    # Faire apparaitre l'image par default mais ne fonctionne pas ici, pourquoi?
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        photo_default_url = settings.MEDIA_URL + "photo_default/photo_default.jpg"
-        context["photo_default_url"] = photo_default_url
-        return context
-
     def form_valid(self, form):
         email = form.cleaned_data["email"]
-        user = User.objects.get(email=email)
-        self.user = user
-        messages.success(self.request, "Un e-mail de réinitialisation a été envoyé.")
-        return super().form_valid(form)
+        try:
+            user = User.objects.get(email=email)
+            self.user = user
+            # Ajouter un message de succès
+            messages.success(self.request, "Un email de réinitialisation a été envoyé.")
+        except User.DoesNotExist:
+            messages.error(self.request, "Aucun utilisateur trouvé avec cet email.")
 
+        return super().form_valid(form)
 
 class CustomResetPasswordConfirmView(PasswordResetConfirmView):
     form_class = CustomSetPasswordForm
     template_name = "réinitialisation/password_reset_confirm.html"
     success_url = reverse_lazy("index")
 
-    # ici non plus, les seul vue on je renvois un template dans les url path
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        photo_default_url = settings.MEDIA_URL + "photo_default/photo_default.jpg"
-        context["photo_default_url"] = photo_default_url
-        return context
-
     def form_valid(self, form):
         messages.success(self.request, "Votre mot de passe a été changé.")
         return super().form_valid(form)
 
-
 # ------------------------------Connection en 2 étapes------------------------------------------------
-
 
 # operation 1 : demande d'identifiant
 def connection1(request):
@@ -374,18 +382,22 @@ def connection1(request):
             username = form.cleaned_data.get("username")
             try:
                 user = get_user_model().objects.get(username=username)
-                request.session["user_id"] = user.id
-                # gestion du token de session
-                # On le recupere ou renevouvel
-                token, created = TokenValidation.objects.update_or_create(
-                    user=user, defaults={"token": get_random_string(32)}
-                )
-                request.session["token"] = token.token
+                if user.is_active:
+                    request.session["user_id"] = user.id
+                    # gestion du token de session
+                    # On le recupere ou renevouvel
+                    token, created = TokenValidation.objects.update_or_create(
+                        user=user, defaults={"token": get_random_string(32)}
+                    )
+                    request.session["token"] = token.token
 
-                email = User.objects.get(username=username).email
+                    email = User.objects.get(username=username).email
 
-                Deux_F_A(request, email, username)
-                return redirect("connection2")
+                    Deux_F_A(request, email, username)
+                    return redirect("connection2")
+                else:
+                    messages.error(request, "Votre compte n'est pas actif ou inexistant.")
+                    return redirect("connection1")
             except get_user_model().DoesNotExist:
                 messages.error(request, "Utilisateur introuvable.")
                 return redirect("connection1")
@@ -435,10 +447,10 @@ def connection2(request):
                 request.session.pop("user_id", None)
                 request.session.pop("token", None)
 
-                messages.success(request, "Vous êtes connecté.")
+                messages.info(request, "Vous êtes connecté.")
                 return redirect("index")
             else:
-                messages.error(request, "Identifiant ou mot de passe incorrect.")
+                messages.error(request, "Vos identifiants sont érronés.")
                 return redirect("connection2")
         except get_user_model().DoesNotExist:
             messages.error(request, "Vos identifiants sont érronés.")
@@ -457,6 +469,7 @@ def connection2(request):
 
 def logout_view(request):
     logout(request)
+    messages.info(request, "Vous êtes déconnecté.")
     return redirect("/")
 
 
@@ -473,7 +486,7 @@ def MonCompte(request):
     trajet2 = TrajetProposer.objects.filter(chauffeur=user , etat="Annulé")
     trajet3 = TrajetProposer.objects.filter(chauffeur=user , etat="En cours")
     trajet4 = TrajetProposer.objects.filter(chauffeur=user , etat="Disponible")
-    # faire le calcul de l'heure de depart + durée trajet pour afficher l'heure d'arrivée
+
     voiture = Voiture.objects.filter(user=user)
     type_moteur = Voiture.objects.filter(type_moteur=user)
     reservation = ReservationTrajet.objects.filter(passager=user)
@@ -856,26 +869,19 @@ def MonCompte(request):
                 etat="Disponible",
                 places__gt=0,
             )
-            # code de base
-            # resultat = TrajetProposer.objects.exclude(chauffeur=request.user).exclude(etat="Terminé").exclude(etat="En cours")
-            # sa represente 3 requete differentes, en dessous la même chose en une seule requete donc plus performant
-            # utilisation de Q pour les requetes complexes
-            # On utilise | pour un ou pour garder les 2 requetes distinctes, utilisateur connecté exclus et (ou) trajet etat exclus
-            # puis pour le et on utilise & pour les deux etats exclus
-
             if user.is_authenticated:
-                resultat = resultat.exclude(
+                trajet4 = resultat.exclude(
                     Q(chauffeur=request.user) | Q(etat="Terminé") | Q(etat="En cours")
                 )
             else:
-                resultat = resultat.filter(etat="Disponible")
+                trajet4 = resultat.filter(etat="Disponible")
 
             request.session["resultat_recherche"] = list(
             resultat.values_list("id", flat=True)
                 )
 
-            first_resultat= resultat.exclude(Q(voiture__type_moteur="Electrique") | Q(voiture__type_moteur="Hybride"))
-            second_resultat= resultat.exclude(Q(voiture__type_moteur="essence") | Q(voiture__type_moteur="diesel"))
+            first_resultat= trajet4.exclude(Q(voiture__type_moteur="Electrique") | Q(voiture__type_moteur="Hybride"))
+            second_resultat= trajet4.exclude(Q(voiture__type_moteur="essence") | Q(voiture__type_moteur="diesel"))
             if first_resultat.exists() or second_resultat.exists():
                 messages.success(request, "Hey voici juste pour vous !!")
             else:
@@ -1776,16 +1782,11 @@ def Envoi_Reponse_Modo(request, email_user, reponse_modo):
 
 # _________________A FAIRE_________________
 
-# la transition d'etat, la logique metier est presente mais pas le suivis de l'etat
-
-# --------Trouver comment ajouter la photo par default sur le reset mdp-----------------------------
 
 # ------------------------------------A faire avec javascript------------------------------------------------------
 
 
 # --------retour sur onglet actif dynamique-------
-# --------rendre les fitres de trajet dynamique-------
-# --------choix de role dynamique -------
 # --------ajout de voiture dynamique-------
 
 #factorisation du code quand j'aurai tout fini , dynamisme fonctionnalité op

@@ -27,15 +27,7 @@ urlpatterns = [
     path("connection2/", main_views.connection2, name="connection2"),
     path("logout/", main_views.logout_view, name="logout"),
     # 1ère étape: envoi d'un email en validant l'email
-    path(
-        "password_reset/",
-        auth_views.PasswordResetView.as_view(
-            success_url=reverse_lazy("index"),
-            form_class=main_views.ConfirmEmailForm,
-            template_name="réinitialisation/password_reset_form.html",
-        ),
-        name="password_reset",
-    ),
+    path("password_reset/", main_views.CustomPasswordResetView.as_view(), name="password_reset"),
     # 2ème étape: Changement du mot de passe via le lien de l'étape 1
     path(
         "reset/<uidb64>/<token>/",

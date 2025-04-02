@@ -15,7 +15,7 @@
   height: var(--logo-size);
   width: var(--logo-size);
 }
-#reservation_annulé,
+#reservation_annuler,
 form#etat_form select,
 form#etat_form button,
 #reservation_form select,
@@ -55,13 +55,13 @@ footer a {
   margin-top: var(--spacing-lg);
 }
 #resultat_recherche {
-  width: 180px;
+  width: 150px;
   height: auto;
   font-size: 18px;
   margin-top: 10px;
 }
 label#resultat_recherche img {
-  width: 160px;
+  width: 140px;
   height: 90px;
 }
 .presentation p {
@@ -72,7 +72,6 @@ h2,
 h3,
 h4{
   font-size: var(--font-size-base);
-  margin-top: var(--spacing-lg);
 }
 
 #info_user {
@@ -140,6 +139,7 @@ div#preference p {
   margin-right: 15%;
   margin-left: 15%;
 }
+#inscription,
 #recherche_form,
 #login1,
 #login2,
@@ -149,4 +149,7 @@ div#preference p {
 }
 form#trajet_form , #ajout_voiture,#reservation_faite, #covoiturage_proposer, #trajet_proposer, #reservion_fini , #reservation_annulé, #covoiturage_annulé {
   margin-bottom:10px;
+}
+#bouton_terminer ,#deux_choix {
+  margin-bottom: 20px;
 }

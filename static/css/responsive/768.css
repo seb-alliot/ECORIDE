@@ -14,7 +14,7 @@
   height: var(--logo-size);
   width: var(--logo-size);
 }
-#reservation_annulé,
+#reservation_annuler,
 form#etat_form select,
 form#etat_form button,
 #reservation_form select,
@@ -80,7 +80,6 @@ h2,
 h3,
 h4{
   font-size: 18px;
-  margin-top: var(--spacing-md);
 }
 .presentation p {
   font-size: 18px;

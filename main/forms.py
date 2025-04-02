@@ -57,13 +57,6 @@ class Inscription(UserCreationForm):
         model = User
         fields = ["username", "email", "password1", "password2"]
 
-    def clean_password1(self):
-        password1 = self.cleaned_data.get("password1")
-        if not re.match(r"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$", password1):
-            raise forms.ValidationError(
-                "Le mot de passe doit contenir au moins 8 caractères, une lettre majuscule, une lettre minuscule et un chiffre."
-            )
-        return password1
 
     def clean_password2(self):
         password1 = self.cleaned_data.get("password1")
@@ -204,24 +197,6 @@ class TrajetForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         if user:
             self.fields["voiture"].queryset = Voiture.objects.filter(user=user)
-
-
-class StatutTrajetForm(forms.ModelForm):
-
-    class Meta:
-        model = ChangerStatutTrajet
-        fields = ["statut"]
-        widgets = {"statut": forms.Select(choices=TrajetProposer.ETAT)}
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        statut = "Disponible"
-        self.fields["statut"].choices = [
-            (key, value)
-            for key, value in self.fields["statut"].choices
-            if key != "Disponible"
-        ]
-
 
 class RechercheTrajetForm(forms.Form):
     ville_depart = forms.CharField(
@@ -536,7 +511,7 @@ class Demarrer_ou_annulerForm(forms.ModelForm):
 
     def __init__(self, *args, user=None, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fields["etat"].choices = [("Annulé", "Annuler"),("En cours", "Demarrer")]
+        self.fields["etat"].choices = [("En cours", "Demarrer"),("Annulé", "Annuler")]
 
 class AvisForm(forms.ModelForm):
     class Meta:

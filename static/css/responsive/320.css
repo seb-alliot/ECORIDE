@@ -2,11 +2,11 @@
   --logo-size: 80px;
   --font-size-base: 10px;
   --input-width: 60px;
-  --image-height: 80px;
+  --image-height: 100px;
 }
 .image-principal {
   background-image: url("../../photo/principal_mobile.avif");
-  min-height: var(--image-height);
+  min-height:115px;
 }
 #logo,
 .photo_profile,
@@ -14,7 +14,6 @@
   height: var(--logo-size);
   width: var(--logo-size);
 }
-
 
 #inscription input,
 #inscription button,
@@ -34,7 +33,7 @@ footer a {
   width: var(--input-width);
   font-size: var(--font-size-base);
 }
-#reservation_annulé,
+#reservation_annuler,
 select#id_etat,
 #deux_choix,
 #bouton_terminer,
@@ -150,7 +149,6 @@ h2,
 h3,
 h4{
   font-size: 13px;
-  margin-top: var(--spacing-md);
 }
 #recherche_form,
 #login1,
@@ -158,4 +156,7 @@ h4{
 #reset_mdp,
 #validation_email {
   height: 45px;
+}
+#bouton_terminer ,#deux_choix {
+  margin-bottom: 10px;
 }

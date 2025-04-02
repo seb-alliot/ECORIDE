@@ -121,7 +121,7 @@ label#resultat_recherche img {
   #historique img,
   #label_proposition img,
   label#resultat_recherche > img {
-    width: 95px;
+    width: 110px;
     height: 80px;
   }
   #label_proposition,
@@ -130,7 +130,7 @@ label#resultat_recherche img {
   #historique,
   #label_proposition,
   #resultat_recherche {
-    width: 115px;
+    width: 130px;
     height: auto;
   }
 }
@@ -183,8 +183,8 @@ label#resultat_recherche img {
   #historique img,
   #label_proposition img,
   label#resultat_recherche > img {
-    width: 120px;
-    height: 80px;
+    width: 135px;
+    height: 85px;
   }
   #label_proposition,
   #covoit_proposer,
@@ -192,7 +192,7 @@ label#resultat_recherche img {
   #historique,
   #label_proposition,
   #resultat_recherche {
-    width: 140px;
+    width: 150px;
     height: auto;
   }
 }
@@ -214,7 +214,7 @@ label#resultat_recherche img {
   #historique img,
   #label_proposition img,
   label#resultat_recherche > img {
-    width: 130px;
+    width: 150px;
     height: 90px;
   }
   #label_proposition,
@@ -223,7 +223,7 @@ label#resultat_recherche img {
   #historique,
   #label_proposition,
   #resultat_recherche {
-    width: 150px;
+    width: 170px;
     height: auto;
   }
 }
@@ -245,7 +245,7 @@ label#resultat_recherche img {
   #historique img,
   #label_proposition img,
   label#resultat_recherche > img {
-    width: 140px;
+    width: 160px;
     height: 100px;
   }
   #label_proposition,
@@ -254,7 +254,7 @@ label#resultat_recherche img {
   #historique,
   #label_proposition,
   #resultat_recherche {
-    width: 160px;
+    width: 180px;
     height: auto;
   }
 }
@@ -275,7 +275,7 @@ label#resultat_recherche img {
   #historique img,
   #label_proposition img,
   label#resultat_recherche > img {
-    width: 140px;
+    width: 160px;
     height: 100px;
   }
   #label_proposition,
@@ -284,7 +284,7 @@ label#resultat_recherche img {
   #historique,
   #label_proposition,
   #resultat_recherche {
-    width: 160px;
+    width: 180px;
     height: auto;
   }
 }
@@ -307,8 +307,8 @@ label#resultat_recherche img {
   #historique img,
   #label_proposition img,
   label#resultat_recherche > img {
-    width: 150px;
-    height: 105px;
+    width: 160px;
+    height: 100px;
   }
   #label_proposition,
   #covoit_proposer,
@@ -316,7 +316,7 @@ label#resultat_recherche img {
   #historique,
   #label_proposition,
   #resultat_recherche {
-    width: 170px;
+    width: 180px;
     height: auto;
   }
 }
@@ -399,7 +399,7 @@ label#resultat_recherche img {
   #historique img,
   #label_proposition img,
   label#resultat_recherche > img {
-    width: 170px;
+    width: 180px;
     height: 120px;
   }
   #label_proposition,
