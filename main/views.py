@@ -156,6 +156,7 @@ def accueil(request):
     recherche_form = RechercheTrajetForm(request.GET)
     filtre_form = FiltreTrajetForm(request.GET)
     type_moteur = Voiture.objects.filter(type_moteur=user)
+    trajet4 = TrajetProposer.objects.filter(etat="Disponible")
 
     resultat_filtrer = None
     first_resultat = None
@@ -177,18 +178,17 @@ def accueil(request):
                 date=date,
             )
             if user.is_authenticated:
-                resultat = resultat.exclude(
-                    Q(chauffeur=request.user) | (Q(etat="Terminé") | Q(etat="En cours") | Q(etat="Annulé"))
-                )
+                trajet4 = resultat.exclude(
+                    chauffeur=request.user)
             elif user.is_anonymous:
-                resultat = resultat.exclude((Q(etat="Terminé") | Q(etat="En cours") | Q(etat="Annulé")))
+                trajet4 = resultat.exclude((Q(etat="Terminé") | Q(etat="En cours") | Q(etat="Annulé")))
 
             request.session["resultat_recherche"] = list(
             resultat.values_list("id", flat=True)
                 )
 
-            first_resultat= resultat.exclude(Q(voiture__type_moteur="Electrique") | Q(voiture__type_moteur="Hybride"))
-            second_resultat= resultat.exclude(Q(voiture__type_moteur="essence") | Q(voiture__type_moteur="diesel"))
+            first_resultat= trajet4.exclude(Q(voiture__type_moteur="Electrique") | Q(voiture__type_moteur="Hybride"))
+            second_resultat= trajet4.exclude(Q(voiture__type_moteur="essence") | Q(voiture__type_moteur="diesel"))
 
             if first_resultat.exists() or second_resultat.exists():
                 messages.success(request, "Hey voici juste pour vous !!")
@@ -871,7 +871,7 @@ def MonCompte(request):
             )
             if user.is_authenticated:
                 trajet4 = resultat.exclude(
-                    Q(chauffeur=request.user) | Q(etat="Terminé") | Q(etat="En cours")
+                    chauffeur=request.user
                 )
             else:
                 trajet4 = resultat.filter(etat="Disponible")

@@ -145,6 +145,9 @@ h4{
 form#trajet_form , #ajout_voiture,#reservation_faite, #covoiturage_proposer, #trajet_proposer, #reservion_fini , #reservation_annulé, #covoiturage_annulé {
   margin-bottom:15px;
 }
-#bouton_terminer ,#deux_choix {
+#preference_form,#bouton_terminer ,#deux_choix {
   margin-bottom: 20px;
+}
+#account-admin {
+  gap: 15px;
 }

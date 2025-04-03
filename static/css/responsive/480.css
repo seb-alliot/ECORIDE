@@ -152,6 +152,9 @@ div#info_trajet {
 #validation_email {
   height: 40px;
 }
-#bouton_terminer ,#deux_choix {
+#preference_form,#bouton_terminer ,#deux_choix {
   margin-bottom: 15px;
+}
+#account-admin {
+  gap: 5px;
 }

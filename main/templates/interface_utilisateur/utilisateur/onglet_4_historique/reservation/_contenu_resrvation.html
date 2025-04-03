@@ -9,11 +9,19 @@
         {% else %}
             <img src="{{ photo_default_url }}" alt="photo par défaut" class="photo_profile">
         {% endif %}<br>
-        {{ res.trajet_reserver.chauffeur }}<br>
+        {% if res.trajet_reserver.chauffeur%}
+            {{ res.trajet_reserver.chauffeur }} <br>
+        {% else %}
+        utilisateur supprimé<br>
+        {% endif %}
+        {% if res.trajet_reserver.ville_depart %}
         Départ de :<br>{{ res.trajet_reserver.ville_depart}} ->  {{ res.trajet_reserver.ville_arrivee }}<br>
         Le  {{ res.trajet_reserver.date }}<br>
         À  {{ res.trajet_reserver.heure|date:"H\H:i"  }}<br>
         véhicule :<br>{{ res.trajet_reserver.voiture.marque }} {{ res.trajet_reserver.voiture.modele }}<br>
+        {% else %}
+        trajet supprimé<br>
+        {% endif %}
         {% if res.etat_reservation == "Terminé" %}
         Prix
         {% elif res.etat_reservation == "Annulé" %}

@@ -18,11 +18,15 @@
         {% else %}
             <img src="{{ photo_default_url }}" alt="photo par default">
         {% endif %}
+        {% if resultat.chauffeur%}
         {{ resultat.chauffeur }} :
-        {% if trajet.note_moyenne == "Pas encore évalué" %}
+        {% else %}
+        utilisateur supprimé
+        {% endif %}
+        {% if trajet.note_moyenne %}
         {{ trajet.note_moyenne }}/ 5 ⭐
         {% else %}
-            {{ trajet.note_moyenne|floatformat:1 }} / 5 ⭐
+            pas encore noté
         {% endif %}
         <br>
         Départ de :<br>

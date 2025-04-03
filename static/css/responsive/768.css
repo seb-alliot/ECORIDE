@@ -150,6 +150,9 @@ div#div_avis > div > p {
 #validation_email {
   height: 45px;
 }
-form#trajet_form {
+#preference_form,form#trajet_form {
   margin-bottom: 15px;
+}
+#account-admin {
+  gap: 10px;
 }
