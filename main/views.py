@@ -1375,6 +1375,7 @@ def Fait_Ton_Taff_De_Modo(request):
                         note_chauffeur.etat_paiement = choix_moderateur
                         note_chauffeur.decision_prise = True
                         note_chauffeur.save()
+
                         messages.info(request, "Le commentaire a bien été enregistré.")
 
                         if choix_moderateur == "Payer":
@@ -1386,8 +1387,9 @@ def Fait_Ton_Taff_De_Modo(request):
 
                             reservation.trajet_payer = True
                             reservation.save()
-                            mail.store(email_id, "+FLAGS", "\\Deleted")
-                            mail.expunge()
+                            if request.POST.get("valider") == "oui":
+                                mail.store(email_id, "+FLAGS", "\\Deleted")
+                                mail.expunge()
                             messages.success(request, "Le paiement a été accordé.")
 
                         elif choix_moderateur == "Refuser":
@@ -1397,8 +1399,9 @@ def Fait_Ton_Taff_De_Modo(request):
                             messages.success(
                                 request, "Vous avez bien refusé le paiement au chauffeur."
                             )
-                            mail.store(email_id, "+FLAGS", "\\Deleted")
-                            mail.expunge()
+                            if request.POST.get("valider") == "oui":
+                                mail.store(email_id, "+FLAGS", "\\Deleted")
+                                mail.expunge()
                     except TrajetProposer.DoesNotExist:
                         messages.error(request, "Trajet introuvable.")
                     except ReservationTrajet.DoesNotExist:
@@ -1426,8 +1429,9 @@ def Fait_Ton_Taff_De_Modo(request):
                         note_chauffeur.commentaire_moderer = True
                         note_chauffeur.decision_prise = True
                         note_chauffeur.save()
-                        mail.store(email_id, "+FLAGS", "\\Deleted")
-                        mail.expunge()
+                        if request.POST.get("Confirmer") == "oui":
+                            mail.store(email_id, "+FLAGS", "\\Deleted")
+                            mail.expunge()
                         messages.info(request, "Le commentaire a bien été enregistré.")
                     except TrajetProposer.DoesNotExist:
                         messages.error(request, "Trajet introuvable.")
@@ -1443,12 +1447,10 @@ def Fait_Ton_Taff_De_Modo(request):
 
                     reponse_modo = reponse_modo_form.cleaned_data["reponse"]
                     Envoi_Reponse_Modo(request, email_user,commentaire,pseudo, reponse_modo)
-                    mail.store(email_id, "+FLAGS", "\\Deleted")
-                    mail.expunge()
-                elif request.POST.get("supprimer_email") == "oui":
-                    mail.store(email_id, "+FLAGS", "\\Deleted")
-                    mail.expunge()
-                    messages.success(request, "Email supprimé.")
+                    if request.POST.get("repondre") == "oui":
+                        mail.store(email_id, "+FLAGS", "\\Deleted")
+                        mail.expunge()
+                        messages.success(request, "Email supprimé.")
 
 
             context = {

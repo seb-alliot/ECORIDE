@@ -1,0 +1,7 @@
+<form method="POST">
+    {% csrf_token %}
+    <input type="hidden" name="Confirmer" value="oui">
+    <button type="submit" onclick="return confirm('Confirmer mon choix ?');">
+        Confirmer
+    </button>
+</form>
