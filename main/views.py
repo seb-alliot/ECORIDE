@@ -65,6 +65,7 @@ import imaplib, email
 from email.header import decode_header
 import os, re, uuid , secrets
 from bs4 import BeautifulSoup
+import chardet
 
 
 # ------------------------------------------------------------------------------------------
@@ -1246,6 +1247,8 @@ def Fait_Ton_Taff_De_Modo(request):
             emails = []
             selected_email = None
             commentaire = "Aucun commentaire trouvé."
+            pseudo = "Je s'appel Groot"
+
             reponse_modo = "Aucune réponse trouvée."
             email_user = None
             email_type = request.GET.get("email_type", "").strip()
@@ -1267,13 +1270,16 @@ def Fait_Ton_Taff_De_Modo(request):
 
                 if isinstance(subject, bytes) and encoding:
                     subject = subject.decode(encoding if encoding else "utf-8")
+                if subject.lower().startswith("re:"):
+                    continue
 
                 # on applique un filtre sur ce que l'on veux sur le template
                 sender = message.get("From")
                 if not (
                     ("Avis negatif" in subject
                     or "Avis positif" in subject
-                    or "Prise de contact" in subject)
+                    or "Prise de contact" in subject
+                    )
                     and ("staff.modo.ecoride@gmail.com" in sender)
                 ):
                     continue
@@ -1284,8 +1290,14 @@ def Fait_Ton_Taff_De_Modo(request):
                 # on autopsie l'email recu
                 if message.is_multipart():
                     for part in message.walk():
-                        if part.get_content_type() == "text/plain":
-                            body = part.get_payload(decode=True).decode()
+                        if part.get_content_type() == "body/html":
+                            gerer_caractere_speciaux = chardet.detect(part.get_payload())
+                            if gerer_caractere_speciaux["encoding"]:
+                                body = part.get_payload(decode=True).decode(
+                                    gerer_caractere_speciaux["encoding"]
+                                )
+                            else:
+                                body = part.get_payload(decode=True).decode()
 
                             break
                 else:
@@ -1324,11 +1336,20 @@ def Fait_Ton_Taff_De_Modo(request):
                         # on fait sauter Commentaire : pour avoir juste le commentaire
                     if commentaire.startswith("Commentaire :"):
                         commentaire = commentaire.replace("Commentaire :", "").strip()
+                    div_pseudo = extraire.find("div", class_="pseudo")
+                    # On extrait le pseudo
+                    if div_pseudo and div_pseudo.p:
+                        pseudo = (
+                            div_pseudo.p.get_text().replace("Nom : ", "").strip()
+                        )
+                        # on fait sauter Pseudo : pour avoir juste le pseudo
+                    if pseudo.startswith("Nom:"):
+                        pseudo = pseudo.replace("Nom :", "").strip()
 
             moderation_form = ModerationTrajetForm(
                 request.POST or None, initial={"commentaire": commentaire}
             )
-            reponse_modo_form = ReponseForm(request.POST or None, initial={"email": email_user})
+            reponse_modo_form = ReponseForm(request.POST or None, initial={"email": email_user, "commentaire": commentaire})
             moderation_positive_form = ModerationAvisPositifForm(request.POST or None, initial={"commentaire": commentaire})
 
             if email_type == "Avis negatif":
@@ -1354,7 +1375,6 @@ def Fait_Ton_Taff_De_Modo(request):
                         note_chauffeur.etat_paiement = choix_moderateur
                         note_chauffeur.decision_prise = True
                         note_chauffeur.save()
-
                         messages.info(request, "Le commentaire a bien été enregistré.")
 
                         if choix_moderateur == "Payer":
@@ -1366,6 +1386,8 @@ def Fait_Ton_Taff_De_Modo(request):
 
                             reservation.trajet_payer = True
                             reservation.save()
+                            mail.store(email_id, "+FLAGS", "\\Deleted")
+                            mail.expunge()
                             messages.success(request, "Le paiement a été accordé.")
 
                         elif choix_moderateur == "Refuser":
@@ -1375,7 +1397,8 @@ def Fait_Ton_Taff_De_Modo(request):
                             messages.success(
                                 request, "Vous avez bien refusé le paiement au chauffeur."
                             )
-
+                            mail.store(email_id, "+FLAGS", "\\Deleted")
+                            mail.expunge()
                     except TrajetProposer.DoesNotExist:
                         messages.error(request, "Trajet introuvable.")
                     except ReservationTrajet.DoesNotExist:
@@ -1410,17 +1433,16 @@ def Fait_Ton_Taff_De_Modo(request):
                         messages.error(request, "Trajet introuvable.")
                     except CreditUser.DoesNotExist:
                         messages.error(request, "Ce chauffeur n'existe plus.")
-
                 elif request.POST.get("supprimer_email") == "oui":
                     mail.store(email_id, "+FLAGS", "\\Deleted")
                     mail.expunge()
                     messages.success(request, "Email supprimé.")
 
-
             elif email_type == "Prise de contact":
                 if reponse_modo_form.is_valid():
+
                     reponse_modo = reponse_modo_form.cleaned_data["reponse"]
-                    Envoi_Reponse_Modo(request, email_user, reponse_modo)
+                    Envoi_Reponse_Modo(request, email_user,commentaire,pseudo, reponse_modo)
                     mail.store(email_id, "+FLAGS", "\\Deleted")
                     mail.expunge()
                 elif request.POST.get("supprimer_email") == "oui":
@@ -1751,12 +1773,14 @@ def Deux_F_A(request, email, username):
         return redirect("connection1")
 
 
-def Envoi_Reponse_Modo(request, email_user, reponse_modo):
+def Envoi_Reponse_Modo(request, email_user,commentaire,pseudo, reponse_modo):
     try:
         site_url = f"http://{get_current_site(request).domain}"
 
         subject = "Réponse à votre prise de contact"
         context = {
+            "pseudo": pseudo,
+            "commentaire": commentaire,
             "reponse_modo": reponse_modo,
             "site_url": site_url,
         }

@@ -8,17 +8,14 @@
 </head>
 
 <body>
-    <h1>Prise de contact</h1>
-
-    <p>Réception d'une prise de contact par un utilsiateur :</p>
-
-    <ul>
-        <li><strong>Nom</strong> : {{ pseudo }}</li>
-        <li><strong>telephone</strong> : {{ telephone }}</li>
         <li><strong>Email</strong> : {{ email_user }}</li>
+        <div class="pseudo">
+            <p>Nom : {{ pseudo }}</p>
+        </div>
+        <li><strong>telephone</strong> : {{ telephone }}</li>
         <li><strong>sujet</strong> : {{ sujet }}</li>
-        <li><strong>Message</strong> : {{ message }}</li>
-    </ul>
-
+        <div class="commentaire">
+            <p>Commentaire :</strong> {{ message }}</p>
+        </div>
 </body>
 </html>
