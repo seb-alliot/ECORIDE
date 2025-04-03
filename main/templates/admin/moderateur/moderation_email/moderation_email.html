@@ -4,9 +4,6 @@
     {% include "css_html/_css_moderateur.html" %}
 {% endblock style %}
 
-
-
-
 {% block principal %}
     <h1>Bon courage !!</h1>
     <h2>Choisissez le style d'email à modérer</h2>
@@ -66,13 +63,9 @@
                 {{ reponse_modo_form.as_p }}
                 <button type="submit">Répondre</button>
             </form>
-            <form method="POST">
-                {% csrf_token %}
-                <input type="hidden" name="supprimer_email" value="oui">
-                <button type="submit" onclick="return confirm('Voulez-vous vraiment supprimer cet email ?');">
-                    Supprimer l'email
-                </button>
-            </form>
+            {% include "admin/moderateur/moderation_email/_bouton_suppresion.html " %}
+
+
         {% endif %}
 
     {% else %}
