@@ -55,7 +55,7 @@
                 {{ moderation_form.as_p }}
                 <button type="submit">Valider mon choix</button>
             </form>
-            {% include "admin/moderateur/moderation_email/_bouton_suppresion.html "%}
+            {% include "admin/moderateur/moderation_email/_bouton_suppresion.html" %}
 
         {% elif request.GET.email_type == "Prise de contact" %}
             <form method="POST" id="prise_contact">
@@ -63,7 +63,7 @@
                 {{ reponse_modo_form.as_p }}
                 <button type="submit">Répondre</button>
             </form>
-            {% include "admin/moderateur/moderation_email/_bouton_suppresion.html " %}
+            {% include "admin/moderateur/moderation_email/_bouton_suppresion.html" %}
 
 
         {% endif %}
