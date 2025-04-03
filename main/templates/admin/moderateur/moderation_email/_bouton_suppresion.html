@@ -1,7 +1,0 @@
-<form method="POST">
-    {% csrf_token %}
-    <input type="hidden" name="supprimer_email" value="oui">
-    <button type="submit" onclick="return confirm('Voulez-vous vraiment supprimer cet email ?');">
-        Supprimer l'email
-    </button>
-</form>
