@@ -14,6 +14,12 @@
   height: var(--logo-size);
   width: var(--logo-size);
 }
+#bouton_confirmer,
+#moderation_form select,
+#contact_form input,
+#contact_form button,
+#bouton_modo,
+#bouton_refuser,
 #reservation_annuler,
 form#etat_form select,
 form#etat_form button,
@@ -47,6 +53,7 @@ form#email_select_form select,
 footer a {
   width: 125px;
   font-size: var(--font-size-base);
+  height: 30px;
 }
 #inscription,
 #login1,
@@ -88,12 +95,17 @@ h4{
   font-size: 22px;
   margin-bottom: var(--spacing-lg);
 }
-form#contact_form textarea {
+form#contact_form textarea,
+#avis_positif  {
   width: 450px;
   height: 175px;
 }
-form#contact_form input,
-form#contact_form button {
+#id_commentaire {
+  width: 300px;
+  height: 100px;
+  font-size: 20px;
+}
+form#contact_form input{
   width: 175px;
   font-size: var(--font-size-base);
 }
@@ -155,4 +167,7 @@ div#div_avis > div > p {
 }
 #account-admin {
   gap: 10px;
+}
+#moderation_form select, #bouton_modo {
+  margin-right: 50px;
 }

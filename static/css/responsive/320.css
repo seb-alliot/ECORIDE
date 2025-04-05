@@ -14,7 +14,7 @@
   height: var(--logo-size);
   width: var(--logo-size);
 }
-
+#contact_form input,
 #inscription input,
 #inscription button,
 #recherche_form input,
@@ -27,12 +27,18 @@
 #filtre_form select,
 #selection_trajet button,
 select#id_places,
-form#email_filter_form select,
-form#email_select_form select,
 footer a {
   width: var(--input-width);
   font-size: var(--font-size-base);
+  height: 25px;
 }
+#bouton_confirmer,
+#moderation_form select,
+#contact_form button,
+form#email_filter_form select,
+form#email_select_form select,
+#bouton_modo,
+#bouton_refuser,
 #reservation_annuler,
 select#id_etat,
 #deux_choix,
@@ -51,6 +57,7 @@ form#etat_form button,
 #validation_email button {
   width: var(--image-height);
   font-size: var(--font-size-base);
+  height: 25px;
 }
 #inscription,
 #login1,
@@ -90,13 +97,18 @@ label#resultat_recherche img {
   font-size: 12px;
 }
 
-form#contact_form textarea {
+form#contact_form textarea,
+#avis_positif {
   font-size: 10px;
-  width: 300px;
-  height: 150px;
+  width: 270px;
+  height: 120px;
 }
-form#contact_form input,
-form#contact_form button {
+#id_commentaire {
+  width: 210px;
+  height: 85px;
+  font-size: 16px;
+}
+form#contact_form input{
   font-size: 10px;
   width: 150px;
 }
@@ -148,7 +160,7 @@ h1,
 h2,
 h3,
 h4{
-  font-size: 13px;
+  font-size: 12px;
 }
 #recherche_form,
 #login1,
@@ -163,4 +175,20 @@ h4{
 #account-admin {
   gap: 5px;
   flex-direction: column;
+}
+
+input#id_commentaire_moderer {
+  margin-top: -6.23%;
+  height : 30px;
+}
+
+#label_commentaire_moderer,#label_commentaire_modererbel_#label_commentaire_moderer {
+  width: 110px;
+  height: 30px;
+  align-content: center;
+  text-align: center;
+}
+
+#moderation_form select, #bouton_modo {
+  margin-right: 10px;
 }

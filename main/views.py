@@ -28,7 +28,6 @@ from .forms import (
     AvisForm,
     ContactForm,
     ModerationTrajetForm,
-    ReponseForm,
     ModerationAvisPositifForm,
     TerminerTrajetForm,
     Demarrer_ou_annulerForm,
@@ -1248,9 +1247,11 @@ def Fait_Ton_Taff_De_Modo(request):
             selected_email = None
             commentaire = "Aucun commentaire trouvé."
             pseudo = "Je s'appel Groot"
+            telephone = "Telephone rose bonjour"
+            sujet = "qui est née en premier? l'oeuf où la poule?"
+            email_user = "celui de ta maman ne fonctionne pas"
 
             reponse_modo = "Aucune réponse trouvée."
-            email_user = None
             email_type = request.GET.get("email_type", "").strip()
 
             # Récupération de l'email sélectionné (si existant)
@@ -1319,37 +1320,63 @@ def Fait_Ton_Taff_De_Modo(request):
 
                     extraire = BeautifulSoup(body, "html.parser")
 
-                    li_list = extraire.find_all("li")
-                    for li in li_list:
-                        text = li.get_text(strip=True)
-                        match = re.search(r"Email:\s*(.*)", text)
-                        if match:
-                            email_user = match.group(1)
-                            break
-
-                    div_commentaire = extraire.find("div", class_="commentaire")
                     # On extrait le commentaire du passager
+                    div_email = extraire.find("div", class_="email_user")
+                    if div_email and div_email.p:
+                        email_user = (
+                            div_email.p.get_text().replace("Email: ", "").strip()
+                        )
+
+                    # on fait sauter Commentaire : pour avoir juste le commentaire
+                    if email_user.startswith("Email :"):
+                        email_user = email_user.replace("Email :", "").strip()
+
+
+                    # On extrait le commentaire du passager
+                    div_commentaire = extraire.find("div", class_="commentaire")
                     if div_commentaire and div_commentaire.p:
                         commentaire = (
                             div_commentaire.p.get_text().replace("Commentaire: ", "").strip()
                         )
-                        # on fait sauter Commentaire : pour avoir juste le commentaire
+
+                    # on fait sauter Commentaire : pour avoir juste le commentaire
                     if commentaire.startswith("Commentaire :"):
                         commentaire = commentaire.replace("Commentaire :", "").strip()
-                    div_pseudo = extraire.find("div", class_="pseudo")
+
                     # On extrait le pseudo
+                    div_pseudo = extraire.find("div", class_="pseudo")
                     if div_pseudo and div_pseudo.p:
                         pseudo = (
                             div_pseudo.p.get_text().replace("Nom : ", "").strip()
                         )
-                        # on fait sauter Pseudo : pour avoir juste le pseudo
-                    if pseudo.startswith("Nom:"):
+                    # on fait sauter Pseudo : pour avoir juste le pseudo
+                    if pseudo.startswith("Nom :"):
                         pseudo = pseudo.replace("Nom :", "").strip()
+
+                    # On extrait le telephone
+                    div_telephone = extraire.find("div", class_="telephone")
+                    if div_telephone and div_telephone.p:
+                        telephone = (
+                            div_telephone.p.get_text().replace("telephone :", "").strip()
+                        )
+                    # on fait sauter telephone : pour avoir juste le telephone
+                    if telephone.startswith("telephone :"):
+                        telephone = telephone.replace("telephone :", "").strip()
+
+                    # On extrait le sujet
+                    div_sujet = extraire.find("div", class_="sujet")
+                    if div_sujet and div_sujet.p:
+                        sujet = (
+                            div_sujet.p.get_text().replace("sujet : ", "").strip()
+                        )
+                    # on fait sauter sujet : pour avoir juste le sujet
+                    if sujet.startswith("sujet:"):
+                        sujet = sujet.replace("sujet :", "").strip()
 
             moderation_form = ModerationTrajetForm(
                 request.POST or None, initial={"commentaire": commentaire}
             )
-            reponse_modo_form = ReponseForm(request.POST or None, initial={"email": email_user, "commentaire": commentaire})
+            contact_form = ContactForm(request.POST or None, initial={"email": email_user,"pseudo":pseudo,"telephone":telephone,"sujet":sujet, "message": commentaire})
             moderation_positive_form = ModerationAvisPositifForm(request.POST or None, initial={"commentaire": commentaire})
 
             if email_type == "Avis negatif":
@@ -1369,7 +1396,6 @@ def Fait_Ton_Taff_De_Modo(request):
                             passager=passager,
                             trajet=trajet,
                         )
-
                         note_chauffeur.commentaire = moderation_form.cleaned_data["commentaire"]
                         note_chauffeur.commentaire_moderer = True
                         note_chauffeur.etat_paiement = choix_moderateur
@@ -1382,12 +1408,12 @@ def Fait_Ton_Taff_De_Modo(request):
                             reservation.etat_paiement = "Payer"
                             credit_chauffeur = CreditUser.objects.get(user=trajet.chauffeur)
                             facture_passager = reservation.prix_par_passager
-                            credit_chauffeur.credit += facture_passager
-                            credit_chauffeur.save()
 
-                            reservation.trajet_payer = True
-                            reservation.save()
-                            if request.POST.get("valider") == "oui":
+                            if request.POST.get("Valider") == "oui":
+                                credit_chauffeur.credit += facture_passager
+                                credit_chauffeur.save()
+                                reservation.trajet_payer = True
+                                reservation.save()
                                 mail.store(email_id, "+FLAGS", "\\Deleted")
                                 mail.expunge()
                             messages.success(request, "Le paiement a été accordé.")
@@ -1399,7 +1425,7 @@ def Fait_Ton_Taff_De_Modo(request):
                             messages.success(
                                 request, "Vous avez bien refusé le paiement au chauffeur."
                             )
-                            if request.POST.get("valider") == "oui":
+                            if request.POST.get("Valider") == "oui":
                                 mail.store(email_id, "+FLAGS", "\\Deleted")
                                 mail.expunge()
                     except TrajetProposer.DoesNotExist:
@@ -1426,10 +1452,13 @@ def Fait_Ton_Taff_De_Modo(request):
                             trajet=trajet,
                         )
                         note_chauffeur.commentaire = moderation_positive_form.cleaned_data["commentaire"]
-                        note_chauffeur.commentaire_moderer = True
-                        note_chauffeur.decision_prise = True
-                        note_chauffeur.save()
                         if request.POST.get("Confirmer") == "oui":
+                            note_chauffeur.commentaire_moderer = True
+                            note_chauffeur.decision_prise = True
+                            note_chauffeur.save()
+                            mail.store(email_id, "+FLAGS", "\\Deleted")
+                            mail.expunge()
+                        elif request.POST.get("Refuser") == "oui":
                             mail.store(email_id, "+FLAGS", "\\Deleted")
                             mail.expunge()
                         messages.info(request, "Le commentaire a bien été enregistré.")
@@ -1443,9 +1472,9 @@ def Fait_Ton_Taff_De_Modo(request):
                     messages.success(request, "Email supprimé.")
 
             elif email_type == "Prise de contact":
-                if reponse_modo_form.is_valid():
+                if contact_form.is_valid():
 
-                    reponse_modo = reponse_modo_form.cleaned_data["reponse"]
+                    reponse_modo = contact_form.cleaned_data["reponse"]
                     Envoi_Reponse_Modo(request, email_user,commentaire,pseudo, reponse_modo)
                     if request.POST.get("repondre") == "oui":
                         mail.store(email_id, "+FLAGS", "\\Deleted")
@@ -1461,7 +1490,7 @@ def Fait_Ton_Taff_De_Modo(request):
                 "commentaire": commentaire,
                 # Formulaire
                 "moderation_positive_form": moderation_positive_form,
-                "reponse_modo_form": reponse_modo_form,
+                "contact_form": contact_form,
                 "moderation_form": moderation_form,
             }
             context.update(initialisation_template(request))
@@ -1775,14 +1804,14 @@ def Deux_F_A(request, email, username):
         return redirect("connection1")
 
 
-def Envoi_Reponse_Modo(request, email_user,commentaire,pseudo, reponse_modo):
+def Envoi_Reponse_Modo(request, email_user,message,pseudo, reponse_modo):
     try:
         site_url = f"http://{get_current_site(request).domain}"
 
         subject = "Réponse à votre prise de contact"
         context = {
             "pseudo": pseudo,
-            "commentaire": commentaire,
+            "message": message,
             "reponse_modo": reponse_modo,
             "site_url": site_url,
         }

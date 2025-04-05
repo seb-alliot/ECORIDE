@@ -1,7 +1,23 @@
-<form method="POST">
+<form method="POST" id="avis_positif">
     {% csrf_token %}
-    <input type="hidden" name="Confirmer" value="oui">
-    <button type="submit" onclick="return confirm('Confirmer mon choix ?');">
-        Confirmer
-    </button>
+    <label id="commentaire_label" for="commentaire">Commentaire :</label>
+    {{ moderation_positive_form.commentaire}}
+
+    <form method="POST">
+        {% csrf_token %}
+        <div id="bouton_moderateur" class="generix3">
+            <div>
+                <input type="hidden" name="Confirmer" value="oui">
+                <button id="bouton_modo" type="submit" onclick="return confirm('Confirmer mon choix ?');">
+                    Confirmer
+                </button>
+            </div>
+            <div>
+                <input type="hidden" name="Refuser" value="oui">
+                <button id="bouton_refuser" type="submit" onclick="return confirm('Confirmer mon choix ?');">
+                    Refuser
+                </button>
+            </div>
+            </div>
+    </form>
 </form>

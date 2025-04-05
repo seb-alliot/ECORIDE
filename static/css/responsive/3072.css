@@ -14,6 +14,12 @@
   height: var(--logo-size);
   width: var(--logo-size);
 }
+#bouton_confirmer,
+#moderation_form select,
+#contact_form input,
+#contact_form button,
+#bouton_modo,
+#bouton_refuser,
 #reservation_annuler,
 form#etat_form select,
 form#etat_form button,
@@ -81,11 +87,14 @@ div.conteneur_recherche > div,
 #contact_form textarea {
   font-size: 28px;
 }
-form#contact_form textarea {
-  width: 600px;
+form#contact_form textarea,
+#avis_positif,
+#id_commentaire   {
+  width: 700px;
   height: 300px;
-  font-size: 20px;
+  font-size: 30px;
 }
+
 form#contact_form input,
 form#contact_form button {
   width: 270px;
@@ -164,4 +173,7 @@ form#trajet_form , #ajout_voiture,#reservation_faite, #covoiturage_proposer, #tr
 }
 #account-admin {
   gap: 20px;
+}
+#moderation_form select, #bouton_modo {
+  margin-right: 98px;
 }

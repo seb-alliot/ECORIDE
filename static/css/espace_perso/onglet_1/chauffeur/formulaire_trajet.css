@@ -51,7 +51,7 @@ div.content > ul > li > input[type="radio"] {
   #trajet_form input,
   #trajet_form select,
   #trajet_form button {
-    width: 140px;
+    width: 130px;
     font-size: 12px;
   }
   p {

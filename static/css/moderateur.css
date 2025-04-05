@@ -1,4 +1,4 @@
-form#email_filter_form label , form#email_select_form label {
+form#email_filter_form label , form#email_select_form label , #moderation_form label{
     display: none;
 }
 #select_email {
@@ -7,3 +7,45 @@ form#email_filter_form label , form#email_select_form label {
 }
 
 
+#prise_contact label, #commentaire_label {
+    display: none;
+}
+
+.bouton_modo {
+    height:30px;
+    width: 180px;
+}
+
+textarea#id_reponse {
+    display: flex;
+    justify-content: center;
+    width: 300px;
+    height: 200px;
+}
+
+
+form#prise_contact, #moderation_form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+form#email_select_form select{
+    margin-bottom: 15px;;
+}
+
+
+#avis_positif{
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+}
+#bouton_modo {
+    align-self: center;
+}
+
+#bouton_confirmer, #bout_reponse_modo, #bouton_modo, #email_select, #email_type , #bouton_refuser, #id_etat_paiement{
+    margin-top : 10px;
+}
+#id_commentaire {
+    align-self: center;
+    }
