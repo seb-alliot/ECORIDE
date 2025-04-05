@@ -18,13 +18,26 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 env = environ.Env()
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+#BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 _SITE_ROOT = os.path.dirname(os.path.abspath(__file__))
 
-SECRET_KEY = env('DJANGO_SECRET_KEY', default='django-insecure-#&')
+# Quick-start development settings - unsuitable for production
+# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = env('DJANGO_SECRET_KEY', default='django-insecure-#&')
+# settings.py
+
+# Clés API de Stripe en mode test
+# dans settings.py
+
+# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['www.ecoride-itsuki.it.com' , 'ecoride-itsuki.it.com']
+ALLOWED_HOSTS = ['ecoride-itsuki.it.com', 'www.ecoride-itsuki.it.com']
+
+
 
 # Application definition
 
@@ -35,7 +48,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
+    "crispy_bootstrap5",
     'main',
+    'simple_history',
     'django_extensions',
 	]
 
@@ -75,9 +91,16 @@ TEMPLATES = [
 WSGI_APPLICATION = 'ECORIDE.wsgi.application'
 
 
+# Database
+# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
+
 DATABASES = {
-'default': env.db('DATABASE_URL')
+'default': env.db('DATABASE_URL', default='postgres://itsuki:Studietudiant1.@147.93.90.211:5432/ecoride')
+
 }
+
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -117,14 +140,17 @@ USE_TZ = True
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 MEDIA_URL = '/main/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'main', 'profils_picture')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'main', 'profils_picture')  # Ou 'media/profils_picture'
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR,'static'),
+    os.path.join(BASE_DIR, 'ECORIDE', 'static'),
+    # os.path.join(BASE_DIR, 'main', 'static'),  # Supprimer si le dossier n'existe pas
 ]
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
@@ -160,18 +186,15 @@ EMAIL_HOST_USER = env('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
 
-MAIL_IMAP_SERVER = os.getenv("MAIL_IMAP_SERVER")
-MAIL_IMAP_PORT = os.getenv("MAIL_IMAP_PORT")
-MAIL_IMAP_USER = os.getenv("MAIL_IMAP_USER")
-MAIL_IMAP_PASSWORD = os.getenv("MAIL_IMAP_PASSWORD")
 
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
 SESSION_COOKIE_AGE = 60*60*24
 SESSION_EXPRIRE_AT_BROWSER_CLOSE = True
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 LOGOUT_REDIRECT_URL = '/'
-LOGGING_URL = 'login/connection1.html'
 
 SECURE_PROXY_SSL_HEADER =("HTTP_X_FORWARDED_PROTO","https")
 SECURE_SSL_REDIRECT = False
