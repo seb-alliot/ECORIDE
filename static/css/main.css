@@ -38,8 +38,11 @@
 }
 
 /* Classes utilitaires */
-.class_flex {
-  display: flex;
+.class_espace {
+  margin: var(--spacing-lg);
+}
+.espace_bas {
+  margin-bottom: var(--spacing-sm);
 }
 .display_grid {
   display: grid;
@@ -53,13 +56,10 @@
 .classe_row_reverse {
   flex-direction: row-reverse;
 }
-.class_aligne_items_center,
-.aligne_item_center {
+.class_aligne_items_center {
   align-items: center;
 }
-.aligne_content_center {
-  align-content: center;
-}
+
 .class_column {
   flex-direction: column;
 }
@@ -82,10 +82,6 @@
   position: relative;
 }
 
-.generic {
-  display: flex;
-  align-items: center;
-}
 .generix1 {
   display: flex;
   flex-direction: column;
@@ -106,7 +102,16 @@
   align-items: center;
   margin-top: 10px;
 }
-select#id_etat{
+form#etat_form select,
+form#etat_form button,
+#reservation_form select,
+#reservation_form button {
+  margin: 5px;
+}
+form#etat_form select,
+#reservation_form select ,
+select#id_etat,
+.generic{
   display: flex;
   justify-self: center;
 }
@@ -120,7 +125,7 @@ select#id_etat{
 ul.class_flex {
   gap:var(--spacing-md);
 }
-ul.resultat {
+ul.resultat, .class_flex {
   display: flex;
 }
 /* Reset et base */
@@ -141,7 +146,8 @@ header {
 }
 
 header h1 a,
-header a {
+header a,
+::placeholder {
   color: var(--color-text);
 }
 
@@ -202,46 +208,13 @@ input {
   box-shadow: var(--box-shadow);
   text-align: center;
 }
-#deux_choix,
-#bouton_terminer,
-#recherche_form input,
-#recherche_form button,
-#reservation_form button,
-#form_trajet input,
-#form_trajet button,
-#filtre_form input,
-#filtre_form button,
-#filtre_form select,
-#selection_trajet button,
-#id_places,
-#inscription input,
-#inscription button,
-#login1 input,
-#login1 button,
-#login2 input,
-#login2 button,
-#reset_mdp input,
-#reset_mdp button,
-#validation_email input,
-#validation_email button,
-#contact_form input,
-#contact_form button,
-footer a,
-form#email_filter_form select,
-form#email_select_form select,
-#reservation_form select
-  {
-  height: 30px;
-}
+
 button {
-  background-color: var(--color-primary); /* #7D6E63 marron */
+  background-color: var(--color-primary);
   color: var(--color-light);
 }
 
-select {
-  background-color: var(--color-light);
-}
-input {
+select, input {
   background-color: var(--color-light);
 }
 
@@ -268,17 +241,12 @@ div#reservation > div > form#reservation_form > select:hover {
 .resultat input[type="radio"]:hover ~ label#resultat_recherche,
 #covoit_proposer input[type="radio"]:hover ~ label,
 .conteneur_recherche2
-  .resultat
-  input[type="radio"]:hover
-  ~ label#resultat_recherche,
+.resultat
+input[type="radio"]:hover ~ label#resultat_recherche,
 #covoit_proposer:hover,
 #covoit_reserver:hover {
   background: var(--color-primary);
   color: var(--color-light);
-}
-
-::placeholder {
-  color: var(--color-text);
 }
 
 .p_deco {
@@ -308,7 +276,6 @@ a:hover {
 
 .presentation > div p {
   padding: var(--spacing-lg);
-  flex: 1;
 }
 
 .presentation img {
@@ -328,9 +295,6 @@ a:hover {
 .admin-link {
   text-decoration: none;
   color: var(--color-text);
-}
-#inscription label, form#trajet_terminer_form > label, form#demarrer_ou_annuler_form > label {
-  display: none;
 }
 
 #inscription,
@@ -379,28 +343,13 @@ a:hover {
   flex-direction: row-reverse;
 }
 
-.label-hidden {
-  display: none;
-}
-/* Résultats */
-.resultat {
-  gap: var(--spacing-lg);
-}
-
-/* Styles des radios et labels */
-.resultat input[type="radio"],
-form#filtre_form label,
-#recherche_form label {
-  display: none;
-}
 .resultat label {
   border-radius: 10px;
   background-color: #f8f9fa;
   padding: 10px;
 }
 
-form#selection_trajet button, select#id_etat
-{
+form#selection_trajet button, select#id_etat{
   height: 30px;
   margin-bottom: 15px;
 }
@@ -428,10 +377,6 @@ label#resultat_recherche {
   flex-direction: column;
   margin-top: var(--spacing-lg);
   align-self: center;
-}
-
-#contact_form p label {
-  display: none;
 }
 
 #contact_form button {
@@ -479,17 +424,7 @@ div#reservation > div:nth-child(1) {
   border-radius: 15% 0 0 15%;
 }
 
-/*--- Partie info trajet ---*/
-
-#chauffeur_trajet {
-  border: solid 2px var(--color-text);
-  width: 100%;
-  justify-content: center;
-  display: flex;
-  background-color: var(--color-hover);
-}
-
-#prix_trajet {
+#chauffeur_trajet, #prix_trajet {
   border: solid 2px var(--color-text);
   width: 100%;
   justify-content: center;
@@ -503,41 +438,27 @@ div#reservation > div:nth-child(1) {
   flex-direction: column;
   color: var(--color-light);
 }
-
 div#info_trajet > div#info_trajet {
   margin: 20%;
 }
-
-/*--- Partie info chauffeur ---*/
-
 div#reservation > div:nth-child(3) {
   border-radius: 0 15% 15% 0;
 }
-
-form#reservation_form > div > ul {
-  gap: 20px;
+/* Résultats */
+.resultat,form#reservation_form > div > ul , form#etat_form > div > ul{
+  gap: var(--spacing-lg);
 }
 
 /*--covoiturage mon_compte--*/
 
-form#etat_form > label,
-#reservation_form > label {
+form#etat_form > label, .resultat input[type="radio"],form#filtre_form label,#recherche_form label ,#reservation_form > label , #contact_form p label, #inscription label, form#trajet_terminer_form > label, form#demarrer_ou_annuler_form > label,  form#contact_form label{
   display: none;
 }
+
 #reservation_form > ul {
   margin: 0px;
 }
-form#etat_form > div > ul {
-  gap: 20px;
-}
-form#etat_form select,
-form#etat_form button,
-#reservation_form select,
-#reservation_form button {
-  margin: 5px;
-}
-form#etat_form select,
-#reservation_form select {
-  display: flex;
-  justify-self: center;
+
+textarea {
+  text-align: center;
 }

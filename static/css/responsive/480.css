@@ -15,7 +15,6 @@
   height: var(--logo-size);
   width: var(--logo-size);
 }
-
 #recherche_form input,
 #recherche_form button,
 #reservation_form button,
@@ -25,12 +24,21 @@
 #filtre_form button,
 #filtre_form select,
 #selection_trajet button,
-form#email_filter_form select,
-form#email_select_form select,
 select#id_places {
   width: var(--input-width);
   font-size: var(--font-size-base);
 }
+#bouton_confirmer,
+#moderation_form select,
+#bouton_refuser,
+#bouton_modo,
+form#email_filter_form select,
+form#email_select_form select,
+form#contact_form button {
+  width:100px;
+}
+#contact_form input,
+#contact_form button,
 #reservation_annuler,
 select#id_etat,
 #deux_choix,
@@ -87,13 +95,18 @@ h3,
 h4{
   font-size: 16px;
 }
-form#contact_form textarea {
+form#contact_form textarea,
+#avis_positif  {
   font-size: 10px;
   width: 300px;
   height: 150px;
 }
-form#contact_form input,
-form#contact_form button {
+#id_commentaire {
+  width: 300px;
+  height: 100px;
+  font-size: 20px;
+}
+form#contact_form input{
   font-size: 10px;
   width: 150px;
 }
@@ -150,11 +163,50 @@ div#info_trajet {
 #login2,
 #reset_mdp,
 #validation_email {
-  height: 40px;
+  height: 45px;
 }
 #preference_form,#bouton_terminer ,#deux_choix {
   margin-bottom: 15px;
 }
 #account-admin {
   gap: 5px;
+}
+#bouton_confirmer,
+#moderation_form select,
+#bouton_refuser,
+#deux_choix,
+#bouton_terminer,
+#recherche_form input,
+#recherche_form button,
+#reservation_form button,
+#form_trajet input,
+#form_trajet button,
+#filtre_form input,
+#filtre_form button,
+#filtre_form select,
+#selection_trajet button,
+#id_places,
+#inscription input,
+#inscription button,
+#login1 input,
+#login1 button,
+#login2 input,
+#login2 button,
+#reset_mdp input,
+#reset_mdp button,
+#validation_email input,
+#validation_email button,
+#contact_form input,
+#contact_form button,
+footer a,
+form#email_filter_form select,
+form#email_select_form select,
+#reservation_form select,
+#bouton_modo
+  {
+  height: 30px;
+}
+
+#moderation_form select, #bouton_modo {
+  margin-right: 100px;
 }

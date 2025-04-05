@@ -10,7 +10,6 @@ import re
 from django.core.exceptions import ValidationError
 from main.models import (
     TrajetProposer,
-    ChangerStatutTrajet,
     Voiture,
     ChoixRole,
     Preference,
@@ -576,6 +575,11 @@ class ContactForm(forms.Form):
         widget=forms.Textarea(attrs={"placeholder": "Message"}),
         required=True,
     )
+    reponse = forms.CharField(
+        label="Réponse",
+        widget=forms.Textarea(attrs={"placeholder": "Réponse"}),
+        required=False,
+    )
 
     def clean_message(self):
         message = self.cleaned_data.get("message")
@@ -598,27 +602,15 @@ class ContactForm(forms.Form):
             self.fields["email"].widget.attrs["readonly"] = True
             self.fields["telephone"].widget.attrs["readonly"] = True
 
-class ReponseForm(forms.Form):
-    reponse = forms.CharField(
-        label="Reponse",
-        widget=forms.Textarea(attrs={"placeholder": "Répondre"}),
-        required=True,
-    )
-    email = forms.EmailField(
-        max_length=100,
-        label="Email",
-        widget=forms.EmailInput(attrs={"placeholder": "email utilisateur"}),
-        required=True,
-    )
+
 
 class ModerationAvisPositifForm(forms.ModelForm):
 
     class Meta:
         model = NoteUser
-        fields = ["commentaire", "commentaire_moderer"]
+        fields = ["commentaire"]
         widgets = {
             "commentaire": forms.Textarea(),
-            "commentaire_moderer": forms.CheckboxInput(),
         }
 
     def __init__(self, *args, **kwargs):
@@ -638,11 +630,10 @@ class ModerationTrajetForm(forms.ModelForm):
 
     class Meta:
         model = NoteUser
-        fields = ["etat_paiement", "commentaire", "commentaire_moderer"]
+        fields = ["commentaire","etat_paiement"]
         widgets = {
-            "etat_paiement": forms.Select(choices=ReservationTrajet.ETAT_PAIEMENT),
             "commentaire": forms.Textarea(),
-            "commentaire_moderer": forms.CheckboxInput(),
+            "etat_paiement": forms.Select(choices=ReservationTrajet.ETAT_PAIEMENT),
         }
 
     def __init__(self, *args, **kwargs):

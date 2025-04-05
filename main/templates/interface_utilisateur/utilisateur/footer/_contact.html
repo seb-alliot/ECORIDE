@@ -7,7 +7,17 @@
     <div id="contact_form">
         <form id="contact_form" method="POST">
             {% csrf_token %}
-            {{ contact_form.as_p }}
+            <label for="pseudo">Nom :</label>
+            {{ contact_form.pseudo }}
+            <label for="email_user">Email :</label>
+            {{ contact_form.email }}
+            <label for="telephone">Téléphone :</label>
+            {{ contact_form.telephone }}
+            <label for="sujet">Sujet :</label>
+            {{ contact_form.sujet }}
+            <label for="message">Message :</label>
+            {{ contact_form.message }}
+
                 <button type="submit">Envoyer</button>
         </form>
     </div>
