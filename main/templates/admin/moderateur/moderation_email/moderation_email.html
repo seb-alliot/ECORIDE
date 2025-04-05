@@ -5,6 +5,7 @@
 {% endblock style %}
 
 {% block principal %}
+
 <div class="generix3">
     <h1>Bon courage !!</h1>
 </div>
@@ -28,34 +29,35 @@
             </select>
             <noscript><button type="submit">Filtrer</button></noscript>
         </form>
-            {% if request.GET.email_type %}
-                    <!-- Selecte pour sélectionner un email, avec conservation du filtre -->
-                    <form method="GET" class="class_flex class_justify_center" id="email_select_form">
-                        <input type="hidden" name="email_type" value="{{ request.GET.email_type }}">
-                        <label for="email_select">Sélectionner un email :</label>
-                        <select id="email_select" name="email_id" onchange="this.form.submit()">
-                            <option value="">Email à gérer</option>
-                            {% for email in emails %}
-                                <option value="{{ email.id }}" {% if selected_email and email.id == selected_email.id %}selected{% endif %}>
-                                    {{ email.subject }}
-                                </option>
-                            {% endfor %}
-                        </select>
-                        <noscript><button type="submit">Valider</button></noscript>
-                    </form>
-                </div>
-                <!-- Affichage de l'email sélectionné -->
-                {% if selected_email %}
-                    {% if request.GET.email_type == "Avis negatif" %}
-                        {% include "admin/moderateur/moderation_email/_bouton_avis_negatif.html" %}
-                    {% elif request.GET.email_type == "Avis positif" %}
-                        {% include "admin/moderateur/moderation_email/_bouton_avis_positif.html" %}
-                    {% elif request.GET.email_type == "Prise de contact" %}
-                        {% include "admin/moderateur/moderation_email/_bouton_reponse_modo.html" %}
-                    {% else %}
-                        <p>Aucun email à modérer.</p>
-                    {% endif %}
-                {% endif %}
+        {% if request.GET.email_type %}
+                <!-- Selecte pour sélectionner un email, avec conservation du filtre -->
+                <form method="GET" class="class_flex class_justify_center" id="email_select_form">
+                    <input type="hidden" name="email_type" value="{{ request.GET.email_type }}">
+                    <label for="email_select">Sélectionner un email :</label>
+                    <select id="email_select" name="email_id" onchange="this.form.submit()">
+                        <option value="">Email à gérer</option>
+                        {% for email in emails %}
+                            <option value="{{ email.id }}" {% if selected_email and email.id == selected_email.id %}selected{% endif %}>
+                                {{ email.subject }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                    <noscript><button type="submit">Valider</button></noscript>
+                </form>
+            </div>
+        {% endif %}
+        <!-- Affichage de l'email sélectionné -->
+        {% if selected_email %}
+            {% if request.GET.email_type == "Avis negatif" %}
+                {% include "admin/moderateur/moderation_email/_bouton_avis_negatif.html" %}
+            {% elif request.GET.email_type == "Avis positif" %}
+                {% include "admin/moderateur/moderation_email/_bouton_avis_positif.html" %}
+            {% elif request.GET.email_type == "Prise de contact" %}
+                {% include "admin/moderateur/moderation_email/_bouton_reponse_modo.html" %}
+            {% else %}
+                <p>Aucun email à modérer.</p>
             {% endif %}
+        {% endif %}
+    </div>
 
 {% endblock %}
