@@ -191,6 +191,17 @@ a {
   align-items: center;
 }
 
+.resultat input[type="radio"],
+form#filtre_form label,
+#recherche_form label ,
+#contact_form p label,
+.label-hidden ,
+form#etat_form > label,
+#reservation_form > label,
+#contact_form label{
+  display: none;
+}
+
 /* Éléments de formulaire */
 button,
 select,
@@ -379,20 +390,14 @@ a:hover {
   flex-direction: row-reverse;
 }
 
-.label-hidden {
-  display: none;
-}
+
 /* Résultats */
 .resultat {
   gap: var(--spacing-lg);
 }
 
-/* Styles des radios et labels */
-.resultat input[type="radio"],
-form#filtre_form label,
-#recherche_form label {
-  display: none;
-}
+
+
 .resultat label {
   border-radius: 10px;
   background-color: #f8f9fa;
@@ -430,9 +435,6 @@ label#resultat_recherche {
   align-self: center;
 }
 
-#contact_form p label {
-  display: none;
-}
 
 #contact_form button {
   display: flex;
@@ -518,12 +520,7 @@ form#reservation_form > div > ul {
   gap: 20px;
 }
 
-/*--covoiturage mon_compte--*/
 
-form#etat_form > label,
-#reservation_form > label {
-  display: none;
-}
 #reservation_form > ul {
   margin: 0px;
 }
