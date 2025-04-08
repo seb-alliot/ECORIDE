@@ -10,6 +10,7 @@ from django.utils.crypto import get_random_string
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
+from django.contrib.auth.decorators import user_passes_test
 
 from .forms import (
     Inscription,
@@ -1212,7 +1213,7 @@ def AvisSatisfaction(request, trajet_id, token):
     )
 
 
-@login_required  # Ajouter le decoration pour le staff
+@user_passes_test(lambda u: u.is_superuser)
 def Fait_Ton_Taff_De_Modo(request):
 
             # Connexion au serveur IMAP

@@ -125,6 +125,24 @@
     </div>
     </div>
 
+    <!--Onglet 6  moderation emails -->
+    {% if user.is_superuser %}
+    <div class="tab">
+        <input
+        id="tab-6"
+        name="tab-group-1"
+        type="radio"/>
+        <label for="tab-6">
+            moderation
+        </label>
+    <div class="content">
+
+        <div>
+            {% include "admin/moderateur/moderation_email/moderation_email.html" %}
+        </div>
+    </div>
+    </div>
+    {% endif %}
 </div>
 {% endwith %}
 {% endblock principal %}

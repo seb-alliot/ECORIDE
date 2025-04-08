@@ -109,7 +109,7 @@ class NoteUser(models.Model):
 
     etat_paiement = models.CharField(
         max_length=20,
-        choices=[("Payer", "Payer"), ("Refuser", "Refuser")],
+        choices=[("Payer", "valider le paiement"), ("Refuser", "Refuser le paiement")],
         default="Payer",
         verbose_name="Statut du paiement",
     )

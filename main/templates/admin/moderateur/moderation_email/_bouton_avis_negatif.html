@@ -1,17 +1,19 @@
 
+{% include "admin/moderateur/moderation_email/_afficher_info_trajet.html" %}
 
 <form method="POST" id="moderation_form">
     {% csrf_token %}
     <div>
 
-    <label for="commentaire">Commentaire :</label><br>
+    <label for="commentaire">Commentaire :</label>
     {{ moderation_form.commentaire }}
     <p>Valider le commentaire ?</p>
-    <label for="avis">Avis :</label><br>
+    <label for="avis">Avis :</label>
     {{ moderation_form.avis }}
     </div>
+    <p>Que faire du paiement du chauffeur?</p>
         <div id="avis_negatif_bouton" class="class_flex">
-            <label for="etat_paiement">État du paiement :</label><br>
+            <label for="etat_paiement">État du paiement :</label>
             {{ moderation_form.etat_paiement }}
 
             <form method="POST">
