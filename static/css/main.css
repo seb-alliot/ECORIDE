@@ -91,7 +91,7 @@
   flex-direction: column;
 }
 
-.generix2 {
+.generix2 , #je_donne_mon_avis{
   display: flex;
   justify-content: center;
   align-items: center;
@@ -213,37 +213,7 @@ input {
   box-shadow: var(--box-shadow);
   text-align: center;
 }
-#deux_choix,
-#bouton_terminer,
-#recherche_form input,
-#recherche_form button,
-#reservation_form button,
-#form_trajet input,
-#form_trajet button,
-#filtre_form input,
-#filtre_form button,
-#filtre_form select,
-#selection_trajet button,
-#id_places,
-#inscription input,
-#inscription button,
-#login1 input,
-#login1 button,
-#login2 input,
-#login2 button,
-#reset_mdp input,
-#reset_mdp button,
-#validation_email input,
-#validation_email button,
-#contact_form input,
-#contact_form button,
-footer a,
-form#email_filter_form select,
-form#email_select_form select,
-#reservation_form select
-  {
-  height: 30px;
-}
+
 button {
   background-color: var(--color-primary); /* #7D6E63 marron */
   color: var(--color-light);

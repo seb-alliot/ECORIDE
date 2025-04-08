@@ -7,25 +7,23 @@
     <title>Avis positif de la part de {{ trajet.passager }} pour le Trajet  {{ trajet.id }}</title>
 </head>
     <body>
-            <div class="email-container">
-                <p><strong>Passager :</strong> {{ passager.username }} {{ passager.email }}</p>
-                <p><strong>Chauffeur :</strong> {{ chauffeur.username }}
-                    {% if telephone %},
-                        {{ telephone }}
-                    {% else %}
-                        le numéro n'est pas renseigné
-                    {% endif %} ,
-                    {{ chauffeur.email }}</p>
-                <p><strong>Trajet :</strong> {{ trajet.ville_depart }} à {{ trajet.ville_arrivee }}</p>
-                <p><strong>Date de réservation :</strong> {{ trajet.date }}</p>
-
-                <div class="commentaire">
-                    <p><strong>Commentaire :</strong> {{ commentaire }}</p>
-                </div>
-                <p>Pour plus de détails, vous pouvez consulter la page de l'avis sur votre tableau de bord.</p>
-                <div class="footer">
-                </div>
-            </div>
-
+        <div class="date_reservation">
+            <p>Date de réservation : {{ trajet.date }}</p>
+        </div>
+        <div class="passager">
+            <p>Passager : {{ passager.username }}</p>
+        </div>
+        <div class="trajet">
+            <p >Trajet : {{ trajet.ville_depart }} à {{ trajet.ville_arrivee }}</p>
+        </div>
+        <div class="chauffeur">
+            <p>Chauffeur : {{ chauffeur.username }}</p>
+        </div>
+        <div class="commentaire">
+            <p><strong>Commentaire :</strong> {{ commentaire }}</p>
+        </div>
+            <p>Pour plus de détails, vous pouvez consulter la page de l'avis sur votre tableau de bord.</p>
+        <div class="footer">
+        </div>
         </body>
         </html>

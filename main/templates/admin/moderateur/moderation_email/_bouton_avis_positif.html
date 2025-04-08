@@ -1,23 +1,40 @@
-<form method="POST" id="avis_positif">
-    {% csrf_token %}
-    <label id="commentaire_label" for="commentaire">Commentaire :</label>
-    {{ moderation_positive_form.commentaire}}
 
-    <form method="POST">
+<form id="affichage_trajet_form" class="generix1 class_aligne_items_center">
+    <div id="aficher_chauffeur">
+        <label for="chauffeur">Chauffeur</label>
+        {{ affichage_trajet_form.chauffeur }}
+    </div>
+    <div id="aficher_passager">
+    <label for="passager">Passager</label>
+    {{ affichage_trajet_form.passager }}
+    </div>
+    <div id="aficher_trajet">
+    <label for="trajet">Trajet concerné</label>
+    {{ affichage_trajet_form.trajet }}
+    </div>
+    <div id="aficher_date_reservation">
+    <label for="date_reservation">Date de réservation</label>
+    {{ affichage_trajet_form.date_reservation }}
+    </div>
+</form>
+
+<div class="generix3">
+    <form method="POST" id="avis_positif">
         {% csrf_token %}
-        <div id="bouton_moderateur" class="generix3">
+        <label for="formulaire_avis_positif">Formulaire avis positif :</label><br>
+        {{ moderation_positive_form.as_p }}
+
+        <div class="generix3" id="bouton_moderateur">
             <div>
-                <input type="hidden" name="Confirmer" value="oui">
-                <button id="bouton_modo" type="submit" onclick="return confirm('Confirmer mon choix ?');">
-                    Confirmer
+                <button id="ajouter" type="submit" name="action" value="Ajouter" onclick="return confirm('Confirmer l\'ajout ?');">
+                    Ajouter
                 </button>
             </div>
             <div>
-                <input type="hidden" name="Refuser" value="oui">
-                <button id="bouton_refuser" type="submit" onclick="return confirm('Confirmer mon choix ?');">
+                <button id="refuser" type="submit" name="action" value="Refuser" onclick="return confirm('Confirmer le refus ?');">
                     Refuser
                 </button>
             </div>
-            </div>
+        </div>
     </form>
-</form>
+</div>

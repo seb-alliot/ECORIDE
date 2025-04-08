@@ -9,7 +9,7 @@
                 {{ reservation_form.places }}
                 <form method="POST">
                     {% csrf_token %}
-                    <input type="hidden" name="supprimer_email" value="oui">
+                    <input type="hidden" name="Reserver" value="oui">
                     <button id="pop_up_confirmation" type="submit" onclick="return confirm('Confirmer la réservation?');">
                         Réserver
                     </button>

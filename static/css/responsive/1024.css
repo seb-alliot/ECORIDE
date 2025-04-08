@@ -15,6 +15,11 @@
   height: var(--logo-size);
   width: var(--logo-size);
 }
+#ajouter,
+#refuser,
+button#bouton_note,
+select#id_avis,
+select#id_note,
 #bouton_confirmer,
 #moderation_form select,
 #contact_form input,
@@ -64,7 +69,13 @@ footer a {
   height: 55px;
 }
 #creer_compte,
-#mot_de_passe_oublie {
+#mot_de_passe_oublie,
+button#bouton_note,
+select#id_avis,
+select#id_note,
+#note_perso,
+#avis_perso,
+#info_trajet {
   font-size: var(--font-size-base);
   margin-top: var(--spacing-lg);
 }
@@ -97,8 +108,7 @@ h4{
 div.conteneur_recherche {
   margin-bottom: var(--spacing-lg);
 }
-form#contact_form textarea,
-#avis_positif  {
+form#contact_form textarea  {
   width: 500px;
   height: 175px;
   font-size: var(--font-size-other)
@@ -170,12 +180,43 @@ div#preference p {
 form#trajet_form , #ajout_voiture,#reservation_faite, #covoiturage_proposer, #trajet_proposer, #reservion_fini , #reservation_annulé, #covoiturage_annulé {
   margin-bottom:10px;
 }
-#preference_form,#bouton_terminer ,#deux_choix {
+#preference_form,#bouton_terminer ,#deux_choix, button#bouton_note,
+select#id_avis,
+select#id_note {
   margin-bottom: 15px;
 }
 #account-admin {
   gap: 10px;
 }
-#moderation_form select, #bouton_modo {
+#moderation_form select,select#id_avis {
   margin-right: 20px;
+}
+#avis_positif input {
+  width: 350px;
+  height: 30px;
+}
+#bouton_moderateur {
+  gap:20px;
+}
+
+#aficher_chauffeur input,#aficher_passager input , #aficher_trajet input , #aficher_date_reservation input {
+  height: 30px;
+  width: 200px;
+  font-size: var(--font-size-other);
+}
+#aficher_chauffeur input , #aficher_passager input {
+  margin-left: 75px;
+}
+#aficher_trajet input {
+  margin-left: 35px;
+}
+#aficher_date_reservation input {
+  margin-left: 10px;
+}
+#affichage_trajet_form {
+  margin-top: 50px;
+}
+#ajouter,
+#refuser{
+  margin-top: 15px;
 }

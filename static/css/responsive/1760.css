@@ -14,6 +14,13 @@
   height: var(--logo-size);
   width: var(--logo-size);
 }
+#ajouter,
+#refuser,
+#ajouter,
+#refuser,
+button#bouton_note,
+select#id_avis,
+select#id_note,
 #bouton_confirmer,
 #moderation_form select,
 #contact_form input,
@@ -79,12 +86,14 @@ label#resultat_recherche img {
 }
 div.conteneur_recherche > div,
 #info_user,
-#selection_trajet button {
+#selection_trajet button,
+button#bouton_note,
+select#id_avis,
+select#id_note {
   margin-bottom: var(--spacing-lg);
 }
 
-#id_commentaire,form#contact_form textarea,
-#avis_positif  {
+#id_commentaire,form#contact_form textarea  {
   width: 500px;
   height: 200px;
   font-size: 20px;
@@ -133,7 +142,12 @@ div#preference p {
 #place_a_reserver, #resultat_ecolo , #resultat_non_ecolo {
   font-size: 22px;
 }
-#creer_compte {
+#note_perso,
+#avis_perso,
+#info_trajet,
+#creer_compte,button#bouton_note,
+select#id_avis,
+select#id_note{
   margin-top: var(--spacing-lg);
   font-size: var(--font-size-base);
 }
@@ -158,12 +172,44 @@ h4{
 form#trajet_form , #ajout_voiture,#reservation_faite, #covoiturage_proposer, #trajet_proposer, #reservion_fini , #reservation_annulé, #covoiturage_annulé {
   margin-bottom:15px;
 }
-#preference_form,#bouton_terminer ,#deux_choix {
+#preference_form,#bouton_terminer ,#deux_choix,button#bouton_note,
+select#id_avis,
+select#id_note {
   margin-bottom: 20px;
 }
 #account-admin {
   gap: 15px;
 }
-#moderation_form select, #bouton_modo {
+#moderation_form select, #bouton_modo,select#id_avis {
   margin-right: 60px;
+}
+#avis_positif input {
+  width: 500px;
+  height: 30px;
+}
+
+#bouton_moderateur {
+  gap:20px;
+}
+
+#aficher_chauffeur input,#aficher_passager input , #aficher_trajet input , #aficher_date_reservation input {
+  height: 30px;
+  width: 220px;
+  font-size: 16px;
+}
+#aficher_chauffeur input , #aficher_passager input {
+  margin-left: 213px;
+}
+#aficher_trajet input {
+  margin-left: 173px;
+}
+#aficher_date_reservation input {
+  margin-left: 145px;
+}
+#affichage_trajet_form {
+  margin-top: 50px;
+}
+#ajouter,
+#refuser{
+  margin-top: 20px;
 }

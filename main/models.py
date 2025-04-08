@@ -10,6 +10,7 @@ from decimal import Decimal
 import uuid
 from django.db.models import Sum
 from django.db.models import Q
+from django.core.exceptions import ValidationError
 
 
 class CreditUser(models.Model):
@@ -48,6 +49,7 @@ class NoteUser(models.Model):
         (Decimal(5), "5"),
     ]
     AVIS = [
+        ("","---"),
         ("oui", "oui"),
         ("non", "non"),
     ]
@@ -372,9 +374,6 @@ class AdresseUser(models.Model):
             if vieille_image and vieille_image != self.photo:
                 vieille_image.delete(save=False)
 
-            if self.email != self.user.email:
-                self.user.email = self.email
-                self.user.save()
         self.clean()
         super().save(*args, **kwargs)
 
@@ -961,4 +960,3 @@ class ChangerStatutTrajet(models.Model):
 
     def __str__(self):
         return f"Le statut du trajet {self.trajet} a été modifié en {self.statut} le {self.modified_at}"
-

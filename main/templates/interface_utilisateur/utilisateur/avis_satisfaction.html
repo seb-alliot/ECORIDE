@@ -2,11 +2,24 @@
 {% load static %}
 
 {% block principal%}
-    <p>Vous avez réservé un trajet avec {{ trajet.chauffeur }} le {{ trajet.date }} à {{ trajet.heure|date:"H\H:i" }}.</p>
-    <p>Est ce que votre covoiturage c'est bien passé ?</p>
-        <form method="POST">
+<div class="generix3">
+    <p id="info_trajet" >Vous avez réservé un trajet avec {{ trajet.chauffeur }} le {{ trajet.date }} à {{ trajet.heure|date:"H\H:i" }}.</p>
+</div>
+<div class="generix3">
+    <p id="avis_perso">Est ce que votre covoiturage c'est bien passé ?</p>
+</div>
+<div class="generix3">
+    <p id="note_perso">Une petite note au passage !</p>
+</div>
+        <form method="POST" id="je_donne_mon_avis" class="class_column">
             {% csrf_token %}
-            {{ avis_form.as_p }}
-            <button type="submit" value="avis_form">Envoyer</button>
+            <div>
+            {{ avis_form.avis }}
+            {{ avis_form.note}}
+            </div>
+            <div>
+            {{ avis_form.commentaire }}
+            </div>
+            <button id="bouton_note" type="submit" value="avis_form">Envoyer</button>
         </form>
 {% endblock principal %}

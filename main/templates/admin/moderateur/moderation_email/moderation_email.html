@@ -54,8 +54,6 @@
                 {% include "admin/moderateur/moderation_email/_bouton_avis_positif.html" %}
             {% elif request.GET.email_type == "Prise de contact" %}
                 {% include "admin/moderateur/moderation_email/_bouton_reponse_modo.html" %}
-            {% else %}
-                <p>Aucun email à modérer.</p>
             {% endif %}
         {% endif %}
     </div>

@@ -414,12 +414,6 @@ class AdresseForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         if user:
             self.fields['email'].initial = user.email
-    def clean_email(self):
-        email = self.cleaned_data.get('email')
-        if User.objects.filter(email=email).exclude(pk=self.instance.user.pk).exists():
-            raise forms.ValidationError("Cet email est déjà utilisé.")
-        return email
-
 
     def clean_numero(self):
         numero = self.cleaned_data.get("numero")
@@ -435,6 +429,13 @@ class AdresseForm(forms.ModelForm):
             raise ValidationError("Le code postal doit contenir exactement 5 chiffres.")
         return code_postal
 
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+
+        if User.objects.exclude(id=self.instance.user.id).filter(email=email).exists():
+            raise ValidationError("Cet email appartient déjà à un autre utilisateur.")
+
+        return email
 
     def clean(self):
         cleaned_data = super().clean()
@@ -451,19 +452,6 @@ class AdresseForm(forms.ModelForm):
                 raise forms.ValidationError(f"Le champ {field} est obligatoire.")
         return cleaned_data
 
-    def self(self):
-        cleaned_data = super().clean()
-        required_fields = [
-            "numero",
-            "code_postal",
-            "nom_rue",
-            "ville",
-            "telephone",
-            "email",
-        ]
-        for field in required_fields:
-            if not cleaned_data.get(field):
-                raise forms.ValidationError(f"Le champ {field} est obligatoire.")
 
 
 # ---------------------------- Gestion des réservations de trajet ---------------------------->
@@ -602,15 +590,13 @@ class ContactForm(forms.Form):
             self.fields["email"].widget.attrs["readonly"] = True
             self.fields["telephone"].widget.attrs["readonly"] = True
 
-
-
 class ModerationAvisPositifForm(forms.ModelForm):
 
     class Meta:
         model = NoteUser
         fields = ["commentaire"]
         widgets = {
-            "commentaire": forms.Textarea(),
+            "commentaire": forms.Textarea(attrs={"placeholder": "Ajoutez un commentaire ici"}),
         }
 
     def __init__(self, *args, **kwargs):
@@ -619,21 +605,45 @@ class ModerationAvisPositifForm(forms.ModelForm):
 
     def clean_commentaire(self):
         commentaire = self.cleaned_data.get("commentaire")
-        if len(commentaire) > 200:
+        if len(commentaire) > 100:
             raise forms.ValidationError(
-                "Le commentaire ne doit pas dépasser 200 caractères."
+                "Le commentaire ne doit pas dépasser 100 caractères."
             )
         return commentaire
 
+class AfficherTrajetForm(forms.Form):
+    chauffeur = forms.CharField(
+        label="Chauffeur",  # Ajout du label pour un meilleur affichage
+        widget=forms.TextInput(attrs={"placeholder": "Chauffeur"}),
+        required=True,  # Ajouter si le champ est requis
+    )
 
+    passager = forms.CharField(
+        label="Passager",
+        widget=forms.TextInput(attrs={"placeholder": "Passager"}),
+        required=True,
+    )
+
+    trajet = forms.CharField(
+        label="Trajet",
+        widget=forms.TextInput(attrs={"placeholder": "Trajet"}),
+        required=True,
+    )
+
+    date_reservation = forms.CharField(
+        label="Date de réservation",
+        widget=forms.TextInput(attrs={"placeholder": "Date de réservation"}),
+        required=False,  # Vous pouvez changer en True si c'est un champ obligatoire
+    )
 class ModerationTrajetForm(forms.ModelForm):
 
     class Meta:
         model = NoteUser
-        fields = ["commentaire","etat_paiement"]
+        fields = ["commentaire","etat_paiement","avis"]
         widgets = {
-            "commentaire": forms.Textarea(),
             "etat_paiement": forms.Select(choices=ReservationTrajet.ETAT_PAIEMENT),
+            "avis": forms.Select(choices=NoteUser.AVIS),
+            "commentaire": forms.Textarea(),
         }
 
     def __init__(self, *args, **kwargs):
