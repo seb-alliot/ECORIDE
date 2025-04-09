@@ -61,7 +61,7 @@ from django.views.generic import CreateView
 from django.contrib.auth.models import User, AnonymousUser
 from django.db.models import Avg, Value, Q
 from django.db.models.functions import Coalesce
-import imaplib, email , random , chardet , uuid, re
+import imaplib, email , random , chardet , uuid, re , secrets
 from email.header import decode_header
 from bs4 import BeautifulSoup
 
