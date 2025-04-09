@@ -4,24 +4,19 @@
 <form method="POST" id="moderation_form">
     {% csrf_token %}
     <div>
-
-    <label for="commentaire">Commentaire :</label>
-    {{ moderation_form.commentaire }}
-    <p>Valider le commentaire ?</p>
-    <label for="avis">Avis :</label>
-    {{ moderation_form.avis }}
+        <label for="commentaire">Commentaire :</label>
+            {{ moderation_form.commentaire }}
+            <p>Valider le commentaire ?</p>
+        <label for="avis">Avis :</label>
+            {{ moderation_form.avis }}
     </div>
     <p>Que faire du paiement du chauffeur?</p>
-        <div id="avis_negatif_bouton" class="class_flex">
-            <label for="etat_paiement">État du paiement :</label>
+    <div id="avis_negatif_bouton" class="class_flex">
+        <label for="etat_paiement">État du paiement :</label>
             {{ moderation_form.etat_paiement }}
-
-            <form method="POST">
-                {% csrf_token %}
-                <input type="hidden" name="Valider" value="oui">
-            <button id="bouton_confirmer" type="submit" onclick="return confirm('Confirmer votre choix ?');">
-                Valider
-            </button>
-        </div>
-    </form>
+            <input type="hidden" name="Valider" value="oui">
+                <button id="bouton_confirmer" type="submit" onclick="return confirm('Confirmer votre choix ?');">
+                    Valider
+                </button>
+    </div>
 </form>

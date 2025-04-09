@@ -2,13 +2,11 @@
 <form method="POST" id="contact_form">
     {% csrf_token %}
     {{ contact_form.as_p }}
-<form  id="repondre_mail"method="POST">
     {% csrf_token %}
     <div class="generix3" >
-    <input type="hidden" name="repondre" value="oui">
-    <button id="bout_reponse_modo" type="submit" onclick="return confirm('Etes vous sur de votre réponse ?');">
-        répondre
-    </button>
+        <input type="hidden" name="repondre" value="oui">
+        <button id="bout_reponse_modo" type="submit" onclick="return confirm('Etes vous sur de votre réponse ?');">
+            répondre
+        </button>
     </div>
-</form>
 </form>
