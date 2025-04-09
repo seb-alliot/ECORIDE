@@ -67,7 +67,10 @@ from django.db.models.functions import Coalesce
 import random
 import imaplib, email
 from email.header import decode_header
-import os, re, uuid , secrets
+import os
+import re
+import uuid
+import secrets
 from bs4 import BeautifulSoup
 import chardet
 
