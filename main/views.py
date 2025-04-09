@@ -1,4 +1,5 @@
 # coding:utf-8
+import os
 
 from django.contrib.auth import get_user_model, authenticate, login, logout
 from django.shortcuts import render, redirect, get_object_or_404
@@ -63,8 +64,6 @@ from django.db.models.functions import Coalesce
 import imaplib, email , random , chardet , uuid, re
 from email.header import decode_header
 from bs4 import BeautifulSoup
-
-
 
 # ------------------------------------------------------------------------------------------
 # ---------------------------------DEBUT CLASS DJANGO---------------------------------------

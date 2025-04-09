@@ -140,14 +140,13 @@ USE_TZ = True
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 MEDIA_URL = '/main/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'main', 'profils_picture')  # Ou 'media/profils_picture'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'main', 'profils_picture')
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'ECORIDE', 'static'),
-    # os.path.join(BASE_DIR, 'main', 'static'),  # Supprimer si le dossier n'existe pas
 ]
 
 

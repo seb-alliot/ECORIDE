@@ -1,4 +1,10 @@
+{% extends "index.html" %}
 
+{% block style %}
+    {% include "css_html/_css_moderateur.html" %}
+{% endblock style %}
+
+{% block principal %}
 <div class="generix3">
     <h1>Bon courage !!</h1>
 </div>
@@ -50,4 +56,4 @@
             {% endif %}
         {% endif %}
     </div>
-
+{% endblock principal %}
