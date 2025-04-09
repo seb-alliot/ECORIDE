@@ -12,6 +12,8 @@ from django.urls import reverse_lazy, reverse
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import user_passes_test
+from email.header import decode_header
+
 
 from .forms import (
     Inscription,
@@ -62,7 +64,6 @@ from django.contrib.auth.models import User, AnonymousUser
 from django.db.models import Avg, Value, Q
 from django.db.models.functions import Coalesce
 import imaplib, email , random , chardet , uuid, re , secrets
-from email.header import decode_header
 from bs4 import BeautifulSoup
 
 # ------------------------------------------------------------------------------------------
@@ -453,6 +454,7 @@ def Info_Reservation(request):
 # --------------------------Espace Personnel-------------------------------------------
 @login_required(login_url="connection1")
 def MonCompte(request):
+
     # Récupération des données utilisateur
     user = request.user
     context = {}
@@ -1736,7 +1738,7 @@ def Deux_F_A(request, email, username):
         return redirect("connection2")
 
     except Exception as e:
-        messages.error(request, f"Erreur lors de l'envoi de l'e-mail de confirmation de fin de covoiturag : {str(e)}")
+        messages.error(request, f"Erreur lors de l'envoi du code connection: {str(e)}")
         return redirect("connection1")
 
 
