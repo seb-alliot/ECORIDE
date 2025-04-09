@@ -1,5 +1,4 @@
 # coding:utf-8
-import os
 
 from django.contrib.auth import get_user_model, authenticate, login, logout
 from django.shortcuts import render, redirect, get_object_or_404
@@ -12,8 +11,6 @@ from django.urls import reverse_lazy, reverse
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import user_passes_test
-from email.header import decode_header
-
 
 from .forms import (
     Inscription,
@@ -51,20 +48,27 @@ from .models import (
     TokenValidation,
     NoteUser,
 )
-from .repeated_code import Filtre_trajet, RechercheTrajet
-from .form_espace_perso import AjoutAdresse
 from django.contrib.auth.views import PasswordResetConfirmView, PasswordResetView
 
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib import messages
 from django.core.mail import EmailMessage
+from django.utils import timezone
 from django.conf import settings
 from django.views.generic import CreateView
 from django.contrib.auth.models import User, AnonymousUser
+from datetime import timedelta
+from decimal import Decimal, ROUND_HALF_UP
+import sys
 from django.db.models import Avg, Value, Q
 from django.db.models.functions import Coalesce
-import imaplib, email , random , chardet , uuid, re , secrets
+import random
+import imaplib, email
+from email.header import decode_header
+import os, re, uuid , secrets
 from bs4 import BeautifulSoup
+import chardet
+
 
 # ------------------------------------------------------------------------------------------
 # ---------------------------------DEBUT CLASS DJANGO---------------------------------------
@@ -1465,7 +1469,7 @@ def envoi_email_prise_contact(request, telephone, pseudo, email_user, sujet,mess
         message=request.POST.get("message")
         messages.success(request, "Votre message a bien été envoyé.")
     except Exception as e:
-        print(f"Erreur lors de l'envoi de l'e-mail de confirmation de fin de covoiturage: {str(e)}")
+        print(f"Erreur lors de l'envoi de l'e-mail de demande d'information: {str(e)}")
         messages.error(request, f"Erreur lors de l'envoi de l'e-mail de votre retour positif: {str(e)}")
 
 
@@ -1532,7 +1536,7 @@ def Envoi_Email_Avis_Trajet_Negatif(
 
     except Exception as e:
         print(
-            f"Erreur lors de l'envoi de l'e-mail de confirmation de fin de covoiturage: {str(e)}"
+            f"Erreur lors de l'envoi de l'e-mail de votre méchant avis pour le chauffeur: {str(e)}"
         )
         messages.error(
             request,
@@ -1604,7 +1608,7 @@ def Envoi_Email_Avis_Trajet_Positif(
 
     except Exception as e:
         print(
-            f"Erreur lors de l'envoi de l'e-mail de confirmation de fin de covoiturage: {str(e)}"
+            f"Erreur lors de l'envoi de l'e-mail de votre avis sympa pour le chauffeur: {str(e)}"
         )
         messages.error(
             request,
@@ -1649,9 +1653,6 @@ def Envoi_Email_Terminer(request, trajet_id, reservations, token):
             email.send()
 
     except Exception as e:
-        print(
-            f"Erreur lors de l'envoi de l'e-mail de confirmation de fin de covoiturage: {str(e)}"
-        )
         messages.error(
             request,
             f"Erreur lors de l'envoi de l'e-mail de confirmation de fin de covoiturag : {str(e)}",
