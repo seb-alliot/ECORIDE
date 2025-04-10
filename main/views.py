@@ -11,6 +11,7 @@ from django.urls import reverse_lazy, reverse
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import user_passes_test
+from email.header import decode_header
 
 from .forms import (
     Inscription,
@@ -49,33 +50,23 @@ from .models import (
     NoteUser,
 )
 from django.contrib.auth.views import PasswordResetConfirmView, PasswordResetView
+from .repeated_code import RechercheTrajet, Filtre_trajet
+from .form_espace_perso import AjoutAdresse
 
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib import messages
 from django.core.mail import EmailMessage
-from django.utils import timezone
 from django.conf import settings
 from django.views.generic import CreateView
 from django.contrib.auth.models import User, AnonymousUser
-from datetime import timedelta
-from decimal import Decimal, ROUND_HALF_UP
-import sys
-from django.db.models import Avg, Value, Q
-from django.db.models.functions import Coalesce
 import random
 import imaplib, email
-from email.header import decode_header
 import os
 import re
 import uuid
 import secrets
 from bs4 import BeautifulSoup
 import chardet
-
-
-# ------------------------------------------------------------------------------------------
-# ---------------------------------DEBUT CLASS DJANGO---------------------------------------
-# ------------------------------------------------------------------------------------------
 
 
 # Accueil en definition car fonction simple
@@ -154,102 +145,47 @@ def mentions_legales(request):
         context,
     )
 
+
 def accueil(request):
 
     user = request.user
     # Initialisation des formulaires
-    adresse_form = TrajetForm()
     recherche_form = RechercheTrajetForm(request.GET)
     filtre_form = FiltreTrajetForm(request.GET)
-    type_moteur = Voiture.objects.filter(type_moteur=user)
     trajet4 = TrajetProposer.objects.filter(etat="Disponible")
 
-    resultat_filtrer = None
     first_resultat = None
     second_resultat = None
-    resultat = None
-
     form_trajet = request.GET.get("form_trajet")
+
+    context = {
+        # utilisateur
+        # resultat de recherche de covoiturage
+        "first_resultat": first_resultat,
+        "second_resultat": second_resultat,
+        # formulaire de la page
+        "filtre_form": filtre_form,
+        "recherche_form": recherche_form,
+        "form_trajet": form_trajet,
+        #envoie des message au template, inutile si balise message dans le template
+        "messages": messages.get_messages(request),
+    }
+    context.update(initialisation_template(request))
 
     if request.method == "GET":
 
         # Formulaire de recherche de trajet
         if form_trajet == "recherche_form" and recherche_form.is_valid():
-            ville_depart = recherche_form.cleaned_data["ville_depart"]
-            ville_arrivee = recherche_form.cleaned_data["ville_arrivee"]
-            date = recherche_form.cleaned_data["date"]
-            resultat = TrajetProposer.objects.filter(
-                ville_depart__icontains=ville_depart,
-                ville_arrivee__icontains=ville_arrivee,
-                date=date,
-            )
-            if user.is_authenticated:
-                trajet4 = resultat.exclude(chauffeur=request.user)
-            elif user.is_anonymous:
-                trajet4 = resultat.exclude((Q(etat="Terminé") | Q(etat="En cours") | Q(etat="Annulé")))
-
-            request.session["resultat_recherche"] = list(
-            resultat.values_list("id", flat=True)
-                )
-
-            first_resultat= trajet4.exclude(Q(voiture__type_moteur="Electrique") | Q(voiture__type_moteur="Hybride"))
-            second_resultat= trajet4.exclude(Q(voiture__type_moteur="essence") | Q(voiture__type_moteur="diesel"))
-
-            if first_resultat.exists() or second_resultat.exists():
-                messages.success(request, "Hey voici juste pour vous !!")
-            else:
-                messages.error(
-                    request,
-                    "La déception ... Une autre date peut-être ?",
-                )
+            first_resultat, second_resultat = RechercheTrajet(request, recherche_form, user, trajet4)
+            context["first_resultat"] = first_resultat
+            context["second_resultat"] = second_resultat
 
         # Formulaire de filtrage de trajet
         elif form_trajet == "filtre_form" and filtre_form.is_valid():
-            resultat = TrajetProposer.objects.filter(
-                id__in=request.session.get("resultat_recherche")
-            )
+            first_resultat, second_resultat = Filtre_trajet(request, filtre_form)
+            context["first_resultat"] = first_resultat
+            context["second_resultat"] = second_resultat
 
-            if filtre_form.cleaned_data["note"]:
-                note_minimum = filtre_form.cleaned_data["note"]
-                chauffeurs = User.objects.annotate(
-                    note_moyenne=Avg("accusé__note")
-                ).filter(note_moyenne__gte=note_minimum)
-
-                for chauffeur in chauffeurs:
-                    resultat = resultat.filter(chauffeur__in=chauffeurs)
-
-            if filtre_form.cleaned_data["temps_trajet"]:
-                resultat = resultat.filter(
-                    temps_trajet__lte=filtre_form.cleaned_data["temps_trajet"]
-                )
-
-            if filtre_form.cleaned_data["prix"]:
-                resultat = resultat.filter(prix__lte=filtre_form.cleaned_data["prix"])
-
-            first_resultat= resultat.exclude(Q(voiture__type_moteur="Electrique") | Q(voiture__type_moteur="Hybride"))
-            second_resultat= resultat.exclude(Q(voiture__type_moteur="essence") | Q(voiture__type_moteur="diesel"))
-
-            if first_resultat.exists() or second_resultat.exists():
-                messages.success(request, "Vos exigences ont trouvé satisfaction.")
-            elif not resultat.exists():
-                messages.error(request, "Oups !! La recherche n'a rien donné.")
-
-    context = {
-        # utilisateur
-        "type_moteur": type_moteur,
-        # resultat de recherche de covoiturage
-        "first_resultat": first_resultat,
-        "second_resultat": second_resultat,
-        # formulaire de la page
-        "adresse_form": adresse_form,
-        "filtre_form": filtre_form,
-        "recherche_form": recherche_form,
-        "form_trajet": form_trajet,
-        "resultat_filtrer": resultat_filtrer,
-        #envoie des message au template, inutile si balise message dans le template
-        "messages": messages.get_messages(request),
-    }
-    context.update(initialisation_template(request))
     return render(request, "index.html", context)
 
 
@@ -413,10 +349,7 @@ def connection1(request):
     context.update(initialisation_template(request))
     return render(request, "login/connection1.html", context)
 
-
 # operation 2 : demande de mot de passe et code connection 2fa
-
-
 def connection2(request):
     connected_users = request.session.get("connected_users", [])
     user_id = request.session.get("user_id")
@@ -468,39 +401,66 @@ def connection2(request):
     context.update(initialisation_template(request))
     return render(request, "login/connection2.html", context)
 
-
 # --------------------------Deconnection-----------------------------------------------
-
-
 def logout_view(request):
     logout(request)
     messages.info(request, "Vous êtes déconnecté.")
     return redirect("/")
 
-
-# --------------------------Espace Personnel-------------------------------------------
-@login_required(login_url="connection1")
-def MonCompte(request):
-    # Récupération des données utilisateur
+# ----------------------Espace Personnel initialisation de données---------------------
+def InfoTrajet(request):
     user = request.user
 
-    role = ChoixRole.objects.filter(user=user).first()
-    preference = Preference.objects.filter(user_preference=user).first()
+    type_moteur = Voiture.objects.filter(type_moteur=user)
+
+    chauffeur = TrajetProposer.objects.filter(chauffeur=user).first()
     trajet = TrajetProposer.objects.filter(chauffeur=user).first()
     trajet1 = TrajetProposer.objects.filter(chauffeur=user ,etat="Terminé")
     trajet2 = TrajetProposer.objects.filter(chauffeur=user , etat="Annulé")
     trajet3 = TrajetProposer.objects.filter(chauffeur=user , etat="En cours")
     trajet4 = TrajetProposer.objects.filter(chauffeur=user , etat="Disponible")
 
-    voiture = Voiture.objects.filter(user=user)
-    type_moteur = Voiture.objects.filter(type_moteur=user)
+    return {
+        'chauffeur': chauffeur,
+        'type_moteur': type_moteur,
+        'trajet': trajet,
+        'trajet1': trajet1,
+        'trajet2': trajet2,
+        'trajet3': trajet3,
+        'trajet4': trajet4
+    }
+
+def Info_Reservation(request):
+    user = request.user
+
+    chauffeur = TrajetProposer.objects.filter(chauffeur=user).first()
+    trajet = TrajetProposer.objects.filter(chauffeur=user).first()
     reservation = ReservationTrajet.objects.filter(passager=user)
     reservation1 = reservation.filter(etat_reservation="Terminé", passager=user)
     reservation2 = reservation.filter(etat_reservation="Annulé", passager=user)
     reservation3 = reservation.filter(etat_reservation="Reserver", passager=user)
     prix_total_paye = ReservationTrajet.paiement_total_passager(request.user, trajet)
 
-    chauffeur = TrajetProposer.objects.filter().first()
+    return {
+        'chauffeur': chauffeur,
+        'reservation': reservation,
+        'reservation1': reservation1,
+        'reservation2': reservation2,
+        'reservation3': reservation3,
+        'prix_total_paye': prix_total_paye,
+    }
+# --------------------------Espace Personnel-------------------------------------------
+@login_required(login_url="connection1")
+def MonCompte(request):
+
+    # Récupération des données utilisateur
+    user = request.user
+    context = {}
+    role = ChoixRole.objects.filter(user=user).first()
+    preference = Preference.objects.filter(user_preference=user).first()
+
+    voiture = Voiture.objects.filter(user=user)
+
     note_chauffeur = NoteUser.objects.filter().first()
 
     adresse_user = AdresseUser.objects.filter(user=user).first()
@@ -509,7 +469,6 @@ def MonCompte(request):
 
 
     # Initialisation des formulaires
-    adresse_form = AdresseForm(instance=adresse_user, user=user)
     preference_form = PreferenceForm()
     role_form = ChoixRoleForm(instance=role)
     voiture_form = VoitureForm(request.POST)
@@ -517,6 +476,7 @@ def MonCompte(request):
     reservation_form = StatutReservationForm(request.POST)
     trajet_terminer_form = TerminerTrajetForm(request.POST)
     demarrer_ou_annuler_form= Demarrer_ou_annulerForm(request.POST)
+    adresse_form = AjoutAdresse(request)
 
     filtre_form = FiltreTrajetForm(request.GET)
     recherche_form = RechercheTrajetForm(request.GET)
@@ -533,20 +493,8 @@ def MonCompte(request):
 
         # __________ Formulaire d'ajout d'adresse___________
         if form_soumis == "adresse_form":
-            adresse_form = AdresseForm(
-                request.POST, request.FILES, instance=adresse_user, user=user
-            )
-            if adresse_form.is_valid():
-                adresse = adresse_form.save(commit=False)
-                adresse.user = user
-                adresse.save()
-                messages.success(request, "Vos informations  été mis à jour.")
-                return redirect("MonCompte")
-            else:
-                if email:
-                    messages.error(request,"cette adresse email est déjà prise")
-                else:
-                    messages.error(request, "Tous les champs sont obligatoires.")
+            context["adresse_form"] = adresse_form
+            return redirect("MonCompte")
 
         # _________Formulaire de choix de rôle___________________
         elif form_soumis == "role_form":
@@ -854,78 +802,6 @@ def MonCompte(request):
                             messages.error(request, "Aucune réservation trouvée.")
                             return redirect("MonCompte")
 
-    # ______________Recherche de trajet____________________
-
-    if request.method == "GET":
-        resultat = None
-
-        if form_trajet == "recherche_form" and recherche_form.is_valid():
-            ville_depart = recherche_form.cleaned_data["ville_depart"]
-            ville_arrivee = recherche_form.cleaned_data["ville_arrivee"]
-            date = recherche_form.cleaned_data["date"]
-            pseudo = recherche_form.cleaned_data["pseudo"]
-
-            resultat = TrajetProposer.objects.filter(
-                # icontains pour la recherche insensible a la casse
-                ville_depart__icontains=ville_depart,
-                ville_arrivee__icontains=ville_arrivee,
-                chauffeur__username__icontains=pseudo,
-                date=date,
-                etat="Disponible",
-                places__gt=0,
-            )
-            if user.is_authenticated:
-                trajet4 = resultat.exclude(
-                    chauffeur=request.user
-                )
-            else:
-                trajet4 = resultat.filter(etat="Disponible")
-
-            request.session["resultat_recherche"] = list(
-            resultat.values_list("id", flat=True)
-                )
-
-            first_resultat= trajet4.exclude(Q(voiture__type_moteur="Electrique") | Q(voiture__type_moteur="Hybride"))
-            second_resultat= trajet4.exclude(Q(voiture__type_moteur="essence") | Q(voiture__type_moteur="diesel"))
-            if first_resultat.exists() or second_resultat.exists():
-                messages.success(request, "Hey voici juste pour vous !!")
-            else:
-                messages.error(
-                    request,
-                    "La déception ... Une autre date peut-être ?",
-                )
-
-        # ______________FILTRE DE TRAJET____________________
-
-        elif form_trajet == "filtre_form" and filtre_form.is_valid():
-            resultat_ids = request.session.get("resultat_recherche", [])
-            resultat = TrajetProposer.objects.filter(id__in=resultat_ids) if resultat_ids else None
-
-            if filtre_form.cleaned_data["note"]:
-                note_minimum = filtre_form.cleaned_data["note"]
-                chauffeurs = User.objects.annotate(
-                    note_moyenne=Avg("accusé__note")
-                ).filter(note_moyenne__gte=note_minimum)
-
-                resultat = resultat.filter(chauffeur__in=chauffeurs)
-
-            if filtre_form.cleaned_data["temps_trajet"]:
-                resultat = resultat.filter(
-                    temps_trajet__lte=filtre_form.cleaned_data["temps_trajet"]
-                )
-
-            if filtre_form.cleaned_data["prix"]:
-                resultat = resultat.filter(prix__lte=filtre_form.cleaned_data["prix"])
-
-            first_resultat= resultat.exclude(Q(voiture__type_moteur="Electrique") | Q(voiture__type_moteur="Hybride"))
-            second_resultat= resultat.exclude(Q(voiture__type_moteur="essence") | Q(voiture__type_moteur="diesel"))
-
-            if resultat.exists():
-                messages.success(request, "Vos exigences ont trouvé satisfaction.")
-            elif not resultat.exists():
-                messages.error(request, "Oups !! La recherche n'a rien donné.")
-
-
     context = {
         # utilisateur
         "note_chauffeur": note_chauffeur,
@@ -933,28 +809,17 @@ def MonCompte(request):
         "preference": preference,
         "adresse_user": adresse_user,
         "voiture": voiture,
-        "chauffeur": chauffeur,
-        # trajet
-        "type_moteur": type_moteur,
-        "prix_total_paye": prix_total_paye,
-        "trajet": trajet,
-        "trajet1": trajet1,
-        "trajet2": trajet2,
-        "trajet3": trajet3,
-        "trajet4": trajet4,
-        "reservation": reservation,
-        "reservation1": reservation1,
-        "reservation2": reservation2,
-        "reservation3": reservation3,
+
         # recherche et filtre
         "resultat": resultat,
         "first_resultat": first_resultat,
         "second_resultat": second_resultat,
         "resultat_filtrer": resultat_filtrer,
+
         # formulaire:
         # __utilisateur__
-        "preference_form": preference_form,
         "adresse_form": adresse_form,
+        "preference_form": preference_form,
         "role_form": role_form,
         "voiture_form": voiture_form,
         # __trajet__
@@ -967,6 +832,24 @@ def MonCompte(request):
         "reservation_form": reservation_form,
         "messages": messages.get_messages(request),
     }
+    # ______________Recherche de trajet____________________
+
+    if request.method == "GET":
+
+        # Formulaire de recherche de trajet
+        if form_trajet == "recherche_form" and recherche_form.is_valid():
+            first_resultat, second_resultat = RechercheTrajet(request, recherche_form, user, trajet4)
+            context["first_resultat"] = first_resultat
+            context["second_resultat"] = second_resultat
+
+        # Formulaire de filtrage de trajet
+        elif form_trajet == "filtre_form" and filtre_form.is_valid():
+            first_resultat, second_resultat = Filtre_trajet(request, filtre_form)
+            context["first_resultat"] = first_resultat
+            context["second_resultat"] = second_resultat
+
+    context.update(InfoTrajet(request))
+    context.update(Info_Reservation(request))
     context.update(initialisation_template(request))
     return render(request, "interface_utilisateur/utilisateur/MonCompte.html", context)
 
@@ -1580,7 +1463,7 @@ def envoi_email_prise_contact(request, telephone, pseudo, email_user, sujet,mess
         message=request.POST.get("message")
         messages.success(request, "Votre message a bien été envoyé.")
     except Exception as e:
-        print(f"Erreur lors de l'envoi de l'e-mail de confirmation de fin de covoiturage: {str(e)}")
+        print(f"Erreur lors de l'envoi de l'e-mail de demande d'information: {str(e)}")
         messages.error(request, f"Erreur lors de l'envoi de l'e-mail de votre retour positif: {str(e)}")
 
 
@@ -1647,7 +1530,7 @@ def Envoi_Email_Avis_Trajet_Negatif(
 
     except Exception as e:
         print(
-            f"Erreur lors de l'envoi de l'e-mail de confirmation de fin de covoiturage: {str(e)}"
+            f"Erreur lors de l'envoi de l'e-mail de votre méchant avis pour le chauffeur: {str(e)}"
         )
         messages.error(
             request,
@@ -1719,7 +1602,7 @@ def Envoi_Email_Avis_Trajet_Positif(
 
     except Exception as e:
         print(
-            f"Erreur lors de l'envoi de l'e-mail de confirmation de fin de covoiturage: {str(e)}"
+            f"Erreur lors de l'envoi de l'e-mail de votre avis sympa pour le chauffeur: {str(e)}"
         )
         messages.error(
             request,
@@ -1764,9 +1647,6 @@ def Envoi_Email_Terminer(request, trajet_id, reservations, token):
             email.send()
 
     except Exception as e:
-        print(
-            f"Erreur lors de l'envoi de l'e-mail de confirmation de fin de covoiturage: {str(e)}"
-        )
         messages.error(
             request,
             f"Erreur lors de l'envoi de l'e-mail de confirmation de fin de covoiturag : {str(e)}",
@@ -1853,7 +1733,7 @@ def Deux_F_A(request, email, username):
         return redirect("connection2")
 
     except Exception as e:
-        messages.error(request, f"Erreur lors de l'envoi de l'e-mail de confirmation de fin de covoiturag : {str(e)}")
+        messages.error(request, f"Erreur lors de l'envoi du code connection: {str(e)}")
         return redirect("connection1")
 
 

@@ -1,7 +1,7 @@
 from django.db.models import Q
 from django.contrib import messages
 from .models import TrajetProposer, User
-from django.db.models import Avg, Value, Q
+from django.db.models import Avg, Q
 
 
 
