@@ -123,7 +123,7 @@
         </div>
     </div>
     </div>
-
+    {% if user.is_superuser %}
     <!--Onglet 6 moderation -->
     <div class="tab">
         <input
@@ -186,6 +186,7 @@
                     {% endif %}
                 </div>
             </div>
+        {% endif %}
     </div>
     </div>
 {% endwith %}
