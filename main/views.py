@@ -123,38 +123,34 @@ def mentions_legales(request):
 
 
 def accueil(request):
-    user = request.user
-    context = {}
-    context.update(initialisation_template(request))
+    try:
+        context = {}
 
-    recherche_form, first_resultat, second_resultat = RechercheTrajet(request)
-    filtre_form, resultat1, resultat2 = Filtre_trajet(request)
+        recherche_form, first_resultat, second_resultat = RechercheTrajet(request)
+        filtre_form, resultat1, resultat2 = Filtre_trajet(request)
 
-    if request.method == "GET":
+        if request.method == "GET":
+            if recherche_form:
+                context["recherche_form"] = recherche_form
+            elif filtre_form:
+                context["filtre_form"] = filtre_form
 
-        # Formulaire de recherche de trajet
-        if recherche_form:
-            context["recherche_form"] = recherche_form
-
-        elif filtre_form:
-            context["filtre_form"] = filtre_form
-
-    context = {
-        # utilisateur
-        # recherche
-        "first_resultat": first_resultat,
-        "second_resultat": second_resultat,
-
-        # filtre
-        "resultat1": resultat1,
-        "resultat2": resultat2,
-        # formulaire de la page
-        "filtre_form": filtre_form,
-        "recherche_form": recherche_form,
-        #envoie des message au template, inutile si balise message dans le template
-        "messages": messages.get_messages(request),
-    }
-    return render(request, "index.html", context)
+        context = {
+            "first_resultat": first_resultat,
+            "second_resultat": second_resultat,
+            "resultat1": resultat1,
+            "resultat2": resultat2,
+            "filtre_form": filtre_form,
+            "recherche_form": recherche_form,
+            "messages": messages.get_messages(request),
+        }
+        context.update(InfoTrajet(request))
+        context.update(Info_Reservation(request))
+        context.update(initialisation_template(request))
+        return render(request, "index.html", context)
+    except Exception as e:
+        # Affiche l'erreur dans la page pour débogage
+        return HttpResponseServerError(f"Erreur : {str(e)}")
 
 
 class UserCreateView(CreateView):
