@@ -32,7 +32,6 @@ SECRET_KEY = env('DJANGO_SECRET_KEY', default='django-insecure-#&')
 # Clés API de Stripe en mode test
 # dans settings.py
 
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
 ALLOWED_HOSTS = ['ecoride-itsuki.it.com', 'www.ecoride-itsuki.it.com']
