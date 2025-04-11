@@ -123,34 +123,14 @@ def mentions_legales(request):
 
 
 def accueil(request):
-    try:
         context = {}
 
-        recherche_form, first_resultat, second_resultat = RechercheTrajet(request)
-        filtre_form, resultat1, resultat2 = Filtre_trajet(request)
 
-        if request.method == "GET":
-            if recherche_form:
-                context["recherche_form"] = recherche_form
-            elif filtre_form:
-                context["filtre_form"] = filtre_form
 
-        context = {
-            "first_resultat": first_resultat,
-            "second_resultat": second_resultat,
-            "resultat1": resultat1,
-            "resultat2": resultat2,
-            "filtre_form": filtre_form,
-            "recherche_form": recherche_form,
-            "messages": messages.get_messages(request),
-        }
         context.update(InfoTrajet(request))
         context.update(Info_Reservation(request))
         context.update(initialisation_template(request))
         return render(request, "index.html", context)
-    except Exception as e:
-        # Affiche l'erreur dans la page pour débogage
-        return HttpResponseServerError(f"Erreur : {str(e)}")
 
 
 class UserCreateView(CreateView):
