@@ -72,7 +72,6 @@ import os, re, uuid, secrets, chardet, random, imaplib, email
 from bs4 import BeautifulSoup
 
 
-# Accueil en definition car fonction simple
 
 
 def Contact(request):
@@ -146,8 +145,6 @@ def accueil(request):
             "recherche_form": recherche_form,
             "messages": messages.get_messages(request),
         }
-        context.update(InfoTrajet(request))
-        context.update(Info_Reservation(request))
         context.update(initialisation_template(request))
         return render(request, "index.html", context)
 
