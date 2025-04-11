@@ -125,6 +125,7 @@ def mentions_legales(request):
 def accueil(request):
     user = request.user
     context = {}
+    context.update(initialisation_template(request))
 
     recherche_form, first_resultat, second_resultat = RechercheTrajet(request)
     filtre_form, resultat1, resultat2 = Filtre_trajet(request)
@@ -153,7 +154,6 @@ def accueil(request):
         #envoie des message au template, inutile si balise message dans le template
         "messages": messages.get_messages(request),
     }
-    context.update(initialisation_template(request))
     return render(request, "index.html", context)
 
 
