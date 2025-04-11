@@ -125,8 +125,8 @@ def mentions_legales(request):
 def accueil(request):
     user = request.user
     if user.is_anonymous:
-        recherche_form = None
-        filtre_form = None
+        recherche_form, first_resultat, second_resultat  = None
+        filtre_form, resultat1, resultat2  = None
     else:
         recherche_form, first_resultat, second_resultat = RechercheTrajet(request)
         filtre_form, resultat1, resultat2 = Filtre_trajet(request)
