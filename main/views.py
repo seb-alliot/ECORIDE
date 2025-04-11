@@ -123,7 +123,7 @@ def mentions_legales(request):
 
 
 def accueil(request):
-
+    user = request.user
     context = {}
 
     recherche_form, first_resultat, second_resultat = RechercheTrajet(request)
