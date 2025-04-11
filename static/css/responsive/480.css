@@ -92,14 +92,15 @@ footer a {
   margin-top: var(--spacing-md);
 }
 #resultat_recherche {
-  width: 130px;
+  width: 300px;
   height: auto;
   font-size: var(--font-size-base);
   margin-top: 10px;
 }
 label#resultat_recherche img {
   width: 110px;
-  height: 80px;
+  height: 110px;
+  margin-right: 10px;
 }
 .presentation p {
   font-size: 15px;

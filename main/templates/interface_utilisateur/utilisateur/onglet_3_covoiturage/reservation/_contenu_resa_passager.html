@@ -8,7 +8,7 @@
         aria-labelledby="label_trajet_{{ res.id }}"
     >
     <label
-    class="class_column"
+    class="class_flex"
     id="covoit_reserver"
     for="trajet_{{ res.id }}"
     >
@@ -18,7 +18,7 @@
             <img src="{{ photo_default_url }}" alt="photo par défaut">
         {% endif %}
         Chauffeur : {{ res.trajet_reserver.chauffeur }}<br>
-        Départ de :<br>{{ res.trajet_reserver.ville_depart }} -> {{ res.trajet_reserver.ville_arrivee }}<br>
+        Trajet :<br>{{ res.trajet_reserver.ville_depart }} -> {{ res.trajet_reserver.ville_arrivee }}<br>
         Le {{ res.trajet_reserver.date }}<br>
         À {{ res.trajet_reserver.heure|date:"H\H:i" }}<br>
         Voiture :<br>{{ res.trajet_reserver.voiture.marque }} {{ res.trajet_reserver.voiture.modele }}<br>

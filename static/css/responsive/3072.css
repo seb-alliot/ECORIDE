@@ -1,6 +1,6 @@
 :root {
   --logo-size: 250px;
-  --font-size-base: 34px;
+  --font-size-base: 26px;
   --input-width: 300px;
   --image-height: 900px;
 }
@@ -74,14 +74,15 @@ select#id_note {
   margin-top: var(--spacing-lg);
 }
 #resultat_recherche {
-  width: 170px;
+  width: 450px;
   height: auto;
-  font-size: 18px;
+  font-size: 20px;
   margin-top: 10px;
 }
 label#resultat_recherche img {
   width: 150px;
-  height: 100px;
+  height: 150px;
+  margin-right: 10px;
 }
 #info_user,
 .presentation p {

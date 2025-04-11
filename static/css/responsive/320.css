@@ -78,14 +78,15 @@ button#bouton_note{
   margin-top: var(--spacing-md);
 }
 #resultat_recherche {
-  width: 115px;
+  width: 260px;
   height: auto;
   font-size: var(--font-size-base);
   margin-top: var(--spacing-md);
 }
 label#resultat_recherche img {
   width: 95px;
-  height: 80px;
+  height: 95px;
+  margin-right: 10px;
 }
 .presentation > div:nth-child(1) p,
 .presentation > div:nth-child(2) p,

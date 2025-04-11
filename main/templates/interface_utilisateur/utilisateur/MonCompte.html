@@ -34,7 +34,10 @@
             {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_form_recherche.html" %}
                 {% if first_resultat or second_resultat %}
                     {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_resultat_recherche.html" %}
-                    {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_filtre_trajet.html" %}
+                    {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_form_filtre_trajet.html" %}
+                {% elif resultat1 or resultat2 %}
+                    {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_resultat_filtre_recherche.html" %}
+                    {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_form_filtre_trajet.html" %}
                 {% endif %}
         {% endif %}
     </div>

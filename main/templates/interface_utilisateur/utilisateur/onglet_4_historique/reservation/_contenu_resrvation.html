@@ -2,7 +2,7 @@
 <li  class="class_flex">
     <label
     id="historique"
-    class="class_flex class_column class_justify_center"
+    class="class_flex"
     for="trajet_{{ tjt.id }}">
         {% if res.trajet_reserver.chauffeur.adresse_user.photo %}
             <img src="{{ res.trajet_reserver.chauffeur.adresse_user.photo.url }}" alt="photo de profil" class="photo_profile">
@@ -15,10 +15,10 @@
         utilisateur supprimé<br>
         {% endif %}
         {% if res.trajet_reserver.ville_depart %}
-        Départ de :<br>{{ res.trajet_reserver.ville_depart}} ->  {{ res.trajet_reserver.ville_arrivee }}<br>
+        Trajet : {{ res.trajet_reserver.ville_depart}} ->  {{ res.trajet_reserver.ville_arrivee }}<br>
         Le  {{ res.trajet_reserver.date }}<br>
         À  {{ res.trajet_reserver.heure|date:"H\H:i"  }}<br>
-        véhicule :<br>{{ res.trajet_reserver.voiture.marque }} {{ res.trajet_reserver.voiture.modele }}<br>
+        véhicule : {{ res.trajet_reserver.voiture.marque }} {{ res.trajet_reserver.voiture.modele }}<br>
         {% else %}
         trajet supprimé<br>
         {% endif %}

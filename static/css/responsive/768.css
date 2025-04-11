@@ -73,13 +73,14 @@ footer a {
   margin-top: var(--spacing-md);
 }
 #resultat_recherche {
-  width: 130px;
+  width: 300px;
   height: auto;
   margin-top: 10px;
 }
 label#resultat_recherche img {
   width: var(--logo-size);
-  height: 80px;
+  height:var(--logo-size);
+  margin-right: 10px;
 }
 #resultat_recherche,
 #contact_form input,

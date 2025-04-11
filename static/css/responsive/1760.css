@@ -1,6 +1,6 @@
 :root {
   --logo-size: 150px;
-  --font-size-base: 24px;
+  --font-size-base: 20px;
   --input-width: 220px;
   --image-height: 480px;
 }
@@ -68,14 +68,15 @@ footer a {
   margin-top: var(--spacing-lg);
 }
 #resultat_recherche {
-  width: 190px;
+  width: 440px;
   height: auto;
-  font-size: 22px;
+  font-size: 18px;
   margin-top: 10px;
 }
 label#resultat_recherche img {
   width: 170px;
-  height: 100px;
+  height: 170px;
+  margin-right:10px;
 }
 #contact_form input,
 #contact_form button,

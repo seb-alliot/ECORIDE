@@ -22,13 +22,10 @@ from .forms import (
     CustomSetPasswordForm,
     ConfirmEmailForm,
     ReservationTrajetForm,
-    StatutReservationForm,
     AvisForm,
     ContactForm,
     ModerationTrajetForm,
     ModerationAvisPositifForm,
-    TerminerTrajetForm,
-    Demarrer_ou_annulerForm,
     AfficherTrajetForm,
 )
 from .models import (
@@ -39,15 +36,33 @@ from .models import (
     Voiture,
     TrajetProposer,
     ReservationTrajet,
-    ChangerStatutTrajet,
     ActivationToken,
     TokenValidation,
     NoteUser,
 )
-from django.contrib.auth.views import PasswordResetConfirmView, PasswordResetView
-from .repeated_code import RechercheTrajet, Filtre_trajet
-from .form_espace_perso import AjoutAdresse , ChangeTonRole , DonneTesPreferences , AjouteTaCaisse , ProposeTonCovoiturage\
-    , FiniTonCovoiturage
+from django.contrib.auth.views import (
+    PasswordResetConfirmView,
+    PasswordResetView
+)
+from .donne_template import (
+    InfoTrajet,
+    Info_Reservation,
+    initialisation_template,
+)
+from .repeated_code import (
+    RechercheTrajet,
+    Filtre_trajet
+)
+from .form_espace_perso import (
+    AjoutAdresse,
+    ChangeTonRole,
+    DonneTesPreferences,
+    AjouteTaCaisse,
+    ProposeTonCovoiturage,
+    FiniTonCovoiturage,
+    GereTonCovoiteChauffeur,
+    GereTaReservationPassager,
+)
 
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib import messages
@@ -55,44 +70,11 @@ from django.core.mail import EmailMessage
 from django.conf import settings
 from django.views.generic import CreateView
 from django.contrib.auth.models import User
-import random
-import imaplib, email
-import os
-import re
-import uuid
-import secrets
+import os, re, uuid, secrets, chardet, random, imaplib, email
 from bs4 import BeautifulSoup
-import chardet
 
 
 # Accueil en definition car fonction simple
-def initialisation_template(request):
-    photo_default_url = settings.MEDIA_URL + "photo_default/photo_default.jpg"
-    user = request.user
-
-    if request.user.is_authenticated:
-        try:
-            credit = CreditUser.objects.get(user=user)
-        except CreditUser.DoesNotExist:
-            credit = None
-        trajets = TrajetProposer.objects.filter(chauffeur=user)
-        adresse_user = AdresseUser.objects.filter(user=user).first()
-    if user.is_anonymous:
-        credit = None
-        adresse_user = None
-        trajets = None
-
-    context = {
-        "user": user,
-        "credit": credit,
-        "adresse_user": adresse_user,
-        "photo_default_url": photo_default_url,
-        "credit": credit,
-        "adresse_user": adresse_user,
-        "trajets": trajets,
-        "photo_default_url": photo_default_url,
-    }
-    return context
 
 
 def Contact(request):
@@ -144,44 +126,38 @@ def mentions_legales(request):
 
 def accueil(request):
 
-    user = request.user
-    # Initialisation des formulaires
-    recherche_form = RechercheTrajetForm(request.GET)
-    filtre_form = FiltreTrajetForm(request.GET)
-    trajet4 = TrajetProposer.objects.filter(etat="Disponible")
+    context = {}
 
-    first_resultat = None
-    second_resultat = None
-    form_trajet = request.GET.get("form_trajet")
-
-    context = {
-        # utilisateur
-        # resultat de recherche de covoiturage
-        "first_resultat": first_resultat,
-        "second_resultat": second_resultat,
-        # formulaire de la page
-        "filtre_form": filtre_form,
-        "recherche_form": recherche_form,
-        "form_trajet": form_trajet,
-        #envoie des message au template, inutile si balise message dans le template
-        "messages": messages.get_messages(request),
-    }
-    context.update(initialisation_template(request))
+    recherche_form, first_resultat, second_resultat = RechercheTrajet(request)
+    filtre_form, resultat1, resultat2 = Filtre_trajet(request)
 
     if request.method == "GET":
 
         # Formulaire de recherche de trajet
-        if form_trajet == "recherche_form" and recherche_form.is_valid():
-            first_resultat, second_resultat = RechercheTrajet(request, recherche_form, user, trajet4)
-            context["first_resultat"] = first_resultat
-            context["second_resultat"] = second_resultat
+        if recherche_form:
+            context["recherche_form"] = recherche_form
 
-        # Formulaire de filtrage de trajet
-        elif form_trajet == "filtre_form" and filtre_form.is_valid():
-            first_resultat, second_resultat = Filtre_trajet(request, filtre_form)
-            context["first_resultat"] = first_resultat
-            context["second_resultat"] = second_resultat
+        elif filtre_form:
+            context["filtre_form"] = filtre_form
 
+    context = {
+        # utilisateur
+        # recherche
+        "first_resultat": first_resultat,
+        "second_resultat": second_resultat,
+
+        # filtre
+        "resultat1": resultat1,
+        "resultat2": resultat2,
+        # formulaire de la page
+        "filtre_form": filtre_form,
+        "recherche_form": recherche_form,
+        #envoie des message au template, inutile si balise message dans le template
+        "messages": messages.get_messages(request),
+    }
+    context.update(InfoTrajet(request))
+    context.update(Info_Reservation(request))
+    context.update(initialisation_template(request))
     return render(request, "index.html", context)
 
 
@@ -404,47 +380,7 @@ def logout_view(request):
     return redirect("/")
 
 # ----------------------Espace Personnel initialisation de données---------------------
-def InfoTrajet(request):
-    user = request.user
 
-    type_moteur = Voiture.objects.filter(type_moteur=user)
-
-    chauffeur = TrajetProposer.objects.filter(chauffeur=user).first()
-    trajet = TrajetProposer.objects.filter(chauffeur=user).first()
-    trajet1 = TrajetProposer.objects.filter(chauffeur=user ,etat="Terminé")
-    trajet2 = TrajetProposer.objects.filter(chauffeur=user , etat="Annulé")
-    trajet3 = TrajetProposer.objects.filter(chauffeur=user , etat="En cours")
-    trajet4 = TrajetProposer.objects.filter(chauffeur=user , etat="Disponible")
-
-    return {
-        'chauffeur': chauffeur,
-        'type_moteur': type_moteur,
-        'trajet': trajet,
-        'trajet1': trajet1,
-        'trajet2': trajet2,
-        'trajet3': trajet3,
-        'trajet4': trajet4
-    }
-
-def Info_Reservation(request):
-    user = request.user
-
-    chauffeur = TrajetProposer.objects.filter(chauffeur=user).first()
-    trajet = TrajetProposer.objects.filter(chauffeur=user).first()
-    reservation = ReservationTrajet.objects.filter(passager=user)
-    reservation1 = reservation.filter(etat_reservation="Terminé", passager=user)
-    reservation2 = reservation.filter(etat_reservation="Annulé", passager=user)
-    reservation3 = reservation.filter(etat_reservation="Reserver", passager=user)
-    prix_total_paye = ReservationTrajet.paiement_total_passager(request.user, trajet)
-
-    return {
-        'chauffeur': chauffeur,
-        'reservation': reservation,
-        'reservation1': reservation1,
-        'reservation2': reservation2,
-        'reservation3': reservation3,
-        'prix_total_paye': prix_total_paye,
-    }
 # --------------------------Espace Personnel-------------------------------------------
 @login_required(login_url="connection1")
 def MonCompte(request):
@@ -457,239 +393,78 @@ def MonCompte(request):
     role = ChoixRole.objects.filter(user=user).first()
     preference = Preference.objects.filter(user_preference=user).first()
     note_chauffeur = NoteUser.objects.filter().first()
-    trajet = TrajetProposer.objects.filter(chauffeur=user).first()
 
     adresse_user = AdresseUser.objects.filter(user=user).first()
     if adresse_user is None:
         adresse_user = AdresseUser(user=user, email=user.email)
 
 
-    # Initialisation des formulaires
+    # Appel des fontions pour les formulaire
     preference_form = DonneTesPreferences(request)
     role_form = ChangeTonRole(request)
     adresse_form = AjoutAdresse(request)
     voiture_form = AjouteTaCaisse(request)
-
     trajet_form = ProposeTonCovoiturage(request)
-    reservation_form = StatutReservationForm(request.POST)
+    reservation_form = GereTaReservationPassager(request)
     trajet_terminer_form = FiniTonCovoiturage(request)
-    demarrer_ou_annuler_form= Demarrer_ou_annulerForm(request.POST)
+    demarrer_ou_annuler_form= GereTonCovoiteChauffeur(request)
 
-    filtre_form = FiltreTrajetForm(request.GET)
-    recherche_form = RechercheTrajetForm(request.GET)
-
-    first_resultat = None
-    second_resultat = None
-
-    form_trajet = request.GET.get("form_trajet")
-    form_soumis = request.POST.get("form_soumis")
+    recherche_form, first_resultat, second_resultat = RechercheTrajet(request)
+    filtre_form, resultat1, resultat2 = Filtre_trajet(request)
 
     if request.method == "POST":
 
         # __________ Formulaire d'ajout d'adresse___________
-        if form_soumis == "adresse_form":
+        if adresse_form:
             context["adresse_form"] = adresse_form
             return redirect("MonCompte")
 
         # _________Formulaire de choix de rôle___________________
-        elif form_soumis == "role_form":
+        elif role_form:
             context["role_form"] = role_form
             return redirect("MonCompte")
 
         # _________Formulaire des preferences chauffeur___________________
-        elif form_soumis == "preference_form":
+        elif preference_form:
             context["preference_form"] = preference_form
             return redirect("MonCompte")
 
         # __________Formulaire d'ajout de voiture___________
-        elif form_soumis == "voiture_form":
+        elif voiture_form:
             context["voiture_form"] = voiture_form
             return redirect("MonCompte")
 
         # __________Formulaire de proposition de trajet___
-        elif form_soumis == "trajet_form":
+        elif trajet_form:
             context["trajet_form"] = trajet_form
             return redirect("MonCompte")
 
         # Formulaire de trajet terminé
-        elif form_soumis == "trajet_terminer_form":
+        elif trajet_terminer_form:
             context["trajet_terminer_form"] = trajet_terminer_form
             return redirect("MonCompte")
 
         # Formulaire de changement de statut de trajet
-        elif form_soumis == "demarrer_ou_annuler_form":
-            demarrer_ou_annuler_form = Demarrer_ou_annulerForm(request.POST)
-            trajet_id = request.POST.get("trajet_id")
-            if demarrer_ou_annuler_form.is_valid():
-                token = None
-                if token is None:
-                    token = uuid.uuid4()
-
-                # ______PARTIE CHAUFFEUR______
-
-                if request.user == trajet.chauffeur:
-                    trajet = get_object_or_404(TrajetProposer, id=trajet_id)
-                    # bien mettre trajet.chauffeur et non pas role.chauffeur  ou display comme en html sa ne fonctionne pas, erreur muette
-                    statut_trajet = demarrer_ou_annuler_form.cleaned_data["etat"]
-                    Changer_statut = ChangerStatutTrajet.objects.create(
-                        trajet=trajet,
-                        statut=statut_trajet,
-                    )
-
-                    if statut_trajet == "En cours":
-                        trajet.etat = statut_trajet
-                        reservations = ReservationTrajet.objects.filter(
-                            trajet_reserver=trajet
-                        )
-                        reservations.update(etat_reservation="En cours")
-                        trajet.save()
-                        messages.success(request, "Trajet démarré, bon voyage !")
-
-                    # ______________ANNULATION TRAJET PAR LE CHAUFFEUR_____________
-
-                    elif statut_trajet == "Annulé":
-                        try:
-                            # Récupérer le trajet concerné
-                            trajet_reserver = get_object_or_404(
-                                TrajetProposer, id=trajet_id
-                            )
-
-                            # Vérifier si le trajet a déjà été remboursé
-                            if trajet_reserver.trajet_rembourser:
-                                messages.error(
-                                    request,
-                                    "Le remboursement du trajet a déjà été effectué..",
-                                )
-                                return redirect("MonCompte")
-                            else:
-                                reservations = ReservationTrajet.objects.filter(
-                                    trajet_reserver=trajet_reserver
-                                )
-                                total_place_reserver = sum(
-                                    reservation.places for reservation in reservations
-                                )
-
-                                trajet_reserver.places += total_place_reserver
-                                trajet_reserver.etat = "Annulé"
-                                trajet_reserver.trajet_rembourser = True
-                                reservation.etat_reservation = "Annulé"
-                                trajet_reserver.save()
-                                messages.success(
-                                    request, "Votre covoiturage a bien été annulé."
-                                )
-
-                                # Remboursement des passagers
-                                for reservation in reservations:
-                                    try:
-                                        prix_payer = (
-                                            reservation.places * trajet_reserver.prix
-                                        )
-                                        credit_passager = get_object_or_404(
-                                            CreditUser, user=reservation.passager
-                                        )
-                                        credit_passager.credit += prix_payer
-                                        credit_passager.save()
-
-                                        reservation.etat_reservation = "Annulé"
-                                        reservation.reservation_rembourser = True
-                                        reservation.save()
-                                    except Exception as e:
-                                        messages.error(
-                                            request,
-                                            f"Erreur lors du remboursement du passager : {str(e)}",
-                                        )
-                                        continue
-
-                                # Redonne la comme au chauffeur
-                                try:
-                                    credit_chauffeur = get_object_or_404(
-                                        CreditUser, user=trajet_reserver.chauffeur
-                                    )
-                                    comission = 2
-                                    credit_chauffeur.credit += comission
-                                    credit_chauffeur.save()
-                                except Exception as e:
-                                    messages.error(
-                                        request,
-                                        f"Erreur lors du retrait des gains du chauffeur : {str(e)}",
-                                    )
-
-                                # Retirer la commission de l'admin
-                                try:
-                                    superuser = User.objects.filter(
-                                        is_superuser=True
-                                    ).first()
-                                    if superuser:
-                                        credit_admin = get_object_or_404(
-                                            CreditUser, user=superuser
-                                        )
-                                        comission_admin = 2
-                                        credit_admin.credit -= comission_admin
-                                        credit_admin.save()
-                                    else:
-                                        messages.error(
-                                            request,
-                                            "L'administrateur n'a pas été trouvé.",
-                                        )
-                                except Exception as e:
-                                    messages.error(
-                                        request,
-                                        f"Erreur lors du débit de la commission pour la plateforme : {str(e)}",
-                                    )
-
-                                # Envoyer l'email d'annulation
-                                Envoi_Email_Annulation(request, trajet_id, reservations)
-                                messages.success(
-                                    request,
-                                    "Votre proposition de covoiturage a été annulée.",
-                                )
-                                return redirect("MonCompte")
-
-                        except Exception as e:
-                            messages.error(
-                                request,
-                                f"Erreur lors de l'annulation du trajet : {str(e)}",
-                            )
+        elif demarrer_ou_annuler_form:
+            context["demarrer_ou_annuler_form"] = demarrer_ou_annuler_form
+            return redirect("MonCompte")
 
         # ______________ANNULATION TRAJET PAR LE PASSAGER____
-        elif form_soumis == "reservation_form":
-            reservation_form = StatutReservationForm(request.POST)
-            reservation_id = request.POST.get("reservation_id")
-            reservation = get_object_or_404(ReservationTrajet, id=reservation_id)
+        elif reservation_form:
+            context["reservation_form"] = reservation_form
+            return redirect("MonCompte")
 
-            if reservation.reservation_rembourser:
-                messages.error(request, "La réservation a déjà été remboursée.")
-                return redirect("MonCompte")
-            else:
-                if reservation_form.is_valid():
-                    if request.user == reservation.passager:
-                        etat_reservation = reservation_form.cleaned_data[
-                            "etat_reservation"
-                        ]
+    # ______________Recherche de trajet____________________
 
-                        if etat_reservation == "Annulé":
-                            trajet = reservation.trajet_reserver
-                            trajet.places += reservation.places
-                            trajet.save()
+    if request.method == "GET":
 
-                            prix_payer = reservation.places * trajet.prix
-                            credit_user = CreditUser.objects.get(user=request.user)
-                            credit_user.credit += prix_payer
-                            credit_user.save()
+        # Formulaire de recherche de trajet
+        if recherche_form:
+            context["recherche_form"] = recherche_form
 
-                            trajet.total_payer -= prix_payer
-                            trajet.save()
+        elif filtre_form:
+            context["filtre_form"] = filtre_form
 
-                            reservation.etat_reservation = "Annulé"
-                            reservation.reservation_rembourser = True
-                            reservation.save()
-                            messages.success(
-                                request, "Votre réservation a bien été annulée."
-                            )
-                            return redirect("MonCompte")
-                        else:
-                            messages.error(request, "Aucune réservation trouvée.")
-                            return redirect("MonCompte")
     context.update({
         # utilisateur
         "note_chauffeur": note_chauffeur,
@@ -698,11 +473,15 @@ def MonCompte(request):
         "adresse_user": adresse_user,
         "voiture": voiture,
 
-        # recherche et filtre
+        # recherche
         "first_resultat": first_resultat,
         "second_resultat": second_resultat,
 
-        # formulaire:
+        # filtre
+        "resultat1": resultat1,
+        "resultat2": resultat2,
+
+        # formulaire
         # __utilisateur__
         "adresse_form": adresse_form,
         "preference_form": preference_form,
@@ -718,22 +497,6 @@ def MonCompte(request):
         "reservation_form": reservation_form,
         "messages": messages.get_messages(request),
     })
-
-    # ______________Recherche de trajet____________________
-
-    if request.method == "GET":
-
-        # Formulaire de recherche de trajet
-        if form_trajet == "recherche_form" and recherche_form.is_valid():
-            first_resultat, second_resultat = RechercheTrajet(request, recherche_form, user, trajet4)
-            context["first_resultat"] = first_resultat
-            context["second_resultat"] = second_resultat
-
-        # Formulaire de filtrage de trajet
-        elif form_trajet == "filtre_form" and filtre_form.is_valid():
-            first_resultat, second_resultat = Filtre_trajet(request, filtre_form)
-            context["first_resultat"] = first_resultat
-            context["second_resultat"] = second_resultat
 
     context.update(InfoTrajet(request))
     context.update(Info_Reservation(request))

@@ -72,14 +72,15 @@ select#id_note {
   margin-top: var(--spacing-lg);
 }
 #resultat_recherche {
-  width: 180px;
+  width: 400px;
   height: auto;
-  font-size: var(--font-size-base);
+  font-size: 16px;
   margin-top: 10px;
 }
 label#resultat_recherche img {
   width: 160px;
-  height: 90px;
+  height: 160px;
+  margin-right: 10px;
 }
 .presentation > div p {
   font-size: 24px;

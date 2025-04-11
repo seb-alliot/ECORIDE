@@ -80,14 +80,15 @@ select#id_note,
   margin-top: var(--spacing-lg);
 }
 #resultat_recherche {
-  width: 150px;
+  width: 380px;
   height: auto;
   font-size: var(--font-size-other);
   margin-top: 10px;
 }
 label#resultat_recherche img {
   width: 130px;
-  height: 90px;
+  height: 130px;
+  margin-right: 10px;
 }
 .presentation p,
 #contact_form input,

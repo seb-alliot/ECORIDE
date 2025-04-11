@@ -147,7 +147,8 @@ header a {
 
 .photo_profile,
 .photo_default,
-label#resultat_recherche img {
+label#resultat_recherche img,
+#covoit_reserver img {
   border-radius: var(--border-radius-lg);
 }
 

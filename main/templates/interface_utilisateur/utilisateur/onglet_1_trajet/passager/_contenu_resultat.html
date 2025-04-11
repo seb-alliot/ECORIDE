@@ -10,7 +10,7 @@
         >
     <label
         id="resultat_recherche"
-        class="class_shadow class_flex class_column class_border"
+        class="class_shadow class_flex class_border"
         for="trajet_{{ resultat.id }}"
         >
         {% if resultat.chauffeur.adresse_user.photo %}
@@ -29,19 +29,19 @@
             pas encore noté
         {% endif %}
         <br>
-        Départ de :<br>
-        {{ resultat.ville_depart }} pour {{ resultat.ville_arrivee }}<br>
+        Trajet :
+        {{ resultat.ville_depart }} -> {{ resultat.ville_arrivee }}<br>
         A : {{ resultat.heure|date:"H\H:i"  }}<br>
         le : {{ resultat.date|date:"d/m/Y" }}<br>
-        voiture :<br> {{ resultat.voiture.marque }} {{ resultat.voiture.modele }}<br>
+        voiture :{{ resultat.voiture.marque }} {{ resultat.voiture.modele }}<br>
         Moteur : {{ resultat.voiture.type_moteur }}<br>
         Prix :  {{ resultat.prix }}€<br>
         {% if resultat.places != 0 %}
             Place{{ resultat.places|pluralize }} libre{{ resultat.places|pluralize }} : {{ resultat.places }}
         {% else %}
             complet
-        {% endif %}
+        {% endif %}<br>
         statut: {{ resultat.etat }}<br>
-        durée estimé : <br>{{ resultat.temps_trajet }}
+        durée estimé : {{ resultat.temps_trajet }}
     </label>
 </li>
