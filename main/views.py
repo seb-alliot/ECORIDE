@@ -17,8 +17,6 @@ from .forms import (
     Inscription,
     IdentifiantForm,
     MotDePasseForm,
-    RechercheTrajetForm,
-    FiltreTrajetForm,
     CustomSetPasswordForm,
     ConfirmEmailForm,
     ReservationTrajetForm,
@@ -155,8 +153,6 @@ def accueil(request):
         #envoie des message au template, inutile si balise message dans le template
         "messages": messages.get_messages(request),
     }
-    context.update(InfoTrajet(request))
-    context.update(Info_Reservation(request))
     context.update(initialisation_template(request))
     return render(request, "index.html", context)
 

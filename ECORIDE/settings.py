@@ -135,7 +135,7 @@ USE_TZ = True
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-MEDIA_URL = '/main/'
+MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'main', 'profils_picture')
 
 STATIC_URL = '/static/'

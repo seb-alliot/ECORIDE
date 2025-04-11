@@ -358,7 +358,7 @@ class AdresseUser(models.Model):
     email = models.EmailField(max_length=100, null=True, blank=True)
     photo = models.ImageField(
         upload_to="user",
-        default="main/profils_picture/photo_default/photo_default.jpg",
+        default="media/profils_picture/photo_default/photo_default.jpg",
         null=True,
         blank=True,
         verbose_name="Photo de profil",
