@@ -123,102 +123,40 @@ def mentions_legales(request):
 
 
 def accueil(request):
-
     user = request.user
-    # Initialisation des formulaires
-    adresse_form = TrajetForm()
-    recherche_form = RechercheTrajetForm(request.GET)
-    filtre_form = FiltreTrajetForm(request.GET)
-    type_moteur = Voiture.objects.filter(type_moteur=user)
-    trajet4 = TrajetProposer.objects.filter(etat="Disponible")
+    
+    context = {}
 
-    resultat_filtrer = None
-    first_resultat = None
-    second_resultat = None
-    resultat = None
-
-    form_trajet = request.GET.get("form_trajet")
+    recherche_form, first_resultat, second_resultat = RechercheTrajet(request)
+    filtre_form, resultat1, resultat2 = Filtre_trajet(request)
 
     if request.method == "GET":
 
         # Formulaire de recherche de trajet
-        if form_trajet == "recherche_form" and recherche_form.is_valid():
-            ville_depart = recherche_form.cleaned_data["ville_depart"]
-            ville_arrivee = recherche_form.cleaned_data["ville_arrivee"]
-            date = recherche_form.cleaned_data["date"]
-            resultat = TrajetProposer.objects.filter(
-                ville_depart__icontains=ville_depart,
-                ville_arrivee__icontains=ville_arrivee,
-                date=date,
-            )
-            if user.is_authenticated:
-                trajet4 = resultat.exclude(chauffeur=request.user)
-            elif user.is_anonymous:
-                trajet4 = resultat.exclude((Q(etat="Terminé") | Q(etat="En cours") | Q(etat="Annulé")))
+        if recherche_form:
+            context["recherche_form"] = recherche_form
 
-            request.session["resultat_recherche"] = list(
-            resultat.values_list("id", flat=True)
-                )
-
-            first_resultat= trajet4.exclude(Q(voiture__type_moteur="Electrique") | Q(voiture__type_moteur="Hybride"))
-            second_resultat= trajet4.exclude(Q(voiture__type_moteur="essence") | Q(voiture__type_moteur="diesel"))
-
-            if first_resultat.exists() or second_resultat.exists():
-                messages.success(request, "Hey voici juste pour vous !!")
-            else:
-                messages.error(
-                    request,
-                    "La déception ... Une autre date peut-être ?",
-                )
-
-        # Formulaire de filtrage de trajet
-        elif form_trajet == "filtre_form" and filtre_form.is_valid():
-            resultat = TrajetProposer.objects.filter(
-                id__in=request.session.get("resultat_recherche")
-            )
-
-            if filtre_form.cleaned_data["note"]:
-                note_minimum = filtre_form.cleaned_data["note"]
-                chauffeurs = User.objects.annotate(
-                    note_moyenne=Avg("accusé__note")
-                ).filter(note_moyenne__gte=note_minimum)
-
-                for chauffeur in chauffeurs:
-                    resultat = resultat.filter(chauffeur__in=chauffeurs)
-
-            if filtre_form.cleaned_data["temps_trajet"]:
-                resultat = resultat.filter(
-                    temps_trajet__lte=filtre_form.cleaned_data["temps_trajet"]
-                )
-
-            if filtre_form.cleaned_data["prix"]:
-                resultat = resultat.filter(prix__lte=filtre_form.cleaned_data["prix"])
-
-            first_resultat= resultat.exclude(Q(voiture__type_moteur="Electrique") | Q(voiture__type_moteur="Hybride"))
-            second_resultat= resultat.exclude(Q(voiture__type_moteur="essence") | Q(voiture__type_moteur="diesel"))
-
-            if first_resultat.exists() or second_resultat.exists():
-                messages.success(request, "Vos exigences ont trouvé satisfaction.")
-            elif not resultat.exists():
-                messages.error(request, "Oups !! La recherche n'a rien donné.")
+        elif filtre_form:
+            context["filtre_form"] = filtre_form
 
     context = {
         # utilisateur
-        "type_moteur": type_moteur,
-        # resultat de recherche de covoiturage
+        # recherche
         "first_resultat": first_resultat,
         "second_resultat": second_resultat,
+
+        # filtre
+        "resultat1": resultat1,
+        "resultat2": resultat2,
         # formulaire de la page
-        "adresse_form": adresse_form,
         "filtre_form": filtre_form,
         "recherche_form": recherche_form,
-        "form_trajet": form_trajet,
-        "resultat_filtrer": resultat_filtrer,
         #envoie des message au template, inutile si balise message dans le template
         "messages": messages.get_messages(request),
     }
     context.update(initialisation_template(request))
     return render(request, "index.html", context)
+
 
 class UserCreateView(CreateView):
 

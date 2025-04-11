@@ -19,6 +19,7 @@ def initialisation_template(request):
         credit = None
         adresse_user = None
         trajets = None
+        
 
     context = {
         "user": user,
