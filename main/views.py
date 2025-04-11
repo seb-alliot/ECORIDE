@@ -122,31 +122,8 @@ def mentions_legales(request):
 
 
 def accueil(request):
-        context = {
-                    'user': request.user if request.user.is_authenticated else None,
-        }
 
-
-        recherche_form, first_resultat, second_resultat = RechercheTrajet(request)
-        filtre_form, resultat1, resultat2 = Filtre_trajet(request)
-
-        if request.method == "GET":
-            if recherche_form:
-                context["recherche_form"] = recherche_form
-            elif filtre_form:
-                context["filtre_form"] = filtre_form
-
-        context = {
-            "first_resultat": first_resultat,
-            "second_resultat": second_resultat,
-            "resultat1": resultat1,
-            "resultat2": resultat2,
-            "filtre_form": filtre_form,
-            "recherche_form": recherche_form,
-            "messages": messages.get_messages(request),
-        }
-        context.update(initialisation_template(request))
-        return render(request, "index.html", context)
+        return render(request, "index.html")
 
 
 
