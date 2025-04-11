@@ -72,6 +72,7 @@ import os, re, uuid, secrets, chardet, random, imaplib, email
 from bs4 import BeautifulSoup
 
 
+# Accueil en definition car fonction simple
 
 
 def Contact(request):
@@ -122,9 +123,41 @@ def mentions_legales(request):
 
 
 def accueil(request):
+    user = request.user
+    if user.is_anonymous:
+        recherche_form = None
+        filtre_form = None
+    else:
+        recherche_form, first_resultat, second_resultat = RechercheTrajet(request)
+        filtre_form, resultat1, resultat2 = Filtre_trajet(request)
+    context = {}
 
-        return render(request, "index.html")
+    if request.method == "GET":
 
+        # Formulaire de recherche de trajet
+        if recherche_form:
+            context["recherche_form"] = recherche_form
+
+        elif filtre_form:
+            context["filtre_form"] = filtre_form
+
+    context = {
+        # utilisateur
+        # recherche
+        "first_resultat": first_resultat,
+        "second_resultat": second_resultat,
+
+        # filtre
+        "resultat1": resultat1,
+        "resultat2": resultat2,
+        # formulaire de la page
+        "filtre_form": filtre_form,
+        "recherche_form": recherche_form,
+        #envoie des message au template, inutile si balise message dans le template
+        "messages": messages.get_messages(request),
+    }
+    context.update(initialisation_template(request))
+    return render(request, "index.html", context)
 
 
 class UserCreateView(CreateView):
