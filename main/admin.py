@@ -10,8 +10,12 @@ from .models import (
     ReservationTrajet,
     ChangerStatutTrajet,
 )
+from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
+from django.utils.translation import gettext_lazy as _
+from .models import ChoixRole, CreditUser
+from typing import Callable, Optional
 
 
 # Register your models here.
@@ -44,17 +48,17 @@ class CustomUserAdmin(UserAdmin):
             CreditUser.objects.create(user=obj, role="passager")
             ChoixRole.objects.create(user=obj)
 
-    def get_role(self, obj):
+    def get_role(self, obj: User):
         role = ChoixRole.objects.filter(user=obj).first()
         return role.role if role else "Aucun"
 
-    get_role.short_description = "Role"
+    get_role.short_description = _("Role")
 
-    def get_credit(self, obj):
+    def get_credit(self, obj: User):
         credit = CreditUser.objects.filter(user=obj).first()
         return credit.credit if credit else 0
 
-    get_credit.short_description = "Crédit"
+    get_credit.short_description = _("Crédit")
 
 
 # On désactive le model admin de base pour le remplacer

@@ -744,7 +744,7 @@ def AvisSatisfaction(request, trajet_id, token):
     )
 
 
-@user_passes_test(lambda u: u.is_superuser)
+@user_passes_test(lambda u: isinstance(u, User) and u.is_superuser)
 def Fait_Ton_Taff_De_Modo(request):
 
             # Connexion au serveur IMAP
