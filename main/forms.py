@@ -590,6 +590,8 @@ class ContactForm(forms.Form):
             self.fields["email"].widget.attrs["readonly"] = True
             self.fields["telephone"].widget.attrs["readonly"] = True
 
+            if user and user.is_superuser:
+                self.fields["message"].widget.attrs["readonly"] = True
 class ModerationAvisPositifForm(forms.ModelForm):
 
     class Meta:
@@ -610,6 +612,8 @@ class ModerationAvisPositifForm(forms.ModelForm):
                 "Le commentaire ne doit pas dépasser 100 caractères."
             )
         return commentaire
+
+
 
 class AfficherTrajetForm(forms.Form):
     chauffeur = forms.CharField(
@@ -635,6 +639,12 @@ class AfficherTrajetForm(forms.Form):
         widget=forms.TextInput(attrs={"placeholder": "Date de réservation"}),
         required=False,  # Vous pouvez changer en True si c'est un champ obligatoire
     )
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["chauffeur"].widget.attrs["readonly"] = True
+        self.fields["passager"].widget.attrs["readonly"] = True
+        self.fields["trajet"].widget.attrs["readonly"] = True
+        self.fields["date_reservation"].widget.attrs["readonly"] = True
 class ModerationTrajetForm(forms.ModelForm):
 
     class Meta:

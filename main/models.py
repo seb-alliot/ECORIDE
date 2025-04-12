@@ -402,7 +402,7 @@ class ChoixRole(models.Model):
 class Voiture(models.Model):
     def get_year_choices():
         current_year = datetime.now().year
-        return [(year, str(year)) for year in range(1950, current_year + 1)]
+        return [(year, str(year)) for year in reversed(range(1950, current_year + 1))]
 
     TYPE_MOTEUR = [
         ("Electrique", "Electrique"),

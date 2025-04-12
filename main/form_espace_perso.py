@@ -25,7 +25,7 @@ from .models import (
 
 import uuid
 
-def AjoutAdresse(request, adresse_user=None, user=None):
+def AjoutTonAdresse(request, adresse_user=None, user=None):
     user = request.user
 
     if adresse_user is None:

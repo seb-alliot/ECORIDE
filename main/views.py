@@ -42,7 +42,7 @@ from django.contrib.auth.views import (
     PasswordResetConfirmView,
     PasswordResetView
 )
-from .donne_template import (
+from .donnee_template import (
     InfoTrajet,
     Info_Reservation,
     initialisation_template,
@@ -52,7 +52,7 @@ from .repeated_code import (
     Filtre_trajet
 )
 from .form_espace_perso import (
-    AjoutAdresse,
+    AjoutTonAdresse,
     ChangeTonRole,
     DonneTesPreferences,
     AjouteTaCaisse,
@@ -124,7 +124,7 @@ def mentions_legales(request):
 
 def accueil(request):
     user = request.user
-    
+
     context = {}
 
     recherche_form, first_resultat, second_resultat = RechercheTrajet(request)
@@ -140,11 +140,9 @@ def accueil(request):
             context["filtre_form"] = filtre_form
 
     context = {
-        # utilisateur
         # recherche
         "first_resultat": first_resultat,
         "second_resultat": second_resultat,
-
         # filtre
         "resultat1": resultat1,
         "resultat2": resultat2,
@@ -399,7 +397,7 @@ def MonCompte(request):
     # Appel des fontions pour les formulaire
     preference_form = DonneTesPreferences(request)
     role_form = ChangeTonRole(request)
-    adresse_form = AjoutAdresse(request)
+    adresse_form = AjoutTonAdresse(request)
     voiture_form = AjouteTaCaisse(request)
     trajet_form = ProposeTonCovoiturage(request)
     reservation_form = GereTaReservationPassager(request)
