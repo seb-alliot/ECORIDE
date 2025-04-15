@@ -23,12 +23,11 @@
         {% else %}
         utilisateur supprimé
         {% endif %}
-        {% if trajet.note_moyenne %}
-        {{ trajet.note_moyenne }}/ 5 ⭐
+        {% if resultat.note_chauffeur %}
+        {{ resultat.note_chauffeur|floatformat:1 }} / 5 ⭐
         {% else %}
-            pas encore noté
-        {% endif %}
-        <br>
+        pas de note
+        {% endif %}<br>
         Trajet :
         {{ resultat.ville_depart }} -> {{ resultat.ville_arrivee }}<br>
         A : {{ resultat.heure|date:"H\H:i"  }}<br>

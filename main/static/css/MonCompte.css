@@ -1,0 +1,471 @@
+/*--------------------------Menu--------------------------*/
+
+h1,
+h2,
+h3,
+h4 {
+  margin:10px;
+}
+
+#menu-tab {
+  font-family: "trebuchet ms", geneva;
+  color: black;
+  margin-top: 10px;
+}
+
+/*--------------Dimensions tableau--------------*/
+
+#page-wrap {
+  width: 100%;
+  margin: 10px auto;
+}
+
+/*-----------Gestion---des---Onglets--------------*/
+
+.tab {
+  float: left;
+}
+.tab label {
+  padding: 10px;
+  background: white;
+  border: solid 1px black;
+  position: relative;
+  left: 2px;
+  top: 4px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  box-shadow: 6px 6px 10px beige;
+}
+.tab [type="radio"] {
+  display: none;
+}
+
+.tab [type="radio"]:checked ~ label {
+  background-color: rgb(200, 240, 200);
+  color: black;
+  z-index: 0;
+  border-bottom: 1px solid white;
+}
+
+.tab [type="radio"]:checked ~ label ~ .content {
+  z-index: 1;
+}
+.tab [type="radio"]:checked ~ label ~ .content > * {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/*--------------Contenant----des---onglets--------------*/
+
+.content {
+  position: absolute;
+  top: 25px;
+  left: 0;
+  background: #b19a8b;
+  right: 0;
+  bottom: 0;
+  padding: 20px;
+  border-radius: 5px 10px 10px 10px;
+  box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.41);
+  overflow-y: auto;
+}
+
+#adresse_form option,
+#trajet_form option,
+form#etat_form option,
+#id_etat_reservation option,
+#role_form option,
+#voiture_form option,
+#preference_form option {
+  background-color: rgb(200, 240, 200);
+  border: solid 3px black;
+}
+
+#label img,
+#covoit_proposer img,
+#label_proposition img {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  margin-bottom: 10px;
+  border-radius: 15%;
+}
+/*-----Onglets actifs--------------*/
+
+[type="radio"]:checked ~ label ~ .content {
+  z-index: 1;
+}
+[type="radio"]:checked ~ label ~ .content > * {
+  opacity: 1;
+  transform: translateX(0);
+}
+/*--autre--*/
+#modification_satut {
+  margin-bottom: 30px;
+}
+/*--------------Responsive conteneur--------------*/
+
+@media (min-width: 320px) and (max-width: 480px) {
+  div.tabs {
+    margin: 10px 2%;
+  }
+  #menu-tab {
+    font-size: 8pt;
+  }
+  .tabs {
+    min-height: 450px;
+    margin-top: 10px;
+  }
+  .tab label {
+    top: 8px;
+  }
+  #label img,
+  #covoit_proposer img,
+  #label_proposition img,
+  label#resultat_recherche > img {
+    width: 110px;
+    height: 80px;
+  }
+  #label_proposition,
+  #covoit_proposer,
+  #covoit_reserver,
+  #label_proposition,
+  #resultat_recherche {
+    width: 130px;
+    height: auto;
+  }
+  #historique, #resultat_recherche , #covoit_reserver{
+    width: 280px;
+    height: auto;
+  }
+  label#resultat_recherche img, #covoit_reserver img,   #historique img {
+    width: 110px;
+    height: 110px;
+    margin-right:10px;
+  }
+
+}
+
+@media (min-width: 480px) and (max-width: 768px) {
+  div.tabs {
+    margin: 10px 4%;
+  }
+  .tab label {
+    font-size: 12px;
+  }
+  .tabs {
+    min-height: 470px;
+    margin-top: 10px;
+  }
+  #label_proposition,
+  #covoit_proposer,
+  #label_proposition {
+    width: 130px;
+    height: auto;
+  }
+  #label img,
+  #covoit_proposer img,
+  #label_proposition img,
+  label#resultat_recherche > img {
+    width: 110px;
+    height: 80px;
+  }
+  #historique, #resultat_recherche , #covoit_reserver{
+    width: 280px;
+    height: auto;
+    font-size: 10px;
+  }
+  label#resultat_recherche img, #covoit_reserver img,   #historique img {
+    width: 110px;
+    height: 110px;
+    margin-right:10px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  div.tabs {
+    margin: 10px 6%;
+  }
+  .tab label {
+    font-size: 14px;
+  }
+  .tabs {
+    min-height: 550px;
+    margin-top: 10px;
+  }
+  #label img,
+  #label_proposition img {
+    width: 135px;
+    height: 85px;
+  }
+  #label_proposition,
+  #covoit_proposer,
+  #label_proposition {
+    width: 150px;
+    height: auto;
+  }
+  #historique, #resultat_recherche , #covoit_reserver{
+    width: 310px;
+    height: auto;
+  }
+  label#resultat_recherche img, #covoit_reserver img,   #historique img {
+    width: 110px;
+    height: 110px;
+    margin-right:10px;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1280px) {
+  div.tabs {
+    margin: 15px 8%;
+  }
+  .tab label {
+    font-size: 15px;
+  }
+  .tabs {
+    min-height: 550px;
+    margin-top: 10px;
+  }
+  #label img,
+  #covoit_proposer img,
+  #label_proposition img {
+    width: 150px;
+    height: 90px;
+  }
+  #label_proposition,
+  #covoit_proposer,
+  #label_proposition{
+    width: 170px;
+    height: auto;
+  }
+  #historique, #resultat_recherche , #covoit_reserver{
+    width: 360px;
+    height: auto;
+    font-size: 12px;
+  }
+  label#resultat_recherche img, #covoit_reserver img,   #historique img {
+    width: 130px;
+    height: 130px;
+    margin-right:10px;
+  }
+}
+
+@media (min-width: 1280px) and (max-width: 1440px) {
+  div.tabs {
+    margin: 20px 10%;
+  }
+  .tab label {
+    font-size: 16px;
+  }
+  .tabs {
+    min-height: 550px;
+    margin-top: 10px;
+  }
+  #label img,
+  #label_proposition img,
+  label#resultat_recherche > img {
+    width: 160px;
+    height: 160px;
+  }
+  #label_proposition,
+  #covoit_proposer,
+  #label_proposition {
+    width: 180px;
+    height: auto;
+  }
+  #historique img, #covoit_reserver img {
+    margin-right:10px;
+  }
+  #historique, #resultat_recherche , #covoit_reserver{
+    width: 390px;
+    height: auto;
+    font-size: 15px;
+  }
+  label#resultat_recherche img, #covoit_reserver img,   #historique img {
+    width: 150px;
+    height: 150px;
+    margin-right:10px;
+  }
+}
+
+@media (min-width: 1440px) and (max-width: 1760px) {
+  div.tabs {
+    margin: 20px 12%;
+  }
+  .tab label {
+    font-size: 16px;
+  }
+  .tabs {
+    min-height: 550px;
+    margin-top: 10px;
+  }
+  #label img,
+  #label_proposition img,
+  label#resultat_recherche > img {
+    width: 160px;
+    height: 100px;
+  }
+  #label_proposition,
+  #covoit_proposer,
+  #covoit_reserver,
+  #label_proposition,
+  #resultat_recherche {
+    width: 180px;
+    height: auto;
+  }
+  #historique, #resultat_recherche , #covoit_reserver{
+    width: 370px;
+    height: auto;
+    font-size: 15px;
+  }
+  label#resultat_recherche img, #covoit_reserver img,   #historique img {
+    width: 130px;
+    height: 130px;
+    margin-right:10px;
+  }
+}
+
+@media (min-width: 1760px) and (max-width: 1920px) {
+  div.tabs {
+    margin: 25px 14%;
+  }
+  .tab label {
+    font-size: 18px;
+    top:2px;
+  }
+  .tabs {
+    min-height: 550px;
+    margin-top: 10px;
+  }
+  #label img,
+  #covoit_proposer img,
+  #label_proposition img,
+  label#resultat_recherche > img {
+    width: 160px;
+    height: 100px;
+  }
+  #label_proposition,
+  #covoit_proposer,
+  #label_proposition {
+    width: 180px;
+    height: auto;
+  }
+  #historique, #resultat_recherche , #covoit_reserver{
+    width: 400px;
+    height: auto;
+    font-size: 16px;
+  }
+  label#resultat_recherche img, #covoit_reserver img,   #historique img {
+    width: 150px;
+    height: 150px;
+    margin-right:10px;
+  }
+}
+
+@media (min-width: 1920px) and (max-width: 2048px) {
+  div.tabs {
+    margin: 25px 14%;
+  }
+  .tab label {
+    font-size: 16px;
+  }
+  .tabs {
+    min-height: 550px;
+    margin-top: 10px;
+  }
+  #label img,
+  #covoit_proposer img,
+  #label_proposition img,
+  label#resultat_recherche > img {
+    width: 160px;
+    height: 110px;
+  }
+  #label_proposition,
+  #covoit_proposer,
+  #label_proposition {
+    width: 180px;
+    height: auto;
+  }
+  #historique, #resultat_recherche , #covoit_reserver{
+    width: 400px;
+    height: auto;
+    font-size: 15px;
+  }
+  label#resultat_recherche img, #covoit_reserver img,   #historique img {
+    width: 150px;
+    height: 150px;
+    margin-right:10px;
+  }
+}
+@media (min-width: 2048px) and (max-width:2560px){
+  div.tabs {
+    margin: 30px 16%;
+  }
+  .tab label {
+    font-size: 20px;
+  }
+  .tabs {
+    min-height: 550px;
+    margin-top: 10px;
+  }
+  #label img,
+  #covoit_proposer img,
+  #label_proposition img{
+    width: 170px;
+    height: 120px;
+  }
+  #label_proposition,
+  #covoit_proposer,
+  #label_proposition {
+    width: 200px;
+    height: auto;
+  }
+  #historique, #resultat_recherche , #covoit_reserver{
+    width: 400px;
+    height: auto;
+    font-size: 16px;
+  }
+  label#resultat_recherche img, #covoit_reserver img,   #historique img {
+    width: 150px;
+    height: 150px;
+    margin-right:10px;
+  }
+}
+@media (min-width:2560px){
+  div.tabs {
+    margin: 30px 20%;
+  }
+  .tab label {
+    font-size: 20px;
+    top:0px;
+  }
+  .tabs {
+    min-height: 700px;
+    margin-top: 10px;
+  }
+  #label img,
+  #covoit_proposer img,
+  #label_proposition img {
+    width: 180px;
+    height: 120px;
+  }
+  #label_proposition,
+  #covoit_proposer,
+  #label_proposition {
+    width: 200px;
+    height: auto;
+  }
+  #historique, #resultat_recherche , #covoit_reserver{
+    width: 450px;
+    height: auto;
+    font-size: 18x;
+  }
+  label#resultat_recherche img, #covoit_reserver img,   #historique img {
+    width: 180px;
+    height: 180px;
+    margin-right:10px;
+  }
+}
+#avis_positif {
+  height: auto;
+}

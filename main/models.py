@@ -122,22 +122,6 @@ class NoteUser(models.Model):
         verbose_name_plural = "Notes utilisateurs"
         unique_together = ["chauffeur", "passager", "trajet"]
 
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        moyenne = NoteUser.objects.filter(
-            chauffeur=self.chauffeur, note__isnull=False
-        ).aggregate(models.Avg("note"))["note__avg"]
-
-        self.chauffeur.note = moyenne if moyenne else None
-        self.chauffeur.save()
-
-    @property
-    def get_note_moyenne(self):
-        moyenne = NoteUser.objects.filter(chauffeur=self.chauffeur).aggregate(
-            models.Avg("note")
-        )["note__avg"]
-        return moyenne if moyenne else "Pas encore évalué"
-
     def __str__(self):
         return f"Note de {self.chauffeur}: {self.note} {self.commentaire} {self.avis} "
 
@@ -358,7 +342,7 @@ class AdresseUser(models.Model):
     email = models.EmailField(max_length=100, null=True, blank=True)
     photo = models.ImageField(
         upload_to="user",
-        default="media/profils_picture/photo_default/photo_default.jpg",
+        default="photo_default/photo_default.jpg",
         null=True,
         blank=True,
         verbose_name="Photo de profil",

@@ -134,10 +134,10 @@ class CustomSetPasswordForm(SetPasswordForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields["new_password1"].widget.attrs.update(
-            {"placeholder": "Nouveau mot de passe"}
+            {"placeholder": "New password"}
         )
         self.fields["new_password2"].widget.attrs.update(
-            {"placeholder": "Confirmer le mot de passe"}
+            {"placeholder": "New password"}
         )
 
 
@@ -211,7 +211,9 @@ class RechercheTrajetForm(forms.Form):
         required=False,
     )
     date = forms.DateField(
-        label="Date", widget=forms.DateInput(attrs={"type": "date"}), required=True
+        label="Date",
+        widget=forms.DateInput(attrs={"type": "date"}),
+        required=True
     )
     pseudo = forms.CharField(
         max_length=100,
@@ -590,10 +592,7 @@ class ContactForm(forms.Form):
             self.fields["email"].widget.attrs["readonly"] = True
             self.fields["telephone"].widget.attrs["readonly"] = True
 
-            if user and user.is_superuser:
-                self.fields["message"].widget.attrs["readonly"] = True
 class ModerationAvisPositifForm(forms.ModelForm):
-
     class Meta:
         model = NoteUser
         fields = ["commentaire"]
@@ -612,8 +611,6 @@ class ModerationAvisPositifForm(forms.ModelForm):
                 "Le commentaire ne doit pas dépasser 100 caractères."
             )
         return commentaire
-
-
 
 class AfficherTrajetForm(forms.Form):
     chauffeur = forms.CharField(

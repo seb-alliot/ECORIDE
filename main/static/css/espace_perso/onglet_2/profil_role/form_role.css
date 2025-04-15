@@ -1,0 +1,121 @@
+#role_form {
+  margin-top: 10px;
+}
+
+#role_form label {
+  display: none;
+}
+#role_form select,
+#role_form button {
+  border-radius: 10px 10px 10px 10px;
+}
+@media (min-width: 320px) and (max-width: 480px) {
+  #role_form select,
+  #role_form button {
+    width: 150px;
+    height: 30px;
+    font-size: 12px;
+  }
+  #role_form {
+    margin-bottom: 10px;
+  }
+}
+@media (min-width: 480px) and (max-width: 768px) {
+  #role_form select,
+  #role_form button {
+    width: 150px;
+    font-size: 14px;
+    height: 30px;
+  }
+  p {
+    font-size: 14px;
+  }
+  #role_form {
+    margin-bottom: 10px;
+  }
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+  #role_form select,
+  #role_form button {
+    width: 150px;
+    font-size: 14px;
+    height: 30px;
+  }
+  p {
+    font-size: 16px;
+  }
+  #role_form {
+    margin-bottom: 15px;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1280px) {
+  #role_form select,
+  #role_form button {
+    width: 180px;
+    font-size: 16px;
+    height: 30px;
+  }
+  p {
+    font-size: 18px;
+  }
+  #role_form {
+    margin-bottom: 20px;
+  }
+}
+@media (min-width: 1280px) and (max-width: 1440px) {
+  #role_form select,
+  #role_form button {
+    width: 180px;
+    font-size: 14px;
+    height: 30px;
+  }
+  p {
+    font-size: 18px;
+  }
+  #role_form {
+    margin-bottom: 20px;
+  }
+}
+@media (min-width: 1440px) and (max-width: 1760px) {
+  #role_form select,
+  #role_form button {
+    width: 180px;
+    font-size: 18px;
+    height: 30px;
+  }
+  p {
+    font-size: 20px;
+  }
+  #role_form {
+    margin-bottom: 25px;
+  }
+}
+@media (min-width: 1760px) and (max-width: 1920px) {
+  #role_form select,
+  #role_form button {
+    width: 200px;
+    font-size: 20px;
+    height: 30px;
+  }
+  p {
+    font-size: 20px;
+  }
+  #role_form {
+    margin-bottom: 25px;
+  }
+}
+@media(min-width:1920px){
+  #role_form select,
+  #role_form button {
+    width: 225px;
+    font-size: 20px;
+    height: 30px;
+  }
+  p {
+    font-size: 20px;
+  }
+  #role_form {
+    margin-bottom: 25px;
+  }
+}

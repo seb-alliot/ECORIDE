@@ -1,0 +1,148 @@
+input#id_photo {
+  display: flex;
+}
+
+div.photo-parent > div > img {
+  border-radius: 15%;
+  margin-left: 51.5%;
+  margin-top: 30px;
+}
+.photo-fille {
+  gap: 10px;
+  margin-top: 10px;
+}
+
+#adresse_form label,
+#adresse_form img textarea,
+form#adresse_form a {
+  display: none;
+}
+
+input[type="file"]::file-selector-button {
+  display: flex;
+  background-color: #ffffff;
+  color: rgb(1, 0, 0);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+}
+input[type="file"]::file-selector-button:hover {
+  background-color: rgb(200, 240, 200);
+  display: flex;
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  #adresse_form img textarea {
+    font-size: 10px;
+  }
+  #adresse_form input,
+  #adresse_form select,
+  #adresse_form button,
+  #adresse_form input[type="file"]::file-selector-button {
+    width: 125px;
+    height: 30px;
+    font-size: 12px;
+    border: solid black 1px;
+  }
+  div.photo-parent > div > img {
+    width: 120px;
+    height: 95px;
+  }
+  .photo-parent {
+    align-items: center;
+  }
+  input#id_photo {
+    display: flex;
+    margin-left: -55%;
+  }
+}
+@media (min-width: 480px) and (max-width: 768px) {
+  #adresse_form img textarea {
+    font-size: 12px;
+  }
+  #adresse_form input,
+  #adresse_form select,
+  #adresse_form button,
+  #adresse_form input[type="file"]::file-selector-button {
+    width: 150px;
+    height: 30px;
+    font-size: 12px;
+  }
+
+  div.photo-parent > div > img {
+    width: 150px;
+    height: 125px;
+  }
+}
+@media (min-width: 768px) and (max-width: 1024px) {
+  #adresse_form img textarea {
+    font-size: 12px;
+  }
+  #adresse_form input,
+  #adresse_form select,
+  #adresse_form button,
+  #adresse_form input[type="file"]::file-selector-button {
+    width: 200px;
+    height: 30px;
+    font-size: 12px;
+  }
+  div.photo-parent > div > img {
+    width: 200px;
+    height: 150px;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1280px) {
+  #adresse_form img textarea {
+    font-size: 18px;
+  }
+  #adresse_form input,
+  #adresse_form select,
+  #adresse_form button,
+  #adresse_form input[type="file"]::file-selector-button {
+    width: 225px;
+    height: 30px;
+    font-size: 15px;
+  }
+  div.photo-parent > div > img {
+    width: 225px;
+    height: 175px;
+  }
+}
+@media (min-width: 1280px) and (max-width: 1440px) {
+  #adresse_form img textarea {
+    font-size: 18px;
+  }
+  #adresse_form input,
+  #adresse_form select,
+  #adresse_form button,
+  #adresse_form input[type="file"]::file-selector-button {
+    width: 225px;
+    height: 30px;
+    font-size: 15px;
+  }
+  div.photo-parent > div > img {
+    width: 225px;
+    height: 175px;
+  }
+}
+
+@media (min-width: 1440px) {
+  #adresse_form img textarea {
+    font-size: 18px;
+  }
+  #adresse_form input,
+  #adresse_form select,
+  #adresse_form button,
+  #adresse_form input[type="file"]::file-selector-button {
+    width: 225px;
+    height: 30px;
+    font-size: 15px;
+  }
+  div.photo-parent > div > img {
+    width: 225px;
+    height: 175px;
+  }
+}

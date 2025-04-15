@@ -1,0 +1,222 @@
+#voiture_form input,
+#voiture_form select,
+#voiture_form button {
+  border-radius: 10px;
+}
+
+#voiture_form label {
+  display: none;
+}
+
+div.voiture_mere {
+  gap: 10px;
+}
+div.voiture_mere > div {
+  display: flex;
+  gap: 2px;
+}
+@media (min-width: 320px) and (max-width: 480px) {
+  #voiture_form input,
+  #voiture_form select,
+  #voiture_form button {
+    width: 110px;
+    height: 30px;
+    font-size: 10px;
+    gap: 14px;
+  }
+  div.voiture_mere {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  div.voiture_mere > div {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+}
+@media (min-width: 480px) and (max-width: 768px) {
+  #voiture_form input,
+  #voiture_form select,
+  #voiture_form button {
+    width: 140px;
+    height: 30px;
+    font-size: 12px;
+    gap: 14px;
+  }
+  div.voiture_mere {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  div.voiture_mere > div {
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+}
+
+@media(min-width: 768px) and (max-width: 1024px) {
+  div.voiture_mere {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    justify-content: center;
+  }
+  #voiture_form input,
+  #voiture_form select,
+  #voiture_form button {
+    width: 150px;
+    height: 30px;
+    font-size: 12px;
+    gap: 14px;
+  }
+  div.voiture_mere > div {
+    display: flex;
+    gap: 4px;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1280px) {
+  div.voiture_mere {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    justify-content: center;
+  }
+  div.voiture_mere > div {
+    display: flex;
+    gap: 2px;
+  }
+  #voiture_form input,
+  #voiture_form select,
+  #voiture_form button {
+    width: 180px;
+    height: 30px;
+    font-size: 14px;
+    gap: 14px;
+  }
+}
+@media (min-width: 1280px) and (max-width: 1440px) {
+  div.voiture_mere {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    justify-content: center;
+  }
+  div.voiture_mere > div {
+    display: flex;
+    gap: 2px;
+  }
+  #voiture_form input,
+  #voiture_form select,
+  #voiture_form button {
+    width: 180px;
+    height: 30px;
+    font-size: 14px;
+    gap: 14px;
+  }
+}
+@media (min-width: 1440px) and (max-width: 1760px) {
+  div.voiture_mere {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  div.voiture_mere > div {
+    display: flex;
+    gap: 2px;
+  }
+  #voiture_form input,
+  #voiture_form select,
+  #voiture_form button {
+    width: 180px;
+    height: 30px;
+    font-size: 16px;
+    gap: 14px;
+  }
+}
+@media (min-width: 1760px) and (max-width: 1920px) {
+  div.voiture_mere {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+  }
+  div.voiture_mere > div {
+    display: flex;
+    gap: 2px;
+  }
+  #voiture_form input,
+  #voiture_form select,
+  #voiture_form button {
+    width: 200px;
+    height: 30px;
+    font-size: 16px;
+    gap: 14px;
+  }
+}
+@media(min-width:1920px) and (max-width:2048px){
+  div.voiture_mere {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: center;
+  }
+  div.voiture_mere > div {
+    display: flex;
+    gap: 2px;
+  }
+  #voiture_form input,
+  #voiture_form select,
+  #voiture_form button {
+    width: 225px;
+    height: 30px;
+    font-size: 16px;
+    gap: 14px;
+  }
+}
+
+@media(min-width:2048px) and (max-width:2560px){
+    div.voiture_mere {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      justify-content: center;
+    }
+    div.voiture_mere > div {
+      display: flex;
+      gap: 2px;
+    }
+    #voiture_form input,
+    #voiture_form select,
+    #voiture_form button {
+      width: 225px;
+      height: 30px;
+      font-size: 16px;
+      gap: 14px;
+    }
+  }
+@media(min-width:2560px){
+    div.voiture_mere {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-direction: column;
+    }
+    div.voiture_mere > div {
+      display: flex;
+      gap: 2px;
+    }
+    #voiture_form input,
+    #voiture_form select,
+    #voiture_form button {
+      width: 225px;
+      height: 30px;
+      font-size: 16px;
+      gap: 14px;
+    }
+  }

@@ -4,8 +4,8 @@
             <p>Avis</p>
         </div>
         <div class="class_flex class_aligne_items_center  class_column">
-            {% for commentaire in commentaires %}
-                <p id="avis">{{ commentaire.passager__username }} : {{ commentaire.commentaire }}</p>
+            {% for commentaires in commentaire %}
+                <p id="avis"> {{ commentaires.commentaire }}</p>
             {% empty %}
                 <p>Aucun commentaire</p>
             {% endfor %}
@@ -14,11 +14,11 @@
             <p>Note</p>
         </div>
         <div class="class_flex class_aligne_items_center class_column">
-            {% if note_chauffeur.get_note_moyenne %}
-            <p  id="note">{{  note_chauffeur.get_note_moyenne|floatformat:1 }}/ 5 ⭐ </p>
+            {% if trajet.note_chauffeur %}
+            {{ trajet.note_chauffeur|floatformat:1 }} / 5 ⭐
             {% else %}
-                <p id="note">Aucune note</p>
-            {% endif %}
+            pas de note
+            {% endif %}<br>
         </div>
         <div class="class_flex p_deco  class_aligne_items_center class_border_radius class_justify_center">
             <p>préférences</p>

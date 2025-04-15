@@ -8,6 +8,8 @@ from django.conf.urls.static import static
 from django.contrib.auth import logout
 from django.urls import re_path
 from django.views.static import serve
+from main.utils import UserCreateView , activation, CustomPasswordResetView , CustomResetPasswordConfirmView
+from main.forms import CustomSetPasswordForm
 
 
 urlpatterns = [
@@ -20,21 +22,17 @@ urlpatterns = [
     path("contact/", main_views.Contact, name="_contact"),
     path("faq/", main_views.mentions_legales, name="_faq"),
 
-    path("inscription/", main_views.UserCreateView.as_view(), name="inscription"),
-    path("activation/<token>/<uidb64>/", main_views.activation, name="activation"),
+    path("inscription/", UserCreateView.as_view(), name="inscription"),
+    path("activation/<token>/<uidb64>/", activation, name="activation"),
 
     path("connection1/", main_views.connection1, name="connection1"),
     path("connection2/", main_views.connection2, name="connection2"),
     path("logout/", main_views.logout_view, name="logout"),
 
-    path("password_reset/", main_views.CustomPasswordResetView.as_view(), name="password_reset"),
+    path("password_reset/", CustomPasswordResetView.as_view(), name="password_reset"),
     path(
         "reset/<uidb64>/<token>/",
-        auth_views.PasswordResetConfirmView.as_view(
-            success_url=reverse_lazy("index"),
-            form_class=main_views.CustomSetPasswordForm,
-            template_name="réinitialisation/password_reset_confirm.html",
-        ),
+        CustomResetPasswordConfirmView.as_view(),
         name="password_reset_confirm",
     ),
     path(

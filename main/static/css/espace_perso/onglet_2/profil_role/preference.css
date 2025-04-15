@@ -1,0 +1,170 @@
+textarea#id_exigences_personnelles {
+  font-size: 12px;
+}
+#preference_form {
+  margin-top: 10px;
+}
+
+#preference_form label {
+  display: none;
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  #preference_form input,
+  #preference_form select,
+  #preference_form button,
+  textarea#id_exigences_personnelles {
+    width: 120px;
+    height: 30px;
+    font-size: 10px;
+  }
+  #preference_form {
+    flex-direction: column;
+    gap: 2px;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  .preference_css {
+    flex-direction: column;
+    gap: 12px;
+    font-size: 12px;
+  }
+  .preference_css :nth-child(1) {
+    margin-top: 10px;
+  }
+  .preference_css :nth-child(1),
+  .preference_css :nth-child(2),
+  .preference_css :nth-child(3),
+  .preference_css :nth-child(4) {
+    justify-content: center;
+    margin-top: 10px;
+  }
+}
+@media (min-width: 480px) and (max-width: 768px) {
+  #preference_form input,
+  #preference_form select,
+  #preference_form button,
+  textarea#id_exigences_personnelles {
+    width: 150px;
+    height: 30px;
+    font-size: 12px;
+  }
+  #preference_form {
+    flex-direction: column;
+    gap: 2px;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  .preference_css {
+    flex-direction: column;
+    gap: 12px;
+    font-size: 12px;
+  }
+  .preference_css :nth-child(1) {
+    margin-top: 10px;
+  }
+  .preference_css :nth-child(1),
+  .preference_css :nth-child(2),
+  .preference_css :nth-child(3),
+  .preference_css :nth-child(4) {
+    justify-content: center;
+    margin-top: 10px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  form#preference_form {
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 15px;
+  }
+  #preference_form input,
+  #preference_form select,
+  #preference_form button,
+  textarea#id_exigences_personnelles {
+    width: 150px;
+    height: 30px;
+    font-size: 12px;
+  }
+  .preference_css {
+    gap: 14px;
+    font-size: 15px;
+    margin: 20px;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1280px) {
+  #preference_form input,
+  #preference_form select,
+  #preference_form button,
+  textarea#id_exigences_personnelles {
+    width: 180px;
+    height: 30px;
+    font-size: 14px;
+  }
+  .preference_css {
+    gap: 14px;
+    font-size: 16px;
+    margin: 20px;
+  }
+}
+@media (min-width: 1280px) and (max-width: 1440px) {
+  #preference_form input,
+  #preference_form select,
+  #preference_form button,
+  textarea#id_exigences_personnelles {
+    width: 180px;
+    height: 30px;
+    font-size: 14px;
+  }
+  .preference_css {
+    gap: 14px;
+    font-size: 18px;
+    margin: 20px;
+  }
+}
+@media (min-width: 1440px) and (max-width: 1760px) {
+  #preference_form input,
+  #preference_form select,
+  #preference_form button,
+  textarea#id_exigences_personnelles {
+    width: 180px;
+    height: 30px;
+    font-size: 16px;
+  }
+  .preference_css {
+    gap: 14px;
+    font-size: 20px;
+    margin: 20px;
+  }
+}
+@media (min-width: 1760px) and (max-width: 1920px) {
+  #preference_form input,
+  #preference_form select,
+  #preference_form button,
+  textarea#id_exigences_personnelles {
+    width: 200px;
+    height: 30px;
+    font-size: 16px;
+  }
+  .preference_css {
+    gap: 14px;
+    font-size: 20px;
+    margin: 20px;
+  }
+}
+@media(min-width:1920px){
+  #preference_form input,
+  #preference_form select,
+  #preference_form button,
+  textarea#id_exigences_personnelles {
+    width: 225px;
+    height: 30px;
+    font-size: 16px;
+  }
+  .preference_css {
+    gap: 14px;
+    font-size: 20px;
+    margin: 20px;
+  }
+}

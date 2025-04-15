@@ -1,0 +1,234 @@
+:root {
+  --logo-size: 100px;
+  --font-size-base: 12px;
+  --input-width: 80px;
+  --input-width--other: 95px;
+  --image-height: 100px;
+}
+.image-principal {
+  background-image: url("../../photo/principal_mobile.avif");
+  min-height: 180px;
+}
+#logo,
+.photo_profile,
+.photo_default {
+  height: var(--logo-size);
+  width: var(--logo-size);
+}
+#ajouter,
+#refuser,
+#recherche_form input,
+#recherche_form button,
+#reservation_form button,
+#form_trajet input,
+#form_trajet button,
+#filtre_form input,
+#filtre_form button,
+#filtre_form select,
+#selection_trajet button,
+select#id_places {
+  width: var(--input-width);
+  font-size: var(--font-size-base);
+  height: 30px;
+
+}
+#ajouter,
+#refuser,
+#bouton_confirmer,
+#moderation_form select,
+form#email_filter_form select,
+form#email_select_form select,
+form#contact_form button {
+  width: var(--logo-size);
+}
+
+#bouton_refuser,
+#bouton_modo,
+#email_type,
+#email_select,
+button#bouton_note,
+select#id_avis,
+select#id_note,
+button#bouton_note,
+select#id_avis,
+select#id_note,
+#contact_form input,
+#contact_form button,
+#reservation_annuler,
+select#id_etat,
+#deux_choix,
+#bouton_terminer,
+form#etat_form select,
+form#etat_form button,
+#reservation_form select,
+#reservation_form button,
+#inscription input,
+#inscription button,
+#login1 input,
+#login1 button,
+#login2 input,
+#login2 button,
+#reset_mdp input,
+#reset_mdp button,
+#validation_email input,
+#validation_email button,
+footer a {
+  width: var(--input-width--other);
+  font-size: var(--font-size-base);
+  height: 30px;
+
+}
+#inscription,
+#login1,
+#login2,
+#reset_mdp,
+#validation_email {
+  height: 50px;
+}
+
+#creer_compte,
+#mot_de_passe_oublie {
+  font-size: var(--font-size-base);
+  margin-top: var(--spacing-md);
+}
+#resultat_recherche {
+  width: 300px;
+  height: auto;
+  font-size: var(--font-size-base);
+  margin-top: 10px;
+}
+label#resultat_recherche img {
+  width: 110px;
+  height: 110px;
+  margin-right: 10px;
+}
+.presentation p {
+  font-size: 15px;
+}
+#info_user,
+select#id_avis,
+select#id_note,
+#avis_perso {
+  font-size: 16px;
+  margin-bottom: var(--spacing-sm);
+}
+h1,
+h2,
+h3,
+h4{
+  font-size: 16px;
+}
+form#contact_form textarea {
+  font-size: 10px;
+  width: 300px;
+  height: 150px;
+}
+#id_commentaire {
+  width: 300px;
+  height: 100px;
+  font-size: 20px;
+}
+form#contact_form input{
+  font-size: 10px;
+  width: 150px;
+}
+/*---carte de selection de trajet---*/
+div#reservation > div > img.photo_profile,
+div#reservation > div {
+  width: 140px;
+  height: 140px;
+}
+div#info_trajet > div > p {
+  font-size: 11px;
+}
+#prix_trajet,
+#chauffeur_trajet,
+#info_trajet > div > p {
+  font-size: var(--font-size-base);
+}
+div#info_trajet ,
+#note_perso,
+#avis_perso,
+#info_trajet{
+  margin: 3px;
+}
+#div_avis {
+  font-size: 8px;
+  width: 80%;
+  margin-top: 4px;
+}
+#dive_preference,
+#note {
+  margin: var(--spacing-sm);
+  font-size: 8px;
+}
+#preference {
+  margin-top: 6px;
+  font-size: 8px;
+}
+#place_a_reserver, #resultat_ecolo , #resultat_non_ecolo {
+  font-size: var(--spacing-md);
+  margin: var(--spacing-md);
+}
+#chauffeur_trajet {
+  margin-bottom: -1.5%;
+}
+#prix_trajet {
+  margin-top: -1.5%;
+}
+#creer_compte , button#bouton_note
+{
+  margin-top: var(--font-size-base);
+}
+.presentation > div {
+  margin-right: 12.5%;
+  margin-left: 12.5%;
+}
+#recherche_form,
+#login1,
+#login2,
+#reset_mdp,
+#validation_email {
+  height: 45px;
+}
+#preference_form,#bouton_terminer ,#deux_choix {
+  margin-bottom: 15px;
+}
+#account-admin {
+  gap: 5px;
+}
+
+
+#moderation_form select, #bouton_modo {
+  margin-right: 100px;
+}
+#avis_positif input {
+  width: 210px;
+  height: 30px;
+}
+
+#aficher_chauffeur input,#aficher_passager input , #aficher_trajet input , #aficher_date_reservation input {
+  height: 30px;
+  width: 110px;
+  font-size: 12px;
+}
+#aficher_chauffeur input , #aficher_passager input {
+  margin-left: 140px;
+}
+#aficher_trajet input {
+  margin-left: 110px;
+}
+#id_date_reservation {
+  margin-left: 87px;
+}
+#affichage_trajet_form label {
+  font-size: 12px;
+}
+#affichage_trajet_form {
+  margin-top: 30px;
+}
+
+#bouton_moderateur {
+  gap: 40px;
+  margin-top: 10px;;
+}
