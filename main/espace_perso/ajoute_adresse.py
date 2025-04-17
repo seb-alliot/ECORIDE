@@ -19,7 +19,7 @@ def AjoutTonAdresse(request, adresse_user=None, user=None):
             adresse.user = user
             adresse.save()
             messages.success(request, "Vos informations ont été mises à jour.")
-            return None, redirect("MonCompte")
+            return redirect("MonCompte")
         else:
             if "email" in adresse_form.errors:
                 messages.error(request, "Cette adresse email est déjà prise.")
