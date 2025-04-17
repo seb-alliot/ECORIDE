@@ -36,8 +36,6 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['ecoride-itsuki.it.com', 'www.ecoride-itsuki.it.com']
 
-
-
 # Application definition
 
 INSTALLED_APPS = [
