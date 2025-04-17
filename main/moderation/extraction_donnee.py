@@ -83,6 +83,7 @@ def ExtractionDonnee(request, email_type, selected_email, mail, email_id_selecte
             pseudo = "Non renseigné"
             telephone = "Non renseigné"
             sujet = "Non renseigné"
+            commentaire = "Non renseigné"
 
             # Email
             div_email = extraire.find("div", class_="email_user")
@@ -103,6 +104,11 @@ def ExtractionDonnee(request, email_type, selected_email, mail, email_id_selecte
             div_sujet = extraire.find("div", class_="sujet")
             if div_sujet and div_sujet.p:
                 sujet = div_sujet.p.get_text().replace("sujet:", "").replace("sujet :", "").strip()
+
+            # Commentaire
+            div_commentaire = extraire.find("div", class_="commentaire")
+            if div_commentaire and div_commentaire.p:
+                commentaire = div_commentaire.p.get_text().replace("Commentaire:", "").replace("Commentaire :", "").strip()
 
         except AttributeError:
             messages.info(request, "Des données n'ont pas pu être récupérées.")
