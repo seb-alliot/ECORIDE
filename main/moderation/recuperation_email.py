@@ -1,20 +1,18 @@
-from django.http import HttpResponseRedirect
 from email.header import decode_header
 import chardet
 import email
 
-def RecuperationEmail(request, mail_ids, mail, emails):
-    if not mail_ids:
-        return HttpResponseRedirect("/admin/moderateur/moderation_email/",
-            {"error": "Aucun email à modérer."}
-        )
+def RecuperationEmail(request, mail, data, result, mail_ids, emails):
 
-    email_id_selected = request.GET.get("email_id")
     email_type = request.GET.get("email_type", "").strip()
-    filtered_emails = []
+    selected_email = None
 
-    for current_email_id in mail_ids:
-        result, data = mail.fetch(current_email_id, "(RFC822)")
+    #confort ux uniquement
+    # Récupération de l'email sélectionné (si existant)
+    email_id_selected = request.GET.get("email_id")
+    # Si pas d'email on fait en sorte de ne pas générer d'erreur
+    for email_id in mail_ids:
+        result, data = mail.fetch(email_id, "(RFC822)")
         if result != "OK" or not data or not data[0]:
             continue
 
@@ -24,48 +22,47 @@ def RecuperationEmail(request, mail_ids, mail, emails):
 
         message = email.message_from_bytes(raw_email)
         subject, encoding = decode_header(message["Subject"])[0]
-        if isinstance(subject, bytes):
+        if isinstance(subject, bytes) and encoding:
             subject = subject.decode(encoding if encoding else "utf-8")
-
         if subject.lower().startswith("re:"):
             continue
-
+        if email_type and email_type.lower() not in subject.lower():
+            continue
+        # on applique un filtre sur ce que l'on veux recuperer comme email
         sender = message.get("From")
         if not (
-            ("Avis negatif" in subject or "Avis positif" in subject or "Prise de contact" in subject)
+            (
+                "Avis negatif" in subject
+                or "Avis positif" in subject
+                or "Prise de contact" in subject
+            )
             and ("staff.modo.ecoride@gmail.com" in sender)
         ):
             continue
 
-        if email_type and email_type not in subject:
-            continue
-
         body = ""
+        # on autopsie l'email recu
         if message.is_multipart():
             for part in message.walk():
-                if part.get_content_type() == "body/html":
-                    charset = chardet.detect(part.get_payload())["encoding"]
-                    if charset:
-                        body = part.get_payload(decode=True).decode(charset)
+                if part.get_content_type() == "text/html":
+                    gerer_caractere_speciaux = chardet.detect(part.get_payload())
+                    if gerer_caractere_speciaux["encoding"]:
+                        body = part.get_payload(decode=True).decode(
+                            gerer_caractere_speciaux["encoding"]
+                        )
                     else:
                         body = part.get_payload(decode=True).decode()
                     break
         else:
             body = message.get_payload(decode=True).decode()
-
         email_data = {
+            "id": email_id.decode(),
             "subject": subject,
             "sender": sender,
             "body": body,
         }
-
-        filtered_emails.append({
-            "id": current_email_id.decode(),
-            "subject": subject,
-            "sender": sender,
-            "email_id": current_email_id,
-        })
-
         emails.append(email_data)
+        if email_id_selected and email_id_selected == email_data["id"]:
+            selected_email = email_data
 
-    return email_id_selected, email_type, current_email_id, body, email_data, subject, emails
+    return email_type, email_id_selected, mail_ids, emails, selected_email

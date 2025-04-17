@@ -1,5 +1,5 @@
 from django.conf import settings
-from ..models import TrajetProposer, Voiture, ChoixRole, NoteUser, Preference
+from ..models import  Voiture, ChoixRole, Preference
 from ..models import CreditUser, AdresseUser
 
 def initialisation_template(request):
