@@ -10,7 +10,7 @@
                                     Départ de :<br>{{ trajet.ville_depart }} pour {{ trajet.ville_arrivee }}<br>
                                     Le  {{ trajet.date|date }}<br>
                                     A: {{ trajet.heure|date:"H\H:i" }}<br>
-                                    Voiture : <br>{{ trajet.voiture.marque}} {{ trajet.voiture.modele }}<br>
+                                    Voiture : {{ trajet.voiture.marque}} {{ trajet.voiture.modele }}<br>
                                     Moteur :  {{ trajet.voiture.type_moteur }}<br>
                                     Prix : {{ trajet.prix }}€<br>
                                     Place:{% if trajet.places != 0 %} {{ trajet.places }}

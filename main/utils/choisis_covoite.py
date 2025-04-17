@@ -66,14 +66,16 @@ def ChoisisTonCovoite(request):
                     #ou return HttpResponseRedirect(f"{reverse('reservation')}?trajet_id={trajet.id}") #
 
                 # Vérification et mise à jour de la réservation
-                elif reservation:
+                if reservation:
                     if reservation.etat_reservation == "Annulé":
-                        reservation = ReservationTrajet.objects.create(
-                            trajet_reserver=trajet,
-                            passager=user,
-                            prix_par_passager=prix_total,
-                            places=places_reservees,
-                        )
+                        # On réactive la réservation sinon gros bug pas sympa et bien muet
+                        reservation.etat_reservation = "Reserver"
+                        reservation.places = 0
+                        reservation.prix_par_passager = 0
+                        reservation.save()
+                        # Mise à jour des données
+                        reservation.paiement_passager(places_reservees)
+
                     else:
                         reservation.places += places_reservees
                         reservation.paiement_passager(places_reservees)

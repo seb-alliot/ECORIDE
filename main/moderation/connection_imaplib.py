@@ -13,13 +13,13 @@ def ConnectionImaplib(request):
     mail.select("inbox")
 
     result, data = mail.search(None, "ALL")
+
     if result != "OK":
         return render(
         request,
             "admin/moderateur/moderation_email/moderation_email.html",
             {"error": "Il n'y a pas d'emails a modérer."},
         )
-
     mail_ids = data[0].split()
     emails = []
-    return emails, mail_ids, mail
+    return mail, data, result ,mail_ids, emails

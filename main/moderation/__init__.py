@@ -1,2 +1,6 @@
 from .connection_imaplib import ConnectionImaplib
 from .recuperation_email import RecuperationEmail
+from .extraction_donnee import ExtractionDonnee
+from .moderation_negative import GereLesAvisNegatif
+from .moderation_positive import GereLesAvisPositif
+from .prise_contact import PriseDeContact
