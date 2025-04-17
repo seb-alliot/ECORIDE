@@ -29,7 +29,6 @@ _SITE_ROOT = os.path.dirname(os.path.abspath(__file__))
 SECRET_KEY = env('DJANGO_SECRET_KEY', default='django-insecure-#&')
 # settings.py
 
-# Clés API de Stripe en mode test
 # dans settings.py
 
 DEBUG = False
