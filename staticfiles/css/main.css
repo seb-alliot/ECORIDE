@@ -159,7 +159,6 @@ label#resultat_recherche img,
 
 #logo {
   display: flex;
-  margin-left: 4%;
 }
 /* Footer */
 footer {
@@ -305,6 +304,7 @@ a:hover {
   display: flex;
   text-decoration: none;
   flex-direction: column;
+  align-items: center;
 }
 
 .admin-link {
@@ -512,4 +512,25 @@ form#etat_form select,
 }
 form#reservation_form > a.btn.btn-primary {
   color:red;
+}
+div#gain_plateforme {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.success, .error, .info{
+  display: flex;
+  justify-content: center;
+  margin: 5%;
+
+}
+.success {
+  color: green;
+}
+.error {
+  color: red;
+}
+.info {
+  color: blue;
 }

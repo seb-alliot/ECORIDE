@@ -1,5 +1,5 @@
 :root {
-  --logo-size: 120px;
+  --logo-size: 115px;
   --font-size-base: 20px;
   --font-size-other: 16px;
   --input-width: 165px;
@@ -186,9 +186,7 @@ select#id_avis,
 select#id_note {
   margin-bottom: 15px;
 }
-#account-admin {
-  gap: 80px;
-}
+
 #moderation_form select,select#id_avis {
   margin-right: 20px;
 }
@@ -224,4 +222,26 @@ select#id_note {
 
 form#reservation_form > a.btn.btn-primary {
   font-size: 22px;
+}
+li#voiture_posseder {
+  margin-left: 5%;
+}
+
+#gain_plateforme {
+  margin-top: 10px;
+  font-size: 16px;
+  margin-left: -10%;
+}
+#account-admin {
+  font-size: 16px;
+  gap:80px;
+  margin-left: 30%;
+}
+
+.success, .error, .info{
+  font-size: 20px;
+}
+#logo {
+  display: flex;
+  margin-left: -300%;
 }

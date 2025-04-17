@@ -1,5 +1,5 @@
 :root {
-  --logo-size: 250px;
+  --logo-size: 270px;
   --font-size-base: 26px;
   --input-width: 300px;
   --image-height: 900px;
@@ -183,9 +183,7 @@ form#trajet_form , #ajout_voiture,#reservation_faite, #covoiturage_proposer, #tr
 select#id_note{
   margin-bottom: 20px;
 }
-#account-admin {
-  gap: 20px;
-}
+
 #moderation_form select, #bouton_modo, select#id_avis{
   margin-right: 98px;
 }
@@ -194,7 +192,6 @@ select#id_note{
   height: 30px;
   height: 40px;
 }
-
 
 #bouton_moderateur {
   gap:20px;
@@ -228,4 +225,24 @@ select#id_note{
 
 form#reservation_form > a.btn.btn-primary {
   font-size: 34px;
+}
+
+#gain_plateforme {
+  margin-top: 10px;
+  font-size: 24px;
+  margin-left: -10%;
+}
+#account-admin {
+  font-size: 24px;
+  gap:100px;
+  margin-left: 80%;
+}
+
+.success, .error, .info{
+  font-size: 28px;
+}
+
+#logo {
+  display: flex;
+  margin-left: -590%;
 }

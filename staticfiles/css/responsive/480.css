@@ -1,5 +1,5 @@
 :root {
-  --logo-size: 100px;
+  --logo-size: 95px;
   --font-size-base: 12px;
   --input-width: 80px;
   --input-width--other: 95px;
@@ -15,6 +15,9 @@
   height: var(--logo-size);
   width: var(--logo-size);
 }
+select#id_avis,
+#moderation_form select,
+#bouton_modo,
 #ajouter,
 #refuser,
 #recherche_form input,
@@ -126,7 +129,7 @@ form#contact_form textarea {
 #id_commentaire {
   width: 300px;
   height: 100px;
-  font-size: 20px;
+  font-size: 16px;
 }
 form#contact_form input{
   font-size: 10px;
@@ -195,7 +198,7 @@ div#info_trajet ,
   margin-bottom: 15px;
 }
 #account-admin {
-  gap: 5px;
+  gap: 15px;
 }
 
 
@@ -231,4 +234,12 @@ div#info_trajet ,
 #bouton_moderateur {
   gap: 40px;
   margin-top: 10px;;
+}
+.success, .error, .info{
+  font-size: 16px;
+}
+
+#logo {
+  display: flex;
+  margin-left: -25%;
 }
