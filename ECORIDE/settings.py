@@ -130,21 +130,21 @@ USE_I18N = True
 
 USE_TZ = True
 
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "main","media")
+MEDIA_ROOT = BASE_DIR / "main" / "media"
 
 STATIC_URL = "/static/"
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "main", "static"),
+    BASE_DIR / "main" / "static",
 ]
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
