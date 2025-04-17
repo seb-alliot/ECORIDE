@@ -12,7 +12,16 @@ def GereLesAvisNegatif(request,mail,email_id_selected,commentaire, chauffeur_id,
     print(f"le trajet id a pour numéro de bdd :", id_trajet)
     try:
         chauffeur = User.objects.get(pk=chauffeur_id)
-        passager = User.objects.get(pk=passager_id)
+        passager = passager_id
+        print(f"le passager est ", passager)
+        reservation = ReservationTrajet.objects.filter(
+            trajet_reserver=trajet_id,
+            passager=passager_id,
+        ).first()
+        if not passager:
+            passager = None
+            messages.info(request, "Le passager n'existe plus.")
+        print(f"le chauffeur est ", chauffeur)
     except User.DoesNotExist:
         messages.error(request, "Utilisateur introuvable.")
         return redirect("moderation_email")
@@ -24,15 +33,14 @@ def GereLesAvisNegatif(request,mail,email_id_selected,commentaire, chauffeur_id,
             choix_commentaire = moderation_form.cleaned_data["avis"]
             note_chauffeur = NoteUser.objects.create(
                 chauffeur=chauffeur,
-                passager=passager,
+                passager=passager if passager else None,
             )
-            reservation = ReservationTrajet.objects.filter(
-                passager=passager_id,
-            ).first()
+
             try:
                 if choix_commentaire == "oui":
+                    print(f"le choix du commentaire est {choix_commentaire}")
                     if note_chauffeur.commentaire_moderer:
-                        messages.error(request, "Le commentaire a déjà été modéré.")
+                        messages.info(request, "Le commentaire a déjà été modéré.")
                     else:
                         note_chauffeur.commentaire_moderer = True
                         note_chauffeur.etat_paiement = choix_moderateur
@@ -40,14 +48,16 @@ def GereLesAvisNegatif(request,mail,email_id_selected,commentaire, chauffeur_id,
                         note_chauffeur.save()
                         note_chauffeur.commentaire_moderer = True
                         messages.info(request, "Le commentaire a bien été enregistré.")
-                elif choix_commentaire == "non":
+                if choix_commentaire == "non":
+                    print(f"le choix du commentaire est {choix_commentaire}")
                     if note_chauffeur.commentaire_moderer:
-                        messages.error(request, "Le commentaire a déjà été modéré.")
+                        messages.einfo(request, "Le commentaire a déjà été modéré.")
                     else:
                         note_chauffeur.commentaire_moderer = True
                         messages.info(request, "Votre choix pour le commentaire a été enregistré.")
 
                 if choix_moderateur == "Payer":
+                    print(f"le choix du paiement est {choix_moderateur}")
                     if note_chauffeur.decision_prise:
                         messages.info(request, "Le paiement a déjà été traiter.")
                     else:
@@ -60,6 +70,7 @@ def GereLesAvisNegatif(request,mail,email_id_selected,commentaire, chauffeur_id,
                             reservation.trajet_payer = True
                             note_chauffeur.decision_prise = True
                             reservation.save()
+                            print("la reservation est ", reservation)
 
                             mail.store(email_id_selected, "+FLAGS", "\\Deleted")
                             mail.expunge()
@@ -70,7 +81,9 @@ def GereLesAvisNegatif(request,mail,email_id_selected,commentaire, chauffeur_id,
                             return redirect("moderation_email")
 
                 elif choix_moderateur == "Refuser":
+                    print(f"le choix du paiement est {choix_moderateur}")
                     if request.POST.get("Valider") == "oui":
+                        print(f"les donné de la requete sont {request.POST}")
                         reservation.etat_paiement = "Refuser"
                         reservation.trajet_payer = True
                         note_chauffeur.decision_prise = True

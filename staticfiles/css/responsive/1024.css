@@ -187,7 +187,7 @@ select#id_note {
   margin-bottom: 15px;
 }
 #account-admin {
-  gap: 10px;
+  gap: 80px;
 }
 #moderation_form select,select#id_avis {
   margin-right: 20px;

@@ -1,5 +1,5 @@
 :root {
-  --logo-size: 100px;
+  --logo-size: 95px;
   --font-size-base: 12px;
   --input-width: 80px;
   --input-width--other: 95px;
@@ -198,7 +198,7 @@ div#info_trajet ,
   margin-bottom: 15px;
 }
 #account-admin {
-  gap: 5px;
+  gap: 15px;
 }
 
 
@@ -234,4 +234,12 @@ div#info_trajet ,
 #bouton_moderateur {
   gap: 40px;
   margin-top: 10px;;
+}
+.success, .error, .info{
+  font-size: 16px;
+}
+
+#logo {
+  display: flex;
+  margin-left: -25%;
 }

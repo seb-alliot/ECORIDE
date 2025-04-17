@@ -181,7 +181,8 @@ select#id_note {
   margin-bottom: 15px;
 }
 #account-admin{
-  gap: 10px;
+  gap: 50px;
+  margin-left: 20%;
 }
 #moderation_form select, #bouton_modo, select#id_avis {
   margin-right: 50px;
@@ -220,4 +221,13 @@ select#id_note {
 
 form#reservation_form > a.btn.btn-primary {
   font-size: 20px;
+}
+
+.success, .error, .info{
+  font-size: 18px;
+}
+
+#logo {
+  display: flex;
+  margin-left: -140%;
 }

@@ -179,7 +179,7 @@ form#trajet_form , #ajout_voiture,#reservation_faite, #covoiturage_proposer, #tr
   margin-bottom: 20px;
 }
 #account-admin {
-  gap: 10px;
+  gap: 80px;
 }
 #moderation_form select, #bouton_modo,
 select#id_avis {

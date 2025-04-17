@@ -1,5 +1,5 @@
 :root {
-  --logo-size: 150px;
+  --logo-size: 170px;
   --font-size-base: 20px;
   --input-width: 220px;
   --image-height: 480px;
@@ -178,8 +178,8 @@ select#id_avis,
 select#id_note {
   margin-bottom: 20px;
 }
-#account-admin {
-  gap: 15px;
+div#gain_plateforme {
+  font-size: 20px;
 }
 #moderation_form select, #bouton_modo,select#id_avis {
   margin-right: 60px;
@@ -217,4 +217,24 @@ select#id_note {
 
 form#reservation_form > a.btn.btn-primary {
   font-size: 28px;
+}
+
+#gain_plateforme {
+  margin-top: 10px;
+  font-size: 20px;
+  margin-left: -10%;
+}
+#account-admin {
+  font-size: 20px;
+  gap:80px;
+  margin-left: 60%;
+}
+
+.success, .error, .info{
+  font-size: 24px;
+}
+
+#logo {
+  display: flex;
+  margin-left: -480%;
 }

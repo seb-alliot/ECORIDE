@@ -182,9 +182,7 @@ form#trajet_form , #ajout_voiture,#reservation_faite, #covoiturage_proposer, #tr
 select#id_note {
   margin-bottom: 20px;
 }
-#account-admin {
-  gap: 10px;
-}
+
 #moderation_form select, #bouton_modo,select#id_avis{
   margin-right: 50px;
 }
@@ -221,4 +219,23 @@ select#id_note {
 
 form#reservation_form > a.btn.btn-primary {
   font-size: 24px;
+}
+
+#gain_plateforme {
+  margin-top: 10px;
+  font-size: 18px;
+  margin-left: -10%;
+}
+#account-admin {
+  font-size: 18px;
+  gap:80px;
+  margin-left: 60%;
+}
+.success, .error, .info{
+  font-size: 22px;
+}
+
+#logo {
+  display: flex;
+  margin-left: -500%;
 }

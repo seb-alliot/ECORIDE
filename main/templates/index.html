@@ -24,20 +24,26 @@
     </head>
 
 
-<header class="generic position_relative">
+<header class="generix3 position_relative">
     {% block headerContent %}
-    {% block logo %}
-        {% include "interface_utilisateur/reutilisable/_logo.html" %}
-    {% endblock logo %}
+    <div>
+        <div>
+            <div class="class_flex">
+                {% block logo %}
+                    {% include "interface_utilisateur/reutilisable/_logo.html" %}
+                {% endblock logo %}
 
-    {% block msginfo %}
-        {% include "interface_utilisateur/reutilisable/_msginfo.html" %}
-    {% endblock msginfo %}
-
-    {% block connection %}
-        {% include "interface_utilisateur/reutilisable/_info_user.html" %}
-    {% endblock connection %}
-
+                {% block connection %}
+                    {% include "interface_utilisateur/reutilisable/_info_user.html" %}
+                {% endblock connection %}
+            </div>
+        </div>
+        <div>
+            {% block msginfo %}
+                {% include "interface_utilisateur/reutilisable/_msginfo.html" %}
+            {% endblock msginfo %}
+        </div>
+    </div>
     {% endblock headerContent %}
 </header>
 

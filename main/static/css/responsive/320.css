@@ -1,5 +1,5 @@
 :root {
-  --logo-size: 80px;
+  --logo-size: 60px;
   --font-size-base: 10px;
   --input-width: 60px;
   --image-height: 100px;
@@ -185,10 +185,6 @@ h4{
 #preference_form,#bouton_terminer ,#deux_choix {
   margin-bottom: 10px;
 }
-#account-admin {
-  gap: 5px;
-  flex-direction: column;
-}
 
 input#id_commentaire_moderer {
   margin-top: -6.23%;
@@ -232,4 +228,24 @@ input#id_commentaire_moderer {
 #bouton_moderateur {
   gap: 40px;
   margin-top: 10px;;
+}
+
+
+#logo {
+  display: flex;
+  margin-left: -36%;
+}
+#gain_plateforme {
+  margin-top: 10px;
+  font-size: 14px;
+  margin-left: -10%;
+}
+#account-admin {
+  font-size: 10px;
+  gap:20px;
+}
+
+
+.success, .error, .info{
+  font-size: 14px;
 }
