@@ -4,7 +4,6 @@ from ..forms import  AfficherTrajetForm
 from django.contrib import messages
 from django.shortcuts import redirect
 
-
 def ExtractionDonnee(request, email_type, selected_email, mail, email_id_selected):
     body = selected_email["body"]
     trajet_id = None
@@ -18,7 +17,6 @@ def ExtractionDonnee(request, email_type, selected_email, mail, email_id_selecte
 
     extraire = BeautifulSoup(body, "html.parser")
     # On extrait le commentaire du passager
-    div_commentaire = extraire.find("div", class_="commentaire")
     try:
         if email_type == "Avis positif":
             if div_commentaire and div_commentaire.p:
@@ -113,7 +111,6 @@ def ExtractionDonnee(request, email_type, selected_email, mail, email_id_selecte
         except AttributeError:
             messages.info(request, "Des données n'ont pas pu être récupérées.")
             return redirect("moderation_email")
-
 
     affichage_trajet_form = AfficherTrajetForm(request.POST or None, initial={"chauffeur": chauffeur,"trajet": trajet, "date_reservation": date_resa,"passager":passager})
 
