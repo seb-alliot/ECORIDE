@@ -2,3 +2,13 @@
 
 <link href="{% static 'css/main.css' %}" rel="stylesheet">
 <link href="{% static 'css/specifique_index.css' %}" rel="stylesheet">
+
+{% if user.is_authenticated %}
+    {% if user.is_superuser %}
+        <link href="{% static 'css/admin_header.css' %}" rel="stylesheet">
+    {% else %}
+        <link href="{% static 'css/user_lambda_header.css' %}" rel="stylesheet">
+    {% endif %}
+{% elif user.is_anonymous %}
+    <link href="{% static 'css/user_lambda_header.css' %}" rel="stylesheet">
+{% endif %}

@@ -1,5 +1,5 @@
 :root {
-  --logo-size: 110px;
+  --logo-size: 80px;
   --font-size-base: 12px;
   --input-width: 145px;
   --image-height: 250px;
@@ -78,8 +78,8 @@ footer a {
   margin-top: 10px;
 }
 label#resultat_recherche img {
-  width: var(--logo-size);
-  height:var(--logo-size);
+  width: 110px;
+  height:110px;
   margin-right: 10px;
 }
 #resultat_recherche,
@@ -180,10 +180,7 @@ select#id_avis,
 select#id_note {
   margin-bottom: 15px;
 }
-#account-admin{
-  gap: 50px;
-  margin-left: 20%;
-}
+
 #moderation_form select, #bouton_modo, select#id_avis {
   margin-right: 50px;
 }
@@ -225,9 +222,4 @@ form#reservation_form > a.btn.btn-primary {
 
 .success, .error, .info{
   font-size: 18px;
-}
-
-#logo {
-  display: flex;
-  margin-left: -140%;
 }

@@ -230,20 +230,12 @@ input#id_commentaire_moderer {
   margin-top: 10px;;
 }
 
-
-#logo {
-  display: flex;
-  margin-left: -36%;
-}
 #gain_plateforme {
   margin-top: 10px;
   font-size: 12px;
   margin-left: -10%;
 }
-#account-admin {
-  font-size: 10px;
-  gap:20px;
-}
+
 
 
 .success, .error, .info{

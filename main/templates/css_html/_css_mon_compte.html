@@ -25,3 +25,12 @@
 <link href="{% static 'css/espace_perso/onglet_5/adresse.css' %}" rel="stylesheet">
 
 
+{% if user.is_authenticated %}
+    {% if user.is_superuser %}
+        <link href="{% static 'css/admin_header.css' %}" rel="stylesheet">
+        {% else %}
+        <link href="{% static 'css/user_lambda_header.css' %}" rel="stylesheet">
+    {% endif %}
+{% elif user.is_anonymous %}
+    <link href="{% static 'css/user_lambda_header.css' %}" rel="stylesheet">
+{% endif %}

@@ -1,5 +1,5 @@
 :root {
-  --logo-size: 95px;
+  --logo-size: 70px;
   --font-size-base: 12px;
   --input-width: 80px;
   --input-width--other: 95px;
@@ -42,7 +42,7 @@ select#id_places {
 form#email_filter_form select,
 form#email_select_form select,
 form#contact_form button {
-  width: var(--logo-size);
+  width: 95px;
 }
 
 #bouton_refuser,
@@ -197,10 +197,6 @@ div#info_trajet ,
 #preference_form,#bouton_terminer ,#deux_choix {
   margin-bottom: 15px;
 }
-#account-admin {
-  gap: 15px;
-}
-
 
 #moderation_form select, #bouton_modo {
   margin-right: 100px;
@@ -237,9 +233,4 @@ div#info_trajet ,
 }
 .success, .error, .info{
   font-size: 16px;
-}
-
-#logo {
-  display: flex;
-  margin-left: -25%;
 }

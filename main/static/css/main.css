@@ -16,7 +16,6 @@
 @import url("responsive/1920.css") screen and (min-width: 1920px) and
   (max-width: 3072px);
 @import url("responsive/3072.css") screen and (min-width: 3072px);
-
 /* Variables CSS */
 :root {
   --color-primary: #7d6e63;
@@ -522,8 +521,6 @@ div#gain_plateforme {
 .success, .error, .info{
   display: flex;
   justify-content: center;
-  margin: 5%;
-
 }
 .success {
   color: green;

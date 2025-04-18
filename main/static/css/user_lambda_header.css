@@ -1,0 +1,7 @@
+header{
+    margin:1%;
+}
+header > div > div > div.class_flex {
+    display: flex;
+    justify-content: space-between;
+}

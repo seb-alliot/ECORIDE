@@ -3,3 +3,8 @@
 <link href="{% static 'css/main.css' %}" rel="stylesheet">
 
 <link href="{% static 'css/moderateur.css' %}" rel="stylesheet">
+{% if user.is_authenticated %}
+    {% if user.is_superuser %}
+        <link href="{% static 'css/admin_header.css' %}" rel="stylesheet">
+    {% endif %}
+{% endif %}

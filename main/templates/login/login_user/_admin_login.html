@@ -3,26 +3,23 @@
     <div  id="account-admin" class="class_flex">
         <div>
             <div>
-                <div>
-                    <a href="{% url 'MonCompte' %}" class="account-link">
-                        <div>
-                            <img src="{{ adresse_user.photo.url|default:photo_default_url }}" alt="photo de profil" class="photo_profile">
-                        </div>
-                        <div>
-                            {{ request.user.username }}<br>
-                        </div>
-                        <div>
-                            votre compte
-                        </div>
-                    </a>
-                </div>
+                <a href="{% url 'MonCompte' %}" class="account-link">
+                    <div>
+                        <img src="{{ adresse_user.photo.url|default:photo_default_url }}" alt="photo de profil" class="photo_profile">
+                    </div>
+                    <div>
+                        {{ request.user.username }}<br>
+                    </div>
+                    <div>
+                        votre compte
+                    </div>
+                </a>
             </div>
         </div>
 
         <div>
-            <div>
-                <a href="{% url 'moderation_email' %}" class="account-link">
-                    <img src="{% static 'photo/moderation_email.avif' %}" alt="photo de profil" class="photo_profile">
+            <a href="{% url 'moderation_email' %}" class="account-link">
+                <img src="{% static 'photo/moderation_email.avif' %}" alt="photo de profil" class="photo_profile">
                     <div>
                         <div>
                             Modération
@@ -31,23 +28,20 @@
                             emails
                         </div>
                     </div>
-                </a>
-            </div>
+            </a>
         </div>
 
         <div>
-            <div>
-                <a href="{% url 'admin:index' %}" class="account-link">
+            <a href="{% url 'admin:index' %}" class="account-link">
+                <div>
                     <div>
-                        <div>
-                            <img src="{{ adresse_user.photo.url|default:photo_default_url }}" alt="photo de profil" class="photo_profile">
-                        </div>
-                        <div class="generix3">
-                            Admin
-                        </div>
+                        <img src="{{ adresse_user.photo.url|default:photo_default_url }}" alt="photo de profil" class="photo_profile">
                     </div>
-                </a>
-            </div>
+                    <div class="generix3">
+                        Admin
+                    </div>
+                </div>
+            </a>
         </div>
 
     </div>

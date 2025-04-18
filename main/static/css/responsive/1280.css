@@ -1,5 +1,5 @@
 :root {
-  --logo-size: 130px;
+  --logo-size: 120px;
   --font-size-base: 20px;
   --input-width: 200px;
   --image-height: 310px;
@@ -221,25 +221,11 @@ form#reservation_form > a.btn.btn-primary {
   font-size: 16px;
   margin-left: -10%;
 }
-#account-admin {
-  font-size: 16px;
-  gap:80px;
-}
 
 .success, .error, .info{
   font-size: 22px;
 }
 
-#account-admin {
-  font-size: 16px;
-  gap:80px;
-  margin-left: 55%;
-}
-
 .success, .error, .info{
   font-size: 20px;
-}
-#logo {
-  display: flex;
-  margin-left: -410%;
 }

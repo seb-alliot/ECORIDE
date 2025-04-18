@@ -232,17 +232,9 @@ form#reservation_form > a.btn.btn-primary {
   font-size: 24px;
   margin-left: -10%;
 }
-#account-admin {
-  font-size: 24px;
-  gap:100px;
-  margin-left: 80%;
-}
+
 
 .success, .error, .info{
   font-size: 28px;
 }
 
-#logo {
-  display: flex;
-  margin-left: -590%;
-}

@@ -1,5 +1,5 @@
 :root {
-  --logo-size: 115px;
+  --logo-size: 100px;
   --font-size-base: 20px;
   --font-size-other: 16px;
   --input-width: 165px;
@@ -232,16 +232,8 @@ li#voiture_posseder {
   font-size: 16px;
   margin-left: -10%;
 }
-#account-admin {
-  font-size: 16px;
-  gap:80px;
-  margin-left: 30%;
-}
+
 
 .success, .error, .info{
   font-size: 20px;
-}
-#logo {
-  display: flex;
-  margin-left: -300%;
 }
