@@ -28,7 +28,7 @@ from .espace_perso import (
     GereTaReservationPassager,
 )
 from .utils import ChoisisTonCovoite, DonneTonAvis, UserCreateView, PriseContact
-from .connection import PremierEtape, DeuxiemeEtape
+from .connection import PremierEtape, DeuxiemeEtape, is_superuser_or_moderateur
 from .moderation import (
     ConnectionImaplib,
     RecuperationEmail,
@@ -42,7 +42,6 @@ from django.contrib import messages
 from django.conf import settings
 from django.views.generic import CreateView
 from django.contrib.auth.models import User
-import email
 
 
 def Contact(request):
@@ -251,8 +250,12 @@ def AvisSatisfaction(request, trajet_id, token):
         request, "interface_utilisateur/utilisateur/avis_satisfaction.html", context
     )
 
-@user_passes_test(lambda u: isinstance(u, User) and u.is_superuser)
 def Fait_Ton_Taff_De_Modo(request):
+    # on gere l'acces au page admin/moderateur
+    if not is_superuser_or_moderateur(request.user):
+        return HttpResponseRedirect("index")
+    #else:
+        #messages.info(request,"Bienvenue dans votre espace moderateur")
     context = {}
     moderation_positive_form = None
     moderation_form = None
@@ -270,7 +273,8 @@ def Fait_Ton_Taff_De_Modo(request):
 
     #___________________Extraction des données du mail____________________
     if selected_email:
-        donnee_extrait = ExtractionDonnee(request, email_type, selected_email, mail, email_id_selected)
+        donnee_extrait = ExtractionDonnee(request, email_type, selected_email)
+
         if isinstance(donnee_extrait, HttpResponseRedirect):
             return donnee_extrait
         affichage_trajet_form , telephone, sujet, email_user, pseudo, commentaire, trajet_id, email_type, selected_email, passager_id, chauffeur_id = donnee_extrait
@@ -278,7 +282,7 @@ def Fait_Ton_Taff_De_Modo(request):
         #_______gestion avis negatif avec choix paiment et ajout commentaire____
         if email_type == "Avis negatif":
 
-            moderation_form = GereLesAvisNegatif(request,mail,email_id_selected,commentaire, chauffeur_id, passager_id, trajet_id)
+            moderation_form = GereLesAvisNegatif(request, chauffeur_id, passager_id, trajet_id, commentaire)
             if isinstance(moderation_form, HttpResponseRedirect):
                 return moderation_form
             context["moderation_form"] = moderation_form

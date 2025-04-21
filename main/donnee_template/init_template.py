@@ -8,6 +8,7 @@ def initialisation_template(request):
 
     if request.user.is_authenticated:
         try:
+            is_moderateur = request.user.groups.filter(name='moderateur').exists()
             credit = CreditUser.objects.get(user=user)
             voiture = Voiture.objects.filter(user=user)
             role = ChoixRole.objects.filter(user=user).first()
@@ -24,12 +25,14 @@ def initialisation_template(request):
         voiture = None
         role = None
         preference = None
+        is_moderateur = False
 
     context = {
         #Photo par defaut
         'photo_default_url': photo_default_url,
 
         #utilisateur
+        "is_moderateur": is_moderateur,
         "role": role,
         "preference": preference,
         'voiture': voiture,

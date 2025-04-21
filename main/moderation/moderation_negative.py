@@ -1,106 +1,103 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 from django.contrib import messages
-from ..models import TrajetProposer, ReservationTrajet, NoteUser, CreditUser, User
+from ..models import TrajetProposer, ReservationTrajet, NoteUser, CreditUser
 from ..forms import ModerationTrajetForm
 
 
-def GereLesAvisNegatif(request,mail,email_id_selected,commentaire, chauffeur_id, passager_id, trajet_id):
-
+def GereLesAvisNegatif(request, chauffeur_id, passager_id, trajet_id, commentaire):
     trajet = TrajetProposer.objects.filter(id=trajet_id).first()
-    print(f"le trajet est  ", trajet)
-    id_trajet = trajet.id
-    print(f"le trajet id a pour numéro de bdd :", id_trajet)
+    note_chauffeur = NoteUser.objects.filter(
+        chauffeur=chauffeur_id,
+        trajet=trajet_id,
+        passager=passager_id,
+    ).first()
+
+    if not note_chauffeur:
+        messages.error(request, "Note du chauffeur introuvable.")
+        return redirect("moderation_email")
+
     try:
-        chauffeur = User.objects.get(pk=chauffeur_id)
-        passager = passager_id
-        print(f"le passager est ", passager)
-        reservation = ReservationTrajet.objects.filter(
+        reservation = ReservationTrajet.objects.get(
             trajet_reserver=trajet_id,
             passager=passager_id,
-        ).first()
-        if not passager:
-            passager = None
-            messages.info(request, "Le passager n'existe plus.")
-        print(f"le chauffeur est ", chauffeur)
-    except User.DoesNotExist:
-        messages.error(request, "Utilisateur introuvable.")
+        )
+    except ReservationTrajet.DoesNotExist:
+        messages.error(request, "Réservation introuvable.")
         return redirect("moderation_email")
 
     moderation_form = ModerationTrajetForm(request.POST or None, initial={"commentaire": commentaire})
+
     if request.method == "POST":
         if moderation_form.is_valid():
-            choix_moderateur = moderation_form.cleaned_data["etat_paiement"]
-            choix_commentaire = moderation_form.cleaned_data["avis"]
-            note_chauffeur = NoteUser.objects.create(
-                chauffeur=chauffeur,
-                passager=passager if passager else None,
-            )
+            etat_paiement = moderation_form.cleaned_data["etat_paiement"]
+            avis = moderation_form.cleaned_data["avis"]
+            commentaire_saisi = moderation_form.cleaned_data["commentaire"]
+
+            choix_modo = []
+            info_commentaire = []
 
             try:
-                if choix_commentaire == "oui":
-                    print(f"le choix du commentaire est {choix_commentaire}")
+                # Gestion du commentaire
+                if avis == "oui":
                     if note_chauffeur.commentaire_moderer:
-                        messages.info(request, "Le commentaire a déjà été modéré.")
+                        info_commentaire.append("Commentaire déjà traité.")
                     else:
+                        note_chauffeur.commentaire = commentaire_saisi
                         note_chauffeur.commentaire_moderer = True
-                        note_chauffeur.etat_paiement = choix_moderateur
+                        note_chauffeur.etat_paiement = etat_paiement
                         note_chauffeur.decision_prise = True
                         note_chauffeur.save()
-                        note_chauffeur.commentaire_moderer = True
-                        messages.info(request, "Le commentaire a bien été enregistré.")
-                if choix_commentaire == "non":
-                    print(f"le choix du commentaire est {choix_commentaire}")
+                        info_commentaire.append("Commentaire ajouté.")
+                elif avis == "non":
                     if note_chauffeur.commentaire_moderer:
-                        messages.einfo(request, "Le commentaire a déjà été modéré.")
+                        info_commentaire.append("Commentaire déjà traité.")
                     else:
                         note_chauffeur.commentaire_moderer = True
-                        messages.info(request, "Votre choix pour le commentaire a été enregistré.")
+                        note_chauffeur.save()
+                        info_commentaire.append("Commentaire refusé.")
+                        choix_modo.append("Décision validée.")
 
-                if choix_moderateur == "Payer":
-                    print(f"le choix du paiement est {choix_moderateur}")
+                # Paiement
+                if etat_paiement == "Payer":
                     if note_chauffeur.decision_prise:
-                        messages.info(request, "Le paiement a déjà été traiter.")
+                        choix_modo.append("Paiement déjà traité.")
                     else:
-                        reservation.etat_paiement = "Payer"
-                        credit_chauffeur = CreditUser.objects.get(user=trajet.chauffeur)
-                        facture_passager = reservation.prix_par_passager
                         if request.POST.get("Valider") == "oui":
-                            credit_chauffeur.credit += facture_passager
+                            credit_chauffeur = CreditUser.objects.get(user=trajet.chauffeur)
+                            credit_chauffeur.credit += reservation.prix_par_passager
                             credit_chauffeur.save()
+                            reservation.etat_paiement = "Payer"
                             reservation.trajet_payer = True
-                            note_chauffeur.decision_prise = True
                             reservation.save()
-                            print("la reservation est ", reservation)
-
-                            mail.store(email_id_selected, "+FLAGS", "\\Deleted")
-                            mail.expunge()
-                            messages.success(request, "Le paiement a été accordé.")
-                            return redirect("moderation_email")
+                            note_chauffeur.decision_prise = True
+                            note_chauffeur.save()
+                            choix_modo.append("Paiement accordé.")
                         else:
-                            messages.error(request, "Erreur dans le traitement du paiement.")
+                            messages.error(request, "Validation manquante pour paiement.")
                             return redirect("moderation_email")
-
-                elif choix_moderateur == "Refuser":
-                    print(f"le choix du paiement est {choix_moderateur}")
+                elif etat_paiement == "Refuser":
                     if request.POST.get("Valider") == "oui":
-                        print(f"les donné de la requete sont {request.POST}")
                         reservation.etat_paiement = "Refuser"
                         reservation.trajet_payer = True
-                        note_chauffeur.decision_prise = True
                         reservation.save()
-                        messages.success(
-                            request, "Vous avez bien refusé le paiement au chauffeur."
-                        )
-                        mail.store(email_id_selected, "+FLAGS", "\\Deleted")
-                        mail.expunge()
-                        return redirect("moderation_email")
+                        note_chauffeur.decision_prise = True
+                        note_chauffeur.save()
+                        choix_modo.append("Paiement refusé.")
                     else:
-                        messages.error(request, "Erreur dans le traitement du paiement.")
+                        messages.error(request, "Validation manquante pour refus de paiement.")
                         return redirect("moderation_email")
+
+                # Messages finaux
+                decision = ", ".join(choix_modo) if choix_modo else "aucune"
+                commentaire_info = ", ".join(info_commentaire) if info_commentaire else "aucun"
+                messages.info(request, f"Votre décision : {decision}. Commentaire : {commentaire_info}")
+                return redirect("moderation_email")
+
             except TrajetProposer.DoesNotExist:
                 messages.error(request, "Trajet introuvable.")
-            except ReservationTrajet.DoesNotExist:
-                messages.error(request, "Réservation introuvable.")
             except CreditUser.DoesNotExist:
                 messages.error(request, "Ce chauffeur n'existe plus.")
+        else:
+            print("🛑 Formulaire invalide :", moderation_form.errors)
+
     return moderation_form

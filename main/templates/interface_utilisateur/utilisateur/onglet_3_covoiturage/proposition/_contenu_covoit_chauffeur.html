@@ -10,10 +10,10 @@
             <label
             id ="covoit_proposer"
             for="trajet_{{ tjt.id }}">
-            Trajet :<br> {{ tjt.ville_depart }} -> {{ tjt.ville_arrivee }}<br>
+            Trajet : {{ tjt.ville_depart }} -> {{ tjt.ville_arrivee }}<br>
             Le {{ tjt.date }}<br>
             À : {{ tjt.heure|date:"H\H:i" }}<br>
-            Voiture : {{ tjt.voiture.marque }} {{ tjt.voiture.modele }}<br>
+            Voiture :<br> {{ tjt.voiture.marque }} {{ tjt.voiture.modele }}<br>
             Prix : {{ tjt.prix }}€<br>
             Places libres:
             {% if tjt.places %}

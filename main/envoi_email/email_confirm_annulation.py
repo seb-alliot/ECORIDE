@@ -44,7 +44,6 @@ def Envoi_Email_Annulation(request, trajet_id, reservations):
             email.send()
 
     except Exception as e:
-        print(f"Erreur lors de l'envoi de l'e-mail d'annulation: {str(e)}")
         messages.error(
             request, f"Erreur lors de l'envoi de l'e-mail d'annulation : {str(e)}"
         )

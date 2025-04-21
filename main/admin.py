@@ -9,13 +9,14 @@ from .models import (
     Preference,
     ReservationTrajet,
     ChangerStatutTrajet,
+    User
 )
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
 from .models import ChoixRole, CreditUser
-from typing import Callable, Optional
+from django.contrib.auth.models import Group
 
 
 # Register your models here.
@@ -34,6 +35,7 @@ class CustomUserAdmin(UserAdmin):
         ("Pseudo", {"fields": ("username", "password")}),
         ("Email de l'utilisateur", {"fields": ("email",)}),
         ("Etat du compte", {"fields": ("is_active",)}),
+        ("Groupes", {"fields": ("groups",)}),
     ]
     # On ajoute les models CreditUser et ChoixRole a l'interface admin lors de la création d'un utilisateur
     inlines = [CreditUserInline, ChoiceRoleInline]
@@ -52,17 +54,17 @@ class CustomUserAdmin(UserAdmin):
         role = ChoixRole.objects.filter(user=obj).first()
         return role.role if role else "Aucun"
 
-    get_role.short_description = _("Role")
+    get_role.short_description = "Role"
 
     def get_credit(self, obj: User):
         credit = CreditUser.objects.filter(user=obj).first()
         return credit.credit if credit else 0
 
-    get_credit.short_description = _("Crédit")
+    get_credit.short_description = "Crédit"
 
 
 # On désactive le model admin de base pour le remplacer
-# par le custom qui accepte les cominaisons de models
+# par le custom qui accepte les combinaisons de models
 admin.site.unregister(User)
 admin.site.register(User, CustomUserAdmin)
 
@@ -89,6 +91,7 @@ class UserAdmin(admin.ModelAdmin):
 @admin.register(NoteUser)
 class NoteUserAdmin(admin.ModelAdmin):
     list_display = [
+        "id",
         "passager",
         "chauffeur",
         "note",
@@ -314,6 +317,7 @@ class PreferenceAdmin(admin.ModelAdmin):
 class ReservationTrajetAdmin(admin.ModelAdmin):
     list_display = [
         "id",
+        "passager",
         "trajet_reserver",
         "passager",
         "prix_par_passager",

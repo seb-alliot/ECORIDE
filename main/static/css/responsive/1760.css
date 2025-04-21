@@ -95,8 +95,8 @@ select#id_note {
 }
 
 #id_commentaire,form#contact_form textarea  {
-  width: 500px;
-  height: 200px;
+  width: 450px;
+  height: 150px;
   font-size: 20px;
 }
 form#contact_form input,
@@ -182,7 +182,7 @@ div#gain_plateforme {
   font-size: 20px;
 }
 #moderation_form select, #bouton_modo,select#id_avis {
-  margin-right: 60px;
+  margin-right: 10px;
 }
 #avis_positif input {
   width: 500px;
@@ -193,23 +193,6 @@ div#gain_plateforme {
   gap:20px;
 }
 
-#aficher_chauffeur input,#aficher_passager input , #aficher_trajet input , #aficher_date_reservation input {
-  height: 30px;
-  width: 220px;
-  font-size: 16px;
-}
-#aficher_chauffeur input , #aficher_passager input {
-  margin-left: 213px;
-}
-#aficher_trajet input {
-  margin-left: 173px;
-}
-#aficher_date_reservation input {
-  margin-left: 145px;
-}
-#affichage_trajet_form {
-  margin-top: 50px;
-}
 #ajouter,
 #refuser{
   margin-top: 20px;

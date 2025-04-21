@@ -194,9 +194,20 @@ class TrajetForm(forms.ModelForm):
 
     def __init__(self, *args, user=None, **kwargs):
         super().__init__(*args, **kwargs)
+        champs_obligatoires = [
+            "ville_depart",
+            "ville_arrivee",
+            "date",
+            "heure",
+            "places",
+            "prix",
+            "temps_trajet",
+            "voiture",
+        ]
+        for champ in champs_obligatoires:
+            self.fields[champ].required = True
         if user:
             self.fields["voiture"].queryset = Voiture.objects.filter(user=user)
-
 class RechercheTrajetForm(forms.Form):
     ville_depart = forms.CharField(
         max_length=100,
@@ -375,6 +386,20 @@ class VoitureForm(forms.ModelForm):
         if Voiture.objects.filter(immatriculation=immatriculation).exists():
             raise forms.ValidationError("Cette immatriculation est déjà utilisée.")
         return immatriculation
+    def __init__(self, *args, user=None, **kwargs):
+        super().__init__(*args, **kwargs)
+        champs_obligatoires = [
+            "marque",
+            "modele",
+            "couleur",
+            "immatriculation",
+            "annee",
+            "type_moteur",
+            "places",
+        ]
+        for champ in champs_obligatoires:
+            self.fields[champ].required = True
+
 
 
 # ---------------------------- Gestion de l'adresse utilisateur ---------------------------->
@@ -533,7 +558,6 @@ class AvisForm(forms.ModelForm):
                 self.fields["trajet"].widget.attrs["readonly"] = True
                 self.fields["passager"].widget.attrs["readonly"] = True
 
-
 class ContactForm(forms.Form):
 
     pseudo = forms.CharField(
@@ -588,9 +612,9 @@ class ContactForm(forms.Form):
             self.fields["email"].initial = user.email
             self.fields["telephone"].initial = user.adresse_user.telephone
 
-            self.fields["pseudo"].widget.attrs["readonly"] = True
-            self.fields["email"].widget.attrs["readonly"] = True
-            self.fields["telephone"].widget.attrs["readonly"] = True
+            if user.is_authenticated:
+                for field in ["pseudo", "email", "telephone"]:
+                    self.fields[field].widget.attrs["readonly"] = True
 
 class ModerationAvisPositifForm(forms.ModelForm):
     class Meta:
@@ -614,9 +638,9 @@ class ModerationAvisPositifForm(forms.ModelForm):
 
 class AfficherTrajetForm(forms.Form):
     chauffeur = forms.CharField(
-        label="Chauffeur",  # Ajout du label pour un meilleur affichage
+        label="Chauffeur",
         widget=forms.TextInput(attrs={"placeholder": "Chauffeur"}),
-        required=True,  # Ajouter si le champ est requis
+        required=True,
     )
 
     passager = forms.CharField(
@@ -634,7 +658,12 @@ class AfficherTrajetForm(forms.Form):
     date_reservation = forms.CharField(
         label="Date de réservation",
         widget=forms.TextInput(attrs={"placeholder": "Date de réservation"}),
-        required=False,  # Vous pouvez changer en True si c'est un champ obligatoire
+        required=False,
+    )
+    prix = forms.CharField(
+        label="Prix",
+        widget=forms.TextInput(attrs={"placeholder": "Prix"}),
+        required=False,
     )
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -642,6 +671,7 @@ class AfficherTrajetForm(forms.Form):
         self.fields["passager"].widget.attrs["readonly"] = True
         self.fields["trajet"].widget.attrs["readonly"] = True
         self.fields["date_reservation"].widget.attrs["readonly"] = True
+        self.fields["prix"].widget.attrs["readonly"] = True
 class ModerationTrajetForm(forms.ModelForm):
 
     class Meta:

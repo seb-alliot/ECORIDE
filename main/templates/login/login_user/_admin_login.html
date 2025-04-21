@@ -7,11 +7,13 @@
                     <div>
                         <img src="{{ adresse_user.photo.url|default:photo_default_url }}" alt="photo de profil" class="photo_profile">
                     </div>
-                    <div>
-                        {{ request.user.username }}<br>
-                    </div>
-                    <div>
-                        votre compte
+                    <div class="generix1 aligne_item_center">
+                        <div>
+                            {{ request.user.username }}<br>
+                        </div>
+                        <div>
+                            Crédit : {{ credit.credit|floatformat:2 }} €
+                        </div>
                     </div>
                 </a>
             </div>
@@ -20,8 +22,8 @@
         <div>
             <a href="{% url 'moderation_email' %}" class="account-link">
                 <img src="{% static 'photo/moderation_email.avif' %}" alt="photo de profil" class="photo_profile">
+                <div class="generix1 aligne_item_center">
                     <div>
-                        <div>
                             Modération
                         </div>
                         <div class="generix3">

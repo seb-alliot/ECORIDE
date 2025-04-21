@@ -37,6 +37,7 @@
 }
 
 /* Classes utilitaires */
+
 .class_flex {
   display: flex;
 }
@@ -134,6 +135,9 @@ body {
   min-height: 100vh;
 }
 /* Header */
+header.position_relative > div > div > div.class_flex {
+  justify-content: space-between;
+}
 header {
   justify-content: space-between;
   padding: var(--spacing-md) var(--spacing-lg);

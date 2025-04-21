@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avis négatif de la part de {{ trajet.passager }} pour le Trajet  {{ trajet.id }}</title>
+    <title>Avis négatif de la part de {{ passagers }} pour le Trajet  {{ trajet.id }}</title>
 </head>
     <body>
         <div class="email-container">
-            <p><strong>Passager :</strong> {{ passager.username }} {{ passager.email }}</p>
+
+            <p><strong>Passager :</strong> {{ passagers }} {{ passagers.email }}</p>
             <p><strong>Chauffeur :</strong> {{ chauffeur.username }} ,
                 {% if telephone %}
                     {{ telephone }}

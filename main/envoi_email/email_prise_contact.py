@@ -30,5 +30,4 @@ def envoi_email_prise_contact(request, telephone, pseudo, email_user, sujet,mess
         message=request.POST.get("message")
         messages.success(request, "Votre message a bien été envoyé.")
     except Exception as e:
-        print(f"Erreur lors de l'envoi de l'e-mail de demande d'information: {str(e)}")
         messages.error(request, f"Erreur lors de l'envoi de l'e-mail de votre retour positif: {str(e)}")

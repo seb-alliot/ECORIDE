@@ -1,10 +1,10 @@
 from django.shortcuts import redirect, get_object_or_404
+from django.urls import reverse
 from django.contrib import messages
-from django.contrib.auth.models import User
 from ..models import TrajetProposer, ReservationTrajet
 from ..forms import TerminerTrajetForm
-import uuid
-
+from ..securite import reservation_token
+from ..envoi_email import Envoi_Email_Terminer
 
 def FiniTonCovoiturage(request):
     user = request.user
@@ -16,9 +16,6 @@ def FiniTonCovoiturage(request):
         trajet_terminer_form = TerminerTrajetForm(request.POST)
         trajet_id = request.POST.get("trajet_id")
         if trajet_terminer_form.is_valid():
-            token = None
-            if token is None:
-                token = uuid.uuid4()
 
             if request.user == trajet.chauffeur:
                 trajet = get_object_or_404(TrajetProposer, id=trajet_id)
@@ -32,8 +29,9 @@ def FiniTonCovoiturage(request):
                     trajet.etat = statut_trajet
                     trajet.save()
                     messages.success(request, "Vous êtes arrivé à bon port !")
-                    from ..envoi_email import Envoi_Email_Terminer
-                    Envoi_Email_Terminer(request, trajet_id, reservations, token)
+                    # Appelle une seule fois pour tout traiter dans Envoi_Email_Terminer
+                    Envoi_Email_Terminer(request, trajet.id)
+
                     return redirect("MonCompte")
                 else:
                     messages.error(request, "Aucun trajet trouvé.")

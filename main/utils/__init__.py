@@ -1,5 +1,5 @@
 from .choisis_covoite import ChoisisTonCovoite
-from .donne_avis import DonneTonAvis
+from .donne_ton_avis import DonneTonAvis
 from .activation_compte import activation
 from .prise_de_contact import PriseContact
 

@@ -1,0 +1,29 @@
+{% load static %}
+    <div  id="account-moderateur" class="class_flex">
+        <div>
+            <a href="{% url 'moderation_email' %}" class="account-link">
+                <img src="{% static 'photo/moderation_email.avif' %}" alt="photo de profil" class="photo_profile">
+                    <div class="generix1 aligne_item_center">
+                        <div>
+                            Modération
+                        </div>
+                        <div class="generix3">
+                            emails
+                        </div>
+                    </div>
+            </a>
+        </div>
+        <div>
+            <a href="{% url 'MonCompte' %}" class="account-link">
+                <div>
+                    <img src="{{ adresse_user.photo.url|default:photo_default_url }}" alt="photo de profil" class="photo_profile">
+                </div>
+                <div class="generix1 aligne_item_center">
+                    {{ request.user.username }}<br>
+                </div>
+                <div >
+                    {{ credit.credit|floatformat:2 }} €
+                </div>
+            </a>
+        </div>
+    </div>

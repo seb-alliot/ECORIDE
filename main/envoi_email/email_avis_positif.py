@@ -4,12 +4,15 @@ from ..models import ReservationTrajet, AdresseUser, TrajetProposer
 from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 from django.urls import reverse
+import uuid
 
 def Envoi_Email_Avis_Trajet_Positif(
-    request, chauffeur, trajet_id, reservations, commentaire, token
+    request, chauffeur, trajet_id, reservation, commentaire, token, passagers
 ):
 
     try:
+        message_id = f"<avis-{trajet_id}-{uuid.uuid4()}@ecoride.com>"
+
         site_url = f"http://{get_current_site(request).domain}"
         avis_satisfaction_url = (
             f"{site_url}{reverse('AvisSatisfaction', args=[trajet_id, token])}"
@@ -19,6 +22,7 @@ def Envoi_Email_Avis_Trajet_Positif(
         ).first()
         trajet = TrajetProposer.objects.get(id=trajet_id)
         reservations = ReservationTrajet.objects.filter(trajet_reserver=trajet_id)
+        date = reservation.trajet_reserver.date
         chauffeur = trajet.chauffeur
         try:
             telephone = (
@@ -30,13 +34,8 @@ def Envoi_Email_Avis_Trajet_Positif(
             telephone = None
         prix_total = reservation.prix_par_passager
 
-        for res in reservations:
-            passager = res.passager
-            chauffeur = res.trajet_reserver.chauffeur
-            date = res.trajet_reserver.date
-            trajet = res.trajet_reserver
 
-        subject = f"Avis positif {trajet_id}"
+        subject = f"Avis positif {trajet_id} "
 
         context = {
             "prix_total": prix_total,
@@ -45,7 +44,7 @@ def Envoi_Email_Avis_Trajet_Positif(
             "reservations": reservations,
             "site_url": site_url,
             "avis_satisfaction_url": avis_satisfaction_url,
-            "passager": passager,
+            "passagers": passagers,
             "chauffeur": chauffeur,
             "date": date,
             "trajet_id": trajet_id,
@@ -59,19 +58,14 @@ def Envoi_Email_Avis_Trajet_Positif(
             body=message,
             from_email="staff.modo.ecoride@gmail.com",
             to=["staff.modo.ecoride@gmail.com"],
+            headers={"Message-ID": message_id},
         )
         email.content_subtype = "html"
         email.send()
 
-        messages.success(
-            request, "Votre avis a été envoyer, nous vous remercions pour votre retour."
-        )
-
     except Exception as e:
-        print(
-            f"Erreur lors de l'envoi de l'e-mail de votre avis sympa pour le chauffeur: {str(e)}"
-        )
+
         messages.error(
             request,
-            f"Erreur lors de l'envoi de l'e-mail de votre retour positif: {str(e)}",
+            f"Erreur lors de l'envoi de l'e-mail d'avis positif: {str(e)}",
         )

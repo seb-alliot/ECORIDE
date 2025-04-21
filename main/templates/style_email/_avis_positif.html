@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avis positif de la part de {{ trajet.passager }} pour le Trajet  {{ trajet.id }}</title>
+    <title>Avis positif de la part de {{ passagers }} pour le Trajet  {{ trajet.id }}</title>
 </head>
     <body>
         <div class="date_reservation">
             <p>Date de réservation : {{ trajet.date }}</p>
         </div>
         <div class="passager">
-            <p>Passager : {{ passager.username }}</p>
+            <p>Passager : {{ passagers }}</p>
         </div>
         <div class="trajet">
             <p >Trajet : {{ trajet.ville_depart }} à {{ trajet.ville_arrivee }}</p>

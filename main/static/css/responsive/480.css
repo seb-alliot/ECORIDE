@@ -123,8 +123,8 @@ h4{
 }
 form#contact_form textarea {
   font-size: 10px;
-  width: 300px;
-  height: 150px;
+  width: 250px;
+  height: 100px;
 }
 #id_commentaire {
   width: 300px;
@@ -206,26 +206,6 @@ div#info_trajet ,
   height: 30px;
 }
 
-#aficher_chauffeur input,#aficher_passager input , #aficher_trajet input , #aficher_date_reservation input {
-  height: 30px;
-  width: 110px;
-  font-size: 12px;
-}
-#aficher_chauffeur input , #aficher_passager input {
-  margin-left: 140px;
-}
-#aficher_trajet input {
-  margin-left: 110px;
-}
-#id_date_reservation {
-  margin-left: 87px;
-}
-#affichage_trajet_form label {
-  font-size: 12px;
-}
-#affichage_trajet_form {
-  margin-top: 30px;
-}
 
 #bouton_moderateur {
   gap: 40px;

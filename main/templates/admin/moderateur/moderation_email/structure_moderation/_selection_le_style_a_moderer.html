@@ -1,0 +1,13 @@
+<form method="GET" class="class_flex class_justify_center" id="email_select_form">
+    <input type="hidden" name="email_type" value="{{ request.GET.email_type }}">
+    <label for="email_select">Sélectionner un email :</label>
+    <select id="email_select" name="email_id" onchange="this.form.submit()">
+        <option value="">Email à gérer</option>
+        {% for email in emails %}
+            <option value="{{ email.id }}" {% if selected_email and email.id == selected_email.id %}selected{% endif %}>
+                {{ email.subject }}
+            </option>
+        {% endfor %}
+    </select>
+    <noscript><button type="submit">Valider</button></noscript>
+</form>

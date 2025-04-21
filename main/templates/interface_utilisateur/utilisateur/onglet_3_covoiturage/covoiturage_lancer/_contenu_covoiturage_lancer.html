@@ -12,11 +12,11 @@
             for="trajet_{{ tjt.id }}">
 
             {% if tjt.chauffeur.adresse_user.photo %}
-                <img src="{{ tjt.chauffeur.adresse_user.photo.url }}" alt="photo de profil" class="photo_profile">
+                <img src="{{ tjt.chauffeur.adresse_user.photo.url }}" alt="photo de profil">
             {% else %}
-                <img src="{{ photo_default_url }}" alt="photo par défaut" class="photo_profile">
-            {% endif %}<br>
-            Trajet :{{ tjt.ville_depart }} -> {{ tjt.ville_arrivee }}<br>
+                <img src="{{ photo_default_url }}" alt="photo par défaut" >
+            {% endif %}
+            Trajet :<br>{{ tjt.ville_depart }} -> {{ tjt.ville_arrivee }}<br>
             Le {{ tjt.date }}<br>
             À : {{ tjt.heure|date:"H\H:i" }}<br>
             Voiture : <br>{{ tjt.voiture.marque }} {{ tjt.voiture.modele }}<br>

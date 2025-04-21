@@ -1,0 +1,47 @@
+<form id="affichage_trajet_form">
+    <div>
+        <div id="aficher_chauffeur">
+            <div>
+                <label id="idinconnu" for="chauffeur">Chauffeur</label>
+            </div>
+            <div>
+                {{ affichage_trajet_form.chauffeur }}
+            </div>
+        </div>
+
+        <div id="aficher_passager">
+            <div>
+                <label for="passager">Passager</label>
+            </div>
+            <div>
+            {{ affichage_trajet_form.passager }}
+            </div>
+        </div>
+
+        <div id="aficher_trajet">
+            <div >
+                <label for="trajet">Trajet concerné</label>
+            </div>
+            <div>
+                {{ affichage_trajet_form.trajet }}
+            </div>
+        </div>
+
+        <div id="aficher_date_reservation">
+            <div>
+                <label for="date_reservation">Date de réservation</label>
+            </div>
+            <div>
+                {{ affichage_trajet_form.date_reservation }}
+            </div>
+        </div>
+        <div id="afficher_prix">
+            <div>
+                <label for="prix">Prix payer</label>
+            </div>
+            <div>
+                {{ affichage_trajet_form.prix }}
+            </div>
+        </div>
+    </div>
+</form>

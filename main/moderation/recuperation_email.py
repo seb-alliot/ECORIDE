@@ -29,6 +29,8 @@ def RecuperationEmail(request, mail, data, result, mail_ids, emails):
         if email_type and email_type.lower() not in subject.lower():
             continue
         # on applique un filtre sur ce que l'on veux recuperer comme email
+        message_id = message.get("Message-ID")
+
         sender = message.get("From")
         if not (
             (
@@ -60,9 +62,11 @@ def RecuperationEmail(request, mail, data, result, mail_ids, emails):
             "subject": subject,
             "sender": sender,
             "body": body,
+            "message_id": message_id,
         }
         emails.append(email_data)
         if email_id_selected and email_id_selected == email_data["id"]:
             selected_email = email_data
+
 
     return email_type, email_id_selected, mail_ids, emails, selected_email

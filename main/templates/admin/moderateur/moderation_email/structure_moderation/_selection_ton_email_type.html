@@ -1,0 +1,10 @@
+<form method="GET" class="class_flex class_justify_center" id="email_filter_form">
+    <label for="email_type">Filtrer :</label>
+    <select id="email_type" name="email_type" onchange="this.form.submit()">
+        <option value="">-- Type d'email  --</option>
+        <option value="Avis positif" {% if request.GET.email_type == "Avis positif" %}selected{% endif %}>Avis positif</option>
+        <option value="Avis negatif" {% if request.GET.email_type == "Avis negatif" %}selected{% endif %}>Avis négatif</option>
+        <option value="Prise de contact" {% if request.GET.email_type == "Prise de contact" %}selected{% endif %}>Prise de contact</option>
+    </select>
+    <noscript><button type="submit">Filtrer</button></noscript>
+</form>

@@ -6,8 +6,9 @@ from django.template.loader import render_to_string
 from django.urls import reverse
 
 def Envoi_Email_Avis_Trajet_Negatif(
-    request, passager, trajet_id, reservations, commentaire, token
+    request, passager, trajet_id, reservations, commentaire, token, passagers
 ):
+    print(f"les données de l'email sont : {passager} {trajet_id} {reservations} {commentaire},{passagers}")
     try:
         site_url = f"http://{get_current_site(request).domain}"
         avis_satisfaction_url = (
@@ -35,7 +36,7 @@ def Envoi_Email_Avis_Trajet_Negatif(
             date = res.trajet_reserver.date
             trajet = res.trajet_reserver
 
-        subject = f"Avis negatif {trajet_id}"
+        subject = f"Avis positif {trajet_id} de la part de {passagers}"
 
         context = {
             "prix_total": prix_total,
@@ -49,6 +50,7 @@ def Envoi_Email_Avis_Trajet_Negatif(
             "date": date,
             "trajet_id": trajet_id,
             "commentaire": commentaire,
+            "passagers": passagers,
         }
 
         message = render_to_string("style_email/_avis_negatif.html", context)
@@ -61,10 +63,6 @@ def Envoi_Email_Avis_Trajet_Negatif(
         )
         email.content_subtype = "html"
         email.send()
-
-        messages.success(
-            request, "Votre avis a été envoyer, nous vous remercions pour votre retour."
-        )
 
     except Exception as e:
         print(

@@ -1,12 +1,24 @@
-{% if user.is_authenticated %}
-    {% if user.is_superuser %}
-        {% include "login/login_user/_admin_login.html" %}
-    {% else %}
-        {% include "login/login_user/_login_lambda.html" %}
-    {% endif %}
-{% else %}
-    {% include "login/login_user/_login_anonymous.html" %}
-{% endif %}
+{% load static %}
 
 {% block connection %}
-{% endblock connection %}
+
+{% if user.is_authenticated %}
+    {% if is_moderateur  %}
+        {% include "login/login_user/_moderateur_login.html" %}
+        <link href="{% static 'css/moderateur_header.css' %}" rel="stylesheet">
+
+    {% elif user.is_superuser %}
+        {% include "login/login_user/_admin_login.html" %}
+        <link href="{% static 'css/admin_header.css' %}" rel="stylesheet">
+
+    {% else %}
+        {% include "login/login_user/_login_lambda.html" %}
+        <link href="{% static 'css/user_lambda_header.css' %}" rel="stylesheet">
+
+    {% endif %}
+{% elif user.is_anonymous %}
+    {% include "login/login_user/_login_anonymous.html" %}
+    <link href="{% static 'css/user_lambda_header.css' %}" rel="stylesheet">
+
+{% endif %}
+{% endblock %}

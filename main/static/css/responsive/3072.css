@@ -197,23 +197,7 @@ select#id_note{
   gap:20px;
 }
 
-#aficher_chauffeur input,#aficher_passager input , #aficher_trajet input , #aficher_date_reservation input {
-  height: 40px;
-  width: 300px;
-  font-size: 24px;
-}
-#aficher_chauffeur input , #aficher_passager input {
-  margin-left: 295px;
-}
-#aficher_trajet input {
-  margin-left: 230px;
-}
-#aficher_date_reservation input {
-  margin-left: 187px;
-}
-#affichage_trajet_form {
-  margin-top: 100px;
-}
+
 #ajouter,
 #refuser{
   margin-top: 50px;
@@ -237,4 +221,3 @@ form#reservation_form > a.btn.btn-primary {
 .success, .error, .info{
   font-size: 28px;
 }
-

@@ -5,54 +5,70 @@
 {% endblock style %}
 
 {% block principal %}
-<div class="generix3">
-    <h1>Bon courage !!</h1>
-</div>
-<div class="generix2 class_espace ">
-    <h2>Choisissez le style d'email à modérer</h2>
-</div>
+<div id="menu-tab">
+    <div class="page-wrap">
+    <div class="tabs position_relative">
+        <div class="tab">
+            <input
+            id="tab-1"
+            checked="checked"
+            name="tab-group-1"
+            type="radio"/>
+            <label for="tab-1">
+                Moredation email
+            </label>
 
-<div class="generix2 espace_bas">
-    <p id="nbr_mail">Vous avez {{ emails|length }} email{{ emails|pluralize }} à modérer.</p>
-</div>
+            <div class="content position_relative">
+            <div class="generix3">
+                <h1>Bon courage !!</h1>
+            </div>
+            <div class="generix2 class_espace ">
+                <h2>Choisissez le style d'email à modérer</h2>
+            </div>
 
-    <div id="select_email class_column">
-        <!-- Formulaire pour filtrer les emails -->
-        <form method="GET" class="class_flex class_justify_center" id="email_filter_form">
-            <label for="email_type">Filtrer :</label>
-            <select id="email_type" name="email_type" onchange="this.form.submit()">
-                <option value="">-- Type d'email  --</option>
-                <option value="Avis positif" {% if request.GET.email_type == "Avis positif" %}selected{% endif %}>Avis positif</option>
-                <option value="Avis negatif" {% if request.GET.email_type == "Avis negatif" %}selected{% endif %}>Avis négatif</option>
-                <option value="Prise de contact" {% if request.GET.email_type == "Prise de contact" %}selected{% endif %}>Prise de contact</option>
-            </select>
-            <noscript><button type="submit">Filtrer</button></noscript>
-        </form>
-        {% if request.GET.email_type %}
-                <!-- Selecte pour sélectionner un email, avec conservation du filtre -->
-                <form method="GET" class="class_flex class_justify_center" id="email_select_form">
-                    <input type="hidden" name="email_type" value="{{ request.GET.email_type }}">
-                    <label for="email_select">Sélectionner un email :</label>
-                    <select id="email_select" name="email_id" onchange="this.form.submit()">
-                        <option value="">Email à gérer</option>
-                        {% for email in emails %}
-                            <option value="{{ email.id }}" {% if selected_email and email.id == selected_email.id %}selected{% endif %}>
-                                {{ email.subject }}
-                            </option>
-                        {% endfor %}
-                    </select>
-                    <noscript><button type="submit">Valider</button></noscript>
-                </form>
-        {% endif %}
-        <!-- Affichage de l'email sélectionné -->
-        {% if selected_email %}
-            {% if request.GET.email_type == "Avis negatif" %}
-                {% include "admin/moderateur/moderation_email/_bouton_avis_negatif.html" %}
-            {% elif request.GET.email_type == "Avis positif" %}
-                {% include "admin/moderateur/moderation_email/_bouton_avis_positif.html" %}
-            {% elif request.GET.email_type == "Prise de contact" %}
-                {% include "admin/moderateur/moderation_email/_bouton_reponse_modo.html" %}
-            {% endif %}
-        {% endif %}
+            <div class="generix2 espace_bas">
+                <p id="nbr_mail">Vous avez {{ emails|length }} email{{ emails|pluralize }} à modérer.</p>
+            </div>
+
+                <div id="select_email class_column">
+                    <!-- Formulaire pour filtrer les emails -->
+                    {% include "admin/moderateur/moderation_email/structure_moderation/_selection_ton_email_type.html" %}
+                    {% if request.GET.email_type %}
+                            <!-- Selecte pour sélectionner un email, avec conservation du filtre -->
+                            {% include "admin/moderateur/moderation_email/structure_moderation/_selection_le_style_a_moderer.html" %}
+                    {% endif %}
+                    <!-- Affichage de l'email sélectionné -->
+                    {% if selected_email %}
+                        {% if request.GET.email_type == "Avis negatif" %}
+                            {% include "admin/moderateur/different_bouton/_bouton_avis_negatif.html" %}
+                        {% elif request.GET.email_type == "Avis positif" %}
+                            {% include "admin/moderateur/different_bouton/_bouton_avis_positif.html" %}
+                        {% elif request.GET.email_type == "Prise de contact" %}
+                            {% include "admin/moderateur/different_bouton/_bouton_reponse_modo.html" %}
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+            </div>
+
+            <!--Onglet 2 admin-->
+            <div class="tab">
+                <input
+                id="tab-2"
+                name="tab-group-1"
+                type="radio" />
+                <label for="tab-2">
+                    admin
+                </label>
+            <div class="content">
+                <div>
+                    <p>Prochaine étape : <strong>Créer un tableau de bord</strong></p>
+                </div>
+            </div>
+            </div>
+        </div>
     </div>
+    </div>
+</div>
+
 {% endblock principal %}

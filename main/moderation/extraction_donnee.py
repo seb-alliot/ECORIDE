@@ -1,10 +1,12 @@
 from bs4 import BeautifulSoup
-from ..models import TrajetProposer, ReservationTrajet
+from ..models import TrajetProposer, ReservationTrajet, User
 from ..forms import  AfficherTrajetForm
 from django.contrib import messages
 from django.shortcuts import redirect
+import re
 
-def ExtractionDonnee(request, email_type, selected_email, mail, email_id_selected):
+
+def ExtractionDonnee(request, email_type, selected_email):
     body = selected_email["body"]
     trajet_id = None
     trajet = None
@@ -14,27 +16,21 @@ def ExtractionDonnee(request, email_type, selected_email, mail, email_id_selecte
     commentaire = None
     passager = None
     chauffeur = None
+    # Valeurs par défaut a extraire
+    email_user = "Non renseigné"
+    pseudo = "Non renseigné"
+    telephone = "Non renseigné"
+    sujet = "Non renseigné"
+    commentaire = "Non renseigné"
 
     extraire = BeautifulSoup(body, "html.parser")
+    div_commentaire = extraire.find("div", class_="commentaire")
     # On extrait le commentaire du passager
     try:
-        if email_type == "Avis positif":
-            if div_commentaire and div_commentaire.p:
-                commentaire = div_commentaire.p.get_text().replace("Commentaire: ", "").strip()
-                if commentaire.startswith("Commentaire :"):
-                    commentaire = commentaire.replace("Commentaire :", "").strip()
-            else:
-                commentaire = None
-                mail.store(email_id_selected, "+FLAGS", "\\Deleted")
-                mail.expunge()
-                messages.info(request, "Aucun commentaire, le mail a été supprimé.")
-        elif email_type == "Avis negatif":
-            if div_commentaire and div_commentaire.p:
-                commentaire = div_commentaire.p.get_text().replace("Commentaire: ", "").strip()
-            # on fait sauter Commentaire : pour avoir juste le commentaire
-            else:
-                commentaire = None
-                messages.info(request, "Aucun commentaire a ajouter.")
+        if div_commentaire and div_commentaire.p:
+                commentaire = div_commentaire.p.get_text().replace("Commentaire:", "").replace("Commentaire :", "").strip()
+        else:
+            commentaire = None
     except AttributeError:
         messages.info(request, "Aucun commentaire.")
     title_id = extraire.find("title")
@@ -42,7 +38,6 @@ def ExtractionDonnee(request, email_type, selected_email, mail, email_id_selecte
         if title_id:
             title_id = title_id.get_text()
             trajet_id = title_id.split(" ")[-1]
-            #vérification massive des id existants sinon next :)
             try:
                 if not trajet_id or trajet_id in [None, "", "auth.User.None", "None"]:
                     messages.info(request, "Le trajet n'existe plus.")
@@ -51,23 +46,26 @@ def ExtractionDonnee(request, email_type, selected_email, mail, email_id_selecte
                     messages.info(request, "Le trajet n'existe plus")
 
                 chauffeur = trajet.chauffeur
-                chauffeur_id = chauffeur.id if chauffeur else None
                 if not chauffeur:
                     messages.info(request, "Le chauffeur n'existe plus.")
-                    mail.store(email_id_selected, "+FLAGS", "\\Deleted")
-                    mail.expunge()
-                    return redirect("moderation_email")
-
-                reservation = ReservationTrajet.objects.filter(trajet_reserver=trajet).first()
-                if reservation:
-                    passager = reservation.passager
+                chauffeur_id = chauffeur.id if chauffeur else None
+                # On extrait le nom du passager
+                trouve_le_nom = re.search(r"de la part de (\w+)", title_id)
+                if trouve_le_nom:
+                    passager = trouve_le_nom.group(1)
+                    print(f"le nom du passager trouver est : {passager}")
+                    passager = User.objects.filter(username=passager).first()
                     passager_id = passager.id if passager else None
-                elif not reservation:
-                    messages.info(request, "La réservation n'existe plus.")
+                    print(f"l'id du passager est  : {passager_id}")
+                reservation = ReservationTrajet.objects.filter(trajet_reserver=trajet, passager=passager, prix_par_passager__isnull=False).first()
+                prix = reservation.prix_par_passager if reservation else None
+                print(f"le prix de la reservation est : {prix}")
+
+
             except (ValueError, TypeError):
                 return redirect("moderation_email")
 
-            date_resa = trajet.date
+            date_resa = trajet.date.strftime("%d/%m/%Y")
             trajet = (
                 (trajet.ville_depart) + " - " + (trajet.ville_arrivee)
                 if trajet
@@ -76,13 +74,6 @@ def ExtractionDonnee(request, email_type, selected_email, mail, email_id_selecte
 
     elif email_type == "Prise de contact":
         try:
-            # Valeurs par défaut a extraire
-            email_user = "Non renseigné"
-            pseudo = "Non renseigné"
-            telephone = "Non renseigné"
-            sujet = "Non renseigné"
-            commentaire = "Non renseigné"
-
             # Email
             div_email = extraire.find("div", class_="email_user")
             if div_email and div_email.p:
@@ -112,6 +103,7 @@ def ExtractionDonnee(request, email_type, selected_email, mail, email_id_selecte
             messages.info(request, "Des données n'ont pas pu être récupérées.")
             return redirect("moderation_email")
 
-    affichage_trajet_form = AfficherTrajetForm(request.POST or None, initial={"chauffeur": chauffeur,"trajet": trajet, "date_reservation": date_resa,"passager":passager})
+
+    affichage_trajet_form = AfficherTrajetForm(request.POST or None, initial={"chauffeur": chauffeur,"trajet": trajet, "date_reservation": date_resa,"passager":passager, "prix": prix})
 
     return affichage_trajet_form , telephone, sujet, email_user, pseudo, commentaire, trajet_id, email_type, selected_email, passager_id, chauffeur_id
