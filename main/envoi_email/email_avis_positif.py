@@ -34,8 +34,7 @@ def Envoi_Email_Avis_Trajet_Positif(
             telephone = None
         prix_total = reservation.prix_par_passager
 
-
-        subject = f"Avis positif {trajet_id} "
+        subject = f"Avis positif {trajet_id} de la part de {passagers}"
 
         context = {
             "prix_total": prix_total,
@@ -64,7 +63,6 @@ def Envoi_Email_Avis_Trajet_Positif(
         email.send()
 
     except Exception as e:
-
         messages.error(
             request,
             f"Erreur lors de l'envoi de l'e-mail d'avis positif: {str(e)}",

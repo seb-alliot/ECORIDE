@@ -97,7 +97,4 @@ def GereLesAvisNegatif(request, chauffeur_id, passager_id, trajet_id, commentair
                 messages.error(request, "Trajet introuvable.")
             except CreditUser.DoesNotExist:
                 messages.error(request, "Ce chauffeur n'existe plus.")
-        else:
-            print("🛑 Formulaire invalide :", moderation_form.errors)
-
     return moderation_form

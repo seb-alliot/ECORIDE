@@ -5,8 +5,6 @@ from ..forms import ModerationAvisPositifForm
 
 
 def GereLesAvisPositif(request, email_id_selected, mail, trajet_id, commentaire, chauffeur_id, passager_id):
-    print(f"les données reçues : trajet_id={trajet_id}, chauffeur_id={chauffeur_id}, passager_id={passager_id}, email_id={email_id_selected}")
-    print("-" * 50)
 
     trajet = TrajetProposer.objects.filter(id=trajet_id).first()
     passager = User.objects.filter(id=passager_id).first()
@@ -43,7 +41,7 @@ def GereLesAvisPositif(request, email_id_selected, mail, trajet_id, commentaire,
 
                 elif action == "Refuser":
                     if note_chauffeur.commentaire:
-                        infos.append("Commentaire refusé")
+                        infos.append("Commentaire déjà existant")
                     else:
                         note_chauffeur.commentaire_moderer = True
                         note_chauffeur.decision_prise = True
@@ -71,6 +69,5 @@ def GereLesAvisPositif(request, email_id_selected, mail, trajet_id, commentaire,
 
         else:
             messages.error(request, "Formulaire invalide.")
-            print("Erreur dans le formulaire :", moderation_form.errors)
 
     return moderation_form

@@ -53,14 +53,10 @@ def ExtractionDonnee(request, email_type, selected_email):
                 trouve_le_nom = re.search(r"de la part de (\w+)", title_id)
                 if trouve_le_nom:
                     passager = trouve_le_nom.group(1)
-                    print(f"le nom du passager trouver est : {passager}")
                     passager = User.objects.filter(username=passager).first()
                     passager_id = passager.id if passager else None
-                    print(f"l'id du passager est  : {passager_id}")
                 reservation = ReservationTrajet.objects.filter(trajet_reserver=trajet, passager=passager, prix_par_passager__isnull=False).first()
                 prix = reservation.prix_par_passager if reservation else None
-                print(f"le prix de la reservation est : {prix}")
-
 
             except (ValueError, TypeError):
                 return redirect("moderation_email")

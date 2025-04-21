@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.db.models import Avg, Q
-from ..models import TrajetProposer, NoteUser, ReservationTrajet, CreditUser
+from ..models import TrajetProposer, NoteUser, ReservationTrajet, CreditUser, Preference
 from ..forms import ReservationTrajetForm
 
 
@@ -22,6 +22,8 @@ def ChoisisTonCovoite(request):
         Q(commentaire__isnull=True) |
         Q(commentaire__exact="")
     ).order_by("passager", "?").distinct("passager").values("commentaire")[:3]
+    preference = Preference.objects.filter(user_preference=trajet.chauffeur).first()
+    print(preference, trajet.chauffeur)
 
     try:
         credit_user = (
@@ -97,4 +99,4 @@ def ChoisisTonCovoite(request):
                 return redirect("MonCompte")
             else:
                 messages.error(request, "Vos creédits sont insuffisants pour réserver.")
-    return reservation_form , trajet, commentaire
+    return reservation_form , trajet, commentaire, preference

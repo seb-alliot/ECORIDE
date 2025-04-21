@@ -4,7 +4,6 @@ from ..models import TrajetProposer, NoteUser, ReservationTrajet, CreditUser
 from ..forms import AvisForm
 from ..securite import confirm_token
 from ..envoi_email import Envoi_Email_Avis_Trajet_Positif , Envoi_Email_Avis_Trajet_Negatif
-from django.http import HttpResponseRedirect
 
 
 def DonneTonAvis(request, trajet_id, token):
@@ -96,17 +95,21 @@ def DonneTonAvis(request, trajet_id, token):
             credit_chauffeur.save()
             # Vérifier si le commentaire est déjà attribué avant d'envoyer l'email
             # Si le commentaire existe on n'envoie pas l'email, eviter de spam
-            if not note_existante.commentaire_attribuee and not note_existante.note_attribuee:
-
+            if note_existante.commentaire_attribuee and not note_existante.note_attribuee:
+                messages.info(request, "Vous avez déja renseigné un commentaire.")
+            else:
+                commentaire = nouveau_commentaire if nouveau_commentaire else None
                 Envoi_Email_Avis_Trajet_Positif(
                         request, chauffeur, trajet_id, reservation, commentaire, token, passagers
                     )
                 info_liste_mail.append("avis positif")
 
         elif avis_soumis == "non":
-            if not note_existante.commentaire_attribuee and not note_existante.note_attribuee:
-                # Si le commentaire est déjà attribué, on n'envoie pas l'email
-                # Eviter de spam
+            # Si le commentaire est déjà attribué, on n'envoie pas l'email
+            # Eviter de spam
+            if  note_existante.commentaire_attribuee and not note_existante.note_attribuee:
+                messages.info(request, "Vous avez déja renseigné un commentaire.")
+            else:
                 commentaire = nouveau_commentaire if nouveau_commentaire else None
                 Envoi_Email_Avis_Trajet_Negatif(
                     request, chauffeur, trajet_id, reservation, commentaire, token, passagers

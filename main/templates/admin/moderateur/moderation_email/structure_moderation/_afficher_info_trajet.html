@@ -35,6 +35,7 @@
                 {{ affichage_trajet_form.date_reservation }}
             </div>
         </div>
+        {% if email_type == 'Avis negatif' %}
         <div id="afficher_prix">
             <div>
                 <label for="prix">Prix payer</label>
@@ -43,5 +44,6 @@
                 {{ affichage_trajet_form.prix }}
             </div>
         </div>
+        {% endif %}
     </div>
 </form>
