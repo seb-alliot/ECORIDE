@@ -222,3 +222,11 @@ li#voiture_posseder {
 .success, .error, .info{
   font-size: 20px;
 }
+#affichage_admin input {
+  width:180px;
+  height:30px;
+  font-size: 16px;
+}
+th {
+  font-size: 18px;
+}

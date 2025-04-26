@@ -51,6 +51,7 @@
             </div>
             </div>
 
+            {% if admin %}
             <!--Onglet 2 admin-->
             <div class="tab">
                 <input
@@ -61,12 +62,10 @@
                     admin
                 </label>
             <div class="content">
-                <div>
-                    <p>Prochaine étape : <strong>Créer un tableau de bord</strong></p>
-                </div>
-            </div>
+                {% include "admin/moderateur/moderation_email/structure_moderation/_affichage_admin.html" %}
             </div>
         </div>
+        {% endif %}
     </div>
     </div>
 </div>

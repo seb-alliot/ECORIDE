@@ -439,7 +439,6 @@ div#reservation > div {
   box-shadow: var(--box-shadow);
   border: solid 2px black;
 }
-
 /**----Photo chauffeur------*/
 
 div#reservation > div > img.photo_profile {

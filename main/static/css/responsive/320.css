@@ -224,3 +224,12 @@ input#id_commentaire_moderer {
 .success, .error, .info{
   font-size: 14px;
 }
+
+#affichage_admin input {
+  width:90px;
+  height:25px;
+  font-size: 12px;
+}
+th {
+  font-size: 14px;
+}

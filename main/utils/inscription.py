@@ -1,25 +1,28 @@
+import re
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib import messages
 from django.core.mail import EmailMessage
 from django.shortcuts import redirect
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.utils.http import urlsafe_base64_encode
 from django.views.generic.edit import CreateView
 from django.template.loader import render_to_string
 from ..models import ChoixRole, CreditUser, ActivationToken, User
 from ..forms import Inscription
-from  django.urls import reverse
-
 
 class UserCreateView(CreateView):
-
     model = User
     form_class = Inscription
     template_name = "inscription/inscription.html"
     success_url = reverse_lazy("index")
+    
+    # utilisation de dispatch car vue generique
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect("home")
+        return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
-
         try:
             user = form.save(commit=False)
             user.is_active = False
@@ -35,7 +38,7 @@ class UserCreateView(CreateView):
             activation_url = self.request.build_absolute_uri(
                 reverse("activation", kwargs={"token": token, "uidb64": uidb64})
             )
-            self.ActivationCompte(user, uidb64, activation_url)
+            self.send_activation_email(user, uidb64, activation_url)
 
             messages.success(self.request, "Votre compte a été créé avec succès.")
             return redirect(self.success_url)
@@ -44,11 +47,10 @@ class UserCreateView(CreateView):
             return self.form_invalid(form)
 
     def form_invalid(self, form):
-
-        username = form.data.get("username")
-        email = form.cleaned_data.get("email")
-        password1 = form.data.get("password1")
-        password2 = form.data.get("password2")
+        username = self.request.POST.get("username")
+        email = self.request.POST.get("email")
+        password1 = self.request.POST.get("password1")
+        password2 = self.request.POST.get("password2")
 
         if username and User.objects.filter(username=username).exists():
             messages.error(self.request, "Ce nom d'utilisateur est déjà pris.")
@@ -62,13 +64,12 @@ class UserCreateView(CreateView):
             elif not re.match(r"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$", password1):
                 messages.error(
                     self.request,
-                    "Le mot de passe doit comporter au moins 8 caractères, avec une majuscule, une minuscule et un chiffre."
+                    "Le mot de passe doit comporter au moins 8 caractères, avec une majuscule, une minuscule, un chiffre et un caractère spécial."
                 )
 
         return super().form_invalid(form)
 
-    def ActivationCompte(self, user, uidb64, activation_url):
-
+    def send_activation_email(self, user, uidb64, activation_url):
         subject = "Activation de votre compte EcoRide"
         context = {"user": user, "activation_url": activation_url, "uidb64": uidb64}
         message = render_to_string("style_email/activation_email.html", context)

@@ -699,3 +699,25 @@ class ModerationTrajetForm(forms.ModelForm):
                 "Le commentaire ne doit pas dépasser 200 caractères."
             )
         return commentaire
+
+class AfficherReservationForm(forms.Form):
+    jour = forms.CharField(
+        label="Jour",
+        widget=forms.TextInput(attrs={"placeholder": "Jour"}),
+        required=True,
+    )
+    total_gain = forms.CharField(
+        label="Total gain",
+        widget=forms.TextInput(attrs={"placeholder": "Total gain"}),
+        required=True,
+    )
+    total_resa = forms.CharField(
+        label="Total réservation",
+        widget=forms.TextInput(attrs={"placeholder": "Total réservation"}),
+        required=True,
+    )
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["jour"].widget.attrs["readonly"] = True
+        self.fields["total_gain"].widget.attrs["readonly"] = True
+        self.fields["total_resa"].widget.attrs["readonly"] = True

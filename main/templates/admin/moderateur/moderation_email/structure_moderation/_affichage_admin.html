@@ -1,0 +1,22 @@
+    <form id="affichage_admin" >
+        <ul>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Jour</th>
+                        <th>Total réservation</th>
+                        <th>Total gain</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for fusion_form in formulaire_pres_remplis_fusion %}
+                        <tr>
+                            <td>{{ fusion_form.jour }}</td>
+                            <td>{{ fusion_form.total_resa }}</td>
+                            <td>{{ fusion_form.total_gain }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </ul>
+    </form>

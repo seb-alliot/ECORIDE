@@ -6,7 +6,6 @@ form#email_filter_form label , form#email_select_form label , #moderation_form l
     justify-content: center;
 }
 
-
 #prise_contact label, #commentaire_label {
     display: none;
 }
@@ -23,7 +22,6 @@ textarea#id_reponse {
     height: 200px;
 }
 
-
 form#prise_contact, #moderation_form{
     display: flex;
     flex-direction: column;
@@ -32,7 +30,6 @@ form#prise_contact, #moderation_form{
 form#email_select_form select{
     margin-bottom: 15px;;
 }
-
 
 #avis_positif{
     display: flex;

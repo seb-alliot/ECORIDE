@@ -4,8 +4,7 @@ from django.contrib.auth import logout
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
-from django.contrib.auth.decorators import user_passes_test
-from email.header import decode_header
+
 
 from .forms import (
     AfficherTrajetForm,
@@ -27,8 +26,18 @@ from .espace_perso import (
     ProposeTonCovoiturage,
     GereTaReservationPassager,
 )
-from .utils import ChoisisTonCovoite, DonneTonAvis, UserCreateView, PriseContact
-from .connection import PremierEtape, DeuxiemeEtape, is_superuser_or_moderateur
+from .utils import (
+    ChoisisTonCovoite,
+    DonneTonAvis,
+    UserCreateView,
+    PriseContact
+)
+from .connection import (
+    PremierEtape,
+    DeuxiemeEtape,
+    is_superuser_or_moderateur,
+    Admin_access,
+)
 from .moderation import (
     ConnectionImaplib,
     RecuperationEmail,
@@ -36,12 +45,9 @@ from .moderation import (
     GereLesAvisNegatif,
     GereLesAvisPositif,
     PriseDeContact,
+    Fusion_donnee,
 )
-from django.contrib.auth.tokens import default_token_generator
 from django.contrib import messages
-from django.conf import settings
-from django.views.generic import CreateView
-from django.contrib.auth.models import User
 
 
 def Contact(request):
@@ -258,6 +264,8 @@ def Fait_Ton_Taff_De_Modo(request):
     #else:
         #messages.info(request,"Bienvenue dans votre espace moderateur")
     context = {}
+
+    # 1er onglet, moderation des mails
     moderation_positive_form = None
     moderation_form = None
     contact_form = None
@@ -265,6 +273,7 @@ def Fait_Ton_Taff_De_Modo(request):
     # Connexion au serveur IMAP
     # Même principe que email dans settings
     mail, data, result, mail_ids, emails = ConnectionImaplib(request)
+
     affichage_trajet_form = AfficherTrajetForm(request.POST or None)
     email_recuperer = RecuperationEmail(request, mail, data, result, mail_ids, emails)
     if isinstance(email_recuperer, HttpResponseRedirect):
@@ -304,7 +313,15 @@ def Fait_Ton_Taff_De_Modo(request):
                 return affichage_trajet_form
             context["contact_form"] = contact_form
 
+    # 2ème onglet admin
+    # Pas besoin de isinstance car on ne fait pas de redirection, et une seul données renvoyée
+    user = request.user
+    admin = Admin_access(request,user)
+    formulaire_pres_remplis_fusion = Fusion_donnee(request)
+
     context = {
+        "admin": admin,
+        "formulaire_pres_remplis_fusion": formulaire_pres_remplis_fusion,
         "emails": emails,
         "selected_email": selected_email,
         "messages": messages.get_messages(request),
@@ -319,9 +336,9 @@ def Fait_Ton_Taff_De_Modo(request):
         request, "admin/moderateur/moderation_email/moderation_email.html", context
     )
 
+
 # _________________En cour_________________
 
-# Factorisation
 
 # _________________A FAIRE_________________
 

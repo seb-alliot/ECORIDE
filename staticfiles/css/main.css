@@ -16,7 +16,6 @@
 @import url("responsive/1920.css") screen and (min-width: 1920px) and
   (max-width: 3072px);
 @import url("responsive/3072.css") screen and (min-width: 3072px);
-
 /* Variables CSS */
 :root {
   --color-primary: #7d6e63;
@@ -38,6 +37,7 @@
 }
 
 /* Classes utilitaires */
+
 .class_flex {
   display: flex;
 }
@@ -135,6 +135,9 @@ body {
   min-height: 100vh;
 }
 /* Header */
+header.position_relative > div > div > div.class_flex {
+  justify-content: space-between;
+}
 header {
   justify-content: space-between;
   padding: var(--spacing-md) var(--spacing-lg);
@@ -436,7 +439,6 @@ div#reservation > div {
   box-shadow: var(--box-shadow);
   border: solid 2px black;
 }
-
 /**----Photo chauffeur------*/
 
 div#reservation > div > img.photo_profile {
@@ -522,8 +524,6 @@ div#gain_plateforme {
 .success, .error, .info{
   display: flex;
   justify-content: center;
-  margin: 5%;
-
 }
 .success {
   color: green;

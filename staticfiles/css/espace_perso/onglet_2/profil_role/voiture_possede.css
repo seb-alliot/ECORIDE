@@ -75,7 +75,7 @@ div.info_perso > li {
   }
   div.info_perso > li {
     width: 180px;
-    font-size: 14px;
+    font-size: 16px;
   }
 }
 @media (min-width: 1440px) and (max-width: 1760px) {

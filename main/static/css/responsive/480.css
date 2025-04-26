@@ -214,3 +214,12 @@ div#info_trajet ,
 .success, .error, .info{
   font-size: 16px;
 }
+
+#affichage_admin input {
+  width:110px;
+  height:25px;
+  font-size: 12px;
+}
+th {
+  font-size: 14px;
+}

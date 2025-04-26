@@ -10,7 +10,6 @@ from decimal import Decimal
 import uuid
 from django.db.models import Sum
 from django.db.models import Q
-from django.core.exceptions import ValidationError
 
 
 class CreditUser(models.Model):

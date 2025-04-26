@@ -1,3 +1,4 @@
 from .etape1 import PremierEtape
 from .etape2 import DeuxiemeEtape
-from .verif_qui_tu_es import is_superuser_or_moderateur
+from .all_access import is_superuser_or_moderateur
+from .admin_access import Admin_access

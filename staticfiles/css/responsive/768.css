@@ -1,5 +1,5 @@
 :root {
-  --logo-size: 110px;
+  --logo-size: 80px;
   --font-size-base: 12px;
   --input-width: 145px;
   --image-height: 250px;
@@ -9,11 +9,12 @@
   min-height: var(--image-height);
 }
 #logo,
-.photo_profile,
-.photo_default {
+.photo_default,
+.photo_profile{
   height: var(--logo-size);
   width: var(--logo-size);
 }
+
 #ajouter,
 #refuser,
 button#bouton_note,
@@ -78,8 +79,8 @@ footer a {
   margin-top: 10px;
 }
 label#resultat_recherche img {
-  width: var(--logo-size);
-  height:var(--logo-size);
+  width: 110px;
+  height:110px;
   margin-right: 10px;
 }
 #resultat_recherche,
@@ -103,8 +104,8 @@ h4{
   margin-bottom: var(--spacing-lg);
 }
 form#contact_form textarea {
-  width: 450px;
-  height: 175px;
+  width: 300px;
+  height: 110px;
 }
 #id_commentaire {
   width: 300px;
@@ -121,6 +122,7 @@ div#reservation > div {
   width: 250px;
   height: 250px;
 }
+
 #note_perso,
 #avis_perso,
 #info_trajet,
@@ -180,38 +182,13 @@ select#id_avis,
 select#id_note {
   margin-bottom: 15px;
 }
-#account-admin{
-  gap: 50px;
-  margin-left: 20%;
-}
+
 #moderation_form select, #bouton_modo, select#id_avis {
   margin-right: 50px;
 }
 #avis_positif input {
   width: 300px;
   height: 30px;
-}
-
-
-#aficher_chauffeur input,#aficher_passager input , #aficher_trajet input , #aficher_date_reservation input {
-  height: 30px;
-  width: 125px;
-  font-size: 12px;
-}
-#aficher_chauffeur input , #aficher_passager input {
-  margin-left: 125px;
-}
-#aficher_trajet input {
-  margin-left: 95px;
-}
-#id_date_reservation {
-  margin-left: 72px;
-}
-#affichage_trajet_form label {
-  font-size: 12px;
-}
-#affichage_trajet_form {
-  margin-top: 30px;
 }
 
 #bouton_moderateur {
@@ -225,9 +202,4 @@ form#reservation_form > a.btn.btn-primary {
 
 .success, .error, .info{
   font-size: 18px;
-}
-
-#logo {
-  display: flex;
-  margin-left: -140%;
 }

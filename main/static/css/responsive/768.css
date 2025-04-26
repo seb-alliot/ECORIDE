@@ -203,3 +203,12 @@ form#reservation_form > a.btn.btn-primary {
 .success, .error, .info{
   font-size: 18px;
 }
+
+#affichage_admin input {
+  width:160px;
+  height:30px;
+  font-size: 14px;
+}
+th {
+  font-size: 16px;
+}
