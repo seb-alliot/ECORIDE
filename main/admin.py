@@ -36,11 +36,22 @@ class CustomUserAdmin(UserAdmin):
         ("Email de l'utilisateur", {"fields": ("email",)}),
         ("Etat du compte", {"fields": ("is_active",)}),
         ("Groupes", {"fields": ("groups",)}),
+        ("Permissions", {"fields": ("user_permissions",)}),
+        ("Date de création", {"fields": ("date_joined",)}),
+        ("Dernière connexion", {"fields": ("last_login",)}),
+        (
+            "Informations personnelles",
+            {
+                "fields": (
+                    "is_staff",
+                )
+            },
+        ),
     ]
     # On ajoute les models CreditUser et ChoixRole a l'interface admin lors de la création d'un utilisateur
     inlines = [CreditUserInline, ChoiceRoleInline]
 
-    list_display = ["username", "email", "get_role", "get_credit", "is_active"]
+    list_display = ["username",'is_staff', "email", "get_role", "get_credit", "is_active"]
     list_filter = ["is_active"]
 
     # On combine les models via les formulaires à la creation d'un utilisateur via l'interface admin

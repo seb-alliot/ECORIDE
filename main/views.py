@@ -4,19 +4,18 @@ from django.contrib.auth import logout
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
-
+from django.contrib import messages
 
 from .forms import (
     AfficherTrajetForm,
 )
 
-from .donnee_template import (
+from .code import (
     InfoTrajet,
     Info_Reservation,
     initialisation_template,
-)
-from .code_doublon import RechercheTrajet, Filtre_trajet
-from .espace_perso import (
+    RechercheTrajet,
+    Filtre_trajet,
     AjoutTonAdresse,
     AjouteTaCaisse,
     DonneTesPreferences,
@@ -25,20 +24,13 @@ from .espace_perso import (
     GereTonCovoiteChauffeur,
     ProposeTonCovoiturage,
     GereTaReservationPassager,
-)
-from .utils import (
     ChoisisTonCovoite,
     DonneTonAvis,
-    UserCreateView,
-    PriseContact
-)
-from .connection import (
+    PriseContact,
     PremierEtape,
     DeuxiemeEtape,
     is_superuser_or_moderateur,
     Admin_access,
-)
-from .moderation import (
     ConnectionImaplib,
     RecuperationEmail,
     ExtractionDonnee,
@@ -47,7 +39,7 @@ from .moderation import (
     PriseDeContact,
     Fusion_donnee,
 )
-from django.contrib import messages
+
 
 
 def Contact(request):
@@ -78,6 +70,7 @@ def mentions_legales(request):
     )
 
 def accueil(request):
+
     context = {}
 
     recherche_form, first_resultat, second_resultat = RechercheTrajet(request)
@@ -102,8 +95,6 @@ def accueil(request):
         # formulaire de la page
         "filtre_form": filtre_form,
         "recherche_form": recherche_form,
-        # envoie des message au template, inutile si balise message dans le template
-        "messages": messages.get_messages(request),
     }
     context.update(initialisation_template(request))
     return render(request, "index.html", context)
@@ -121,7 +112,6 @@ def connection1(request):
 
     context.update(initialisation_template(request))
     return render(request, "login/connection1.html", context)
-
 
 # operation 2 : demande de mot de passe et code connection 2fa
 def connection2(request):
@@ -148,7 +138,7 @@ def logout_view(request):
 def MonCompte(request):
     context = {}
 
-    # Appel des fontions pour les formulaire
+    # Appel des fontions pour les formulaires
     preference_form = DonneTesPreferences(request)
     role_form = ChangeTonRole(request)
     adresse_form = AjoutTonAdresse(request)
@@ -209,7 +199,6 @@ def MonCompte(request):
             "recherche_form": recherche_form,
             # __reservation__
             "reservation_form": reservation_form,
-            "messages": messages.get_messages(request),
         }
     )
 
@@ -336,8 +325,6 @@ def Fait_Ton_Taff_De_Modo(request):
         request, "admin/moderateur/moderation_email/moderation_email.html", context
     )
 
-
-# _________________En cour_________________
 
 
 # _________________A FAIRE_________________

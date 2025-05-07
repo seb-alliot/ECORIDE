@@ -1,15 +1,13 @@
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import path
 from main import views as main_views
 from django.contrib.auth import views as auth_views
-from django.urls import reverse_lazy
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import logout
 from django.urls import re_path
 from django.views.static import serve
-from main.utils import UserCreateView , activation, CustomPasswordResetView , CustomResetPasswordConfirmView
-from main.forms import CustomSetPasswordForm
+from .code import UserCreateView , activation, CustomPasswordResetView , CustomResetPasswordConfirmView
 
 
 urlpatterns = [
