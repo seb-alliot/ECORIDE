@@ -1,3 +1,4 @@
+{% load static %}
 
 <h1 class="class_flex class_justify_center p_deco">Proposez un covoiturage</h1>
 <form id="trajet_form" method="POST">
@@ -12,10 +13,10 @@
             {{ trajet_form.date }}
         </div>
         <div class="flex1 class_flex class_justify_center class_aligne_items_center">
-        <label for="voiture">Voiture</label>
+            <label for="id_voiture">Voiture</label>
             {{ trajet_form.voiture }}
-        <label for="place">Nombre de places</label>
-            {{ trajet_form.places }}
+        <label for="id_places">Nombre de places</label>
+        {{ trajet_form.places }}
             <label for="id_heure">Heure de départ</label>
                 {{ trajet_form.heure }}
         </div>
@@ -28,3 +29,6 @@
         </div>
     </div>
 </form>
+
+<script> const voituresData = JSON.parse('{{ voitures_data_json|escapejs }}');</script>
+<script src="{% static 'js/place_voiture.js' %}"></script>

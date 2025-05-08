@@ -5,7 +5,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.contrib import messages
-
+from django.core.serializers.json import DjangoJSONEncoder
+import json
 from .forms import (
     AfficherTrajetForm,
 )
@@ -38,6 +39,7 @@ from .code import (
     GereLesAvisPositif,
     PriseDeContact,
     Fusion_donnee,
+    recupere_places_voiture,
 )
 
 
@@ -147,6 +149,14 @@ def MonCompte(request):
     reservation_form = GereTaReservationPassager(request)
     trajet_terminer_form = FiniTonCovoiturage(request)
     demarrer_ou_annuler_form = GereTonCovoiteChauffeur(request)
+
+    voitures_user = request.user.voiture.all()  # grâce à related_name="voitures"
+
+    voitures_data = {
+        str(voiture.id): voiture.places for voiture in voitures_user
+    }
+    context["voitures_data_json"] = json.dumps(voitures_data, cls=DjangoJSONEncoder)
+
 
     recherche_form, first_resultat, second_resultat = RechercheTrajet(request)
     filtre_form, resultat1, resultat2 = Filtre_trajet(request)
@@ -324,6 +334,9 @@ def Fait_Ton_Taff_De_Modo(request):
     return render(
         request, "admin/moderateur/moderation_email/moderation_email.html", context
     )
+
+
+
 
 
 

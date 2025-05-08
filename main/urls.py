@@ -10,6 +10,7 @@ from django.views.static import serve
 from .code import UserCreateView , activation, CustomPasswordResetView , CustomResetPasswordConfirmView
 
 
+
 urlpatterns = [
 
     path("admin/", admin.site.urls),

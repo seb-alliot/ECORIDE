@@ -67,4 +67,6 @@ def ProposeTonCovoiturage(request):
                 request,
                 "Une erreur est apparue lors de la proposition de covoiturage.",
             )
+    else:
+        print("Formulaire invalide :", trajet_form.errors)
     return trajet_form
