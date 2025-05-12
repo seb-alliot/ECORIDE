@@ -16,6 +16,7 @@ def ExtractionDonnee(request, email_type, selected_email):
     commentaire = None
     passager = None
     chauffeur = None
+    prix = None
     # Valeurs par défaut a extraire
     email_user = "Non renseigné"
     pseudo = "Non renseigné"

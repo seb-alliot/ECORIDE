@@ -24,7 +24,6 @@ def ChoisisTonCovoite(request):
     ).order_by("passager", "?").distinct("passager").values("commentaire")[:3] #utilisation de distinct pour ne pas avoir de doublon, possible que sur postgresql
 
     preference = Preference.objects.filter(user_preference=trajet.chauffeur).first()
-    print(preference, trajet.chauffeur)
 
     try:
         credit_user = (
@@ -98,7 +97,7 @@ def ChoisisTonCovoite(request):
                     trajet.save()
 
                     messages.success(request, "La réservation est validée, bonne route !")
-                    return redirect("MonCompte")
+                    return redirect(f"{reverse('reservation')}?trajet_id={trajet.id}")
             else:
                 messages.error(request, "Vos creédits sont insuffisants pour réserver.")
     return reservation_form , trajet, commentaire, preference

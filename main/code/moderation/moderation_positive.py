@@ -1,4 +1,5 @@
 from django.shortcuts import redirect
+from django.urls import reverse
 from django.contrib import messages
 from ...models import NoteUser, TrajetProposer, User
 from ...forms import ModerationAvisPositifForm
@@ -50,22 +51,21 @@ def GereLesAvisPositif(request, email_id_selected, mail, trajet_id, commentaire,
 
                 else:
                     messages.error(request, "Action inconnue.")
-                    return redirect("moderation_email")
+                    return redirect(f"{reverse('moderation_email')}?email_type={f"Avis+positif"}")
 
                 if supprimer_email:
                     mail.store(email_id_selected, "+FLAGS", "\\Deleted")
+                    mail.expunge()
                     deletions.append("Email supprimé")
 
                 # Messages d'infos
                 if deletions or infos:
                     for msg in deletions + infos:
                         messages.info(request, msg)
-
-                return redirect("moderation_email")
-
+                return redirect(f"{reverse('moderation_email')}?email_type={f"Avis+positif"}")
             except Exception as e:
                 messages.error(request, f"Erreur inattendue : {str(e)}")
-                return redirect("moderation_email")
+                return redirect(f"{reverse('moderation_email')}?email_type={f"Avis+positif"}")
 
         else:
             messages.error(request, "Formulaire invalide.")

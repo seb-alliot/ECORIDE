@@ -1,4 +1,5 @@
 from django.shortcuts import redirect
+from django.urls import reverse
 from django.contrib import messages
 from ...models import TrajetProposer, ReservationTrajet, NoteUser, CreditUser
 from ...forms import ModerationTrajetForm
@@ -74,7 +75,7 @@ def GereLesAvisNegatif(request, chauffeur_id, passager_id, trajet_id, commentair
                             choix_modo.append("Paiement accordé.")
                         else:
                             messages.error(request, "Validation manquante pour paiement.")
-                            return redirect("moderation_email")
+                            return redirect(f"{reverse('moderation_email')}?email_type={f"Avis+negatif"}")
                 elif etat_paiement == "Refuser":
                     if request.POST.get("Valider") == "oui":
                         reservation.etat_paiement = "Refuser"
@@ -85,13 +86,13 @@ def GereLesAvisNegatif(request, chauffeur_id, passager_id, trajet_id, commentair
                         choix_modo.append("Paiement refusé.")
                     else:
                         messages.error(request, "Validation manquante pour refus de paiement.")
-                        return redirect("moderation_email")
+                        return redirect(f"{reverse('moderation_email')}?email_type={f"Avis+negatif"}")
 
                 # Messages finaux
                 decision = ", ".join(choix_modo) if choix_modo else "aucune"
                 commentaire_info = ", ".join(info_commentaire) if info_commentaire else "aucun"
                 messages.info(request, f"Votre décision : {decision}. Commentaire : {commentaire_info}")
-                return redirect("moderation_email")
+                return redirect(f"{reverse('moderation_email')}?email_type={f"Avis+negatif"}")
 
             except TrajetProposer.DoesNotExist:
                 messages.error(request, "Trajet introuvable.")

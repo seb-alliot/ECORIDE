@@ -1,9 +1,12 @@
 from django.shortcuts import redirect
 from django.contrib import messages
 from ...forms import ContactForm
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 
-def  PriseDeContact(request, email_id_selected, mail, telephone, sujet, email_user, pseudo, commentaire):
+
+def PriseDeContact(request, email_id_selected, mail, telephone, sujet, email_user, pseudo, commentaire):
     user= request.user
 
     contact_form = ContactForm(request.POST or None, initial={"email": email_user,"pseudo":pseudo,"telephone":telephone, "sujet":sujet, "message": commentaire})
@@ -24,7 +27,8 @@ def  PriseDeContact(request, email_id_selected, mail, telephone, sujet, email_us
                 mail.store(email_id_selected, "+FLAGS", "\\Deleted")
                 mail.expunge()
                 messages.success(request, "Email supprimé.")
-            return redirect("moderation_email")
+            return redirect(f"{reverse('moderation_email')}?email_type={f"Prise+de+contact"}")
+
         else:
             messages.error(request, "Erreur dans le formulaire.")
     return contact_form

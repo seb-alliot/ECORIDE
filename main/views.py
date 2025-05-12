@@ -308,9 +308,8 @@ def Fait_Ton_Taff_De_Modo(request):
         elif email_type == "Prise de contact":
 
             contact_form = PriseDeContact(request, email_id_selected, mail, telephone, sujet, email_user, pseudo, commentaire)
-            if isinstance(affichage_trajet_form, HttpResponseRedirect):
-                return affichage_trajet_form
-            context["contact_form"] = contact_form
+            if isinstance(contact_form, HttpResponseRedirect):
+                return contact_form
 
     # 2ème onglet admin
     # Pas besoin de isinstance car on ne fait pas de redirection, et une seul données renvoyée
