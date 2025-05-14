@@ -45,6 +45,7 @@ def Filtre_trajet(request):
 
         if resultat1.exists() or resultat2.exists():
             messages.success(request, "Hey voici juste pour vous !!")
+            
         else:
             messages.error(
                 request,

@@ -7,128 +7,18 @@
 {% block principal %}
     {% with role.get_role_display as user_role %}
         {% if user_role == "Chauffeur" %}
-        {% elif user_role == "Passager" %}
+            {% elif user_role == "Passager" %}
         {% endif %}
 
-<div id="menu-tab">
-    <div class="page-wrap">
-    <div class="tabs position_relative">
+        <div id="menu-tab">
+            <div class="page-wrap">
+            <div class="tabs position_relative">
 
-    <!--1er onglet trajet-->
-    <div class="tab">
-        <input
-        id="tab-1"
-        checked="checked"
-        name="tab-group-1"
-        type="radio"/>
-        <label for="tab-1">
-            Trajet
-        </label>
-    <div class="content position_relative">
-
-        {% if user_role == "Chauffeur"%}
-            {% include "interface_utilisateur/utilisateur/onglet_1_trajet/chauffeur/_form_ajout_trajet.html" %}
-            {% include "interface_utilisateur/utilisateur/onglet_1_trajet/chauffeur/_trajet_proposer.html" %}
-
-        {% elif user_role == "Passager" %}
-            {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_form_recherche.html" %}
-                {% if first_resultat or second_resultat %}
-                    {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_resultat_recherche.html" %}
-                    {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_form_filtre_trajet.html" %}
-                {% elif resultat1 or resultat2 %}
-                    {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_resultat_filtre_recherche.html" %}
-                    {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_form_filtre_trajet.html" %}
-                {% endif %}
-        {% endif %}
-    </div>
-    </div>
-
-    <!--Onglet 2 profil-->
-    <div class="tab">
-        <input
-        id="tab-2"
-        name="tab-group-1"
-        type="radio" />
-        <label for="tab-2">
-            Profil
-        </label>
-    <div class="content">
-
-        <div>
-            <!-- tout le monde-->
-            {% block tout_le_monde %}
-                {% include "interface_utilisateur/utilisateur/onglet_2_profil/_tout_monde.html" %}
-            {% endblock tout_le_monde %}
+                {% for tab in tabs %}
+                    {% include "interface_utilisateur/tabs/_"|add:tab|add:".html" %}
+                {% endfor %}
+            </div>
+            </div>
         </div>
-
-        <div>
-            {% if user_role == "Chauffeur" %}
-                {% include "interface_utilisateur/utilisateur/onglet_2_profil/chauffeur/_preference_chauffeur.html" %}
-                    {% include "interface_utilisateur/utilisateur/onglet_2_profil/chauffeur/_voiture_posseder.html" %}
-                    {% include "interface_utilisateur/utilisateur/onglet_2_profil/chauffeur/_ajout_voiture.html" %}
-                {% else %}
-                    <p class="class_flex class_justify_center">Vous n'avez pas le profile nécessaire à l'ajout de véhicule</p>
-                {% endif %}
-
-            {% block deconnection %}
-                {% include "interface_utilisateur/utilisateur/deconnection/_deconnection.html" %}
-            {% endblock deconnection %}
-        </div>
-    </div>
-    </div>
-
-    <!--Onglet 3 covoiturage-->
-    <div class="tab">
-        <input
-        id="tab-3"
-        name="tab-group-1"
-        type="radio" />
-        <label for="tab-3">
-            Covoiturage
-        </label>
-    <div class="content">
-
-        <div>
-            {% include "interface_utilisateur/utilisateur/onglet_3_covoiturage/covoiturage.html" %}
-        </div>
-    </div>
-    </div>
-
-
-    <!--Onglet 4 historique-->
-    <div class="tab">
-        <input
-        id="tab-4"
-        name="tab-group-1"
-        type="radio" />
-        <label for="tab-4">
-            Historique
-        </label>
-    <div class="content">
-        <div>
-            {% include "interface_utilisateur/utilisateur/onglet_4_historique/_historique.html" %}
-        </div>
-    </div>
-    </div>
-
-    <!--Onglet 5  info utilisateur-->
-    <div class="tab">
-        <input
-        id="tab-5"
-        name="tab-group-1"
-        type="radio"/>
-        <label for="tab-5">
-            Adresse
-        </label>
-    <div class="content display_grid class_justify_center">
-        <div>
-            {% include "interface_utilisateur/utilisateur/onglet_5_adresse/_adresse.html" %}
-        </div>
-    </div>
-    </div>
-{% endwith %}
-<script src="{% static 'js/retour_onglet.js' %}"></script>
-
-</div>
-
+    {% endwith %}
 {% endblock principal %}

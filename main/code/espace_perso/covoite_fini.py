@@ -3,7 +3,6 @@ from django.urls import reverse
 from django.contrib import messages
 from ...models import TrajetProposer, ReservationTrajet
 from ...forms import TerminerTrajetForm
-from ..securite import reservation_token
 from ..envoi_email import Envoi_Email_Terminer
 
 def FiniTonCovoiturage(request):
@@ -32,13 +31,13 @@ def FiniTonCovoiturage(request):
                     # Appelle une seule fois pour tout traiter dans Envoi_Email_Terminer
                     Envoi_Email_Terminer(request, trajet.id)
 
-                    return redirect("MonCompte")
+                    return redirect(f"{reverse('MonCompte')}?{request.META['QUERY_STRING']}")
                 else:
                     messages.error(request, "Aucun trajet trouvé.")
-                    return redirect("MonCompte")
+                    return redirect(f"{reverse('MonCompte')}?{request.META['QUERY_STRING']}")
             else:
                 messages.error(request, "Vous n'êtes pas le conducteur de ce trajet.")
-                return redirect("MonCompte")
+                return redirect(f"{reverse('MonCompte')}?{request.META['QUERY_STRING']}")
         else:
             trajet_terminer_form = TerminerTrajetForm()
             messages.error(request, "Une erreur est survenue lors de la validation du trajet.")

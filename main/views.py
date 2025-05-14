@@ -139,6 +139,8 @@ def logout_view(request):
 @login_required(login_url="connection1")
 def MonCompte(request):
     context = {}
+    tabs = ["tab1", "tab2", "tab3", "tab4", "tab5"]
+    context["tabs"] = tabs
 
     # Appel des fontions pour les formulaires
     preference_form = DonneTesPreferences(request)
@@ -175,8 +177,9 @@ def MonCompte(request):
 
         for form_name, form_instance in forms_post.items():
             if form_instance:
+                if isinstance(form_instance, HttpResponseRedirect):
+                    return form_instance
                 context[form_name] = form_instance
-                return redirect("MonCompte")
 
     if request.method == "GET":
         form_get = {
@@ -344,12 +347,4 @@ def Fait_Ton_Taff_De_Modo(request):
 
 # ------------------------------------A faire avec javascript------------------------------------------------------
 
-
-# --------retour sur onglet actif dynamique-------
 # --------ajout de voiture dynamique , faire un choix de marque avec model dynamique-------
-# Nombre de place selectionnable dynamique sur reservation et proposition de trajet
-# factorisation du code quand j'aurai tout fini , dynamisme fonctionnalité op
-
-# _________________A FINIR_________________
-
-# responsive sur les deux derniere fonctions pour l'admin

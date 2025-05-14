@@ -3,6 +3,7 @@ from django.shortcuts import redirect
 from django.db import transaction
 from ...models import  CreditUser, User
 from ...forms import TrajetForm
+from django.urls import reverse
 
 
 def ProposeTonCovoiturage(request):
@@ -26,7 +27,7 @@ def ProposeTonCovoiturage(request):
                             request,
                             "Vos crédits sont insuffisants pour proposer un covoiturage.",
                         )
-                        return redirect("MonCompte")
+                        return redirect(f"{reverse('MonCompte')}?{request.META['QUERY_STRING']}")
                     else:
                         credit_user.credit -= commission
                         credit_user.save()
@@ -54,19 +55,17 @@ def ProposeTonCovoiturage(request):
                     request,
                     "Erreur lors de la mise à jour du crédit administrateur.",
                 )
-                return redirect("MonCompte")
+                return redirect(f"{reverse('MonCompte')}?{request.META['QUERY_STRING']}")
             except Exception as e:
                 messages.error(
                     request,
                     f"Erreur lors de la proposition de covoiturage : {str(e)}",
                 )
-                return redirect("MonCompte")
+                return redirect(f"{reverse('MonCompte')}?{request.META['QUERY_STRING']}")
         else:
             trajet_form = TrajetForm()
             messages.error(
                 request,
                 "Une erreur est apparue lors de la proposition de covoiturage.",
             )
-    else:
-        print("Formulaire invalide :", trajet_form.errors)
     return trajet_form

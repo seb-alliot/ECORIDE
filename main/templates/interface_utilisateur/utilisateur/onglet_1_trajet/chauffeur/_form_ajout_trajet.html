@@ -1,7 +1,7 @@
 {% load static %}
 
 <h1 class="class_flex class_justify_center p_deco">Proposez un covoiturage</h1>
-<form id="trajet_form" method="POST">
+<form id="trajet_form" method="POST" action="{{ queryString|default:"" }}">
         {% csrf_token %}
     <div class="flex class_flex class_column">
         <div class="flex1 class_flex class_justify_center class_aligne_items_center">

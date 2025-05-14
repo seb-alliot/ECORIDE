@@ -6,6 +6,7 @@ from django.contrib.auth.models import User
 from ...models import TrajetProposer, ReservationTrajet, ChangerStatutTrajet, CreditUser
 from ...forms import Demarrer_ou_annulerForm
 from django.db import transaction
+from django.urls import reverse
 
 
 def GereTonCovoiteChauffeur(request):
@@ -40,6 +41,7 @@ def GereTonCovoiteChauffeur(request):
                     reservations.update(etat_reservation="En cours")
                     trajet.save()
                     messages.success(request, "Trajet démarré, bon voyage !")
+                    return redirect(f"{reverse('MonCompte')}?{request.META['QUERY_STRING']}")
 
                 # ______________ANNULATION TRAJET PAR LE CHAUFFEUR_____________
 
@@ -57,7 +59,7 @@ def GereTonCovoiteChauffeur(request):
                                 request,
                                 "Le remboursement du trajet a déjà été effectué..",
                             )
-                                return redirect("MonCompte")
+                                return redirect(f"{reverse('MonCompte')}?{request.META['QUERY_STRING']}")
                             else:
                                 reservations = ReservationTrajet.objects.filter(
                                 trajet_reserver=trajet_reserver
@@ -135,7 +137,7 @@ def GereTonCovoiteChauffeur(request):
                                 request,
                                 "Covoiturage annulé, les passagers en sont informés par email",
                                 )
-                                return redirect("MonCompte")
+                                return redirect(f"{reverse('MonCompte')}?{request.META['QUERY_STRING']}")
 
                     except Exception as e:
                         messages.error(

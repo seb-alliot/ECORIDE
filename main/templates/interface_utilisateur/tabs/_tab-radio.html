@@ -1,0 +1,10 @@
+<input
+id="tab-{{ tabId }}"
+name="tab-group"
+type="radio"
+{% if request.GET.tabid|default:"1" == tabId %} checked {% endif %}
+/>
+
+<label for="tab-{{ tabId }}">
+    {{ tabName }}
+</label>

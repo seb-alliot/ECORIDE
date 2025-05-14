@@ -2,6 +2,7 @@ from django.shortcuts import redirect
 from django.contrib import messages
 from ...models import Voiture
 from ...forms import VoitureForm
+from django.urls import reverse
 
 def AjouteTaCaisse(request):
     user = request.user
@@ -15,7 +16,7 @@ def AjouteTaCaisse(request):
             voiture.user = user
             voiture.save()
             messages.success(request, "Votre véhicule a bien été ajouté.")
-            return redirect("MonCompte")
+            return redirect(f"{reverse('MonCompte')}?{request.META['QUERY_STRING']}")
         else:
             immatriculation = request.POST.get("immatriculation")
             if Voiture.objects.filter(immatriculation=immatriculation).exists():

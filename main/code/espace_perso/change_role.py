@@ -2,6 +2,8 @@ from django.shortcuts import redirect
 from django.contrib import messages
 from ...models import ChoixRole
 from ...forms import ChoixRoleForm
+from django.shortcuts import redirect
+from django.urls import reverse
 
 def ChangeTonRole(request):
     user = request.user
@@ -15,7 +17,9 @@ def ChangeTonRole(request):
             role.user = user
             role.save()
             messages.success(request, "Votre rôle a été mis à jour.")
-            return redirect("MonCompte")
+            print(f"-"*40)
+            return redirect(f"{reverse('MonCompte')}?{request.META['QUERY_STRING']}")
+
         else:
             role_form = ChoixRoleForm(request.POST, instance=role)
             messages.error(request, "Veuillez sélectionner un rôle valide.")

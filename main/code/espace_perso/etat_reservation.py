@@ -3,6 +3,7 @@ from django.contrib import messages
 from ...models import ReservationTrajet, CreditUser
 from ...forms import StatutReservationForm
 from django.db import transaction
+from django.urls import reverse
 
 def GereTaReservationPassager(request):
     user = request.user
@@ -19,7 +20,7 @@ def GereTaReservationPassager(request):
 
                 if reservation.reservation_rembourser:
                     messages.error(request, "La réservation a déjà été remboursée.")
-                    return redirect("MonCompte")
+                    return redirect(f"{reverse('MonCompte')}?{request.META['QUERY_STRING']}")
                 else:
                     if reservation_form.is_valid():
                         if request.user == reservation.passager:
@@ -45,15 +46,15 @@ def GereTaReservationPassager(request):
                                 messages.success(
                                 request, "Votre réservation a bien été annulée."
                                 )
-                                return redirect("MonCompte")
+                                return redirect(f"{reverse('MonCompte')}?{request.META['QUERY_STRING']}")
                             else:
                                 messages.error(request, "Aucune réservation trouvée.")
-                                return redirect("MonCompte")
+                                return redirect(f"{reverse('MonCompte')}?{request.META['QUERY_STRING']}")
                         else:
                             messages.error(
                             request, "Vous n'êtes pas le passager de cette réservation."
                             )
-                            return redirect("MonCompte")
+                            return redirect(f"{reverse('MonCompte')}?{request.META['QUERY_STRING']}")
                     else:
                         reservation_form = StatutReservationForm()
                         messages.error(
@@ -62,5 +63,5 @@ def GereTaReservationPassager(request):
                         )
         except Exception as e:
             messages.error(request, f"Une erreur est survenue : {str(e)}")
-            return redirect("MonCompte")
+            return redirect(f"{reverse('MonCompte')}?{request.META['QUERY_STRING']}")
     return reservation_form

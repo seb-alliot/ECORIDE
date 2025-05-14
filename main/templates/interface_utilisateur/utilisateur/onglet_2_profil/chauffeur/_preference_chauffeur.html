@@ -21,7 +21,7 @@
     </div>
 {% endif %}
 
-<form id="preference_form" method="post" class="class_flex class_justify_center">
+<form id="preference_form" method="post"action="{{ queryString|default:"" }}" class="class_flex class_justify_center">
     {% csrf_token %}
         <label for="preferences_form">Préférences</label>
             {{ preference_form.fumeur }}

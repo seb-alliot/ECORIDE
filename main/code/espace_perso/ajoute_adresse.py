@@ -3,6 +3,7 @@ from django.shortcuts import redirect
 from ...models import AdresseUser
 from ...forms import AdresseForm
 import logging
+from django.urls import reverse
 
 # Création du logger
 logger = logging.getLogger(__name__)
@@ -23,7 +24,7 @@ def AjoutTonAdresse(request, adresse_user=None, user=None):
                 adresse.user = user
                 adresse.save()
                 messages.success(request, "Vos informations ont été mises à jour.")
-                return redirect("MonCompte")
+                return redirect(f"{reverse('MonCompte')}?{request.META['QUERY_STRING']}")
             else:
                 if "email" in adresse_form.errors:
                     messages.error(request, "Cette adresse email est déjà prise.")
@@ -37,4 +38,4 @@ def AjoutTonAdresse(request, adresse_user=None, user=None):
     except Exception as e:
         logger.error(f"Erreur lors de l'ajout de l'adresse pour l'utilisateur {user.id}: {str(e)}")
         messages.error(request, "Une erreur est survenue lors de la mise à jour de vos informations.")
-        return redirect("MonCompte")
+        return redirect(f"{reverse('MonCompte')}?{request.META['QUERY_STRING']}")

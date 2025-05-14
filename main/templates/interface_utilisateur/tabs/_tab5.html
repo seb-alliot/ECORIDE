@@ -1,0 +1,10 @@
+<!--Onglet 5  info utilisateur-->
+<div class="tab">
+    {% include "interface_utilisateur/tabs/_tab-radio.html" with tabId="5" tabName="Adresse" %}
+
+    <div class="content display_grid class_justify_center">
+        <div>
+            {% include "interface_utilisateur/utilisateur/onglet_5_adresse/_adresse.html" with queryString="?tabid="|add:"5" %}
+        </div>
+    </div>
+</div>

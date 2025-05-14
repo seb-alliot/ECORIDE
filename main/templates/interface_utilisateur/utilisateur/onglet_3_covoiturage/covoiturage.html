@@ -6,7 +6,7 @@
 <div>
     {% if trajet3 %}
     <h2 id="covoiturage_proposer" class="class_flex class_justify_center p_deco">Votre covoiturages demarrer</h2>
-        <form class="display_grid" id="trajet_terminer_form" method="post">
+        <form class="display_grid" id="trajet_terminer_form" action="{{ queryString|default:"" }}" method="post">
             {% csrf_token %}
                 {% include "interface_utilisateur/utilisateur/onglet_3_covoiturage/covoiturage_lancer/_partie_covoiturage_lancer.html" %}
                 <label for="etat_trajet">changement de statut</label>
@@ -23,7 +23,7 @@
 <div>
     {% if trajet4 %}
     <h2 id="covoiturage_proposer" class="class_flex class_justify_center p_deco">Vos covoiturages proposés</h2>
-        <form class="display_grid" id="demarrer_ou_annuler_form" method="post">
+        <form class="display_grid" action="{{ queryString|default:"" }}" id="demarrer_ou_annuler_form" method="post">
             {% csrf_token %}
                 {% include "interface_utilisateur/utilisateur/onglet_3_covoiturage/proposition/_partie__covoit_chauffeur.html" %}
                 <label for="etat_trajet">changement de statut</label>
@@ -42,7 +42,7 @@
 <div >
     {% if reservation3 %}
     <h3 id="reservation_faite" class="class_flex class_justify_center p_deco">Vos réservations</h3>
-        <form class="display_grid" id="reservation_form" method="post">
+        <form class="display_grid" action="{{ queryString|default:"" }}" id="reservation_form" method="post">
             {% csrf_token %}
                 {% include "interface_utilisateur/utilisateur/onglet_3_covoiturage/reservation/partie_resa_passager.html" %}
             <label for="etat_reservation_{{ res.id }}">Modifier le statut :</label>

@@ -1,0 +1,22 @@
+    <!--1er onglet trajet-->
+    <div class="tab">
+        {% include "interface_utilisateur/tabs/_tab-radio.html" with tabId="1" tabName="Trajet" %}
+
+        <div class="content position_relative">
+
+            {% if user_role == "Chauffeur"%}
+                {% include "interface_utilisateur/utilisateur/onglet_1_trajet/chauffeur/_form_ajout_trajet.html" with queryString="?tabid="|add:"1" %}
+                {% include "interface_utilisateur/utilisateur/onglet_1_trajet/chauffeur/_trajet_proposer.html" %}
+
+            {% elif user_role == "Passager" %}
+                {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_form_recherche.html" %}
+                    {% if first_resultat or second_resultat %}
+                        {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_resultat_recherche.html" %}
+                        {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_form_filtre_trajet.html" %}
+                    {% elif resultat1 or resultat2 %}
+                        {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_resultat_filtre_recherche.html" %}
+                        {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_form_filtre_trajet.html" %}
+                    {% endif %}
+            {% endif %}
+        </div>
+    </div>

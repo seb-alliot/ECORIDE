@@ -1,0 +1,27 @@
+<!--Onglet 2 profil-->
+<div class="tab">
+    {% include "interface_utilisateur/tabs/_tab-radio.html" with tabId="2" tabName="Profil" %}
+
+    <div class="content">
+        <div>
+            <!-- tout le monde-->
+            {% block tout_le_monde %}
+                {% include "interface_utilisateur/utilisateur/onglet_2_profil/_tout_monde.html" with queryString="?tabid="|add:"2" %}
+            {% endblock tout_le_monde %}
+        </div>
+
+        <div>
+            {% if user_role == "Chauffeur" %}
+                {% include "interface_utilisateur/utilisateur/onglet_2_profil/chauffeur/_preference_chauffeur.html" %}
+                    {% include "interface_utilisateur/utilisateur/onglet_2_profil/chauffeur/_voiture_posseder.html" %}
+                    {% include "interface_utilisateur/utilisateur/onglet_2_profil/chauffeur/_ajout_voiture.html" %}
+                {% else %}
+                    <p class="class_flex class_justify_center">Vous n'avez pas le profile nécessaire à l'ajout de véhicule</p>
+                {% endif %}
+
+            {% block deconnection %}
+                {% include "interface_utilisateur/utilisateur/deconnection/_deconnection.html" %}
+            {% endblock deconnection %}
+        </div>
+    </div>
+</div>

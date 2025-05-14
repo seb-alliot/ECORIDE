@@ -1,6 +1,6 @@
 {% if preference %}
 <h4 id="ajout_voiture" class="class_flex class_justify_center p_deco">Ajouter un véhicule</h4>
-<form  class="class_flex class_justify_center" id="voiture_form" action="{% url 'MonCompte' %}" method="post">
+<form  class="class_flex class_justify_center" id="voiture_form"action="{{ queryString|default:"" }}" method="post">
     {% csrf_token %}
     <div class="voiture_mere class_flex class_justify_center">
         <div>
