@@ -13,9 +13,9 @@
 
         <div>
             {% if user_role == "Chauffeur" %}
-                {% include "interface_utilisateur/utilisateur/onglet_2_profil/chauffeur/_preference_chauffeur.html" %}
+                {% include "interface_utilisateur/utilisateur/onglet_2_profil/chauffeur/_preference_chauffeur.html" with queryString="?tabid="|add:"2" %}
                     {% include "interface_utilisateur/utilisateur/onglet_2_profil/chauffeur/_voiture_posseder.html" %}
-                    {% include "interface_utilisateur/utilisateur/onglet_2_profil/chauffeur/_ajout_voiture.html" %}
+                    {% include "interface_utilisateur/utilisateur/onglet_2_profil/chauffeur/_ajout_voiture.html" with queryString="?tabid="|add:"2" %}
                 {% else %}
                     <p class="class_flex class_justify_center">Vous n'avez pas le profile nécessaire à l'ajout de véhicule</p>
                 {% endif %}

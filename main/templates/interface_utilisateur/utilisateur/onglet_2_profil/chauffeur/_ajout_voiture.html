@@ -1,3 +1,4 @@
+{% load static %}
 {% if preference %}
 <h4 id="ajout_voiture" class="class_flex class_justify_center p_deco">Ajouter un véhicule</h4>
 <form  class="class_flex class_justify_center" id="voiture_form"action="{{ queryString|default:"" }}" method="post">
@@ -27,3 +28,6 @@
 {% else %}
     <p class="class_flex class_justify_center">Comme le réservoir à remplir</p>
 {% endif %}
+
+<script>const modelsData = JSON.parse('{{ models_data|escapejs }}')</script>
+<script src="{% static 'js/ajoute_voiture.js' %}"></script>

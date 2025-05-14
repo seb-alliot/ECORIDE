@@ -18,6 +18,8 @@ def ChangeTonRole(request):
             role.save()
             messages.success(request, "Votre rôle a été mis à jour.")
             print(f"-"*40)
+            print(role_form.cleaned_data)
+            print(role)
             return redirect(f"{reverse('MonCompte')}?{request.META['QUERY_STRING']}")
 
         else:

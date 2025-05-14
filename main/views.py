@@ -11,6 +11,10 @@ from .forms import (
     AfficherTrajetForm,
 )
 
+from .models import (
+    Voiture
+)
+
 from .code import (
     InfoTrajet,
     Info_Reservation,
@@ -142,6 +146,8 @@ def MonCompte(request):
     # Onglet de la page factorisé
     tabs = ["_tab1.html", "_tab2.html", "_tab3.html", "_tab4.html", "_tab5.html"]
     context["tabs"] = tabs
+    context["models_data"] = json.dumps(Voiture.MODELE, cls=DjangoJSONEncoder)
+
 
     # Appel des fontions pour les formulaires
     preference_form = DonneTesPreferences(request)
@@ -152,6 +158,7 @@ def MonCompte(request):
     reservation_form = GereTaReservationPassager(request)
     trajet_terminer_form = FiniTonCovoiturage(request)
     demarrer_ou_annuler_form = GereTonCovoiteChauffeur(request)
+
     try:
         voitures_user = request.user.voiture.all()  # grâce à related_name="voitures"
         voitures_data = {
