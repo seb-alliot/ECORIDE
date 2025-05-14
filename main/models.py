@@ -3,8 +3,7 @@ from django.contrib.auth.models import User
 from django.utils.crypto import get_random_string
 from django.utils.timezone import now
 from django.utils import timezone
-from django.core.validators import MinValueValidator, MaxValueValidator, RegexValidator
-from django.conf import settings
+from django.core.validators import MinValueValidator, RegexValidator
 from datetime import date, datetime, timedelta
 from decimal import Decimal
 import uuid

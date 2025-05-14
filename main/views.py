@@ -139,7 +139,8 @@ def logout_view(request):
 @login_required(login_url="connection1")
 def MonCompte(request):
     context = {}
-    tabs = ["tab1", "tab2", "tab3", "tab4", "tab5"]
+    # Onglet de la page factorisé
+    tabs = ["_tab1.html", "_tab2.html", "_tab3.html", "_tab4.html", "_tab5.html"]
     context["tabs"] = tabs
 
     # Appel des fontions pour les formulaires
@@ -151,13 +152,15 @@ def MonCompte(request):
     reservation_form = GereTaReservationPassager(request)
     trajet_terminer_form = FiniTonCovoiturage(request)
     demarrer_ou_annuler_form = GereTonCovoiteChauffeur(request)
-
-    voitures_user = request.user.voiture.all()  # grâce à related_name="voitures"
-
-    voitures_data = {
-        str(voiture.id): voiture.places for voiture in voitures_user
-    }
-    context["voitures_data_json"] = json.dumps(voitures_data, cls=DjangoJSONEncoder)
+    try:
+        voitures_user = request.user.voiture.all()  # grâce à related_name="voitures"
+        voitures_data = {
+            str(voiture.id): voiture.places for voiture in voitures_user
+        }
+        context["voitures_data_json"] = json.dumps(voitures_data, cls=DjangoJSONEncoder)
+    except AttributeError:
+        # Si l'utilisateur n'a pas de voiture associée, on initialise un dictionnaire vide
+        context["voitures_data_json"] = json.dumps({})
 
 
     recherche_form, first_resultat, second_resultat = RechercheTrajet(request)

@@ -6,7 +6,10 @@ from django.urls import reverse
 
 def AjouteTaCaisse(request):
     user = request.user
-    voiture = Voiture.objects.filter(user=user).first()
+    try:
+        voiture = Voiture.objects.get(user=user)
+    except Voiture.DoesNotExist:
+        voiture = None
     voiture_form = VoitureForm(request.POST)
 
     if request.method == "POST" and request.POST.get("form_soumis") == "voiture_form":

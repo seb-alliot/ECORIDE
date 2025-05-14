@@ -1,5 +1,6 @@
     <!--1er onglet trajet-->
     <div class="tab">
+        <!-- ajoute de with tabId="" tabName="" pour le renvoie de donné sur les reverse en backend-->
         {% include "interface_utilisateur/tabs/_tab-radio.html" with tabId="1" tabName="Trajet" %}
 
         <div class="content position_relative">
@@ -9,6 +10,7 @@
                 {% include "interface_utilisateur/utilisateur/onglet_1_trajet/chauffeur/_trajet_proposer.html" %}
 
             {% elif user_role == "Passager" %}
+                <!-- pas besoin de querystring, la valeur par defaut suffit pour le method get des formulaire -->
                 {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_form_recherche.html" %}
                     {% if first_resultat or second_resultat %}
                         {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_resultat_recherche.html" %}

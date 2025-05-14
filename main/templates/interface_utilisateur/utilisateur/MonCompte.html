@@ -13,9 +13,10 @@
         <div id="menu-tab">
             <div class="page-wrap">
             <div class="tabs position_relative">
-
+                <!-- factoring des tab retourner via le backend-->
                 {% for tab in tabs %}
-                    {% include "interface_utilisateur/tabs/_"|add:tab|add:".html" %}
+                    <!-- on inclus le tab renvoyer au template de maniere dynamique via add:tab et la boucle -->
+                    {% include "interface_utilisateur/tabs/"|add:tab %}
                 {% endfor %}
             </div>
             </div>
