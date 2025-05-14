@@ -43,7 +43,6 @@ from .code import (
     GereLesAvisPositif,
     PriseDeContact,
     Fusion_donnee,
-    recupere_places_voiture,
 )
 
 
@@ -168,7 +167,6 @@ def MonCompte(request):
     except AttributeError:
         # Si l'utilisateur n'a pas de voiture associée, on initialise un dictionnaire vide
         context["voitures_data_json"] = json.dumps({})
-
 
     recherche_form, first_resultat, second_resultat = RechercheTrajet(request)
     filtre_form, resultat1, resultat2 = Filtre_trajet(request)

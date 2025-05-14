@@ -10,6 +10,12 @@ document.addEventListener('DOMContentLoaded', function () {
     select.setAttribute('name', name)
 
     placesInput.replaceWith(select);
+    const defaultOption = document.createElement('option');
+    defaultOption.value = ''
+    defaultOption.textContent = '-- Sélectionnez un véhicule --'
+    
+
+    select.appendChild(defaultOption);
 
     updateSeatsOption(voitureSelect, select);
 
