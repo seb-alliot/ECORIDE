@@ -95,7 +95,7 @@ def GereLesAvisNegatif(request, chauffeur_id, passager_id, trajet_id, commentair
                 decision = ", ".join(choix_modo) if choix_modo else "aucune"
                 commentaire_info = ", ".join(info_commentaire) if info_commentaire else "aucun"
                 messages.info(request, f"Votre décision : {decision}. Commentaire : {commentaire_info}")
-                return redirect(f"{reverse('moderation_email')}?email_type={f"Avis+negatif"}")
+                return redirect(f"{reverse('moderation_email')}?email_type=Avis+negatif")
 
             except TrajetProposer.DoesNotExist:
                 messages.error(request, "Trajet introuvable.")
