@@ -51,7 +51,7 @@ def GereLesAvisPositif(request, email_id_selected, mail, trajet_id, commentaire,
 
                 else:
                     messages.error(request, "Action inconnue.")
-                    return redirect(f"{reverse('moderation_email')}?email_type={f"Avis+positif"}")
+                    return redirect(f"{reverse('moderation_email')}?email_type=Avis+positif")
 
                 if supprimer_email:
                     mail.store(email_id_selected, "+FLAGS", "\\Deleted")
@@ -62,10 +62,10 @@ def GereLesAvisPositif(request, email_id_selected, mail, trajet_id, commentaire,
                 if deletions or infos:
                     for msg in deletions + infos:
                         messages.info(request, msg)
-                return redirect(f"{reverse('moderation_email')}?email_type={f"Avis+positif"}")
+                return redirect(f"{reverse('moderation_email')}?email_type=Avis+positif")
             except Exception as e:
                 messages.error(request, f"Erreur inattendue : {str(e)}")
-                return redirect(f"{reverse('moderation_email')}?email_type={f"Avis+positif"}")
+                return redirect(f"{reverse('moderation_email')}?email_type=Avis+positif")
 
         else:
             messages.error(request, "Formulaire invalide.")

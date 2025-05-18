@@ -27,7 +27,7 @@ def PriseDeContact(request, email_id_selected, mail, telephone, sujet, email_use
                 mail.store(email_id_selected, "+FLAGS", "\\Deleted")
                 mail.expunge()
                 messages.success(request, "Email supprimé.")
-            return redirect(f"{reverse('moderation_email')}?email_type={f"Prise+de+contact"}")
+            return redirect(f"{reverse('moderation_email')}?email_type=Prise+de+contact")
 
         else:
             messages.error(request, "Erreur dans le formulaire.")

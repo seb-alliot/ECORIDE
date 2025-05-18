@@ -75,20 +75,23 @@ def GereLesAvisNegatif(request, chauffeur_id, passager_id, trajet_id, commentair
                             choix_modo.append("Paiement accordé.")
                         else:
                             messages.error(request, "Validation manquante pour paiement.")
-                            return redirect(f"{reverse('moderation_email')}?email_type={f"Avis+negatif"}")
+                            return redirect(f"{reverse('moderation_email')}?email_type=Avis+negatif")
+
                 elif etat_paiement == "Refuser":
                     if request.POST.get("Valider") == "oui":
                         reservation.etat_paiement = "Refuser"
-                        reservation.trajet_payer = True
                         reservation.save()
                         note_chauffeur.decision_prise = True
+                        reservation.trajet_payer = True
+
                         note_chauffeur.save()
                         choix_modo.append("Paiement refusé.")
                     else:
                         messages.error(request, "Validation manquante pour refus de paiement.")
-                        return redirect(f"{reverse('moderation_email')}?email_type={f"Avis+negatif"}")
+                        return redirect(f"{reverse('moderation_email')}?email_type=Avis+negatif")
 
-                # Messages finaux
+
+                # Messages rendus
                 decision = ", ".join(choix_modo) if choix_modo else "aucune"
                 commentaire_info = ", ".join(info_commentaire) if info_commentaire else "aucun"
                 messages.info(request, f"Votre décision : {decision}. Commentaire : {commentaire_info}")
