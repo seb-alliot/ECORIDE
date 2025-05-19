@@ -1,9 +1,8 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect
 from django.contrib.auth.models import User
 from ...models import AdresseUser
 from ...forms import ContactForm
-
+from ..envoi_email import envoi_email_prise_contact
 
 def PriseContact(request):
 
@@ -27,7 +26,6 @@ def PriseContact(request):
             email_user = contact_form.cleaned_data["email"]
             sujet = contact_form.cleaned_data["sujet"]
             message = contact_form.cleaned_data["message"]
-            from ..envoi_email import envoi_email_prise_contact
             envoi_email_prise_contact(request, telephone, pseudo, email_user, sujet,message )
             return redirect("index")
     return contact_form, adresse_user

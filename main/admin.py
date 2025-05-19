@@ -37,8 +37,6 @@ class CustomUserAdmin(UserAdmin):
         ("Etat du compte", {"fields": ("is_active",)}),
         ("Groupes", {"fields": ("groups",)}),
         ("Permissions", {"fields": ("user_permissions",)}),
-        ("Date de création", {"fields": ("date_joined",)}),
-        ("Dernière connexion", {"fields": ("last_login",)}),
         (
             "Informations personnelles",
             {
@@ -49,18 +47,17 @@ class CustomUserAdmin(UserAdmin):
         ),
     ]
     # On ajoute les models CreditUser et ChoixRole a l'interface admin lors de la création d'un utilisateur
-    inlines = [CreditUserInline, ChoiceRoleInline]
 
     list_display = ["username",'is_staff', "email", "get_role", "get_credit", "is_active"]
     list_filter = ["is_active"]
 
-    # On combine les models via les formulaires à la creation d'un utilisateur via l'interface admin
+    # On combine les models à la creation d'un utilisateur via l'interface admin
     def save_model(self, request, obj, form, change):
         super().save_model(request, obj, form, change)
         if not change:
-            CreditUser.objects.create(user=obj, role="passager")
-            ChoixRole.objects.create(user=obj)
-
+            # On crée un CreditUser et un ChoixRole par défaut lors de la création d'un utilisateur par l'admin
+            CreditUser.objects.get_or_create(user=obj, defaults={"credit": 20})
+            ChoixRole.objects.get_or_create(user=obj, defaults={"role": "passager"})
     def get_role(self, obj: User):
         role = ChoixRole.objects.filter(user=obj).first()
         return role.role if role else "Aucun"
@@ -288,9 +285,9 @@ class TrajetProposerAdmin(admin.ModelAdmin):
         ("Proposer par", {"fields": ["chauffeur"]}),
         ("Trajet", {"fields": ["ville_depart", "ville_arrivee"]}),
         ("Quand", {"fields": ["date", "heure"]}),
-        ("Avec", {"fields": ["voiture", "type_moteur"]}),
         ("Nombre de places", {"fields": ["places"]}),
-        ("Pour combien", {"fields": ["prix", "total_payer"]}),
+        ("Voiture", {"fields": ["voiture"]}),
+        ("Pour combien", {"fields": ["prix"]}),
         ("Temps de trajet", {"fields": ["temps_trajet"]}),
         ("Etat", {"fields": ["etat"]}),
         ("Remboursement", {"fields": ["trajet_rembourser"]}),

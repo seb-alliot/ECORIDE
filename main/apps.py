@@ -6,8 +6,5 @@ class MainConfig(AppConfig):
     name = "main"
 
 
-class utilisateurConfig(AppConfig):
-    name = "utilisateur"
-
     def ready(self):
-        import signals
+        import main.signals.signals

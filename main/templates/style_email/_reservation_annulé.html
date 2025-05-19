@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Informations sur votre réservation</title>
+</head>
+<body>
+    <h1>Votre réservation de {{ trajet.ville_depart }} vers {{ trajet.ville_arrivee }} le {{ trajet.date }} a été annulée</h1>
+
+    <p>Nous sommes au regret de vous informer que {{ chauffeur }} a été supprimé de la plateforme, ce qui a entraîné l'annulation de votre réservation.</p>
+
+    <p>Mais ne vous inquiétez pas, un remboursement de {{ prix_total }}€ a d’ores et déjà été effectué sur votre compte.</p>
+
+    <p>Vous pouvez vous connecter en cliquant sur le lien suivant pour choisir un nouveau covoiturage :</p>
+
+    <p><a href="{{ monprofile_url }}">Choisir un nouveau covoiturage</a></p>
+
+    <footer style="margin-top: 30px;">
+        <p>Si vous avez des questions, n'hésitez pas à nous contacter.</p>
+        <p>Merci de votre compréhension.</p>
+        <p>L'équipe ECORIDE</p>
+    </footer>
+</body>
+</html>

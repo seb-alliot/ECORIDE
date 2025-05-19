@@ -5,3 +5,4 @@ from .email_deux_f_a import Deux_F_A
 from .email_prise_contact import envoi_email_prise_contact
 from .email_reponse_modo import Envoi_Reponse_Modo
 from .email_trajet_terminer import Envoi_Email_Terminer
+from .email_suppression_user import Information_suppression_user
