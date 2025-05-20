@@ -1,4 +1,5 @@
 {% load static %}
+
 <div>
     <div  id="account-admin" class="class_flex">
         <div>
@@ -37,7 +38,7 @@
             <a href="{% url 'admin:index' %}" class="account-link">
                 <div>
                     <div>
-                        <img src="{{ adresse_user.photo.url|default:photo_default_url }}" alt="photo de profil" class="photo_profile">
+                        <img src="{% static 'photo/admin.jpg' %}" alt="photo admin" class="photo_profile">
                     </div>
                     <div class="generix3">
                         Admin

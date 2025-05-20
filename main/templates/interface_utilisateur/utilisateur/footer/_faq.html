@@ -1,6 +1,56 @@
 {% extends "index.html" %}
 
 {% block principal %}
-    <h1>Foire au questions</h1>
-    <p>En construction</p>
+    <h1>FAQ ECORIDE - Projet Covoiturage</h1>
+
+        <div class="faq-item">
+            <h3>Q1 : Comment un utilisateur peut-il s’inscrire ?</h3>
+            <p>R: L’utilisateur remplit un formulaire d’inscription avec ses informations personnelles. Un compte est créé avec un crédit initial de 20.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Q2 : Comment un passager réserve-t-il un trajet ?</h3>
+            <p>R: Le passager choisit un trajet disponible, réserve un nombre de places, et le prix est débité automatiquement de son crédit.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Q3 : Que se passe-t-il si un utilisateur (chauffeur) est supprimé ?</h3>
+            <p>R: Tous ses trajets sont annulés, les passagers concernés sont remboursés, et ils reçoivent un email d’information avec un lien pour choisir un nouveau covoiturage.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Q4 : Comment sont gérées les notes des chauffeurs ?</h3>
+            <p>R: Après chaque trajet, les passagers peuvent noter le chauffeur. La moyenne des notes est calculée et affichée.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Q5 : Puis-je annuler une réservation ?</h3>
+            <p>R: Oui, l’annulation met à jour le statut de la réservation, libère les places et rembourse automatiquement le passager.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Q6 : Comment le remboursement est-il effectué ?</h3>
+            <p>R: Le crédit du passager est augmenté du montant remboursé correspondant au prix payé.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Q7 : Comment sont gérées les places disponibles sur un trajet ?</h3>
+            <p>R: Lorsqu’une réservation est validée, le nombre de places disponibles est réduit. À l’annulation, les places sont rendues.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Q8 : Puis-je rechercher un trajet selon plusieurs critères ?</h3>
+            <p>R: Oui, la recherche peut se faire par ville de départ, ville d’arrivée, date, prix, durée, et note moyenne du chauffeur.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Q9 : Comment puis-je contacter le support en cas de problème ?</h3>
+            <p>R: Un email est disponible dans les messages de confirmation et dans les pages du site pour contacter l’équipe ECORIDE.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Q10 : Quelles sont les règles de suppression des utilisateurs ?</h3>
+            <p>R : Lorsqu’un utilisateur est supprimé, toutes les données le concernant sont automatiquement annulées, remboursées et définitivement supprimées.</p>
+        </div>
+
 {% endblock principal %}

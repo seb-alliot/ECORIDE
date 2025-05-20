@@ -34,14 +34,24 @@ def GereTonCovoiteChauffeur(request):
                 )
 
                 if statut_trajet == "En cours":
-                    trajet.etat = statut_trajet
-                    reservations = ReservationTrajet.objects.filter(
-                    trajet_reserver=trajet
-                    )
-                    reservations.update(etat_reservation="En cours")
-                    trajet.save()
-                    messages.success(request, "Trajet démarré, bon voyage !")
-                    return redirect(f"{reverse('MonCompte')}?{request.META['QUERY_STRING']}")
+                    if TrajetProposer.objects.filter(
+                    chauffeur = request.user,
+                    etat="En cours"
+                    ).exists():
+                        messages.info(
+                        request,
+                        "Un trajet est déjà en cours",
+                        )
+                        return redirect(f"{reverse('MonCompte')}?{request.META['QUERY_STRING']}")
+                    else:
+                        trajet.etat = statut_trajet
+                        reservations = ReservationTrajet.objects.filter(
+                        trajet_reserver=trajet
+                        )
+                        reservations.update(etat_reservation="En cours")
+                        trajet.save()
+                        messages.success(request, "Trajet démarré, bon voyage !")
+                        return redirect(f"{reverse('MonCompte')}?{request.META['QUERY_STRING']}")
 
                 # ______________ANNULATION TRAJET PAR LE CHAUFFEUR_____________
 
