@@ -62,7 +62,7 @@ MIDDLEWARE = [
     'django.middleware.locale.LocaleMiddleware',
 ]
 LOGIN_URL  = 'login/connection1/'
-SITE_URL = f"https://ecoride-itsuki.it.com/"
+SITE_URL = f"https://ecoride-itsuki.it.com"
 ROOT_URLCONF = 'main.urls'
 TEMPLATES = [
     {
