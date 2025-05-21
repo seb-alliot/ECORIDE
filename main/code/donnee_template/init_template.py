@@ -1,7 +1,6 @@
 from django.conf import settings
-from ...models import  Voiture, ChoixRole, Preference
+from ...models import  Voiture, ChoixRole, Preference, User
 from ...models import CreditUser, AdresseUser
-from ...code import Admin_access
 
 
 def initialisation_template(request):
@@ -14,12 +13,16 @@ def initialisation_template(request):
     credit = None
     is_moderateur = False
     admin = False
-    
+    credit_superuser = None
+
+
     if request.user.is_authenticated:
         try:
             admin = request.user.groups.filter(name='admin').exists()
             is_moderateur = request.user.groups.filter(name='moderateur').exists()
             credit = CreditUser.objects.get(user=user)
+            superuser = User.objects.filter(username='ECORIDE').first()
+            credit_superuser = CreditUser.objects.filter(user=superuser).first()
             voiture = Voiture.objects.filter(user=user)
             role = ChoixRole.objects.filter(user=user).first()
             preference = Preference.objects.filter(user_preference=user).first()
@@ -29,13 +32,12 @@ def initialisation_template(request):
         except CreditUser.DoesNotExist:
             credit = None
 
-
-
     context = {
         #Photo par defaut
         'photo_default_url': photo_default_url,
 
         #utilisateur
+        "credit_superuser": credit_superuser,
         "admin": admin,
         "is_moderateur": is_moderateur,
         "role": role,

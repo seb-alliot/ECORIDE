@@ -51,53 +51,40 @@ def ChoisisTonCovoite(request):
             if request.POST.get("Reserver") == "oui":
                 with transaction.atomic():
                     trajet = TrajetProposer.objects.select_for_update().get(id=trajet.id)
-                    # Vérification du crédit suffisant
                     prix_total = trajet.prix * places_reservees
+
                     if credits < prix_total:
                         messages.error(
-                            request, "Vos crédits sont insuffisant pour réserver ce trajet."
+                            request, "Vos crédits sont insuffisants pour réserver ce trajet."
                         )
-                        return HttpResponseRedirect(f"{reverse('reservation')}?trajet_id={trajet.id}")
+                        return redirect(f"{reverse('reservation')}?trajet_id={trajet.id}")
 
-                    # Vérification du nombre de places disponibles
-                    elif places_reservees > trajet.places:
+                    if places_reservees > trajet.places:
                         messages.error(
                             request,
                             "Le nombre de places est insuffisant actuellement pour votre demande.",
                         )
                         return redirect(f"{reverse('reservation')}?trajet_id={trajet.id}")
-                        #ou return HttpResponseRedirect(f"{reverse('reservation')}?trajet_id={trajet.id}") #
 
-                    # Vérification et mise à jour de la réservation
+                    # Si une réservation existe déjà
                     if reservation:
                         if reservation.etat_reservation == "Annulé":
-                            # On réactive la réservation sinon gros bug pas sympa et bien muet
                             reservation.etat_reservation = "Reserver"
                             reservation.places = 0
                             reservation.prix_par_passager = 0
                             reservation.save()
-                            # Mise à jour des données
-                            reservation.paiement_passager(places_reservees)
-
-                        else:
-                            reservation.places += places_reservees
-                            reservation.paiement_passager(places_reservees)
+                        reservation.places += places_reservees
+                        reservation.save()
                     else:
-                        reservation = ReservationTrajet.objects.create(
+                        # La création déclenchera le signal qui gèrera le reste
+                        ReservationTrajet.objects.create(
                             trajet_reserver=trajet,
                             passager=user,
-                            prix_par_passager=prix_total,
                             places=places_reservees,
+                            prix_par_passager=0  # Sera fixé par le signal
                         )
-                        credit_user.credit -= prix_total
-                        credit_user.save()
-
-                        # Mise à jour des places restantes
-                    trajet.places -= places_reservees
-                    trajet.save()
 
                     messages.success(request, "La réservation est validée, bonne route !")
                     return redirect(f"{reverse('reservation')}?trajet_id={trajet.id}")
-            else:
-                messages.error(request, "Vos creédits sont insuffisants pour réserver.")
+
     return reservation_form , trajet, commentaire, preference

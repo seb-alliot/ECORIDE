@@ -7,4 +7,9 @@ class MainConfig(AppConfig):
 
 
     def ready(self):
-        import main.signals.signals
+        import main.signals.suppression_user
+        import main.signals.debit_commission
+        import main.signals.creation_user
+        import main.signals.debit_reservation
+        import main.signals.crediter_annulation
+        import main.signals.crediter_passager_chauffeur

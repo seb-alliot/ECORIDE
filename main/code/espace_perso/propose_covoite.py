@@ -21,7 +21,7 @@ def ProposeTonCovoiturage(request):
                     #credit_user = CreditUser.objects.get(user=user) code de base
                     # on verrouille les credits de l'utilisateur pour éviter les problèmes avec select_for_update
                     credit_user = CreditUser.objects.select_for_update().get(user=user)
-                    # __on retire la commission au credit utilisateur__
+                    # __(on retire la commission au credit utilisateur) ==> transformer via le signal, une verif reste ici pour le request message
                     if credit_user.credit < 2:
                         messages.error(
                             request,
@@ -29,17 +29,6 @@ def ProposeTonCovoiturage(request):
                         )
                         return redirect(f"{reverse('MonCompte')}?{request.META['QUERY_STRING']}")
                     else:
-                        credit_user.credit -= commission
-                        credit_user.save()
-                        # __on recupere l'admin__
-                        superuser = User.objects.filter(is_superuser=True).first()
-                        # __on recupere ses credit__
-                        credit_admin, created = CreditUser.objects.get_or_create(user=superuser)
-
-                        # __on ajoute la commission au credit admin__
-                        credit_admin.credit += commission
-                        credit_admin.save()
-
                         trajet.chauffeur = user
                         trajet.save()
                         # on reinitialise le formulaire pour éviter de garder les données et eviter les erreurs

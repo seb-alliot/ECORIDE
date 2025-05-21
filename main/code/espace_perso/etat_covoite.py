@@ -106,9 +106,9 @@ def GereTonCovoiteChauffeur(request):
 
                                     # Redonne la com au chauffeur
                                 try:
-                                    credit_chauffeur = get_object_or_404(
-                                    CreditUser, user=trajet_reserver.chauffeur
-                                    )
+                                    credit_chauffeur = CreditUser.objects.filter(
+                                    user=trajet.chauffeur
+                                    ).first()
                                     comission = 2
                                     credit_chauffeur.credit += comission
                                     credit_chauffeur.save()
@@ -120,9 +120,7 @@ def GereTonCovoiteChauffeur(request):
 
                                 # Retirer la commission de l'admin
                                 try:
-                                    superuser = User.objects.filter(
-                                    is_superuser=True
-                                    ).first()
+                                    superuser = User.objects.filter(username='ECORIDE').first()
                                     if superuser:
                                         credit_admin = get_object_or_404(
                                         CreditUser, user=superuser

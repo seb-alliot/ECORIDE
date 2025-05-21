@@ -34,6 +34,7 @@ footer a {
   font-size: var(--font-size-base);
   height: 25px;
 }
+
 button#bouton_note,
 select#id_avis,
 select#id_note,

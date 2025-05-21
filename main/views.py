@@ -43,6 +43,7 @@ from .code import (
     GereLesAvisPositif,
     PriseDeContact,
     Fusion_donnee,
+    SuppressionCompte,
 )
 
 
@@ -157,6 +158,7 @@ def MonCompte(request):
     reservation_form = GereTaReservationPassager(request)
     trajet_terminer_form = FiniTonCovoiturage(request)
     demarrer_ou_annuler_form = GereTonCovoiteChauffeur(request)
+    suppression_compte_form = SuppressionCompte(request)
 
     try:
         voitures_user = request.user.voiture.all()  # grâce à related_name="voitures"
@@ -181,6 +183,7 @@ def MonCompte(request):
             "trajet_terminer_form": trajet_terminer_form,
             "demarrer_ou_annuler_form": demarrer_ou_annuler_form,
             "reservation_form": reservation_form,
+            "suppression_compte_form": suppression_compte_form,
         }
 
         for form_name, form_instance in forms_post.items():
@@ -344,15 +347,3 @@ def Fait_Ton_Taff_De_Modo(request):
     return render(
         request, "admin/moderateur/moderation_email/moderation_email.html", context
     )
-
-
-
-
-
-
-# _________________A FAIRE_________________
-
-
-# ------------------------------------A faire avec javascript------------------------------------------------------
-
-# --------ajout de voiture dynamique , faire un choix de marque avec model dynamique-------

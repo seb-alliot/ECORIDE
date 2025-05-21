@@ -14,10 +14,7 @@ def activation(request, uidb64, token):
             messages.error(request, "Le lien a expiré.")
             return redirect("inscription")
         user.is_active = True
-        credit_user = CreditUser.objects.get(user=user)
-        credit_user.credit += 20
         user.save()
-        credit_user.save()
         activation_token.delete()
         messages.success(request, "Votre compte a été activé.")
         return redirect("connection1")

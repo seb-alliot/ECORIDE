@@ -47,9 +47,11 @@ class CustomUserAdmin(UserAdmin):
         ),
     ]
     # On ajoute les models CreditUser et ChoixRole a l'interface admin lors de la création d'un utilisateur
+    inlines = [CreditUserInline, ChoiceRoleInline]
 
     list_display = ["username",'is_staff', "email", "get_role", "get_credit", "is_active"]
     list_filter = ["is_active"]
+
 
     # On combine les models à la creation d'un utilisateur via l'interface admin
     def save_model(self, request, obj, form, change):
@@ -58,6 +60,7 @@ class CustomUserAdmin(UserAdmin):
             # On crée un CreditUser et un ChoixRole par défaut lors de la création d'un utilisateur par l'admin
             CreditUser.objects.get_or_create(user=obj, defaults={"credit": 20})
             ChoixRole.objects.get_or_create(user=obj, defaults={"role": "passager"})
+
     def get_role(self, obj: User):
         role = ChoixRole.objects.filter(user=obj).first()
         return role.role if role else "Aucun"
@@ -353,7 +356,7 @@ class ReservationTrajetAdmin(admin.ModelAdmin):
     fieldsets = [
         ("Qui ?", {"fields": ["passager"]}),
         ("Pour ou ?  ", {"fields": ["trajet_reserver"]}),
-        ("Combien ?", {"fields": ["places", "prix_par_passager"]}),
+        ("Combien ?", {"fields": ["places"]}),
         ("Etat", {"fields": ["etat_reservation"]}),
         ("Remboursement", {"fields": ["reservation_rembourser"]}),
     ]

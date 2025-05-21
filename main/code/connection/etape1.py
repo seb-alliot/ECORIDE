@@ -8,7 +8,7 @@ from django.utils.crypto import get_random_string
 def PremierEtape(request):
     user = request.user
     if user.is_authenticated:
-        return redirect("home")
+        return redirect("index")
     else:
         form = IdentifiantForm(request.POST or None)
 

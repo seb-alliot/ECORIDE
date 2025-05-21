@@ -7,7 +7,7 @@
         {% include "login/login_user/_moderateur_login.html" %}
         <link href="{% static 'css/moderateur_header.css' %}" rel="stylesheet">
 
-    {% elif admin %}
+    {% elif admin or user.is_superuser %}
         {% include "login/login_user/_admin_login.html" %}
         <link href="{% static 'css/admin_header.css' %}" rel="stylesheet">
 

@@ -7,7 +7,7 @@ from django.urls import reverse_lazy, reverse
 from django.utils.http import urlsafe_base64_encode
 from django.views.generic.edit import CreateView
 from django.template.loader import render_to_string
-from ...models import ChoixRole, CreditUser, ActivationToken, User
+from ...models import ActivationToken, User
 from ...forms import Inscription
 
 class UserCreateView(CreateView):
@@ -29,9 +29,6 @@ class UserCreateView(CreateView):
             user = form.save(commit=False)
             user.is_active = False
             user.save()
-
-            ChoixRole.objects.create(role="passager", user=user)
-            CreditUser.objects.create(user=user)
 
             uidb64 = urlsafe_base64_encode(str(user.pk).encode("utf-8"))
             token = default_token_generator.make_token(user)
