@@ -39,6 +39,7 @@ def ProposeTonCovoiturage(request):
                             request,
                             "Votre covoiturage a bien été ajouté. Merci pour votre contribution !",
                         )
+                        return redirect(f"{reverse('MonCompte')}?{request.META['QUERY_STRING']}")
             except CreditUser.DoesNotExist:
                 messages.error(
                     request,

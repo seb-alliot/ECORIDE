@@ -1,7 +1,7 @@
 from django.db.models.signals import pre_delete
 from django.dispatch import receiver
 from django.contrib.auth.models import User
-from ..models import TrajetProposer, CreditUser
+from ...models import TrajetProposer, CreditUser
 from django.db import transaction
 
 @receiver(pre_delete, sender=TrajetProposer)
@@ -10,7 +10,6 @@ def crediter_user(sender, instance,  **kwargs):
 
     commission = 2
     chauffeur = instance.chauffeur
-    # Attention, vérifier que passager est bien ManyToMany sur TrajetProposer
     passagers = instance.passager.all() if hasattr(instance, 'passager') else []
 
     prix_unitaire = instance.prix
@@ -23,7 +22,7 @@ def crediter_user(sender, instance,  **kwargs):
             credit_chauffeur.credit += commission
             credit_chauffeur.save()
 
-            # Débiter la plateforme (par username explicite ici : ECORIDE)
+            # Débiter la plateforme
             superuser = User.objects.filter(username='ECORIDE').first()
             if superuser:
                 credit_plateforme, _ = CreditUser.objects.select_for_update().get_or_create(user=superuser)

@@ -1,16 +1,27 @@
 from django.shortcuts import redirect
 from django.contrib import messages
-from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.db.models import Avg, Q
 from ...models import TrajetProposer, NoteUser, ReservationTrajet, CreditUser, Preference
 from ...forms import ReservationTrajetForm
 from django.db import transaction
+from .compteur_vue_mongo import increment_vue
+import os
+from dotenv import load_dotenv
+from pymongo import MongoClient
 
 
 def ChoisisTonCovoite(request):
     user = request.user
     # Récupération du trajet
+    load_dotenv()
+    uri = os.getenv("uri")
+    client = MongoClient(uri)
+    db = client["ECORIDE"]
+
+    vue = db["vue"]
+    compteur = increment_vue(vue, "compteur_vue")
+
     trajet_id = request.GET.get("trajet_id")
     trajet = TrajetProposer.objects.filter(
         id=trajet_id
@@ -87,4 +98,4 @@ def ChoisisTonCovoite(request):
                     messages.success(request, "La réservation est validée, bonne route !")
                     return redirect(f"{reverse('reservation')}?trajet_id={trajet.id}")
 
-    return reservation_form , trajet, commentaire, preference
+    return reservation_form , trajet, commentaire, preference, compteur

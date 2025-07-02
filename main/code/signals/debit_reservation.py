@@ -1,6 +1,6 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from ..models import ReservationTrajet, CreditUser, TrajetProposer
+from ...models import ReservationTrajet, CreditUser, TrajetProposer
 from django.db import transaction
 
 @receiver(post_save, sender=ReservationTrajet)

@@ -241,9 +241,10 @@ def SelectionTrajet(request):
         return result
 
     # Sinon, on peut unpack normalement
-    reservation_form, trajet, commentaire, preference = result
+    reservation_form, trajet, commentaire, preference, compteur = result
 
     context = {
+        "compteur": compteur,
         "preference": preference,
         "reservation_form": reservation_form,
         "trajet": trajet,

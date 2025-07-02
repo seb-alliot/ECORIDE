@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.utils.http import urlsafe_base64_decode
-from ...models import ActivationToken, CreditUser
+from ...models import ActivationToken
 
 def activation(request, uidb64, token):
     try:

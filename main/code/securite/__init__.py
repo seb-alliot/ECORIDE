@@ -1,2 +1,2 @@
-from .securite_temporaire import reservation_token
 from .confirmation_identite import confirm_token
+from .securite_temporaire import reservation_token

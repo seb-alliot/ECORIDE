@@ -1,4 +1,4 @@
-from ..models import User, CreditUser, ChoixRole
+from ...models import User, CreditUser, ChoixRole
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 

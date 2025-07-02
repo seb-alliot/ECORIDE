@@ -1,6 +1,5 @@
 from django.contrib import admin
 from .models import (
-    CreditUser,
     NoteUser,
     AdresseUser,
     ChoixRole,
@@ -9,26 +8,15 @@ from .models import (
     Preference,
     ReservationTrajet,
     ChangerStatutTrajet,
-    User
 )
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
-from .models import ChoixRole, CreditUser
-from django.contrib.auth.models import Group
+from .models import ChoixRole
 
 
 # Register your models here.
-class CreditUserInline(admin.TabularInline):
-    model = CreditUser
-    extra = 1
-
-
-class ChoiceRoleInline(admin.TabularInline):
-    model = ChoixRole
-    extra = 1
-
 
 class CustomUserAdmin(UserAdmin):
     fieldsets = [
@@ -37,47 +25,10 @@ class CustomUserAdmin(UserAdmin):
         ("Etat du compte", {"fields": ("is_active",)}),
         ("Groupes", {"fields": ("groups",)}),
         ("Permissions", {"fields": ("user_permissions",)}),
-        (
-            "Informations personnelles",
-            {
-                "fields": (
-                    "is_staff",
-                )
-            },
-        ),
+        ("Informations personnelles",{"fields": ("is_staff",)},),
     ]
-    # On ajoute les models CreditUser et ChoixRole a l'interface admin lors de la création d'un utilisateur
-    inlines = [CreditUserInline, ChoiceRoleInline]
-
-    list_display = ["username",'is_staff', "email", "get_role", "get_credit", "is_active"]
+    list_display = ["username",'is_staff', "email","is_active"]
     list_filter = ["is_active"]
-
-
-    # On combine les models à la creation d'un utilisateur via l'interface admin
-    def save_model(self, request, obj, form, change):
-        super().save_model(request, obj, form, change)
-        if not change:
-            # On crée un CreditUser et un ChoixRole par défaut lors de la création d'un utilisateur par l'admin
-            CreditUser.objects.get_or_create(user=obj, defaults={"credit": 20})
-            ChoixRole.objects.get_or_create(user=obj, defaults={"role": "passager"})
-
-    def get_role(self, obj: User):
-        role = ChoixRole.objects.filter(user=obj).first()
-        return role.role if role else "Aucun"
-
-    get_role.short_description = "Role"
-
-    def get_credit(self, obj: User):
-        credit = CreditUser.objects.filter(user=obj).first()
-        return credit.credit if credit else 0
-
-    get_credit.short_description = "Crédit"
-
-
-# On désactive le model admin de base pour le remplacer
-# par le custom qui accepte les combinaisons de models
-admin.site.unregister(User)
-admin.site.register(User, CustomUserAdmin)
 
 
 class UserAdmin(admin.ModelAdmin):
@@ -86,16 +37,11 @@ class UserAdmin(admin.ModelAdmin):
         "username",
         "email",
         "password",
-        "first_name",
-        "last_name",
         "is_active",
         "is_staff",
-        "is_superuser",
-        "date_joined",
-        "last_login",
     ]
-    search_fields = ["username", "email", "first_name", "last_name"]
-    list_filter = ["is_active", "is_staff", "is_superuser", "date_joined", "last_login"]
+    search_fields = ["username", "email"]
+    list_filter = ["is_active", "is_staff"]
     list_per_page = 10
 
 

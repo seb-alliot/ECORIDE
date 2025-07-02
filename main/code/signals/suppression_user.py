@@ -1,9 +1,9 @@
 from django.db.models.signals import pre_delete
 from django.dispatch import receiver
 from django.contrib.auth.models import User
-from ..models import TrajetProposer, ReservationTrajet, CreditUser
+from ...models import TrajetProposer, ReservationTrajet, CreditUser
 from django.db import transaction
-from ..code import Information_suppression_user
+from ..envoi_email import Information_suppression_user
 
 # On assure que la logique de suppression des trajets et réservations est bien gérée via transactions atomiques
 # pour éviter les incohérences en cas d'erreur durant la suppression.

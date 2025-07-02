@@ -4,6 +4,7 @@
 
 {% block principal %}
     <div id="reservation">
+
         <!--Section photo chauffeur-->
         {% include "interface_utilisateur/utilisateur/reservation/contenu_reservation/_photo_chauffeur.html" %}
         <!--Section information trajet-->
@@ -15,4 +16,10 @@
 {% include "interface_utilisateur/utilisateur/reservation/contenu_reservation/_form_reservation.html" %}
 <!--Formulaire de réservation de place-->
 
+    <div id="compteur_vue" class="class_flex class_column class_aligne_items_center">
+        <p>Nombre de vues de cette page : </p>
+        {% if compteur %}
+            {{ compteur }}
+        {% endif %}
+    </div>
 {% endblock principal %}
