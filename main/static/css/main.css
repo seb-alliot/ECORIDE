@@ -900,10 +900,10 @@ th {
 }
 
 .presentation img {
-  min-width: clamp(100px, 70vw, 350px);
-  max-width: clamp(100px, 70vw, 350px);
-  min-height:clamp(200px, 10vw, 350px);
-  max-height:clamp(200px, 10vw, 350px);
+  min-width: clamp(80px, 70vw, 350px);
+  max-width: clamp(80px, 70vw, 350px);
+  min-height:clamp(130px, 10vw, 350px);
+  max-height:clamp(130px, 10vw, 350px);
   border-radius: clamp(5px, 1vw, 15px);
 }
 
