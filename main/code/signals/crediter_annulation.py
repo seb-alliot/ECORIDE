@@ -30,12 +30,6 @@ def remboursement_reservation_passager(sender, instance, **kwargs):
                 trajet.etat_trajet = "Annulé"
                 trajet.save()
 
-                print(f"Le compte de {passager.username} a été crédité de {prix_total} € (remboursement).")
-                print(f"{places_reservees} place(s) remise(s) disponible(s) sur le trajet {trajet.id}.")
-                print(f"l'etat de la réservation est {trajet.etat_reservation} et l'état du trajet est {trajet.etat_trajet}.")
-                print(f"l'etat du trajet est {trajet.etat_trajet}.")
 
     except CreditUser.DoesNotExist:
-        print(f"Crédit inexistant pour {passager.username}.")
-    except TrajetProposer.DoesNotExist:
-        print(f"Trajet {trajet.id} inexistant.")
+        pass  # Le passager a forcement un compte de crédit ou est supprimé

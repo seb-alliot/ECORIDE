@@ -2,81 +2,76 @@
 
 <!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="EcoRide est une plateforme innovante de covoiturage qui vous permet de partager vos trajets en voiture...">
-        <meta name="google-site-verification" content="55hTLK2eHYbvixFbM_aq6D4SBMNeT9s7a7GurBqs9hM" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="EcoRide est une plateforme innovante de covoiturage qui vous permet de partager vos trajets en voiture...">
+    <meta name="google-site-verification" content="55hTLK2eHYbvixFbM_aq6D4SBMNeT9s7a7GurBqs9hM" />
 
-        <link rel="icon" href="{% static 'photo/logo.ico' %}" type="image/x-icon">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
-        <link rel="preload" href="{% static 'css/main.css' %}" as="style">
+    <link rel="icon" href="{% static 'photo/logo.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="preload" href="{% static 'css/main.css' %}" as="style">
 
-        <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    {% block title %}
+        {% include "interface_utilisateur/reutilisable/_nom_du_site.html" %}
+    {% endblock title %}
 
-        {% block title %}
-            {% include "interface_utilisateur/reutilisable/_nom_du_site.html" %}
-        {% endblock title %}
-
-        {% block style %}
-            {% include "css_html/_css_index.html" %}
-        {% endblock style %}
-    </head>
-
-
-<header class="position_relative">
-    {% block headerContent %}
-    <div>
-        <div>
-            <div class="class_flex">
-                {% block logo %}
-                    {% include "interface_utilisateur/reutilisable/_logo.html" %}
-                {% endblock logo %}
-
-                {% block connection %}
-                    {% include "interface_utilisateur/reutilisable/_info_user.html" %}
-                {% endblock connection %}
-            </div>
-        </div>
-        <div>
-            {% block msginfo %}
-                {% include "interface_utilisateur/reutilisable/_msginfo.html" %}
-            {% endblock msginfo %}
-        </div>
-    </div>
-    {% endblock headerContent %}
-</header>
+    {% block style %}
+        {% include "css_html/_css_index.html" %}
+    {% endblock style %}
+</head>
 
 <body class="generix1 class_box_sizing ">
-    {% block body %}
-        {% block fondbase %}
-            {% include "interface_utilisateur/reutilisable/_fondbase.html" %}
-        {% endblock fondbase %}
+    <header class="position_relative">
+        {% block headerContent %}
+        <div>
+            <div>
+                <div class="class_flex">
+                    {% block logo %}
+                        {% include "interface_utilisateur/reutilisable/_logo.html" %}
+                    {% endblock logo %}
 
-        {% block principal %}
-            {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_form_recherche.html" %}
-            {% if first_resultat or second_resultat %}
-                {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_resultat_recherche.html" %}
-                {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_form_filtre_trajet.html" %}
-            {% elif resultat1 or resultat2 %}
-                {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_resultat_filtre_recherche.html" %}
-                {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_form_filtre_trajet.html" %}
-            {% endif %}
-        {% endblock principal %}
+                    {% block connection %}
+                        {% include "interface_utilisateur/reutilisable/_info_user.html" %}
+                    {% endblock connection %}
+                </div>
+            </div>
+            <div>
+                {% block msginfo %}
+                    {% include "interface_utilisateur/reutilisable/_msginfo.html" %}
+                {% endblock msginfo %}
+            </div>
+        </div>
+        {% endblock headerContent %}
+    </header>
 
-    {% block presentation %}
-        {% include "interface_utilisateur/reutilisable/_presentation.html" %}
-    {% endblock presentation %}
-    {% block user %}
-        {% include "interface_utilisateur/reutilisable/_info_utilisateur.html" %}
-    {% endblock user%}
+    <main>
+        {% block body %}
+            {% block fondbase %}
+                {% include "interface_utilisateur/reutilisable/_fondbase.html" %}
+            {% endblock fondbase %}
 
-    {% endblock body %}
+            {% block principal %}
+                {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_form_recherche.html" %}
+                {% if first_resultat or second_resultat %}
+                    {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_resultat_recherche.html" %}
+                    {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_form_filtre_trajet.html" %}
+                {% elif resultat1 or resultat2 %}
+                    {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_resultat_filtre_recherche.html" %}
+                    {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_form_filtre_trajet.html" %}
+                {% endif %}
+            {% endblock principal %}
 
-<footer class="generix2">
+            {% block presentation %}
+                {% include "interface_utilisateur/reutilisable/_presentation.html" %}
+            {% endblock presentation %}
+        {% endblock body %}
+    </main>
+
+    <footer class="generix2">
         {% block footerContent %}
             {% include "interface_utilisateur/reutilisable/_footer.html" %}
         {% endblock footerContent %}
-</footer>
+    </footer>
 </body>
 </html>

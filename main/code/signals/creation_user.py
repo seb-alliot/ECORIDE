@@ -13,6 +13,3 @@ def create_user_profile(sender, instance, created, **kwargs):
         # Créer le compte de crédit
         credit_user = CreditUser.objects.create(user=user, credit=20)
 
-        print(f" Nouvel utilisateur créé : {user.username}")
-        print(f" Rôle assigné : passager")
-        print(f" Crédit initial : 20 €")

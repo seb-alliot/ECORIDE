@@ -43,7 +43,6 @@ def user_deleted(sender, instance, **kwargs):
                         chauffeur=instance
                     )
 
-                    print(f"La réservation {res.id} a été annulée et le passager {passager.username} remboursé de {prix_rembourse}€.")
 
     # Si l'utilisateur est aussi un passager qui a réservé des trajets
     if reservations_en_tant_que_passager.exists():
@@ -60,7 +59,6 @@ def user_deleted(sender, instance, **kwargs):
                     res.reservation_rembourser = True
                     res.save()
 
-                    print(f"Réservation {res.id} annulée : {res.places} place(s) rendue(s) pour le trajet {trajet}.")
 
                     # Suppression de la réservation (optionnel, à toi de voir si tu veux garder trace)
                     res.delete()
@@ -69,4 +67,3 @@ def user_deleted(sender, instance, **kwargs):
     if trajets.exists():
         trajets.delete()
 
-    print(f"L'utilisateur {instance.username} a été supprimé, ses trajets et réservations ont été traités.")

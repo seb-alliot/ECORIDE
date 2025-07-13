@@ -2,33 +2,35 @@
 
 <h1 class="class_flex class_justify_center p_deco">Proposez un covoiturage</h1>
 <form id="trajet_form" method="POST" action="{{ queryString|default:"" }}">
-        {% csrf_token %}
-    <div class="flex class_flex class_column">
-        <div class="flex1 class_flex class_justify_center class_aligne_items_center">
-        <label for="id_depart">Ville de départ</label>
-            {{ trajet_form.ville_depart }}
-        <label for="id_arrivee">Ville d'arrivée</label>
-            {{ trajet_form.ville_arrivee }}
-        <label for="id_date">Date de départ</label>
-            {{ trajet_form.date }}
-        </div>
-        <div class="flex1 class_flex class_justify_center class_aligne_items_center">
-            <label for="id_voiture">Voiture</label>
-            {{ trajet_form.voiture }}
-        <label for="id_places">Nombre de places</label>
-        {{ trajet_form.places }}
-            <label for="id_heure">Heure de départ</label>
-                {{ trajet_form.heure }}
-        </div>
-        <div class="flex1 class_flex class_justify_center class_aligne_items_center">
-            <label for="prix">Prix</label>
-                {{ trajet_form.prix }}
-            <label for="id_heure">durée estimé</label>
-                {{ trajet_form.temps_trajet }}
-                <button id="propotion" type="submit"name="form_soumis" value="trajet_form">Proposez un trajet</button>
-        </div>
-    </div>
+    {% csrf_token %}
+
+    <label for="id_depart">Ville de départ</label>
+    {{ trajet_form.ville_depart }}
+
+    <label for="id_arrivee">Ville d'arrivée</label>
+    {{ trajet_form.ville_arrivee }}
+
+    <label for="id_date">Date de départ</label>
+    {{ trajet_form.date }}
+
+    <label for="id_voiture">Voiture</label>
+    {{ trajet_form.voiture }}
+
+    <label for="id_places">Nombre de places</label>
+    {{ trajet_form.places }}
+
+    <label for="id_heure">Heure de départ</label>
+    {{ trajet_form.heure }}
+
+    <label for="prix">Prix</label>
+    {{ trajet_form.prix }}
+
+    <label for="temps_trajet">Durée estimée</label>
+    {{ trajet_form.temps_trajet }}
+
+    <button id="proposition" type="submit" name="form_soumis" value="trajet_form">Proposez un trajet</button>
 </form>
+
 
 <script> const voituresData = JSON.parse('{{ voitures_data_json|escapejs }}');</script>
 <script src="{% static 'js/place_voiture.js' %}"></script>

@@ -20,11 +20,9 @@ def debit_credit_reservation(sender, instance, created, **kwargs):
         prix_total = prix_unitaire * places_reservees
 
         if credit_passager.credit < prix_total:
-            print(f"{passager.username} n'a pas assez de crédits.")
             return
 
         if places_reservees > trajet.places:
-            print("Pas assez de places disponibles.")
             return
 
         with transaction.atomic():
@@ -41,10 +39,7 @@ def debit_credit_reservation(sender, instance, created, **kwargs):
             instance.prix_par_passager = prix_unitaire
             instance.save(update_fields=["prix_par_passager"])
 
-            print(f"Le compte de {passager.username} a été débité de {prix_total} €.")
-            print(f"{places_reservees} place(s) réservée(s) sur le trajet {trajet.id}.")
+
 
     except CreditUser.DoesNotExist:
-        print(f"Crédit inexistant pour {passager.username}.")
-    except TrajetProposer.DoesNotExist:
-        print(f"Trajet {trajet.id} inexistant.")
+        pass  # Le passager a forcement un compte de crédit ou est supprimé, ou le trajet n'existe pas et dans se cas il est géré ailleurs

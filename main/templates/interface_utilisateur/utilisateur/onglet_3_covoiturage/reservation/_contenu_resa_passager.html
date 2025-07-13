@@ -22,7 +22,7 @@
         Le {{ res.trajet_reserver.date }}<br>
         À {{ res.trajet_reserver.heure|date:"H\H:i" }}<br>
         Voiture :<br>{{ res.trajet_reserver.voiture.marque }} {{ res.trajet_reserver.voiture.modele }}<br>
-        Prix payer : {{ res.prix_par_passager }}€<br>
+        Montant : {{ res.prix_par_passager }}€<br>
         Places disponibles
         {% if res.trajet_reserver.places != 0 %}
         {{ res.trajet_reserver.places }}

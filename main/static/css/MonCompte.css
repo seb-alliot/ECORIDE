@@ -1,65 +1,154 @@
-/*--------------------------Menu--------------------------*/
+
+:root {
+  --container-main-width: clamp(150px, 25vw, 450px);
+  --content-max-width: 1000px;
+  --content-side-padding: clamp(10px, 5vw, 40px);
+  --deco-font-size: clamp(12px, 1.5vw, 16px);
+  --deco-gap: clamp(5%, 2vw, 3%);
+  --deco-height: clamp(30px, 5vh, 30px);
+  --deco-margin-top: clamp(10px, 2vw, 20px);
+  --deco-radius: 10px;
+  --deco-width: clamp(110px, 20vw, 225px);
+  --font-size-base: clamp(8px, 2vw, 20px);
+  --font-size-base--p: clamp(18px, 3vw, 22px);
+  --font-size-dynamic: clamp(10px, 1.2vw, 18px);
+  --font-size-other: clamp(10px, 1.5vw, 16px);
+  --font-size-small: clamp(8pt, 2vw, 20px);
+  --form-font-size: clamp(10px, 1.5vw, 15px);
+  --form-height: clamp(30px, 5vh, 30px);
+  --form-width: clamp(120px, 20vw, 225px);
+  --image-height: clamp(90px, 18vw, 800px);
+  --img-flex-height: clamp(80px, 6vw, 120px);
+  --img-flex-width: clamp(110px, 9vw, 180px);
+  --img-size-large: clamp(130px, 14vw, 180px);
+  --img-size-small: clamp(120px, 12vw, 160px);
+  --img-square-size: clamp(110px, 10vw, 180px);
+  --input-margin-left: clamp(-55%, -10vw, -55%);
+  --input-width: clamp(60px, 12vw, 220px);
+  --input-width--other: clamp(70px, 18vw, 95px);
+  --logo-size: clamp(40px, 8vw, 200px);
+  --photo-gap: clamp(5px, 1.5vw, 10px);
+  --photo-height: clamp(95px, 14vw, 175px);
+  --photo-margin-top: clamp(10px, 3vw, 30px);
+  --photo-radius: 15%;
+  --photo-width: clamp(120px, 18vw, 225px);
+  --spacing-lg: clamp(15px, 3vw, 25px);
+  --spacing-md: clamp(8px, 2vw, 10px);
+  --spacing-sm: clamp(4px, 1vw, 10px);
+  --tab-content-width: clamp(130px, 12vw, 200px);
+  --tab-label-top-offset: clamp(3px, 0vw, 5vw);
+  --tab-vertical-margin: clamp(10px, 1.5vw, 30px);
+  --tabs-margin-side: clamp(2%, 6vw, 20%);
+  --tabs-min-height: clamp(450px, 75vh, 700px);
+
+  /* Ajout variables pour formulaire trajet */
+  --trajet-input-size: clamp(80px, 25vw, 250px);
+  --trajet-font-size: clamp(10px, 1vw, 20px);
+  --trajet-button-font-size: clamp(12px, 1.8vw, 18px);
+  --trajet-gap: clamp(5px, 2vw, 15px);
+  /* Redondance volontaire ou héritée, laisse tel quel */
+  --spacing-md: clamp(8px, 2vw, 10px);
+  --spacing-sm: clamp(4px, 1vw, 10px);
+
+  /* ROLE FORM */
+  --role-width: clamp(150px, 14vw, 225px);
+  --role-font-size: clamp(10px, 1.2vw, 20px);
+  --role-height: 30px;
+  --role-margin-top: clamp(10px, 2vw, 20px);
+  --role-margin-bottom: clamp(10px, 2vw, 25px);
+  --role-border-radius: 10px;
+
+  --p-font-size: clamp(14px, 2.2vw, 20px);
+
+  /* VOITURE FORM */
+  --voiture-input-width: clamp(110px, 12vw, 225px);
+  --voiture-font-size: clamp(10px, 1.2vw, 16px);
+  --voiture-input-height: 30px;
+  --voiture-form-gap: 14px;
+  --voiture-mere-gap: 10px;
+  --voiture-child-gap-default: 2px;
+  --voiture-child-gap-large: 4px;
+
+  /* PREFERENCE FORM */
+  --preference-width: clamp(120px, 12vw, 225px);
+  --preference-font-size: clamp(10px, 1.5vw, 16px);
+  --preference-textarea-font: clamp(10px, 1.4vw, 16px);
+  --preference-height: 30px;
+  --preference-gap-form: clamp(2px, 1vw, 4px);
+  --preference-gap-block: clamp(10px, 1.5vw, 20px);
+  --preference-margin-block: clamp(10px, 2vw, 20px);
+  --preference-font-size-block: clamp(12px, 2vw, 20px);
+
+  /* INFO PERSO */
+  --info-perso-gap: clamp(10px, 2vw, 20px);
+  --info-perso-margin-top: clamp(5px, 1vw, 15px);
+  --info-perso-li-width: clamp(111px, 13vw, 200px);
+  --info-perso-font-size: clamp(10px, 1.5vw, 16px);
+
+  /* Historique */
+  --label-historique-width: clamp(150px, 10vw, 220px);
+  --ul-padding-left: clamp(10px, 3vw, 25px);
+  --font--zine-historique: clamp(10px, 1.2vw, 18px);
+}
 
 h1,
 h2,
 h3,
 h4 {
-  margin:10px;
+  margin: var(--spacing-md);
 }
 
 #menu-tab {
   font-family: "trebuchet ms", geneva;
   color: black;
-  margin-top: 10px;
+  margin-top: var(--spacing-md);
+  font-size: var(--font-size-small);
 }
-
-/*--------------Dimensions tableau--------------*/
 
 #page-wrap {
   width: 100%;
-  margin: 10px auto;
+  margin: var(--spacing-md) auto;
 }
-
-/*-----------Gestion---des---Onglets--------------*/
 
 .tab {
   float: left;
 }
+
 .tab label {
-  padding: 10px;
+  padding: var(--spacing-md);
   background: white;
   border: solid 1px black;
   position: relative;
   left: 2px;
-  top: 4px;
-  margin-bottom: 12px;
   border-radius: 10px;
   box-shadow: 6px 6px 10px beige;
+  font-size: var(--font-size-small);
+  top: var(--tab-label-top-offset);
 }
+
 .tab [type="radio"] {
   display: none;
 }
 
-.tab [type="radio"]:checked ~ label {
+.tab [type="radio"]:checked~label {
   background-color: rgb(200, 240, 200);
   color: black;
   z-index: 0;
   border-bottom: 1px solid white;
 }
 
-.tab [type="radio"]:checked ~ label ~ .content {
+.tab [type="radio"]:checked~label~.content {
   z-index: 1;
 }
-.tab [type="radio"]:checked ~ label ~ .content > * {
+
+.tab [type="radio"]:checked~label~.content>* {
   opacity: 1;
   transform: translateX(0);
 }
 
-/*--------------Contenant----des---onglets--------------*/
-
 .content {
   position: absolute;
-  top: 25px;
+  top: clamp(15px, 3vw, 25px);
   left: 0;
   background: #b19a8b;
   right: 0;
@@ -87,397 +176,319 @@ form#etat_form option,
   display: flex;
   flex-direction: column;
   align-self: center;
-  margin-bottom: 10px;
+  margin-bottom: var(--spacing-md);
   border-radius: 15%;
+  width: var(--img-flex-width);
+  height: var(--img-flex-height);
 }
-/*-----Onglets actifs--------------*/
 
-[type="radio"]:checked ~ label ~ .content {
-  z-index: 1;
+label#resultat_recherche img,
+#covoit_reserver img,
+#historique img {
+  margin-right: var(--spacing-md);
+  width: var(--img-square-size);
+  height: var(--img-square-size);
 }
-[type="radio"]:checked ~ label ~ .content > * {
-  opacity: 1;
-  transform: translateX(0);
+
+#historique,
+#resultat_recherche,
+#covoit_reserver {
+  height: auto;
+  min-width: var(--container-main-width);
+  font-size: var(--font-size-dynamic);
 }
-/*--autre--*/
+
+#label_proposition,
+#covoit_proposer {
+  height: auto;
+  width: var(--tab-content-width);
+}
+
+#avis_positif {
+  height: auto;
+}
+
 #modification_satut {
   margin-bottom: 30px;
 }
-/*--------------Responsive conteneur--------------*/
 
-@media (min-width: 320px) and (max-width: 480px) {
-  div.tabs {
-    margin: 10px 2%;
-  }
-  #menu-tab {
-    font-size: 8pt;
-  }
-  .tabs {
-    min-height: 450px;
-    margin-top: 10px;
-  }
-  .tab label {
-    top: 8px;
-  }
-  #label img,
-  #covoit_proposer img,
-  #label_proposition img,
-  label#resultat_recherche > img {
-    width: 110px;
-    height: 80px;
-  }
-  #label_proposition,
-  #covoit_proposer,
-  #covoit_reserver,
-  #label_proposition,
-  #resultat_recherche {
-    width: 130px;
-    height: auto;
-  }
-  #historique, #resultat_recherche , #covoit_reserver{
-    width: 280px;
-    height: auto;
-  }
-  label#resultat_recherche img, #covoit_reserver img,   #historique img {
-    width: 110px;
-    height: 110px;
-    margin-right:10px;
-  }
-
+div.tabs {
+  margin-top: var(--tab-vertical-margin);
+  margin-bottom: var(--tab-vertical-margin);
+  margin-left: var(--tabs-margin-side);
+  margin-right: var(--tabs-margin-side);
 }
 
-@media (min-width: 480px) and (max-width: 768px) {
-  div.tabs {
-    margin: 10px 2%;
-  }
-  .tab label {
-    font-size: 12px;
-  }
-  .tabs {
-    min-height: 470px;
-    margin-top: 10px;
-  }
-  #label_proposition,
-  #covoit_proposer,
-  #label_proposition {
-    width: 130px;
-    height: auto;
-  }
-  #label img,
-  #covoit_proposer img,
-  #label_proposition img,
-  label#resultat_recherche > img {
-    width: 110px;
-    height: 80px;
-  }
-  #historique, #resultat_recherche , #covoit_reserver{
-    width: 280px;
-    height: auto;
-    font-size: 10px;
-  }
-  label#resultat_recherche img, #covoit_reserver img,   #historique img {
-    width: 110px;
-    height: 110px;
-    margin-right:10px;
-  }
+.tabs {
+  min-height: var(--tabs-min-height);
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
-  div.tabs {
-    margin: 10px 6%;
-  }
-  .tab label {
-    font-size: 14px;
-  }
-  .tabs {
-    min-height: 550px;
-    margin-top: 10px;
-  }
-  #label img,
-  #label_proposition img {
-    width: 135px;
-    height: 85px;
-  }
-  img {
-    width: 130px;
-    height: 80px;
-  }
-  #label_proposition,
-  #covoit_proposer,
-  #label_proposition {
-    width: 150px;
-    height: auto;
-  }
-  #historique, #resultat_recherche , #covoit_reserver{
-    width: 310px;
-    height: auto;
-  }
-  label#resultat_recherche img, #covoit_reserver img,   #historique img {
-    width: 110px;
-    height: 110px;
-    margin-right:10px;
-  }
+#deconnexion,
+#suppression-compte {
+  background-color: rgb(255, 0, 0);
+  border-radius: var(--deco-radius);
+  width: var(--deco-width);
+  height: var(--deco-height);
+  font-size: var(--deco-font-size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-@media (min-width: 1024px) and (max-width: 1280px) {
-  div.tabs {
-    margin: 15px 8%;
-  }
-  .tab label {
-    font-size: 15px;
-  }
-  .tabs {
-    min-height: 550px;
-    margin-top: 10px;
-  }
-  #label img,
-  #covoit_proposer img,
-  #label_proposition img {
-    width: 130px;
-    height: 90px;
-  }
-  #label_proposition,
-  #covoit_proposer,
-  #label_proposition{
-    width: 152px;
-    height: auto;
-  }
-  #historique, #resultat_recherche , #covoit_reserver{
-    width: 360px;
-    height: auto;
-    font-size: 12px;
-  }
-  label#resultat_recherche img, #covoit_reserver img,   #historique img {
-    width: 130px;
-    height: 130px;
-    margin-right:10px;
-  }
+#deconnexion:hover a,
+#deconnexion:hover,
+#suppression-compte:hover a,
+#suppression-compte:hover {
+  color: white;
+  background-color: rgb(0, 0, 0);
+}
+button#suppression-compte {
+  color: black;
+}
+#deconnection_user {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  gap: var(--border-radius-sm);
+  margin-top: var(--deco-gap);
 }
 
-@media (min-width: 1280px) and (max-width: 1440px) {
-  div.tabs {
-    margin: 20px 10%;
-  }
-  .tab label {
-    font-size: 16px;
-  }
-  .tabs {
-    min-height: 580px;
-    margin-top: 10px;
-  }
-  #label img,
-  #label_proposition img,
-  label#resultat_recherche > img {
-    width: 160px;
-    height: 160px;
-  }
-  img {
-    width: 158x;
-    height: 100px;
-  }
-  #label_proposition,
-  #covoit_proposer,
-  #label_proposition {
-    width: 180px;
-    height: auto;
-  }
-  #historique img, #covoit_reserver img {
-    margin-right:10px;
-  }
-  #historique, #resultat_recherche , #covoit_reserver{
-    width: 390px;
-    height: auto;
-    font-size: 15px;
-  }
-  label#resultat_recherche img, #covoit_reserver img,   #historique img {
-    width: 150px;
-    height: 150px;
-    margin-right:10px;
-  }
+/* ---- Début du style adresse.css ---- */
+
+/* Affichage de l'input file */
+input#id_photo {
+  display: flex;
 }
 
-@media (min-width: 1440px) and (max-width: 1760px) {
-  div.tabs {
-    margin: 20px 12%;
-  }
-  .tab label {
-    font-size: 16px;
-  }
-  .tabs {
-    min-height: 580px;
-    margin-top: 10px;
-  }
-  #label img,
-  #label_proposition img,
-  label#resultat_recherche > img {
-    width: 160px;
-    height: 100px;
-  }
-  #label_proposition,
-  #covoit_proposer,
-  #covoit_reserver,
-  #label_proposition,
-  #resultat_recherche {
-    width: 180px;
-    height: auto;
-  }
-  #historique, #resultat_recherche , #covoit_reserver{
-    width: 370px;
-    height: auto;
-    font-size: 15px;
-  }
-  label#resultat_recherche img, #covoit_reserver img,   #historique img {
-    width: 130px;
-    height: 130px;
-    margin-right:10px;
-  }
-  img {
-    width: 158px;
-    height: 100px;
-  }
+/* Image de profil */
+div.photo-parent > div > img {
+  border-radius: var(--photo-radius);
+  margin-left: 51.5%;
+  margin-top: var(--photo-margin-top);
+  width: var(--photo-width);
+  height: var(--photo-height);
 }
 
-@media (min-width: 1760px) and (max-width: 1920px) {
-  div.tabs {
-    margin: 25px 14%;
-  }
-  .tab label {
-    font-size: 18px;
-    top:2px;
-  }
-  .tabs {
-    min-height: 580px;
-    margin-top: 10px;
-  }
-  #label img,
-  #covoit_proposer img,
-  #label_proposition img,
-  label#resultat_recherche > img {
-    width: 160px;
-    height: 100px;
-  }
-  #label_proposition,
-  #covoit_proposer,
-  #label_proposition {
-    width: 180px;
-    height: auto;
-  }
-  #historique, #resultat_recherche , #covoit_reserver{
-    width: 400px;
-    height: auto;
-    font-size: 16px;
-  }
-  label#resultat_recherche img, #covoit_reserver img,   #historique img {
-    width: 150px;
-    height: 150px;
-    margin-right:10px;
-  }
+/* Container secondaire */
+.photo-fille {
+  gap: var(--photo-gap);
+  margin-top: 10px;
 }
 
-@media (min-width: 1920px) and (max-width: 2048px) {
-  div.tabs {
-    margin: 25px 14%;
-  }
-  .tab label {
-    font-size: 16px;
-  }
-  .tabs {
-    min-height: 580px;
-    margin-top: 10px;
-  }
-  #label img,
-  #covoit_proposer img,
-  #label_proposition img,
-  label#resultat_recherche > img {
-    width: 160px;
-    height: 110px;
-  }
-  #label_proposition,
-  #covoit_proposer,
-  #label_proposition {
-    width: 180px;
-    height: auto;
-  }
-  #historique, #resultat_recherche , #covoit_reserver{
-    width: 400px;
-    height: auto;
-    font-size: 15px;
-  }
-  label#resultat_recherche img, #covoit_reserver img,   #historique img {
-    width: 150px;
-    height: 150px;
-    margin-right:10px;
-  }
+/* Cache certains éléments */
+#adresse_form label,
+#adresse_form img textarea,
+form#adresse_form a {
+  display: none;
 }
-@media (min-width: 2048px) and (max-width:2560px){
-  div.tabs {
-    margin: 30px 16%;
-  }
-  .tab label {
-    font-size: 20px;
-  }
-  .tabs {
-    min-height: 580px;
-    margin-top: 10px;
-  }
-  #label img,
-  #covoit_proposer img,
-  #label_proposition img{
-    width: 170px;
-    height: 120px;
-  }
-  #label_proposition,
-  #covoit_proposer,
-  #label_proposition {
-    width: 200px;
-    height: auto;
-  }
-  #historique, #resultat_recherche , #covoit_reserver{
-    width: 400px;
-    height: auto;
-    font-size: 16px;
-  }
-  label#resultat_recherche img, #covoit_reserver img,   #historique img {
-    width: 150px;
-    height: 150px;
-    margin-right:10px;
-  }
+
+/* Style du bouton fichier */
+input[type="file"]::file-selector-button {
+  display: flex;
+  background-color: #ffffff;
+  color: rgb(1, 0, 0);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  width: var(--form-width);
+  height: var(--form-height);
+  font-size: var(--form-font-size);
 }
-@media (min-width:2560px){
-  div.tabs {
-    margin: 30px 20%;
-  }
-  .tab label {
-    font-size: 20px;
-    top:0px;
-  }
-  .tabs {
-    min-height: 700px;
-    margin-top: 10px;
-  }
-  #label img,
-  #covoit_proposer img,
-  #label_proposition img {
-    width: 180px;
-    height: 120px;
-  }
-  #label_proposition,
-  #covoit_proposer,
-  #label_proposition {
-    width: 200px;
-    height: auto;
-  }
-  #historique, #resultat_recherche , #covoit_reserver{
-    width: 450px;
-    height: auto;
-    font-size: 18x;
-  }
-  label#resultat_recherche img, #covoit_reserver img,   #historique img {
-    width: 180px;
-    height: 180px;
-    margin-right:10px;
-  }
+
+input[type="file"]::file-selector-button:hover {
+  background-color: rgb(200, 240, 200);
 }
-#avis_positif {
+
+/* Tous les inputs, select et boutons du formulaire */
+#adresse_form input,
+#adresse_form select,
+#adresse_form button,
+#deconnexion,
+#suppression-compte {
+  width: var(--form-width);
+  height: var(--form-height);
+  font-size: var(--form-font-size);
+  border: solid black 1px;
+}
+
+/* Styles formulaire trajet */
+#trajet_form {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--trajet-gap);
+  justify-items: center;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+  padding: var(--spacing-sm);
+}
+
+#trajet_form input,
+#trajet_form select,
+#trajet_form button {
+  width: var(--trajet-input-size);
+  height: 30px;
+  font-size: var(--trajet-font-size);
+}
+
+#trajet_form button {
+  font-size: var(--trajet-button-font-size);
+}
+
+#trajet_form label {
+  display: none;
+}
+
+#label_proposition {
+  background-color: rgb(200, 240, 200);
+  color: black;
+}
+
+div.content > ul {
+  gap: var(--trajet-gap);
+  font-size: var(--trajet-font-size);
+  z-index: 1;
+}
+
+div.content > ul > li > input[type="radio"] {
+  display: none;
+}
+
+/* ROLE FORM */
+#role_form {
+  margin-top: var(--role-margin-top);
+  margin-bottom: var(--role-margin-bottom);
+}
+#role_form label {
+  display: none;
+}
+#role_form select,
+#role_form button {
+  width: var(--role-width);
+  height: var(--role-height);
+  font-size: var(--role-font-size);
+  border-radius: var(--role-border-radius);
+}
+p {
+  font-size: var(--p-font-size);
+}
+
+/* VOITURE FORM */
+#voiture_form input,
+#voiture_form select,
+#voiture_form button {
+  width: var(--voiture-input-width);
+  height: var(--voiture-input-height);
+  font-size: var(--voiture-font-size);
+  gap: var(--voiture-form-gap);
+  border-radius: 10px;
+}
+#voiture_form label {
+  display: none;
+}
+div.voiture_mere {
+  display: flex;
+  justify-content: center;
+  gap: var(--voiture-mere-gap);
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+div.voiture_mere > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--voiture-child-gap-default);
+}
+
+/* PREFERENCE FORM */
+textarea#id_exigences_personnelles {
+  font-size: var(--preference-textarea-font);
+}
+#preference_form {
+  margin-top: var(--preference-margin-block);
+  margin-bottom: var(--preference-margin-block);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--preference-gap-form);
+  align-items: center;
+}
+#preference_form label {
+  display: none;
+}
+#preference_form input,
+#preference_form select,
+#preference_form button,
+textarea#id_exigences_personnelles {
+  width: var(--preference-width);
+  height: var(--preference-height);
+  font-size: var(--preference-font-size);
+}
+.preference_css {
+  display: flex;
+  flex-direction: column;
+  gap: var(--preference-gap-block);
+  font-size: var(--preference-font-size-block);
+  margin: var(--preference-margin-block);
+}
+.preference_css :nth-child(-n + 4) {
+  justify-content: center;
+  margin-top: var(--preference-margin-block);
+}
+
+/* INFO PERSO */
+div.info_perso {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--info-perso-gap);
+  margin-top: var(--info-perso-margin-top);
+  justify-content: center;
+  font-size: var(--info-perso-font-size);
+}
+div.info_perso > li {
+  width: var(--info-perso-li-width);
+  font-size: var(--info-perso-font-size);
+}
+
+/* VOITURE POSSEDER */
+#voiture_posseder {
+  gap: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  list-style-type: none;
+  background-color: rgb(200, 240, 200);
+  padding: 10px;
+  margin-bottom: 15px;
+  box-shadow: 6px 6px 10px beige;
+}
+
+/* HISTORIQUE */
+#label_historique {
   height: auto;
+  width: var(--label-historique-width);
+  font-size: var(--font--zine-historique);
+}
+
+div.content > div > div > ul {
+  gap: 10px;
+  padding-left: var(--ul-padding-left);
+}
+
+/* SEULES MEDIA QUERIES UTILES */
+@media (min-width: 768px) {
+  div.voiture_mere {
+    flex-direction: column;
+    justify-content: center;
+  }
+  div.voiture_mere > div {
+    flex-direction: row;
+    gap: var(--voiture-child-gap-large);
+  }
+
+  .preference_css {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }

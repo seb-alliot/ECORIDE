@@ -1,59 +1,260 @@
-form#email_filter_form label , form#email_select_form label , #moderation_form label , #avis_positif label, #je_donne_mon_avis label{
-    display: none;
-}
-#select_email {
-    display: flex;
-    justify-content: center;
+:root {
+  /* Spacing */
+  --margin-sm: clamp(8px, 1vw + 6px, 10px);
+  --margin-md: clamp(10px, 1vw + 8px, 20px);
+  --margin-lg: clamp(15px, 1vw + 10px, 25px);
+  --margin-xl: clamp(3%, 2vw, 5%);
+  --margin-xxl: clamp(15px, 2vw, 45px);
+
+  /* Gaps */
+  --gap-sm: clamp(10px, 2vw, 20px);
+  --gap-md: clamp(20px, 4vw, 50px);
+  --gap-lg: clamp(50px, 6vw, 80px);
+  --gap-xl: clamp(80px, 8vw, 100px);
+
+  /* Fonts */
+  --font-size-sm: clamp(10px, 0.8vw + 8px, 16px);
+  --font-size-md: clamp(16px, 1vw + 14px, 24px);
+  --font-size-lg: clamp(18px, 1vw + 14px, 26px);
+  --font-size-xl: clamp(24px, 1.5vw + 14px, 32px);
+
+  /* Inputs & Buttons */
+  --button-height: clamp(25px, 1vw + 20px, 30px);
+  --button-width: clamp(150px, 10vw, 180px);
+  --textarea-width: clamp(250px, 20vw, 300px);
+  --textarea-height: clamp(150px, 15vw, 200px);
+  --input-border: 1px solid #000000;
+
+  /* Tabs */
+  --tabs-margin-vertical: clamp(10px, 2vw, 30px);
+  --tabs-margin-horizontal: clamp(5%, 4vw, 28%);
+  --tab-label-font-size: clamp(8pt, 1vw + 6pt, 22pt);
+  --tab-label-top: clamp(1vw - 5px, 8px);
+  --tabs-min-height: clamp(650px, 30vw, 1200px);
+  --tab-padding: clamp(8px, 1vw + 4px, 20px);
+  --tab-border-radius: 10px;
+
+  /* Affichage Trajet */
+  --affichage-trajet-element-height: clamp(25px, 1.2vw + 20px, 40px);
+  --affichage-trajet-element-width: clamp(130px, 15vw, 350px);
+  --affichage-trajet-font-size: clamp(12px, 1vw + 10px, 22px);
 }
 
-#prise_contact label, #commentaire_label {
-    display: none;
+/* ================= GLOBAL STRUCTURE ================= */
+
+#account-admin {
+  font-size: clamp(10px, 1.2vw + 10px, 30px);
+  gap: var(--gap-md);
+}
+
+/* ================= AFFICHAGE TRAJET ================= */
+
+#affichage_trajet_form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: var(--margin-xxl);
+}
+
+#affichage_trajet_form > div > div {
+  display: flex;
+  align-items: center;
+}
+
+#affichage_trajet_form label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  left: 0;
+  top: 0;
+  margin-bottom: 0;
+  border-radius: 0;
+}
+
+#affichage_trajet_form input,
+#affichage_trajet_form select {
+  flex: 1;
+  border-radius: 0;
+  border: var(--input-border);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0);
+  height: var(--affichage-trajet-element-height);
+  width: var(--affichage-trajet-element-width);
+  font-size: var(--affichage-trajet-font-size);
+}
+
+/* ================= TABLEAU ================= */
+
+#page-wrap {
+  width: 100%;
+  margin: 10px auto;
+}
+
+/* ================= ONGLET ================= */
+
+.tab {
+  float: left;
+}
+#menu-tab {
+  margin-top: var(--tabs-margin-vertical);
+}
+.tab label {
+  padding: var(--tab-padding);
+  background: white;
+  border: solid 1px black;
+  position: relative;
+  left: 2px;
+  top: var(--tab-label-top);
+  border-radius: var(--tab-border-radius);
+  font-size: var(--tab-label-font-size);
+}
+
+.tab [type="radio"] {
+  display: none;
+}
+
+.tab [type="radio"]:checked ~ label {
+  background-color: rgb(200, 240, 200);
+  color: black;
+  z-index: 0;
+  border-bottom: 1px solid white;
+}
+
+.tab [type="radio"]:checked ~ label ~ .content {
+  z-index: 1;
+}
+.tab [type="radio"]:checked ~ label ~ .content > * {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ================= CONTENU ONGLET ================= */
+
+.content {
+  position: absolute;
+  top: 25px;
+  left: 0;
+  background: #b19a8b;
+  right: 0;
+  bottom: 0;
+  padding: 20px;
+  border-radius: 5px 10px 10px 10px;
+  box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.41);
+  overflow-y: auto;
+}
+
+/* ================= OPTIONS ================= */
+
+#adresse_form option,
+#trajet_form option,
+form#etat_form option,
+#id_etat_reservation option,
+#role_form option,
+#voiture_form option,
+#preference_form option {
+  background-color: rgb(200, 240, 200);
+  border: solid 3px black;
+}
+
+/* ================= ADMIN & MODÉRATION ================= */
+
+#modification_satut {
+  margin-bottom: 30px;
+}
+
+#nbr_mail,
+h1 {
+  margin: var(--margin-lg);
+  font-size: var(--font-size-xl);
+}
+
+h2 {
+  font-size: var(--font-size-lg);
+}
+
+#nbr_mail {
+  font-size: var(--font-size-md);
+}
+
+form#moderation_form > div > p,
+form#moderation_form > p {
+  font-size: var(--font-size-md);
+  margin: var(--margin-md);
+}
+
+div#account-moderateur.class_flex {
+  gap: clamp(10px, 5vw, 10%);
+  margin-right: 2%;
+}
+
+form#email_filter_form label,
+form#email_select_form label,
+#moderation_form label,
+#avis_positif label,
+#je_donne_mon_avis label,
+#prise_contact label,
+#commentaire_label {
+  display: none;
+}
+
+#select_email {
+  display: flex;
+  justify-content: center;
 }
 
 .bouton_modo {
-    height:30px;
-    width: 180px;
+  height: var(--button-height);
+  width: var(--button-width);
 }
 
 textarea#id_reponse {
-    display: flex;
-    justify-content: center;
-    width: 300px;
-    height: 200px;
+  display: flex;
+  justify-content: center;
+  width: var(--textarea-width);
+  height: var(--textarea-height);
 }
 
-form#prise_contact, #moderation_form{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-form#email_select_form select{
-    margin-bottom: 15px;;
+form#prise_contact,
+#moderation_form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-#avis_positif{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-#bouton_modo {
-    align-self: center;
+form#email_select_form select {
+  margin-bottom: var(--margin-sm);
 }
 
-#bouton_confirmer, #bout_reponse_modo, #bouton_modo, #email_select, #email_type , #bouton_refuser, #id_etat_paiement {
-    margin-top : 10px;
+#avis_positif {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+
+#bouton_confirmer,
+#bout_reponse_modo,
+#bouton_modo,
+#email_select,
+#email_type,
+#bouton_refuser,
+#id_etat_paiement {
+  margin-top: var(--margin-sm);
+}
+
 #id_commentaire {
-    align-self: center;
-    }
+  align-self: center;
+}
+
+/* ================= AFFICHAGE ADMIN ================= */
 
 #affichage_admin {
-    display: flex;
-    justify-content: center;
-    margin-top: 5%;
+  display: flex;
+  justify-content: center;
+  margin-top: var(--margin-xl);
 }
+
 #affichage_admin > ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
 }

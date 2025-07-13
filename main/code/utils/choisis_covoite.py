@@ -19,8 +19,8 @@ def ChoisisTonCovoite(request):
     client = MongoClient(uri)
     db = client["ECORIDE"]
 
-    vue = db["vue"]
-    compteur = increment_vue(vue, "compteur_vue")
+    trajet_id = request.GET.get("trajet_id")
+    compteur = increment_vue(db, trajet_id)
 
     trajet_id = request.GET.get("trajet_id")
     trajet = TrajetProposer.objects.filter(

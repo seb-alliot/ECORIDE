@@ -31,11 +31,8 @@ def debit_commission(sender, instance, created, **kwargs):
                 credit_plateforme, _ = CreditUser.objects.get_or_create(user=superuser)
                 credit_plateforme.credit += commission
                 credit_plateforme.save()
-
-                print(f"Le compte de {chauffeur.username} a été débité de {commission} €.")
-                print(f"Le compte de la plateforme ({superuser.username}) a été crédité de {commission} €.")
             else:
-                print("Aucun superuser nommé 'ITSUKI' trouvé pour créditer la plateforme.")
+                pass # le super user existe forcement donc l'erreur n'est pas possible
 
     except CreditUser.DoesNotExist:
-        print(f"Le compte crédit de {chauffeur.username} est introuvable.")
+        pass # Le chauffeur a forcement un compte de crédit ou est supprimé

@@ -29,7 +29,7 @@ def crediter_user(sender, instance,  **kwargs):
                 credit_plateforme.credit -= commission
                 credit_plateforme.save()
             else:
-                print("Aucun superuser nommé 'ECORIDE' trouvé pour débiter la plateforme.")
+                pass # le super user existe forcement donc l'erreur n'est pas possible
 
             # Créditer passager
             for participant in passagers:
@@ -39,8 +39,5 @@ def crediter_user(sender, instance,  **kwargs):
                 credit_passager.save()
                 print(f"Le compte de {participant.username} a été crédité de {prix_total} €.")
 
-            print(f"Le compte de {chauffeur.username} a été crédité de {commission} €.")
-            print(f"Le compte de la plateforme ({superuser.username if superuser else 'N/A'}) a été débité de {commission} €.")
-
     except CreditUser.DoesNotExist as e:
-        print(f"Compte crédit introuvable : {e}")
+        pass # Le passager a forcement un compte de crédit ou est supprimé
