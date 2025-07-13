@@ -20,7 +20,8 @@ urlpatterns = [
 
     path("contact/", main_views.Contact, name="_contact"),
     path("faq/", main_views.mentions_legales, name="_faq"),
-
+    path("rgpd/", main_views.rgpd, name="_rgpd"),
+    
     path("inscription/", UserCreateView.as_view(), name="inscription"),
     path("activation/<token>/<uidb64>/", activation, name="activation"),
 

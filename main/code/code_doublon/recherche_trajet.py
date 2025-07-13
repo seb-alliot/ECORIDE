@@ -25,11 +25,6 @@ def RechercheTrajet(request):
             etat="Disponible",
             places__gt=0,
         ).annotate(note_chauffeur=Avg("chauffeur__accusé__note"))
-        for trajet in trajet4:
-            print("Trajet :", trajet)
-            print("Nom chauffeur :", trajet.chauffeur.username)
-            print("Note du chauffeur :", trajet.note_chauffeur)
-            print("—" * 40)
 
 
         if user.is_authenticated:

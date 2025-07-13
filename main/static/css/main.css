@@ -7,7 +7,7 @@
   --spacing-md: 10px;
   --input-width--other: clamp(70px, 18vw, 95px);
   --spacing-middle: 15px;
-  --spacing-lg: 20px;
+  --spacing-lg: clamp(20px, 3vw, 35px);
   --font-size-other: clamp(10px, 1.2vw, 16px);
   --font-size-base--p: clamp(18px, 3vw, 22px);
   --content-max-width: 1000px;
@@ -948,5 +948,14 @@ th {
   .presentation-flex-reverse p {
     max-width: 50%;
     font-size: clamp(var(--font-size-base--p), 3vw, var(--font-size-base--p));
+  }
+}
+@media (min-width: 320px) and (max-width: 767px) {
+  .presentation img {
+    min-width: clamp(80px, 50vw, 350px);
+    max-width: clamp(80px, 50vw, 350px);
+    min-height:clamp(130px, 10vw, 350px);
+    max-height:clamp(130px, 10vw, 350px);
+    border-radius: clamp(5px, 1vw, 15px);
   }
 }

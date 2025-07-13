@@ -74,7 +74,15 @@ def mentions_legales(request):
         "interface_utilisateur/utilisateur/footer/_faq.html",
         context,
     )
+def rgpd(request):
 
+    context = {}
+    context.update(initialisation_template(request))
+    return render(
+        request,
+        "interface_utilisateur/utilisateur/footer/_rgpd.html",
+        context,
+    )
 def accueil(request):
 
     context = {}
