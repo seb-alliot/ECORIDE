@@ -1,0 +1,50 @@
+{% extends "index.html" %}
+{% load static %}
+
+{% block principal %}
+    <link rel="stylesheet" href="{% static 'css/faq.css' %}">
+
+    <h1>Mentions légales – EcoRide</h1>
+
+    <div class="faq-item">
+        <h3>1. Éditeur du site</h3>
+        <p>
+            Le site <strong>EcoRide</strong> est un projet fictif développé dans le cadre d’une formation ou d’un diplôme.
+            Il est édité à titre personnel par <strong>Itsuki</strong>.
+        </p>
+    </div>
+
+    <div class="faq-item">
+        <h3>2. Hébergement</h3>
+        <p>
+            Le site est hébergé par :
+            <br><strong>Hostinger International Ltd</strong><br>
+            61 Lordou Vironos Street, 6023 Larnaca, Chypre<br>
+            <a href="https://www.hostinger.fr" target="_blank">www.hostinger.fr</a>
+        </p>
+    </div>
+
+    <div class="faq-item">
+        <h3>3. Contact</h3>
+        <p>
+            Pour toute question, vous pouvez contacter l’éditeur du site à l’adresse suivante :
+            <a href="mailto:staff.modo.ecoride@gmail.com">staff.modo.ecoride@gmail.com</a>
+        </p>
+    </div>
+
+    <div class="faq-item">
+        <h3>4. Propriété intellectuelle</h3>
+        <p>
+            Tous les contenus présents sur le site EcoRide (textes, images, code source, etc.) sont utilisés dans un cadre académique et ne font l’objet d’aucune exploitation commerciale.
+            Si des éléments tiers sont utilisés, ils sont mentionnés ou crédités selon les conditions de leurs auteurs.
+        </p>
+    </div>
+
+    <div class="faq-item">
+        <h3>5. Responsabilité</h3>
+        <p>
+            Le site est fourni à titre informatif et pédagogique. Il ne saurait engager la responsabilité de son auteur en cas d’erreurs, d’inexactitudes ou d’utilisation des données présentes.
+        </p>
+    </div>
+
+{% endblock %}

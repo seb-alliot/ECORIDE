@@ -71,7 +71,7 @@ def mentions_legales(request):
     context.update(initialisation_template(request))
     return render(
         request,
-        "interface_utilisateur/utilisateur/footer/_faq.html",
+        "interface_utilisateur/utilisateur/footer/_mentions_legal.html",
         context,
     )
 def rgpd(request):
