@@ -655,7 +655,7 @@ form#email_select_form select{
   height: clamp(25px, 3vw, 35px);
 }
 footer a {
-  font-size: var(--font-size--other);
+  font-size: var(--font-size-base);
   height: auto;
   padding: var(--spacing-sm) var(--spacing-md);
   color: var(--color-text);
