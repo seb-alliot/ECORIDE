@@ -19,7 +19,7 @@ urlpatterns = [
     path("", main_views.accueil, name="index"),
 
     path("contact/", main_views.Contact, name="_contact"),
-    path("faq/", main_views.mentions_legales, name="_faq"),
+    path("faq/", main_views.Faq, name="_faq"),
     path("rgpd/", main_views.rgpd, name="_rgpd"),
     path("mentions_legales/", main_views.mentions_legales, name="_mentions_legales"),
 

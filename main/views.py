@@ -83,6 +83,15 @@ def rgpd(request):
         "interface_utilisateur/utilisateur/footer/_rgpd.html",
         context,
     )
+
+def Faq(request):
+    context = {}
+    context.update(initialisation_template(request))
+    return render(
+        request,
+        "interface_utilisateur/utilisateur/footer/_faq.html",
+        context,
+    )
 def accueil(request):
 
     context = {}
