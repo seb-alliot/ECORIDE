@@ -388,7 +388,7 @@ label#resultat_recherche {
 #contact_form {
   display: flex;
   flex-direction: column;
-  margin-top: var(--spacing-lg);
+  margin: var(--spacing-lg);
   align-items: center;
 }
 
@@ -620,9 +620,7 @@ select#id_note,
 #reservation_annuler,
 form#etat_form select,
 form#etat_form button,
-#deux_choix,
 #bouton_terminer,
-select#id_etat,
 #pop_up_confirmation,
 form#recherche_form input,
 form#recherche_form button,
@@ -904,8 +902,8 @@ th {
 .presentation img {
   min-width: clamp(80px, 70vw, 350px);
   max-width: clamp(80px, 70vw, 350px);
-  min-height:clamp(130px, 10vw, 350px);
-  max-height:clamp(130px, 10vw, 350px);
+  min-height:clamp(130px, 15vw, 350px);
+  max-height:clamp(130px, 15vw, 350px);
   border-radius: clamp(5px, 1vw, 15px);
 }
 

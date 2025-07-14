@@ -13,7 +13,7 @@
   --font-size-base--p: clamp(18px, 3vw, 22px);
   --font-size-dynamic: clamp(10px, 1.2vw, 18px);
   --font-size-other: clamp(10px, 1.2vw, 16px);
-  --font-size-small: clamp(8pt, 2vw, 20px);
+  --font-size-small: clamp(8pt, 1.5vw, 16px);
   --form-font-size: clamp(10px, 1.5vw, 15px);
   --form-height: clamp(30px, 5vh, 30px);
   --form-width: clamp(120px, 20vw, 225px);
@@ -26,16 +26,16 @@
   --input-margin-left: clamp(-55%, -10vw, -55%);
   --input-width: clamp(60px, 12vw, 220px);
   --input-width--other: clamp(70px, 18vw, 95px);
-  --logo-size: clamp(40px, 8vw, 200px);
+  --logo-size: clamp(60px, 8vw, 200px);
   --photo-gap: clamp(5px, 1.5vw, 10px);
   --photo-height: clamp(95px, 14vw, 175px);
   --photo-margin-top: clamp(10px, 3vw, 30px);
   --photo-radius: 15%;
   --photo-width: clamp(120px, 18vw, 225px);
   --spacing-lg: clamp(15px, 3vw, 25px);
-  --spacing-md: clamp(8px, 2vw, 10px);
-  --spacing-sm: clamp(4px, 1vw, 10px);
-  --tab-content-width: clamp(130px, 12vw, 200px);
+  --spacing-md: clamp(8px, 2vw, 10px); /* gardée une seule fois */
+  --spacing-sm: clamp(4px, 1vw, 10px); /* gardée une seule fois */
+  --tab-content-width: clamp(150px, 12vw, 200px);
   --tab-label-top-offset: clamp(3px, 0vw, 5vw);
   --tab-vertical-margin: clamp(10px, 1.5vw, 30px);
   --tabs-margin-side: clamp(2%, 6vw, 20%);
@@ -43,11 +43,9 @@
 
   /* Ajout variables pour formulaire trajet */
   --trajet-input-size: clamp(80px, 25vw, 250px);
-  --trajet-font-size: clamp(10px, 1vw, 20px);
+  --trajet-font-size: clamp(10px, 1.2vw, 20px);
   --trajet-button-font-size: clamp(12px, 1.8vw, 18px);
   --trajet-gap: clamp(5px, 2vw, 15px);
-  --spacing-md: clamp(8px, 2vw, 10px);
-  --spacing-sm: clamp(4px, 1vw, 10px);
 
   /* ROLE FORM */
   --role-width: clamp(150px, 14vw, 225px);
@@ -70,7 +68,7 @@
 
   /* PREFERENCE FORM */
   --preference-width: clamp(120px, 12vw, 225px);
-  --preference-font-size: clamp(10px, 1.5vw, 16px);
+  --preference-font-size: clamp(10px, 1.2vw, 16px);
   --preference-textarea-font: clamp(10px, 1.4vw, 16px);
   --preference-height: 30px;
   --preference-gap-form: clamp(2px, 1vw, 4px);
@@ -89,6 +87,7 @@
   --ul-padding-left: clamp(10px, 3vw, 25px);
   --font--zine-historique: clamp(10px, 1.2vw, 18px);
 }
+
 
 h1,
 h2,
@@ -199,10 +198,9 @@ label#resultat_recherche img,
   font-size: var(--font-size-dynamic);
 }
 
-#label_proposition,
-#covoit_proposer {
+#label_proposition{
   height: auto;
-  width: var(--tab-content-width);
+  min-width: var(--tab-content-width);
 }
 
 #avis_positif {
@@ -226,26 +224,36 @@ div.tabs {
 
 #deconnexion,
 #suppression-compte {
-  background-color: rgb(255, 0, 0);
   border-radius: var(--deco-radius);
-  width: var(--deco-width);
-  height: var(--deco-height);
-  font-size: var(--deco-font-size);
+  color: white;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-#deconnexion:hover a,
-#deconnexion:hover,
-#suppression-compte:hover a,
-#suppression-compte:hover {
-  color: white;
-  background-color: rgb(0, 0, 0);
+#suppression-compte {
+  background-color: rgb(200, 0, 0);
 }
-button#suppression-compte {
+#suppression-compte:hover {
+  background-color: black;
+  color: rgb(200, 0, 0);
+}
+
+#deconnexion {
+  background-color: rgb(255, 165, 0);
+}
+#deconnexion a {
   color: black;
 }
+#deconnexion:hover {
+  background-color: rgb(208, 9, 2);
+}
+#deconnexion:hover a {
+  color: white;
+}
+
+
+
 #deconnection_user {
   display: flex;
   justify-content: center;
@@ -363,6 +371,8 @@ div.content > ul > li > input[type="radio"] {
 #role_form label {
   display: none;
 }
+
+
 #role_form select,
 #role_form button {
   width: var(--role-width);
@@ -416,16 +426,19 @@ textarea#id_exigences_personnelles {
 #preference_form label {
   display: none;
 }
+
+select#id_etat,
+#deux_choix,
 #preference_form input,
 #preference_form select,
 #preference_form button,
 #reservation_form select,
 #reservation_form button,
-
 textarea#id_exigences_personnelles {
   width: var(--preference-width);
   height: var(--preference-height);
   font-size: var(--preference-font-size);
+  margin:clamp(5px, 1vw, 15px);
 }
 .preference_css {
   display: flex;
