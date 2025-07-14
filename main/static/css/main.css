@@ -269,7 +269,6 @@ a:hover {
   color: #a7c7a5;
 }
 
-/* Layout principal */
 .image-principal {
   background-size: cover;
   background-position: center;
@@ -293,7 +292,6 @@ a:hover {
 
 
 /*connection*/
-/* Ajouter ces classes */
 .account-link {
   display: flex;
   text-decoration: none;
@@ -481,7 +479,7 @@ div#reservation > div > img.photo_profile {
 div#reservation > div:nth-child(3) {
   border-radius: 0 15% 15% 0;
 }
-/* ----------- MEDIA QUERY MOBILE ----------- */
+
 @media (max-width: 768px) {
   div#reservation {
     flex-direction: column;
@@ -549,8 +547,6 @@ div#info_trajet {
 
 /*--- Partie info chauffeur ---*/
 
-
-
 form#reservation_form > div > ul {
   gap: 20px;
 }
@@ -583,7 +579,7 @@ div#gain_plateforme {
   display: flex;
   justify-content: center;
   margin-top: var(--spacing-md);
-  font-size: clamp(10px, 3vw, 12px);
+  font-size: clamp(10px, 2vw, 16px);
   margin-left: clamp(-15%, -10vw, -10%);
 }
 
@@ -624,8 +620,6 @@ select#id_note,
 #reservation_annuler,
 form#etat_form select,
 form#etat_form button,
-#reservation_form select,
-#reservation_form button,
 #deux_choix,
 #bouton_terminer,
 select#id_etat,
@@ -648,16 +642,21 @@ form#login2 button,
 form#reset_mdp input,
 form#reset_mdp button,
 form#validation_email input,
-form#validation_email button,
-form#email_filter_form select,
-form#email_select_form select{
+form#validation_email button{
   width: var(--input-width);
   font-size: var(--font-size-other);
   height: clamp(25px, 3vw, 35px);
 }
+form#email_filter_form select,
+form#email_select_form select{
+  min-width: clamp(100px, 2vw , 225px);
+  min-height: clamp(25px , 3vw, 35px);
+  font-size: var(--font-size-other);
+}
+
+
 footer a {
   font-size: var(--font-size-base);
-  height: auto;
   padding: var(--spacing-sm) var(--spacing-md);
   color: var(--color-text);
   height: clamp(30px, 4vw, 40px);
@@ -756,8 +755,8 @@ div#preference p {
 
 /* Consolidated margin for #creer_compte */
 #creer_compte {
-  margin-top: var(--spacing-lg);
   font-size: var(--font-size-base);
+  margin-bottom: var(--spacing-lg);
 }
 
 /* Consolidated form margins */
@@ -820,10 +819,11 @@ h1, h2, h3, h4 {
 
 /* Consolidated #account-admin */
 #account-admin {
-  font-size: clamp(--font-size-base);
   gap: clamp(10px, 4vw, 80px);
 }
-
+#account-admin a {
+  font-size: clamp(10px, 2vw, 16px);
+}
 /* Consolidated #logo margin-right */
 #logo {
   margin-right: clamp(10%, 20vw, 20%);

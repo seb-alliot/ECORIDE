@@ -1,6 +1,6 @@
 
 :root {
-  --container-main-width: clamp(150px, 25vw, 450px);
+  --container-main-width: clamp(200px, 25vw, 450px);
   --content-max-width: 1000px;
   --content-side-padding: clamp(10px, 5vw, 40px);
   --deco-font-size: clamp(12px, 1.5vw, 16px);
@@ -12,7 +12,7 @@
   --font-size-base: clamp(8px, 2vw, 20px);
   --font-size-base--p: clamp(18px, 3vw, 22px);
   --font-size-dynamic: clamp(10px, 1.2vw, 18px);
-  --font-size-other: clamp(10px, 1.5vw, 16px);
+  --font-size-other: clamp(10px, 1.2vw, 16px);
   --font-size-small: clamp(8pt, 2vw, 20px);
   --form-font-size: clamp(10px, 1.5vw, 15px);
   --form-height: clamp(30px, 5vh, 30px);
@@ -22,7 +22,7 @@
   --img-flex-width: clamp(110px, 9vw, 180px);
   --img-size-large: clamp(130px, 14vw, 180px);
   --img-size-small: clamp(120px, 12vw, 160px);
-  --img-square-size: clamp(110px, 10vw, 180px);
+  --img-square-size: clamp(70px, 10vw, 180px);
   --input-margin-left: clamp(-55%, -10vw, -55%);
   --input-width: clamp(60px, 12vw, 220px);
   --input-width--other: clamp(70px, 18vw, 95px);
@@ -46,7 +46,6 @@
   --trajet-font-size: clamp(10px, 1vw, 20px);
   --trajet-button-font-size: clamp(12px, 1.8vw, 18px);
   --trajet-gap: clamp(5px, 2vw, 15px);
-  /* Redondance volontaire ou héritée, laisse tel quel */
   --spacing-md: clamp(8px, 2vw, 10px);
   --spacing-sm: clamp(4px, 1vw, 10px);
 
@@ -96,6 +95,7 @@ h2,
 h3,
 h4 {
   margin: var(--spacing-md);
+  font-size: clamp(14px, 2vw, 24px);
 }
 
 #menu-tab {
@@ -149,6 +149,7 @@ h4 {
 .content {
   position: absolute;
   top: clamp(15px, 3vw, 25px);
+  margin-bottom: var(--spacing-lg);
   left: 0;
   background: #b19a8b;
   right: 0;
@@ -276,7 +277,6 @@ div.photo-parent > div > img {
   margin-top: 10px;
 }
 
-/* Cache certains éléments */
 #adresse_form label,
 #adresse_form img textarea,
 form#adresse_form a {
@@ -302,7 +302,6 @@ input[type="file"]::file-selector-button:hover {
   background-color: rgb(200, 240, 200);
 }
 
-/* Tous les inputs, select et boutons du formulaire */
 #adresse_form input,
 #adresse_form select,
 #adresse_form button,
@@ -420,6 +419,9 @@ textarea#id_exigences_personnelles {
 #preference_form input,
 #preference_form select,
 #preference_form button,
+#reservation_form select,
+#reservation_form button,
+
 textarea#id_exigences_personnelles {
   width: var(--preference-width);
   height: var(--preference-height);
@@ -475,7 +477,6 @@ div.content > div > div > ul {
   padding-left: var(--ul-padding-left);
 }
 
-/* SEULES MEDIA QUERIES UTILES */
 @media (min-width: 768px) {
   div.voiture_mere {
     flex-direction: column;
