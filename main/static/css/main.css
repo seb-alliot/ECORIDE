@@ -824,7 +824,7 @@ h1, h2, h3, h4 {
 #login2,
 #reset_mdp,
 #validation_email {
-  height: clamp(40px, 5vw, 55px);
+  height: clamp(45px, 5vw, 55px);
 }
 
 /* Consolidated #account-admin */
