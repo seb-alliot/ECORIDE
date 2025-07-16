@@ -2,6 +2,7 @@
   --logo-size: clamp(60px, 8vw, 200px);
   --font-size-base: clamp(8px, 2vw, 20px);
   --input-width: clamp(65px, 12vw, 220px);
+  --input-height: clamp(25px, 5vw, 40px);
   --image-height: clamp(100px, 25vw, 800px);
   --spacing-sm: 5px;
   --spacing-md: 10px;
@@ -319,8 +320,8 @@ form#demarrer_ou_annuler_form > label {
   align-items: center;
   border: 1px solid var(--color-text);
   box-shadow: var(--box-shadow);
-  height: clamp(45px, 6vw, 55px);
   margin-bottom: var(--spacing-lg);
+  height: clamp(45px, 5vw, 55px);
 }
 
 /* Formulaire de recherche */
@@ -357,7 +358,7 @@ form#demarrer_ou_annuler_form > label {
 }
 
 form#selection_trajet button {
-  height: 30px;
+  height: var(--input-height);
   margin-bottom: 15px;
 }
 form#filtre_form {
@@ -399,7 +400,7 @@ label#resultat_recherche {
   margin-top: var(--spacing-md);
   width: var(--input-width);
   font-size: var(--font-size-other);
-  height: clamp(25px, 3vw, 30px);
+  height: var(--input-height);
 }
 
 /* Bouton réserver et formulaire trajet */
@@ -409,7 +410,7 @@ label#resultat_recherche {
   color: white;
   width: var(--input-width);
   font-size: var(--font-size-other);
-  height: clamp(25px, 3vw, 30px);
+  height: var(--input-height);
 }
 /*--------------Block RESERVATION--------------*/
 
@@ -564,7 +565,7 @@ form#etat_form button,
   margin: 5px;
   width: var(--input-width);
   font-size: var(--font-size-other);
-  height: clamp(25px, 3vw, 30px);
+  height: var(--input-height);
 }
 form#etat_form select,
 #reservation_form select {
@@ -643,12 +644,12 @@ form#validation_email input,
 form#validation_email button{
   width: var(--input-width);
   font-size: var(--font-size-other);
-  height: clamp(25px, 3vw, 35px);
+  height: var(--input-height);
 }
 form#email_filter_form select,
 form#email_select_form select{
   min-width: clamp(100px, 2vw , 225px);
-  min-height: clamp(25px , 3vw, 35px);
+  height: var(--input-height);
   font-size: var(--font-size-other);
 }
 
@@ -657,19 +658,11 @@ footer a {
   font-size: var(--font-size-base);
   padding: var(--spacing-sm) var(--spacing-md);
   color: var(--color-text);
-  height: clamp(30px, 4vw, 40px);
-}
-/* Consolidated inscription/login forms height */
-#inscription,
-#login1,
-#login2,
-#reset_mdp,
-#validation_email {
-  height: clamp(45px, 6vw, 55px);
+  height: var(--input-height);
 }
 
+
 /* Consolidated specific font-sizes and margins for links/buttons */
-#creer_compte a,
 #mot_de_passe_oublie a,
 button#bouton_note,
 select#id_avis,
@@ -753,8 +746,27 @@ div#preference p {
 
 /* Consolidated margin for #creer_compte */
 #creer_compte {
-  font-size: var(--font-size-base);
+  display: inline-block;
+  align-self: center;
+  align-content: center;
   margin-bottom: var(--spacing-lg);
+  background-color: var(--color-primary);
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  font-size: var(--font-size-other);
+  border: 1px solid var(--color-text);
+  border-radius: var(--border-radius-sm);
+  box-shadow: var(--box-shadow);
+  transition: background-color 0.3s, color 0.3s;
+  width: var(--input-width);
+  height: var(--input-height);
+}
+
+#creer_compte:hover {
+  background-color: var(--color-hover);
+  color: var(--color-text);
+  text-decoration: none;
 }
 
 /* Consolidated form margins */
@@ -903,7 +915,7 @@ th {
   min-width: clamp(80px, 70vw, 350px);
   max-width: clamp(80px, 70vw, 350px);
   min-height:clamp(130px, 15vw, 350px);
-  max-height:clamp(130px, 15vw, 350px);
+  max-height:clamp(130px, 30vw, 350px);
   border-radius: clamp(5px, 1vw, 15px);
 }
 
@@ -947,15 +959,13 @@ th {
   .presentation-flex p,
   .presentation-flex-reverse p {
     max-width: 50%;
-    font-size: clamp(var(--font-size-base--p), 3vw, var(--font-size-base--p));
+    font-size: var(--font-size-base--p);
   }
-}
-@media (min-width: 320px) and (max-width: 767px) {
   .presentation img {
-    min-width: clamp(80px, 50vw, 350px);
-    max-width: clamp(80px, 50vw, 350px);
-    min-height:clamp(130px, 10vw, 350px);
-    max-height:clamp(130px, 10vw, 350px);
+    min-width: clamp(80px, 50vw, 450px);
+    max-width: clamp(80px, 50vw, 450px);
+    min-height:clamp(130px, 15vw, 450px);
+    max-height:clamp(130px, 15vw, 450px);
     border-radius: clamp(5px, 1vw, 15px);
   }
 }
