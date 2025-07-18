@@ -90,9 +90,9 @@ WSGI_APPLICATION = 'ECORIDE.wsgi.application'
 
 DATABASES = {
 'default': env.db('DATABASE_URL'),
-
 }
-
+URI = os.getenv("uri")
+MONGO_DB_NAME = "ECORIDE"
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
@@ -128,7 +128,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-BASE_DIR = Path(__file__).resolve().parent.parent
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "main","media")

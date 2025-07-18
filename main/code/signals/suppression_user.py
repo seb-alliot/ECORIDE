@@ -4,12 +4,15 @@ from django.contrib.auth.models import User
 from ...models import TrajetProposer, ReservationTrajet, CreditUser
 from django.db import transaction
 from ..envoi_email import Information_suppression_user
-
-# On assure que la logique de suppression des trajets et réservations est bien gérée via transactions atomiques
-# pour éviter les incohérences en cas d'erreur durant la suppression.
+from pymongo import MongoClient
+import os
+from dotenv import load_dotenv
+load_dotenv()
+from ..utils import get_mongo_db
 
 @receiver(pre_delete, sender=User)
 def user_deleted(sender, instance, **kwargs):
+
     # Récupérer les trajets proposés par ce chauffeur
     trajets = TrajetProposer.objects.filter(chauffeur=instance)
 
@@ -19,7 +22,6 @@ def user_deleted(sender, instance, **kwargs):
     # Si c'est un chauffeur avec des trajets proposés
     if trajets.exists():
         with transaction.atomic():
-            # Récupérer toutes les réservations qui concernent ses trajets
             reservations_des_trajets = ReservationTrajet.objects.filter(trajet_reserver__in=trajets)
 
             for res in reservations_des_trajets:
@@ -44,7 +46,6 @@ def user_deleted(sender, instance, **kwargs):
                     )
 
 
-    # Si l'utilisateur est aussi un passager qui a réservé des trajets
     if reservations_en_tant_que_passager.exists():
         with transaction.atomic():
             for res in reservations_en_tant_que_passager:
@@ -59,11 +60,9 @@ def user_deleted(sender, instance, **kwargs):
                     res.reservation_rembourser = True
                     res.save()
 
-
-                    # Suppression de la réservation (optionnel, à toi de voir si tu veux garder trace)
-                    res.delete()
-
-    # Enfin, supprimer les trajets du chauffeur
     if trajets.exists():
+        for trajet in trajets:
+            db = get_mongo_db()
+            db["vue"].delete_one({"_id": str(trajet.id)})
+            print(f"[MongoDB] : Vue du trajet {trajet.id} supprimée.")
         trajets.delete()
-

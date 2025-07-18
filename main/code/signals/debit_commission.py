@@ -8,7 +8,7 @@ from django.db import transaction
 @receiver(post_save, sender=TrajetProposer)
 def debit_commission(sender, instance, created, **kwargs):
     if not created:
-        return  # Si c'est pas une création, on ne fait rien
+        return
 
     commission = 2
     chauffeur = instance.chauffeur
@@ -19,13 +19,12 @@ def debit_commission(sender, instance, created, **kwargs):
             credit_user = CreditUser.objects.get(user=chauffeur)
 
             if credit_user.credit < commission:
-                print(f"Le compte de {chauffeur.username} n'a pas assez de crédits pour le trajet proposé.")
                 return
 
             credit_user.credit -= commission
             credit_user.save()
 
-            # Créditer la plateforme (par username explicite ici : ITSUKI)
+            # Créditer la plateforme (par username explicite ici : ECORIDE)
             superuser = User.objects.filter(username='ECORIDE').first()
             if superuser:
                 credit_plateforme, _ = CreditUser.objects.get_or_create(user=superuser)

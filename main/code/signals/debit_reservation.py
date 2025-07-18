@@ -30,7 +30,6 @@ def debit_credit_reservation(sender, instance, created, **kwargs):
             credit_passager.credit -= prix_total
             credit_passager.save()
 
-            # Crédite temporairement la plateforme ou une file d'attente, à ajuster si besoin
             # Mise à jour des places disponibles
             trajet.places -= places_reservees
             trajet.save()
@@ -38,8 +37,6 @@ def debit_credit_reservation(sender, instance, created, **kwargs):
             # Mise à jour du prix unitaire dans la réservation
             instance.prix_par_passager = prix_unitaire
             instance.save(update_fields=["prix_par_passager"])
-
-
 
     except CreditUser.DoesNotExist:
         pass  # Le passager a forcement un compte de crédit ou est supprimé, ou le trajet n'existe pas et dans se cas il est géré ailleurs
