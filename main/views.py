@@ -47,7 +47,6 @@ from .code import (
 )
 
 
-
 def Contact(request):
     context = {}
 

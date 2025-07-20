@@ -2,5 +2,11 @@
 {% load static %}
 
 {% block principal %}
-    {% include "login/login-etape/_etape_1_id.html" %}
+    <form method="POST" id="login1">
+    {% csrf_token %}
+    <label for="connection2" class="label-hidden">Identifiant</label>
+    {{ form.username }}
+    <button type="submit">Se connecter</button>
+</form>
+    <a id="creer_compte" href="{% url 'inscription' %}">Créer un compte</a>
 {% endblock principal %}

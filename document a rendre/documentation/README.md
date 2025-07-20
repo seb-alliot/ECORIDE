@@ -107,9 +107,12 @@ Dans le terminal :
       NOW()
    );
 
-Ce qui donnera user : ITSUKI et mdp : Studietudiant1. en local
+Ce qui donnera user : ITSUKI et mdp : Studietudiant1. en local, sur le serveur y a le même.
+le mot de est hasher via bycrypt que j'utilise dans le settings afin que django puisse le reconnaitre par la suite
 
-le mot de est hasher via bycrypt que j'utilise dans le settings afin que django puis le reconnaitre par la suite
+L'utilisateur Ecoride avec se pseudo est impératif au bon fonctionnement de l'application, l'email  staff.modo.ecoride@gmail.com est recommander mais pas necessaire, le mdp importe peux.
+
+
 
 2. **Lancer le serveur local :**
 

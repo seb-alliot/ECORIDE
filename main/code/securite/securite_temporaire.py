@@ -1,8 +1,8 @@
 
-from itsdangerous import URLSafeTimedSerializer, BadSignature, SignatureExpired
+from itsdangerous import URLSafeTimedSerializer
 from django.conf import settings
 
 
 def reservation_token(username):
-    s = URLSafeTimedSerializer(settings.SECRET_KEY)
-    return s.dumps(username, salt="avis-covoiturage")
+    securite = URLSafeTimedSerializer(settings.SECRET_KEY)
+    return securite.dumps(username, salt="avis-covoiturage")
