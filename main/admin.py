@@ -14,6 +14,7 @@ from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
 from .models import ChoixRole
+from .forms import TrajetForm
 
 
 # Register your models here.
@@ -186,6 +187,7 @@ class VoitureAdmin(admin.ModelAdmin):
 
 @admin.register(TrajetProposer)
 class TrajetProposerAdmin(admin.ModelAdmin):
+    form = TrajetForm
     list_display = [
         "id",
         "chauffeur",

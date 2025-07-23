@@ -8,17 +8,15 @@ from django.db import transaction
 from .compteur_vue_mongo import increment_vue
 import os
 from dotenv import load_dotenv
-from pymongo import MongoClient
+load_dotenv()
+
 
 
 def ChoisisTonCovoite(request):
     user = request.user
     # Récupération du trajet
-    load_dotenv()
-    uri = os.getenv("uri")
-    client = MongoClient(uri)
-    db = client["ECORIDE"]
-
+    from .connection_mongo import get_mongo_db
+    db = get_mongo_db()
     trajet_id = request.GET.get("trajet_id")
     compteur = increment_vue(db, trajet_id)
 

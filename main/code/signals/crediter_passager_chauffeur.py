@@ -4,8 +4,6 @@ from django.contrib.auth.models import User
 from ...models import TrajetProposer, CreditUser
 from ..utils import get_mongo_db
 from django.db import transaction
-from pymongo import MongoClient
-import os
 from dotenv import load_dotenv
 load_dotenv()
 

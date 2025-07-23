@@ -22,7 +22,7 @@ def RechercheTrajet(request):
             ville_depart__icontains=ville_depart,
             ville_arrivee__icontains=ville_arrivee,
             date=date,
-            etat="Disponible",
+            etat__in=["Disponible"],
             places__gt=0,
         ).annotate(note_chauffeur=Avg("chauffeur__accusé__note"))
 

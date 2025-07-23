@@ -191,7 +191,17 @@ class TrajetForm(forms.ModelForm):
             return timedelta(minutes=total_minutes)
 
         return None
+    def clean_ville_depart(self):
+        ville_depart = self.cleaned_data.get("ville_depart")
+        if ville_depart:
+            return ville_depart.lower().strip()
+        return None
 
+    def clean_ville_arrivee(self):
+        ville_arrivee = self.cleaned_data.get("ville_arrivee")
+        if ville_arrivee:
+            return ville_arrivee.lower().strip()
+        return None
     def __init__(self, *args, user=None, **kwargs):
         super().__init__(*args, **kwargs)
         champs_obligatoires = [
@@ -208,6 +218,10 @@ class TrajetForm(forms.ModelForm):
             self.fields[champ].required = True
         if user:
             self.fields["voiture"].queryset = Voiture.objects.filter(user=user)
+
+
+
+
 class RechercheTrajetForm(forms.Form):
     ville_depart = forms.CharField(
         max_length=100,
@@ -245,6 +259,17 @@ class RechercheTrajetForm(forms.Form):
             raise forms.ValidationError("La date ne peut pas être dans le passé.")
         return date
 
+    def clean_ville_depart(self):
+        ville_depart = self.cleaned_data.get("ville_depart")
+        if ville_depart:
+            return ville_depart.lower().strip()
+        return None
+
+    def clean_ville_arrivee(self):
+        ville_arrivee = self.cleaned_data.get("ville_arrivee")
+        if ville_arrivee:
+            return ville_arrivee.lower().strip()
+        return None
 
 class FiltreTrajetForm(forms.Form):
 

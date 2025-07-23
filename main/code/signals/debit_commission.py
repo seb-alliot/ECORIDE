@@ -24,6 +24,7 @@ def debit_commission(sender, instance, created, **kwargs):
             credit_user.credit -= commission
             credit_user.save()
 
+
             # Créditer la plateforme (par username explicite ici : ECORIDE)
             superuser = User.objects.filter(username='ECORIDE').first()
             if superuser:

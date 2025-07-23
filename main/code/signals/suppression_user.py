@@ -4,7 +4,6 @@ from django.contrib.auth.models import User
 from ...models import TrajetProposer, ReservationTrajet, CreditUser
 from django.db import transaction
 from ..envoi_email import Information_suppression_user
-from pymongo import MongoClient
 import os
 from dotenv import load_dotenv
 load_dotenv()
