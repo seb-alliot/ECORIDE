@@ -15,7 +15,6 @@ urlpatterns = [
 
     path("admin/", admin.site.urls),
     path("moderation/", main_views.Fait_Ton_Taff_De_Modo, name="moderation_email"),
-
     path("", main_views.accueil, name="index"),
 
     path("contact/", main_views.Contact, name="_contact"),

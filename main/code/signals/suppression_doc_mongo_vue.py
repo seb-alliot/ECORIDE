@@ -9,9 +9,7 @@ def verif_etat(sender, instance, **kwargs):
     if instance.pk:
         try:
             ancien = sender.objects.get(pk=instance.pk)
-            print(f"Ancien état du trajet {instance.id} : {ancien.etat}")
             if ancien.etat != instance.etat:
-                print(f"Changement d'état du trajet {instance.id} de {ancien.etat} à {instance.etat}")
                 instance.etat_actuel = ancien.etat
         except sender.DoesNotExist:
             instance.etat_actuel = None
@@ -30,6 +28,6 @@ def suppression_mongo_doc_vue(sender, instance, created, **kwargs):
         db = get_mongo_db()
         result = db["vue"].delete_one({"_id": str(instance.id)})
         if result.deleted_count > 0:
-            print(f"[MongoDB] : Vue du trajet {instance.id} supprimée.")
+            return
         else:
-            print(f"[MongoDB] : Aucune vue trouvée pour le trajet {instance.id}.")
+            pass  # Le document n'existe pas ou a déjà été supprimé, aucune action nécessaire

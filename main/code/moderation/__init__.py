@@ -7,3 +7,4 @@ from .prise_contact import PriseDeContact
 from .afficher_les_reservations import Afficher_reservations
 from .gain_jour import Affiche_gain_jour
 from .fusion_donnee import Fusion_donnee
+from .graphique import Graphique

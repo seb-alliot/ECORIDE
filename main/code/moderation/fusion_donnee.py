@@ -19,5 +19,19 @@ def Fusion_donnee(request):
             'total_gain': gain.initial['total_gain']
         })
         formulaire_pres_remplis_fusion.append(fusion_form)
+    # On extrait les données du formulaire fusionné
+    dict_resa = {}
+    dict_gain = {}
 
-    return formulaire_pres_remplis_fusion
+    for form in formulaire_pres_remplis_fusion:
+        jour = form.initial.get('jour')
+        resa = form.initial.get('total_resa', 0)
+        gain = form.initial.get('total_gain', 0)
+        dict_resa[jour] = resa
+        dict_gain[jour] = gain
+
+    # On aligne tous les jours, avec 0 par défaut si jour absent
+    jours = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"]
+    resa = [dict_resa.get(j, 0) for j in jours]
+    gains = [dict_gain.get(j, 0) for j in jours]
+    return formulaire_pres_remplis_fusion, jours, resa, gains

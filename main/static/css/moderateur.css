@@ -257,6 +257,16 @@ form#email_select_form select {
   padding: 0;
   margin: 0;
 }
+.graphique {
+  display: flex;
+  flex-direction: column;
+  margin-top: var(--margin-lg);
+}
+#graphique-title {
+  text-align: center;
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--margin-md);
+}
 
 @media (max-width: 780px) {
   .tab {

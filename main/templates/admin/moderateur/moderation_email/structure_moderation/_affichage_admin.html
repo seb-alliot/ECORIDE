@@ -20,3 +20,11 @@
             </table>
         </ul>
     </form>
+    <div class="graphique">
+        <h2 id="graphique-title">Graphique des réservations et gains</h2>
+        {% if graphique %}
+            <img id="graphique" src="data:image/png;base64,{{ graphique }}" alt="Graphique des réservations et gains">
+        {% else %}
+            <p>Aucun graphique disponible.</p>
+        {% endif %}
+    </div>

@@ -38,4 +38,4 @@ def crediter_user(sender, instance, **kwargs):
                 credit_passager.save()
 
     except CreditUser.DoesNotExist as e:
-        print(f"[Erreur Crédit] : {e}")
+        return f"Erreur lors de la mise à jour des crédits : {str(e)}"
