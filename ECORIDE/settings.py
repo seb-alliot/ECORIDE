@@ -20,7 +20,6 @@ environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 #BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-_SITE_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -28,8 +27,6 @@ _SITE_ROOT = os.path.dirname(os.path.abspath(__file__))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env('DJANGO_SECRET_KEY', default='django-insecure-#&')
 # settings.py
-
-# dans settings.py
 
 DEBUG = False
 
@@ -46,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main',
     'simple_history',
-    'django_extensions',
+    "main.backend",
 	]
 
 MIDDLEWARE = [
@@ -68,7 +65,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            BASE_DIR/'main/templates',
+            BASE_DIR/'main/frontend/templates',
             ],
 
         'APP_DIRS': True,
@@ -184,6 +181,7 @@ LOGOUT_REDIRECT_URL = '/'
 
 SECURE_PROXY_SSL_HEADER =("HTTP_X_FORWARDED_PROTO","https")
 SECURE_SSL_REDIRECT = False
+#peux etre laisser sur false si on utilise un proxy inverse comme nginx
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 SECURE_BROWSER_XSS_FILTER = True

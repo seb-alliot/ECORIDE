@@ -1,15 +1,13 @@
-from django.contrib import admin
 from django.urls import path
 from django.contrib.auth import views as auth_views
-from django.conf import settings
-from django.conf.urls.static import static
-from django.urls import re_path
-from django.views.static import serve
-from ..main.backend.code import UserCreateView , activation, CustomPasswordResetView , CustomResetPasswordConfirmView
-from ..main.backend import views
+from django.contrib import admin
+
+from .code import UserCreateView , activation, CustomPasswordResetView , CustomResetPasswordConfirmView, annuler_trajet
+from . import views
 
 
 urlpatterns = [
+    path("admin/",admin.site.urls),
     path("moderation/", views.Fait_Ton_Taff_De_Modo, name="moderation_email"),
     path("", views.accueil, name="index"),
 
@@ -43,6 +41,7 @@ urlpatterns = [
     ),
 
     path("monprofile/", views.MonCompte, name="MonCompte"),
+    path("annuler_trajet5", annuler_trajet, name="annuler_trajet5"),
     path("reservation/", views.SelectionTrajet, name="reservation"),
     path(
         "Confirmation/<int:trajet_id>/<str:token>/",
@@ -50,9 +49,3 @@ urlpatterns = [
         name="AvisSatisfaction",
     ),
 ]
-urlpatterns += [
-    re_path(r'^google59ae742b6eee40ef\.html$', serve, {'document_root': settings.STATIC_ROOT, 'path': 'google59ae742b6eee40ef.html'}),
-    re_path(r'^sitemap\.xml$', serve, {'document_root': settings.STATIC_ROOT, 'path': 'sitemap.xml'}),
-]
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
