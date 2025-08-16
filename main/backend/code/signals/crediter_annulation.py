@@ -8,9 +8,7 @@ from django.db import transaction
 @receiver(pre_delete, sender=ReservationTrajet)
 def remboursement_reservation_passager(sender, instance, **kwargs):
     passager = instance.passager
-    print(passager)
     trajet = instance.trajet_reserver
-    print(trajet)
     places_reservees = instance.places
 
     try:

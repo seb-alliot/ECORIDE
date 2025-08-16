@@ -15,7 +15,6 @@ commission = Decimal(os.getenv("COMMISSION", "0"))
 
 def process_annulation_trajet(instance: TrajetProposer):
     chauffeur = instance.chauffeur
-    print(f"Créditer le chauffeur {chauffeur.username} pour l'annulation du trajet {instance.id}")
 
     with transaction.atomic():
         # Créditer le chauffeur (commission)
@@ -35,14 +34,10 @@ def process_annulation_trajet(instance: TrajetProposer):
 
         # Rembourser les passagers
         reservations = ReservationTrajet.objects.filter(trajet_reserver=instance)
-        print(f"reservations : {reservations}")
         for participant in reservations:
-            print(f"Remboursement du passager {participant.passager.username} pour la réservation {participant.id}")
             credit_passager = CreditUser.objects.select_for_update().get(user=participant.passager)
             prix_total = participant.prix_par_passager * participant.places
-            print(f"Montant remboursé passager {participant.passager.username} : {prix_total}")
             credit_passager.credit += prix_total
-            print(f"Nouveau solde passager {participant.passager.username} : {credit_passager.credit}")
             credit_passager.save()
 
 @receiver(pre_delete, sender=TrajetProposer)

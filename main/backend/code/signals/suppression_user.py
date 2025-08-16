@@ -62,5 +62,4 @@ def user_deleted(sender, instance, **kwargs):
         for trajet in trajets:
             db = get_mongo_db()
             db["vue"].delete_one({"_id": str(trajet.id)})
-            print(f"[MongoDB] : Vue du trajet {trajet.id} supprimée.")
         trajets.delete()

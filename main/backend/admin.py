@@ -312,7 +312,6 @@ class ReservationTrajetAdmin(admin.ModelAdmin):
         "reservation_rembourser",
         "etat_reservation",
     ]
-    list_editable = ["places", "etat_reservation"]
     list_per_page = 10
     fieldsets = [
         ("Qui ?", {"fields": ["passager"]}),
@@ -321,11 +320,3 @@ class ReservationTrajetAdmin(admin.ModelAdmin):
         ("Etat", {"fields": ["etat_reservation"]}),
         ("Remboursement", {"fields": ["reservation_rembourser"]}),
     ]
-
-
-@admin.register(ChangerStatutTrajet)
-class ChangerStatutTrajetAdmin(admin.ModelAdmin):
-    list_display = ["id", "trajet", "statut"]
-    search_fields = ["trajet", "statut"]
-    list_filter = ["trajet", "statut"]
-    list_per_page = 10
