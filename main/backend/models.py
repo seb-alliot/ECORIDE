@@ -8,6 +8,22 @@ from decimal import Decimal
 import uuid
 from django.db.models import Sum
 
+class Commission(models.Model):
+    valeur = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=Decimal("0.00"),
+        verbose_name="Valeur de la commission",
+    )
+
+    def save(self, *args, **kwargs):
+        # supprime toute autre commission avant d’enregistrer, on créer un singleton
+        Commission.objects.exclude(id=self.id).delete()
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.valeur}"
+
 
 class CreditUser(models.Model):
     user = models.OneToOneField(
@@ -100,7 +116,6 @@ class NoteUser(models.Model):
         default=False, verbose_name="Commenté ?"
     )
 
-    # Champs de modération
     commentaire_moderer = models.BooleanField(default=False)
 
     etat_paiement = models.CharField(

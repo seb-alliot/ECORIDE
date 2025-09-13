@@ -26,10 +26,3 @@
 
 
 {% endblock principal %}
-{% block script_js %}
-    {{ trajet5|json_script:"trajet5" }}
-    <script>
-        const annulerUrl = "{% url 'annuler_trajet5' %}";
-    </script>
-    <script src="{% static 'js/recup_trajet.js' %}"></script>
-{% endblock script_js %}

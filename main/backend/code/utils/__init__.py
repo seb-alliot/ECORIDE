@@ -8,3 +8,4 @@ from .connection_mongo import get_mongo_db
 from .inscription import UserCreateView
 from .reset_password import CustomPasswordResetView
 from .confirm_reset_password import CustomResetPasswordConfirmView
+from ..code_doublon.asynchrone_filtre_trajet import async_function

@@ -1,33 +1,38 @@
-
 <form id="selection_trajet" method="GET" action="{% url 'reservation' %}">
-    <div class="conteneur_recherche">
-        <h2 class="p_deco class_justify_center class_flex">Covoiturage non écologique</h2>
-        <div class="conteneur_recherche2 class_scroll">
-            <ul class="resultat ">
-                {% for resultat in resultat1 %}
-                    {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_contenu_resultat.html" %}
-                {% empty %}
-                    <p id="resultat_non_ecolo"class="class_flex class_justify_center">0 resultat. Essayez une autre date !</p>
-                {% endfor %}
-            </ul>
+        <div class="conteneur_recherche">
+            <h2 class="p_deco class_justify_center class_flex">Covoiturage non écologique</h2>
+            <div class="conteneur_recherche2 class_scroll">
+                <ul class="resultat ">
+                    {% for resultat in resultat1 %}
+                        {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_contenu_resultat.html" %}
+                    {% empty %}
+                        <p id="resultat_non_ecolo" class="class_flex class_justify_center">
+                            0 resultat. Essayez une autre date !
+                        </p>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
-    </div>
 
-    <div class="conteneur_recherche class_scroll position_relative">
-        <h2 class="p_deco class_justify_center class_flex ">Covoiturage écologique</h2>
-        <div class="conteneur_recherche2 class_flex">
-            <ul class="resultat class_scroll">
-                {% for resultat in resultat2 %}
-                    {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_contenu_resultat.html" %}
-                {% empty %}
-                    <p id="resultat_ecolo"class="class_flex class_justify_center">0 resultat. Essayez une autre date !</p>
-                {% endfor %}
-            </ul>
+        <div class="conteneur_recherche class_scroll position_relative">
+            <h2 class="p_deco class_justify_center class_flex ">Covoiturage écologique</h2>
+            <div class="conteneur_recherche2 class_flex">
+                <ul class="resultat class_scroll">
+                    {% for resultat in resultat2 %}
+                        {% include "interface_utilisateur/utilisateur/onglet_1_trajet/passager/_contenu_resultat.html" %}
+                    {% empty %}
+                        <p id="resultat_ecolo" class="class_flex class_justify_center">
+                            0 resultat. Essayez une autre date !
+                        </p>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
-    </div>
-    {% if resultat1 or resultat2 %}
-        <div class="class_flex class_justify_center">
-            <button type="submit">Réserver</button>
-        </div>
-    {% endif %}
+
+        {% if resultat1 or resultat2 %}
+            <div class="class_flex class_justify_center">
+                <button type="submit">Réserver</button>
+            </div>
+        {% endif %}
+
 </form>

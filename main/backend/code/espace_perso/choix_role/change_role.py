@@ -22,8 +22,5 @@ def ChangeTonRole(request):
         else:
             role_form = ChoixRoleForm(request.POST, instance=role)
             messages.error(request, "Veuillez sélectionner un rôle valide.")
-    context = {
-        "role_form": role_form,
-        "role": role,
-    }
+
     return role_form

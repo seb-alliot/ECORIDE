@@ -9,6 +9,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 import json
 from .forms import (
     AfficherTrajetForm,
+    FiltreTrajetForm,
 )
 
 from .models import (
@@ -96,31 +97,18 @@ def accueil(request):
     context = {}
 
     recherche_form, first_resultat, second_resultat = RechercheTrajet(request)
-    filtre_form, resultat1, resultat2 = Filtre_trajet(request)
-
-    if request.method == "GET":
-
-        # Formulaire de recherche de trajet
-        if recherche_form:
-            context["recherche_form"] = recherche_form
-
-        elif filtre_form:
-            context["filtre_form"] = filtre_form
-
+    filtre_form = FiltreTrajetForm(request.GET)
     context = {
         # recherche
         "first_resultat": first_resultat,
         "second_resultat": second_resultat,
-        # filtre
-        "resultat1": resultat1,
-        "resultat2": resultat2,
+
         # formulaire de la page
         "filtre_form": filtre_form,
         "recherche_form": recherche_form,
     }
     context.update(initialisation_template(request))
     return render(request, "index.html", context)
-
 # ------------------------------Connection en 2 étapes------------------------------------------------
 
 # operation 1 : demande d'identifiant

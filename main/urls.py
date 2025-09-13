@@ -8,7 +8,7 @@ from django.views.static import serve
 urlpatterns = [
 
     path("", main_views.accueil, name="index"),
-    path("backend/", include("main.backend.urls")),
+    path("ECORIDE/", include("main.backend.urls")),
 ]
 urlpatterns += [
     re_path(r'^google59ae742b6eee40ef\.html$', serve, {'document_root': settings.STATIC_ROOT, 'path': 'google59ae742b6eee40ef.html'}),

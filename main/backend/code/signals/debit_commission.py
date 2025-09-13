@@ -5,14 +5,15 @@ from ...models import TrajetProposer, CreditUser
 from django.db import transaction
 import os
 from decimal import Decimal
+from ..utils.recup_commission import get_commission
 
 
 @receiver(post_save, sender=TrajetProposer)
 def debit_commission(sender, instance, created, **kwargs):
     if not created:
         return
+    commission = get_commission()
 
-    commission = Decimal(os.getenv("COMMISSION"))
     chauffeur = instance.chauffeur
 
     try:

@@ -2,13 +2,15 @@ from django.contrib import messages
 from django.db.models import Q, Avg
 from ...models import TrajetProposer
 from ...forms import RechercheTrajetForm
+from django.utils import timezone
 
 def RechercheTrajet(request):
     user = request.user
+    maintenant = timezone.now()
     first_resultat = None
     second_resultat = None
     recherche_form = RechercheTrajetForm(request.GET or None)
-    trajet4 = TrajetProposer.objects.filter(etat__in="Disponible")
+    trajet4 = TrajetProposer.objects.filter(etat__in="Disponible").exclude(date__lte=maintenant).annotate(note_chauffeur=Avg("chauffeur__accusé__note"))
     if request.method == "GET" and request.GET.get("form_trajet") == "recherche_form" and recherche_form.is_valid():
 
         ville_depart = recherche_form.cleaned_data["ville_depart"]
@@ -19,13 +21,14 @@ def RechercheTrajet(request):
             trajet4 = trajet4.filter(chauffeur__username__icontains=pseudo)
 
         trajet4 = TrajetProposer.objects.filter(
-            ville_depart__icontains=ville_depart,
-            ville_arrivee__icontains=ville_arrivee,
-            date=date,
-            etat__in=["Disponible"],
-            places__gt=0,
-        ).annotate(note_chauffeur=Avg("chauffeur__accusé__note"))
-
+        ville_depart__icontains=ville_depart,
+        ville_arrivee__icontains=ville_arrivee,
+        date=date,
+        etat__in=["Disponible"],
+        places__gt=0,
+    ).annotate(note_chauffeur=Avg("chauffeur__accusé__note")).exclude(date__lte=timezone.now())
+        if date < timezone.now().date():
+            messages.error(request, "La date ne peut pas être dans le passé.")
 
         if user.is_authenticated:
             trajet4 = trajet4.exclude(chauffeur=user)
@@ -39,12 +42,7 @@ def RechercheTrajet(request):
 
         if first_resultat.exists() or second_resultat.exists():
             messages.success(request, "Hey voici juste pour vous !!")
-        else:
-            messages.error(
-                request,
-                "La déception ... Une autre date peut-être ?",
-            )
-        request.session["first_resultat"] = list(first_resultat.values_list("id", flat=True))
-        request.session["second_resultat"] = list(second_resultat.values_list("id", flat=True))
+        elif not first_resultat.exists() and not second_resultat.exists():
+            messages.error(request, "La déception ... Une autre date peut-être ?")
 
     return recherche_form, first_resultat, second_resultat

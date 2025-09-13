@@ -7,13 +7,14 @@ from django.db import transaction
 from dotenv import load_dotenv
 import os
 load_dotenv()
-from decimal import Decimal
 from datetime import datetime
+from ..utils.recup_commission import get_commission
 
 
 @receiver(pre_save, sender=TrajetProposer)
 def crediter_annulation(sender, instance, **kwargs):
-    commission = Decimal(os.getenv("COMMISSION"))
+    commission = get_commission()
+
     if not instance.pk:
         return
     maintenant = datetime.now()

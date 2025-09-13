@@ -8,12 +8,14 @@ from django.db import transaction
 from dotenv import load_dotenv
 import os
 from decimal import Decimal
+from ..utils.recup_commission import get_commission
 
 load_dotenv()
-commission = Decimal(os.getenv("COMMISSION", "0"))
 
 
 def process_annulation_trajet(instance: TrajetProposer):
+    commission = get_commission()
+
     chauffeur = instance.chauffeur
 
     with transaction.atomic():

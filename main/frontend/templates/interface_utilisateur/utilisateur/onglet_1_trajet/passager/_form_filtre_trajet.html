@@ -1,11 +1,28 @@
+{% load static %}
 
-<form id="filtre_form" name="" method="GET" class="class_flex class_justify_center">
-    {% csrf_token %}
+<form id="filtre_form" method="GET" class="class_flex class_justify_center">
     <label for="note">Note du chauffeur</label>
-        {{ filtre_form.note }}
-    <label for="place">durée trajet</label>
-        {{ filtre_form.temps_trajet }}
+    {{ filtre_form.note }}
+
+    <label for="temps_trajet">Durée trajet</label>
+    {{ filtre_form.temps_trajet }}
+
     <label for="prix">Prix maximum</label>
     {{ filtre_form.prix }}
+
     <button type="submit" name="form_trajet" value="filtre_form">Filtrer la recherche</button>
 </form>
+
+
+
+<form id="selection_trajet" method="GET" action="{% url 'reservation' %}">
+    <div id="reservation_btn" class="class_flex class_justify_center" style="display: none;">
+        <button type="submit">Réserver</button>
+    </div>
+</form>
+{% block script_js %}
+<script>
+    const urlfiltre_form = "{% url 'async_function' %}";
+</script>
+<script src="{% static 'js/filtre_trajet.js' %}" defer></script>
+{% endblock script_js %}

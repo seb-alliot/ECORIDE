@@ -2,7 +2,14 @@ from django.urls import path
 from django.contrib.auth import views as auth_views
 from django.contrib import admin
 
-from ..main.backend.code import UserCreateView , activation, CustomPasswordResetView , CustomResetPasswordConfirmView, annuler_trajet
+from ..main.backend.code import (
+    UserCreateView,
+    activation,
+    CustomPasswordResetView,
+    CustomResetPasswordConfirmView,
+    annuler_trajet,
+    Filtre_trajet,
+    )
 from ..main.backend import views
 
 
@@ -42,6 +49,7 @@ urlpatterns = [
 
     path("monprofile/", views.MonCompte, name="MonCompte"),
     path("annuler_trajet5", annuler_trajet, name="annuler_trajet5"),
+    path("filtre_trajet/", Filtre_trajet, name="filtre_trajet"),
     path("reservation/", views.SelectionTrajet, name="reservation"),
     path(
         "Confirmation/<int:trajet_id>/<str:token>/",

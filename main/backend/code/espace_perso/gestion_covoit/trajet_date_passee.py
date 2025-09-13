@@ -14,9 +14,7 @@ def annuler_trajet(request):
     user = request.user
     try:
         data = json.loads(request.body)
-        print("Data received for trajet annulation:", data)
         trajets_ids = data.get('trajet', [])
-        print("Trajets IDs to cancel:", trajets_ids)
     except (json.JSONDecodeError, KeyError, TypeError):
         trajets_ids = []
 
@@ -25,12 +23,11 @@ def annuler_trajet(request):
         chauffeur=user,
         etat='Disponible',
     )
-    print("Trajets trouvé pour annulation:", trajets5)
 
     nb_annules = 0
     for trajet in trajets5:
         trajet.etat = 'Annulé'
-        trajet.save()  # sauvegarde pour les signaux
+        trajet.save() 
         nb_annules += 1
 
     return JsonResponse({

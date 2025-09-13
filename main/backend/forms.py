@@ -253,12 +253,6 @@ class RechercheTrajetForm(forms.Form):
             raise forms.ValidationError("Ce chauffeur n'existe pas.")
         return pseudo
 
-    def clean_date(self):
-        date = self.cleaned_data.get("date")
-        if date < datetime.now().date():
-            raise forms.ValidationError("La date ne peut pas être dans le passé.")
-        return date
-
     def clean_ville_depart(self):
         ville_depart = self.cleaned_data.get("ville_depart")
         if ville_depart:
@@ -286,7 +280,9 @@ class FiltreTrajetForm(forms.Form):
     )
     note = forms.FloatField(
         label="Note",
-        widget=widgets.NumberInput(attrs={"placeholder": "Par note"}),
+        widget=widgets.NumberInput(
+            attrs={"placeholder": "Par note", "step": "0.1"}  # 👈 permet 4.6
+        ),
         required=False,
     )
 

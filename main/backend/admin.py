@@ -7,8 +7,8 @@ from .models import (
     TrajetProposer,
     Preference,
     ReservationTrajet,
-    ChangerStatutTrajet,
-    CreditUser
+    CreditUser,
+    Commission,
 )
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
@@ -46,6 +46,17 @@ class UserAdmin(admin.ModelAdmin):
     list_filter = ["is_active", "is_staff"]
     list_per_page = 10
 
+@admin.register(Commission)
+class CommissionAdmin(admin.ModelAdmin):
+    list_display = [
+        "id",
+        "valeur",
+    ]
+    list_editable = ["valeur"]
+    search_fields = ["id", "valeur"]
+    list_per_page = 10
+
+
 @admin.register(CreditUser)
 class CreditUserAdmin(admin.ModelAdmin):
     list_display = [
@@ -81,6 +92,10 @@ class NoteUserAdmin(admin.ModelAdmin):
         "commentaire",
         "commentaire_moderer",
         "decision_prise",
+    ]
+    list_editable = [
+        "avis",
+        "commentaire",
     ]
     list_filter = [
         "passager",
@@ -122,6 +137,19 @@ class AdresseUserAdmin(admin.ModelAdmin):
         "email",
         "photo",
     ]
+    list_editable = [
+        "user",
+        "numero",
+        "type_voie",
+        "complement",
+        "nom_rue",
+        "code_postal",
+        "ville",
+        "pays",
+        "telephone",
+        "email",
+        "photo",
+    ]
     list_filter = [
         "user",
         "numero",
@@ -137,6 +165,7 @@ class AdresseUserAdmin(admin.ModelAdmin):
     ]
     list_per_page = 104
     fieldsets = [
+        ("utilisateur", {"fields": ["user"]}),
         ("Le batiment et le type de voie", {"fields": ["numero", "type_voie"]}),
         ("le nom de la rue", {"fields": ["nom_rue", "complement"]}),
         ("Code postal et ville", {"fields": ["code_postal", "ville"]}),
@@ -182,6 +211,9 @@ class VoitureAdmin(admin.ModelAdmin):
         "places",
         "immatriculation",
         "annee",
+    ]
+    list_editable = [
+        "type_moteur"
     ]
     search_fields = [
         "user",

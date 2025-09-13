@@ -14,7 +14,6 @@ class CustomPasswordResetView(PasswordResetView):
         try:
             user = User.objects.get(email=email)
             self.user = user
-            # Ajouter un message de succès
             messages.success(self.request, "Un email de réinitialisation a été envoyé.")
         except User.DoesNotExist:
             messages.error(self.request, "Aucun utilisateur trouvé avec cet email.")
