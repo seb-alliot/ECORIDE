@@ -86,7 +86,14 @@ WSGI_APPLICATION = 'ECORIDE.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-'default': env.db('DATABASE_URL'),
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': env('POSTGRES_DB', default='ecoride'),
+        'USER': env('POSTGRES_USER', default='itsuki'),
+        'PASSWORD': env('POSTGRES_PASSWORD', default='motdepasse'),
+        'HOST': env('POSTGRES_HOST', default='db'),  # ou l’IP si serveur externe
+        'PORT': env('POSTGRES_PORT', default='5432'),
+    }
 }
 URI = os.getenv("uri")
 MONGO_DB_NAME = "ECORIDE"
