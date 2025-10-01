@@ -151,7 +151,7 @@ LOGGING = {
         'file': {
             'level': 'ERROR',
             'class': 'logging.FileHandler',
-            'filename': '/home/itsuki/ECORIDE/logs/django_errors.log',
+            'filename': '/app/logs/django_errors.log',  # <-- utiliser le chemin du conteneur
         },
     },
     'loggers': {
@@ -162,6 +162,7 @@ LOGGING = {
         },
     },
 }
+
 
 #Email de confirmation de compte
 
