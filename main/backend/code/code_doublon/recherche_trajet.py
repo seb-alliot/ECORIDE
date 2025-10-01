@@ -6,7 +6,7 @@ from django.utils import timezone
 
 def RechercheTrajet(request):
     user = request.user
-    maintenant = timezone.now()
+    maintenant = timezone.localtime()
     first_resultat = None
     second_resultat = None
     recherche_form = RechercheTrajetForm(request.GET or None)
@@ -23,12 +23,10 @@ def RechercheTrajet(request):
         trajet4 = TrajetProposer.objects.filter(
         ville_depart__icontains=ville_depart,
         ville_arrivee__icontains=ville_arrivee,
-        date=date,
+        date=maintenant.date(),
         etat__in=["Disponible"],
         places__gt=0,
-    ).annotate(note_chauffeur=Avg("chauffeur__accusé__note")).exclude(date__lte=timezone.now())
-        if date < timezone.now().date():
-            messages.error(request, "La date ne peut pas être dans le passé.")
+    ).annotate(note_chauffeur=Avg("chauffeur__accusé__note"))
 
         if user.is_authenticated:
             trajet4 = trajet4.exclude(chauffeur=user)

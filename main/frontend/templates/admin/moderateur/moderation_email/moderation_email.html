@@ -31,12 +31,15 @@
             </div>
 
                 <div id="select_email class_column">
+                    <div>
                     <!-- Formulaire pour filtrer les emails -->
                     {% include "admin/moderateur/moderation_email/structure_moderation/_selection_ton_email_type.html" %}
                     {% if request.GET.email_type %}
                             <!-- Selecte pour sélectionner un email, avec conservation du filtre -->
                             {% include "admin/moderateur/moderation_email/structure_moderation/_selection_le_style_a_moderer.html" %}
                     {% endif %}
+                    </div>
+                    <div>
                     <!-- Affichage de l'email sélectionné -->
                     {% if selected_email %}
                         {% if request.GET.email_type == "Avis negatif" %}

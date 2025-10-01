@@ -4,13 +4,13 @@ from django.db import transaction
 from ....models import  CreditUser
 from ....forms import TrajetForm
 from django.urls import reverse
-from datetime import datetime
+from django.utils import timezone
 
 
 def ProposeTonCovoiturage(request):
     user = request.user
     trajet_form = TrajetForm(request.POST, user=user)
-    maintenant = datetime.now().date()
+    maintenant = timezone.localtime()
 
     if request.method == "POST" and request.POST.get("form_soumis") == "trajet_form":
 
@@ -18,10 +18,10 @@ def ProposeTonCovoiturage(request):
             trajet = trajet_form.save(commit=False)
             try:
                 with transaction.atomic():
-                    if trajet_form.cleaned_data["date"] < maintenant:
+                    if trajet_form.cleaned_data["date"] < maintenant.date():
                         messages.error(
                             request,
-                            "La date de départ doit être ultérieure à la date actuelle.",
+                            "La date de départ ne peux être inférieur à la date actuelle.",
                         )
                         return redirect(f"{reverse('MonCompte')}?{request.META['QUERY_STRING']}")
                     #credit_user = CreditUser.objects.get(user=user) code de base

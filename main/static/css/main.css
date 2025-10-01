@@ -648,7 +648,7 @@ form#validation_email button{
 }
 form#email_filter_form select,
 form#email_select_form select{
-  min-width: clamp(100px, 2vw , 225px);
+  min-width: clamp(145px, 2vw , 225px);
   height: var(--input-height);
   font-size: var(--font-size-other);
 }
@@ -895,9 +895,9 @@ th {
 
 /* Consolidated presentation */
 .presentation {
-  max-width: var(--content-max-width, 1000px);
+  max-width: var(--content-max-width);
   margin: 0 auto;
-  padding: 0 var(--content-side-padding, clamp(10px, 5vw, 40px));
+  padding: 0 var(--content-side-padding);
   display: flex;
   flex-direction: column;
   gap: clamp(20px, 3vw, 40px);
