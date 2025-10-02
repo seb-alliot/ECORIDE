@@ -7,7 +7,6 @@ from datetime import datetime
 from django.conf import settings
 
 def async_function(request):
-    print("Received GET parameters:", request.GET)
     maintenant = datetime.now()
     lien_photo_default = settings.MEDIA_URL + "photo_default/photo_default.jpg"
     if request.headers.get('X-Requested-With') != 'XMLHttpRequest':
@@ -17,7 +16,6 @@ def async_function(request):
         note_chauffeur=Avg("chauffeur__accusé__note")
     ).exclude(date__lte=maintenant)
     chauffeurs = trajet4.values("chauffeur").distinct()
-    print("Chauffeurs found:", chauffeurs)
 
     # Récupération des photos des chauffeurs
     for conducteur in chauffeurs:
@@ -31,7 +29,6 @@ def async_function(request):
         else:
             photo_url = lien_photo_default
 
-        print("Photo found:", photo_url)
         conducteur["photo"] = photo_url
     # Récupération des filtres depuis JS
     note = request.GET.get("note")

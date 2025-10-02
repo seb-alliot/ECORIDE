@@ -1,4 +1,7 @@
--- ajout de main pour correspondre a django et a sa structure de projet
+psql -U nom_utilisateur -d nom_base_donnée -f chemin_vers_le_fichier.sql
+
+
+-- ajout de backend pour correspondre a django et a sa structure de projet
 
 CREATE TABLE auth_user (
     id SERIAL PRIMARY KEY,
@@ -15,7 +18,7 @@ CREATE TABLE auth_user (
 );
 
 
-CREATE TABLE main_credituser (
+CREATE TABLE backend_credituser (
     id SERIAL PRIMARY KEY,
     credit NUMERIC(10, 2) NOT NULL DEFAULT 0.00,
     user_id INTEGER NOT NULL UNIQUE,
@@ -23,7 +26,7 @@ CREATE TABLE main_credituser (
 );
 
 
-CREATE TABLE main_adresseuser (
+CREATE TABLE backend_adresseuser (
     id SERIAL PRIMARY KEY,
     numero VARCHAR(10) NOT NULL,
     type_voie VARCHAR(100) NOT NULL,
@@ -40,15 +43,15 @@ CREATE TABLE main_adresseuser (
 );
 
 
-CREATE TABLE main_choixrole (
+CREATE TABLE backend_choixrole (
     id SERIAL PRIMARY KEY,
     role VARCHAR(20) NOT NULL DEFAULT 'passager',
     user_id INTEGER NOT NULL UNIQUE,
-    CONSTRAINT fk_main_choixrole_user FOREIGN KEY (user_id) REFERENCES auth_user(id) ON DELETE CASCADE
+    CONSTRAINT fk_backend_choixrole_user FOREIGN KEY (user_id) REFERENCES auth_user(id) ON DELETE CASCADE
 );
 
 
-CREATE TABLE main_voiture (
+CREATE TABLE backend_voiture (
     id SERIAL PRIMARY KEY,
     marque VARCHAR(30) NOT NULL DEFAULT 'Marque',
     modele VARCHAR(50) NOT NULL DEFAULT 'Modele',
@@ -58,10 +61,10 @@ CREATE TABLE main_voiture (
     immatriculation VARCHAR(10) NOT NULL,
     annee INTEGER NOT NULL DEFAULT EXTRACT(YEAR FROM CURRENT_DATE),
     user_id INTEGER,
-    CONSTRAINT fk_main_voiture_user FOREIGN KEY (user_id) REFERENCES auth_user(id) ON DELETE CASCADE
+    CONSTRAINT fk_backend_voiture_user FOREIGN KEY (user_id) REFERENCES auth_user(id) ON DELETE CASCADE
 );
 
-CREATE TABLE main_trajetproposer (
+CREATE TABLE backend_trajetproposer (
     id SERIAL PRIMARY KEY,
     etat VARCHAR(15) NOT NULL DEFAULT 'Disponible',
     trajet_rembourser BOOLEAN NOT NULL DEFAULT FALSE,
@@ -76,12 +79,12 @@ CREATE TABLE main_trajetproposer (
     created_at TIMESTAMPTZ DEFAULT NOW(),
     chauffeur_id INTEGER NOT NULL,
     voiture_id INTEGER,
-    CONSTRAINT fk_main_trajetproposer_chauffeur FOREIGN KEY (chauffeur_id) REFERENCES auth_user(id) ON DELETE CASCADE,
-    CONSTRAINT fk_main_trajetproposer_voiture FOREIGN KEY (voiture_id) REFERENCES main_voiture(id) ON DELETE CASCADE
+    CONSTRAINT fk_backend_trajetproposer_chauffeur FOREIGN KEY (chauffeur_id) REFERENCES auth_user(id) ON DELETE CASCADE,
+    CONSTRAINT fk_backend_trajetproposer_voiture FOREIGN KEY (voiture_id) REFERENCES backend_voiture(id) ON DELETE CASCADE
 );
 
 
-CREATE TABLE main_noteuser (
+CREATE TABLE backend_noteuser (
     id SERIAL PRIMARY KEY,
     note NUMERIC(2, 1),
     note_attribuee BOOLEAN NOT NULL DEFAULT FALSE,
@@ -96,44 +99,44 @@ CREATE TABLE main_noteuser (
     passager_id INTEGER,
     chauffeur_id INTEGER,
     trajet_id INTEGER,
-    CONSTRAINT fk_main_noteuser_passager FOREIGN KEY (passager_id) REFERENCES auth_user(id) ON DELETE SET NULL,
-    CONSTRAINT fk_main_noteuser_chauffeur FOREIGN KEY (chauffeur_id) REFERENCES auth_user(id) ON DELETE SET NULL,
-    CONSTRAINT fk_main_noteuser_trajet FOREIGN KEY (trajet_id) REFERENCES main_trajetproposer(id) ON DELETE SET NULL,
-    CONSTRAINT unique_main_note_per_trajet_user UNIQUE (chauffeur_id, passager_id, trajet_id)
+    CONSTRAINT fk_backend_noteuser_passager FOREIGN KEY (passager_id) REFERENCES auth_user(id) ON DELETE SET NULL,
+    CONSTRAINT fk_backend_noteuser_chauffeur FOREIGN KEY (chauffeur_id) REFERENCES auth_user(id) ON DELETE SET NULL,
+    CONSTRAINT fk_backend_noteuser_trajet FOREIGN KEY (trajet_id) REFERENCES backend_trajetproposer(id) ON DELETE SET NULL,
+    CONSTRAINT unique_backend_note_per_trajet_user UNIQUE (chauffeur_id, passager_id, trajet_id)
 );
 
 
-CREATE TABLE main_tokenvalidation (
+CREATE TABLE backend_tokenvalidation (
     id SERIAL PRIMARY KEY,
     token VARCHAR(128) NOT NULL UNIQUE,
     action VARCHAR(20) NOT NULL DEFAULT 'default_action',
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     user_id INTEGER NOT NULL UNIQUE,
-    CONSTRAINT fk_main_tokenvalidation_user FOREIGN KEY (user_id) REFERENCES auth_user(id) ON DELETE CASCADE
+    CONSTRAINT fk_backend_tokenvalidation_user FOREIGN KEY (user_id) REFERENCES auth_user(id) ON DELETE CASCADE
 );
 
 
-CREATE TABLE main_activationtoken (
+CREATE TABLE backend_activationtoken (
     id SERIAL PRIMARY KEY,
     token VARCHAR(100) NOT NULL UNIQUE,
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     user_id INTEGER NOT NULL UNIQUE,
-    CONSTRAINT fk_main_activationtoken_user FOREIGN KEY (user_id) REFERENCES auth_user(id) ON DELETE CASCADE
+    CONSTRAINT fk_backend_activationtoken_user FOREIGN KEY (user_id) REFERENCES auth_user(id) ON DELETE CASCADE
 );
 
 
-CREATE TABLE main_preference (
+CREATE TABLE backend_preference (
     id SERIAL PRIMARY KEY,
     exigences_particulieres VARCHAR(50) NOT NULL DEFAULT 'Pas d''exigences particulières',
     exigences_personnelles TEXT,
     fumeur VARCHAR(50) NOT NULL DEFAULT 'Non_fumeur',
     animaux VARCHAR(50) NOT NULL DEFAULT 'Animaux',
     user_preference_id INTEGER UNIQUE,
-    CONSTRAINT fk_main_preference_user FOREIGN KEY (user_preference_id) REFERENCES auth_user(id) ON DELETE SET NULL
+    CONSTRAINT fk_backend_preference_user FOREIGN KEY (user_preference_id) REFERENCES auth_user(id) ON DELETE SET NULL
 );
 
 
-CREATE TABLE main_reservationtrajet (
+CREATE TABLE backend_reservationtrajet (
     id SERIAL PRIMARY KEY,
     prix_par_passager NUMERIC(5, 2) NOT NULL DEFAULT 0.00,
     places INTEGER,
@@ -144,41 +147,122 @@ CREATE TABLE main_reservationtrajet (
     created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     trajet_reserver_id INTEGER,
     passager_id INTEGER,
-    CONSTRAINT fk_main_reservationtrajet_trajet FOREIGN KEY (trajet_reserver_id) REFERENCES main_trajetproposer(id) ON DELETE SET NULL,
-    CONSTRAINT fk_main_reservationtrajet_passager FOREIGN KEY (passager_id) REFERENCES auth_user(id) ON DELETE SET NULL
+    CONSTRAINT fk_backend_reservationtrajet_trajet FOREIGN KEY (trajet_reserver_id) REFERENCES backend_trajetproposer(id) ON DELETE SET NULL,
+    CONSTRAINT fk_backend_reservationtrajet_passager FOREIGN KEY (passager_id) REFERENCES auth_user(id) ON DELETE SET NULL
 );
 
 
-CREATE TABLE main_changestatuttrajet (
+CREATE TABLE backend_changestatuttrajet (
     id SERIAL PRIMARY KEY,
     statut VARCHAR(15) NOT NULL DEFAULT 'Disponible',
     modified_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     trajet_id INTEGER,
-    CONSTRAINT fk_main_changestatuttrajet_trajet FOREIGN KEY (trajet_id) REFERENCES main_trajetproposer(id) ON DELETE CASCADE
+    CONSTRAINT fk_backend_changestatuttrajet_trajet FOREIGN KEY (trajet_id) REFERENCES backend_trajetproposer(id) ON DELETE CASCADE
 );
 
 
-
 -- Index sur les clés étrangères pour accélérer les jointures
-CREATE INDEX idx_main_credituser_user_id ON main_credituser (user_id);
-CREATE INDEX idx_main_adresseuser_user_id ON main_adresseuser (user_id);
-CREATE INDEX idx_main_choixrole_user_id ON main_choixrole (user_id);
-CREATE INDEX idx_main_voiture_user_id ON main_voiture (user_id);
-CREATE INDEX idx_main_trajetproposer_chauffeur_id ON main_trajetproposer (chauffeur_id);
-CREATE INDEX idx_main_trajetproposer_voiture_id ON main_trajetproposer (voiture_id);
-CREATE INDEX idx_main_noteuser_passager_id ON main_noteuser (passager_id);
-CREATE INDEX idx_main_noteuser_chauffeur_id ON main_noteuser (chauffeur_id);
-CREATE INDEX idx_main_noteuser_trajet_id ON main_noteuser (trajet_id);
-CREATE INDEX idx_main_tokenvalidation_user_id ON main_tokenvalidation (user_id);
-CREATE INDEX idx_main_activationtoken_user_id ON main_activationtoken (user_id);
-CREATE INDEX idx_main_preference_user_preference_id ON main_preference (user_preference_id);
-CREATE INDEX idx_main_reservationtrajet_passager_id ON main_reservationtrajet (passager_id);
-CREATE INDEX idx_main_reservationtrajet_trajet_reserver_id ON main_reservationtrajet (trajet_reserver_id);
-CREATE INDEX idx_main_changestatuttrajet_trajet_id ON main_changestatuttrajet (trajet_id);
+CREATE INDEX idx_backend_credituser_user_id ON backend_credituser (user_id);
+CREATE INDEX idx_backend_adresseuser_user_id ON backend_adresseuser (user_id);
+CREATE INDEX idx_backend_choixrole_user_id ON backend_choixrole (user_id);
+CREATE INDEX idx_backend_voiture_user_id ON backend_voiture (user_id);
+CREATE INDEX idx_backend_trajetproposer_chauffeur_id ON backend_trajetproposer (chauffeur_id);
+CREATE INDEX idx_backend_trajetproposer_voiture_id ON backend_trajetproposer (voiture_id);
+CREATE INDEX idx_backend_noteuser_passager_id ON backend_noteuser (passager_id);
+CREATE INDEX idx_backend_noteuser_chauffeur_id ON backend_noteuser (chauffeur_id);
+CREATE INDEX idx_backend_noteuser_trajet_id ON backend_noteuser (trajet_id);
+CREATE INDEX idx_backend_tokenvalidation_user_id ON backend_tokenvalidation (user_id);
+CREATE INDEX idx_backend_activationtoken_user_id ON backend_activationtoken (user_id);
+CREATE INDEX idx_backend_preference_user_preference_id ON backend_preference (user_preference_id);
+CREATE INDEX idx_backend_reservationtrajet_passager_id ON backend_reservationtrajet (passager_id);
+CREATE INDEX idx_backend_reservationtrajet_trajet_reserver_id ON backend_reservationtrajet (trajet_reserver_id);
+CREATE INDEX idx_backend_changestatuttrajet_trajet_id ON backend_changestatuttrajet (trajet_id);
 
 -- Index pour les champs fréquemment utilisés dans les clauses WHERE
-CREATE INDEX idx_main_trajetproposer_ville_depart ON main_trajetproposer (ville_depart);
-CREATE INDEX idx_main_trajetproposer_ville_arrivee ON main_trajetproposer (ville_arrivee);
-CREATE INDEX idx_main_trajetproposer_date ON main_trajetproposer (date);
-CREATE INDEX idx_main_trajetproposer_etat ON main_trajetproposer (etat);
-CREATE INDEX idx_main_reservationtrajet_etat_reservation ON main_reservationtrajet (etat_reservation);
+CREATE INDEX idx_backend_trajetproposer_ville_depart ON backend_trajetproposer (ville_depart);
+CREATE INDEX idx_backend_trajetproposer_ville_arrivee ON backend_trajetproposer (ville_arrivee);
+CREATE INDEX idx_backend_trajetproposer_date ON backend_trajetproposer (date);
+CREATE INDEX idx_backend_trajetproposer_etat ON backend_trajetproposer (etat);
+CREATE INDEX idx_backend_reservationtrajet_etat_reservation ON backend_reservationtrajet (etat_reservation);
+
+
+recuperer le hash du mot de passe de l'utilisateur via :
+en python shell:
+
+from django.contrib.auth.hashers import make_password
+hash_pw = make_password('Studietudiant1.', hasher='bcrypt_sha256')
+print(hash_pw)
+
+on copie le hash et on l'utilise dans la requete d'insertion suivante :
+
+INSERT INTO auth_user (
+    username, email, password, first_name, last_name, is_active, is_staff, is_superuser, date_joined
+) VALUES (
+    'ITSUKI',
+    'itsuki@example.com',
+    'bcrypt_sha256$260000$abcdef123456$K3rGdG...longhash...',  -- le hash généré
+    'ITSUKI',
+    '',
+    TRUE,
+    FALSE,
+    FALSE,
+    NOW()
+);
+
+ajout de credit a l'utilisateur fraichement créé:
+
+INSERT INTO backend_credituser (user_id, credit)
+VALUES ((SELECT id FROM auth_user WHERE username='ITSUKI'), 20.00);
+
+-- ajout de trajet proposer par l'utilisateur ITSUKI
+
+INSERT INTO backend_trajetproposer (
+    etat, trajet_rembourser, ville_depart, ville_arrivee, date, heure, places, prix, temps_trajet, chauffeur_id
+) VALUES (
+    'Disponible',
+    FALSE,
+    'Paris',
+    'Lyon',
+    '2024-07-15',
+    '09:00:00',
+    3,
+    25.00,
+    INTERVAL '2 hours',
+    (SELECT id FROM auth_user WHERE username='ITSUKI')
+);
+
+-- ajout de preference pour l'utilisateur ITSUKI
+
+INSERT INTO backend_preference (
+    exigences_particulieres, exigences_personnelles, fumeur, animaux, user_preference_id
+) VALUES (
+    'Pas d''exigences particulières',
+    'Je préfère les trajets calmes et sans musique forte.',
+    'Non_fumeur',
+    'Animaux',
+    (SELECT id FROM auth_user WHERE username='ITSUKI')
+);
+
+-- ajout d'une voiture pour l'utilisateur ITSUKI
+
+INSERT INTO backend_voiture (
+    marque, modele, couleur, type_moteur, places, immatriculation, annee, user_id
+) VALUES (
+    'Toyota',
+    'Celica',
+    'Bleu',
+    'Essence',
+    '5',
+    'AB-123-CD',
+    2020,
+    (SELECT id FROM auth_user WHERE username='ITSUKI')
+);
+
+-- ajout de choix de role pour l'utilisateur ITSUKI
+
+INSERT INTO backend_choixrole (
+    role, user_id
+) VALUES (
+    'chauffeur',
+    (SELECT id FROM auth_user WHERE username='ITSUKI')
+);

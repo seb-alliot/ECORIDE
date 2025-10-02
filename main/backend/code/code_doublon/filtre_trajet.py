@@ -21,7 +21,6 @@ def Filtre_trajet(request):
             chauffeurs = User.objects.annotate(
                 note_moyenne=Avg("accusé__note")
             ).filter(note_moyenne__gte=note_minimum)
-            print(note_minimum)
 
             for chauffeur in chauffeurs:
                 trajet4 = trajet4.filter(chauffeur__in=chauffeurs)

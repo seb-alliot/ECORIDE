@@ -29,5 +29,8 @@
     <p class="class_flex class_justify_center">Comme le réservoir à remplir</p>
 {% endif %}
 
-<script>const modelsData = JSON.parse('{{ models_data|escapejs }}')</script>
+<script nonce="{{ request.csp_nonce }}">
+    const modelsData = JSON.parse('{{ models_data|escapejs }}');
+</script>
+
 <script src="{% static 'js/ajoute_voiture.js' %}"></script>

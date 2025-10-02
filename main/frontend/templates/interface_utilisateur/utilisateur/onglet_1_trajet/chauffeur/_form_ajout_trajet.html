@@ -32,5 +32,9 @@
 </form>
 
 
-<script> const voituresData = JSON.parse('{{ voitures_data_json|escapejs }}');</script>
+<script nonce="{{ request.csp_nonce }}">
+    const voituresData = JSON.parse('{{ voitures_data_json|escapejs }}');
+</script>
+
 <script src="{% static 'js/place_voiture.js' %}"></script>
+
