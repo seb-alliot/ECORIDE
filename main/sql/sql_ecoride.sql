@@ -1,5 +1,8 @@
-psql -U nom_utilisateur -d nom_base_donnée -f chemin_vers_le_fichier.sql
+psql -U postgres -d ecoride -f chemin_vers_le_fichier.sql
 
+
+CREATE DATABASE IF NOT EXISTS ecoride CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE ecoride;
 
 -- ajout de backend pour correspondre a django et a sa structure de projet
 
@@ -22,7 +25,8 @@ CREATE TABLE backend_credituser (
     id SERIAL PRIMARY KEY,
     credit NUMERIC(10, 2) NOT NULL DEFAULT 0.00,
     user_id INTEGER NOT NULL UNIQUE,
-    CONSTRAINT fk_main_credituser_user FOREIGN KEY (user_id) REFERENCES auth_user(id) ON DELETE CASCADE
+    CONSTRAINT fk_main_credituser_user FOREIGN KEY (user_id)
+    REFERENCES auth_user(id) ON DELETE CASCADE
 );
 
 
@@ -39,7 +43,8 @@ CREATE TABLE backend_adresseuser (
     email VARCHAR(100),
     photo VARCHAR(100) DEFAULT 'photo_default/photo_default.jpg',
     user_id INTEGER NOT NULL UNIQUE,
-    CONSTRAINT fk_main_adresseuser_user FOREIGN KEY (user_id) REFERENCES auth_user(id) ON DELETE CASCADE
+    CONSTRAINT fk_main_adresseuser_user FOREIGN KEY (user_id)
+    REFERENCES auth_user(id) ON DELETE CASCADE
 );
 
 
@@ -47,7 +52,8 @@ CREATE TABLE backend_choixrole (
     id SERIAL PRIMARY KEY,
     role VARCHAR(20) NOT NULL DEFAULT 'passager',
     user_id INTEGER NOT NULL UNIQUE,
-    CONSTRAINT fk_backend_choixrole_user FOREIGN KEY (user_id) REFERENCES auth_user(id) ON DELETE CASCADE
+    CONSTRAINT fk_backend_choixrole_user FOREIGN KEY (user_id)
+    REFERENCES auth_user(id) ON DELETE CASCADE
 );
 
 
@@ -61,7 +67,8 @@ CREATE TABLE backend_voiture (
     immatriculation VARCHAR(10) NOT NULL,
     annee INTEGER NOT NULL DEFAULT EXTRACT(YEAR FROM CURRENT_DATE),
     user_id INTEGER,
-    CONSTRAINT fk_backend_voiture_user FOREIGN KEY (user_id) REFERENCES auth_user(id) ON DELETE CASCADE
+    CONSTRAINT fk_backend_voiture_user FOREIGN KEY (user_id)
+    REFERENCES auth_user(id) ON DELETE CASCADE
 );
 
 CREATE TABLE backend_trajetproposer (

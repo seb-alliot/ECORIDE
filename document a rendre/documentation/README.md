@@ -1,3 +1,8 @@
+# Qu'est ce qu'ECORIDE ?
+
+EcoRide est une plateforme en ligne de covoiturage permettant de simplifier l'échange entre utilisateur , proposer, réserver des covoiturages en toute simplicitée et en cas de soucis notre support est a votre écoute afin de régler tout litige
+
+
 # ECORIDE – Guide d'installation et de lancement
 
 ##  PRÉREQUIS
@@ -7,11 +12,11 @@
 **Langages :**
 - Python (Back-end)
 - HTML (Front-end)
-- CSS (Apparence visuelle)
+- CSS 3 (Apparence visuelle)
 - SQL (Base de données)
 
 **Base de données :**
-- PostgreSQL 17
+- PostgreSQL 17 en developpement , 16 en prod
 
 **Framework :**
 - Django (framework Python)

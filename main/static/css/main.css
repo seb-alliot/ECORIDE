@@ -11,6 +11,7 @@
   --spacing-lg: clamp(20px, 3vw, 35px);
   --font-size-other: clamp(10px, 1.2vw, 16px);
   --font-size-base--p: clamp(18px, 3vw, 22px);
+  --footer-height: clamp(50px, 8vw, 80px);
   --content-max-width: 1000px;
   --content-side-padding: clamp(10px, 5vw, 40px);
   --color-primary: #7d6e63;
@@ -24,7 +25,6 @@
   --box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.41);
   --font-main: Arial, sans-serif;
 }
-
 /* Classes utilitaires */
 .class_flex {
   display: flex;
@@ -97,6 +97,8 @@ select#id_etat {
   display: flex;
   justify-self: center;
 }
+
+
 /* Scrollbar personnalisée */
 .class_scroll {
   overflow-y: auto;
@@ -111,16 +113,16 @@ ul.resultat {
   display: flex;
 }
 /* Reset et base */
-* {
-  margin: 0;
+*, *::before, *::after {
   box-sizing: border-box;
 }
+
 
 body {
   background-color: var(--color-background);
   font-family: var(--font-main);
   min-height: 100vh;
-}
+  }
 main {
   display: flex;
   flex-direction: column;
@@ -132,8 +134,9 @@ header.position_relative > div > div > div.class_flex {
   justify-content: space-between;
 }
 header {
-  justify-content: space-between;
   padding: var(--spacing-md) var(--spacing-lg);
+  height: clamp(80px, 10vw, 210px);
+  background-color: var(--color-light);
 }
 
 header h1 a,
@@ -141,17 +144,14 @@ header a {
   color: var(--color-text);
 }
 
-/* Consolidated photo_profile, photo_default, logo */
 #logo,
 .photo_profile,
-.photo_default,
 label#resultat_recherche img {
   height: var(--logo-size);
   width: var(--logo-size);
   margin-right: var(--font-size-other);
 }
 .photo_profile,
-.photo_default,
 label#resultat_recherche img,
 #covoit_reserver img {
   border-radius: var(--border-radius-lg);
@@ -159,18 +159,30 @@ label#resultat_recherche img,
 #logo {
   display: flex;
 }
-
 .photo_default {
-  background-image: url("../photo/photo_default.jpg");
-  background-size: cover;
+  width: clamp(120px, 20vw, 265px);
+  height: clamp(25px, 10vh , 45px);
+  padding: clamp(0.4rem, 1vw, 0.8rem) clamp(0.8rem, 2vw, 1.6rem);
+  background-color: var(--color-primary);
+  color: var(--text-on-primary);
+  border: none;
+  border-radius: clamp(6px, 1vw, 10px);
+  text-decoration: none;
 }
 
+.photo_default:hover {
+  background-color: var(--color-secondary);
+  transform: scale(1.05);
+}
+
+
 /* Footer */
-footer {
+footer{
   gap: clamp(10px, 2vw, 30px);
   padding: 0;
   margin-top: auto;
-  margin-bottom: var(--spacing-sm);
+  height : var(--footer-height);
+  background-color: var(--color-light);
 }
 
 a {
@@ -179,11 +191,13 @@ a {
   display: flex;
   justify-content: center;
 }
+
 .footer {
   border-radius: var(--border-radius-sm);
   background-color: var(--color-primary);
   color: white;
 }
+
 .footer-link {
   text-decoration: none;
   box-shadow: var(--box-shadow);
@@ -481,33 +495,6 @@ div#reservation > div:nth-child(3) {
   border-radius: 0 15% 15% 0;
 }
 
-@media (max-width: 768px) {
-  div#reservation {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  div#reservation > div {
-    width: clamp(250px, 80vw, 90vw);
-    min-height: clamp(300px, 60vw, 400px);
-  }
-
-  div#reservation > div:nth-child(1) {
-    border-radius: 15% 15% 0% 0%;
-  }
-
-  div#reservation > div:nth-child(3) {
-    border-radius: 0% 0% 15% 15%;
-  }
-
-  div#reservation > div > img.photo_profile {
-    border-radius: 15% 15% 0 0;
-  }
-
-  div#info_trajet > div > p {
-    font-size: clamp(14px, 3vw, 16px);
-  }
-}
 
 
 /*--- Partie info trajet ---*/
@@ -933,6 +920,41 @@ th {
   background-size: cover;
   background-position: center;
 }
+
+
+@media (max-width: 768px) {
+  div#reservation {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  div#reservation > div {
+    width: clamp(250px, 80vw, 90vw);
+    min-height: clamp(300px, 60vw, 400px);
+  }
+
+  div#reservation > div:nth-child(1) {
+    border-radius: 15% 15% 0% 0%;
+  }
+
+  div#reservation > div:nth-child(3) {
+    border-radius: 0% 0% 15% 15%;
+  }
+
+  div#reservation > div > img.photo_profile {
+    border-radius: 15% 15% 0 0;
+  }
+
+  div#info_trajet > div > p {
+    font-size: clamp(14px, 3vw, 16px);
+  }
+  .photo_default {
+    display: flex;
+    flex-direction: column;
+    width: clamp(60px, 20vw, 125px);
+  }
+}
+
 @media (min-width: 768px) {
   .presentation-flex,
   .presentation-flex-reverse {

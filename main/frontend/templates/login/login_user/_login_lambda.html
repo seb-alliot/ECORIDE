@@ -1,15 +1,7 @@
 <div>
-    <a href="{% url 'MonCompte' %}" class="account-link">
+    <a href="{% url 'MonCompte' %}" class="photo_default">
         <div>
-            <img src="{{ adresse_user.photo.url|default:photo_default_url }}" alt="photo de profil" class="photo_profile">
-        </div>
-        <div class="generix1 aligne_item_center">
-            <div>
-                {{ request.user.username }}<br>
-            </div>
-            <div class="generix3">
-                Crédits : {{ credit.credit|floatformat:2 }} €
-            </div>
+            Mon compte : {{ credit.credit|floatformat:2 }} €
         </div>
     </a>
 </div>

@@ -1,5 +1,5 @@
 from .visuel_gain_resa.afficher_les_reservations import Afficher_reservations
-from .visuel_gain_resa.fusion_donnee import Fusion_donnee
+from .visuel_gain_resa.fusion_gain_jour import Fusion_donnee
 from .visuel_gain_resa.gain_jour import Affiche_gain_jour
 from .visuel_gain_resa.graphique import Graphique
 from .recuperation_email.recuperation_email import RecuperationEmail

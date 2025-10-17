@@ -7,3 +7,4 @@ from .moderation import *
 from .securite import *
 from .utils import *
 from .signals import *
+from .test import *
