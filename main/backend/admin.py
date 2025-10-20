@@ -232,8 +232,6 @@ class VoitureAdmin(admin.ModelAdmin):
 
     class Media:
         js = ("js/voiture_admin.js",)
-        print("js bien chargé")
-
 
 
 @admin.register(TrajetProposer)
