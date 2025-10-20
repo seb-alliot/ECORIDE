@@ -15,7 +15,7 @@ from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
 from .models import ChoixRole
-from .forms import TrajetForm
+from .forms import TrajetForm , VoitureForm
 
 
 # Register your models here.
@@ -185,6 +185,8 @@ class ChoixRoleAdmin(admin.ModelAdmin):
 
 @admin.register(Voiture)
 class VoitureAdmin(admin.ModelAdmin):
+    form = VoitureForm
+
     fieldsets = [
         ("Propriétaire", {"fields": ["user"]}),
         ("Voiture", {"fields": ["marque", "modele"]}),
@@ -227,6 +229,11 @@ class VoitureAdmin(admin.ModelAdmin):
     ]
     list_filter = ["user", "type_moteur", "places", "immatriculation"]
     list_per_page = 10
+
+    class Media:
+        js = ("js/voiture_admin.js",)
+        print("js bien chargé")
+
 
 
 @admin.register(TrajetProposer)

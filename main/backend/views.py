@@ -3,7 +3,7 @@
 from django.contrib.auth import logout
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect, JsonResponse
+from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.core.serializers.json import DjangoJSONEncoder
 import json
@@ -246,7 +246,6 @@ def SelectionTrajet(request):
     if isinstance(result, HttpResponseRedirect):
         return result
 
-    # Sinon, on peut unpack normalement
     reservation_form, trajet, commentaire, preference, compteur = result
 
     context = {
@@ -297,6 +296,7 @@ def Fait_Ton_Taff_De_Modo(request):
     email_recuperer = asyncio.run(
         RecuperationEmail(request)
     )
+    # asyncio.run permet d'executer une fonction asynchrone dans un contexte synchrone depuis python 3.7
     if isinstance(email_recuperer, HttpResponseRedirect):
         return email_recuperer
     email_type, email_id_selected, mail_ids, emails, selected_email = email_recuperer

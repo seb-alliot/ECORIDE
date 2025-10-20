@@ -1,7 +1,6 @@
 const selectMarque = document.getElementById('id_marque')
 const selectModele = document.getElementById('id_modele')
 
-// 🔽 Vider les options du select des modèles au chargement
 if (selectModele) {
     selectModele.innerHTML = ''
     const defaultOption = document.createElement('option')
@@ -11,7 +10,6 @@ if (selectModele) {
 }
 
 if (selectMarque !== null) {
-    // Lorsque la marque change, on exécute la fonction "changeModel"
     selectMarque.addEventListener('change', changeModel)
 }
 

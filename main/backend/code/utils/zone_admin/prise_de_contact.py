@@ -1,8 +1,8 @@
 from django.shortcuts import redirect
 from django.contrib.auth.models import User
-from ...models import AdresseUser
-from ...forms import ContactForm
-from ..envoi_email import envoi_email_prise_contact
+from ....models import AdresseUser
+from ....forms import ContactForm
+from ...envoi_email import envoi_email_prise_contact
 
 def PriseContact(request):
 

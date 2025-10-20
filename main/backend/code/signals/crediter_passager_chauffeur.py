@@ -3,12 +3,12 @@ from django.db.models.signals import pre_delete, post_save
 from django.dispatch import receiver
 from django.contrib.auth.models import User
 from ...models import TrajetProposer, CreditUser, ReservationTrajet
-from ..utils import get_mongo_db
+from ..utils.avis_trajet import get_mongo_db
 from django.db import transaction
 from dotenv import load_dotenv
 import os
 from decimal import Decimal
-from ..utils.recup_commission import get_commission
+from ..utils.zone_admin.recup_commission import get_commission
 
 load_dotenv()
 

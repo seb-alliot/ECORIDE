@@ -1,5 +1,5 @@
 from django.http import JsonResponse
-from ...models import Voiture
+from ....models import Voiture
 
 def recupere_places_voiture(request):
     voiture_id = request.GET.get('voiture_id')

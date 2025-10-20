@@ -5,7 +5,7 @@ from ...models import TrajetProposer, CreditUser
 from django.db import transaction
 import os
 from decimal import Decimal
-from ..utils.recup_commission import get_commission
+from ..utils.zone_admin.recup_commission import get_commission
 
 
 @receiver(post_save, sender=TrajetProposer)

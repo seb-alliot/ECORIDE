@@ -1,9 +1,9 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
-from ...models import TrajetProposer, NoteUser, ReservationTrajet, CreditUser
-from ...forms import AvisForm
-from ..securite import confirm_token
-from ..envoi_email import Envoi_Email_Avis_Trajet_Positif , Envoi_Email_Avis_Trajet_Negatif
+from ....models import TrajetProposer, NoteUser, ReservationTrajet, CreditUser
+from ....forms import AvisForm
+from ...securite import confirm_token
+from ...envoi_email import Envoi_Email_Avis_Trajet_Positif , Envoi_Email_Avis_Trajet_Negatif
 from django.db import transaction
 
 def DonneTonAvis(request, trajet_id, token):

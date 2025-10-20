@@ -162,7 +162,7 @@ label#resultat_recherche img,
 .photo_default {
   width: clamp(120px, 20vw, 265px);
   height: clamp(25px, 10vh , 45px);
-  padding: clamp(0.4rem, 1vw, 0.8rem) clamp(0.8rem, 2vw, 1.6rem);
+  padding: clamp(10px, 2vw, 15px);
   background-color: var(--color-primary);
   color: var(--text-on-primary);
   border: none;
@@ -577,6 +577,7 @@ div#gain_plateforme {
   display: flex;
   justify-content: center;
   font-size: clamp(14px, 2.5vw, 18px);
+  margin-top : -2%;
 }
 .success {
   color: green;
@@ -819,7 +820,7 @@ h1, h2, h3, h4 {
   gap: clamp(10px, 4vw, 80px);
 }
 #account-admin a {
-  font-size: clamp(10px, 2vw, 16px);
+  font-size: clamp(9px, 2vw, 16px);
 }
 /* Consolidated #logo margin-right */
 #logo {
@@ -951,7 +952,7 @@ th {
   .photo_default {
     display: flex;
     flex-direction: column;
-    width: clamp(60px, 20vw, 125px);
+    width: clamp(70px, 20vw, 125px);
   }
 }
 

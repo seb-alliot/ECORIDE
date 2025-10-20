@@ -1,6 +1,6 @@
 # utils.py
 from decimal import Decimal
-from ...models import Commission
+from ....models import Commission
 
 def get_commission():
     try:

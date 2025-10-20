@@ -1,8 +1,8 @@
 from django.contrib.auth.views import PasswordResetView
 from django.urls import reverse_lazy
 from django.contrib import messages
-from ...models import User
-from ...forms import ConfirmEmailForm
+from ....models import User
+from ....forms import ConfirmEmailForm
 
 class CustomPasswordResetView(PasswordResetView):
     form_class = ConfirmEmailForm

@@ -9,7 +9,7 @@ from .code import (
     CustomResetPasswordConfirmView,
     annuler_trajet,
     async_function,
-    ChangeTonRole,
+    get_modeles_voiture,
 )
 from . import views
 
@@ -47,14 +47,17 @@ urlpatterns = [
         auth_views.PasswordResetCompleteView.as_view(),
         name="password_reset_complete",
     ),
-
-    path("monprofile/", views.MonCompte, name="MonCompte"),
-    path("annuler_trajet5", annuler_trajet, name="annuler_trajet5"),
-    path("async_function", async_function, name="async_function"),
-    path("reservation/", views.SelectionTrajet, name="reservation"),
     path(
         "Confirmation/<int:trajet_id>/<str:token>/",
         views.AvisSatisfaction,
         name="AvisSatisfaction",
     ),
+    path("monprofile/", views.MonCompte, name="MonCompte"),
+    path("reservation/", views.SelectionTrajet, name="reservation"),
+
+    # vue ajax
+    path("annuler_trajet5", annuler_trajet, name="annuler_trajet5"),
+    path("async_function", async_function, name="async_function"),
+    path("model-voiture/", get_modeles_voiture, name="model_voiture"),
+
 ]

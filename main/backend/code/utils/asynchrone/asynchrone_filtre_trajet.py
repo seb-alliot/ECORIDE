@@ -2,7 +2,7 @@ from django.http import JsonResponse
 from django.template.loader import render_to_string
 from django.db.models import Q, Avg, FloatField
 from django.db.models.functions import Round
-from ...models import TrajetProposer, User, AdresseUser
+from ....models import TrajetProposer, User, AdresseUser
 from datetime import datetime
 from django.conf import settings
 

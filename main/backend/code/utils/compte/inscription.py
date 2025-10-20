@@ -7,8 +7,8 @@ from django.urls import reverse_lazy, reverse
 from django.utils.http import urlsafe_base64_encode
 from django.views.generic.edit import CreateView
 from django.template.loader import render_to_string
-from ...models import ActivationToken, User
-from ...forms import Inscription
+from ....models import ActivationToken, User
+from ....forms import Inscription
 
 class UserCreateView(CreateView):
     model = User

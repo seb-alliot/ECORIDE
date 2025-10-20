@@ -2,10 +2,10 @@ from django.shortcuts import redirect
 from django.contrib import messages
 from django.urls import reverse
 from django.db.models import Avg, Q
-from ...models import TrajetProposer, NoteUser, ReservationTrajet, CreditUser, Preference
-from ...forms import ReservationTrajetForm
+from ....models import TrajetProposer, NoteUser, ReservationTrajet, CreditUser, Preference
+from ....forms import ReservationTrajetForm
 from django.db import transaction
-from .compteur_vue_mongo import increment_vue
+from ..avis_trajet.compteur_vue_mongo import increment_vue
 import os
 from dotenv import load_dotenv
 load_dotenv()
@@ -15,7 +15,7 @@ load_dotenv()
 def ChoisisTonCovoite(request):
     user = request.user
     # Récupération du trajet
-    from .connection_mongo import get_mongo_db
+    from ..avis_trajet.connection_mongo import get_mongo_db
     db = get_mongo_db()
     trajet_id = request.GET.get("trajet_id")
     compteur = increment_vue(db, trajet_id)

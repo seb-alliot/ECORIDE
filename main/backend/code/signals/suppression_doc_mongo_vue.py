@@ -2,7 +2,7 @@ from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
 from django.conf import settings
 from ...models import TrajetProposer
-from ..utils import get_mongo_db
+from ..utils.avis_trajet import get_mongo_db
 
 @receiver(pre_save, sender=TrajetProposer)
 def verif_etat(sender, instance, **kwargs):

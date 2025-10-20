@@ -708,7 +708,7 @@ class Voiture(models.Model):
     }
 
     marque = models.CharField(max_length=30, choices=MARQUE, default="Marque")
-    modele = models.CharField(choices=MODELE, max_length=50, default="Modele")
+    modele = models.CharField(max_length=50, blank=True, default="")
     couleur = models.CharField(choices=COULEUR, max_length=50, default="Couleur")
     type_moteur = models.CharField(
         choices=TYPE_MOTEUR, max_length=50, verbose_name="Moteur"

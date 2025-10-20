@@ -6,4 +6,4 @@ from .gestion_covoit.covoite_fini import FiniTonCovoiturage
 from .gestion_covoit.etat_covoite import GereTonCovoiteChauffeur
 from .gestion_covoit.propose_covoite import ProposeTonCovoiturage
 from .gestion_covoit.etat_reservation import GereTaReservationPassager
-from .gestion_covoit.trajet_date_passee import annuler_trajet
+from ..utils.asynchrone.trajet_date_passee import annuler_trajet

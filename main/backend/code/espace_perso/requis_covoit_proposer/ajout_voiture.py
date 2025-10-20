@@ -25,6 +25,7 @@ def AjouteTaCaisse(request):
             immatriculation = request.POST.get("immatriculation")
             if Voiture.objects.filter(immatriculation=immatriculation).exists():
                 messages.error(request, "Cette immatriculation est déjà prise.")
+                return redirect(f"{reverse('MonCompte')}?{request.META['QUERY_STRING']}")
             else:
                 if immatriculation:
                     messages.error(request, "L'immatriculation n'a pas le bon format.")

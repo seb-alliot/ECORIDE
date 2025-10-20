@@ -1,0 +1,4 @@
+from .activation_compte import activation
+from .inscription import UserCreateView
+from .reset_password import CustomPasswordResetView
+from .confirm_reset_password import CustomResetPasswordConfirmView

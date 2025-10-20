@@ -39,7 +39,7 @@
   --tab-label-top-offset: clamp(3px, 0vw, 5vw);
   --tab-vertical-margin: clamp(10px, 1.5vw, 30px);
   --tabs-margin-side: clamp(2%, 6vw, 20%);
-  --tabs-min-height: clamp(450px, 75vh, 700px);
+  --tabs-min-height: clamp(450px, 90vh, 700px);
 
   /* Ajout variables pour formulaire trajet */
   --trajet-input-size: clamp(80px, 25vw, 250px);
