@@ -122,6 +122,8 @@ body {
   background-color: var(--color-background);
   font-family: var(--font-main);
   min-height: 100vh;
+  margin:0;
+  padding:0;
   }
 main {
   display: flex;
