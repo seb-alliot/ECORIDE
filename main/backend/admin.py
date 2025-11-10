@@ -15,12 +15,16 @@ from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
 from .models import ChoixRole
-from .forms import TrajetForm , VoitureForm
+from .forms import TrajetForm , VoitureForm, AdresseForm , CustomUserForm
 
 
 # Register your models here.
 
+
+
+
 class CustomUserAdmin(UserAdmin):
+    form = CustomUserForm
     fieldsets = [
         ("Pseudo", {"fields": ("username", "password")}),
         ("Email de l'utilisateur", {"fields": ("email",)}),
@@ -29,9 +33,19 @@ class CustomUserAdmin(UserAdmin):
         ("Permissions", {"fields": ("user_permissions",)}),
         ("Informations personnelles",{"fields": ("is_staff",)},),
     ]
-    list_display = ["username",'is_staff', "email","is_active"]
-    list_filter = ["is_active"]
 
+    list_display = [
+        "id",
+        "username",
+        "email",
+        "is_active",
+        "is_staff",
+    ]
+    search_fields = ["username", "email"]
+    list_filter = ["is_active", "is_staff"]
+    list_per_page = 10
+admin.site.unregister(User)
+admin.site.register(User, CustomUserAdmin)
 
 class UserAdmin(admin.ModelAdmin):
     list_display = [
@@ -110,6 +124,7 @@ class NoteUserAdmin(admin.ModelAdmin):
 
 @admin.register(AdresseUser)
 class AdresseUserAdmin(admin.ModelAdmin):
+    form = AdresseForm
     list_display = [
         "id",
         "user",

@@ -17,13 +17,28 @@ from main.backend.models import (
     ReservationTrajet,
     NoteUser,
 )
-from django.core.validators import RegexValidator
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
 from datetime import timedelta
 from django.forms import widgets
+from django.contrib.auth import get_user_model
 
 # --------------------- Gestion des utilisateurs -------------------->
+
+
+User = get_user_model()
+
+class CustomUserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = "__all__"
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        if User.objects.exclude(pk=self.instance.pk).filter(email=email).exists():
+            raise ValidationError("Cet email est déjà utilisé.")
+        return email
+
 
 
 class Inscription(UserCreationForm):
@@ -480,7 +495,8 @@ class AdresseForm(forms.ModelForm):
     def clean_email(self):
         email = self.cleaned_data.get('email')
 
-        if User.objects.exclude(id=self.instance.user.id).filter(email=email).exists():
+        if User.objects.filter(email=email).exists() or \
+        AdresseUser.objects.exclude(pk=self.instance.pk).filter(email=email).exists():
             raise ValidationError("Cet email appartient déjà à un autre utilisateur.")
 
         return email

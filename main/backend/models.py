@@ -350,7 +350,7 @@ class AdresseUser(models.Model):
             )
         ],
     )
-    email = models.EmailField(max_length=100, null=True, blank=True)
+    email = models.EmailField(max_length=100, null=True, blank=True, unique=True)
     photo = models.ImageField(
         upload_to="user",
         default="photo_default/photo_default.jpg",

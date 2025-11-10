@@ -62,4 +62,3 @@ urlpatterns = [
     path("async_function", async_function, name="async_function"),
     path("model-voiture/", get_modeles_voiture, name="model_voiture"),
 ]
-+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
