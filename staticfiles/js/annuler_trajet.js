@@ -14,7 +14,7 @@ function getCookie(name) {
 }
 
 function annulerTrajets5() {
-    const trajets5 = JSON.parse(document.getElementById('trajet5').textContent);
+    const trajets5 = JSON.parse(document.getElementById('label_proposition').textContent);
 
     fetch(annulerUrl, {
         method: 'POST',

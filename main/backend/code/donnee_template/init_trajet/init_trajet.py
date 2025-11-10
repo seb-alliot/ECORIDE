@@ -1,7 +1,7 @@
-from django.shortcuts import render
 from ....models import TrajetProposer, Voiture
 from collections import defaultdict
 from django.utils import timezone
+import json
 
 def InfoTrajet(request):
     user = request.user
@@ -27,8 +27,9 @@ def InfoTrajet(request):
     trajet3 = trajet_voulu["En cours"]
     trajet4 = trajet_voulu["Disponible"]
     trajet5 = list(trajet_depasser.values(
-        'id', 'etat'
+        "id", "etat"
         ))
+    trajet5_json = json.dumps(trajet5)
 
 
     return {
@@ -39,5 +40,5 @@ def InfoTrajet(request):
         'trajet2': trajet2,
         'trajet3': trajet3,
         'trajet4': trajet4,
-        'trajet5': trajet5
+        'trajet5_json': trajet5_json
     }
