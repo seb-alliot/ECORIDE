@@ -203,10 +203,14 @@ SECURE_HSTS_PRELOAD = True
 
 # Protection csp :
 # bloque tout par défaut, n'autorise que le domaine pour scripts/styles
-CSP_DEFAULT_SRC = ("'self'",)
-CSP_SCRIPT_SRC  = ("'self'", "'nonce'")
-CSP_STYLE_SRC   = ("'self'", "'unsafe-inline'")
-CSP_IMG_SRC     = ("'self'", "data:")
-CSP_OBJECT_SRC  = ("'none'",)
+CONTENT_SECURITY_POLICY = {
+    'DIRECTIVES': {
+        'default-src': ("'self'",),
+        'img-src': ("'self'", 'data:'),
+        'object-src': ("'none'",),
+        'script-src': ("'self'", "'nonce'"),
+        'style-src': ("'self'", "'unsafe-inline'")
+    }
+}
 
 # settings.py
