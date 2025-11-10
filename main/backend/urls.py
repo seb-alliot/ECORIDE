@@ -12,6 +12,8 @@ from .code import (
     get_modeles_voiture,
 )
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -59,5 +61,5 @@ urlpatterns = [
     path("annuler_trajet5", annuler_trajet, name="annuler_trajet5"),
     path("async_function", async_function, name="async_function"),
     path("model-voiture/", get_modeles_voiture, name="model_voiture"),
-
 ]
++ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
