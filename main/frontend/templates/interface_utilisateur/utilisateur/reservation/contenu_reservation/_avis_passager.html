@@ -1,6 +1,5 @@
 <div id="note_commentaire" class="class_flex class_column">
-    <div id="div_avis" >
-        <div class="class_flex p_deco class_border_radius class_justify_center">
+        <div id="div_avis" class="class_flex p_deco class_border_radius class_justify_center" >
             <p>Avis</p>
         </div>
         <div class="class_flex class_aligne_items_center  class_column">
@@ -10,20 +9,20 @@
                 <p>Aucun commentaire</p>
             {% endfor %}
         </div>
-        <div class="class_flex p_deco  class_border_radius class_justify_center">
+        <div id="note" class="class_flex p_deco  class_border_radius class_justify_center">
             <p>Note</p>
         </div>
-        <div class="class_flex class_aligne_items_center class_column">
+        <div  class="class_flex class_aligne_items_center class_column">
             {% if trajet.note_chauffeur %}
             {{ trajet.note_chauffeur|floatformat:1 }} / 5 ⭐
             {% else %}
-            pas de note
+            <p>pas de note</p>
             {% endif %}<br>
         </div>
-        <div class="class_flex p_deco  class_aligne_items_center class_border_radius class_justify_center">
+        <div id="preference" class="class_flex p_deco  class_border_radius class_justify_center">
             <p>préférences</p>
         </div>
-        <div id="preference" class="class_flex class_aligne_items_center class_column">
+        <div  class="class_flex class_aligne_items_center class_column">
             {% if trajet.chauffeur.preference %}
             <p>{{ trajet.chauffeur.preference.get_fumeur_display }}</p>
             <p>{{ trajet.chauffeur.preference.get_animaux_display }}</p>
@@ -33,5 +32,4 @@
                 <p>Aucune preference</p>
             {% endif %}
         </div>
-    </div>
 </div>

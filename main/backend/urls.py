@@ -8,12 +8,11 @@ from .code import (
     CustomPasswordResetView,
     CustomResetPasswordConfirmView,
     annuler_trajet,
-    async_function,
+    filtre_dynamique,
     get_modeles_voiture,
 )
 from . import views
-from django.conf import settings
-from django.conf.urls.static import static
+
 
 
 urlpatterns = [
@@ -59,6 +58,6 @@ urlpatterns = [
 
     # vue ajax
     path("annuler_trajet5", annuler_trajet, name="annuler_trajet5"),
-    path("async_function", async_function, name="async_function"),
+    path("filtre_dynamique", filtre_dynamique, name="filtre_dynamique"),
     path("model-voiture/", get_modeles_voiture, name="model_voiture"),
 ]

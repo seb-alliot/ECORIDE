@@ -6,7 +6,7 @@ from ....models import TrajetProposer, User, AdresseUser
 from datetime import datetime
 from django.conf import settings
 
-def async_function(request):
+def filtre_dynamique(request):
     maintenant = datetime.now()
     lien_photo_default = settings.MEDIA_URL + "photo_default/photo_default.jpg"
     if request.headers.get('X-Requested-With') != 'XMLHttpRequest':
@@ -19,11 +19,9 @@ def async_function(request):
 
     # Récupération des photos des chauffeurs
     for conducteur in chauffeurs:
-        # Correction: Accéder à l'ID du chauffeur via la clé 'chauffeur' du dictionnaire
         user_id = conducteur['chauffeur']
         photo_adresse_user = AdresseUser.objects.filter(user_id=user_id).first()
 
-        # S'assurer que l'objet AdresseUser existe avant d'accéder à la photo
         if photo_adresse_user and photo_adresse_user.photo:
             photo_url = photo_adresse_user.photo.url
         else:

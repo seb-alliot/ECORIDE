@@ -190,22 +190,37 @@ class TrajetForm(forms.ModelForm):
 
     def clean_temps_trajet(self):
         durée = self.cleaned_data.get("temps_trajet")
-        if durée:
-            # Conversion des heures et minutes
-            heure_minute = re.findall(r"(\d+)(h|m)", durée)
-            total_minutes = 0
-            for val, unit in heure_minute:
-                if unit == "h":
-                    # Conversion des heures en minutes
-                    total_minutes += int(val) * 60
-                elif unit == "m":
-                    # Ajout des minutes
-                    total_minutes += int(val)
 
-            # Conversion en timedelta (en minutes) obligatoire
+        if durée:
+            # Ex: "1h30m", "2h", "45m"
+            heure_minute = re.findall(r"(\d+)(h|m)", durée)
+            if not heure_minute:
+                raise forms.ValidationError(
+                    "Le format de la durée est invalide. Utilisez le format 1h30m."
+                )
+            if sum(int(val) for val, unit in heure_minute) == 0:
+                raise forms.ValidationError("La durée du trajet ne peut pas être nulle.")
+            # Vérifie que toute la chaîne est correctement formatée,
+            # obligation du format pour éviter le surplus de code pour laisser de la flexibilité
+            if len("".join([val + unit for val, unit in heure_minute])) != len(
+                    durée
+                ):
+                raise forms.ValidationError(
+                    "Le format de la durée est invalide. Utilisez le format 1h30m."
+                )
+            total_minutes = 0
+
+            for val, unit in heure_minute:
+                val = int(val)
+                if unit == "h":
+                    total_minutes += val * 60
+                elif unit == "m":
+                    total_minutes += val
+
             return timedelta(minutes=total_minutes)
 
         return None
+
     def clean_ville_depart(self):
         ville_depart = self.cleaned_data.get("ville_depart")
         if ville_depart:
@@ -217,6 +232,13 @@ class TrajetForm(forms.ModelForm):
         if ville_arrivee:
             return ville_arrivee.lower().strip()
         return None
+
+    def clean_date(self):
+        date = self.cleaned_data.get("date")
+        if date and date < datetime.now().date():
+            raise forms.ValidationError("La date du trajet ne peut pas être dans le passé.")
+        return date
+
     def __init__(self, *args, user=None, **kwargs):
         super().__init__(*args, **kwargs)
         champs_obligatoires = [
@@ -233,8 +255,6 @@ class TrajetForm(forms.ModelForm):
             self.fields[champ].required = True
         if user:
             self.fields["voiture"].queryset = Voiture.objects.filter(user=user)
-
-
 
 
 class RechercheTrajetForm(forms.Form):
@@ -280,6 +300,12 @@ class RechercheTrajetForm(forms.Form):
             return ville_arrivee.lower().strip()
         return None
 
+    def clean_date(self):
+        date = self.cleaned_data.get("date")
+        if date and date < datetime.now().date():
+            raise forms.ValidationError("La date du trajet ne peut pas être dans le passé.")
+        return date
+
 class FiltreTrajetForm(forms.Form):
 
     temps_trajet = forms.CharField(
@@ -290,7 +316,7 @@ class FiltreTrajetForm(forms.Form):
 
     prix = forms.FloatField(
         label="Prix",
-        widget=forms.NumberInput(attrs={"placeholder": "Prix"}),
+        widget=forms.NumberInput(attrs={"placeholder": "Prix maximum"}),
         required=False,
     )
     note = forms.FloatField(
@@ -303,25 +329,40 @@ class FiltreTrajetForm(forms.Form):
 
     def clean_prix(self):
         prix = self.cleaned_data.get("prix")
+        if prix is not None and not isinstance(prix, (int, float)):
+            raise forms.ValidationError("Le prix doit être un nombre valide.")
         if prix is not None and prix < 0:
             raise forms.ValidationError("Le prix ne peut pas être négatif.")
         return prix
 
     def clean_temps_trajet(self):
         durée = self.cleaned_data.get("temps_trajet")
-        if durée:
-            # Conversion des heures et minutes
-            heure_minute = re.findall(r"(\d+)(h|m)", durée)
-            total_minutes = 0
-            for val, unit in heure_minute:
-                if unit == "h":
-                    # Conversion des heures en minutes
-                    total_minutes += int(val) * 60
-                elif unit == "m":
-                    # Ajout des minutes
-                    total_minutes += int(val)
 
-            # Conversion en timedelta (en minutes) obligatoire
+        if durée:
+            # Ex: "1h30m", "2h", "45m"
+            heure_minute = re.findall(r"(\d+)(h|m)", durée)
+            if not heure_minute:
+                raise forms.ValidationError(
+                    "Le format de la durée est invalide. Utilisez le format 1h30m."
+                )
+            if sum(int(val) for val, unit in heure_minute) == 0:
+                raise forms.ValidationError("La durée du trajet ne peut pas être nulle.")
+            # La même vérification que précédemment
+            if len("".join([val + unit for val, unit in heure_minute])) != len(
+                    durée
+                ):
+                raise forms.ValidationError(
+                    "Le format de la durée est invalide. Utilisez le format 1h30m."
+                )
+            total_minutes = 0
+
+            for val, unit in heure_minute:
+                val = int(val)
+                if unit == "h":
+                    total_minutes += val * 60
+                elif unit == "m":
+                    total_minutes += val
+
             return timedelta(minutes=total_minutes)
         return None
 
@@ -415,6 +456,7 @@ class VoitureForm(forms.ModelForm):
 
     def clean_immatriculation(self):
         immatriculation = self.cleaned_data.get("immatriculation")
+        # Format: XX-000-XX
         if not re.match(r"^[A-Z]{2}-\d{3}-[A-Z]{2}$", immatriculation):
             raise forms.ValidationError(
                 "L'immatriculation doit être de la forme XX-000-XX."
@@ -422,6 +464,7 @@ class VoitureForm(forms.ModelForm):
         if Voiture.objects.filter(immatriculation=immatriculation).exists():
             raise forms.ValidationError("Cette immatriculation est déjà utilisée.")
         return immatriculation
+    
     def __init__(self, *args, user=None, **kwargs):
         super().__init__(*args, **kwargs)
         champs_obligatoires = [

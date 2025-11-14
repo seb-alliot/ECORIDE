@@ -14,8 +14,8 @@
             <div class="page-wrap">
             <div class="tabs position_relative">
                 <!-- factoring des tab retourner via le backend-->
+                <!-- on inclus le tab renvoyer au template de maniere dynamique via add:tab et la boucle -->
                 {% for tab in tabs %}
-                    <!-- on inclus le tab renvoyer au template de maniere dynamique via add:tab et la boucle -->
                     {% include "interface_utilisateur/tabs/"|add:tab %}
                 {% endfor %}
             </div>

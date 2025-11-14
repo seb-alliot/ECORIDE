@@ -23,7 +23,7 @@ def RechercheTrajet(request):
         trajet4 = TrajetProposer.objects.filter(
         ville_depart__icontains=ville_depart,
         ville_arrivee__icontains=ville_arrivee,
-        date=maintenant.date(),
+        date=date,
         etat__in=["Disponible"],
         places__gt=0,
     ).annotate(note_chauffeur=Avg("chauffeur__accusé__note"))
