@@ -13,7 +13,7 @@
   --font-size-base--p: clamp(18px, 3vw, 22px);
   --font-size-dynamic: clamp(10px, 1.2vw, 18px);
   --font-size-other: clamp(10px, 1.2vw, 16px);
-  --font-size-small: clamp(9px, 1vw, 16px);
+  --font-size-small: clamp(10px, 1.2vw, 16px);
   --form-font-size: clamp(10px, 1.5vw, 15px);
   --form-height: clamp(30px, 5vh, 30px);
   --form-width: clamp(120px, 20vw, 225px);
@@ -38,7 +38,7 @@
   --tab-content-width: clamp(150px, 12vw, 200px);
   --tab-label-top-offset: clamp(3px, 0vw, 5vw);
   --tab-vertical-margin: clamp(10px, 1.5vw, 30px);
-  --tabs-margin-side: clamp(2%, 6vw, 20%);
+  --tabs-margin-side: clamp(2%, 3vw, 20%);
   --tabs-min-height: clamp(450px, 90vh, 700px);
 
   /* Ajout variables pour formulaire trajet */
@@ -49,7 +49,7 @@
 
   /* ROLE FORM */
   --role-width: clamp(150px, 14vw, 225px);
-  --role-font-size: clamp(10px, 1.2vw, 20px);
+  --role-font-size: clamp(10px, 1.4vw, 20px);
   --role-height: 30px;
   --role-margin-top: clamp(10px, 2vw, 20px);
   --role-margin-bottom: clamp(10px, 2vw, 25px);

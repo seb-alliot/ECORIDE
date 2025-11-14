@@ -10,9 +10,9 @@
   --spacing-middle: 15px;
   --spacing-lg: clamp(20px, 3vw, 35px);
   --font-size-other: clamp(10px, 1.2vw, 16px);
-  --font-size-base--p: clamp(18px, 3vw, 22px);
+  --font-size-base--p: clamp(18px, 3vw, 25px);
   --footer-height: clamp(50px, 8vw, 80px);
-  --content-max-width: 1000px;
+  --content-max-width: 1200px;
   --content-side-padding: clamp(10px, 5vw, 40px);
   --color-primary: #7d6e63;
   --color-secondary: #b19a8b;
@@ -112,6 +112,7 @@ ul.class_flex {
 ul.resultat {
   display: flex;
 }
+
 /* Reset et base */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -139,6 +140,7 @@ header {
   padding: var(--spacing-md) var(--spacing-lg);
   height: clamp(80px, 10vw, 210px);
   background-color: var(--color-light);
+  height:20%;
 }
 
 header h1 a,
@@ -297,10 +299,9 @@ a:hover {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: repeat(3, 1fr);
-  align-content: center;
   max-width: var(--content-max-width);
-  margin: 0 auto;
   padding: 0 var(--content-side-padding);
+  margin: 0 auto;
 }
 
 .presentation > div p {
@@ -459,11 +460,10 @@ div#reservation > div:nth-child(1) {
 
 /* Image profil */
 div#reservation > div > img.photo_profile {
-  width: 85%;
+  width: 90%;
   height: auto;
-  aspect-ratio: 1 / 1;
   object-fit: cover;
-  margin-top: 15%;;
+  margin-top: 5%;
 }
 
 /* Info chauffeur et prix */
@@ -580,7 +580,6 @@ div#gain_plateforme {
   display: flex;
   justify-content: center;
   font-size: clamp(14px, 2.5vw, 18px);
-  margin-top : -2%;
 }
 .success {
   color: green;
@@ -703,7 +702,7 @@ div#reservation > div > img.photo_profile {
 div#div_avis > div > p {
   font-size: var(--font-size-base);
 }
-#div_avis {
+#div_avis, #note, #preference {
   width: 90%;
   font-size: clamp(10px, 1vw, 12px);
 }
@@ -807,6 +806,7 @@ select#id_avis {
 /* Consolidated h1, h2, h3, h4 */
 h1, h2, h3, h4 {
   font-size: var(--font-size-base);
+  margin: 0;
 }
 
 /* Consolidated #recherche_form, #login1, #login2, #reset_mdp, #validation_email height */
@@ -818,14 +818,12 @@ h1, h2, h3, h4 {
   height: clamp(45px, 9vw, 55px);
 }
 
-/* Consolidated #account-admin */
 #account-admin {
   gap: clamp(10px, 4vw, 80px);
 }
 #account-admin a {
-  font-size: clamp(9px, 2vw, 16px);
+  font-size: clamp(10px, 1.6vw, 16px);
 }
-/* Consolidated #logo margin-right */
 #logo {
   margin-right: clamp(10%, 20vw, 20%);
 }
@@ -848,7 +846,6 @@ div.tabs {
   min-height: clamp(600px, 40vw, 800px);
 }
 
-/* Consolidated #nbr_mail, h1 margin */
 #nbr_mail,
 h1 {
   margin: clamp(10px, 4vw, 15px);
@@ -884,15 +881,7 @@ th {
   font-size: clamp(10px, 2.5vw, 14px);
 }
 
-/* Consolidated presentation */
-.presentation {
-  max-width: var(--content-max-width);
-  margin: 0 auto;
-  padding: 0 var(--content-side-padding);
-  display: flex;
-  flex-direction: column;
-  gap: clamp(20px, 3vw, 40px);
-}
+
 
 .presentation-flex,
 .presentation-flex-reverse {
@@ -902,13 +891,7 @@ th {
   gap: clamp(10px, 2vw, 20px);
 }
 
-.presentation img {
-  min-width: clamp(80px, 70vw, 350px);
-  max-width: clamp(80px, 70vw, 350px);
-  min-height:clamp(130px, 15vw, 350px);
-  max-height:clamp(130px, 30vw, 350px);
-  border-radius: clamp(5px, 1vw, 15px);
-}
+
 
 .presentation-flex p,
 .presentation-flex-reverse p {
@@ -916,17 +899,21 @@ th {
   max-width: 90%;
 }
 .image-principal {
-  background-image: image-set(
-    url("../photo/principal_mobile.avif") 1x,
-    url("../photo/principal.avif") 2x
-  );
   min-height: var(--image-height);
   background-size: cover;
   background-position: center;
 }
 
-
 @media (max-width: 768px) {
+
+  .presentation img {
+    min-width: clamp(80px, 70vw, 350px);
+    max-width: clamp(80px, 70vw, 350px);
+    min-height:clamp(130px, 20vw, 350px);
+    max-height:clamp(130px, 30vw, 350px);
+    border-radius: clamp(5px, 1vw, 15px);
+    margin-bottom: clamp(5px,2vw,40px);
+  }
   div#reservation {
     flex-direction: column;
     align-items: center;
@@ -990,8 +977,20 @@ th {
   .presentation img {
     min-width: clamp(80px, 50vw, 450px);
     max-width: clamp(80px, 50vw, 450px);
-    min-height:clamp(130px, 15vw, 450px);
-    max-height:clamp(130px, 15vw, 450px);
+    min-height:clamp(130px, 20vw, 450px);
+    max-height:clamp(130px, 20vw, 450px);
     border-radius: clamp(5px, 1vw, 15px);
+    margin: 2%;
+  }
+
+}
+@media (min-width: 1025px) {
+  .image-principal {
+    background-image: url("../photo/principal.avif");
+  }
+}
+@media (max-width: 1024px) {
+  .image-principal {
+    background-image: url("../photo/principal_mobile.avif");
   }
 }

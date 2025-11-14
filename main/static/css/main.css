@@ -10,9 +10,9 @@
   --spacing-middle: 15px;
   --spacing-lg: clamp(20px, 3vw, 35px);
   --font-size-other: clamp(10px, 1.2vw, 16px);
-  --font-size-base--p: clamp(18px, 3vw, 22px);
+  --font-size-base--p: clamp(18px, 3vw, 25px);
   --footer-height: clamp(50px, 8vw, 80px);
-  --content-max-width: 1000px;
+  --content-max-width: 1200px;
   --content-side-padding: clamp(10px, 5vw, 40px);
   --color-primary: #7d6e63;
   --color-secondary: #b19a8b;
@@ -112,6 +112,7 @@ ul.class_flex {
 ul.resultat {
   display: flex;
 }
+
 /* Reset et base */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -298,10 +299,9 @@ a:hover {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: repeat(3, 1fr);
-  align-content: center;
   max-width: var(--content-max-width);
-  margin: 0 auto;
   padding: 0 var(--content-side-padding);
+  margin: 0 auto;
 }
 
 .presentation > div p {
@@ -580,7 +580,6 @@ div#gain_plateforme {
   display: flex;
   justify-content: center;
   font-size: clamp(14px, 2.5vw, 18px);
-  margin-top : -2%;
 }
 .success {
   color: green;
@@ -882,15 +881,7 @@ th {
   font-size: clamp(10px, 2.5vw, 14px);
 }
 
-/* Consolidated presentation */
-.presentation {
-  max-width: var(--content-max-width);
-  margin: 0 auto;
-  padding: 0 var(--content-side-padding);
-  display: flex;
-  flex-direction: column;
-  gap: clamp(20px, 3vw, 40px);
-}
+
 
 .presentation-flex,
 .presentation-flex-reverse {
@@ -900,13 +891,7 @@ th {
   gap: clamp(10px, 2vw, 20px);
 }
 
-.presentation img {
-  min-width: clamp(80px, 70vw, 350px);
-  max-width: clamp(80px, 70vw, 350px);
-  min-height:clamp(130px, 20vw, 350px);
-  max-height:clamp(130px, 30vw, 350px);
-  border-radius: clamp(5px, 1vw, 15px);
-}
+
 
 .presentation-flex p,
 .presentation-flex-reverse p {
@@ -914,17 +899,21 @@ th {
   max-width: 90%;
 }
 .image-principal {
-  background-image: image-set(
-    url("../photo/principal_mobile.avif") 1x,
-    url("../photo/principal.avif") 2x
-  );
   min-height: var(--image-height);
   background-size: cover;
   background-position: center;
 }
 
-
 @media (max-width: 768px) {
+
+  .presentation img {
+    min-width: clamp(80px, 70vw, 350px);
+    max-width: clamp(80px, 70vw, 350px);
+    min-height:clamp(130px, 20vw, 350px);
+    max-height:clamp(130px, 30vw, 350px);
+    border-radius: clamp(5px, 1vw, 15px);
+    margin-bottom: clamp(5px,2vw,40px);
+  }
   div#reservation {
     flex-direction: column;
     align-items: center;
@@ -991,5 +980,17 @@ th {
     min-height:clamp(130px, 20vw, 450px);
     max-height:clamp(130px, 20vw, 450px);
     border-radius: clamp(5px, 1vw, 15px);
+    margin: 2%;
+  }
+
+}
+@media (min-width: 1025px) {
+  .image-principal {
+    background-image: url("../photo/principal.avif");
+  }
+}
+@media (max-width: 1024px) {
+  .image-principal {
+    background-image: url("../photo/principal_mobile.avif");
   }
 }
