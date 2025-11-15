@@ -464,7 +464,7 @@ class VoitureForm(forms.ModelForm):
         if Voiture.objects.filter(immatriculation=immatriculation).exists():
             raise forms.ValidationError("Cette immatriculation est déjà utilisée.")
         return immatriculation
-    
+
     def __init__(self, *args, user=None, **kwargs):
         super().__init__(*args, **kwargs)
         champs_obligatoires = [
@@ -538,8 +538,7 @@ class AdresseForm(forms.ModelForm):
     def clean_email(self):
         email = self.cleaned_data.get('email')
 
-        if User.objects.filter(email=email).exists() or \
-        AdresseUser.objects.exclude(pk=self.instance.pk).filter(email=email).exists():
+        if AdresseUser.objects.exclude(user=self.instance.user).filter(email=email).exists():
             raise ValidationError("Cet email appartient déjà à un autre utilisateur.")
 
         return email

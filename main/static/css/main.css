@@ -1,7 +1,7 @@
 :root {
   --logo-size: clamp(60px, 8vw, 200px);
   --font-size-base: clamp(8px, 2vw, 20px);
-  --input-width: clamp(60px, 12vw, 220px);
+  --input-width: clamp(60px, 16vw, 220px);
   --input-height: clamp(25px, 5vw, 40px);
   --image-height: clamp(100px, 25vw, 800px);
   --spacing-sm: 5px;

@@ -1,76 +1,39 @@
 
 :root {
   --container-main-width: clamp(200px, 25vw, 450px);
-  --content-max-width: 1000px;
-  --content-side-padding: clamp(10px, 5vw, 40px);
-  --deco-font-size: clamp(12px, 1.5vw, 16px);
   --deco-gap: clamp(5%, 2vw, 3%);
-  --deco-height: clamp(30px, 5vh, 30px);
-  --deco-margin-top: clamp(10px, 2vw, 20px);
   --deco-radius: 10px;
-  --deco-width: clamp(110px, 20vw, 225px);
-  --font-size-base: clamp(8px, 2vw, 20px);
-  --font-size-base--p: clamp(18px, 3vw, 22px);
-  --font-size-dynamic: clamp(10px, 1.2vw, 18px);
-  --font-size-other: clamp(10px, 1.2vw, 16px);
   --font-size-small: clamp(10px, 1.2vw, 16px);
   --form-font-size: clamp(10px, 1.5vw, 15px);
   --form-height: clamp(30px, 5vh, 30px);
   --form-width: clamp(120px, 20vw, 225px);
-  --image-height: clamp(90px, 18vw, 800px);
-  --img-flex-height: clamp(80px, 6vw, 120px);
-  --img-flex-width: clamp(110px, 9vw, 180px);
-  --img-size-large: clamp(130px, 14vw, 180px);
-  --img-size-small: clamp(120px, 12vw, 160px);
   --img-square-size: clamp(70px, 10vw, 180px);
-  --input-margin-left: clamp(-55%, -10vw, -55%);
-  --input-width: clamp(60px, 12vw, 220px);
-  --input-width--other: clamp(70px, 18vw, 95px);
-  --logo-size: clamp(60px, 8vw, 200px);
-  --photo-gap: clamp(5px, 1.5vw, 10px);
-  --photo-height: clamp(95px, 14vw, 175px);
-  --photo-margin-top: clamp(10px, 3vw, 30px);
-  --photo-radius: 15%;
-  --photo-width: clamp(120px, 18vw, 225px);
-  --spacing-lg: clamp(15px, 3vw, 25px);
+  --form-input-size: clamp(110px, 20vw, 225px);
   --spacing-md: clamp(8px, 2vw, 10px);
-  --spacing-sm: clamp(4px, 1vw, 10px);
-  --tab-content-width: clamp(150px, 12vw, 200px);
-  --tab-label-top-offset: clamp(3px, 0vw, 5vw);
   --tab-vertical-margin: clamp(10px, 1.5vw, 30px);
   --tabs-margin-side: clamp(2%, 3vw, 20%);
-  --tabs-min-height: clamp(450px, 90vh, 700px);
 
   /* Ajout variables pour formulaire trajet */
-  --trajet-input-size: clamp(80px, 25vw, 250px);
+  --trajet-input-size: clamp(80px, 28vw, 330px);
   --trajet-font-size: clamp(10px, 1.2vw, 20px);
   --trajet-button-font-size: clamp(12px, 1.8vw, 18px);
   --trajet-gap: clamp(5px, 2vw, 15px);
 
   /* ROLE FORM */
-  --role-width: clamp(150px, 14vw, 225px);
   --role-font-size: clamp(10px, 1.4vw, 20px);
-  --role-height: 30px;
   --role-margin-top: clamp(10px, 2vw, 20px);
   --role-margin-bottom: clamp(10px, 2vw, 25px);
-  --role-border-radius: 10px;
 
   --p-font-size: clamp(14px, 2.2vw, 20px);
 
   /* VOITURE FORM */
-  --voiture-input-width: clamp(110px, 12vw, 225px);
-  --voiture-font-size: clamp(10px, 1.2vw, 16px);
-  --voiture-input-height: 30px;
   --voiture-form-gap: 14px;
   --voiture-mere-gap: 10px;
   --voiture-child-gap-default: 2px;
   --voiture-child-gap-large: 4px;
 
   /* PREFERENCE FORM */
-  --preference-width: clamp(120px, 12vw, 225px);
-  --preference-font-size: clamp(10px, 1.2vw, 16px);
   --preference-textarea-font: clamp(10px, 1.4vw, 16px);
-  --preference-height: 30px;
   --preference-gap-form: clamp(2px, 1vw, 4px);
   --preference-gap-block: clamp(10px, 1.5vw, 20px);
   --preference-margin-block: clamp(10px, 2vw, 20px);
@@ -119,10 +82,10 @@ h4 {
   border: solid 1px black;
   position: relative;
   left: 2px;
-  border-radius: 10px;
+  border-radius: var(--deco-radius);
   box-shadow: 6px 6px 10px beige;
   font-size: var(--font-size-small);
-  top: var(--tab-label-top-offset);
+  top: clamp(3px, 0vw, 5vw);
 }
 
 .tab [type="radio"] {
@@ -148,7 +111,7 @@ h4 {
 .content {
   position: absolute;
   top: clamp(15px, 3vw, 25px);
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: clamp(15px, 3vw, 25px);
   left: 0;
   background: #b19a8b;
   right: 0;
@@ -178,8 +141,8 @@ form#etat_form option,
   align-self: center;
   margin-bottom: var(--spacing-md);
   border-radius: 15%;
-  width: var(--img-flex-width);
-  height: var(--img-flex-height);
+  width: clamp(110px, 9vw, 180px);
+  height: clamp(80px, 6vw, 120px);
 }
 
 label#resultat_recherche img,
@@ -195,12 +158,12 @@ label#resultat_recherche img,
 #covoit_reserver {
   height: auto;
   min-width: var(--container-main-width);
-  font-size: var(--font-size-dynamic);
+  font-size: var(--font-size-small);
 }
 
 #label_proposition{
   height: auto;
-  min-width: var(--tab-content-width);
+  min-width: clamp(150px, 12vw, 200px);
 }
 
 #avis_positif {
@@ -208,7 +171,7 @@ label#resultat_recherche img,
 }
 
 #modification_satut {
-  margin-bottom: 30px;
+  margin-bottom: var(--form-height);
 }
 
 div.tabs {
@@ -219,7 +182,7 @@ div.tabs {
 }
 
 .tabs {
-  min-height: var(--tabs-min-height);
+  min-height: clamp(450px, 90vh, 700px);
 }
 
 #deconnexion,
@@ -272,16 +235,16 @@ input#id_photo {
 
 /* Image de profil */
 div.photo-parent > div > img {
-  border-radius: var(--photo-radius);
+  border-radius: 15%;
   margin-left: 51.5%;
-  margin-top: var(--photo-margin-top);
-  width: var(--photo-width);
-  height: var(--photo-height);
+  margin-top: clamp(10px, 3vw, 30px);
+  width: var(--form-input-size);
+  height: clamp(95px, 14vw, 175px);
 }
 
 /* Container secondaire */
 .photo-fille {
-  gap: var(--photo-gap);
+  gap: clamp(5px, 1.5vw, 10px);
   margin-top: 10px;
 }
 
@@ -329,14 +292,14 @@ input[type="file"]::file-selector-button:hover {
   justify-items: center;
   align-items: center;
   margin-bottom: var(--spacing-md);
-  padding: var(--spacing-sm);
+  padding: clamp(4px, 1vw, 10px);
 }
 
 #trajet_form input,
 #trajet_form select,
 #trajet_form button {
   width: var(--trajet-input-size);
-  height: 30px;
+  height: var(--form-height);
   font-size: var(--trajet-font-size);
 }
 
@@ -375,10 +338,10 @@ div.content > ul > li > input[type="radio"] {
 
 #role_form select,
 #role_form button {
-  width: var(--role-width);
-  height: var(--role-height);
+  width: var(--form-input-size);
+  height: var(--form-height);
   font-size: var(--role-font-size);
-  border-radius: var(--role-border-radius);
+  border-radius: var(--deco-radius);
 }
 p {
   font-size: var(--p-font-size);
@@ -388,11 +351,11 @@ p {
 #voiture_form input,
 #voiture_form select,
 #voiture_form button {
-  width: var(--voiture-input-width);
-  height: var(--voiture-input-height);
-  font-size: var(--voiture-font-size);
+  width: var(--form-input-size);
+  height: var(--form-height);
+  font-size: var(--font-size-small);
   gap: var(--voiture-form-gap);
-  border-radius: 10px;
+  border-radius: var(--deco-radius);
 }
 #voiture_form label {
   display: none;
@@ -420,7 +383,6 @@ textarea#id_exigences_personnelles {
   margin-bottom: var(--preference-margin-block);
   display: flex;
   flex-wrap: wrap;
-  gap: var(--preference-gap-form);
   align-items: center;
 }
 #preference_form label {
@@ -435,9 +397,9 @@ select#id_etat,
 #reservation_form select,
 #reservation_form button,
 textarea#id_exigences_personnelles {
-  width: var(--preference-width);
-  height: var(--preference-height);
-  font-size: var(--preference-font-size);
+  width: var(--form-input-size);
+  height: var(--form-height);
+  font-size: var(--font-size-small);
   margin:clamp(5px, 1vw, 15px);
 }
 .preference_css {
@@ -470,7 +432,7 @@ div.info_perso > li {
 #voiture_posseder {
   gap: 10px;
   border: 1px solid #ccc;
-  border-radius: 10px;
+  border-radius: var(--deco-radius);
   list-style-type: none;
   background-color: rgb(200, 240, 200);
   padding: 10px;

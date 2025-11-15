@@ -28,8 +28,10 @@ def AjoutTonAdresse(request, adresse_user=None, user=None):
             else:
                 if "email" in adresse_form.errors:
                     messages.error(request, "Cette adresse email est déjà prise.")
+                    return redirect(f"{reverse('MonCompte')}?{request.META['QUERY_STRING']}")
                 else:
                     messages.error(request, "Tous les champs sont obligatoires.")
+                    return redirect(f"{reverse('MonCompte')}?{request.META['QUERY_STRING']}")
         else:
             adresse_form = AdresseForm(instance=adresse_user, user=user)
 
