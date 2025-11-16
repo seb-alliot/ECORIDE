@@ -49,12 +49,12 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    "csp.middleware.CSPMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    "csp.middleware.CSPMiddleware",
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.common.BrokenLinkEmailsMiddleware',
     'django.middleware.gzip.GZipMiddleware',
@@ -203,14 +203,30 @@ SECURE_HSTS_PRELOAD = True
 
 # Protection csp :
 # bloque tout par défaut, n'autorise que le domaine pour scripts/styles
+# CSP Configuration
 CONTENT_SECURITY_POLICY = {
     'DIRECTIVES': {
         'default-src': ("'self'",),
-        'img-src': ("'self'", 'data:'),
+        'script-src': ("'self'",),
+        'script-src-elem': (
+            "'self'",
+            "https://cdnjs.cloudflare.com",
+            "'sha256-OwDT92tUytiP6zW4eO4VbhFT7NYgc3VpfxiwSD9s9vU='",
+            "'sha256-4Bd7A4IKGDbIkd5iEUAHHwdJYHpfhtsIdICRZi//Y7k='",
+            "'sha256-ieoeWczDHkReVBsRBqaal5AFMlBtNjMzgwKvLqi/tSU='",
+        ),
+        'script-src-attr': (
+            "'unsafe-hashes'",
+            "'sha256-O+sar6QcP/vb1EG2w2qniXgxrWKDI1D4ZBkwzTPcTQM='",
+        ),
+        'style-src': ("'self'", "'unsafe-inline'"),
+        'img-src': ("'self'", "data:", "https:"),
+        'font-src': ("'self'",),
+        'connect-src': ("'self'",),
         'object-src': ("'none'",),
-        'script-src': ("'self'", "'nonce'"),
-        'style-src': ("'self'", "'unsafe-inline'")
-    }
+    },
+    'INCLUDE_NONCE_IN': ['script-src', 'script-src-elem'],
 }
+
 
 # settings.py

@@ -30,7 +30,7 @@
 {% endif %}
 
 {% block script_js %}
-<script nonce="{{ request.csp_nonce }}">
+<script nonce="{{ csp_nonce  }}">
     const modelsData = JSON.parse('{{ models_data|escapejs }}');
 </script>
 

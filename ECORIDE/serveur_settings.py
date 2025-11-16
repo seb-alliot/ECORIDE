@@ -46,19 +46,21 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "main",
     "main.backend",
+    "csp",
 ]
 
 MIDDLEWARE = [
-    "django.middleware.security.SecurityMiddleware",
-    "django.contrib.sessions.middleware.SessionMiddleware",
-    "django.middleware.common.CommonMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
-    "django.contrib.auth.middleware.AuthenticationMiddleware",
-    "django.contrib.messages.middleware.MessageMiddleware",
-    "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "django.middleware.common.BrokenLinkEmailsMiddleware",
-    "django.middleware.gzip.GZipMiddleware",
-    "django.middleware.locale.LocaleMiddleware",
+    'django.middleware.security.SecurityMiddleware',
+    "csp.middleware.CSPMiddleware",
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.common.BrokenLinkEmailsMiddleware',
+    'django.middleware.gzip.GZipMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 ]
 LOGIN_URL  = 'login/connection1/'
 SITE_URL = f"http://localhost:8000"
@@ -206,10 +208,30 @@ SECURE_HSTS_PRELOAD = False
 
 # Protection csp :
 # bloque tout par défaut, n'autorise que le domaine pour scripts/styles
-CSP_DEFAULT_SRC = ("'self'",)
-CSP_SCRIPT_SRC  = ("'self'", "'nonce'")
-CSP_STYLE_SRC   = ("'self'", "'unsafe-inline'")
-CSP_IMG_SRC     = ("'self'", "data:")
-CSP_OBJECT_SRC  = ("'none'",)
+
+# CSP Configuration
+CONTENT_SECURITY_POLICY = {
+    'DIRECTIVES': {
+        'default-src': ("'self'",),
+        'script-src': ("'self'",),
+        'script-src-elem': (
+            "'self'",
+            "https://cdnjs.cloudflare.com",
+            "'sha256-OwDT92tUytiP6zW4eO4VbhFT7NYgc3VpfxiwSD9s9vU='",
+            "'sha256-4Bd7A4IKGDbIkd5iEUAHHwdJYHpfhtsIdICRZi//Y7k='",
+            "'sha256-ieoeWczDHkReVBsRBqaal5AFMlBtNjMzgwKvLqi/tSU='",
+        ),
+        'script-src-attr': (
+            "'unsafe-hashes'",
+            "'sha256-O+sar6QcP/vb1EG2w2qniXgxrWKDI1D4ZBkwzTPcTQM='",
+        ),
+        'style-src': ("'self'", "'unsafe-inline'"),
+        'img-src': ("'self'", "data:", "https:"),
+        'font-src': ("'self'",),
+        'connect-src': ("'self'",),
+        'object-src': ("'none'",),
+    },
+    'INCLUDE_NONCE_IN': ['script-src', 'script-src-elem'],
+}
 
 # settings.py

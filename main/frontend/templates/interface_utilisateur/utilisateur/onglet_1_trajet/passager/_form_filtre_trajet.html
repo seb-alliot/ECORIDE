@@ -20,7 +20,7 @@
 </form>
 
 {% block script_js %}
-    <script nonce="{{ request.csp_nonce }}">
+    <script nonce="{{ csp_nonce }}">
         const urlfiltre_form = "{% url 'filtre_dynamique' %}";
     </script>
     <script src="{% static 'js/filtre_trajet.js' %}" defer></script>

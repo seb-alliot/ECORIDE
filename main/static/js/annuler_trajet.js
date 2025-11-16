@@ -14,9 +14,15 @@ function getCookie(name) {
 }
 
 function annulerTrajets5() {
-    const trajets5 = JSON.parse(document.getElementById('trajet5').textContent);
+    const trajetElement = document.getElementById('trajet5');
 
-    // Récupère l'URL depuis le data attribute
+    if (!trajetElement) {
+        console.error('Élément trajet5 non trouvé');
+        return;
+    }
+
+    const trajets5 = JSON.parse(trajetElement.textContent);
+
     const btn = document.getElementById('annuler-btn');
     const annulerUrl = btn.dataset.url;
 
