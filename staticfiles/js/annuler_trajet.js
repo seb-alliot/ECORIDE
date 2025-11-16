@@ -16,6 +16,10 @@ function getCookie(name) {
 function annulerTrajets5() {
     const trajets5 = JSON.parse(document.getElementById('trajet5').textContent);
 
+    // Récupère l'URL depuis le data attribute
+    const btn = document.getElementById('annuler-btn');
+    const annulerUrl = btn.dataset.url;
+
     fetch(annulerUrl, {
         method: 'POST',
         headers: {
@@ -29,12 +33,15 @@ function annulerTrajets5() {
     .then(res => res.json())
     .then(data => {
         if (data.nb_annules > 0) {
-            // reload uniquement si des trajets ont été annulés
             window.location.reload();
         }
     })
     .catch(err => console.error("Erreur fetch:", err));
 }
 
-// Attendre que le DOM soit prêt
-document.addEventListener("DOMContentLoaded", annulerTrajets5);
+document.addEventListener("DOMContentLoaded", () => {
+    const btn = document.getElementById('annuler-btn');
+    if (btn) {
+        btn.addEventListener("click", annulerTrajets5);
+    }
+});
