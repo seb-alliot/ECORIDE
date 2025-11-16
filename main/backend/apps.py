@@ -1,4 +1,7 @@
+# main/backend/apps.py
 from django.apps import AppConfig
+import asyncio
+
 
 class MainConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
@@ -12,3 +15,5 @@ class MainConfig(AppConfig):
         import main.backend.code.signals.crediter_annulation
         import main.backend.code.signals.crediter_passager_chauffeur
         import main.backend.code.signals.suppression_doc_mongo_vue
+
+

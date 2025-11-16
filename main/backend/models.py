@@ -141,12 +141,15 @@ class TokenValidation(models.Model):
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, related_name="token_validation"
     )
-    token = models.CharField(max_length=128, unique=True)
+
+    code_2fa = models.CharField(max_length=128, blank=True, null=True, unique=True)
+
+    session_token = models.CharField(max_length=128, unique=True)
+
     action = models.CharField(max_length=20, default="default_action")
     created_at = models.DateTimeField(auto_now_add=True)
 
     def is_expired(self):
-        # Vérifie si le token est expiré (2h max)
         return timezone.now() - self.created_at > timezone.timedelta(hours=2)
 
     def __str__(self):

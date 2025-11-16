@@ -50,23 +50,32 @@ async def RecuperationEmail(request, mail_ids=None, emails=None):
         if isinstance(subject, bytes) and encoding:
             subject = subject.decode(encoding if encoding else "utf-8")
 
+        # Ignorer les réponses automatiques ou les sujets commençant par "Re:" chiant a gerer
         if subject.lower().startswith("re:"):
-            continue
-        if email_type and email_type.lower() not in subject.lower():
             continue
 
         message_id = message.get("Message-ID")
         sender = message.get("From")
+        # Filtrage des emails selon le type demandé
+        if email_type in ["Avis negatif", "Avis positif"]:
+            # je filtre les avis positifs et négatifs en fonction du sujet
+            if email_type and email_type.lower() not in subject.lower():
+                continue
+            if not (
+                (
+                    "Avis negatif" in subject
+                    or "Avis positif" in subject
+                    or "Prise de contact" in subject
+                )
+                and ("staff.modo.ecoride@gmail.com" in sender)
+            ):
+                continue
+        # sinon je me permet d'afficher le sujet des la prise de contact
+        # et comme j'envois des email a part de la meme adresse je filtre ici directement pour la sécurité
+        if email_type == "Prise de contact":
+            if not "staff.modo.ecoride@gmail.com" in sender or "Avis" in subject:
+                continue
 
-        if not (
-            (
-                "Avis negatif" in subject
-                or "Avis positif" in subject
-                or "Prise de contact" in subject
-            )
-            and ("staff.modo.ecoride@gmail.com" in sender)
-        ):
-            continue
 
         body = ""
         if message.is_multipart():

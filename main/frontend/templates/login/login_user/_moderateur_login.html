@@ -1,15 +1,15 @@
 {% load static %}
     <div  id="account-moderateur" class="class_flex">
         <div>
-            <a href="{% url 'moderation_email' %}" class="photo_default">
-                Modération
-            </a>
-        </div>
-        <div>
             <a href="{% url 'MonCompte' %}" class="photo_default">
                 <div>
                     Mon compte : {{ credit.credit|floatformat:2 }} €
                 </div><br>
+            </a>
+        </div>
+        <div>
+            <a href="{% url 'moderation_email' %}" class="photo_default">
+                Modération
             </a>
         </div>
     </div>

@@ -1,5 +1,4 @@
 from django.shortcuts import get_object_or_404, redirect
-from ...envoi_email import Envoi_Email_Annulation
 
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -20,6 +19,10 @@ def GereTonCovoiteChauffeur(request):
 
         demarrer_ou_annuler_form = Demarrer_ou_annulerForm(request.POST)
         trajet_id = request.POST.get("trajet_id")
+
+        if not trajet_id:
+            messages.error(request, "Aucun trajet spécifié.")
+            return redirect(f"{reverse('MonCompte')}?{request.META['QUERY_STRING']}")
         if demarrer_ou_annuler_form.is_valid():
 
             # ______PARTIE CHAUFFEUR______
@@ -97,6 +100,18 @@ def GereTonCovoiteChauffeur(request):
                                         reservation.etat_reservation = "Annulé"
                                         reservation.reservation_rembourser = True
                                         reservation.save()
+                                        # Envoyer l'email d'annulation
+                                        from ...envoi_email.send_email import envoi_email
+                                        subject = "Annulation de votre trajet"
+                                        context = {
+                                            "trajet": trajet,
+                                            "reservations": reservations,
+                                        }
+                                        envoi_email(request, to=reservation.passager.email, subject=subject, context=context, template="style_email/annulation_confirmation.html")
+                                        messages.success(
+                                        request,
+                                        "Covoiturage annulé, les passagers en sont informés par email",
+                                        )
                                     except Exception as e:
                                         messages.error(
                                         request,
@@ -138,13 +153,6 @@ def GereTonCovoiteChauffeur(request):
                                     request,
                                     f"Erreur lors du débit de la commission pour la plateforme : {str(e)}",
                                     )
-
-                                # Envoyer l'email d'annulation
-                                Envoi_Email_Annulation(request, trajet_id, reservations)
-                                messages.success(
-                                request,
-                                "Covoiturage annulé, les passagers en sont informés par email",
-                                )
                                 return redirect(f"{reverse('MonCompte')}?{request.META['QUERY_STRING']}")
 
                     except Exception as e:

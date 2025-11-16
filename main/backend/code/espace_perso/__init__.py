@@ -7,3 +7,4 @@ from .gestion_covoit.etat_covoite import GereTonCovoiteChauffeur
 from .gestion_covoit.propose_covoite import ProposeTonCovoiturage
 from .gestion_covoit.etat_reservation import GereTaReservationPassager
 from ..utils.asynchrone.annuler_trajet import annuler_trajet
+from .gestion_covoit.choisis_covoite import ChoisisTonCovoite

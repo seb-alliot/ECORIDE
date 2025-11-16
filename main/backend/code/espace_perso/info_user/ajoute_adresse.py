@@ -2,11 +2,8 @@ from django.contrib import messages
 from django.shortcuts import redirect
 from ....models import AdresseUser
 from ....forms import AdresseForm
-import logging
 from django.urls import reverse
 
-# Création du logger
-logger = logging.getLogger(__name__)
 
 def AjoutTonAdresse(request, adresse_user=None, user=None):
     user = request.user
@@ -38,6 +35,5 @@ def AjoutTonAdresse(request, adresse_user=None, user=None):
         return adresse_form
 
     except Exception as e:
-        logger.error(f"Erreur lors de l'ajout de l'adresse pour l'utilisateur {user.id}: {str(e)}")
-        messages.error(request, "Une erreur est survenue lors de la mise à jour de vos informations.")
+        messages.error(request, f"Une erreur est survenue lors de la mise à jour de vos informations. {e}")
         return redirect(f"{reverse('MonCompte')}?{request.META['QUERY_STRING']}")

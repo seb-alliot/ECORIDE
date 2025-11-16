@@ -1,7 +1,7 @@
 :root {
   --logo-size: clamp(60px, 8vw, 200px);
   --font-size-base: clamp(8px, 2vw, 20px);
-  --input-width: clamp(60px, 16vw, 220px);
+  --input-width: clamp(60px, 12vw, 220px);
   --input-height: clamp(25px, 5vw, 40px);
   --image-height: clamp(100px, 25vw, 800px);
   --spacing-sm: 5px;
@@ -168,7 +168,7 @@ label#resultat_recherche img,
   height: clamp(25px, 10vh , 45px);
   padding: clamp(10px, 2vw, 15px);
   background-color: var(--color-primary);
-  color: var(--text-on-primary);
+  color: var(--color-light);
   border: none;
   border-radius: clamp(6px, 1vw, 10px);
   text-decoration: none;
@@ -461,7 +461,7 @@ div#reservation > div:nth-child(1) {
 /* Image profil */
 div#reservation > div > img.photo_profile {
   width: 90%;
-  height: auto;
+  height: 70%;
   object-fit: cover;
   margin-top: 5%;
 }
@@ -631,7 +631,9 @@ form#login2 button,
 form#reset_mdp input,
 form#reset_mdp button,
 form#validation_email input,
-form#validation_email button{
+form#validation_email button,
+select#id_etat,
+#deux_choix{
   width: var(--input-width);
   font-size: var(--font-size-other);
   height: var(--input-height);
@@ -655,8 +657,6 @@ footer a {
 /* Consolidated specific font-sizes and margins for links/buttons */
 #mot_de_passe_oublie a,
 button#bouton_note,
-select#id_avis,
-select#id_note,
 #note_perso,
 #avis_perso,
 #info_trajet {
@@ -671,12 +671,7 @@ form#contact_form textarea {
   font-size: var(--font-size-other);
 }
 
-/* Consolidated #id_commentaire */
-#id_commentaire {
-  width: clamp(320px, 30vw, 400px);
-  height: clamp(110px, 15vw, 135px);
-  font-size: clamp(18px, 3vw, 20px);
-}
+
 
 /* Consolidated #contact_form input (and button from previous consolidation) */
 form#contact_form input {
@@ -773,18 +768,10 @@ form#trajet_form,
 #preference_form,
 #bouton_terminer,
 #deux_choix,
-button#bouton_note,
-select#id_avis,
-select#id_note {
+button#bouton_note {
   margin-bottom: var(--spacing-md);
 }
 
-/* Consolidated #moderation_form select, #bouton_modo, select#id_avis */
-#moderation_form select,
-#bouton_modo,
-select#id_avis {
-  margin-right: clamp(40px, 6vw, 70px);
-}
 
 /* Consolidated #avis_positif input */
 #avis_positif input {
@@ -793,8 +780,8 @@ select#id_avis {
 }
 
 /* Consolidated #bouton_moderateur */
-#bouton_moderateur {
-  gap: clamp(10px, 3vw, 20px);
+#bouton_moderateur, #enable_select {
+  gap: clamp(10px, 2vw, 15px);
 }
 
 /* Consolidated #ajouter, #refuser */
@@ -854,10 +841,13 @@ h1 {
 /* Consolidated #affichage_trajet_form labels and inputs */
 #affichage_trajet_form label,
 #affichage_trajet_form input {
-  height: clamp(20px, 5vw, 30px);
-  width: clamp(130px, 15vw, 150px);
+  height: clamp(30px, 5vw, 40px);
+  width: clamp(100px, 15vw, 150px);
   font-size: clamp(10px, 2vw, 12px);
+  border-radius: 0;
 }
+
+
 form#affichage_trajet_form {
   margin-top: var(--spacing-md);
 }
@@ -903,6 +893,60 @@ th {
   background-size: cover;
   background-position: center;
 }
+
+#account-moderateur {
+  gap: clamp(10px, 4vw, 20px);
+}
+
+
+
+/* Consolidated form gave you guess */
+
+#je_donne_mon_avis {
+  margin-top:2%;
+}
+.form-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-table {
+    display: table;
+    margin: 0 auto;
+}
+
+
+.form-row {
+    display: flex;
+    margin:clamp(10px, 2vw, 15px);
+    gap: clamp(10px, 2vw, 15px);
+}
+
+.form-row label {
+    border: 1px solid black;
+    background-color: var(--color-light);
+    border-radius: 10px;
+    text-align: center;
+    align-content: center;
+    width: clamp(80px, 20vw, 250px);
+    height: var(--input-height);
+
+}
+.form-row input,
+.form-row select,
+.form-row textarea {
+    display: table-cell;
+    width: clamp(80px, 20vw, 250px);
+    height: var(--input-height);
+    padding: 6px;
+}
+
+
+
+
+
+
 
 @media (max-width: 768px) {
 

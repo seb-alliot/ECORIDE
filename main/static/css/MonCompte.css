@@ -389,8 +389,7 @@ textarea#id_exigences_personnelles {
   display: none;
 }
 
-select#id_etat,
-#deux_choix,
+
 #preference_form input,
 #preference_form select,
 #preference_form button,

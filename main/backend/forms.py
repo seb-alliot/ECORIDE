@@ -16,6 +16,7 @@ from main.backend.models import (
     AdresseUser,
     ReservationTrajet,
     NoteUser,
+    CreditUser,
 )
 from django.core.exceptions import ValidationError
 from django.contrib.auth.models import User
@@ -38,8 +39,6 @@ class CustomUserForm(forms.ModelForm):
         if User.objects.exclude(pk=self.instance.pk).filter(email=email).exists():
             raise ValidationError("Cet email est déjà utilisé.")
         return email
-
-
 
 class Inscription(UserCreationForm):
     username = forms.CharField(
@@ -500,7 +499,7 @@ class AdresseForm(forms.ModelForm):
             "photo",
         ]
         widgets = {
-            "numero": forms.NumberInput(attrs={"placeholder": "Numéro du bâtiment"}),
+            "numero": forms.TextInput(attrs={"placeholder": "Numéro du bâtiment"}),
             "type_voie": forms.Select(choices=AdresseUser.TYPE_VOIE),
             "nom_rue": forms.TextInput(attrs={"placeholder": "Nom de la rue"}),
             "complement": forms.TextInput(
@@ -521,12 +520,6 @@ class AdresseForm(forms.ModelForm):
         if user:
             self.fields['email'].initial = user.email
 
-    def clean_numero(self):
-        numero = self.cleaned_data.get("numero")
-        if numero and (len(str(numero)) > 10 or not str(numero).isdigit()):
-            raise ValidationError("Le numéro doit contenir au maximum 10 chiffres.")
-        return numero
-
     def clean_code_postal(self):
         code_postal = self.cleaned_data.get("code_postal")
         if code_postal and (
@@ -542,7 +535,7 @@ class AdresseForm(forms.ModelForm):
             raise ValidationError("Cet email appartient déjà à un autre utilisateur.")
 
         return email
-
+    # Valide que les champs obligatoires sont remplis de maniere rapide via une boucle
     def clean(self):
         cleaned_data = super().clean()
         required_fields = [
@@ -558,8 +551,6 @@ class AdresseForm(forms.ModelForm):
                 raise forms.ValidationError(f"Le champ {field} est obligatoire.")
         return cleaned_data
 
-
-
 # ---------------------------- Gestion des réservations de trajet ---------------------------->
 
 
@@ -568,6 +559,34 @@ class ReservationTrajetForm(forms.ModelForm):
         model = ReservationTrajet
         fields = ["places"]
         widgets = {"places": forms.Select(choices=ReservationTrajet.places)}
+    # Validation ajouter ici pour la vue admin, la logique dans le back peux être supprimée
+    def clean(self):
+        cleaned_data = super().clean()
+        passager = cleaned_data.get("passager")
+        trajet = cleaned_data.get("trajet_reserver")
+        places = cleaned_data.get("places")
+
+        if passager and trajet and places:
+            # Récupérer le crédit du passager
+            try:
+                credit = CreditUser.objects.get(user=passager).credit
+            except CreditUser.DoesNotExist:
+                raise ValidationError("Le passager n'a pas de compte crédit valide.")
+
+            prix_total = trajet.prix * places
+            if credit < prix_total:
+                raise ValidationError("Crédit insuffisant pour cette réservation.")
+
+            if places > trajet.places:
+                raise ValidationError("Nombre de places demandé supérieur aux places disponibles.")
+
+        return cleaned_data
+
+
+
+
+
+
 
 
 class StatutReservationForm(forms.ModelForm):

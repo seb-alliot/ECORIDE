@@ -12,6 +12,9 @@ def GereTaReservationPassager(request):
     reservation_id = request.POST.get("reservation_id")
 
     if request.method == "POST" and request.POST.get("form_soumis") == "reservation_form":
+        if not reservation_id:
+            messages.error(request, "Aucune réservation spécifiée.")
+            return redirect(f"{reverse('MonCompte')}?{request.META['QUERY_STRING']}")
         try:
             with transaction.atomic():
                 reservation_form = StatutReservationForm(request.POST)

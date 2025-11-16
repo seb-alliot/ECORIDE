@@ -2,5 +2,22 @@
 {% load static %}
 
 {% block principal %}
-    {% include "login/login-etape/_etape_2_mdp.html" %}
+<div id="etape-2-connection">
+    <form method="POST" id="login2">
+        {% csrf_token %}
+        <label for="id_Password" class="label-hidden">Mot de passe</label>
+        {{ form.password }}
+        {{ form.token_connection}}
+        {% if form.non_field_errors %}
+            <div class="error">
+                {% for error in form.non_field_errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+        <button type="submit">Se connecter</button>
+    </form>
+
+    <a id="mot_de_passe_oublie" href="{% url 'password_reset' %}">Mot de passe oublier ?</a>
+</div>
 {% endblock principal %}

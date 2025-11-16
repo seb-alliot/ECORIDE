@@ -51,7 +51,7 @@ import asyncio
 def Contact(request):
     context = {}
 
-    contact_demander = PriseContact(request)
+    contact_demander = PriseContact(request, to="staff.modo.ecoride@gmail.com", subject="", template="")
     if isinstance(contact_demander, HttpResponseRedirect):
         return contact_demander
     contact_form, adresse_user = contact_demander
@@ -166,7 +166,7 @@ def MonCompte(request):
 
 
     try:
-        voitures_user = request.user.voiture.all()  # grâce à related_name="voitures"
+        voitures_user = request.user.voiture.all()
         voitures_data = {
             str(voiture.id): voiture.places for voiture in voitures_user
         }
@@ -267,10 +267,17 @@ def SelectionTrajet(request):
 def AvisSatisfaction(request, trajet_id, token):
     context = {}
 
-    avis_form = DonneTonAvis(request, trajet_id, token)
-    if isinstance(avis_form, HttpResponseRedirect):
-        return avis_form
-    context["avis_form"] = avis_form
+    result = DonneTonAvis(request, trajet_id, token)
+    if isinstance(result, HttpResponseRedirect):
+        return result
+
+    avis_form, trajet, reservation = result
+    context = {
+        "avis_form": avis_form,
+        "trajet": trajet,
+        "reservation": reservation,
+    }
+
     context.update(initialisation_template(request))
     return render(
         request, "interface_utilisateur/utilisateur/avis_satisfaction.html", context

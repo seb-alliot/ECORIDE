@@ -19,9 +19,17 @@ def PriseDeContact(request, email_id_selected, mail, telephone, sujet, email_use
     if request.method == "POST":
         if contact_form.is_valid():
             reponse_modo = contact_form.cleaned_data["reponse"]
+            subject = "Prise de contact"
+            context = {
+                "pseudo": pseudo,
+                "telephone": telephone,
+                "email_user": email_user,
+                "commentaire": commentaire,
+                "reponse_modo": reponse_modo,
+            }
 
-            from ...envoi_email import Envoi_Reponse_Modo
-            Envoi_Reponse_Modo(request, email_user, commentaire, pseudo, reponse_modo)
+            from ...envoi_email.send_email import envoi_email
+            envoi_email(request, to=email_user, subject=subject, template="style_email/_reponse_modo.html", context=context)
             if request.POST.get("repondre") == "oui":
                 mail.store(email_id_selected, "+FLAGS", "\\Deleted")
                 mail.expunge()

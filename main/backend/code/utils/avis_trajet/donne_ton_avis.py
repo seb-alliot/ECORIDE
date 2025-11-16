@@ -3,7 +3,7 @@ from django.contrib import messages
 from ....models import TrajetProposer, NoteUser, ReservationTrajet, CreditUser
 from ....forms import AvisForm
 from ...securite import confirm_token
-from ...envoi_email import Envoi_Email_Avis_Trajet_Positif , Envoi_Email_Avis_Trajet_Negatif
+from ...envoi_email.send_email import envoi_email
 from django.db import transaction
 
 def DonneTonAvis(request, trajet_id, token):
@@ -17,7 +17,9 @@ def DonneTonAvis(request, trajet_id, token):
     reservation = get_object_or_404(ReservationTrajet, trajet_reserver=trajet, passager__username=username_token)
     chauffeur = trajet.chauffeur
     passagers = request.user
-
+    if not trajet or not reservation:
+        messages.info(request, "Le trajet ou la réservation n'existe plus.")
+        return redirect("index")
     # Vérifie si une note existe déjà pour ce passager pour le chauffeur sur ce trajet
     note_existante = NoteUser.objects.filter(
         passager=reservation.passager,
@@ -50,11 +52,16 @@ def DonneTonAvis(request, trajet_id, token):
             # blocage modification commentaire
             if note_existante.commentaire_attribuee and nouveau_commentaire:
                 info_liste_fourni.append("commentaire")
-            elif not note_existante.commentaire_attribuee and nouveau_commentaire:
-                note_existante.commentaire_attribuee = True
+            elif not note_existante.commentaire_attribuee:
+                if not nouveau_commentaire or nouveau_commentaire.strip() == "":
+                    note_existante.commentaire = None
+                    note_existante.commentaire_attribuee = False
+                else:
+                    note_existante.commentaire = nouveau_commentaire
+                    note_existante.commentaire_attribuee = True
                 info_liste_succe.append("commentaire")
 
-            # On centralise les messages pour éviter de spammer l'utilisateur
+            # On centralise les messages pour éviter de spammer la modération
             if info_liste_fourni:
                 messages.info(request, f"Vous avez déja renseigné : {', '.join(info_liste_fourni)}.")
             if info_liste_succe:
@@ -100,9 +107,22 @@ def DonneTonAvis(request, trajet_id, token):
                     messages.info(request, "Vous avez déja renseigné un commentaire.")
                 else:
                     commentaire = nouveau_commentaire if nouveau_commentaire else None
-                    Envoi_Email_Avis_Trajet_Positif(
-                            request, chauffeur, trajet_id, reservation, commentaire, token, passagers
-                        )
+                    subject = "Avis positif"
+                    template = "style_email/_avis_positif.html"
+                    envoi_email(
+                        request=request,
+                        to="staff.modo.ecoride@gmail.com",
+                        subject=subject,
+                        template="style_email/_avis_positif.html",
+                        context={
+                            "chauffeur": chauffeur,
+                            "trajet": trajet,
+                            "reservation": reservation,
+                            "commentaire": commentaire,
+                            "token": token,
+                            "passagers": passagers,
+                        }
+                    )
                     info_liste_mail.append("avis positif")
 
         elif avis_soumis == "non":
@@ -112,8 +132,21 @@ def DonneTonAvis(request, trajet_id, token):
                 messages.info(request, "Vous avez déja renseigné un commentaire.")
             else:
                 commentaire = nouveau_commentaire if nouveau_commentaire else None
-                Envoi_Email_Avis_Trajet_Negatif(
-                    request, chauffeur, trajet_id, reservation, commentaire, token, passagers
+                subject = "Avis negatif"
+                template = "style_email/_avis_negatif.html"
+                envoi_email(
+                    request=request,
+                    to="staff.modo.ecoride@gmail.com",
+                    subject=subject,
+                    template=template,
+                    context={
+                        "chauffeur": chauffeur,
+                        "trajet": trajet,
+                        "reservation": reservation,
+                        "commentaire": commentaire,
+                        "token": token,
+                        "passagers": passagers,
+                    }
                 )
                 info_liste_mail.append("avis négatif")
         if info_liste_mail:
@@ -121,4 +154,4 @@ def DonneTonAvis(request, trajet_id, token):
                 request, f"Votre {', '.join(info_liste_mail)} a été envoyer, nous vous remercions pour votre retour."
             )
 
-    return avis_form
+    return avis_form , trajet , reservation

@@ -4,7 +4,6 @@ psql -U postgres -d ecoride -f chemin_vers_le_fichier.sql
 CREATE DATABASE IF NOT EXISTS ecoride CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE ecoride;
 
--- ajout de backend pour correspondre a django et a sa structure de projet
 
 CREATE TABLE auth_user (
     id SERIAL PRIMARY KEY,
@@ -38,7 +37,7 @@ CREATE TABLE backend_adresseuser (
     complement VARCHAR(100),
     code_postal INTEGER NOT NULL,
     ville VARCHAR(100) NOT NULL,
-    pays VARCHAR(100) NOT NULL DEFAULT 'Pays',
+    pays VARCHAR(100) NOT NULL DEFAULT 'France',
     telephone VARCHAR(10),
     email VARCHAR(100),
     photo VARCHAR(100) DEFAULT 'photo_default/photo_default.jpg',
@@ -257,11 +256,11 @@ INSERT INTO backend_voiture (
 ) VALUES (
     'Toyota',
     'Celica',
-    'Bleu',
+    'Rouge',
     'Essence',
-    '5',
-    'AB-123-CD',
-    2020,
+    '3',
+    'BD-585-YH',
+    2002,
     (SELECT id FROM auth_user WHERE username='ITSUKI')
 );
 
@@ -270,6 +269,6 @@ INSERT INTO backend_voiture (
 INSERT INTO backend_choixrole (
     role, user_id
 ) VALUES (
-    'chauffeur',
+    'passager',
     (SELECT id FROM auth_user WHERE username='ITSUKI')
 );

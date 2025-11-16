@@ -19,12 +19,6 @@ def debit_credit_reservation(sender, instance, created, **kwargs):
         prix_unitaire = trajet.prix
         prix_total = prix_unitaire * places_reservees
 
-        if credit_passager.credit < prix_total:
-            return
-
-        if places_reservees > trajet.places:
-            return
-
         with transaction.atomic():
             # Débiter le passager
             credit_passager.credit -= prix_total
@@ -35,7 +29,7 @@ def debit_credit_reservation(sender, instance, created, **kwargs):
             trajet.save()
 
             # Mise à jour du prix unitaire dans la réservation
-            instance.prix_par_passager = prix_unitaire
+            instance.prix_par_passager = prix_total
             instance.save(update_fields=["prix_par_passager"])
 
     except CreditUser.DoesNotExist:

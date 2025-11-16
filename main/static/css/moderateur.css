@@ -34,9 +34,9 @@
   --tab-border-radius: 10px;
 
   /* Affichage Trajet */
-  --affichage-trajet-element-height: clamp(25px, 1.2vw + 20px, 40px);
+  --affichage-trajet-element-height: clamp(25px, 1.2vw, 40px);
   --affichage-trajet-element-width: clamp(130px, 15vw, 350px);
-  --affichage-trajet-font-size: clamp(12px, 1vw + 10px, 22px);
+  --affichage-trajet-font-size: clamp(12px, 1vw, 22px);
 }
 
 /* ================= GLOBAL STRUCTURE ================= */
@@ -70,16 +70,7 @@
   border-radius: 0;
 }
 
-#affichage_trajet_form input,
-#affichage_trajet_form select {
-  flex: 1;
-  border-radius: 0;
-  border: var(--input-border);
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0);
-  height: var(--affichage-trajet-element-height);
-  width: var(--affichage-trajet-element-width);
-  font-size: var(--affichage-trajet-font-size);
-}
+
 
 /* ================= TABLEAU ================= */
 
@@ -129,7 +120,7 @@
 
 .content {
   position: absolute;
-  top: 25px;
+  top: 30px;
   left: 0;
   background: #b19a8b;
   right: 0;
@@ -239,9 +230,6 @@ form#email_select_form select {
   margin-top: var(--margin-sm);
 }
 
-#id_commentaire {
-  align-self: center;
-}
 
 /* ================= AFFICHAGE ADMIN ================= */
 
@@ -266,6 +254,14 @@ form#email_select_form select {
   font-size: var(--font-size-lg);
   margin-bottom: var(--margin-md);
 }
+#id_commentaire {
+  width: clamp(200px, 25vw, 350px);
+}
+form#contact_form p {
+    margin: 0;
+    padding: 0;
+}
+
 
 @media (max-width: 780px) {
   .tab {
@@ -274,6 +270,6 @@ form#email_select_form select {
 }
 @media(max-width:1200px) {
     .content {
-    top: 15px;
+    top: clamp(10px, 3vh, 20px);
   }
 }

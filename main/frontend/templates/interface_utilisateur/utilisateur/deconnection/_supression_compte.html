@@ -1,7 +1,7 @@
 <div id="suppression-compte">
     <form id="suppression_compte_form" method="POST">
         {% csrf_token %}
-            <input type="hidden" name="Valider" value="oui">
+            <input type="hidden" name="choix_suppression" value="oui">
             <button id="suppression-compte" type="submit" onclick="return confirm('Confirmer la suppression du compte ?');">
             Supprimé mon compte
         </button>

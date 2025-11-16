@@ -1,34 +1,59 @@
+# ----------------------------------------------------------------------
+# 1. ENVIRONNEMENT, CACHE ET COMPILATION
+# ----------------------------------------------------------------------
 
-*.log
-*.tmp
-*.swp
+# Environnement virtuel Python et outils
+venv/
+node_modules/
+.egg/
+env/
+
+# Cache de compilation Python
+__pycache__/
 *.pyc
 *.pyo
 *.pyd
-__pycache__/
 
-venv/
-logs/
-
-cert.crt
-cert.key
-
+# Caches Mypy et éditeur
+.mypy_cache/
 .vscode/
 
-read me.txt
-env/
-
-
+# Fichiers de log et temporaires
+logs/
+*.log
+*.tmp
+*.swp
 .log
 .tmp
 
-node_modules/
+# ----------------------------------------------------------------------
+# 2. FICHIERS SENSIBLES ET SPÉCIFIQUES AU SERVEUR
+# ----------------------------------------------------------------------
 
-.egg/
+# Variables d'environnement locales
+.env
 
-credit_admin.py
-credit_sebastien.py
-credit_setsuna.py
+# Clés et certificats
+cert.crt
+cert.key
 
-main/backend/migrations
-ECORIDE/ECORIDE/serveur_settings.py
+# Fichiers de settings spécifiques au déploiement
+ECORIDE/serveur_settings.py
+
+# ----------------------------------------------------------------------
+# 3. FICHIERS ET DOSSIERS DU PROJET
+# ----------------------------------------------------------------------
+
+manipe_git.txt
+fond ecran
+script credit
+
+main/media/user/
+
+# ----------------------------------------------------------------------
+# 4. EXCLUSIONS SPÉCIFIQUES À L'APPLICATION
+# ----------------------------------------------------------------------
+
+# Cache dans les sous-dossiers
+main/backend/__pycache__/
+main/backend/migrations/

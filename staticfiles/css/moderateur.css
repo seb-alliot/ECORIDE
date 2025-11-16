@@ -129,7 +129,7 @@
 
 .content {
   position: absolute;
-  top: 25px;
+  top: 30px;
   left: 0;
   background: #b19a8b;
   right: 0;
@@ -267,6 +267,12 @@ form#email_select_form select {
   margin-bottom: var(--margin-md);
 }
 
+form#contact_form p {
+    margin: 0;
+    padding: 0;
+}
+
+
 @media (max-width: 780px) {
   .tab {
     margin-top: 0px;
@@ -274,6 +280,6 @@ form#email_select_form select {
 }
 @media(max-width:1200px) {
     .content {
-    top: 15px;
+    top: clamp(10px, 3vh, 20px);
   }
 }

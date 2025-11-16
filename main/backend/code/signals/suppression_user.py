@@ -3,7 +3,9 @@ from django.dispatch import receiver
 from django.contrib.auth.models import User
 from ...models import TrajetProposer, ReservationTrajet, CreditUser
 from django.db import transaction
-from ..envoi_email import Information_suppression_user
+
+
+
 from dotenv import load_dotenv
 load_dotenv()
 from ..utils import get_mongo_db
@@ -11,6 +13,19 @@ from ..utils import get_mongo_db
 @receiver(pre_delete, sender=User)
 def user_deleted(sender, instance, **kwargs):
 
+    user_email = instance.email
+    from ..envoi_email.send_email import envoi_email
+    subject = "Suppression de votre compte - Ecoride"
+    template = "style_email/_confirmation_suppression_compte.html"
+
+    context = {"username": instance.username}
+    envoi_email(
+        request=None,
+        to=user_email,
+        subject=subject,
+        template=template,
+        context=context
+    )
     # Récupérer les trajets proposés par ce chauffeur
     trajets = TrajetProposer.objects.filter(chauffeur=instance)
 
@@ -36,12 +51,24 @@ def user_deleted(sender, instance, **kwargs):
                     credit_passager.save()
 
                     # Email d'information envoyé au passager
-                    Information_suppression_user(
-                        passager=passager,
-                        trajet=trajet,
-                        reservation=res,
-                        chauffeur=instance
+                    from ..envoi_email.send_email import envoi_email
+                    subject = "Annulation de votre réservation - Ecoride"
+                    to = passager.email
+                    template = "style_email/_reservation_annule.html"
+                    context = {
+                        "passager": passager,
+                        "trajet": trajet,
+                        "reservation": res,
+                        "chauffeur": instance,
+                    }
+                    envoi_email(
+                        request=None,
+                        to=to,
+                        subject=subject,
+                        template=template,
+                        context=context
                     )
+
 
 
     if reservations_en_tant_que_passager.exists():

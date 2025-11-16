@@ -5,8 +5,7 @@ from django.db.models import Avg, Q
 from ....models import TrajetProposer, NoteUser, ReservationTrajet, CreditUser, Preference
 from ....forms import ReservationTrajetForm
 from django.db import transaction
-from ..avis_trajet.compteur_vue_mongo import increment_vue
-import os
+from ...utils.avis_trajet.compteur_vue_mongo import increment_vue
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -15,12 +14,13 @@ load_dotenv()
 def ChoisisTonCovoite(request):
     user = request.user
     # Récupération du trajet
-    from ..avis_trajet.connection_mongo import get_mongo_db
-    db = get_mongo_db()
-    trajet_id = request.GET.get("trajet_id")
-    compteur = increment_vue(db, trajet_id)
+    from ...utils.asynchrone.connection_mongo import get_mongo_db
 
     trajet_id = request.GET.get("trajet_id")
+    # Incrémentation du compteur de vues dans MongoDB
+    db = get_mongo_db()
+    compteur = increment_vue(db, trajet_id)
+
     trajet = TrajetProposer.objects.filter(
         id=trajet_id
         ).annotate(note_chauffeur=Avg("chauffeur__accusé__note")).first()
@@ -30,7 +30,9 @@ def ChoisisTonCovoite(request):
         Q(commentaire__exact="Aucun commentaire trouvé.") |
         Q(commentaire__isnull=True) |
         Q(commentaire__exact="")
-    ).order_by("passager", "?").distinct("passager").values("commentaire")[:3] #utilisation de distinct pour ne pas avoir de doublon, possible que sur postgresql
+    ).order_by("passager", "?").distinct("passager").values("commentaire")[:3]
+    #utilisation de distinct pour ne pas avoir de doublon, possible que sur postgresql
+    #le [:3] permet de limiter à 3 commentaires aléatoires
 
     preference = Preference.objects.filter(user_preference=trajet.chauffeur).first()
 

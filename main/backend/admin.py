@@ -1,4 +1,10 @@
 from django.contrib import admin
+
+from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.models import User
+from django.utils.translation import gettext_lazy as _
+
 from .models import (
     NoteUser,
     AdresseUser,
@@ -10,16 +16,13 @@ from .models import (
     CreditUser,
     Commission,
 )
-from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin
-from django.contrib.auth.models import User
-from django.utils.translation import gettext_lazy as _
-from .models import ChoixRole
-from .forms import TrajetForm , VoitureForm, AdresseForm , CustomUserForm
-
-
-# Register your models here.
-
+from .forms import (
+    TrajetForm,
+    VoitureForm,
+    AdresseForm,
+    CustomUserForm,
+    ReservationTrajetForm,
+)
 
 
 
@@ -31,7 +34,16 @@ class CustomUserAdmin(UserAdmin):
         ("Etat du compte", {"fields": ("is_active",)}),
         ("Groupes", {"fields": ("groups",)}),
         ("Permissions", {"fields": ("user_permissions",)}),
-        ("Informations personnelles",{"fields": ("is_staff",)},),
+        ("Date de création", {"fields": ("date_joined",)}),
+        ("Dernière connexion", {"fields": ("last_login",)}),
+        (
+            "Informations personnelles",
+            {
+                "fields": (
+                    "is_staff",
+                )
+            },
+        ),
     ]
 
     list_display = [
@@ -44,6 +56,10 @@ class CustomUserAdmin(UserAdmin):
     search_fields = ["username", "email"]
     list_filter = ["is_active", "is_staff"]
     list_per_page = 10
+
+
+    list_display = ["username",'is_staff', "email", "is_active"]
+    list_filter = ["is_active"]
 admin.site.unregister(User)
 admin.site.register(User, CustomUserAdmin)
 
@@ -196,6 +212,7 @@ class ChoixRoleAdmin(admin.ModelAdmin):
     search_fields = ["role"]
     list_filter = ["role"]
     list_per_page = 10
+    list_editable = ["role"]
 
 
 @admin.register(Voiture)
@@ -228,9 +245,6 @@ class VoitureAdmin(admin.ModelAdmin):
         "places",
         "immatriculation",
         "annee",
-    ]
-    list_editable = [
-        "type_moteur"
     ]
     search_fields = [
         "user",
@@ -338,12 +352,14 @@ class PreferenceAdmin(admin.ModelAdmin):
 
 @admin.register(ReservationTrajet)
 class ReservationTrajetAdmin(admin.ModelAdmin):
+    form = ReservationTrajetForm
     list_display = [
         "id",
         "passager",
         "trajet_reserver",
         "passager",
         "prix_par_passager",
+
         "places",
         "reservation_rembourser",
         "etat_reservation",
