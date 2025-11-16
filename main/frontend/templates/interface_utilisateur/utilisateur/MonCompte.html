@@ -24,12 +24,30 @@
     {% endwith %}
 
 
+
+{% block script_js %}
+<script nonce="{{ request.csp_nonce }}">
+    const modelsData = JSON.parse('{{ models_data|escapejs }}');
+</script>
+
+<script src="{% static 'js/ajoute_voiture.js' %}" nonce="{{ request.csp_nonce }}" defer></script>
+
+<script nonce="{{ request.csp_nonce }}">
+    const voituresData = JSON.parse('{{ voitures_data_json|escapejs }}');
+</script>
+<script src="{% static 'js/place_voiture.js' %}" nonce="{{ request.csp_nonce }}" defer></script>
+
 <script id="trajet5" type="application/json">
     {{ trajet5_json|safe }}
 </script>
+
 <script nonce="{{ request.csp_nonce }}">
     const annulerUrl = "{% url 'annuler_trajet5' %}";
 </script>
-<script src="{% static 'js/annuler_trajet.js' %}"></script>
+<script src="{% static 'js/annuler_trajet.js' %}" nonce="{{ request.csp_nonce }}" defer></script>
+
+<script src="{% static 'js/filtre_trajet.js' %}" nonce="{{ request.csp_nonce }}" defer></script>
+
+{% endblock script_js %}
 
 {% endblock principal %}

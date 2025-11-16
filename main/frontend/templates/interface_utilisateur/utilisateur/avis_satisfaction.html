@@ -1,35 +1,26 @@
 {% extends "index.html" %}
 {% load static %}
 
-
-
 {% block principal %}
     <div class="generix3">
         <p id="info_trajet">Vous avez réservé un trajet avec {{ trajet.chauffeur }} le {{ trajet.date }} à {{ trajet.heure|date:"H\\H:i" }}.</p>
     </div>
-
     <form method="POST" id="je_donne_mon_avis" class="form-center">
         {% csrf_token %}
-
         <div class="form-table">
-
             <div class="form-row">
                 <label>Sa c'est bien passé ?</label>
                 {{ avis_form.avis }}
             </div>
-
             <div class="form-row">
                 <label>Quelle note donnez-vous ?</label>
                 {{ avis_form.note }}
             </div>
-
             <div class="form-row">
                 <label>Commentaires</label>
                 {{ avis_form.commentaire }}
             </div>
-
         </div>
-
         <button class="avis_donner" id="bouton_note" type="submit">Envoyer</button>
     </form>
 {% endblock principal %}
