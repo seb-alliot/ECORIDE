@@ -27,21 +27,14 @@
 
 {% block script_js %}
 
-<!-- JSON inline : pas besoin de nonce, mais tu peux le garder -->
+<!-- JSON inline -->
 <script id="trajet5" type="application/json">
     {{ trajet5_json|safe }}
 </script>
 
-<!-- JS inline avec nonce -->
 <script nonce="{{ request.csp_nonce }}">
     const modelsData = JSON.parse('{{ models_data|escapejs }}');
-</script>
-
-<script nonce="{{ request.csp_nonce }}">
     const voituresData = JSON.parse('{{ voitures_data_json|escapejs }}');
-</script>
-
-<script nonce="{{ request.csp_nonce }}">
     const annulerUrl = "{% url 'annuler_trajet5' %}";
 </script>
 
