@@ -14,13 +14,18 @@ function getCookie(name) {
 }
 
 function annulerTrajets5() {
-    const trajets5 = JSON.parse(document.getElementById('trajet5').textContent);
+    const trajetElement = document.getElementById('trajet5');
 
-    // Récupère l'URL depuis le data attribute
-    const btn = document.getElementById('annuler-btn');
-    const annulerUrl = btn.dataset.url;
+    if (!trajetElement) {
+        console.error('Élément trajet5 non trouvé');
+        return;
+    }
 
-    fetch(annulerUrl, {
+    const trajets5 = JSON.parse(trajetElement.textContent);
+
+
+
+    fetch(window.annulerUrl, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
