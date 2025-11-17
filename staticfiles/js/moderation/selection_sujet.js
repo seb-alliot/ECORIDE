@@ -3,7 +3,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("email_select_form");
 
     if (!select || !form) {
-        console.log("Élément select ou form introuvable, script ignoré");
         return;
     }
 
@@ -12,6 +11,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     if (select.value === "" || select.value === null) {
-        console.log("Aucune sélection faite, formulaire non soumis");
+        return;
     }
 });
