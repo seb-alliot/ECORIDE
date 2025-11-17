@@ -7,6 +7,7 @@ from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.core.serializers.json import DjangoJSONEncoder
 import json
+from csp.decorators import csp_replace
 from .forms import (
     AfficherTrajetForm,
     FiltreTrajetForm,
@@ -142,7 +143,7 @@ def logout_view(request):
     messages.info(request, "Vous êtes déconnecté.")
     return redirect("/")
 
-
+@csp_replace({"frame-ancestors": None})
 # --------------------------Espace Personnel-------------------------------------------
 @login_required(login_url="connection1")
 def MonCompte(request):
@@ -237,7 +238,7 @@ def MonCompte(request):
     return render(request, "interface_utilisateur/utilisateur/MonCompte.html", context)
 
 # -----------------------------------------------------------------------------------------
-
+@csp_replace({"frame-ancestors": None})
 def SelectionTrajet(request):
     context = {}
 
@@ -281,7 +282,7 @@ def AvisSatisfaction(request, trajet_id, token):
     return render(
         request, "interface_utilisateur/utilisateur/avis_satisfaction.html", context
     )
-
+@csp_replace({"frame-ancestors": None})
 def Fait_Ton_Taff_De_Modo(request):
     # on gere l'acces au page admin/moderateur
     if not is_superuser_or_moderateur(request.user):

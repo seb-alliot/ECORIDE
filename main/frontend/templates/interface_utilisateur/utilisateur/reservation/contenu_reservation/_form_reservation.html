@@ -1,12 +1,10 @@
 {% load static %}
 
-<!-- En-tête : informations -->
 <div id="info_places" class="class_flex class_column class_aligne_items_center p_deco">
     <p>{{ trajet.places }} places restantes</p><br>
     <p>Combien de places voulez-vous réserver?</p><br>
 </div>
 
-<!-- Formulaire -->
 <div class="class_flex class_justify_center">
     <form id="reservation_form" method="POST">
         {% if user.is_authenticated %}
@@ -14,7 +12,8 @@
             <div id="place_a_reserver" data-max-places="{{ trajet.places|default:1 }}">
                 {{ reservation_form.places }}
                 <input type="hidden" name="Reserver" value="oui">
-                <button id="pop_up_confirmation" type="submit" onclick="return confirm('Confirmer la réservation?');">
+
+                <button id="pop_up_confirmation" type="submit">
                     Réserver
                 </button>
             </div>
@@ -26,4 +25,7 @@
     </form>
 </div>
 
-<script src="{% static 'js/places_reservation.js' %}"></script>
+{% block script_js %}
+    <script src="{% static 'js/espace_perso/validation_reservation.js' %}" nonce="{{ request.csp_nonce }}"></script>
+    <script src="{% static 'js/espace_perso/places_reservation.js' %}" nonce="{{ request.csp_nonce }}"></script>
+{% endblock script_js %}

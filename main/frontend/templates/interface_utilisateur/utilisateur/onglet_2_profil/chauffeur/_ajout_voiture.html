@@ -1,5 +1,6 @@
 {% load static %}
 {% if preference %}
+
 <h4 id="ajout_voiture" class="class_flex class_justify_center p_deco">Ajouter un véhicule</h4>
 <form  class="class_flex class_justify_center" id="voiture_form"action="{{ queryString|default:"" }}" method="post">
     {% csrf_token %}
@@ -29,8 +30,8 @@
     <p class="class_flex class_justify_center">Comme le réservoir à remplir</p>
 {% endif %}
 
-<script nonce="{{ request.csp_nonce }}">
-    const modelsData = JSON.parse('{{ models_data|escapejs }}');
-</script>
 
-<script src="{% static 'js/ajoute_voiture.js' %}"></script>
+{% block script_js %}
+    <script nonce="{{ request.csp_nonce }}">const modelsData = JSON.parse('{{ models_data|escapejs }}');</script>
+    <script src="{% static 'js/espace_perso/ajoute_voiture.js' %}" nonce="{{ request.csp_nonce }}"></script>
+{% endblock script_js %}

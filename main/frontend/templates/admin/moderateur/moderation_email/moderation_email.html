@@ -75,8 +75,8 @@
 </div>
 
 {% block script_js %}
-    <script src="{% static 'js/selection_email.js' %}" nonce="{{ request.csp_nonce }}" defer></script>
-    <script src="{% static 'js/selection_sujet.js' %}" nonce="{{ request.csp_nonce }}" defer></script>
+    <script src="{% static 'js/moderation/selection_email.js' %}" nonce="{{ request.csp_nonce }}" defer></script>
+    <script src="{% static 'js/moderation/selection_sujet.js' %}" nonce="{{ request.csp_nonce }}" defer></script>
 {% endblock script_js %}
 
 {% endblock principal %}

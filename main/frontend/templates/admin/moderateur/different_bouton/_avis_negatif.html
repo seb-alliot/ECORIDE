@@ -1,4 +1,4 @@
-
+{% load static %}
 {% include "admin/moderateur/moderation_email/structure_moderation/_afficher_info_trajet.html" %}
 
 <form method="POST" id="moderation_form">
@@ -15,8 +15,15 @@
         <label for="etat_paiement">État du paiement :</label>
             {{ moderation_form.etat_paiement }}
             <input type="hidden" name="Valider" value="oui">
-                <button id="bouton_confirmer" type="submit" onclick="return confirm('Confirmer votre choix ?');">
-                    Valider
-                </button>
+
+            <button id="bouton_confirmer" type="submit">
+                Valider
+            </button>
     </div>
 </form>
+
+
+{% block script_js %}
+    <script src="{% static 'js/moderation/validation_negatif_moderation.js' %}" nonce="{{ request.csp_nonce }}"></script>
+    <script src="{% static 'js/moderation/moderation_confirmation.js' %}" nonce="{{ request.csp_nonce }}"></script>
+{% endblock script_js %}

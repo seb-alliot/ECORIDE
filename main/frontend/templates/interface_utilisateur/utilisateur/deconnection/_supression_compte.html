@@ -1,9 +1,16 @@
+
+{% load static %}
+
 <div id="suppression-compte">
     <form id="suppression_compte_form" method="POST">
         {% csrf_token %}
             <input type="hidden" name="choix_suppression" value="oui">
-            <button id="suppression-compte" type="submit" onclick="return confirm('Confirmer la suppression du compte ?');">
-            Supprimé mon compte
-        </button>
+            <button id="suppression-compte" type="submit">
+                Supprimer mon compte
+            </button>
     </form>
 </div>
+
+{% block script_js %}
+    <script src="{% static 'js/espace_perso/supprimer_compte.js' %}" nonce="{{ csp_nonce }}"></script>
+{% endblock script_js %}

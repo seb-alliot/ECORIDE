@@ -31,8 +31,7 @@
     <button id="proposition" type="submit" name="form_soumis" value="trajet_form">Proposez un trajet</button>
 </form>
 
-<script nonce="{{ request.csp_nonce }}">
-    const voituresData = JSON.parse('{{ voitures_data_json|escapejs }}');
-</script>
-
-<script src="{% static 'js/place_voiture.js' %}"></script>
+{% block script_js %}
+    <script nonce="{{ request.csp_nonce }}">const voituresData = JSON.parse('{{ voitures_data_json|escapejs }}');</script>
+    <script src="{% static 'js/espace_perso/place_voiture.js' %}" nonce="{{ request.csp_nonce }}"></script>
+{% endblock script_js %}

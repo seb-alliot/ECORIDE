@@ -8,15 +8,22 @@
 
             <div class="generix3" id="bouton_moderateur">
                 <div>
-                    <button id="ajouter" type="submit" name="action" value="Ajouter" onclick="return confirm('Confirmer l\'ajout ?');">
+                    <button id="ajouter" type="submit" name="action" value="Ajouter">
                         Ajouter
                     </button>
                 </div>
                 <div>
-                    <button id="refuser" type="submit" name="action" value="Refuser" onclick="return confirm('Confirmer le refus ?');">
+                    <button id="refuser" type="submit" name="action" value="Refuser">
                         Refuser
                     </button>
                 </div>
             </div>
         </form>
     </div>
+
+{# ASSUREZ-VOUS d'inclure ce script en bas du template #}
+{% load static %}
+{% block script_js %}
+<script src="{% static 'js/moderation/validation_positif_moderation.js' %}" nonce="{{ request.csp_nonce }}"></script>
+<script src="{% static 'js/moderation/moderation_action_confirmation.js' %}" nonce="{{ request.csp_nonce }}"></script>
+{% endblock script_js %}

@@ -260,7 +260,7 @@ class VoitureAdmin(admin.ModelAdmin):
     list_per_page = 10
 
     class Media:
-        js = ("js/voiture_admin.js",)
+        js = ("js/admin/voiture_admin.js",)
 
 
 @admin.register(TrajetProposer)
