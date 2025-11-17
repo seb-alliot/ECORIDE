@@ -209,16 +209,16 @@ SECURE_HSTS_PRELOAD = False
 # CSP Configuration
 from csp import constants
 CONTENT_SECURITY_POLICY = {
-    'DIRECTIVES': {
-        'connect-src': ["'self'"],
-        'default-src': ["'self'"],
-        'font-src': ["'self'"],
-        'img-src': ["'self'", 'data:', 'https:'],
-        'object-src': ["'none'"],
-        'script-src': ["'self'", constants.NONCE],
-        'script-src-attr': ["'self'"],
-        'script-src-elem': ["'self'", constants.NONCE,"'sha256-ieoeWczDHkReVBsRBqaal5AFMlBtNjMzgwKvLqi/tSU='"],
-        'style-src': ["'self'", "'unsafe-inline'"]
+    "DIRECTIVES": {
+        "default-src": ["'self'"],
+        "script-src": ["'self'", constants.NONCE],
+        "script-src-elem": ["'self'", constants.NONCE,"'sha256-ieoeWczDHkReVBsRBqaal5AFMlBtNjMzgwKvLqi/tSU='"],
+        "script-src-attr": ["'self'"],
+        "style-src": ["'self'", constants.NONCE],
+        "img-src": ["'self'", "data:"],
+        "font-src": ["'self'"],
+        "connect-src": ["'self'"],
+        "object-src": ["'none'"]
     }
 }
 # settings.py
