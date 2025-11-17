@@ -1,7 +1,12 @@
 document.addEventListener("DOMContentLoaded", function () {
     const select = document.getElementById("email_select");
+    const form = document.getElementById("email_select_form");
 
+    if (!select || !form) return;
     select.addEventListener("change", function () {
-        document.getElementById("email_select_form").submit();
+        form.submit();
     });
+    if (select.value === "" || select.value === null) {
+        console.log("Aucune sélection faite, formulaire non soumis");
+    }
 });
