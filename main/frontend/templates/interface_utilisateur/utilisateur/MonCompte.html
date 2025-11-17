@@ -23,4 +23,16 @@
         </div>
     {% endwith %}
 
+{% block script_js %}
+
+<script id="trajet5" type="application/json">
+    {{ trajet5_json|safe }}
+</script>
+<script nonce="{{ request.csp_nonce }}">
+    window.annulerUrl  = "{% url 'annuler_trajet5' %}";
+</script>
+<script src="{% static 'js/annuler_trajet.js' %}"></script>
+
+{% endblock script_js %}
+
 {% endblock principal %}

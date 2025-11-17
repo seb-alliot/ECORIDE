@@ -1,13 +1,21 @@
 document.addEventListener('DOMContentLoaded', function () {
     const voitureSelect = document.getElementById('id_voiture');
+
+    /** @type HTMLElement|null */
     const placesInput = document.getElementById('id_places');
 
+    const name = placesInput.getAttribute('name')
     const select = document.createElement('select');
-    select.setAttribute('name', placesInput.getAttribute('name'));
+
+    select.setAttribute('name', name)
 
     placesInput.replaceWith(select);
+    const defaultOption = document.createElement('option');
+    defaultOption.value = ''
+    defaultOption.textContent = '-- Sélectionnez un véhicule --'
 
-    addDefaultOption(select);
+
+    select.appendChild(defaultOption);
 
     updateSeatsOption(voitureSelect, select);
 
@@ -16,33 +24,36 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-function addDefaultOption(select) {
-    const option = document.createElement('option');
-    option.value = '';
-    option.textContent = '-- Sélectionnez un véhicule --';
-    select.appendChild(option);
-}
-
+/**
+ * @param { HTMLSelectElement } select
+ */
 function updateSeatsOption(voitureSelect, select) {
     const voitureId = voitureSelect.value;
     const maxPlaces = voituresData[voitureId];
 
-    clearSeatOptions(select);
+    if (maxPlaces) {
+        removeOptions(select)
 
-    if (!maxPlaces) {
-        return;
-    }
+        for (let i = 0; i < maxPlaces; i++) {
+            /** @type { HTMLOptionElement } */
+            const option = document.createElement('option')
 
-    for (let i = 1; i <= maxPlaces; i++) {
-        const option = document.createElement('option');
-        option.value = i;
-        option.textContent = `${i} place${i > 1 ? 's' : ''}`;
-        select.appendChild(option);
+            option.value = i + 1;
+            option.textContent = i + 1 + " place";
+
+            if(i >= 1) {
+                option.textContent += "s";
+            }
+
+            select.add(option)
+        }
     }
 }
 
-function clearSeatOptions(select) {
-    while (select.options.length > 1) {
-        select.remove(1);
+function removeOptions(selectElement) {
+    var i, L = selectElement.options.length - 1;
+
+    for(i = L; i >= 0; i--) {
+        selectElement.remove(i);
     }
 }

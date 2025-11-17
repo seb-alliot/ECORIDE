@@ -152,7 +152,6 @@ def MonCompte(request):
     context["tabs"] = tabs
     context["models_data"] = json.dumps(Voiture.MODELE, cls=DjangoJSONEncoder)
 
-
     # Appel des fontions pour les formulaires
     preference_form = DonneTesPreferences(request)
     role_form = ChangeTonRole(request)

@@ -23,10 +23,9 @@ function annulerTrajets5() {
 
     const trajets5 = JSON.parse(trajetElement.textContent);
 
-    const btn = document.getElementById('annuler-btn');
-    const annulerUrl = btn.dataset.url;
 
-    fetch(annulerUrl, {
+
+    fetch(window.annulerUrl, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
