@@ -3,7 +3,8 @@ from django.urls import reverse
 from django.contrib import messages
 from ....models import NoteUser, TrajetProposer, User
 from ....forms import ModerationAvisPositifForm
-
+from ...utils import supprimer_mail
+import asyncio
 
 def GereLesAvisPositif(request,email_type, email_id_selected, mail, trajet_id, commentaire, chauffeur_id, passager_id):
 
@@ -39,6 +40,8 @@ def GereLesAvisPositif(request,email_type, email_id_selected, mail, trajet_id, c
                         note_chauffeur.decision_prise = True
                         note_chauffeur.save()
                         infos.append("Commentaire ajouté")
+                        asyncio.run(supprimer_mail(email_id_selected))
+                        messages.success(request, "Email traité.")
 
                 elif action == "Refuser":
                     if note_chauffeur.commentaire:
@@ -48,6 +51,8 @@ def GereLesAvisPositif(request,email_type, email_id_selected, mail, trajet_id, c
                         note_chauffeur.decision_prise = True
                         note_chauffeur.save()
                         infos.append("Décision validée")
+                        asyncio.run(supprimer_mail(email_id_selected))
+                        messages.success(request, "Email traité.")
 
                 else:
                     messages.error(request, "Action inconnue.")

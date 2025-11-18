@@ -7,7 +7,7 @@ from django.urls import reverse
 import re
 
 
-def ExtractionDonnee(request, email_type, selected_email):
+def ExtractionDonnee(request, get_email_type, selected_email):
     body = selected_email["body"]
     trajet_id = None
     trajet = None
@@ -36,7 +36,7 @@ def ExtractionDonnee(request, email_type, selected_email):
     except AttributeError:
         messages.info(request, "Aucun commentaire.")
     title_id = extraire.find("title")
-    if email_type in ["Avis positif", "Avis negatif"]:
+    if get_email_type in ["Avis positif", "Avis negatif"]:
         if title_id:
             title_id = title_id.get_text()
             trajet_id = title_id.split(" ")[-1]
@@ -67,7 +67,7 @@ def ExtractionDonnee(request, email_type, selected_email):
 
                 if list_error:
                     messages.info(request, f"L'info manquante est : {', '.join(list_error)}")
-                    return redirect(f"{reverse('moderation_email')}?email_type={email_type}")
+                    return redirect(f"{reverse('moderation_email')}?email_type={get_email_type}")
 
             except (ValueError, TypeError):
                 return
@@ -78,7 +78,7 @@ def ExtractionDonnee(request, email_type, selected_email):
                 else None
             )
 
-    elif email_type == "Prise de contact":
+    elif get_email_type == "Prise de contact":
         try:
             # Email
             div_email = extraire.find("div", class_="email_user")
@@ -106,9 +106,9 @@ def ExtractionDonnee(request, email_type, selected_email):
                 commentaire = div_commentaire.p.get_text().replace("Commentaire:", "").replace("Commentaire :", "").strip()
 
         except AttributeError:
-            return redirect(f"{reverse('moderation_email')}?email_type={email_type}")
+            return redirect(f"{reverse('moderation_email')}?email_type={get_email_type}")
 
 
     affichage_trajet_form = AfficherTrajetForm(request.POST or None, initial={"chauffeur": chauffeur,"trajet": trajet, "date_reservation": date_resa,"passager":passager, "prix": prix})
 
-    return affichage_trajet_form , telephone, sujet, email_user, pseudo, commentaire, trajet_id, email_type, selected_email, passager_id, chauffeur_id
+    return affichage_trajet_form , telephone, sujet, email_user, pseudo, commentaire, trajet_id, get_email_type, selected_email, passager_id, chauffeur_id

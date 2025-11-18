@@ -3,9 +3,10 @@ from django.urls import reverse
 from django.contrib import messages
 from ....models import TrajetProposer, ReservationTrajet, NoteUser, CreditUser
 from ....forms import ModerationTrajetForm
+from ...utils import supprimer_mail
+import asyncio
 
-
-def GereLesAvisNegatif(request, chauffeur_id, passager_id, trajet_id, commentaire):
+def GereLesAvisNegatif(request, email_id_selected, chauffeur_id, passager_id, trajet_id, commentaire):
     trajet = TrajetProposer.objects.filter(id=trajet_id).first()
     note_chauffeur = NoteUser.objects.filter(
         chauffeur=chauffeur_id,
@@ -52,6 +53,7 @@ def GereLesAvisNegatif(request, chauffeur_id, passager_id, trajet_id, commentair
                 elif avis == "non":
                     if note_chauffeur.commentaire_moderer:
                         info_commentaire.append("Commentaire déjà traité.")
+
                     else:
                         note_chauffeur.commentaire_moderer = True
                         note_chauffeur.save()
@@ -73,6 +75,8 @@ def GereLesAvisNegatif(request, chauffeur_id, passager_id, trajet_id, commentair
                             note_chauffeur.decision_prise = True
                             note_chauffeur.save()
                             choix_modo.append("Paiement accordé.")
+                            asyncio.run(supprimer_mail(email_id_selected))
+                            messages.success(request, "Email traité.")
                         else:
                             messages.error(request, "Validation manquante pour paiement.")
                             return redirect(f"{reverse('moderation_email')}?email_type=Avis+negatif")
@@ -86,6 +90,8 @@ def GereLesAvisNegatif(request, chauffeur_id, passager_id, trajet_id, commentair
 
                         note_chauffeur.save()
                         choix_modo.append("Paiement refusé.")
+                        asyncio.run(supprimer_mail(email_id_selected))
+                        messages.success(request, "Email traité.")
                     else:
                         messages.error(request, "Validation manquante pour refus de paiement.")
                         return redirect(f"{reverse('moderation_email')}?email_type=Avis+negatif")

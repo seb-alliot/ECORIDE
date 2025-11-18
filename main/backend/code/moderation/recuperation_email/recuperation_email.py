@@ -17,7 +17,7 @@ async def RecuperationEmail(request, mail_ids=None, emails=None):
     if emails is None:
         emails = []  # Initialisation une seule fois, avant la boucle
 
-    email_type = request.GET.get("email_type", "").strip()
+    get_email_type = request.GET.get("email_type", "").strip()
     selected_email = None
     email_id_selected = request.GET.get("email_id")
 
@@ -57,9 +57,9 @@ async def RecuperationEmail(request, mail_ids=None, emails=None):
         message_id = message.get("Message-ID")
         sender = message.get("From")
         # Filtrage des emails selon le type demandé
-        if email_type in ["Avis negatif", "Avis positif"]:
+        if get_email_type in ["Avis negatif", "Avis positif"]:
             # je filtre les avis positifs et négatifs en fonction du sujet
-            if email_type and email_type.lower() not in subject.lower():
+            if get_email_type and get_email_type.lower() not in subject.lower():
                 continue
             if not (
                 (
@@ -72,7 +72,7 @@ async def RecuperationEmail(request, mail_ids=None, emails=None):
                 continue
         # sinon je me permet d'afficher le sujet des la prise de contact
         # et comme j'envois des email a part de la meme adresse je filtre ici directement pour la sécurité
-        if email_type == "Prise de contact":
+        if get_email_type == "Prise de contact":
             if not "staff.modo.ecoride@gmail.com" in sender or "Avis" in subject:
                 continue
 
@@ -103,4 +103,4 @@ async def RecuperationEmail(request, mail_ids=None, emails=None):
             selected_email = email_data
 
     await mail.logout()
-    return email_type, email_id_selected, mail_ids, emails, selected_email
+    return get_email_type, email_id_selected, mail_ids, emails, selected_email

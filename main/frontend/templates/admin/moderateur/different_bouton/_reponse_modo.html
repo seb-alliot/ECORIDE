@@ -1,12 +1,17 @@
-
+{% load static %}
 <form method="POST" id="contact_form">
     {% csrf_token %}
     {{ contact_form.as_p }}
-    {% csrf_token %}
-    <div class="generix3" >
+
+    <div class="generix3">
         <input type="hidden" name="repondre" value="oui">
-        <button id="bout_reponse_modo" type="submit" onclick="return confirm('Etes vous sur de votre réponse ?');">
+
+        <button id="bout_reponse_modo" type="submit">
             répondre
         </button>
     </div>
 </form>
+
+{% block script_js %}
+    <script src="{% static 'js/moderation/confirm_reponse.js' %}" nonce="{{ request.csp_nonce }}" defer></script>
+{% endblock %}

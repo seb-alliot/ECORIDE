@@ -4,21 +4,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prise de contact</title>
+    <title>Réponse à votre demande</title>
 </head>
 
 <body>
-    <h1>Réponse a votre demande</h1>
     <p>Bonjour {{ pseudo }}</p>
     <p>Nous vous remercions de nous avoir contacté.</p>
     <p>En réponse à votre demande :</p><br>
-    <p>{{ message }}</p><br>
-    <!--Mettre ici le nom de la personne de la demande pour de ux -->
+    <p>{{ sujet }}</p>
 
     <p>Voici notre réponse:</p><br>
-    <p>{{ reponse_modo }}</p><br>
+    <p>{{ reponse_modo }}</p>
 <footer>
     <p>Vous pouvez de nouveau nous contacter pour plus d'informations, en passant de nouveau par notre formulaire</p>
+    <p><a href="{{ contact_url }}">En cliquant ici</a></p>
     <p>Nous vous conseillons de ne pas répondre a ce mail, car il ne sera pas lu.</p>
     <p>Merci de votre compréhension.</p>
     <p>L'équipe d'ECORIDE</p>

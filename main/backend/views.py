@@ -304,12 +304,12 @@ def Fait_Ton_Taff_De_Modo(request):
     # asyncio.run permet d'executer une fonction asynchrone dans un contexte synchrone depuis python 3.7
     if isinstance(email_recuperer, HttpResponseRedirect):
         return email_recuperer
-    email_type, email_id_selected, mail_ids, emails, selected_email = email_recuperer
+    get_email_type, email_id_selected, mail_ids, emails, selected_email = email_recuperer
 
 
     #___________________Extraction des données du mail____________________
     if selected_email:
-        donnee_extrait = ExtractionDonnee(request, email_type, selected_email)
+        donnee_extrait = ExtractionDonnee(request, get_email_type, selected_email)
 
         if isinstance(donnee_extrait, HttpResponseRedirect):
             return donnee_extrait
@@ -318,7 +318,14 @@ def Fait_Ton_Taff_De_Modo(request):
         #_______gestion avis negatif avec choix paiment et ajout commentaire____
         if email_type == "Avis negatif":
 
-            moderation_form = GereLesAvisNegatif(request, chauffeur_id, passager_id, trajet_id, commentaire)
+            moderation_form = GereLesAvisNegatif(
+                request,
+                email_id_selected,
+                chauffeur_id,
+                passager_id,
+                trajet_id,
+                commentaire
+                )
             if isinstance(moderation_form, HttpResponseRedirect):
                 return moderation_form
             context["moderation_form"] = moderation_form
@@ -326,7 +333,16 @@ def Fait_Ton_Taff_De_Modo(request):
         #_______gestion avis positif et ajout commentaire____
         elif email_type == "Avis positif":
 
-            moderation_positive_form = GereLesAvisPositif(request, email_type, email_id_selected, emails, trajet_id, commentaire, chauffeur_id, passager_id)
+            moderation_positive_form = GereLesAvisPositif(
+                request,
+                email_type,
+                email_id_selected,
+                emails,
+                trajet_id,
+                commentaire,
+                chauffeur_id,
+                passager_id,
+                )
             if isinstance(moderation_positive_form, HttpResponseRedirect):
                 return moderation_positive_form
             context["moderation_positive_form"] = moderation_positive_form
@@ -334,7 +350,15 @@ def Fait_Ton_Taff_De_Modo(request):
         #_____repondre au mail de contact____
         elif email_type == "Prise de contact":
 
-            contact_form = PriseDeContact(request, email_id_selected, emails, telephone, sujet, email_user, pseudo, commentaire)
+            contact_form = PriseDeContact(
+                request,
+                email_id_selected=email_id_selected,
+                telephone=telephone,
+                sujet=sujet,
+                email_user=email_user,
+                pseudo=pseudo,
+                commentaire=commentaire
+                )
             if isinstance(contact_form, HttpResponseRedirect):
                 return contact_form
 
