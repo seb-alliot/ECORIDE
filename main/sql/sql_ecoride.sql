@@ -1,6 +1,3 @@
-psql -U postgres -d ecoride -f chemin_vers_le_fichier.sql
-
-
 CREATE DATABASE IF NOT EXISTS ecoride CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE ecoride;
 
@@ -192,14 +189,14 @@ CREATE INDEX idx_backend_trajetproposer_etat ON backend_trajetproposer (etat);
 CREATE INDEX idx_backend_reservationtrajet_etat_reservation ON backend_reservationtrajet (etat_reservation);
 
 
-recuperer le hash du mot de passe de l'utilisateur via :
-en python shell:
+-- recuperer le hash du mot de passe de l'utilisateur via :
+-- en python shell:
 
-from django.contrib.auth.hashers import make_password
-hash_pw = make_password('Studietudiant1.', hasher='bcrypt_sha256')
-print(hash_pw)
+-- from django.contrib.auth.hashers import make_password
+-- hash_pw = make_password('Studietudiant1.', hasher='bcrypt_sha256')
+-- print(hash_pw)
 
-on copie le hash et on l'utilise dans la requete d'insertion suivante :
+-- on copie le hash et on l'utilise dans la requete d'insertion suivante :
 
 INSERT INTO auth_user (
     username, email, password, first_name, last_name, is_active, is_staff, is_superuser, date_joined
@@ -215,12 +212,12 @@ INSERT INTO auth_user (
     NOW()
 );
 
-ajout de credit a l'utilisateur fraichement créé:
+-- ajout de credit a l'utilisateur fraichement créé:
 
-INSERT INTO backend_credituser (user_id, credit)
-VALUES ((SELECT id FROM auth_user WHERE username='ITSUKI'), 20.00);
+-- INSERT INTO backend_credituser (user_id, credit)
+-- VALUES ((SELECT id FROM auth_user WHERE username='ITSUKI'), 20.00);
 
--- ajout de trajet proposer par l'utilisateur ITSUKI
+-- -- ajout de trajet proposer par l'utilisateur ITSUKI
 
 INSERT INTO backend_trajetproposer (
     etat, trajet_rembourser, ville_depart, ville_arrivee, date, heure, places, prix, temps_trajet, chauffeur_id

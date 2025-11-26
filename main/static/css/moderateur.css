@@ -210,8 +210,9 @@ form#prise_contact,
   align-items: center;
 }
 
-form#email_select_form select {
+form#email_select_form select, #email_type {
   margin-bottom: var(--margin-sm);
+
 }
 
 #avis_positif {

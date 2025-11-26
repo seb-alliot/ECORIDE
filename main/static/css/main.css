@@ -638,12 +638,7 @@ select#id_etat,
   font-size: var(--font-size-other);
   height: var(--input-height);
 }
-form#email_filter_form select,
-form#email_select_form select{
-  min-width: clamp(145px, 2vw , 225px);
-  height: var(--input-height);
-  font-size: var(--font-size-other);
-}
+
 
 
 footer a {
@@ -797,6 +792,10 @@ h1, h2, h3, h4 {
 }
 
 /* Consolidated #recherche_form, #login1, #login2, #reset_mdp, #validation_email height */
+#recherche_covoiturage {
+  text-align: center;
+  margin:var(--content-side-padding);
+}
 #recherche_form,
 #login1,
 #login2,
@@ -865,6 +864,8 @@ th {
 }
 
 /* Consolidated #affichage_admin input */
+form#email_select_form select,
+#email_type,
 #affichage_admin input {
   width: clamp(80px, 25vw, 250px);
   height: clamp(20px, 5vw, 30px);
@@ -942,7 +943,9 @@ th {
     padding: 6px;
 }
 
-
+.presentation img {
+    object-fit:cover;
+}
 
 
 
