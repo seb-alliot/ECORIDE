@@ -118,7 +118,9 @@ ul.resultat {
   box-sizing: border-box;
 }
 
-
+#reservation_btn {
+    display: none;
+}
 body {
   background-color: var(--color-background);
   font-family: var(--font-main);

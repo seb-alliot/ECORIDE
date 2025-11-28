@@ -10,6 +10,7 @@ from .code import (
     annuler_trajet,
     filtre_dynamique,
     get_modeles_voiture,
+    voiture_chauffeur,
 )
 from . import views
 
@@ -60,4 +61,5 @@ urlpatterns = [
     path("annuler_trajet5", annuler_trajet, name="annuler_trajet5"),
     path("filtre_dynamique", filtre_dynamique, name="filtre_dynamique"),
     path("model-voiture/", get_modeles_voiture, name="model_voiture"),
+    path("voiture-chauffeur/", voiture_chauffeur, name="voiture_chauffeur"),
 ]

@@ -14,12 +14,12 @@
 </form>
 
 <form id="selection_trajet" method="GET" action="{% url 'reservation' %}">
-    <div id="reservation_btn" class="class_flex class_justify_center" style="display: none;">
+    <div id="reservation_btn" class="class_flex class_justify_center">
         <button type="submit">Réserver</button>
     </div>
 </form>
 
 {% block script_js %}
     <script nonce="{{ request.csp_nonce }}">const urlfiltre_form = "{% url 'filtre_dynamique' %}";</script>
-    <script src="{% static 'js/espace_perso/filtre_trajet.js' %}" nonce="{{ request.csp_nonce }}" defer></script>
+    <script nonce="{{ request.csp_nonce }}" src="{% static 'js/espace_perso/filtre_trajet.js' %}" defer></script>
 {% endblock script_js %}

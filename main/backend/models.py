@@ -740,7 +740,6 @@ class Voiture(models.Model):
 
 
 class TrajetProposer(models.Model):
-
     PLACES = [
         (1, "1 place"),
         (2, "2 places"),

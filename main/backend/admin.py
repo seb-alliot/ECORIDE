@@ -314,13 +314,16 @@ class TrajetProposerAdmin(admin.ModelAdmin):
         ("Proposer par", {"fields": ["chauffeur"]}),
         ("Trajet", {"fields": ["ville_depart", "ville_arrivee"]}),
         ("Quand", {"fields": ["date", "heure"]}),
-        ("Nombre de places", {"fields": ["places"]}),
         ("Voiture", {"fields": ["voiture"]}),
+        ("Nombre de places", {"fields": ["places"]}),
         ("Pour combien", {"fields": ["prix"]}),
         ("Temps de trajet", {"fields": ["temps_trajet"]}),
         ("Etat", {"fields": ["etat"]}),
         ("Remboursement", {"fields": ["trajet_rembourser"]}),
     ]
+
+    class Media:
+        js = ("js/admin/voiture_chauffeur.js",)
 
 
 @admin.register(Preference)
