@@ -93,10 +93,7 @@
   align-items: center;
   margin-top: 10px;
 }
-select#id_etat {
-  display: flex;
-  justify-self: center;
-}
+
 
 
 /* Scrollbar personnalisée */
@@ -552,20 +549,8 @@ form#reservation_form > div > ul {
 form#etat_form > div > ul {
   gap: 20px;
 }
-form#etat_form select,
-form#etat_form button,
-#reservation_form select,
-#reservation_form button {
-  margin: 5px;
-  width: var(--input-width);
-  font-size: var(--font-size-other);
-  height: var(--input-height);
-}
-form#etat_form select,
-#reservation_form select {
-  display: flex;
-  justify-self: center;
-}
+
+
 form#reservation_form > a.btn.btn-primary {
   color: red;
   font-size: clamp(18px, 4vw, 20px);
@@ -601,46 +586,7 @@ div#gain_plateforme {
   margin: var(--spacing-middle);
 }
 /* Consolidated common properties for various elements that use --input-width, --font-size-base, --input-width--other etc. */
-#ajouter,
-#refuser,
-button#bouton_note,
-select#id_avis,
-select#id_note,
-#bouton_confirmer,
-#moderation_form select,
-#contact_form input,
-#contact_form button,
-#bouton_modo,
-#bouton_refuser,
-#reservation_annuler,
-form#etat_form select,
-form#etat_form button,
-#bouton_terminer,
-#pop_up_confirmation,
-form#recherche_form input,
-form#recherche_form button,
-form#form_trajet input,
-form#form_trajet button,
-form#filtre_form input,
-form#filtre_form button,
-form#filtre_form select,
-form#selection_trajet button,
-form#inscription input,
-form#inscription button,
-form#login1 input,
-form#login1 button,
-form#login2 input,
-form#login2 button,
-form#reset_mdp input,
-form#reset_mdp button,
-form#validation_email input,
-form#validation_email button,
-select#id_etat,
-#deux_choix{
-  width: var(--input-width);
-  font-size: var(--font-size-other);
-  height: var(--input-height);
-}
+
 
 
 
@@ -752,23 +698,7 @@ div#preference p {
   text-decoration: none;
 }
 
-/* Consolidated form margins */
-form#trajet_form,
-#ajout_voiture,
-#reservation_faite,
-#covoiturage_proposer,
-#trajet_proposer,
-#reservion_fini,
-#reservation_annulé,
-#covoiturage_annulé {
-  margin-bottom: var(--spacing-md);
-}
-#preference_form,
-#bouton_terminer,
-#deux_choix,
-button#bouton_note {
-  margin-bottom: var(--spacing-md);
-}
+
 
 
 /* Consolidated #avis_positif input */
@@ -1060,7 +990,6 @@ form#email_select_form select,
 .trajet-radio {
     position: absolute;
     opacity: 0;
-    pointer-events: none;
 }
 
 /* Carte de trajet */

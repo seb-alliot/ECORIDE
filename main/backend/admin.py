@@ -321,6 +321,7 @@ class TrajetProposerAdmin(admin.ModelAdmin):
         ("Etat", {"fields": ["etat"]}),
         ("Remboursement", {"fields": ["trajet_rembourser"]}),
     ]
+    list_editable = ["etat", "trajet_rembourser"]
 
     class Media:
         js = ("js/admin/voiture_chauffeur.js",)

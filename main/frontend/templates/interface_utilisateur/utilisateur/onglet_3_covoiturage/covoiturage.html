@@ -1,9 +1,8 @@
-
-    <h1 class="vehicle-title">
-            <span class="icon">🚗</span>
-            Modifier le statut de
+<h1 class="vehicle-title">
+    <span class="icon"></span>
+        Modifier le statut de
     {% if trajets|length > 1 %} vos {% else %} votre {% endif %} covoiturage{% if trajets|length > 1 %}s{% endif %} ici :
-        </h1>
+</h1>
 <div>
     {% if trajet3 %}
 
@@ -24,7 +23,7 @@
 <div>
     {% if trajet4 %}
         <h2 class="vehicle-title">
-            <span class="icon">🚗</span>
+            <span class="icon"></span>
             Vos covoiturages proposés
         </h2>
         <form class="display_grid" action="{{ queryString|default:"" }}" id="demarrer_ou_annuler_form" method="post">
@@ -44,7 +43,7 @@
 <div >
     {% if reservation3 %}
             <h3 class="vehicle-title">
-            <span class="icon">🚗</span>
+            <span class="icon"></span>
             Vos réservations
         </h3>
         <form class="display_grid" action="{{ queryString|default:"" }}" id="reservation_form" method="post">

@@ -1,84 +1,79 @@
-<li class="reservation-card">
+<li class="trajet-item">
     <input
         type="radio"
         name="trajet_id"
         value="{{ tjt.id }}"
         id="trajet_{{ tjt.id }}"
-        class="reservation-radio"
+        class="trajet-radio"
         aria-labelledby="label_trajet_{{ tjt.id }}"
     >
     <label
-        class="reservation-content"
+        class="trajet-card"
         id="label_trajet_{{ tjt.id }}"
         for="trajet_{{ tjt.id }}"
     >
-        <!-- Header avec photo chauffeur et statut -->
-        <div class="reservation-header">
-            <div class="driver-info">
-                {% if tjt.chauffeur.adresse_user.photo %}
-                    <img src="{{ tjt.chauffeur.adresse_user.photo.url }}" alt="Photo de {{ tjt.chauffeur }}" class="driver-photo">
-                {% else %}
-                    <img src="{{ photo_default_url }}" alt="Photo par défaut" class="driver-photo">
-                {% endif %}
-                <div class="driver-details">
-                    <span class="driver-label">Chauffeur</span>
-                    <span class="driver-name">{{ tjt.chauffeur }}</span>
-                </div>
-            </div>
-            <span class="status-badge {{ tjt.etat|lower }}">{{ tjt.etat }}</span>
-        </div>
+        {% if tjt.chauffeur.adresse_user.photo %}
+            <img src="{{ tjt.chauffeur.adresse_user.photo.url }}" alt="Photo de {{ tjt.chauffeur }}" class="driver-photo">
+        {% else %}
+            <img src="{{ photo_default_url }}" alt="Photo par défaut" class="driver-photo">
+        {% endif %}
 
         <!-- Itinéraire -->
-        <div class="reservation-route">
-            <div class="route-point">
-                <span class="icon">📍</span>
-                <span>{{ tjt.ville_depart }}</span>
+        <div class="trajet-route">
+            <div class="route-item">
+                <span class="route-icon">📍</span>
+                <span class="route-city">{{ tjt.ville_depart }}</span>
             </div>
             <span class="route-arrow">→</span>
-            <div class="route-point">
-                <span class="icon">🏁</span>
-                <span>{{ tjt.ville_arrivee }}</span>
+            <div class="route-item">
+                <span class="route-icon">🏁</span>
+                <span class="route-city">{{ tjt.ville_arrivee }}</span>
             </div>
         </div>
 
-        <!-- Détails date/heure -->
-        <div class="reservation-details">
-            <div class="detail-item">
+        <!-- Informations du trajet -->
+        <div class="trajet-info">
+            <div class="info-item">
                 <span class="icon">📅</span>
-                <span>{{ tjt.date }}</span>
+                <span class="label">Date</span>
+                <span class="value">{{ tjt.date }}</span>
             </div>
-            <div class="detail-item">
+
+            <div class="info-item">
                 <span class="icon">🕐</span>
-                <span>{{ tjt.heure|date:"H\hi" }}</span>
+                <span class="label">Heure</span>
+                <span class="value">{{ tjt.heure|date:"H\hi" }}</span>
+            </div>
+
+            <div class="info-item full-width">
+                <span class="icon">🚗</span>
+                <span class="label">Voiture</span>
+                <span class="value">{{ tjt.voiture.marque }} {{ tjt.voiture.modele }}</span>
             </div>
         </div>
 
-        <!-- Voiture -->
-        <div class="reservation-car">
-            <span class="icon">🚗</span>
-            <span>{{ tjt.voiture.marque }} {{ tjt.voiture.modele }}</span>
-        </div>
+        <!-- Footer -->
+        <div class="trajet-footer">
+            <div class="trajet-prix">
+                <span class="prix-label">Prix</span>
+                <span class="prix-value">{{ tjt.prix }} €</span>
+            </div>
 
-        <!-- Footer avec prix et places -->
-        <div class="reservation-footer">
-            <div class="price-section">
-                <span class="price-label">Montant</span>
-                <span class="price-value">{{ tjt.prix }} €</span>
+            <div class="trajet-places">
+                {% if tjt.places %}
+                    <div class="places-available">
+                        <span class="icon">👥</span>
+                        <span>{{ tjt.places }} place{{ tjt.places|pluralize }}</span>
+                    </div>
+                {% else %}
+                    <div class="places-full">
+                        <span class="icon">👥</span>
+                        <span>Complet</span>
+                    </div>
+                {% endif %}
             </div>
-            <div class="seats-section">
-                <div class="seats-available">
-                    <span class="icon">👥</span>
-                    {% if tjt.places != 0 %}
-                        <span>{{ tjt.places }} place{{ tjt.places|pluralize }} libre{{ tjt.places|pluralize }}</span>
-                    {% else %}
-                        <span class="full">Complet</span>
-                    {% endif %}
-                </div>
-                <div class="seats-booked">
-                    <span class="icon">✓</span>
-                    <span>{{ tjt.places_reservees }} réservée{{ tjt.places_reservees|pluralize }}</span>
-                </div>
-            </div>
+
+            <span class="statut-badge {{ tjt.etat|lower }}">{{ tjt.etat }}</span>
         </div>
 
         <!-- Indicateur de sélection -->

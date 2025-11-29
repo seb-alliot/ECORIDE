@@ -249,13 +249,7 @@ div.content > ul > li > input[type="radio"] {
 }
 
 
-#role_form select,
-#role_form button {
-  width: var(--form-input-size);
-  height: var(--form-height);
-  font-size: var(--role-font-size);
-  border-radius: var(--deco-radius);
-}
+
 p {
   font-size: var(--p-font-size);
 }
@@ -360,29 +354,9 @@ div.content > div > div > ul {
     overflow-y: hidden;
     padding-bottom: 1rem;
     scroll-behavior: smooth;
-
-    /* Scrollbar personnalisée */
-    scrollbar-width: thin;
-    scrollbar-color: #8b6f5c #f0f0f0;
 }
 
-.history-list::-webkit-scrollbar {
-    height: 8px;
-}
 
-.history-list::-webkit-scrollbar-track {
-    background: #f0f0f0;
-    border-radius: 10px;
-}
-
-.history-list::-webkit-scrollbar-thumb {
-    background: #8b6f5c;
-    border-radius: 10px;
-}
-
-.history-list::-webkit-scrollbar-thumb:hover {
-    background: #6b5548;
-}
 
 /* Cartes d'historique */
 .history-card {
@@ -413,20 +387,6 @@ div.content > div > div > ul {
     margin-bottom: 0.75rem;
     padding-bottom: 0.75rem;
     border-bottom: 2px solid #f0f0f0;
-}
-
-.driver-info {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.driver-photo {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid #e8d5c4;
 }
 
 .driver-name {
@@ -600,7 +560,6 @@ div.content > div > div > ul {
 .reservation-radio {
     position: absolute;
     opacity: 0;
-    pointer-events: none;
 }
 
 /* Carte de réservation */
@@ -624,8 +583,11 @@ div.content > div > div > ul {
 .reservation-content:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    background-color: rgb(200, 240, 200);
 }
-
+.reservation-content:checked {
+    background-color: rgb(180, 220, 180);
+}
 /* Réservation sélectionnée */
 .reservation-radio:checked + .reservation-content {
     border-color: #4ecdc4;
@@ -696,11 +658,7 @@ div.content > div > div > ul {
     letter-spacing: 0.5px;
 }
 
-.driver-name {
-    font-weight: 600;
-    font-size: 0.9rem;
-    color: #333;
-}
+
 
 /* Badge statut */
 .status-badge {
@@ -961,7 +919,6 @@ input#id_photo {
 #adresse_form input[type="file"] {
     position: absolute;
     opacity: 0;
-    pointer-events: none;
 }
 
 /* Formulaire */
@@ -1114,10 +1071,6 @@ input#id_photo {
         width: 100%;
         justify-content: center;
     }
-
-    .account-actions {
-        flex-direction: column;
-    }
 }
 
 
@@ -1133,29 +1086,9 @@ input#id_photo {
     overflow-y: hidden;
     padding-bottom: 1rem;
     scroll-behavior: smooth;
-
-    /* Scrollbar personnalisée */
-    scrollbar-width: thin;
-    scrollbar-color: #8b6f5c #f0f0f0;
 }
 
-.trajets-list::-webkit-scrollbar {
-    height: 8px;
-}
 
-.trajets-list::-webkit-scrollbar-track {
-    background: #f0f0f0;
-    border-radius: 10px;
-}
-
-.trajets-list::-webkit-scrollbar-thumb {
-    background: #8b6f5c;
-    border-radius: 10px;
-}
-
-.trajets-list::-webkit-scrollbar-thumb:hover {
-    background: #6b5548;
-}
 
 /* Item de trajet */
 .trajet-item {
@@ -1392,29 +1325,9 @@ input#id_photo {
     padding-bottom: 1rem;
     scroll-behavior: smooth;
     justify-content: center;
-
-    /* Scrollbar personnalisée */
-    scrollbar-width: thin;
-    scrollbar-color: #8b6f5c #f0f0f0;
 }
 
-.vehicles-list::-webkit-scrollbar {
-    height: 8px;
-}
 
-.vehicles-list::-webkit-scrollbar-track {
-    background: #f0f0f0;
-    border-radius: 10px;
-}
-
-.vehicles-list::-webkit-scrollbar-thumb {
-    background: #8b6f5c;
-    border-radius: 10px;
-}
-
-.vehicles-list::-webkit-scrollbar-thumb:hover {
-    background: #6b5548;
-}
 
 /* Carte de voiture */
 .vehicle-card {
@@ -1533,8 +1446,18 @@ input#id_photo {
 #preference_form label {
     display: none;
 }
-#preference_form input, #preference_form select, #preference_form textarea, #preference_form button, form#trajet_form button , form#trajet_form input, form#trajet_form select, form#trajet_form textarea {
+#preference_form input, #preference_form select, #preference_form textarea, #preference_form button, form#trajet_form button , form#trajet_form input, form#trajet_form select, form#trajet_form textarea ,
+#adresse_form button , #adresse_form input, #adresse_form select, #adresse_form textarea , #role_form button , #role_form input, #role_form select,
+#id_etat, select#id_etat , #deux_choix, select#id_etat_reservation , button#reservation_annuler, #bouton_terminer{
     width: var(--form-input-size);
+    height: var(--form-height);
+}
+form#etat_form select,
+#reservation_form select,
+select#id_etat {
+    display: flex;
+    justify-self: center;
+    margin: clamp(10px , 2vh, 20px)
 }
 /* Container des préférences */
 .preferences-container {
@@ -1924,5 +1847,288 @@ input#id_photo {
     .btn-propose-trip {
         width: 100%;
         justify-content: center;
+    }
+}
+
+/* ===============================================
+    CARTES DE TRAJETS PROPOSÉS - STYLE MODERNE
+   =============================================== */
+
+
+   /* Cache le radio input */
+.trajet-radio {
+    position: absolute;
+    opacity: 0;
+}
+/* Liste des trajets - SCROLL HORIZONTAL */
+.trajets-list {
+    list-style: none;
+    position: relative;
+}
+
+.trajet-card {
+    display: block;
+    cursor: pointer;
+}
+.trajet-radio:checked + .trajet-card {
+    border: 3px solid #4ecdc4; /* Exemple de style de sélection */
+    background-color: #f0f8ff; /* Exemple de fond */
+}
+.trajet-radio:checked + .trajet-card .selection-indicator {
+    opacity: 1;
+    transform: scale(1);
+}
+/* Carte de trajet */
+.trajet-card {
+    display: block;
+    background: white;
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 3px solid transparent;
+    position: relative;
+
+}
+
+.trajet-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    background-color: rgb(200, 240, 200);
+}
+
+
+
+
+/* Indicateur de sélection */
+.selection-indicator {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    width: 28px;
+    height: 28px;
+    background: #4ecdc4;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.3s ease;
+}
+
+.trajet-card:checked + .trajet-card .selection-indicator {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.selection-indicator .checkmark {
+    color: white;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+/* Itinéraire */
+.trajet-route {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.route-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.route-icon {
+    font-size: 1rem;
+}
+
+.route-city {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.route-arrow {
+    font-size: 1rem;
+    color: #8b6f5c;
+    font-weight: bold;
+}
+
+/* Informations du trajet */
+.trajet-info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.6rem;
+    margin-bottom: 0.75rem;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding: 0.5rem;
+    background: white;
+    border: 2px solid #f0f0f0;
+    border-radius: 6px;
+}
+
+.info-item.full-width {
+    grid-column: 1 / -1;
+}
+
+.info-item .icon {
+    font-size: 0.95rem;
+}
+
+.info-item .label {
+    font-size: 0.7rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+.info-item .value {
+    font-size: 0.85rem;
+    color: #333;
+    font-weight: 500;
+}
+
+/* Footer */
+.trajet-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 0.75rem;
+    border-top: 2px solid #f0f0f0;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.trajet-prix {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.prix-label {
+    font-size: 0.7rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+
+.prix-value {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #8b6f5c;
+}
+
+.trajet-places {
+    display: flex;
+    align-items: center;
+}
+
+.places-available {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.8rem;
+    background: #d4edda;
+    color: #155724;
+    border-radius: 15px;
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+
+.places-full {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.8rem;
+    background: #f8d7da;
+    color: #721c24;
+    border-radius: 15px;
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+
+.places-available .icon,
+.places-full .icon {
+    font-size: 0.9rem;
+}
+
+/* Badge statut */
+.statut-badge {
+    padding: 0.3rem 0.7rem;
+    border-radius: 15px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.statut-badge.disponible {
+    background: #d4edda;
+    color: #155724;
+}
+
+.statut-badge.annulé {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.statut-badge.encour,
+.statut-badge.en_cours {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.statut-badge.terminé {
+    background: #d1ecf1;
+    color: #0c5460;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .trajet-item {
+        flex: 0 0 280px;
+        min-width: 280px;
+    }
+
+    .trajet-card {
+        padding: 0.75rem;
+    }
+
+    .trajet-route {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .route-arrow {
+        transform: rotate(90deg);
+    }
+
+    .trajet-info {
+        grid-template-columns: 1fr;
+    }
+
+    .trajet-footer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 480px) {
+    .prix-value {
+        font-size: 1rem;
     }
 }
