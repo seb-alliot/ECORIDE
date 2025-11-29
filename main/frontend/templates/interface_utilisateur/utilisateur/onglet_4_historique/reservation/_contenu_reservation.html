@@ -1,0 +1,73 @@
+<li class="history-card">
+    <div class="history-content">
+        <div class="history-header">
+            <div class="driver-info">
+                {% if res.trajet_reserver.chauffeur.adresse_user.photo %}
+                    <img src="{{ res.trajet_reserver.chauffeur.adresse_user.photo.url }}" alt="Photo chauffeur" class="driver-photo">
+                {% else %}
+                    <img src="{{ photo_default_url }}" alt="Photo par défaut" class="driver-photo">
+                {% endif %}
+                <span class="driver-name">
+                    {% if res.trajet_reserver.chauffeur %}
+                        {{ res.trajet_reserver.chauffeur }}
+                    {% else %}
+                        <em>Utilisateur supprimé</em>
+                    {% endif %}
+                </span>
+            </div>
+            <span class="history-badge {{ res.etat_reservation|lower }}">{{ res.etat_reservation }}</span>
+        </div>
+
+        {% if res.trajet_reserver.ville_depart %}
+            <div class="history-route">
+                <div class="route-point">
+                    <span class="icon">📍</span>
+                    <span>{{ res.trajet_reserver.ville_depart }}</span>
+                </div>
+                <span class="route-arrow">→</span>
+                <div class="route-point">
+                    <span class="icon">🏁</span>
+                    <span>{{ res.trajet_reserver.ville_arrivee }}</span>
+                </div>
+            </div>
+
+            <div class="history-details">
+                <div class="detail-item">
+                    <span class="icon">📅</span>
+                    <span>{{ res.trajet_reserver.date }}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="icon">🕐</span>
+                    <span>{{ res.trajet_reserver.heure|date:"H\hi" }}</span>
+                </div>
+            </div>
+
+            <div class="history-car">
+                <span class="icon">🚗</span>
+                <span>{{ res.trajet_reserver.voiture.marque }} {{ res.trajet_reserver.voiture.modele }}</span>
+            </div>
+        {% else %}
+            <div class="deleted-trip">
+                <span class="icon">⚠️</span>
+                <span>Trajet supprimé</span>
+            </div>
+        {% endif %}
+
+        <div class="history-footer">
+            <div class="price-info">
+                <span class="price-label">
+                    {% if res.etat_reservation == "Terminé" %}
+                        Prix payé
+                    {% elif res.etat_reservation == "Annulé" %}
+                        Remboursement
+                    {% endif %}
+                </span>
+                <span class="price">{{ res.prix_par_passager }} €</span>
+            </div>
+            <div class="seats-info">
+                <span class="icon">👥</span>
+                <span>{{ res.places }} place{{ res.places|pluralize }}</span>
+            </div>
+        </div>
+    </div>
+</li>

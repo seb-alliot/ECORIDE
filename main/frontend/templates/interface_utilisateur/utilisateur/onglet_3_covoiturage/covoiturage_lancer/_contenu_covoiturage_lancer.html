@@ -1,33 +1,89 @@
-<div>
-    <li class="resultat class_flex">
-        <input
-            type="radio"
-            name="trajet_id"
-            value="{{ tjt.id }}"
-            id="trajet_{{ tjt.id }}"
-            aria-labelledby="label_trajet_{{ tjt.id }}"
-            >
-            <label
-            id ="covoit_proposer"
-            for="trajet_{{ tjt.id }}">
+<li class="reservation-card">
+    <input
+        type="radio"
+        name="trajet_id"
+        value="{{ tjt.id }}"
+        id="trajet_{{ tjt.id }}"
+        class="reservation-radio"
+        aria-labelledby="label_trajet_{{ tjt.id }}"
+    >
+    <label
+        class="reservation-content"
+        id="label_trajet_{{ tjt.id }}"
+        for="trajet_{{ tjt.id }}"
+    >
+        <!-- Header avec photo chauffeur et statut -->
+        <div class="reservation-header">
+            <div class="driver-info">
+                {% if tjt.chauffeur.adresse_user.photo %}
+                    <img src="{{ tjt.chauffeur.adresse_user.photo.url }}" alt="Photo de {{ tjt.chauffeur }}" class="driver-photo">
+                {% else %}
+                    <img src="{{ photo_default_url }}" alt="Photo par défaut" class="driver-photo">
+                {% endif %}
+                <div class="driver-details">
+                    <span class="driver-label">Chauffeur</span>
+                    <span class="driver-name">{{ tjt.chauffeur }}</span>
+                </div>
+            </div>
+            <span class="status-badge {{ tjt.etat|lower }}">{{ tjt.etat }}</span>
+        </div>
 
-            {% if tjt.chauffeur.adresse_user.photo %}
-                <img src="{{ tjt.chauffeur.adresse_user.photo.url }}" alt="photo de profil">
-            {% else %}
-                <img src="{{ photo_default_url }}" alt="photo par défaut" >
-            {% endif %}
-            Trajet :<br>{{ tjt.ville_depart }} -> {{ tjt.ville_arrivee }}<br>
-            Le {{ tjt.date }}<br>
-            À : {{ tjt.heure|date:"H\H:i" }}<br>
-            Voiture : <br>{{ tjt.voiture.marque }} {{ tjt.voiture.modele }}<br>
-            Prix : {{ tjt.prix }}€<br>
-            Places libres:
-            {% if tjt.places %}
-            {{ tjt.places }}
-            {% else %}
-            complet
-            {% endif %}<br>
-            Etat: {{ tjt.etat }}<br>
-            </label>
-    </li>
-</div>
+        <!-- Itinéraire -->
+        <div class="reservation-route">
+            <div class="route-point">
+                <span class="icon">📍</span>
+                <span>{{ tjt.ville_depart }}</span>
+            </div>
+            <span class="route-arrow">→</span>
+            <div class="route-point">
+                <span class="icon">🏁</span>
+                <span>{{ tjt.ville_arrivee }}</span>
+            </div>
+        </div>
+
+        <!-- Détails date/heure -->
+        <div class="reservation-details">
+            <div class="detail-item">
+                <span class="icon">📅</span>
+                <span>{{ tjt.date }}</span>
+            </div>
+            <div class="detail-item">
+                <span class="icon">🕐</span>
+                <span>{{ tjt.heure|date:"H\hi" }}</span>
+            </div>
+        </div>
+
+        <!-- Voiture -->
+        <div class="reservation-car">
+            <span class="icon">🚗</span>
+            <span>{{ tjt.voiture.marque }} {{ tjt.voiture.modele }}</span>
+        </div>
+
+        <!-- Footer avec prix et places -->
+        <div class="reservation-footer">
+            <div class="price-section">
+                <span class="price-label">Montant</span>
+                <span class="price-value">{{ tjt.prix }} €</span>
+            </div>
+            <div class="seats-section">
+                <div class="seats-available">
+                    <span class="icon">👥</span>
+                    {% if tjt.places != 0 %}
+                        <span>{{ tjt.places }} place{{ tjt.places|pluralize }} libre{{ tjt.places|pluralize }}</span>
+                    {% else %}
+                        <span class="full">Complet</span>
+                    {% endif %}
+                </div>
+                <div class="seats-booked">
+                    <span class="icon">✓</span>
+                    <span>{{ tjt.places_reservees }} réservée{{ tjt.places_reservees|pluralize }}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Indicateur de sélection -->
+        <div class="selection-indicator">
+            <span class="checkmark">✓</span>
+        </div>
+    </label>
+</li>

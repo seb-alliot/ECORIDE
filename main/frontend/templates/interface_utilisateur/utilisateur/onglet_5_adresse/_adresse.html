@@ -1,67 +1,142 @@
 {% load static %}
 
-    <form id="adresse_form" action="{{ queryString|default:"" }}" method="post" enctype="multipart/form-data">
+<div class="profile-container">
+    <!-- Section photo de profil -->
+    <div class="profile-photo-section">
+        <div class="photo-wrapper">
+            {% if adresse_user.photo %}
+                <img src="{{ adresse_user.photo.url }}" alt="Photo de profil" class="profile-photo">
+            {% else %}
+                <img src="{{ photo_default_url }}" alt="Photo par défaut" class="profile-photo">
+            {% endif %}
+            <label for="{{ adresse_form.photo.id_for_label }}" class="photo-upload-btn">
+                <span class="icon">📷</span>
+                Changer la photo
+            </label>
+            {{ adresse_form.photo }}
+        </div>
+    </div>
+
+    <!-- Formulaire d'adresse -->
+    <form id="adresse_form" action="{{ queryString|default:"" }}" method="post" enctype="multipart/form-data" class="profile-form">
         {% csrf_token %}
-            <div class="photo-parent class_flex class_column">
-                <div>
-                    {{ form.subject.errors }}
-                {% if adresse_user.photo %}
-                    <img src="{{ adresse_user.photo.url }}" alt="photo de profil" class="photo_profile">
-                        {{ adresse_form.photo }}
-                {% else %}
-                    <img src="{{ photo_default_url }}" alt="photo par default" class="photo_profile">
-                    {{ adresse_form.photo }}
-                {% endif %}
-                </div>
-                <div class="photo-fille class_flex class_justify_center class_aligne_items_center">
-                    {{ form.subject.errors }}
-                <label for="numero" >Numéro</label>
+
+        <div class="form-section">
+            <h3 class="section-title">
+                <span class="icon">📍</span>
+                Adresse
+            </h3>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="{{ adresse_form.numero.id_for_label }}">Numéro</label>
                     {{ adresse_form.numero }}
-                    {{ form.subject.errors }}
-                <label for="type_Voie" >Type de rue</label>
+                    {% if adresse_form.numero.errors %}
+                        <span class="error-message">{{ adresse_form.numero.errors }}</span>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ adresse_form.type_voie.id_for_label }}">Type de voie</label>
                     {{ adresse_form.type_voie }}
-                </div>
-                <div class="photo-fille class_flex class_justify_center class_aligne_items_center">
-                    {{ form.subject.errors }}
-                <label for="nom_rue">Nom de la rue</label>
-                    {{ adresse_form.nom_rue }}
-                    {{ form.subject.errors }}
-                <label for="complement">Complément</label>
-                    {{ adresse_form.complement }}
-                </div>
-                <div class="photo-fille class_flex class_justify_center class_aligne_items_center">
-                    {{ form.subject.errors }}
-                <label for="code_postal">Code postal</label>
-                    {{ adresse_form.code_postal }}
-                    {{ form.subject.errors }}
-                <label for="ville">Ville</label>
-                    {{ adresse_form.ville }}
-                </div>
-                <div class="photo-fille class_flex class_justify_center class_aligne_items_center">
-                    {{ form.subject.errors }}
-                <label for="pays">Pays</label>
-                    {{ adresse_form.pays }}
-                    {{ form.subject.errors }}
-                <label for='telephone'>Téléphone</label>
-                    {{ adresse_form.telephone }}
-                </div>
-                {{ form.subject.errors }}
-                <div class="photo-fille class_flex class_justify_center class_aligne_items_center">
-                    {{ form.subject.errors }}
-                    {{ form.subject.errors }}
-                <label for='email'>Email</label>
-                    {{ adresse_form.email }}
-                {%if adresse_user %}
-                    <button type="submit" name="form_soumis" value="adresse_form">Modifier</button>
-                {% else %}
-                    <button type="submit" name="form_soumis" value="adresse_form">Ajouter</button>
-                {% endif %}
+                    {% if adresse_form.type_voie.errors %}
+                        <span class="error-message">{{ adresse_form.type_voie.errors }}</span>
+                    {% endif %}
                 </div>
             </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="{{ adresse_form.nom_rue.id_for_label }}">Nom de la rue</label>
+                    {{ adresse_form.nom_rue }}
+                    {% if adresse_form.nom_rue.errors %}
+                        <span class="error-message">{{ adresse_form.nom_rue.errors }}</span>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ adresse_form.complement.id_for_label }}">Complément</label>
+                    {{ adresse_form.complement }}
+                    {% if adresse_form.complement.errors %}
+                        <span class="error-message">{{ adresse_form.complement.errors }}</span>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="{{ adresse_form.code_postal.id_for_label }}">Code postal</label>
+                    {{ adresse_form.code_postal }}
+                    {% if adresse_form.code_postal.errors %}
+                        <span class="error-message">{{ adresse_form.code_postal.errors }}</span>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ adresse_form.ville.id_for_label }}">Ville</label>
+                    {{ adresse_form.ville }}
+                    {% if adresse_form.ville.errors %}
+                        <span class="error-message">{{ adresse_form.ville.errors }}</span>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group full-width">
+                    <label for="{{ adresse_form.pays.id_for_label }}">Pays</label>
+                    {{ adresse_form.pays }}
+                    {% if adresse_form.pays.errors %}
+                        <span class="error-message">{{ adresse_form.pays.errors }}</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h3 class="section-title">
+                <span class="icon">📞</span>
+                Contact
+            </h3>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="{{ adresse_form.telephone.id_for_label }}">Téléphone</label>
+                    {{ adresse_form.telephone }}
+                    {% if adresse_form.telephone.errors %}
+                        <span class="error-message">{{ adresse_form.telephone.errors }}</span>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ adresse_form.email.id_for_label }}">Email</label>
+                    {{ adresse_form.email }}
+                    {% if adresse_form.email.errors %}
+                        <span class="error-message">{{ adresse_form.email.errors }}</span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            {% if adresse_user %}
+                <button type="submit" name="form_soumis" value="adresse_form" class="btn-submit">
+                    <span class="icon">✓</span>
+                    Modifier mes informations
+                </button>
+            {% else %}
+                <button type="submit" name="form_soumis" value="adresse_form" class="btn-submit">
+                    <span class="icon">➕</span>
+                    Ajouter mes informations
+                </button>
+            {% endif %}
+        </div>
     </form>
+
+    <!-- Actions du compte -->
     {% block deconnection %}
-        <div id="deconnection_user">
+        <div class="account-actions">
             {% include "interface_utilisateur/utilisateur/deconnection/_deconnection.html" %}
             {% include "interface_utilisateur/utilisateur/deconnection/_supression_compte.html" %}
         </div>
     {% endblock deconnection %}
+</div>

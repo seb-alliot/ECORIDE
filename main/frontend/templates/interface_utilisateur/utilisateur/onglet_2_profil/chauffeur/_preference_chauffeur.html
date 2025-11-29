@@ -1,35 +1,86 @@
-{% if preference is Null %}
-    <p class="preference_css class_flex class_justify_center">Vous n'avez pas encore défini de préférence pour proposer un covoiturage</p>
-{% else %}
-    <p class="class_flex class_justify_center p_deco">Vos préferences actuelles sont :</p>
-{% endif %}
+<div class="preferences-container">
+    <!-- Titre selon l'état -->
+    {% if preference is None %}
+        <h1 class="preferences-title no-pref">
+            <span class="icon">ℹ️</span>
+            Vous n'avez pas encore défini de préférence pour proposer un covoiturage
+        </h1>
+    {% else %}
+        <h1 class="preferences-title">
+            <span class="icon">⚙️</span>
+            Vos préférences actuelles
+        </h1>
+    {% endif %}
 
-{% if preference is not Null %}
-    <div class="preference_css class_flex class_justify_center">
-        <div class="class_flex class_justify_center">
-            {{ preference.get_fumeur_display }}
-        </div>
-        <div class="class_flex class_justify_center">
-            {{ preference.get_animaux_display }}
-        </div>
-        <div class="class_flex class_justify_center">
-            {{ preference.get_exigences_particulieres_display }}
-        </div>
-        <div class="class_flex class_justify_center">
-            {{ preference.exigences_personnelles }}
-        </div>
-    </div>
-{% endif %}
+    <!-- Affichage des préférences existantes -->
+    {% if preference is not None %}
+        <div class="current-preferences">
+            <div class="pref-card">
+                <span class="pref-icon">🚭</span>
+                <span class="pref-label">Fumeur</span>
+                <span class="pref-value">{{ preference.get_fumeur_display }}</span>
+            </div>
 
-<form id="preference_form" method="post"action="{{ queryString|default:"" }}" class="class_flex class_justify_center">
-    {% csrf_token %}
-        <label for="preferences_form">Préférences</label>
-            {{ preference_form.fumeur }}
-                <label for="preferences_form">Animaux</label>
-            {{ preference_form.animaux }}
-        <label for="preferences_form">Exigences personnelles</label>
-            {{ preference_form.exigences_particulieres }}
-                <label for="preferences_form">Préferences personnelles</label>
-            {{ preference_form.exigences_personnelles }}
-        <button id="button_preferences" type="submit" name="form_soumis" value="preference_form">Modifier</button>
+            <div class="pref-card">
+                <span class="pref-icon">🐾</span>
+                <span class="pref-label">Animaux</span>
+                <span class="pref-value">{{ preference.get_animaux_display }}</span>
+            </div>
+
+            <div class="pref-card">
+                <span class="pref-icon">⭐</span>
+                <span class="pref-label">Exigences</span>
+                <span class="pref-value">{{ preference.get_exigences_particulieres_display }}</span>
+            </div>
+
+            {% if preference.exigences_personnelles %}
+                <div class="pref-card full-width">
+                    <span class="pref-icon">💬</span>
+                    <span class="pref-label">Note personnelle</span>
+                    <span class="pref-value">{{ preference.exigences_personnelles }}</span>
+                </div>
+            {% endif %}
+        </div>
+    {% endif %}
+
+    <!-- Formulaire de modification -->
+    <form id="preference_form" method="post" action="{{ queryString|default:"" }}" class="preferences-form">
+        {% csrf_token %}
+
+        <div class="form-section">
+            <h3 class="section-subtitle">
+                {% if preference %}Modifier{% else %}Définir{% endif %} vos préférences
+            </h3>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="{{ preference_form.fumeur.id_for_label }}">Fumeur</label>
+                    {{ preference_form.fumeur }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ preference_form.animaux.id_for_label }}">Animaux</label>
+                    {{ preference_form.animaux }}
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="{{ preference_form.exigences_particulieres.id_for_label }}">Exigences particulières</label>
+                    {{ preference_form.exigences_particulieres }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ preference_form.exigences_personnelles.id_for_label }}">Préférences personnelles</label>
+                    {{ preference_form.exigences_personnelles }}
+                </div>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" name="form_soumis" value="preference_form" class="btn-save-prefs">
+                {% if preference %}Modifier{% else %}Enregistrer{% endif %} mes préférences
+            </button>
+        </div>
     </form>
+</div>

@@ -1,45 +1,123 @@
-
-<li class="class_flex">
+<!-- _contenu_resultat.html -->
+<li class="trajet-item">
     <input
         type="radio"
         name="trajet_id"
         value="{{ resultat.id }}"
         id="trajet_{{ resultat.id }}"
+        class="trajet-radio"
         aria-labelledby="label_trajet_{{ resultat.id }}"
-        >
+    >
     <label
-        id="resultat_recherche"
-        class="class_shadow class_flex class_border"
+        id="label_trajet_{{ resultat.id }}"
+        class="trajet-card"
         for="trajet_{{ resultat.id }}"
-        >
-        {% if resultat.chauffeur.adresse_user.photo %}
-            <img src="{{ resultat.chauffeur.adresse_user.photo.url }}" alt="photo de profil">
-        {% else %}
-            <img src="{{ photo_default_url }}" alt="photo par default">
-        {% endif %}
-        {% if resultat.chauffeur%}
-        {{ resultat.chauffeur }} :
-        {% else %}
-        utilisateur supprimé
-        {% endif %}
-        {% if resultat.note_chauffeur %}
-        {{ resultat.note_chauffeur|floatformat:1 }} / 5 ⭐
-        {% else %}
-        pas de note
-        {% endif %}<br>
-        Trajet :
-        {{ resultat.ville_depart }} -> {{ resultat.ville_arrivee }}<br>
-        A : {{ resultat.heure|date:"H\H:i"  }}<br>
-        le : {{ resultat.date|date:"d/m/Y" }}<br>
-        voiture :{{ resultat.voiture.marque }} {{ resultat.voiture.modele }}<br>
-        Moteur : {{ resultat.voiture.type_moteur }}<br>
-        Prix :  {{ resultat.prix }}€<br>
-        {% if resultat.places != 0 %}
-            Place{{ resultat.places|pluralize }} libre{{ resultat.places|pluralize }} : {{ resultat.places }}
-        {% else %}
-            complet
-        {% endif %}<br>
-        statut: {{ resultat.etat }}<br>
-        durée estimé : {{ resultat.temps_trajet }}
+    >
+        <!-- Header avec photo et info chauffeur -->
+        <div class="trajet-header">
+            <div class="chauffeur-info">
+                <div class="chauffeur-photo">
+                    {% if resultat.chauffeur.adresse_user.photo %}
+                        <img src="{{ resultat.chauffeur.adresse_user.photo.url }}" alt="Photo de {{ resultat.chauffeur }}">
+                    {% else %}
+                        <img src="{{ photo_default_url }}" alt="Photo par défaut">
+                    {% endif %}
+                </div>
+                <div class="chauffeur-details">
+                    <div class="chauffeur-name">
+                        {% if resultat.chauffeur %}
+                            {{ resultat.chauffeur }}
+                        {% else %}
+                            <span class="deleted-user">Utilisateur supprimé</span>
+                        {% endif %}
+                    </div>
+                    <div class="chauffeur-rating">
+                        {% if resultat.note_chauffeur %}
+                            <span class="rating-stars">⭐</span>
+                            <span class="rating-value">{{ resultat.note_chauffeur|floatformat:1 }} / 5</span>
+                        {% else %}
+                            <span class="no-rating">Pas encore noté</span>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Badge statut -->
+            <div class="statut-badge {% if resultat.etat == 'Disponible' %}disponible{% else %}{{ resultat.etat|lower }}{% endif %}">
+                {{ resultat.etat }}
+            </div>
+        </div>
+
+        <!-- Corps du trajet -->
+        <div class="trajet-body">
+            <!-- Itinéraire -->
+            <div class="trajet-route">
+                <div class="route-item">
+                    <span class="route-icon">📍</span>
+                    <span class="route-city">{{ resultat.ville_depart }}</span>
+                </div>
+                <div class="route-arrow">→</div>
+                <div class="route-item">
+                    <span class="route-icon">🏁</span>
+                    <span class="route-city">{{ resultat.ville_arrivee }}</span>
+                </div>
+            </div>
+
+            <!-- Infos date/heure -->
+            <div class="trajet-datetime">
+                <div class="datetime-item">
+                    <span class="icon">📅</span>
+                    <span>{{ resultat.date|date:"d/m/Y" }}</span>
+                </div>
+                <div class="datetime-item">
+                    <span class="icon">🕐</span>
+                    <span>{{ resultat.heure|date:"H\hi" }}</span>
+                </div>
+                <div class="datetime-item">
+                    <span class="icon">⏱️</span>
+                    <span>{{ resultat.temps_trajet }}</span>
+                </div>
+            </div>
+
+            <!-- Infos voiture -->
+            <div class="trajet-car">
+                <div class="car-model">
+                    <span class="icon">🚗</span>
+                    <span>{{ resultat.voiture.marque }} {{ resultat.voiture.modele }}</span>
+                </div>
+                <div class="car-engine">
+                    <span class="engine-badge {{ resultat.voiture.type_moteur|lower }}">
+                        {% if resultat.voiture.type_moteur == "Electrique" %}⚡{% elif resultat.voiture.type_moteur == "Hybride" %}🔋{% else %}⛽{% endif %}
+                        {{ resultat.voiture.type_moteur }}
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer avec prix et places -->
+        <div class="trajet-footer">
+            <div class="trajet-prix">
+                <span class="prix-label">Prix</span>
+                <span class="prix-value">{{ resultat.prix }} €</span>
+            </div>
+            <div class="trajet-places">
+                {% if resultat.places != 0 %}
+                    <span class="places-available">
+                        <span class="icon">👥</span>
+                        {{ resultat.places }} place{{ resultat.places|pluralize }} libre{{ resultat.places|pluralize }}
+                    </span>
+                {% else %}
+                    <span class="places-full">
+                        <span class="icon">🚫</span>
+                        Complet
+                    </span>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Indicateur de sélection -->
+        <div class="selection-indicator">
+            <span class="checkmark">✓</span>
+        </div>
     </label>
 </li>

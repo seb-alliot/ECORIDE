@@ -1,37 +1,83 @@
 {% load static %}
-{% if preference %}
 
-<h4 id="ajout_voiture" class="class_flex class_justify_center p_deco">Ajouter un véhicule</h4>
-<form  class="class_flex class_justify_center" id="voiture_form"action="{{ queryString|default:"" }}" method="post">
-    {% csrf_token %}
-    <div class="voiture_mere class_flex class_justify_center">
-        <div>
-        <label for="Marque du véhicule">Marque</label>
-            {{ voiture_form.marque }}
-        <label for="Model du véhicule">Modele</label>
-            {{ voiture_form.modele  }}
-        <label for="Nombre de places">places</label>
-            {{ voiture_form.places }}
-        <label for="Immatriculation du véhicule">Immatriculation</label>
-            {{ voiture_form.immatriculation }}
-        </div>
-        <div>
-        <label for="annee">Année</label>
-            {{ voiture_form.annee }}
-        <label for="Couleur du véhicule">Couleur</label>
-            {{ voiture_form.couleur }}
-        <label for="Type de moteur">Motorisation</label>
-            {{ voiture_form.type_moteur }}
-        <button type="submit"name="form_soumis" value="voiture_form">Ajouter un véhicule</button>
-        </div>
+{% if preference %}
+    <div class="vehicle-container">
+        <h1 class="vehicle-title">
+            <span class="icon">🚗</span>
+            Ajouter un véhicule
+        </h1>
+
+        <form id="voiture_form" action="{{ queryString|default:"" }}" method="post" class="vehicle-form">
+            {% csrf_token %}
+
+            <div class="form-section">
+                <h3 class="section-subtitle">
+                    <span class="icon">📋</span>
+                    Informations du véhicule
+                </h3>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="{{ voiture_form.marque.id_for_label }}">Marque</label>
+                        {{ voiture_form.marque }}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{ voiture_form.modele.id_for_label }}">Modèle</label>
+                        {{ voiture_form.modele }}
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="{{ voiture_form.places.id_for_label }}">Nombre de places</label>
+                        {{ voiture_form.places }}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{ voiture_form.immatriculation.id_for_label }}">Immatriculation</label>
+                        {{ voiture_form.immatriculation }}
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="{{ voiture_form.annee.id_for_label }}">Année</label>
+                        {{ voiture_form.annee }}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="{{ voiture_form.couleur.id_for_label }}">Couleur</label>
+                        {{ voiture_form.couleur }}
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group full-width">
+                        <label for="{{ voiture_form.type_moteur.id_for_label }}">Motorisation</label>
+                        {{ voiture_form.type_moteur }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" name="form_soumis" value="voiture_form" class="btn-add-vehicle">
+                    <span class="icon">➕</span>
+                    Ajouter le véhicule
+                </button>
+            </div>
+        </form>
     </div>
-</form>
 {% else %}
-    <p class="class_flex class_justify_center">Comme le réservoir à remplir</p>
+    <div class="no-preference-message">
+        <span class="icon">⛽</span>
+        <p>Comme le réservoir à remplir</p>
+    </div>
 {% endif %}
 
-
 {% block script_js %}
-    <script nonce="{{ request.csp_nonce }}">const modelsData = JSON.parse('{{ models_data|escapejs }}');</script>
+    <script nonce="{{ request.csp_nonce }}">
+        const modelsData = JSON.parse('{{ models_data|escapejs }}');
+    </script>
     <script src="{% static 'js/espace_perso/ajoute_voiture.js' %}" nonce="{{ request.csp_nonce }}"></script>
 {% endblock script_js %}

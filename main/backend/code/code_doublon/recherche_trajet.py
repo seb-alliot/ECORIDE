@@ -11,7 +11,7 @@ def RechercheTrajet(request):
     second_resultat = None
     recherche_form = RechercheTrajetForm(request.GET or None)
     trajet4 = TrajetProposer.objects.filter(etat__in="Disponible").exclude(date__lte=maintenant).annotate(note_chauffeur=Avg("chauffeur__accusé__note"))
-    
+
     if request.method == "GET" and request.GET.get("form_trajet") == "recherche_form" and recherche_form.is_valid():
 
         ville_depart = recherche_form.cleaned_data["ville_depart"]

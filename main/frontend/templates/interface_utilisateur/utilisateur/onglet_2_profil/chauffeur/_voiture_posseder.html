@@ -1,13 +1,37 @@
-<h3 class="class_flex class_justify_center p_deco">L{{ voiture|pluralize:"a,es" }} voiture{{ voiture|pluralize }} que vous possédez</h3>
-<div class="info_perso class_flex class_scroll">
-    {% for voiture in voiture %}
-        <li class="class_flex class_justify_center" id="voiture_posseder">
-            {{ voiture.marque }} {{ voiture.modele }}<br>
-            Moteur :  {{ voiture.type_moteur }}<br>
-            places : {{ voiture.places }}<br>
-            immatriculation : {{ voiture.immatriculation }}
-        </li>
-    {% empty %}
-        <li>Aucune voiture associée.</li>
-    {% endfor %}
+<div class="vehicles-owned-section">
+    <h1 class="vehicle-title">
+        <span class="icon">🚗</span>
+            L{{ voiture|pluralize:"a,es" }} voiture{{ voiture|pluralize }} que vous possédez
+    </h1>
+    <ul class="vehicles-list">
+        {% for voiture in voiture %}
+            <li class="vehicle-card">
+                <div class="vehicle-header">
+                    <h4 class="vehicle-name">{{ voiture.marque }} {{ voiture.modele }}</h4>
+                    <span class="engine-badge {{ voiture.type_moteur|lower }}">
+                        {% if voiture.type_moteur == "Electrique" %}⚡
+                        {% elif voiture.type_moteur == "Hybride" %}🔋
+                        {% else %}⛽{% endif %}
+                        {{ voiture.type_moteur }}
+                    </span>
+                </div>
+
+                <div class="vehicle-details">
+                    <div class="detail-item">
+                        <span class="icon">👥</span>
+                        <span>{{ voiture.places }} place{{ voiture.places|pluralize }}</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="icon">🔢</span>
+                        <span>{{ voiture.immatriculation }}</span>
+                    </div>
+                </div>
+            </li>
+        {% empty %}
+            <li class="no-vehicle-message">
+                <span class="icon">🚗</span>
+                <p>Aucune voiture associée</p>
+            </li>
+        {% endfor %}
+    </ul>
 </div>

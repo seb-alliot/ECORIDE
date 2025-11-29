@@ -1,35 +1,89 @@
-
-<li class="resultat class_flex">
+<li class="reservation-card">
     <input
         type="radio"
         name="reservation_id"
         value="{{ res.id }}"
         id="trajet_{{ res.id }}"
+        class="reservation-radio"
         aria-labelledby="label_trajet_{{ res.id }}"
     >
     <label
-    class="class_flex"
-    id="covoit_reserver"
-    for="trajet_{{ res.id }}"
+        class="reservation-content"
+        id="label_trajet_{{ res.id }}"
+        for="trajet_{{ res.id }}"
     >
-        {% if res.trajet_reserver.chauffeur.adresse_user.photo %}
-            <img src="{{ res.trajet_reserver.chauffeur.adresse_user.photo.url }}" alt="photo de profil" >
-        {% else %}
-            <img src="{{ photo_default_url }}" alt="photo par défaut">
-        {% endif %}
-        Chauffeur : {{ res.trajet_reserver.chauffeur }}<br>
-        Trajet :<br>{{ res.trajet_reserver.ville_depart }} -> {{ res.trajet_reserver.ville_arrivee }}<br>
-        Le {{ res.trajet_reserver.date }}<br>
-        À {{ res.trajet_reserver.heure|date:"H\H:i" }}<br>
-        Voiture :<br>{{ res.trajet_reserver.voiture.marque }} {{ res.trajet_reserver.voiture.modele }}<br>
-        Montant : {{ res.prix_par_passager }}€<br>
-        Places disponibles
-        {% if res.trajet_reserver.places != 0 %}
-        {{ res.trajet_reserver.places }}
-        {% else %}
-        Complet
-        {% endif %}<br>
-        Etat : {{ res.trajet_reserver.etat }}<br>
-        {{ res.places }} places de reservée{{ res.places |pluralize }} <br>
+        <!-- Header avec photo chauffeur et statut -->
+        <div class="reservation-header">
+            <div class="driver-info">
+                {% if res.trajet_reserver.chauffeur.adresse_user.photo %}
+                    <img src="{{ res.trajet_reserver.chauffeur.adresse_user.photo.url }}" alt="Photo de {{ res.trajet_reserver.chauffeur }}" class="driver-photo">
+                {% else %}
+                    <img src="{{ photo_default_url }}" alt="Photo par défaut" class="driver-photo">
+                {% endif %}
+                <div class="driver-details">
+                    <span class="driver-label">Chauffeur</span>
+                    <span class="driver-name">{{ res.trajet_reserver.chauffeur }}</span>
+                </div>
+            </div>
+            <span class="status-badge {{ res.trajet_reserver.etat|lower }}">{{ res.trajet_reserver.etat }}</span>
+        </div>
+
+        <!-- Itinéraire -->
+        <div class="reservation-route">
+            <div class="route-point">
+                <span class="icon">📍</span>
+                <span>{{ res.trajet_reserver.ville_depart }}</span>
+            </div>
+            <span class="route-arrow">→</span>
+            <div class="route-point">
+                <span class="icon">🏁</span>
+                <span>{{ res.trajet_reserver.ville_arrivee }}</span>
+            </div>
+        </div>
+
+        <!-- Détails date/heure -->
+        <div class="reservation-details">
+            <div class="detail-item">
+                <span class="icon">📅</span>
+                <span>{{ res.trajet_reserver.date }}</span>
+            </div>
+            <div class="detail-item">
+                <span class="icon">🕐</span>
+                <span>{{ res.trajet_reserver.heure|date:"H\hi" }}</span>
+            </div>
+        </div>
+
+        <!-- Voiture -->
+        <div class="reservation-car">
+            <span class="icon">🚗</span>
+            <span>{{ res.trajet_reserver.voiture.marque }} {{ res.trajet_reserver.voiture.modele }}</span>
+        </div>
+
+        <!-- Footer avec prix et places -->
+        <div class="reservation-footer">
+            <div class="price-section">
+                <span class="price-label">Montant</span>
+                <span class="price-value">{{ res.prix_par_passager }} €</span>
+            </div>
+            <div class="seats-section">
+                <div class="seats-available">
+                    <span class="icon">👥</span>
+                    {% if res.trajet_reserver.places != 0 %}
+                        <span>{{ res.trajet_reserver.places }} place{{ res.trajet_reserver.places|pluralize }} libre{{ res.trajet_reserver.places|pluralize }}</span>
+                    {% else %}
+                        <span class="full">Complet</span>
+                    {% endif %}
+                </div>
+                <div class="seats-booked">
+                    <span class="icon">✓</span>
+                    <span>{{ res.places }} réservée{{ res.places|pluralize }}</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Indicateur de sélection -->
+        <div class="selection-indicator">
+            <span class="checkmark">✓</span>
+        </div>
     </label>
 </li>

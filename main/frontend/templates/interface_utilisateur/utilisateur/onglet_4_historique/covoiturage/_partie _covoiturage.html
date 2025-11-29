@@ -1,27 +1,31 @@
-    {% if trajet1 %}
-        <h1 class="class_flex class_justify_center p_deco">Vos covoiturages terminé</h1>
-            <div>
-                <ul class="class_scroll class_flex">
-                    {% for tjt in trajets %}
-                        {% if tjt.etat == "Terminé" %}
-                            {% include "interface_utilisateur/utilisateur/onglet_4_historique/covoiturage/_contenu_covoiturage.html" %}
-                        {% endif %}
-                    {% endfor %}
-                    {% for tjt in trajet1 %}
-                            {% include "interface_utilisateur/utilisateur/onglet_4_historique/covoiturage/_contenu_covoiturage.html" %}
-                    {% endfor %}
-                </ul>
-            </div>
-        {% endif %}
-        {% if trajet2 %}
-        <h2 id="covoiturage_annulé" class="class_flex class_justify_center p_deco">Vos covoiturages annulés</h2>
-            <div>
-                <ul class="class_scroll class_flex">
-                    {% for tjt in trajets %}
-                        {% if tjt.etat == "Annulé" %}
-                            {% include "interface_utilisateur/utilisateur/onglet_4_historique/covoiturage/_contenu_covoiturage.html" %}
-                        {% endif %}
-                    {% endfor %}
-                </ul>
-            </div>
-        {% endif %}
+{% if trajet1 %}
+    <section class="history-section">
+        <h2 class="history-title completed">
+            <span class="icon">✅</span>
+            Vos covoiturages terminés
+        </h2>
+        <ul class="history-list">
+            {% for tjt in trajets %}
+                {% if tjt.etat == "Terminé" %}
+                    {% include "interface_utilisateur/utilisateur/onglet_4_historique/covoiturage/_contenu_covoiturage.html" %}
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </section>
+{% endif %}
+
+{% if trajet2 %}
+    <section class="history-section">
+        <h2 class="history-title cancelled">
+            <span class="icon">❌</span>
+            Vos covoiturages annulés
+        </h2>
+        <ul class="history-list">
+            {% for tjt in trajets %}
+                {% if tjt.etat == "Annulé" %}
+                    {% include "interface_utilisateur/utilisateur/onglet_4_historique/covoiturage/_contenu_covoiturage.html" %}
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </section>
+{% endif %}

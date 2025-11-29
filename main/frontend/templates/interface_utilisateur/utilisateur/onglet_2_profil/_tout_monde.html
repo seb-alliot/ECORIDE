@@ -1,5 +1,6 @@
 
-<h1 class="class_flex class_justify_center p_deco">Votre profile actuel est {{ role.get_role_display }}</h1>
+<h1 class="history-title completed"><span class="icon"></span>Votre profile actuel est {{ role.get_role_display }}</h1>
+
 <form id="role_form"method="post" action="{{ queryString|default:"" }}" class="class_flex class_justify_center">
     {% csrf_token %}
         <label for="role_form">Choisissez un profile</label>

@@ -1,37 +1,106 @@
 {% load static %}
 
-<h1 class="class_flex class_justify_center p_deco">Proposez un covoiturage</h1>
-<form id="trajet_form" method="POST" action="{{ queryString|default:"" }}">
-    {% csrf_token %}
+<div class="propose-trip-container">
+<h1 class="history-title completed"><span class="icon">🚗</span>Proposer un covoiturage</h1>
 
-    <label for="id_depart">Ville de départ</label>
-    {{ trajet_form.ville_depart }}
+    <form id="trajet_form" method="POST" action="{{ queryString|default:"" }}" class="propose-trip-form">
+        {% csrf_token %}
 
-    <label for="id_arrivee">Ville d'arrivée</label>
-    {{ trajet_form.ville_arrivee }}
+        <!-- Section Itinéraire -->
+        <div class="form-section">
+            <h3 class="section-subtitle">
+                <span class="icon">🗺️</span>
+                Itinéraire
+            </h3>
 
-    <label for="id_date">Date de départ</label>
-    {{ trajet_form.date }}
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="{{ trajet_form.ville_depart.id_for_label }}">Ville de départ</label>
+                    {{ trajet_form.ville_depart }}
+                </div>
 
-    <label for="id_voiture">Voiture</label>
-    {{ trajet_form.voiture }}
+                <div class="form-group">
+                    <label for="{{ trajet_form.ville_arrivee.id_for_label }}">Ville d'arrivée</label>
+                    {{ trajet_form.ville_arrivee }}
+                </div>
+            </div>
+        </div>
 
-    <label for="id_places">Nombre de places</label>
-    {{ trajet_form.places }}
+        <!-- Section Date et heure -->
+        <div class="form-section">
+            <h3 class="section-subtitle">
+                <span class="icon">📅</span>
+                Date et horaire
+            </h3>
 
-    <label for="id_heure">Heure de départ</label>
-    {{ trajet_form.heure }}
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="{{ trajet_form.date.id_for_label }}">Date de départ</label>
+                    {{ trajet_form.date }}
+                </div>
 
-    <label for="prix">Prix</label>
-    {{ trajet_form.prix }}
+                <div class="form-group">
+                    <label for="{{ trajet_form.heure.id_for_label }}">Heure de départ</label>
+                    {{ trajet_form.heure }}
+                </div>
+            </div>
 
-    <label for="temps_trajet">Durée estimée</label>
-    {{ trajet_form.temps_trajet }}
+            <div class="form-row">
+                <div class="form-group full-width">
+                    <label for="{{ trajet_form.temps_trajet.id_for_label }}">Durée estimée</label>
+                    {{ trajet_form.temps_trajet }}
+                </div>
+            </div>
+        </div>
 
-    <button id="proposition" type="submit" name="form_soumis" value="trajet_form">Proposez un trajet</button>
-</form>
+        <!-- Section Véhicule -->
+        <div class="form-section">
+            <h3 class="section-subtitle">
+                <span class="icon">🚙</span>
+                Véhicule et places
+            </h3>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="{{ trajet_form.voiture.id_for_label }}">Voiture</label>
+                    {{ trajet_form.voiture }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ trajet_form.places.id_for_label }}">Nombre de places</label>
+                    {{ trajet_form.places }}
+                </div>
+            </div>
+        </div>
+
+        <!-- Section Prix -->
+        <div class="form-section">
+            <h3 class="section-subtitle">
+                <span class="icon">💰</span>
+                Tarif
+            </h3>
+
+            <div class="form-row">
+                <div class="form-group full-width">
+                    <label for="{{ trajet_form.prix.id_for_label }}">Prix par passager (€)</label>
+                    {{ trajet_form.prix }}
+                </div>
+            </div>
+        </div>
+
+        <!-- Bouton de soumission -->
+        <div class="form-actions">
+            <button type="submit" name="form_soumis" value="trajet_form" class="btn-propose-trip">
+                <span class="icon">✓</span>
+                Proposer ce trajet
+            </button>
+        </div>
+    </form>
+</div>
 
 {% block script_js %}
-    <script nonce="{{ request.csp_nonce }}">const voituresData = JSON.parse('{{ voitures_data_json|escapejs }}');</script>
+    <script nonce="{{ request.csp_nonce }}">
+        const voituresData = JSON.parse('{{ voitures_data_json|escapejs }}');
+    </script>
     <script src="{% static 'js/espace_perso/place_voiture.js' %}" nonce="{{ request.csp_nonce }}"></script>
 {% endblock script_js %}

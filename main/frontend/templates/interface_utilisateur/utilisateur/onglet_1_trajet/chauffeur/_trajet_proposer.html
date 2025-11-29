@@ -1,28 +1,99 @@
-
 {% if trajets %}
-    <h2 id="trajet_proposer" class="class_flex class_justify_center p_deco">Le{{ trajets|pluralize }} trajet{{ trajets|pluralize }} que vous proposez</h2>
-        <ul class="class_flex class_scroll">
-            {% for trajet in trajets %}
-                {% if trajet.etat == "Disponible" or trajet.etat == "En cour" %}
-                            <li class="class_flex">
-                                <input type="radio" name="trajet" value="{{ trajet.id }}" id="{{ trajet.id }}"/>
-                                <label id="label_proposition" class="position_relation" for="{{ trajet.id }}">
-                                    Départ de :<br>{{ trajet.ville_depart }} pour {{ trajet.ville_arrivee }}<br>
-                                    Le  {{ trajet.date|date }}<br>
-                                    A: {{ trajet.heure|date:"H\H:i" }}<br>
-                                    Voiture : {{ trajet.voiture.marque}} {{ trajet.voiture.modele }}<br>
-                                    Moteur :  {{ trajet.voiture.type_moteur }}<br>
-                                    Prix : {{ trajet.prix }}€<br>
-                                    Place:{% if trajet.places != 0 %} {{ trajet.places }}
-                                    {% else %}
-                                    complet
-                                    {% endif %}<br>
-                                    Etat du trajet : {{ trajet.etat }}<br>
-                                </label>
-                            </li>
-                {% endif %}
-            {% endfor %}
-        </ul>
+        <h2 class="history-title completed">
+            <span class="icon">✅</span>
+            Le{{ trajets|pluralize }} trajet{{ trajets|pluralize }} que vous proposez
+        </h2>
+    <ul class="trajets-list">
+        {% for trajet in trajets %}
+            {% if trajet.etat == "Disponible" or trajet.etat == "En cour" %}
+                <li class="trajet-item">
+                    <input
+                        type="radio"
+                        name="trajet"
+                        value="{{ trajet.id }}"
+                        id="trajet_{{ trajet.id }}"
+                        class="trajet-radio"
+                    />
+                    <label class="trajet-card" for="trajet_{{ trajet.id }}">
+                        <!-- Header -->
+                        <div class="trajet-header">
+                            <span class="statut-badge {{ trajet.etat|lower|cut:" " }}">{{ trajet.etat }}</span>
+                        </div>
+
+                        <!-- Itinéraire -->
+                        <div class="trajet-route">
+                            <div class="route-item">
+                                <span class="route-icon">📍</span>
+                                <span class="route-city">{{ trajet.ville_depart }}</span>
+                            </div>
+                            <span class="route-arrow">→</span>
+                            <div class="route-item">
+                                <span class="route-icon">🏁</span>
+                                <span class="route-city">{{ trajet.ville_arrivee }}</span>
+                            </div>
+                        </div>
+
+                        <!-- Date/heure -->
+                        <div class="trajet-datetime">
+                            <div class="datetime-item">
+                                <span class="icon">📅</span>
+                                <span>{{ trajet.date|date:"d/m/Y" }}</span>
+                            </div>
+                            <div class="datetime-item">
+                                <span class="icon">🕐</span>
+                                <span>{{ trajet.heure|date:"H\hi" }}</span>
+                            </div>
+                        </div>
+
+                        <!-- Voiture -->
+                        <div class="trajet-car">
+                            <div class="car-model">
+                                <span class="icon">🚗</span>
+                                <span>{{ trajet.voiture.marque }} {{ trajet.voiture.modele }}</span>
+                            </div>
+                            <div class="car-engine">
+                                <span class="engine-badge {{ trajet.voiture.type_moteur|lower }}">
+                                    {% if trajet.voiture.type_moteur == "Electrique" %}⚡
+                                    {% elif trajet.voiture.type_moteur == "Hybride" %}🔋
+                                    {% else %}⛽{% endif %}
+                                    {{ trajet.voiture.type_moteur }}
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Footer -->
+                        <div class="trajet-footer">
+                            <div class="trajet-prix">
+                                <span class="prix-label">Prix</span>
+                                <span class="prix-value">{{ trajet.prix }} €</span>
+                            </div>
+                            <div class="trajet-places">
+                                {% if trajet.places != 0 %}
+                                    <span class="places-available">
+                                        <span class="icon">👥</span>
+                                        {{ trajet.places }} place{{ trajet.places|pluralize }}
+                                    </span>
+                                {% else %}
+                                    <span class="places-full">
+                                        <span class="icon">🚫</span>
+                                        Complet
+                                    </span>
+                                {% endif %}
+                            </div>
+                        </div>
+
+                        <!-- Indicateur sélection -->
+                        <div class="selection-indicator">
+                            <span class="checkmark">✓</span>
+                        </div>
+                    </label>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
 {% else %}
-    <p class="class_flex class_justify_center p_deco">Vous n'avez pas encore proposé de trajet</p>
+    <div class="no-trajets-message">
+        <span class="icon">🚗</span>
+        <p>Vous n'avez pas encore proposé de trajet</p>
+    </div>
 {% endif %}
