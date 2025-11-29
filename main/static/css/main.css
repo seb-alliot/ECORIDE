@@ -169,6 +169,7 @@ label#resultat_recherche img,
   width: clamp(120px, 20vw, 265px);
   height: clamp(25px, 10vh , 45px);
   padding: clamp(10px, 2vw, 15px);
+  align-items: center;
   background-color: var(--color-primary);
   color: var(--color-light);
   border: none;

@@ -4,6 +4,7 @@ from datetime import timedelta
 from ....models import ReservationTrajet
 from ....forms import AfficherReservationForm
 
+
 def Afficher_reservations(request):
     jour_semaine_fr = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"]
     # jour_semaine_fr[0] correspond à lundi car weekday() renvoie 0 pour lundi, jusqu'à 6 pour dimanche

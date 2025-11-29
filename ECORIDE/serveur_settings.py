@@ -99,6 +99,7 @@ URI = os.getenv("uri")
 MONGO_DB_NAME = "ECORIDE"
 
 
+
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 

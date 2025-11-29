@@ -1,14 +1,11 @@
 from django.shortcuts import redirect
 from django.contrib import messages
 from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
 
 
-
+@login_required
 def SuppressionCompte(request):
-    # 1. Vérification de l'authentification
-    if not request.user.is_authenticated:
-        messages.error(request, "Veuillez vous connecter pour effectuer cette action.")
-        return redirect('login')
 
     user_delete = request.user
     suppression_compte_form = request.POST.get("choix_suppression")

@@ -41,7 +41,7 @@ from .code import (
     ExtractionDonnee,
     GereLesAvisNegatif,
     GereLesAvisPositif,
-    PriseDeContact,
+    PriseContact,
     Fusion_donnee,
     SuppressionCompte,
     Graphique,
@@ -350,7 +350,7 @@ def Fait_Ton_Taff_De_Modo(request):
         #_____repondre au mail de contact____
         elif email_type == "Prise de contact":
 
-            contact_form = PriseDeContact(
+            contact_form = PriseContact(
                 request,
                 email_id_selected=email_id_selected,
                 telephone=telephone,
@@ -365,7 +365,7 @@ def Fait_Ton_Taff_De_Modo(request):
     # 2ème onglet admin
     user = request.user
     admin = Admin_access(request,user)
-    formulaire_pres_remplis_fusion, jours, resa, gains = Fusion_donnee(request)
+    formulaire_pres_remplis_fusion, jours, resa, gains, total_reservations, total_gains = Fusion_donnee(request)
     graphique = Graphique(jours, resa, gains)
     if isinstance(graphique, HttpResponseRedirect):
         return graphique
@@ -383,6 +383,8 @@ def Fait_Ton_Taff_De_Modo(request):
         "moderation_form": moderation_form,
         "contact_form": contact_form,
         "graphique": graphique,
+        "total_reservations": total_reservations,
+        "total_gains": total_gains,
     }
     context.update(initialisation_template(request))
     return render(

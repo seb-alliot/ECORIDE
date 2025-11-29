@@ -1,30 +1,45 @@
-    <form id="affichage_admin" >
-        <ul>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Jour</th>
-                        <th>Total réservation</th>
-                        <th>Total gain</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for fusion_form in formulaire_pres_remplis_fusion %}
-                        <tr>
-                            <td>{{ fusion_form.jour }}</td>
-                            <td>{{ fusion_form.total_resa }}</td>
-                            <td>{{ fusion_form.total_gain }}</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </ul>
-    </form>
-    <div class="graphique">
+    <div class="stats-grid">
+        {% for fusion_form in formulaire_pres_remplis_fusion %}
+            <div class="stat-card">
+                <div class="stat-day">{{ fusion_form.initial.jour }}</div>
+                <div class="stat-info">
+                    <div class="stat-item">
+                        <span class="label">Réservations</span>
+                        <span class="value">{{ fusion_form.initial.total_resa }}</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="label">Gains</span>
+                        <span class="value">{{ fusion_form.initial.total_gain|floatformat:1 }} €</span>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+
+        <!-- Carte totale -->
+        <div class="stat-card total">
+            <div class="stat-day">Total semaine</div>
+            <div class="stat-info">
+                <div class="stat-item">
+                    <span class="label">Réservations</span>
+                    <span class="value">{{ total_reservations }}</span>
+                </div>
+                <div class="stat-item">
+                    <span class="label">Gains</span>
+                    <span class="value">{{ total_gains|floatformat:1 }} €</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Graphique -->
+    <div class="graphique-container">
         <h2 id="graphique-title">Graphique des réservations et gains</h2>
         {% if graphique %}
-            <img id="graphique" src="data:image/png;base64,{{ graphique }}" alt="Graphique des réservations et gains">
+            <img src="data:image/png;base64,{{ graphique }}"
+                 alt="Graphique"
+                 class="graph-img">
         {% else %}
-            <p>Aucun graphique disponible.</p>
+            <p class="no-data">Aucune donnée disponible.</p>
         {% endif %}
     </div>
+</div>

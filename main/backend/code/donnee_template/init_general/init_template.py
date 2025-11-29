@@ -44,7 +44,6 @@ def initialisation_template(request):
         "preference": preference,
         'voiture': voiture,
         "adresse_user": adresse_user,
-
         "credit": credit,
     }
     return context

@@ -5,20 +5,28 @@ from datetime import timedelta
 from ....forms import AfficherReservationForm
 
 
-def Affiche_gain_jour(request):
+def Affiche_gain_jour(request, date_debut=None, date_fin=None):
     jour_semaine_fr = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"]
-
-    commission = 2.0
+    from ...utils.zone_admin.recup_commission import get_commission
+    # On récupère la valeur de la commission, on convertis le int en float au passage
+    commission = float(get_commission())
 
     gain_afficher = defaultdict(list)
     compteur_gain = defaultdict(float)
     formulaire_pres_remplis_gain = []
 
-    aujourd_hui = timezone.localtime(timezone.now()).date()
-    debut_semaine = aujourd_hui - timedelta(days=aujourd_hui.weekday())
+    if not date_debut:
+        aujourd_hui = timezone.localtime(timezone.now()).date()
+        date_debut = aujourd_hui - timedelta(days=aujourd_hui.weekday())
+    if not date_fin:
+        aujourd_hui = timezone.localtime(timezone.now()).date()
+        date_fin = aujourd_hui + timedelta(days=(6 - aujourd_hui.weekday()))
 
     # On filtres tous les trajets de la semaine en cours en excluant ceux annulés --> commmission remboursée
-    tout_trajet = TrajetProposer.objects.filter(created_at__date__gte=debut_semaine).exclude(etat="Annulé").order_by('created_at')
+    tout_trajet = TrajetProposer.objects.filter(
+        created_at__date__gte=date_debut,
+        created_at__date__lte=date_fin
+    ).exclude(etat="Annulé").order_by('created_at')
 
     for trajet in tout_trajet:
         local_created_at = timezone.localtime(trajet.created_at)

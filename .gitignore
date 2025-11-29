@@ -45,6 +45,11 @@ ECORIDE/serveur_settings.py
 # ----------------------------------------------------------------------
 
 manipe_git.txt
+securite.md
+docker-compose.yml
+Dockerfile
+run_docker.sh
+
 fond ecran
 script credit
 
@@ -57,3 +62,4 @@ main/media/user/
 # Cache dans les sous-dossiers
 main/backend/__pycache__/
 main/backend/migrations/
+main/backend/code/__pycache__/
