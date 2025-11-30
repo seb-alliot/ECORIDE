@@ -93,7 +93,7 @@ DATABASES = {
         'NAME': env('POSTGRES_DB', default='ecoride'),
         'USER': env('POSTGRES_USER', default='itsuki'),
         'PASSWORD': env('POSTGRES_PASSWORD', default='motdepasse'),
-        'HOST': env('POSTGRES_HOST', default='db'),  # ou l’IP si serveur externe
+        'HOST': env('POSTGRES_HOST', default='db'),  # ou l’IP si serveur externe ou du conteneur docker
         'PORT': env('POSTGRES_PORT', default='5432'),
     }
 }
@@ -189,17 +189,11 @@ SESSION_EXPRIRE_AT_BROWSER_CLOSE = True
 
 LOGOUT_REDIRECT_URL = '/'
 
-SECURE_PROXY_SSL_HEADER =("HTTP_X_FORWARDED_PROTO","https")
 SECURE_SSL_REDIRECT = False
 #peux etre laisser sur false si on utilise un proxy inverse comme nginx
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 SECURE_BROWSER_XSS_FILTER = True
-SECURE_CONTENT_TYPE_NOSNIFF = True
-SECURE_HSTS_SECONDS = 31536000
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-SECURE_HSTS_PRELOAD = True
-
 
 # Protection csp :
 # bloque tout par défaut, n'autorise que le domaine pour scripts/styles
