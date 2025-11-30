@@ -194,7 +194,13 @@ SECURE_SSL_REDIRECT = False
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 SECURE_BROWSER_XSS_FILTER = True
+CSRF_TRUSTED_ORIGINS = [
+    'https://ecoride-itsuki.it.com',
+    'https://www.ecoride-itsuki.it.com',
+]
 
+# Si nginx, ajoute aussi :
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # Protection csp :
 # bloque tout par défaut, n'autorise que le domaine pour scripts/styles
 # CSP Configuration
