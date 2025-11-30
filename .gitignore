@@ -38,7 +38,7 @@ cert.crt
 cert.key
 
 # Fichiers de settings spécifiques au déploiement
-ECORIDE/serveur_settings.py
+/.ECORIDE/serveur_settings.py
 
 # ----------------------------------------------------------------------
 # 3. FICHIERS ET DOSSIERS DU PROJET

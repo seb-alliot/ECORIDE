@@ -84,7 +84,9 @@ def GereTonCovoiteChauffeur(request):
                                 trajet_reserver.etat = "Annulé"
                                 trajet_reserver.trajet_rembourser = True
                                 trajet_reserver.save()
-
+                                messages.success(
+                                request, "Trajet annulé, remboursement en cours.",
+                                )
                                 # Remboursement des passagers
                                 for reservation in reservations:
                                     try:
