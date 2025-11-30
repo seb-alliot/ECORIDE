@@ -8,7 +8,7 @@
   --form-height: clamp(30px, 5vh, 30px);
   --form-width: clamp(120px, 20vw, 225px);
   --img-square-size: clamp(70px, 10vw, 180px);
-  --form-input-size: clamp(200px, 20vw, 225px);
+  --form-input-size: clamp(225px, 20vw, 250px);
   --spacing-md: clamp(8px, 2vw, 10px);
   --tab-vertical-margin: clamp(10px, 1.5vw, 30px);
   --tabs-margin-side: clamp(2%, 3vw, 20%);
@@ -49,7 +49,7 @@ h2,
 h3,
 h4 {
   margin: var(--spacing-md);
-  font-size: clamp(12px, 2vw, 24px);
+  font-size: clamp(12px, 4vw, 24px);
 }
 
 #menu-tab {
@@ -1422,6 +1422,10 @@ input#id_photo {
 #preference_form label {
     display: none;
 }
+#filtre_form input ,  #filtre_form button {
+    width: clamp(70px , 18vw , 300px);
+    height: var(--form-height);
+}
 #preference_form input, #preference_form select, #preference_form textarea, #preference_form button, form#trajet_form button , form#trajet_form input, form#trajet_form select, form#trajet_form textarea ,
 #adresse_form button , #adresse_form input, #adresse_form select, #adresse_form textarea , #role_form button , #role_form input, #role_form select,
 #id_etat, select#id_etat , #deux_choix, select#id_etat_reservation , button#reservation_annuler, #bouton_terminer{
@@ -2099,8 +2103,8 @@ div.no-trajets-message > p {
 /* RESPONSIVE */
 @media (max-width: 768px) {
     .trajet-item {
-        flex: 0 0 280px;
-        min-width: 280px;
+        flex: 0 0 250px;
+        min-width: 250px;
     }
 
     .trajet-card {
@@ -2123,6 +2127,9 @@ div.no-trajets-message > p {
     .trajet-footer {
         flex-direction: column;
         align-items: flex-start;
+    }
+    .vehicle-title , .history-title {
+        font-size: 0.7rem;
     }
 }
 

@@ -1,7 +1,7 @@
 :root {
   --logo-size: clamp(60px, 8vw, 200px);
   --font-size-base: clamp(8px, 2vw, 20px);
-  --input-form-search: clamp(60px, 20vw, 300px);
+  --input-form-search: clamp(55px, 18vw, 300px);
   --input-width: clamp(100px, 12vw, 220px);
   --input-height: clamp(25px, 5vw, 40px);
   --image-height: clamp(100px, 25vw, 800px);
@@ -289,6 +289,7 @@ div#reservation > div > form#reservation_form > select:hover {
   background-color: rgb(120, 180, 120);
   color: blanchedalmond;
   text-shadow: 1px 1px 2px black;
+  font-size: var(--font-size-base--p);
 }
 
 a:hover {
@@ -355,7 +356,7 @@ form#demarrer_ou_annuler_form > label {
   font-size: 16px;
   margin-bottom: var(--spacing-lg);
 }
-#recherche_form input, input#id_date , footer a {
+#recherche_form input, input#id_date , footer a, #recherche_form button {
   width: var(--input-form-search);
   font-size: var(--font-size-other);
 }
@@ -1553,6 +1554,9 @@ form#email_select_form select,
 }
 
 
+h2 {
+  font-size: var(--font-size-base--p);
+}
 
 
 
@@ -1798,7 +1802,6 @@ form#email_select_form select,
 
 #place_a_reserver select {
     width: 100%;
-    padding: 0.6rem;
     border: 2px solid white;
     border-radius: 8px;
     font-size: 0.9rem;
