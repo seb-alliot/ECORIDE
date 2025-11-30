@@ -594,22 +594,6 @@ div.content > div > div > ul {
     background: linear-gradient(135deg, #f8ffff 0%, #ffffff 100%);
 }
 
-/* Indicateur de sélection */
-.selection-indicator {
-    position: absolute;
-    top: 0.75rem;
-    right: 0.75rem;
-    width: 28px;
-    height: 28px;
-    background: #4ecdc4;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transform: scale(0);
-    transition: all 0.3s ease;
-}
 
 .reservation-radio:checked + .reservation-content .selection-indicator {
     opacity: 1;
@@ -1075,7 +1059,6 @@ input#id_photo {
 
 
 /* --- Trajet proposer --- */
-/* Liste des trajets - SCROLL HORIZONTAL */
 .trajets-list {
     list-style: none;
     padding: 0;
@@ -1089,13 +1072,6 @@ input#id_photo {
 }
 
 
-
-/* Item de trajet */
-.trajet-item {
-    list-style: none;
-    flex: 0 0 275px;
-    min-width: 275px;
-}
 
 
 
@@ -1854,49 +1830,67 @@ select#id_etat {
     CARTES DE TRAJETS PROPOSÉS - STYLE MODERNE
    =============================================== */
 
-
-   /* Cache le radio input */
+/* 1. Cachez l'input radio standard */
 .trajet-radio {
+    /* Cachez-le visuellement, mais laissez-le accessible pour les lecteurs d'écran (screen readers) */
     position: absolute;
     opacity: 0;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
 }
-/* Liste des trajets - SCROLL HORIZONTAL */
-.trajets-list {
-    list-style: none;
-    position: relative;
+
+/* 2. Style de base pour la carte (le label) */
+/* --- SÉLECTION DE TRAJET (.trajet-item) --- */
+
+/* 1. Masquage de l'input radio standard */
+.trajet-radio {
+    /* Utilise la même technique que pour les autres inputs radios cachés de votre CSS */
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
 }
 
 .trajet-card {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    border: 3px solid transparent;
+    border-radius: 12px;
+    padding: 1rem;
     cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background: white;
+    position: relative;
 }
-.trajet-radio:checked + .trajet-card {
-    border: 3px solid #4ecdc4; /* Exemple de style de sélection */
-    background-color: #f0f8ff; /* Exemple de fond */
+
+/* Au lieu de .trajet-radio:checked + .trajet-card */
+.trajet-card:has(.trajet-radio:checked) {
+    border-color: #4ecdc4;
+    background-color: #e6f7eb;
 }
-.trajet-radio:checked + .trajet-card .selection-indicator {
+
+.trajet-card:has(.trajet-radio:checked):hover {
+    background-color: #d8eadb;
+}
+
+.trajet-card:has(.trajet-radio:checked) .selection-indicator {
+    background-color: #28a745;
     opacity: 1;
     transform: scale(1);
 }
-/* Carte de trajet */
-.trajet-card {
-    display: block;
-    background: white;
-    border-radius: 12px;
-    padding: 1rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border: 3px solid transparent;
-    position: relative;
 
-}
 
-.trajet-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-    background-color: rgb(200, 240, 200);
-}
 div.no-trajets-message {
     display: flex;
 }
@@ -1905,22 +1899,7 @@ div.no-trajets-message > p {
 }
 
 
-/* Indicateur de sélection */
-.selection-indicator {
-    position: absolute;
-    top: 0.75rem;
-    right: 0.75rem;
-    width: 28px;
-    height: 28px;
-    background: #4ecdc4;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transform: scale(0);
-    transition: all 0.3s ease;
-}
+
 
 .trajet-card:checked + .trajet-card .selection-indicator {
     opacity: 1;
@@ -2099,6 +2078,22 @@ div.no-trajets-message > p {
 .statut-badge.terminé {
     background: #d1ecf1;
     color: #0c5460;
+}
+/* Indicateur de sélection */
+.selection-indicator {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    width: 28px;
+    height: 28px;
+    background: #4ecdc4;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.3s ease;
 }
 
 /* RESPONSIVE */

@@ -1,17 +1,13 @@
 <li class="trajet-item">
-    <input
-        type="radio"
-        name="trajet_id"
-        value="{{ tjt.id }}"
-        id="trajet_{{ tjt.id }}"
-        class="trajet-radio"
-        aria-labelledby="label_trajet_{{ tjt.id }}"
-    >
-    <label
-        class="trajet-card"
-        id="label_trajet_{{ tjt.id }}"
-        for="trajet_{{ tjt.id }}"
-    >
+    <label class="trajet-card" id="label_trajet_{{ tjt.id }}">
+        <input
+            type="radio"
+            name="trajet_id"
+            value="{{ tjt.id }}"
+            id="trajet_{{ tjt.id }}"
+            class="trajet-radio"
+        >
+
         {% if tjt.chauffeur.adresse_user.photo %}
             <img src="{{ tjt.chauffeur.adresse_user.photo.url }}" alt="Photo de {{ tjt.chauffeur }}" class="driver-photo">
         {% else %}
@@ -38,13 +34,11 @@
                 <span class="label">Date</span>
                 <span class="value">{{ tjt.date }}</span>
             </div>
-
             <div class="info-item">
                 <span class="icon">🕐</span>
                 <span class="label">Heure</span>
                 <span class="value">{{ tjt.heure|date:"H\hi" }}</span>
             </div>
-
             <div class="info-item full-width">
                 <span class="icon">🚗</span>
                 <span class="label">Voiture</span>
@@ -58,7 +52,6 @@
                 <span class="prix-label">Prix</span>
                 <span class="prix-value">{{ tjt.prix }} €</span>
             </div>
-
             <div class="trajet-places">
                 {% if tjt.places %}
                     <div class="places-available">
@@ -72,7 +65,6 @@
                     </div>
                 {% endif %}
             </div>
-
             <span class="statut-badge {{ tjt.etat|lower }}">{{ tjt.etat }}</span>
         </div>
 
