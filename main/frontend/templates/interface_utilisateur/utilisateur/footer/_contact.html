@@ -5,6 +5,11 @@
 
 {% block principal %}
     <div id="contact_form">
+        <h2 class="contact-title">
+            <span class="icon">📧</span>
+            Contactez-nous
+        </h2>
+    <div id="contact_form">
         <form id="contact_form" method="POST">
             {% csrf_token %}
             <label for="pseudo">Nom :</label>
@@ -20,5 +25,6 @@
 
             <button type="submit">Envoyer</button>
         </form>
+    </div>
     </div>
 {% endblock principal %}

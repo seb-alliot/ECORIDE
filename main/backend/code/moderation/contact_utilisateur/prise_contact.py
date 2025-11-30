@@ -7,7 +7,7 @@ import asyncio
 
 
 
-def PriseDeContact(request, email_id_selected, telephone, sujet, email_user, pseudo, commentaire):
+def PrisedeContact(request, email_id_selected, telephone, sujet, email_user, pseudo, commentaire):
     user= request.user
 
     contact_form = ContactForm(request.POST or None, initial={"email": email_user,"pseudo":pseudo,"telephone":telephone, "sujet":sujet, "message": commentaire})

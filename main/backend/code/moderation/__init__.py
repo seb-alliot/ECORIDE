@@ -7,3 +7,4 @@ from .recuperation_email.extraction_donnee import ExtractionDonnee
 from .gestion_avis_passager.moderation_negative import GereLesAvisNegatif
 from .gestion_avis_passager.moderation_positive import GereLesAvisPositif
 from .prise_contact.prise_de_contact import PriseContact
+from .contact_utilisateur.prise_contact import PrisedeContact

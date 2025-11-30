@@ -5,7 +5,10 @@
 </h1>
 <div>
     {% if trajet3 %}
-
+        <h2 class="vehicle-title">
+            <span class="icon"></span>
+            Vos covoiturages cours
+        </h2>
         <form class="display_grid" id="trajet_terminer_form" action="{{ queryString|default:"" }}" method="post">
             {% csrf_token %}
                 {% include "interface_utilisateur/utilisateur/onglet_3_covoiturage/covoiturage_lancer/_partie_covoiturage_lancer.html" %}

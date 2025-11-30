@@ -558,30 +558,65 @@ class ReservationTrajetForm(forms.ModelForm):
     class Meta:
         model = ReservationTrajet
         fields = ["places"]
-        widgets = {"places": forms.Select(choices=ReservationTrajet.places)}
-    # Validation ajouter ici pour la vue admin, la logique dans le back peux être supprimée
+        widgets = {
+            "places": forms.Select()  # ← Correction: pas besoin de spécifier choices ici
+        }
+
+    def __init__(self, *args, **kwargs):
+        # Récupérer le trajet pour limiter les choix de places
+        self.trajet = kwargs.pop('trajet', None)
+        super().__init__(*args, **kwargs)
+
+        # Si un trajet est fourni, limiter les choix de places
+        if self.trajet:
+            max_places = self.trajet.places
+            self.fields['places'].widget = forms.Select(
+                choices=[(i, i) for i in range(1, max_places + 1)]
+            )
+
     def clean(self):
         cleaned_data = super().clean()
         passager = cleaned_data.get("passager")
         trajet = cleaned_data.get("trajet_reserver")
         places = cleaned_data.get("places")
 
-        if passager and trajet and places:
-            # Récupérer le crédit du passager
-            try:
-                credit = CreditUser.objects.get(user=passager).credit
-            except CreditUser.DoesNotExist:
-                raise ValidationError("Le passager n'a pas de compte crédit valide.")
+        # Validation seulement si toutes les données sont présentes
+        if not all([passager, trajet, places]):
+            return cleaned_data
 
-            prix_total = trajet.prix * places
-            if credit < prix_total:
-                raise ValidationError("Crédit insuffisant pour cette réservation.")
+        # Récupérer le trajet (éviter la double requête)
+        if not isinstance(trajet, TrajetProposer):
+            trajet = TrajetProposer.objects.filter(id=trajet.id).first()
 
-            if places > trajet.places:
-                raise ValidationError("Nombre de places demandé supérieur aux places disponibles.")
+        if not trajet:
+            raise ValidationError("Le trajet sélectionné n'existe pas.")
+
+        # Vérifier que le passager n'est pas le chauffeur
+        if passager == trajet.chauffeur:
+            raise ValidationError("Vous ne pouvez pas réserver votre propre trajet.")
+
+        # Vérifier le nombre de places disponibles
+        if places > trajet.places:
+            raise ValidationError(
+                f"Nombre de places demandé ({places}) supérieur aux places disponibles ({trajet.places})."
+            )
+
+        # Vérifier le crédit du passager
+        try:
+            credit_user = CreditUser.objects.get(user=passager)
+            credit = credit_user.credit
+        except CreditUser.DoesNotExist:
+            raise ValidationError("Le passager n'a pas de compte crédit valide.")
+
+        prix_total = trajet.prix * places
+
+        if credit < prix_total:
+            raise ValidationError(
+                f"Crédit insuffisant pour cette réservation. "
+                f"Crédit disponible : {credit}€, Prix : {prix_total}€"
+            )
 
         return cleaned_data
-
 
 
 

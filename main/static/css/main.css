@@ -1,6 +1,7 @@
 :root {
   --logo-size: clamp(60px, 8vw, 200px);
   --font-size-base: clamp(8px, 2vw, 20px);
+  --input-form-search: clamp(60px, 20vw, 300px);
   --input-width: clamp(100px, 12vw, 220px);
   --input-height: clamp(25px, 5vw, 40px);
   --image-height: clamp(100px, 25vw, 800px);
@@ -215,13 +216,14 @@ a {
 .resultat input[type="radio"],
 form#filtre_form label,
 #recherche_form label,
-#contact_form p label,
 .label-hidden,
 form#etat_form > label,
-#reservation_form > label,
-#contact_form label {
+#reservation_form > label{
   display: none;
 }
+
+
+
 
 /* Éléments de formulaire */
 button,
@@ -233,6 +235,9 @@ input {
   border-radius: var(--border-radius-sm);
   box-shadow: var(--box-shadow);
   text-align: center;
+  width: var(--input-width);
+  height: var(--input-height);
+  font-size: var(--font-size-other);
 }
 
 button {
@@ -350,6 +355,10 @@ form#demarrer_ou_annuler_form > label {
   font-size: 16px;
   margin-bottom: var(--spacing-lg);
 }
+#recherche_form input, input#id_date , footer a {
+  width: var(--input-form-search);
+  font-size: var(--font-size-other);
+}
 
 .conteneur_recherche {
   width: 100%;
@@ -404,23 +413,9 @@ label#resultat_recherche {
   z-index: 1;
 }
 
-/* Formulaire de contact */
-#contact_form {
-  display: flex;
-  flex-direction: column;
-  margin: var(--spacing-lg);
-  align-items: center;
-}
 
-#contact_form button {
-  display: flex;
-  align-self: center;
-  align-items: center;
-  margin-top: var(--spacing-md);
-  width: var(--input-width);
-  font-size: var(--font-size-other);
-  height: var(--input-height);
-}
+
+
 
 /* Bouton réserver et formulaire trajet */
 #reservation_form button,
@@ -608,20 +603,9 @@ button#bouton_note,
   margin-top: var(--spacing-lg);
 }
 
-/* Consolidated #contact_form textarea */
-form#contact_form textarea {
-  width: clamp(200px, 30vw, 400px);
-  height: clamp(100px, 15vw, 130px);
-  font-size: var(--font-size-other);
-}
 
 
 
-/* Consolidated #contact_form input (and button from previous consolidation) */
-form#contact_form input {
-  width: clamp(180px, 20vw, 225px);
-  font-size: var(--font-size-other);
-}
 
 /* Consolidated #note_perso, #avis_perso, #info_trajet, #prix_trajet, #chauffeur_trajet, #info_trajet > div > p */
 #note_perso,
@@ -844,44 +828,265 @@ form#email_select_form select,
     flex-direction: column;
     align-items: center;
 }
-
-.form-table {
-    display: table;
-    margin: 0 auto;
-}
-
-
-.form-row {
-    display: flex;
-    margin:clamp(10px, 2vw, 15px);
-    gap: clamp(10px, 2vw, 15px);
-}
-
-.form-row label {
-    border: 1px solid black;
-    background-color: var(--color-light);
-    border-radius: 10px;
-    text-align: center;
-    align-content: center;
-    width: clamp(80px, 20vw, 250px);
-    height: var(--input-height);
-
-}
-.form-row input,
-.form-row select,
-.form-row textarea {
-    display: table-cell;
-    width: clamp(80px, 20vw, 250px);
-    height: var(--input-height);
-    padding: 6px;
-}
-
 .presentation img {
     object-fit:cover;
 }
 
 
+/* --- Donne ton avis --- */
+/* ===============================================
+   FORMULAIRE D'AVIS - VERSION COMPACTE
+   =============================================== */
 
+/* Container général */
+.generix3 {
+    max-width: 600px;
+    margin: 1rem auto;
+    padding: 1rem;
+}
+
+/* Info du trajet */
+#info_trajet {
+    background: linear-gradient(135deg, #4ecdc4 0%, #44a8a0 100%);
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.5;
+    margin: 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Formulaire */
+#je_donne_mon_avis {
+    max-width: 600px;
+    margin: 1.5rem auto;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Titre du formulaire (optionnel) */
+#je_donne_mon_avis::before {
+    content: "⭐ Votre avis compte !";
+    display: block;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #e8d5c4;
+}
+
+/* Table de formulaire */
+.form-table {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+/* Rangées du formulaire */
+.form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+/* Labels */
+.form-row label {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+/* Icônes dans les labels */
+.form-row:nth-child(1) label::before {
+    content: "👍";
+    font-size: 1.1rem;
+}
+
+.form-row:nth-child(2) label::before {
+    content: "⭐";
+    font-size: 1.1rem;
+}
+
+.form-row:nth-child(3) label::before {
+    content: "💬";
+    font-size: 1.1rem;
+}
+
+/* Inputs et selects */
+.form-row select,
+.form-row textarea {
+    width: 100%;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    background: white;
+
+    /* Centrage du texte */
+    text-align: center;
+    text-align-last: center; /* Pour Firefox et autres navigateurs */
+}
+
+/* Pour les options du select (au clic) */
+.form-row select option {
+    text-align: center;
+}
+
+.form-row select:focus,
+.form-row textarea:focus {
+    outline: none;
+    border-color: #4ecdc4;
+    box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.1);
+}
+
+.form-row select:hover,
+.form-row textarea:hover {
+    background: rgb(200, 240, 200);
+    transform: translateY(-1px);
+}
+
+/* Textarea spécifique */
+.form-row textarea {
+    min-height: 100px;
+    resize: vertical;
+    line-height: 1.5;
+}
+
+/* Bouton d'envoi */
+.avis_donner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    margin-top: 1.5rem;
+    background: linear-gradient(135deg, #4ecdc4 0%, #44a8a0 100%);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.avis_donner:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.avis_donner:active {
+    transform: translateY(0);
+}
+
+/* Icône dans le bouton */
+.avis_donner::before {
+    content: "📤";
+    font-size: 1.1rem;
+}
+
+/* Messages d'erreur */
+.form-row .errorlist {
+    list-style: none;
+    margin: 0.25rem 0 0;
+}
+
+.form-row .errorlist li {
+    color: #721c24;
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.4rem 0.6rem;
+    background: #f8d7da;
+    border-radius: 6px;
+    margin-top: 0.25rem;
+    border-left: 3px solid #721c24;
+}
+
+/* Style pour les étoiles de notation (si vous utilisez un widget custom) */
+.form-row select[name*="note"] {
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+/* RESPONSIVE - Tablettes */
+@media (max-width: 768px) {
+    .generix3,
+    #je_donne_mon_avis {
+        max-width: 90%;
+        margin: 1rem auto;
+    }
+
+    #info_trajet {
+        font-size: 0.95rem;
+    }
+
+    #je_donne_mon_avis::before {
+        font-size: 1.1rem;
+    }
+}
+
+/* RESPONSIVE - Mobiles */
+@media (max-width: 480px) {
+    .generix3,
+    #je_donne_mon_avis {
+        padding: 1rem;
+    }
+
+    #info_trajet {
+        font-size: 0.9rem;
+    }
+
+    #je_donne_mon_avis::before {
+        font-size: 1rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .form-table {
+        gap: 1rem;
+    }
+
+    .form-row label {
+        font-size: 0.9rem;
+    }
+
+    .form-row select,
+    .form-row textarea {
+        font-size: 0.85rem;
+    }
+
+    .form-row textarea {
+        min-height: 80px;
+    }
+
+    .avis_donner {
+        font-size: 0.95rem;
+    }
+}
+
+/* Très petits écrans */
+@media (max-width: 360px) {
+    .generix3,
+    #info_trajet {
+        font-size: 0.85rem;
+    }
+
+    .form-row select,
+    .form-row textarea {
+        font-size: 0.8rem;
+    }
+}
 
 
 @media (max-width: 768px) {
@@ -1739,5 +1944,184 @@ form#email_select_form select,
     .compact-grid {
         grid-template-columns: 1fr 1fr;
         gap: 0.3rem;
+    }
+}
+
+
+/* --- Formulaire de contact --- */
+/* ===============================================
+   FORMULAIRE DE CONTACT - VERSION COMPACTE
+   =============================================== */
+
+#contact_form {
+    max-width: 600px;
+    margin: 1.5rem auto;
+    padding: 1rem;
+}
+
+#contact_form form {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.contact-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin: 0 0 1rem 0;
+    padding: 0.75rem;
+    background: linear-gradient(135deg, #4ecdc4 0%, #44a8a0 100%);
+    color: white;
+    border-radius: 10px;
+}
+
+.contact-title .icon {
+    font-size: 1.4rem;
+}
+
+/* Et supprimez le ::before */
+
+/* Labels */
+#contact_form label {
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: #333;
+    margin-bottom: 0.25rem;
+    display: block;
+}
+
+/* Inputs et textarea */
+#contact_form input[type="text"],
+#contact_form input[type="email"],
+#contact_form input[type="tel"],
+#contact_form textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+#contact_form input:focus,
+#contact_form textarea:focus {
+    outline: none;
+    border-color: #4ecdc4;
+    box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.1);
+}
+
+#contact_form input:hover,
+#contact_form textarea:hover {
+    background: rgb(200, 240, 200);
+    transform: translateY(-1px);
+}
+
+/* Textarea spécifique */
+#contact_form textarea {
+    min-height: 120px;
+    resize: vertical;
+    line-height: 1.5;
+}
+
+/* Bouton submit */
+#contact_form button[type="submit"] {
+    background: linear-gradient(135deg, #4ecdc4 0%, #44a8a0 100%);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    align-self: center;
+}
+
+#contact_form button[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+
+/* Messages d'erreur (si vous en avez) */
+#contact_form .errorlist {
+    list-style: none;
+    padding: 0;
+    margin: 0.25rem 0 0;
+}
+
+#contact_form .errorlist li {
+    color: #721c24;
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.25rem 0.5rem;
+    background: #f8d7da;
+    border-radius: 4px;
+    margin-top: 0.25rem;
+}
+
+
+
+/* RESPONSIVE - Petits écrans */
+@media (max-width: 768px) {
+    #contact_form {
+        max-width: 100%;
+        margin: 1rem auto;
+        padding: 0.75rem;
+    }
+
+    #contact_form form {
+        padding: 1.25rem;
+    }
+
+
+}
+
+@media (max-width: 480px) {
+    #contact_form {
+        padding: 0.5rem;
+    }
+
+    #contact_form form {
+        padding: 1rem;
+        gap: 0.85rem;
+    }
+
+    #contact_form label {
+        font-size: 0.8rem;
+    }
+
+    #contact_form input,
+    #contact_form textarea {
+        padding: 0.65rem;
+        font-size: 0.85rem;
+    }
+
+    #contact_form textarea {
+        min-height: 100px;
+    }
+
+}
+
+/* Très petits écrans */
+@media (max-width: 360px) {
+    #contact_form form {
+        padding: 0.85rem;
+    }
+
+    #contact_form input,
+    #contact_form textarea {
+        padding: 0.6rem;
+        font-size: 0.8rem;
     }
 }

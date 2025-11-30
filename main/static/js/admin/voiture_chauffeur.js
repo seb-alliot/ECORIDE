@@ -18,9 +18,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const chauffeurSelect = document.querySelector("#id_chauffeur");
     const modeleSelect = document.querySelector("#id_voiture");
     const placesSelect = document.querySelector("#id_places");
+
     if(chauffeurSelect) {
         chauffeurSelect.addEventListener("change", () => {
             const selectedChauffeur = chauffeurSelect.value;
+
+            // Correction: parenthèses au lieu de backticks
             fetch(`${ModelVoiture}?id_chauffeur=${selectedChauffeur}`, {
                 method: "GET",
                 headers: {
@@ -30,20 +33,29 @@ document.addEventListener("DOMContentLoaded", () => {
             })
             .then(response => response.json())
             .then(data => {
-                modeleSelect.innerHTML = "";
-                data.id_voiture.forEach(voiture => {
-                    const option = document.createElement("option");
-                    option.value = voiture;
-                    option.textContent = voiture;
-                    modeleSelect.appendChild(option);
-                });
-                placesSelect.innerHTML = "";
-                data.id_places.forEach(place => {
-                    const option = document.createElement("option");
-                    option.value = place;
-                    option.textContent = place;
-                    placesSelect.appendChild(option);
-                });
+                // Remplir le select des voitures
+                modeleSelect.innerHTML = '<option value="">---------</option>';
+
+                if (data.voitures && data.voitures.length > 0) {
+                    data.voitures.forEach(voiture => {
+                        const option = document.createElement("option");
+                        option.value = voiture.id; // L'ID pour le formulaire
+                        option.textContent = `${voiture.marque} ${voiture.modele}`; // Affichage pour l'utilisateur
+                        modeleSelect.appendChild(option);
+                    });
+                }
+
+                // Remplir le select des places (de 1 au max)
+                placesSelect.innerHTML = '<option value="">---------</option>';
+
+                if (data.max_places && data.max_places > 0) {
+                    for (let i = 1; i <= data.max_places; i++) {
+                        const option = document.createElement("option");
+                        option.value = i;
+                        option.textContent = `${i} place${i > 1 ? 's' : ''}`;
+                        placesSelect.appendChild(option);
+                    }
+                }
             })
             .catch(error => {
                 console.error("Erreur lors de la récupération des modèles de voiture :", error);

@@ -45,6 +45,7 @@ from .code import (
     Fusion_donnee,
     SuppressionCompte,
     Graphique,
+    PrisedeContact,
 )
 import asyncio
 
@@ -350,7 +351,7 @@ def Fait_Ton_Taff_De_Modo(request):
         #_____repondre au mail de contact____
         elif email_type == "Prise de contact":
 
-            contact_form = PriseContact(
+            contact_form = PrisedeContact(
                 request,
                 email_id_selected=email_id_selected,
                 telephone=telephone,
