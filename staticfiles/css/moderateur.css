@@ -668,7 +668,6 @@ form#email_select_form select, #email_type {
     display: flex;
     flex-direction: column;
     border-radius: 10px;
-    margin-bottom: 1.5rem;
 }
 
 /* Labels */
