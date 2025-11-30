@@ -1,25 +1,116 @@
 {% extends 'index.html' %}
 {% load static %}
-
-
 {% block principal %}
-    <div id="reservation">
-
-        <!--Section photo chauffeur-->
-        {% include "interface_utilisateur/utilisateur/reservation/contenu_reservation/_photo_chauffeur.html" %}
-        <!--Section information trajet-->
-        {% include "interface_utilisateur/utilisateur/reservation/contenu_reservation/_information_trajet.html" %}
-        <!--Section note et commentaires-->
-        {% include "interface_utilisateur/utilisateur/reservation/contenu_reservation/_avis_passager.html" %}
-        <!--Section note et commentaires-->
+<div class="reservation-compact">
+    <!-- Header avec photo et nom -->
+    <div class="compact-header">
+        {% if trajet.chauffeur.adresse_user.photo %}
+            <img src="{{ trajet.chauffeur.adresse_user.photo.url }}" alt="{{ trajet.chauffeur }}">
+        {% else %}
+            <img src="{{ photo_default_url }}" alt="Photo par défaut">
+        {% endif %}
+        <div class="header-info">
+            <span class="driver-tag">Chauffeur</span>
+            <h2>{{ trajet.chauffeur }}</h2>
+            {% if trajet.note_chauffeur %}
+                <span class="rating-compact">⭐ {{ trajet.note_chauffeur|floatformat:1 }}/5</span>
+            {% else %}
+                <span class="rating-compact">Pas de note</span>
+            {% endif %}
+        </div>
     </div>
-{% include "interface_utilisateur/utilisateur/reservation/contenu_reservation/_form_reservation.html" %}
-<!--Formulaire de réservation de place-->
 
-    <div id="compteur_vue" class="class_flex class_column class_aligne_items_center">
-        <p>vues : </p>
-        {% if compteur %}
-            {{ compteur }}
+    <!-- Itinéraire compact -->
+    <div class="compact-route">
+        <div class="route-item">
+            <span class="icon">📍</span>
+            <span>{{ trajet.ville_depart }}</span>
+        </div>
+        <span class="arrow">→</span>
+        <div class="route-item">
+            <span class="icon">🏁</span>
+            <span>{{ trajet.ville_arrivee }}</span>
+        </div>
+    </div>
+
+    <!-- Infos essentielles en grille compacte -->
+    <div class="compact-grid">
+        <div class="info-box">
+            <span class="icon">📅</span>
+            <span class="value">{{ trajet.date|date:"d/m/y" }}</span>
+        </div>
+        <div class="info-box">
+            <span class="icon">🕐</span>
+            <span class="value">{{ trajet.heure|date:"H\hi" }}</span>
+        </div>
+        <div class="info-box">
+            <span class="icon">💰</span>
+            <span class="value">{{ trajet.prix }}€</span>
+        </div>
+        <div class="info-box">
+            <span class="icon">👥</span>
+            <span class="value">{{ trajet.places }} place{{ trajet.places|pluralize }}</span>
+        </div>
+    </div>
+
+    <!-- Voiture -->
+    <div class="compact-car">
+        <span class="icon">🚗</span>
+        <span>{{ trajet.voiture.marque }} {{ trajet.voiture.modele }}</span>
+    </div>
+
+    <!-- Préférences (si existantes) -->
+    {% if trajet.chauffeur.preference %}
+    <div class="compact-prefs">
+        <div class="pref-tag">🚭 {{ trajet.chauffeur.preference.get_fumeur_display }}</div>
+        <div class="pref-tag">🐾 {{ trajet.chauffeur.preference.get_animaux_display }}</div>
+        {% if trajet.chauffeur.preference.exigences_personnelles %}
+        <div class="pref-tag full">💭 {{ trajet.chauffeur.preference.exigences_personnelles }}</div>
         {% endif %}
     </div>
+    {% endif %}
+
+    {% if commentaire %}
+    <details class="compact-reviews">
+        <summary>💬 Avis ({{ commentaire|length }})</summary>
+        <div class="reviews-content">
+            {% for c in commentaire %}
+                <p>"{{ c.commentaire }}"</p>
+            {% endfor %}
+        </div>
+    </details>
+    {% endif %}
+
+    <!-- Réservation -->
+    <div class="compact-booking">
+        {% if user.is_authenticated %}
+            <form id="reservation_form" method="POST">
+                {% csrf_token %}
+                <div class="booking-flex">
+                    <div id="place_a_reserver" data-max-places="{{ trajet.places|default:1 }}">
+                        {{ reservation_form.places }}
+                    </div>
+                    <input type="hidden" name="Reserver" value="oui">
+                    <button id="pop_up_confirmation" type="submit">
+                        <span class="icon">✓</span> Réserver
+                    </button>
+                </div>
+            </form>
+        {% else %}
+            <a href="{% url 'inscription' %}" class="btn-auth-compact">
+                🔐 Se connecter pour réserver
+            </a>
+        {% endif %}
+    </div>
+
+    <!-- Footer compact -->
+    <div class="compact-footer">
+        <span>👁️ {{ compteur|default:"0" }} vue{{ compteur|pluralize }}</span>
+    </div>
+</div>
+
+{% block script_js %}
+    <script src="{% static 'js/espace_perso/validation_reservation.js' %}" nonce="{{ request.csp_nonce }}"></script>
+    <script src="{% static 'js/espace_perso/places_reservation.js' %}" nonce="{{ request.csp_nonce }}"></script>
+{% endblock script_js %}
 {% endblock principal %}
