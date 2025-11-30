@@ -12,7 +12,6 @@ from ..utils.zone_admin.recup_commission import get_commission
 def debit_commission(sender, instance, created, **kwargs):
     if not created:
         return
-    commission = get_commission()
 
     chauffeur = instance.chauffeur
 
@@ -21,10 +20,10 @@ def debit_commission(sender, instance, created, **kwargs):
             # Débiter le chauffeur
             credit_user = CreditUser.objects.get(user=chauffeur)
 
-            if credit_user.credit < commission:
+            if credit_user.credit < get_commission():
                 return
 
-            credit_user.credit -= commission
+            credit_user.credit -= get_commission()
             credit_user.save()
 
 
@@ -32,7 +31,7 @@ def debit_commission(sender, instance, created, **kwargs):
             superuser = User.objects.filter(username='ECORIDE').first()
             if superuser:
                 credit_plateforme, _ = CreditUser.objects.get_or_create(user=superuser)
-                credit_plateforme.credit += commission
+                credit_plateforme.credit += get_commission()
                 credit_plateforme.save()
             else:
                 pass # le super user existe forcement donc l'erreur n'est pas possible

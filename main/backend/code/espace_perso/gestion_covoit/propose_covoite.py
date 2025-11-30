@@ -5,6 +5,7 @@ from ....models import  CreditUser
 from ....forms import TrajetForm
 from django.urls import reverse
 from django.utils import timezone
+from ...utils.zone_admin.recup_commission import get_commission
 
 
 def ProposeTonCovoiturage(request):
@@ -28,7 +29,7 @@ def ProposeTonCovoiturage(request):
                     # on verrouille les credits de l'utilisateur pour éviter les problèmes avec select_for_update
                     credit_user = CreditUser.objects.select_for_update().get(user=user)
                     # __(on retire la commission au credit utilisateur) ==> transformer via le signal, une verif reste ici pour le request message
-                    if credit_user.credit < 2:
+                    if credit_user.credit < get_commission():
                         messages.error(
                             request,
                             "Vos crédits sont insuffisants pour proposer un covoiturage.",

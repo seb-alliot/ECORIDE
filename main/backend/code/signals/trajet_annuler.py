@@ -13,7 +13,6 @@ from ..utils.zone_admin.recup_commission import get_commission
 
 @receiver(pre_save, sender=TrajetProposer)
 def crediter_annulation(sender, instance, **kwargs):
-    commission = get_commission()
 
     if not instance.pk:
         return
@@ -31,7 +30,7 @@ def crediter_annulation(sender, instance, **kwargs):
                 if ancien_trajet.date >= maintenant.date() and ancien_trajet.trajet_rembourser == True:
                     return
                 credit_chauffeur = CreditUser.objects.select_for_update().get(user=chauffeur)
-                credit_chauffeur.credit += commission
+                credit_chauffeur.credit += get_commission()
                 credit_chauffeur.save()
 
                 db = get_mongo_db()
@@ -39,7 +38,7 @@ def crediter_annulation(sender, instance, **kwargs):
 
                 superuser = User.objects.get(username='ECORIDE')
                 credit_plateforme = CreditUser.objects.select_for_update().get(user=superuser)
-                credit_plateforme.credit -= commission
+                credit_plateforme.credit -= get_commission()
                 credit_plateforme.save()
                 ancien_trajet.etat = "Annulé"
                 ancien_trajet.trajet_rembourser = True
