@@ -7,21 +7,19 @@ from ..utils.avis_trajet import get_mongo_db
 from django.db import transaction
 from dotenv import load_dotenv
 import os
-from decimal import Decimal
 from ..utils.zone_admin.recup_commission import get_commission
 
 load_dotenv()
 
 
 def process_annulation_trajet(instance: TrajetProposer):
-    commission = get_commission()
 
     chauffeur = instance.chauffeur
 
     with transaction.atomic():
         # Créditer le chauffeur (commission)
         credit_chauffeur = CreditUser.objects.select_for_update().get(user=chauffeur)
-        credit_chauffeur.credit += commission
+        credit_chauffeur.credit += get_commission()
         credit_chauffeur.save()
 
         # Supprimer la vue Mongo liée au trajet
@@ -31,7 +29,7 @@ def process_annulation_trajet(instance: TrajetProposer):
         # Débiter la plateforme
         superuser = User.objects.get(username="ECORIDE")
         credit_plateforme = CreditUser.objects.select_for_update().get(user=superuser)
-        credit_plateforme.credit -= commission
+        credit_plateforme.credit -= get_commission()
         credit_plateforme.save()
 
         # Rembourser les passagers
@@ -55,8 +53,14 @@ def crediter_user(sender, instance, **kwargs):
 
 @receiver(post_save, sender=TrajetProposer)
 def crediter_passager_chauffeur(sender, instance, created, **kwargs):
-    if instance.etat == "Annulé":
+
+    if instance.etat == "Annulé" and not instance.trajet_rembourser:
         try:
             process_annulation_trajet(instance)
+
+            TrajetProposer.objects.filter(pk=instance.pk).update(
+                trajet_rembourser=True
+            )
+
         except CreditUser.DoesNotExist as e:
             raise ValueError(f"Erreur lors de la mise à jour des crédits pour le trajet {instance.id}: {e}")
