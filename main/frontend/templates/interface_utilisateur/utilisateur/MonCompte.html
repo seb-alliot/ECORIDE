@@ -23,10 +23,6 @@
         </div>
     {% endwith %}
 
-    {% block script_js %}
-        <script id="trajet5" type="application/json">{{ trajet5_json|safe }}</script>
-        <script nonce="{{ request.csp_nonce }}">window.annulerUrl  = "{% url 'annuler_trajet5' %}";</script>
-        <script src="{% static 'js/espace_perso/annuler_trajet.js' %}" nonce="{{ request.csp_nonce }}"></script>
-    {% endblock script_js %}
+
 
 {% endblock principal %}

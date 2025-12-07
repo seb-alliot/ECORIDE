@@ -1,6 +1,8 @@
+{% load static %}
+
 {% if trajets %}
         <h2 class="history-title completed">
-            <span class="icon">✅</span>
+            <span class="icon"></span>
             Le{{ trajets|pluralize }} trajet{{ trajets|pluralize }} que vous proposez
         </h2>
     <ul class="trajets-list">
@@ -15,12 +17,10 @@
                         class="trajet-radio"
                     />
                     <label class="trajet-card" for="trajet_{{ trajet.id }}">
-                        <!-- Header -->
                         <div class="trajet-header">
                             <span class="statut-badge {{ trajet.etat|lower|cut:" " }}">{{ trajet.etat }}</span>
                         </div>
 
-                        <!-- Itinéraire -->
                         <div class="trajet-route">
                             <div class="route-item">
                                 <span class="route-icon">📍</span>
@@ -33,7 +33,6 @@
                             </div>
                         </div>
 
-                        <!-- Date/heure -->
                         <div class="trajet-datetime">
                             <div class="datetime-item">
                                 <span class="icon">📅</span>
@@ -45,7 +44,6 @@
                             </div>
                         </div>
 
-                        <!-- Voiture -->
                         <div class="trajet-car">
                             <div class="car-model">
                                 <span class="icon">🚗</span>
@@ -61,7 +59,6 @@
                             </div>
                         </div>
 
-                        <!-- Footer -->
                         <div class="trajet-footer">
                             <div class="trajet-prix">
                                 <span class="prix-label">Prix</span>
@@ -82,7 +79,6 @@
                             </div>
                         </div>
 
-                        <!-- Indicateur sélection -->
                         <div class="selection-indicator">
                             <span class="checkmark">✓</span>
                         </div>
@@ -97,3 +93,9 @@
         <p>Vous n'avez pas encore proposé de trajet</p>
     </div>
 {% endif %}
+
+{% block script_js %}
+    <script id="trajet5" type="application/json">{{ trajet5_json|safe }}</script>
+    <script nonce="{{ request.csp_nonce }}">window.annulerUrl  = "{% url 'annuler_trajet5' %}";</script>
+    <script src="{% static 'js/espace_perso/annuler_trajet.js' %}" nonce="{{ request.csp_nonce }}"></script>
+{% endblock script_js %}

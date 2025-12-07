@@ -7,7 +7,6 @@
   --image-height: clamp(100px, 25vw, 800px);
   --spacing-sm: 5px;
   --spacing-md: 10px;
-  --input-width--other: clamp(70px, 18vw, 95px);
   --spacing-middle: 15px;
   --spacing-lg: clamp(20px, 3vw, 35px);
   --font-size-other: clamp(10px, 1.2vw, 16px);
@@ -20,60 +19,66 @@
   --color-background: #faf3e0;
   --color-hover: rgb(200, 240, 200);
   --color-text: #000000;
-  --color-light: #f8f9fa;
+  --color-light: #f8f8f9fa;
   --border-radius-sm: 10px;
   --border-radius-lg: 15%;
   --box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.41);
   --font-main: Arial, sans-serif;
 }
+
+/* Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--color-background);
+  font-family: var(--font-main);
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin-bottom: clamp(20px, 5vw, 40px);
+}
+
 /* Classes utilitaires */
 .class_flex {
   display: flex;
 }
+
 .display_grid {
   display: grid;
 }
-.class_flex_wrap {
-  flex-wrap: wrap;
-}
+
 .class_justify_center {
   justify-content: center;
 }
-.classe_row_reverse {
-  flex-direction: row-reverse;
-}
+
 .class_aligne_items_center {
   align-items: center;
 }
-.aligne_content_center {
-  align-content: center;
-}
+
 .class_column {
   flex-direction: column;
 }
-.class_shadow {
-  box-shadow: var(--box-shadow);
-}
-.class_border {
-  border: 1px solid var(--color-text);
-}
-.class_border_radius {
-  border-radius: var(--border-radius-sm);
-}
+
 .class_box_sizing {
   box-sizing: border-box;
 }
+
 .text_decoration_none {
   text-decoration: none;
 }
+
 .position_relative {
   position: relative;
 }
 
-.generic {
-  display: flex;
-  align-items: center;
-}
 .generix1 {
   display: flex;
   flex-direction: column;
@@ -84,64 +89,38 @@
   justify-content: center;
   align-items: center;
 }
+
 .generix3 {
   display: flex;
   justify-content: center;
 }
-.generix4 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 10px;
-}
 
-
-
-/* Scrollbar personnalisée */
+/* Scroll */
 .class_scroll {
   overflow-y: auto;
   width: 100%;
   scrollbar-color: rgba(150, 200, 150, 1) rgba(220, 220, 220, 0);
   padding-bottom: var(--spacing-md);
 }
+
 ul.class_flex {
   gap: var(--spacing-md);
 }
+
 ul.resultat {
   display: flex;
   list-style: none;
 }
 
-/* Reset et base */
-*, *::before, *::after {
-  box-sizing: border-box;
-}
-
-#reservation_btn {
-    display: none;
-}
-body {
-  background-color: var(--color-background);
-  font-family: var(--font-main);
-  min-height: 100vh;
-  margin:0;
-  padding:0;
-  }
-main {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  margin-bottom: clamp(20px, 5vw, 40px);
-}
 /* Header */
-header.position_relative > div > div > div.class_flex {
-  justify-content: space-between;
-}
 header {
   padding: var(--spacing-md) var(--spacing-lg);
   height: clamp(80px, 10vw, 210px);
   background-color: var(--color-light);
-  height:20%;
+}
+
+header.position_relative > div > div > div.class_flex {
+  justify-content: space-between;
 }
 
 header h1 a,
@@ -149,6 +128,7 @@ header a {
   color: var(--color-text);
 }
 
+/* Logo et images */
 #logo,
 .photo_profile,
 label#resultat_recherche img {
@@ -156,17 +136,21 @@ label#resultat_recherche img {
   width: var(--logo-size);
   margin-right: var(--font-size-other);
 }
+
 .photo_profile,
 label#resultat_recherche img,
 #covoit_reserver img {
   border-radius: var(--border-radius-lg);
 }
+
 #logo {
   display: flex;
 }
+
+/* Boutons par défaut */
 .photo_default {
   width: clamp(120px, 20vw, 265px);
-  height: clamp(25px, 10vh , 45px);
+  height: clamp(25px, 10vh, 45px);
   padding: clamp(10px, 2vw, 15px);
   align-items: center;
   background-color: var(--color-primary);
@@ -182,13 +166,12 @@ label#resultat_recherche img,
   transform: scale(1.05);
 }
 
-
 /* Footer */
-footer{
+footer {
   gap: clamp(10px, 2vw, 30px);
   padding: 0;
   margin-top: auto;
-  height : var(--footer-height);
+  height: var(--footer-height);
   background-color: var(--color-light);
 }
 
@@ -197,6 +180,10 @@ a {
   color: black;
   display: flex;
   justify-content: center;
+}
+
+a:hover {
+  color: #a7c7a5;
 }
 
 .footer {
@@ -213,19 +200,24 @@ a {
   align-items: center;
 }
 
+footer a {
+  font-size: var(--font-size-base);
+  padding: var(--spacing-sm) var(--spacing-md);
+  color: var(--color-text);
+  height: var(--input-height);
+}
+
+/* Labels cachés */
 .resultat input[type="radio"],
 form#filtre_form label,
 #recherche_form label,
 .label-hidden,
 form#etat_form > label,
-#reservation_form > label{
+#reservation_form > label {
   display: none;
 }
 
-
-
-
-/* Éléments de formulaire */
+/* Formulaires */
 button,
 select,
 input {
@@ -248,6 +240,7 @@ button {
 select {
   background-color: var(--color-light);
 }
+
 input {
   background-color: var(--color-light);
 }
@@ -259,7 +252,6 @@ button:focus {
   outline: none;
 }
 
-/* États de survol */
 input:hover,
 button:hover,
 .footer:hover,
@@ -272,9 +264,7 @@ div#reservation > div > form#reservation_form > select:hover {
 }
 
 .resultat input[type="radio"]:hover ~ label#resultat_recherche,
-#covoit_proposer input[type="radio"]:hover ~ label,
 .conteneur_recherche2 .resultat input[type="radio"]:hover ~ label#resultat_recherche,
-#covoit_proposer:hover,
 #covoit_reserver:hover {
   background: var(--color-primary);
   color: var(--color-light);
@@ -284,24 +274,35 @@ div#reservation > div > form#reservation_form > select:hover {
   color: var(--color-text);
 }
 
-.p_deco {
-  box-shadow: 6px 6px 10px beige;
-  background-color: rgb(120, 180, 120);
-  color: blanchedalmond;
-  text-shadow: 1px 1px 2px black;
-  font-size: var(--font-size-base--p);
+/* Messages */
+.success {
+  display: flex;
+  justify-content: center;
+  font-size: clamp(14px, 2.5vw, 18px);
+  color: green;
 }
 
-a:hover {
-  color: #a7c7a5;
+.error {
+  display: flex;
+  justify-content: center;
+  font-size: clamp(14px, 2.5vw, 18px);
+  color: red;
 }
 
+.info {
+  display: flex;
+  justify-content: center;
+  font-size: clamp(14px, 2.5vw, 18px);
+  color: blue;
+}
+
+/* Présentation */
 .image-principal {
+  min-height: var(--image-height);
   background-size: cover;
   background-position: center;
 }
 
-/* Section présentation */
 .presentation {
   display: grid;
   grid-template-columns: 1fr;
@@ -316,25 +317,25 @@ a:hover {
   flex: 1;
 }
 
+.presentation img {
+  object-fit: cover;
+}
 
-/*connection*/
-.account-link {
+.presentation-flex,
+.presentation-flex-reverse {
   display: flex;
-  text-decoration: none;
   flex-direction: column;
   align-items: center;
+  gap: clamp(10px, 2vw, 20px);
 }
 
-.admin-link {
-  text-decoration: none;
-  color: var(--color-text);
-}
-#inscription label,
-form#trajet_terminer_form > label,
-form#demarrer_ou_annuler_form > label {
-  display: none;
+.presentation-flex p,
+.presentation-flex-reverse p {
+  text-align: center;
+  max-width: 90%;
 }
 
+/* Connexion */
 #inscription,
 #login1,
 #login2,
@@ -349,316 +350,12 @@ form#demarrer_ou_annuler_form > label {
   height: clamp(45px, 5vw, 55px);
 }
 
-/* Formulaire de recherche */
-#recherche_form {
-  gap: 0;
-  padding: var(--spacing-md);
-  font-size: 16px;
-  margin-bottom: var(--spacing-lg);
-}
-#recherche_form input, input#id_date , footer a, #recherche_form button {
-  width: var(--input-form-search);
-  font-size: var(--font-size-other);
+#inscription label,
+form#trajet_terminer_form > label,
+form#demarrer_ou_annuler_form > label {
+  display: none;
 }
 
-.conteneur_recherche {
-  width: 100%;
-  margin-bottom: var(--spacing-lg);
-}
-
-.conteneur_recherche2 {
-  background-color: var(--color-secondary);
-  margin-bottom: var(--spacing-md);
-  gap: var(--spacing-md);
-}
-#selection_trajet {
-  margin-bottom: var(--spacing-lg);
-}
-
-/* Résultats */
-.resultat {
-  gap: var(--spacing-lg);
-}
-
-.resultat label {
-  border-radius: 10px;
-  background-color: #f8f9fa;
-  padding: 10px;
-}
-
-form#selection_trajet button {
-  height: var(--input-height);
-  margin-bottom: 15px;
-}
-form#filtre_form {
-  margin-bottom: var(--content-side-padding);
-}
-/* Style de base pour les labels */
-label#resultat_recherche {
-  border-radius: var(--border-radius-sm);
-  background-color: var(--color-light);
-  padding: var(--spacing-md);
-  width: clamp(200px, 30vw, 380px);
-  height: auto;
-  font-size: var(--font-size-other);
-  margin-top: clamp(7px, 2vw, 10px);
-}
-
-/* État checked */
-.resultat [type="radio"]:checked ~ label#resultat_recherche {
-  color: var(--color-text);
-  border-bottom: 1px solid white;
-  background-color: var(--color-hover);
-  border-radius: var(--border-radius-sm);
-  display: flex;
-  z-index: 1;
-}
-
-
-
-
-
-/* Bouton réserver et formulaire trajet */
-#reservation_form button,
-#form_trajet button {
-  background-color: var(--color-primary);
-  color: white;
-  width: var(--input-width);
-  font-size: var(--font-size-other);
-  height: var(--input-height);
-}
-/*--------------Block RESERVATION--------------*/
-
-div#reservation {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: var(--spacing-lg) auto;
-  max-width: var(--content-max-width);
-  padding: 0 var(--content-side-padding);
-}
-
-div#reservation > div {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: var(--color-secondary);
-  box-shadow: var(--box-shadow);
-  border: solid 2px black;
-  width: clamp(250px, 30vw, 300px);
-  min-height: clamp(300px, 35vw, 350px);
-  padding: var(--spacing-sm);
-  box-sizing: border-box;
-  overflow: hidden;
-}
-div#reservation > div:nth-child(1) {
-  border-radius: 15% 0% 0% 15%;
-}
-
-/* Image profil */
-div#reservation > div > img.photo_profile {
-  width: 90%;
-  height: 70%;
-  object-fit: cover;
-  margin-top: 5%;
-}
-
-/* Info chauffeur et prix */
-#chauffeur_trajet,
-#prix_trajet {
-  border: solid 2px var(--color-text);
-  width: 100%;
-  justify-content: center;
-  display: flex;
-  background-color: var(--color-hover);
-  font-size: var(--font-size-other);
-  padding: var(--spacing-sm);
-}
-
-/* Bloc info trajet */
-#info_trajet {
-  margin: 0;
-  padding: var(--spacing-sm);
-  font-size: var(--font-size-other);
-}
-#info_trajet > div {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-#info_trajet > div > p {
-  text-align: center;
-  font-size: clamp(12px, 1.8vw, 16px);
-  color: var(--color-light);
-}
-div#reservation > div:nth-child(3) {
-  border-radius: 0 15% 15% 0;
-}
-
-
-
-/*--- Partie info trajet ---*/
-
-#chauffeur_trajet {
-  border: solid 2px var(--color-text);
-  width: 100%;
-  justify-content: center;
-  display: flex;
-  background-color: var(--color-hover);
-  margin-bottom: clamp(-3%, -1vw, -1.5%);
-  font-size: var(--font-size-other);
-}
-
-#prix_trajet {
-  border: solid 2px var(--color-text);
-  width: 100%;
-  justify-content: center;
-  display: flex;
-  background-color: var(--color-hover);
-  margin-top: clamp(-3%, -1vw, -1.5%);
-  font-size: var(--font-size-other);
-}
-
-#info_trajet > div > p {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  color: var(--color-light);
-  font-size: clamp(10px, 1.5vw, 14px);
-  margin: var(--spacing-sm);
-}
-
-div#info_trajet {
-  margin: 0;
-}
-
-
-/*--- Partie info chauffeur ---*/
-
-form#reservation_form > div > ul {
-  gap: 20px;
-}
-
-#reservation_form > ul {
-  margin: 0px;
-}
-form#etat_form > div > ul {
-  gap: 20px;
-}
-
-
-form#reservation_form > a.btn.btn-primary {
-  color: red;
-  font-size: clamp(18px, 4vw, 20px);
-}
-div#gain_plateforme {
-  display: flex;
-  justify-content: center;
-  margin-top: var(--spacing-md);
-  font-size: clamp(10px, 2vw, 16px);
-  margin-left: clamp(-15%, -10vw, -10%);
-}
-
-.success,
-.error,
-.info {
-  display: flex;
-  justify-content: center;
-  font-size: clamp(14px, 2.5vw, 18px);
-}
-.success {
-  color: green;
-}
-.error {
-  color: red;
-}
-.info {
-  color: blue;
-}
-#compteur_vue {
-  display: flex;
-  justify-content: center;
-  font-size: clamp(14px, 2.5vw, 18px);
-  margin: var(--spacing-middle);
-}
-/* Consolidated common properties for various elements that use --input-width, --font-size-base, --input-width--other etc. */
-
-
-
-
-footer a {
-  font-size: var(--font-size-base);
-  padding: var(--spacing-sm) var(--spacing-md);
-  color: var(--color-text);
-  height: var(--input-height);
-}
-
-
-/* Consolidated specific font-sizes and margins for links/buttons */
-#mot_de_passe_oublie a,
-button#bouton_note,
-#note_perso,
-#avis_perso,
-#info_trajet {
-  font-size: var(--font-size-base);
-  margin-top: var(--spacing-lg);
-}
-
-
-
-
-
-/* Consolidated #note_perso, #avis_perso, #info_trajet, #prix_trajet, #chauffeur_trajet, #info_trajet > div > p */
-#note_perso,
-#avis_perso,
-#info_trajet,
-#prix_trajet,
-#chauffeur_trajet,
-#info_trajet > div > p {
-  font-size: clamp(14px, 1.9vw, 15px);
-  margin: var(--spacing-sm);
-}
-div#reservation > div > img.photo_profile {
-  margin-right: 0;
-}
-
-/* Consolidated #div_avis */
-div#div_avis > div > p {
-  font-size: var(--font-size-base);
-}
-#div_avis, #note, #preference {
-  width: 90%;
-  font-size: clamp(10px, 1vw, 12px);
-}
-
-/* Consolidated #note, #div_avis, #preference */
-#note,
-#div_avis,
-#preference {
-  font-size: clamp(10px, 1vw, 12px);
-}
-
-/* Consolidated div#div_avis > div, div#place_a_reserver > div, div#place_a_reserver */
-div#div_avis > div,
-div#place_a_reserver > div,
-div#place_a_reserver {
-  margin: var(--spacing-md);
-}
-
-/* Consolidated div#preference p */
-div#preference p {
-  margin: clamp(3px, 1vw, 4px);
-  font-size: var(--spacing-md);
-}
-
-/* Consolidated #place_a_reserver, #resultat_ecolo, #resultat_non_ecolo */
-#place_a_reserver,
-#resultat_ecolo,
-#resultat_non_ecolo {
-  font-size: clamp(14px, 3vw, 18px);
-}
-
-/* Consolidated margin for #creer_compte */
 #creer_compte {
   display: inline-block;
   align-self: center;
@@ -683,423 +380,1540 @@ div#preference p {
   text-decoration: none;
 }
 
+/* Recherche */
+#recherche_form {
+  gap: 0;
+  padding: var(--spacing-md);
+  font-size: 16px;
+  margin-bottom: var(--spacing-lg);
+  height: clamp(45px, 9vw, 55px);
+}
 
+#recherche_form input,
+input#id_date,
+#recherche_form button {
+  width: var(--input-form-search);
+  font-size: var(--font-size-other);
+}
 
+#recherche_covoiturage {
+  text-align: center;
+  margin: var(--content-side-padding);
+}
 
-/* Consolidated #avis_positif input */
+.conteneur_recherche {
+  width: 100%;
+  margin-bottom: var(--spacing-lg);
+}
+
+.conteneur_recherche2 {
+  background-color: var(--color-secondary);
+  margin-bottom: var(--spacing-md);
+  gap: var(--spacing-md);
+}
+
+/* Résultats */
+.resultat {
+  gap: var(--spacing-lg);
+}
+
+.resultat label {
+  border-radius: 10px;
+  background-color: #f8f9fa;
+  padding: 10px;
+}
+
+label#resultat_recherche {
+  border-radius: var(--border-radius-sm);
+  background-color: var(--color-light);
+  padding: var(--spacing-md);
+  width: clamp(200px, 30vw, 380px);
+  height: auto;
+  font-size: var(--font-size-other);
+  margin-top: clamp(7px, 2vw, 10px);
+}
+
+.resultat [type="radio"]:checked ~ label#resultat_recherche {
+  color: var(--color-text);
+  border-bottom: 1px solid white;
+  background-color: var(--color-hover);
+  border-radius: var(--border-radius-sm);
+  display: flex;
+  z-index: 1;
+}
+
+#reservation_btn {
+  display: none;
+}
+
+#selection_trajet {
+  margin-bottom: var(--spacing-lg);
+}
+
+form#selection_trajet button {
+  height: var(--input-height);
+  margin-bottom: 15px;
+}
+
+form#filtre_form {
+  margin-bottom: var(--content-side-padding);
+}
+
+#reservation_form button,
+#form_trajet button {
+  background-color: var(--color-primary);
+  color: white;
+  width: var(--input-width);
+  font-size: var(--font-size-other);
+  height: var(--input-height);
+}
+
+.p_deco {
+  box-shadow: 6px 6px 10px beige;
+  background-color: rgb(120, 180, 120);
+  color: blanchedalmond;
+  text-shadow: 1px 1px 2px black;
+  font-size: var(--font-size-base--p);
+}
+
+#resultat_ecolo,
+#resultat_non_ecolo {
+  font-size: clamp(14px, 3vw, 18px);
+}
+
+/* Réservation */
+div#reservation {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: var(--spacing-lg) auto;
+  max-width: var(--content-max-width);
+  padding: 0 var(--content-side-padding);
+}
+
+div#reservation > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--color-secondary);
+  box-shadow: var(--box-shadow);
+  border: solid 2px black;
+  width: clamp(250px, 30vw, 300px);
+  min-height: clamp(300px, 35vw, 350px);
+  padding: var(--spacing-sm);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+div#reservation > div:nth-child(1) {
+  border-radius: 15% 0% 0% 15%;
+}
+
+div#reservation > div:nth-child(3) {
+  border-radius: 0 15% 15% 0;
+}
+
+div#reservation > div > img.photo_profile {
+  width: 90%;
+  height: 70%;
+  object-fit: cover;
+  margin-top: 5%;
+  margin-right: 0;
+}
+
+#chauffeur_trajet,
+#prix_trajet {
+  border: solid 2px var(--color-text);
+  width: 100%;
+  justify-content: center;
+  display: flex;
+  background-color: var(--color-hover);
+  font-size: var(--font-size-other);
+  padding: var(--spacing-sm);
+  font-size: clamp(14px, 1.9vw, 15px);
+  margin: var(--spacing-sm);
+}
+
+#chauffeur_trajet {
+  margin-bottom: clamp(-3%, -1vw, -1.5%);
+}
+
+#prix_trajet {
+  margin-top: clamp(-3%, -1vw, -1.5%);
+}
+
+#info_trajet {
+  margin: 0;
+  padding: var(--spacing-sm);
+  font-size: var(--font-size-other);
+  font-size: clamp(14px, 1.9vw, 15px);
+  margin: var(--spacing-sm);
+  background: linear-gradient(135deg, #4ecdc4 0%, #44a8a0 100%);
+  color: white;
+  border-radius: 10px;
+  text-align: center;
+  line-height: 1.5;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#info_trajet > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#info_trajet > div > p {
+  text-align: center;
+  font-size: clamp(12px, 1.8vw, 16px);
+  color: var(--color-light);
+  font-size: clamp(14px, 1.9vw, 15px);
+  margin: var(--spacing-sm);
+}
+
+form#reservation_form > div > ul {
+  gap: 20px;
+}
+
+#reservation_form > ul {
+  margin: 0px;
+}
+
+#place_a_reserver {
+  font-size: clamp(14px, 3vw, 18px);
+}
+
+div#gain_plateforme {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--spacing-md);
+  font-size: clamp(10px, 2vw, 16px);
+  margin-left: clamp(-15%, -10vw, -10%);
+}
+
+/* Avis */
+#je_donne_mon_avis {
+  max-width: 600px;
+  margin: 1.5rem auto;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#je_donne_mon_avis::before {
+  content: "⭐ Votre avis compte !";
+  display: block;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #e8d5c4;
+}
+
+.form-table {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-row label {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.form-row:nth-child(1) label::before {
+  content: "👍";
+  font-size: 1.1rem;
+}
+
+.form-row:nth-child(2) label::before {
+  content: "⭐";
+  font-size: 1.1rem;
+}
+
+.form-row:nth-child(3) label::before {
+  content: "💬";
+  font-size: 1.1rem;
+}
+
+.form-row select,
+.form-row textarea {
+  width: 100%;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  background: white;
+  text-align: center;
+  text-align-last: center;
+}
+
+.form-row select option {
+  text-align: center;
+}
+
+.form-row select:focus,
+.form-row textarea:focus {
+  outline: none;
+  border-color: #4ecdc4;
+  box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.1);
+}
+
+.form-row select:hover,
+.form-row textarea:hover {
+  background: rgb(200, 240, 200);
+  transform: translateY(-1px);
+}
+
+.form-row textarea {
+  min-height: 100px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.avis_donner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  margin-top: 1.5rem;
+  background: linear-gradient(135deg, #4ecdc4 0%, #44a8a0 100%);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.avis_donner:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.avis_donner:active {
+  transform: translateY(0);
+}
+
+.avis_donner::before {
+  content: "📤";
+  font-size: 1.1rem;
+}
+
+.form-row .errorlist {
+  list-style: none;
+  margin: 0.25rem 0 0;
+}
+
+.form-row .errorlist li {
+  color: #721c24;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.4rem 0.6rem;
+  background: #f8d7da;
+  border-radius: 6px;
+  margin-top: 0.25rem;
+  border-left: 3px solid #721c24;
+}
+
+.form-row select[name*="note"] {
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+#mot_de_passe_oublie a,
+button#bouton_note,
+#note_perso,
+#avis_perso {
+  font-size: var(--font-size-base);
+  margin-top: var(--spacing-lg);
+}
+
+#note_perso,
+#avis_perso {
+  font-size: clamp(14px, 1.9vw, 15px);
+  margin: var(--spacing-sm);
+}
+
+div#div_avis > div > p {
+  font-size: var(--font-size-base);
+}
+
+#div_avis,
+#note,
+#preference {
+  width: 90%;
+  font-size: clamp(10px, 1vw, 12px);
+}
+
+div#div_avis > div,
+div#place_a_reserver > div,
+div#place_a_reserver {
+  margin: var(--spacing-md);
+}
+
+div#preference p {
+  margin: clamp(3px, 1vw, 4px);
+  font-size: var(--spacing-md);
+}
+
 #avis_positif input {
   width: clamp(300px, 35vw, 350px);
   height: clamp(25px, 5vw, 30px);
 }
 
-/* Consolidated #bouton_moderateur */
-#bouton_moderateur, #enable_select {
-  gap: clamp(10px, 2vw, 15px);
-}
-
-/* Consolidated #ajouter, #refuser */
-#ajouter,
-#refuser {
-  margin-top: clamp(10px, 3vw, 15px);
-}
-
-/* Consolidated h1, h2, h3, h4 */
-h1, h2, h3, h4 {
-  font-size: var(--font-size-base);
-  margin: 0;
-}
-
-/* Consolidated #recherche_form, #login1, #login2, #reset_mdp, #validation_email height */
-#recherche_covoiturage {
-  text-align: center;
-  margin:var(--content-side-padding);
-}
-#recherche_form,
-#login1,
-#login2,
-#reset_mdp,
-#validation_email {
-  height: clamp(45px, 9vw, 55px);
-}
-
+/* Account */
 #account-admin {
   gap: clamp(10px, 4vw, 80px);
 }
+
 #account-admin a {
   font-size: clamp(10px, 1.6vw, 16px);
-}
-#logo {
-  margin-right: clamp(10%, 20vw, 20%);
-}
-
-/* Consolidated div.tabs */
-div.tabs {
-  margin: clamp(5px, 1vw, 10px) 10%;
-}
-
-/* Consolidated #menu-tab, .tab label */
-#menu-tab {
-  font-size: clamp(6pt, 2vw, 8pt);
-}
-.tab label {
-  font-size: clamp(10px, 2vw, 14px);
-}
-
-/* Consolidated .tabs min-height */
-.tabs {
-  min-height: clamp(600px, 40vw, 800px);
-}
-
-#nbr_mail,
-h1 {
-  margin: clamp(10px, 4vw, 15px);
-}
-
-/* Consolidated #affichage_trajet_form labels and inputs */
-#affichage_trajet_form label,
-#affichage_trajet_form input {
-  height: clamp(30px, 5vw, 40px);
-  width: clamp(100px, 15vw, 150px);
-  font-size: clamp(10px, 2vw, 12px);
-  border-radius: 0;
-}
-
-
-form#affichage_trajet_form {
-  margin-top: var(--spacing-md);
-}
-
-/* Consolidated form#moderation_form > div > p, form#moderation_form > p */
-form#moderation_form > div > p,
-form#moderation_form > p {
-  font-size: clamp(14px, 3vw, 18px);
-  margin: var(--spacing-sm);
-}
-
-/* Consolidated th */
-th {
-  font-size: clamp(12px, 2.5vw, 16px);
-}
-
-/* Consolidated #affichage_admin input */
-form#email_select_form select,
-#email_type,
-#affichage_admin input {
-  width: clamp(80px, 25vw, 250px);
-  height: clamp(20px, 5vw, 30px);
-  font-size: clamp(10px, 2.5vw, 14px);
-}
-
-
-
-.presentation-flex,
-.presentation-flex-reverse {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: clamp(10px, 2vw, 20px);
-}
-
-
-
-.presentation-flex p,
-.presentation-flex-reverse p {
-  text-align: center;
-  max-width: 90%;
-}
-.image-principal {
-  min-height: var(--image-height);
-  background-size: cover;
-  background-position: center;
 }
 
 #account-moderateur {
   gap: clamp(10px, 4vw, 20px);
 }
 
-
-
-/* Consolidated form gave you guess */
-
-#je_donne_mon_avis {
-  margin-top:2%;
+/* Headers */
+h1,
+h2,
+h3,
+h4 {
+  font-size: var(--font-size-base);
+  margin: 0;
 }
+
+h2 {
+  font-size: var(--font-size-base--p);
+}
+
 .form-center {
-    display: flex;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Trajets list */
+.trajets-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.trajet-radio {
+  position: absolute;
+  opacity: 0;
+}
+
+.trajet-card {
+  display: block;
+  background: white;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 3px solid transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+.trajet-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.trajet-radio:checked + .trajet-card {
+  border-color: #4ecdc4;
+  background: linear-gradient(135deg, #f8ffff 0%, #ffffff 100%);
+}
+
+.selection-indicator {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 28px;
+  height: 28px;
+  background: #4ecdc4;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.3s ease;
+}
+
+.trajet-radio:checked + .trajet-card .selection-indicator {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.selection-indicator .checkmark {
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.trajet-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.chauffeur-info {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.chauffeur-photo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid #e8d5c4;
+  flex-shrink: 0;
+}
+
+.chauffeur-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.chauffeur-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.chauffeur-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+.deleted-user {
+  color: #999;
+  font-style: italic;
+}
+
+.chauffeur-rating {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+}
+
+.rating-stars {
+  font-size: 0.9rem;
+}
+
+.rating-value {
+  font-weight: 600;
+  color: #f39c12;
+}
+
+.no-rating {
+  color: #999;
+  font-size: 0.8rem;
+}
+
+.statut-badge {
+  padding: 0.3rem 0.7rem;
+  border-radius: 15px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.statut-badge.disponible {
+  background: #d4edda;
+  color: #155724;
+}
+
+.statut-badge.annulé {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.trajet-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.trajet-route {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border-radius: 10px;
+}
+
+.route-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex: 1;
+}
+
+.route-icon {
+  font-size: 1rem;
+}
+
+.route-city {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #333;
+}
+
+.route-arrow {
+  font-size: 1rem;
+  color: #8b6f5c;
+  font-weight: bold;
+}
+
+.trajet-datetime {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+
+.datetime-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem;
+  background: white;
+  border: 2px solid #f0f0f0;
+  border-radius: 6px;
+  font-size: 0.85rem;
+}
+
+.datetime-item .icon {
+  font-size: 0.95rem;
+}
+
+.trajet-car {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.car-model {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+
+.engine-badge {
+  padding: 0.3rem 0.7rem;
+  border-radius: 15px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.engine-badge.electrique,
+.engine-badge.hybride {
+  background: #d4edda;
+  color: #155724;
+}
+
+.engine-badge.essence,
+.engine-badge.diesel {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.trajet-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.75rem;
+  border-top: 2px solid #f0f0f0;
+}
+
+.trajet-prix {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.prix-label {
+  font-size: 0.75rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.prix-value {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #8b6f5c;
+}
+
+.trajet-places {
+  display: flex;
+  align-items: center;
+}
+
+.places-available {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  background: #d4edda;
+  color: #155724;
+  border-radius: 15px;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.places-full {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  background: #f8d7da;
+  color: #721c24;
+  border-radius: 15px;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+/* Réservation compacte */
+.reservation-compact {
+  max-width: 500px;
+  margin: 1.25rem auto;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  background-color: rgb(200, 240, 200);
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.compact-header {
+  display: flex;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  align-items: center;
+}
+
+.compact-header img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e8d5c4;
+  flex-shrink: 0;
+}
+
+.header-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.driver-tag {
+  font-size: 0.65rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  font-weight: 600;
+}
+
+.header-info h2 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #333;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rating-compact {
+  font-size: 0.75rem;
+  color: #856404;
+  font-weight: 600;
+}
+
+.compact-route {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  justify-content: space-between;
+}
+
+.route-item span:not(.icon) {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.route-item .icon {
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.arrow {
+  font-size: 1.2rem;
+  color: #8b6f5c;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.compact-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+}
+
+.info-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.6rem 0.4rem;
+  background: white;
+  border: 2px solid #f0f0f0;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.info-box:hover {
+  border-color: #8b6f5c;
+  transform: translateY(-1px);
+}
+
+.info-box .icon {
+  font-size: 1rem;
+}
+
+.info-box .value {
+  white-space: nowrap;
+}
+
+.compact-car {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 0.75rem;
+  background: white;
+  border-radius: 8px;
+  border: 2px solid #f0f0f0;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.compact-car .icon {
+  font-size: 1rem;
+}
+
+.compact-prefs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.pref-tag {
+  padding: 0.3rem 0.6rem;
+  background: #f8f9fa;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #333;
+  border: 1px solid #e0e0e0;
+}
+
+.pref-tag.full {
+  flex: 1 1 100%;
+}
+
+.compact-reviews {
+  background: white;
+  border-radius: 8px;
+  border: 2px solid #f0f0f0;
+}
+
+.compact-reviews summary {
+  padding: 0.6rem 0.75rem;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #333;
+  list-style: none;
+  user-select: none;
+}
+
+.compact-reviews summary::-webkit-details-marker {
+  display: none;
+}
+
+.compact-reviews summary:hover {
+  background: #f8f9fa;
+}
+
+.reviews-content {
+  padding: 0 0.75rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  border-top: 1px solid #f0f0f0;
+}
+
+.reviews-content p {
+  margin: 0.5rem 0 0;
+  padding: 0.5rem;
+  background: #f8f9fa;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  font-style: italic;
+  color: #555;
+}
+
+.compact-booking {
+  background: linear-gradient(135deg, #4ecdc4 0%, #44a8a0 100%);
+  border-radius: 10px;
+  padding: 0.75rem;
+}
+
+.booking-flex {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+#place_a_reserver {
+  flex: 1;
+}
+
+#place_a_reserver select {
+  width: 100%;
+  border: 2px solid white;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  background: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#pop_up_confirmation {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.6rem 1rem;
+  background: white;
+  color: #4ecdc4;
+  border: none;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+#pop_up_confirmation:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#pop_up_confirmation .icon {
+  font-size: 1rem;
+}
+
+.btn-auth-compact {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: white;
+  color: #4ecdc4;
+  text-decoration: none;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.btn-auth-compact:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.compact-footer {
+  display: flex;
+  justify-content: center;
+  padding: 0.5rem;
+  background: white;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  color: #666;
+}
+
+/* Contact */
+#contact_form {
+  max-width: 600px;
+  margin: 1.5rem auto;
+  padding: 1rem;
+}
+
+#contact_form form {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.contact-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0 0 1rem 0;
+  padding: 0.75rem;
+  background: linear-gradient(135deg, #4ecdc4 0%, #44a8a0 100%);
+  color: white;
+  border-radius: 10px;
+}
+
+.contact-title .icon {
+  font-size: 1.4rem;
+}
+
+#contact_form label {
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: #333;
+  margin-bottom: 0.25rem;
+  display: block;
+}
+
+#contact_form input[type="text"],
+#contact_form input[type="email"],
+#contact_form input[type="tel"],
+#contact_form textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  background: white;
+}
+
+#contact_form input:focus,
+#contact_form textarea:focus {
+  outline: none;
+  border-color: #4ecdc4;
+  box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.1);
+}
+
+#contact_form input:hover,
+#contact_form textarea:hover {
+  background: rgb(200, 240, 200);
+  transform: translateY(-1px);
+}
+
+#contact_form textarea {
+  min-height: 120px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+#contact_form button[type="submit"] {
+  background: linear-gradient(135deg, #4ecdc4 0%, #44a8a0 100%);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  align-self: center;
+}
+
+#contact_form button[type="submit"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+#contact_form .errorlist {
+  list-style: none;
+  padding: 0;
+  margin: 0.25rem 0 0;
+}
+
+#contact_form .errorlist li {
+  color: #721c24;
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.25rem 0.5rem;
+  background: #f8d7da;
+  border-radius: 4px;
+  margin-top: 0.25rem;
+}
+
+/* Tabs */
+.page-wrap {
+  /* Styles si nécessaires */
+}
+
+.tabs {
+  /* Styles si nécessaires */
+}
+
+.tab {
+  /* Styles si nécessaires */
+}
+
+.content {
+  /* Styles si nécessaires */
+}
+
+.class_espace {
+  /* Styles si nécessaires */
+}
+
+.espace_bas {
+  /* Styles si nécessaires */
+}
+
+/* Stats graphiques */
+.stats-grid {
+  /* Styles si nécessaires */
+}
+
+.stat-card {
+  /* Styles si nécessaires */
+}
+
+.stat-card.total {
+  /* Styles si nécessaires */
+}
+
+.stat-day {
+  /* Styles si nécessaires */
+}
+
+.stat-info {
+  /* Styles si nécessaires */
+}
+
+.stat-item {
+  /* Styles si nécessaires */
+}
+
+.label {
+  /* Styles si nécessaires */
+}
+
+.graphique-container {
+  /* Styles si nécessaires */
+}
+
+.graph-img {
+  /* Styles si nécessaires */
+}
+
+.no-data {
+  /* Styles si nécessaires */
+}
+
+.no-trajets-message {
+  /* Styles si nécessaires */
+}
+
+/* Véhicules */
+.vehicle-container,
+.propose-trip-container {
+  /* Styles si nécessaires */
+}
+
+.vehicle-title {
+  /* Styles si nécessaires */
+}
+
+.vehicle-form,
+.propose-trip-form {
+  /* Styles si nécessaires */
+}
+
+.form-section {
+  /* Styles si nécessaires */
+}
+
+.section-subtitle,
+.section-title {
+  /* Styles si nécessaires */
+}
+
+.form-group {
+  /* Styles si nécessaires */
+}
+
+.form-group.full-width {
+  /* Styles si nécessaires */
+}
+
+.form-actions {
+  /* Styles si nécessaires */
+}
+
+.btn-add-vehicle,
+.btn-propose-trip,
+.btn-save-prefs,
+.btn-submit {
+  /* Styles si nécessaires */
+}
+
+.no-preference-message,
+.no-vehicle-message {
+  /* Styles si nécessaires */
+}
+
+/* Préférences */
+.preferences-container {
+  /* Styles si nécessaires */
+}
+
+.preferences-title {
+  /* Styles si nécessaires */
+}
+
+.preferences-title.no-pref {
+  /* Styles si nécessaires */
+}
+
+.current-preferences {
+  /* Styles si nécessaires */
+}
+
+.pref-card {
+  /* Styles si nécessaires */
+}
+
+.pref-card.full-width {
+  /* Styles si nécessaires */
+}
+
+.pref-icon,
+.pref-label,
+.pref-value {
+  /* Styles si nécessaires */
+}
+
+.preferences-form {
+  /* Styles si nécessaires */
+}
+
+/* Véhicules possédés */
+.vehicles-owned-section {
+  /* Styles si nécessaires */
+}
+
+.vehicles-list {
+  /* Styles si nécessaires */
+}
+
+.vehicle-card {
+  /* Styles si nécessaires */
+}
+
+.vehicle-header {
+  /* Styles si nécessaires */
+}
+
+.vehicle-name {
+  /* Styles si nécessaires */
+}
+
+.vehicle-details {
+  /* Styles si nécessaires */
+}
+
+.detail-item {
+  /* Styles si nécessaires */
+}
+
+/* Historique */
+.history-section {
+  /* Styles si nécessaires */
+}
+
+.history-title.completed {
+  /* Styles si nécessaires */
+}
+
+.history-title.cancelled {
+  /* Styles si nécessaires */
+}
+
+.history-list {
+  /* Styles si nécessaires */
+}
+
+.history-card {
+  /* Styles si nécessaires */
+}
+
+.history-content {
+  /* Styles si nécessaires */
+}
+
+.history-header {
+  /* Styles si nécessaires */
+}
+
+.driver-info {
+  /* Styles si nécessaires */
+}
+
+.driver-photo {
+  /* Styles si nécessaires */
+}
+
+.driver-name {
+  /* Styles si nécessaires */
+}
+
+.history-badge {
+  /* Styles si nécessaires */
+}
+
+.history-route {
+  /* Styles si nécessaires */
+}
+
+.route-point {
+  /* Styles si nécessaires */
+}
+
+.history-details {
+  /* Styles si nécessaires */
+}
+
+.history-car {
+  /* Styles si nécessaires */
+}
+
+.history-footer {
+  /* Styles si nécessaires */
+}
+
+.price-section,
+.price-info {
+  /* Styles si nécessaires */
+}
+
+.price-label,
+.price-value,
+.price {
+  /* Styles si nécessaires */
+}
+
+.seats-section,
+.seats-info {
+  /* Styles si nécessaires */
+}
+
+.seats-available,
+.seats-booked {
+  /* Styles si nécessaires */
+}
+
+.full {
+  /* Styles si nécessaires */
+}
+
+.deleted-trip {
+  /* Styles si nécessaires */
+}
+
+/* Réservations */
+.reservation-card {
+  /* Styles si nécessaires */
+}
+
+.reservation-radio {
+  /* Styles si nécessaires */
+}
+
+.reservation-content {
+  /* Styles si nécessaires */
+}
+
+.reservation-header {
+  /* Styles si nécessaires */
+}
+
+.driver-details {
+  /* Styles si nécessaires */
+}
+
+.driver-label {
+  /* Styles si nécessaires */
+}
+
+.status-badge {
+  /* Styles si nécessaires */
+}
+
+.reservation-route {
+  /* Styles si nécessaires */
+}
+
+.reservation-details {
+  /* Styles si nécessaires */
+}
+
+.reservation-car {
+  /* Styles si nécessaires */
+}
+
+.reservation-footer {
+  /* Styles si nécessaires */
+}
+
+/* Profil */
+.profile-container {
+  /* Styles si nécessaires */
+}
+
+.profile-photo-section {
+  /* Styles si nécessaires */
+}
+
+.photo-wrapper {
+  /* Styles si nécessaires */
+}
+
+.profile-photo {
+  /* Styles si nécessaires */
+}
+
+.photo-upload-btn {
+  /* Styles si nécessaires */
+}
+
+.profile-form {
+  /* Styles si nécessaires */
+}
+
+.error-message {
+  /* Styles si nécessaires */
+}
+
+.account-actions {
+  /* Styles si nécessaires */
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .trajet-card {
+    padding: 0.75rem;
+  }
+
+  .trajet-header {
     flex-direction: column;
-    align-items: center;
-}
-.presentation img {
-    object-fit:cover;
-}
+    gap: 0.75rem;
+  }
 
+  .statut-badge {
+    align-self: flex-start;
+  }
 
-/* --- Donne ton avis --- */
-/* ===============================================
-   FORMULAIRE D'AVIS - VERSION COMPACTE
-   =============================================== */
-
-/* Container général */
-.generix3 {
-    max-width: 600px;
-    margin: 1rem auto;
-    padding: 1rem;
-}
-
-/* Info du trajet */
-#info_trajet {
-    background: linear-gradient(135deg, #4ecdc4 0%, #44a8a0 100%);
-    color: white;
-    padding: 1rem 1.5rem;
-    border-radius: 10px;
-    text-align: center;
-    font-size: 1rem;
-    font-weight: 600;
-    line-height: 1.5;
-    margin: 0;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-/* Formulaire */
-#je_donne_mon_avis {
-    max-width: 600px;
-    margin: 1.5rem auto;
-    padding: 1.5rem;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-/* Titre du formulaire (optionnel) */
-#je_donne_mon_avis::before {
-    content: "⭐ Votre avis compte !";
-    display: block;
-    text-align: center;
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: #333;
-    margin-bottom: 1.5rem;
-    padding-bottom: 1rem;
-    border-bottom: 2px solid #e8d5c4;
-}
-
-/* Table de formulaire */
-.form-table {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-}
-
-/* Rangées du formulaire */
-.form-row {
-    display: flex;
+  .trajet-route {
     flex-direction: column;
     gap: 0.5rem;
-}
+  }
 
-/* Labels */
-.form-row label {
-    font-weight: 600;
-    font-size: 0.95rem;
-    color: #333;
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-}
+  .route-arrow {
+    transform: rotate(90deg);
+  }
 
-/* Icônes dans les labels */
-.form-row:nth-child(1) label::before {
-    content: "👍";
-    font-size: 1.1rem;
-}
-
-.form-row:nth-child(2) label::before {
-    content: "⭐";
-    font-size: 1.1rem;
-}
-
-.form-row:nth-child(3) label::before {
-    content: "💬";
-    font-size: 1.1rem;
-}
-
-/* Inputs et selects */
-.form-row select,
-.form-row textarea {
-    width: 100%;
-    border: 2px solid #e0e0e0;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    font-family: inherit;
-    transition: all 0.3s ease;
-    background: white;
-
-    /* Centrage du texte */
-    text-align: center;
-    text-align-last: center; /* Pour Firefox et autres navigateurs */
-}
-
-/* Pour les options du select (au clic) */
-.form-row select option {
-    text-align: center;
-}
-
-.form-row select:focus,
-.form-row textarea:focus {
-    outline: none;
-    border-color: #4ecdc4;
-    box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.1);
-}
-
-.form-row select:hover,
-.form-row textarea:hover {
-    background: rgb(200, 240, 200);
-    transform: translateY(-1px);
-}
-
-/* Textarea spécifique */
-.form-row textarea {
-    min-height: 100px;
-    resize: vertical;
-    line-height: 1.5;
-}
-
-/* Bouton d'envoi */
-.avis_donner {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .trajet-datetime {
+    grid-template-columns: 1fr;
     gap: 0.5rem;
-    width: 100%;
-    margin-top: 1.5rem;
-    background: linear-gradient(135deg, #4ecdc4 0%, #44a8a0 100%);
-    color: white;
-    border: none;
-    border-radius: 25px;
-    font-weight: 700;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
+  }
 
-.avis_donner:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-}
+  .trajet-car {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
 
-.avis_donner:active {
-    transform: translateY(0);
-}
-
-/* Icône dans le bouton */
-.avis_donner::before {
-    content: "📤";
-    font-size: 1.1rem;
-}
-
-/* Messages d'erreur */
-.form-row .errorlist {
-    list-style: none;
-    margin: 0.25rem 0 0;
-}
-
-.form-row .errorlist li {
-    color: #721c24;
-    font-size: 0.75rem;
-    font-weight: 500;
-    padding: 0.4rem 0.6rem;
-    background: #f8d7da;
-    border-radius: 6px;
-    margin-top: 0.25rem;
-    border-left: 3px solid #721c24;
-}
-
-/* Style pour les étoiles de notation (si vous utilisez un widget custom) */
-.form-row select[name*="note"] {
-    font-size: 1.2rem;
-    cursor: pointer;
-}
-
-/* RESPONSIVE - Tablettes */
-@media (max-width: 768px) {
-    .generix3,
-    #je_donne_mon_avis {
-        max-width: 90%;
-        margin: 1rem auto;
-    }
-
-    #info_trajet {
-        font-size: 0.95rem;
-    }
-
-    #je_donne_mon_avis::before {
-        font-size: 1.1rem;
-    }
-}
-
-/* RESPONSIVE - Mobiles */
-@media (max-width: 480px) {
-    .generix3,
-    #je_donne_mon_avis {
-        padding: 1rem;
-    }
-
-    #info_trajet {
-        font-size: 0.9rem;
-    }
-
-    #je_donne_mon_avis::before {
-        font-size: 1rem;
-        margin-bottom: 1.25rem;
-    }
-
-    .form-table {
-        gap: 1rem;
-    }
-
-    .form-row label {
-        font-size: 0.9rem;
-    }
-
-    .form-row select,
-    .form-row textarea {
-        font-size: 0.85rem;
-    }
-
-    .form-row textarea {
-        min-height: 80px;
-    }
-
-    .avis_donner {
-        font-size: 0.95rem;
-    }
-}
-
-/* Très petits écrans */
-@media (max-width: 360px) {
-    .generix3,
-    #info_trajet {
-        font-size: 0.85rem;
-    }
-
-    .form-row select,
-    .form-row textarea {
-        font-size: 0.8rem;
-    }
-}
-
-
-@media (max-width: 768px) {
+  .trajet-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
 
   .presentation img {
     min-width: clamp(80px, 70vw, 350px);
     max-width: clamp(80px, 70vw, 350px);
-    min-height:clamp(130px, 20vw, 350px);
-    max-height:clamp(130px, 30vw, 350px);
+    min-height: clamp(130px, 20vw, 350px);
+    max-height: clamp(130px, 30vw, 350px);
     border-radius: clamp(5px, 1vw, 15px);
-    margin-bottom: clamp(5px,2vw,40px);
+    margin-bottom: clamp(5px, 2vw, 40px);
   }
+
   div#reservation {
     flex-direction: column;
     align-items: center;
@@ -1125,10 +1939,205 @@ form#email_select_form select,
   div#info_trajet > div > p {
     font-size: clamp(14px, 3vw, 16px);
   }
+
   .photo_default {
     display: flex;
     flex-direction: column;
     width: clamp(70px, 20vw, 125px);
+  }
+
+  .generix3,
+  #je_donne_mon_avis {
+    max-width: 90%;
+    margin: 1rem auto;
+  }
+
+  #info_trajet {
+    font-size: 0.95rem;
+  }
+
+  #je_donne_mon_avis::before {
+    font-size: 1.1rem;
+  }
+
+  #contact_form {
+    max-width: 100%;
+    margin: 1rem auto;
+    padding: 0.75rem;
+  }
+
+  #contact_form form {
+    padding: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .reservation-compact {
+    max-width: 100%;
+    padding: 1.2rem;
+    gap: 0.6rem;
+  }
+
+  .compact-header {
+    padding: 2rem;
+    gap: 0.6rem;
+  }
+
+  .compact-header img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .header-info h2 {
+    font-size: 0.9rem;
+  }
+
+  .compact-route {
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 0.5rem;
+  }
+
+  .arrow {
+    transform: rotate(90deg);
+  }
+
+  .compact-grid {
+    gap: 0.4rem;
+  }
+
+  .info-box {
+    padding: 0.5rem 0.3rem;
+    font-size: 0.75rem;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .booking-flex {
+    flex-direction: column;
+  }
+
+  #pop_up_confirmation {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .chauffeur-photo {
+    width: 35px;
+    height: 35px;
+  }
+
+  .prix-value {
+    font-size: 1.15rem;
+  }
+
+  .generix3,
+  #je_donne_mon_avis {
+    padding: 1rem;
+    margin: 0.75rem auto;
+  }
+
+  #info_trajet {
+    font-size: 0.9rem;
+  }
+
+  #je_donne_mon_avis::before {
+    font-size: 1rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .form-table {
+    gap: 1rem;
+  }
+
+  .form-row label {
+    font-size: 0.9rem;
+  }
+
+  .form-row select,
+  .form-row textarea {
+    font-size: 0.85rem;
+  }
+
+  .form-row textarea {
+    min-height: 80px;
+  }
+
+  .avis_donner {
+    font-size: 0.95rem;
+  }
+
+  #contact_form {
+    padding: 0.5rem;
+  }
+
+  #contact_form form {
+    padding: 1rem;
+    gap: 0.85rem;
+  }
+
+  #contact_form label {
+    font-size: 0.8rem;
+  }
+
+  #contact_form input,
+  #contact_form textarea {
+    padding: 0.65rem;
+    font-size: 0.85rem;
+  }
+
+  #contact_form textarea {
+    min-height: 100px;
+  }
+}
+
+@media (max-width: 360px) {
+  .compact-header img {
+    width: 45px;
+    height: 45px;
+  }
+
+  .header-info h2 {
+    font-size: 0.85rem;
+  }
+
+  .driver-tag {
+    font-size: 0.6rem;
+  }
+
+  .rating-compact {
+    font-size: 0.7rem;
+  }
+
+  .info-box .icon,
+  .route-item .icon,
+  .compact-car .icon {
+    font-size: 0.9rem;
+  }
+
+  .compact-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.3rem;
+  }
+
+  .generix3,
+  #info_trajet {
+    font-size: 0.85rem;
+  }
+
+  .form-row select,
+  .form-row textarea {
+    font-size: 0.8rem;
+  }
+
+  #contact_form form {
+    padding: 0.85rem;
+  }
+
+  #contact_form input,
+  #contact_form textarea {
+    padding: 0.6rem;
+    font-size: 0.8rem;
   }
 }
 
@@ -1143,6 +2152,7 @@ form#email_select_form select,
   .presentation-flex {
     justify-content: flex-start;
   }
+
   .presentation-flex p {
     text-align: left;
   }
@@ -1151,6 +2161,7 @@ form#email_select_form select,
     flex-direction: row-reverse;
     justify-content: flex-start;
   }
+
   .presentation-flex-reverse p {
     text-align: right;
   }
@@ -1160,971 +2171,25 @@ form#email_select_form select,
     max-width: 50%;
     font-size: var(--font-size-base--p);
   }
+
   .presentation img {
     min-width: clamp(80px, 50vw, 450px);
     max-width: clamp(80px, 50vw, 450px);
-    min-height:clamp(130px, 20vw, 450px);
-    max-height:clamp(130px, 20vw, 450px);
+    min-height: clamp(130px, 20vw, 450px);
+    max-height: clamp(130px, 20vw, 450px);
     border-radius: clamp(5px, 1vw, 15px);
     margin: 2%;
   }
-
 }
+
 @media (min-width: 1025px) {
   .image-principal {
     background-image: url("../photo/principal.avif");
   }
 }
+
 @media (max-width: 1024px) {
   .image-principal {
     background-image: url("../photo/principal_mobile.avif");
   }
-}
-
-
-/* --- resultat trajet --- */
-/* Liste des trajets */
-.trajets-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    gap: 1rem;
-}
-
-/* Cache le radio input par défaut */
-.trajet-radio {
-    position: absolute;
-    opacity: 0;
-}
-
-/* Carte de trajet */
-.trajet-card {
-    display: block;
-    background: white;
-    border-radius: 12px;
-    padding: 1rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border: 3px solid transparent;
-    position: relative;
-    overflow: hidden;
-}
-
-.trajet-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-}
-
-/* Trajet sélectionné */
-.trajet-radio:checked + .trajet-card {
-    border-color: #4ecdc4;
-    background: linear-gradient(135deg, #f8ffff 0%, #ffffff 100%);
-}
-
-/* Indicateur de sélection */
-.selection-indicator {
-    position: absolute;
-    top: 0.75rem;
-    right: 0.75rem;
-    width: 28px;
-    height: 28px;
-    background: #4ecdc4;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transform: scale(0);
-    transition: all 0.3s ease;
-}
-
-.trajet-radio:checked + .trajet-card .selection-indicator {
-    opacity: 1;
-    transform: scale(1);
-}
-
-.selection-indicator .checkmark {
-    color: white;
-    font-size: 1.1rem;
-    font-weight: bold;
-}
-
-/* Header */
-.trajet-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 0.75rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 2px solid #f0f0f0;
-}
-
-.chauffeur-info {
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-}
-
-.chauffeur-photo {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 2px solid #e8d5c4;
-    flex-shrink: 0;
-}
-
-.chauffeur-photo img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.chauffeur-details {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-}
-
-.chauffeur-name {
-    font-weight: 700;
-    font-size: 0.95rem;
-    color: #333;
-}
-
-.deleted-user {
-    color: #999;
-    font-style: italic;
-}
-
-.chauffeur-rating {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-size: 0.85rem;
-}
-
-.rating-stars {
-    font-size: 0.9rem;
-}
-
-.rating-value {
-    font-weight: 600;
-    color: #f39c12;
-}
-
-.no-rating {
-    color: #999;
-    font-size: 0.8rem;
-}
-
-/* Badge statut */
-.statut-badge {
-    padding: 0.3rem 0.7rem;
-    border-radius: 15px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.statut-badge.disponible {
-    background: #d4edda;
-    color: #155724;
-}
-
-.statut-badge.annulé {
-    background: #f8d7da;
-    color: #721c24;
-}
-
-/* Corps du trajet */
-.trajet-body {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    margin-bottom: 0.75rem;
-}
-
-/* Itinéraire */
-.trajet-route {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem;
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    border-radius: 10px;
-}
-
-.route-item {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    flex: 1;
-}
-
-.route-icon {
-    font-size: 1rem;
-}
-
-.route-city {
-    font-weight: 600;
-    font-size: 0.9rem;
-    color: #333;
-}
-
-.route-arrow {
-    font-size: 1rem;
-    color: #8b6f5c;
-    font-weight: bold;
-}
-
-/* Date/heure */
-.trajet-datetime {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.75rem;
-}
-
-.datetime-item {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    padding: 0.5rem;
-    background: white;
-    border: 2px solid #f0f0f0;
-    border-radius: 6px;
-    font-size: 0.85rem;
-}
-
-.datetime-item .icon {
-    font-size: 0.95rem;
-}
-
-/* Voiture */
-.trajet-car {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.6rem;
-    background: #f8f9fa;
-    border-radius: 8px;
-}
-
-.car-model {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-weight: 500;
-    font-size: 0.85rem;
-}
-
-.engine-badge {
-    padding: 0.3rem 0.7rem;
-    border-radius: 15px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-}
-
-.engine-badge.electrique,
-.engine-badge.hybride {
-    background: #d4edda;
-    color: #155724;
-}
-
-.engine-badge.essence,
-.engine-badge.diesel {
-    background: #fff3cd;
-    color: #856404;
-}
-
-/* Footer */
-.trajet-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 0.75rem;
-    border-top: 2px solid #f0f0f0;
-}
-
-.trajet-prix {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-}
-
-.prix-label {
-    font-size: 0.75rem;
-    color: #666;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.prix-value {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #8b6f5c;
-}
-
-.trajet-places {
-    display: flex;
-    align-items: center;
-}
-
-.places-available {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    padding: 0.4rem 0.8rem;
-    background: #d4edda;
-    color: #155724;
-    border-radius: 15px;
-    font-weight: 600;
-    font-size: 0.85rem;
-}
-
-.places-full {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    padding: 0.4rem 0.8rem;
-    background: #f8d7da;
-    color: #721c24;
-    border-radius: 15px;
-    font-weight: 600;
-    font-size: 0.85rem;
-}
-
-/* RESPONSIVE */
-@media (max-width: 768px) {
-    .trajet-card {
-        padding: 0.75rem;
-    }
-
-    .trajet-header {
-        flex-direction: column;
-        gap: 0.75rem;
-    }
-
-    .statut-badge {
-        align-self: flex-start;
-    }
-
-    .trajet-route {
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-
-    .route-arrow {
-        transform: rotate(90deg);
-    }
-
-    .trajet-datetime {
-        grid-template-columns: 1fr;
-        gap: 0.5rem;
-    }
-
-    .trajet-car {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.5rem;
-    }
-
-    .trajet-footer {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.75rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .chauffeur-photo {
-        width: 35px;
-        height: 35px;
-    }
-
-    .prix-value {
-        font-size: 1.15rem;
-    }
-}
-
-
-h2 {
-  font-size: var(--font-size-base--p);
-}
-
-
-
-/* ---- RESERVATION TRAJET ---- */
-
-/* ===============================================
-  RÉSERVATION - VERSION COMPACTE
-   =============================================== */
-
-.reservation-compact {
-    max-width: 500px;
-    margin: 1.25rem auto;
-    padding: 0.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    background-color: rgb(200, 240, 200);
-    border-radius: 12px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-.compact-header {
-    display: flex;
-    gap: 0.75rem;
-    padding: 0.75rem;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
-    align-items: center;
-}
-
-.compact-header img {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid #e8d5c4;
-    flex-shrink: 0;
-}
-
-.header-info {
-    display: flex;
-    flex-direction: column;
-    gap: 0.15rem;
-    min-width: 0;
-}
-
-.driver-tag {
-    font-size: 0.65rem;
-    color: #666;
-    text-transform: uppercase;
-    letter-spacing: 0.3px;
-    font-weight: 600;
-}
-
-.header-info h2 {
-    margin: 0;
-    font-size: 1rem;
-    font-weight: 700;
-    color: #333;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.rating-compact {
-    font-size: 0.75rem;
-    color: #856404;
-    font-weight: 600;
-}
-
-/* Itinéraire compact */
-.compact-route {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.6rem;
-    background: #f8f9fa;
-    border-radius: 8px;
-    justify-content: space-between;
-}
-
-.route-item {
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: #333;
-    flex: 1;
-    min-width: 0;
-}
-
-.route-item span:not(.icon) {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.route-item .icon {
-    font-size: 1rem;
-    flex-shrink: 0;
-}
-
-.arrow {
-    font-size: 1.2rem;
-    color: #8b6f5c;
-    font-weight: bold;
-    flex-shrink: 0;
-}
-
-/* Grille compacte 2x2 */
-.compact-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.5rem;
-}
-
-.info-box {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.4rem;
-    padding: 0.6rem 0.4rem;
-    background: white;
-    border: 2px solid #f0f0f0;
-    border-radius: 8px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    transition: all 0.2s ease;
-}
-
-.info-box:hover {
-    border-color: #8b6f5c;
-    transform: translateY(-1px);
-}
-
-.info-box .icon {
-    font-size: 1rem;
-}
-
-.info-box .value {
-    white-space: nowrap;
-}
-
-/* Voiture compacte */
-.compact-car {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.6rem 0.75rem;
-    background: white;
-    border-radius: 8px;
-    border: 2px solid #f0f0f0;
-    font-size: 0.85rem;
-    font-weight: 600;
-}
-
-.compact-car .icon {
-    font-size: 1rem;
-}
-
-/* Préférences compactes */
-.compact-prefs {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-}
-
-.pref-tag {
-    padding: 0.3rem 0.6rem;
-    background: #f8f9fa;
-    border-radius: 12px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: #333;
-    border: 1px solid #e0e0e0;
-}
-
-.pref-tag.full {
-    flex: 1 1 100%;
-}
-
-/* Avis collapsible */
-.compact-reviews {
-    background: white;
-    border-radius: 8px;
-    border: 2px solid #f0f0f0;
-}
-
-.compact-reviews summary {
-    padding: 0.6rem 0.75rem;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 0.85rem;
-    color: #333;
-    list-style: none;
-    user-select: none;
-}
-
-.compact-reviews summary::-webkit-details-marker {
-    display: none;
-}
-
-.compact-reviews summary:hover {
-    background: #f8f9fa;
-}
-
-.reviews-content {
-    padding: 0 0.75rem 0.75rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    border-top: 1px solid #f0f0f0;
-}
-
-.reviews-content p {
-    margin: 0.5rem 0 0;
-    padding: 0.5rem;
-    background: #f8f9fa;
-    border-radius: 6px;
-    font-size: 0.8rem;
-    line-height: 1.4;
-    font-style: italic;
-    color: #555;
-}
-
-/* Réservation compacte */
-.compact-booking {
-    background: linear-gradient(135deg, #4ecdc4 0%, #44a8a0 100%);
-    border-radius: 10px;
-    padding: 0.75rem;
-}
-
-.booking-flex {
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-}
-
-#place_a_reserver {
-    flex: 1;
-}
-
-#place_a_reserver select {
-    width: 100%;
-    border: 2px solid white;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    background: white;
-    font-weight: 600;
-    cursor: pointer;
-}
-
-#pop_up_confirmation {
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-    padding: 0.6rem 1rem;
-    background: white;
-    color: #4ecdc4;
-    border: none;
-    border-radius: 20px;
-    font-weight: 700;
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    white-space: nowrap;
-}
-
-#pop_up_confirmation:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-}
-
-#pop_up_confirmation .icon {
-    font-size: 1rem;
-}
-
-.btn-auth-compact {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    padding: 0.75rem;
-    background: white;
-    color: #4ecdc4;
-    text-decoration: none;
-    border-radius: 20px;
-    font-weight: 700;
-    font-size: 0.9rem;
-    transition: all 0.2s ease;
-}
-
-.btn-auth-compact:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-}
-
-/* Footer compact */
-.compact-footer {
-    display: flex;
-    justify-content: center;
-    padding: 0.5rem;
-    background: white;
-    border-radius: 8px;
-    font-size: 0.75rem;
-    color: #666;
-}
-
-/* RESPONSIVE - Petits écrans */
-@media (max-width: 480px) {
-    .reservation-compact {
-        max-width: 100%;
-        padding: 1.2rem;
-        gap: 0.6rem;
-    }
-
-    .compact-header {
-        padding: 2rem;
-        gap: 0.6rem;
-    }
-
-    .compact-header img {
-        width: 50px;
-        height: 50px;
-    }
-
-    .header-info h2 {
-        font-size: 0.9rem;
-    }
-
-    .compact-route {
-        flex-direction: column;
-        gap: 0.4rem;
-        padding: 0.5rem;
-    }
-
-    .arrow {
-        transform: rotate(90deg);
-    }
-
-    .compact-grid {
-        gap: 0.4rem;
-    }
-
-    .info-box {
-        padding: 0.5rem 0.3rem;
-        font-size: 0.75rem;
-        flex-direction: column;
-        gap: 0.2rem;
-    }
-
-    .booking-flex {
-        flex-direction: column;
-    }
-
-    #pop_up_confirmation {
-        width: 100%;
-        justify-content: center;
-    }
-}
-
-/* Très petits écrans */
-@media (max-width: 360px) {
-    .compact-header img {
-        width: 45px;
-        height: 45px;
-    }
-
-    .header-info h2 {
-        font-size: 0.85rem;
-    }
-
-    .driver-tag {
-        font-size: 0.6rem;
-    }
-
-    .rating-compact {
-        font-size: 0.7rem;
-    }
-
-    .info-box .icon,
-    .route-item .icon,
-    .compact-car .icon {
-        font-size: 0.9rem;
-    }
-
-    .compact-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 0.3rem;
-    }
-}
-
-
-/* --- Formulaire de contact --- */
-/* ===============================================
-   FORMULAIRE DE CONTACT - VERSION COMPACTE
-   =============================================== */
-
-#contact_form {
-    max-width: 600px;
-    margin: 1.5rem auto;
-    padding: 1rem;
-}
-
-#contact_form form {
-    background: white;
-    border-radius: 12px;
-    padding: 1.5rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.contact-title {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    font-size: 1.3rem;
-    font-weight: 700;
-    margin: 0 0 1rem 0;
-    padding: 0.75rem;
-    background: linear-gradient(135deg, #4ecdc4 0%, #44a8a0 100%);
-    color: white;
-    border-radius: 10px;
-}
-
-.contact-title .icon {
-    font-size: 1.4rem;
-}
-
-/* Et supprimez le ::before */
-
-/* Labels */
-#contact_form label {
-    font-weight: 600;
-    font-size: 0.85rem;
-    color: #333;
-    margin-bottom: 0.25rem;
-    display: block;
-}
-
-/* Inputs et textarea */
-#contact_form input[type="text"],
-#contact_form input[type="email"],
-#contact_form input[type="tel"],
-#contact_form textarea {
-    width: 100%;
-    padding: 0.75rem;
-    border: 2px solid #e0e0e0;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    font-family: inherit;
-    transition: all 0.3s ease;
-    background: white;
-}
-
-#contact_form input:focus,
-#contact_form textarea:focus {
-    outline: none;
-    border-color: #4ecdc4;
-    box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.1);
-}
-
-#contact_form input:hover,
-#contact_form textarea:hover {
-    background: rgb(200, 240, 200);
-    transform: translateY(-1px);
-}
-
-/* Textarea spécifique */
-#contact_form textarea {
-    min-height: 120px;
-    resize: vertical;
-    line-height: 1.5;
-}
-
-/* Bouton submit */
-#contact_form button[type="submit"] {
-    background: linear-gradient(135deg, #4ecdc4 0%, #44a8a0 100%);
-    color: white;
-    border: none;
-    border-radius: 25px;
-    font-weight: 700;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    align-self: center;
-}
-
-#contact_form button[type="submit"]:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-}
-
-
-/* Messages d'erreur (si vous en avez) */
-#contact_form .errorlist {
-    list-style: none;
-    padding: 0;
-    margin: 0.25rem 0 0;
-}
-
-#contact_form .errorlist li {
-    color: #721c24;
-    font-size: 0.75rem;
-    font-weight: 500;
-    padding: 0.25rem 0.5rem;
-    background: #f8d7da;
-    border-radius: 4px;
-    margin-top: 0.25rem;
-}
-
-
-
-/* RESPONSIVE - Petits écrans */
-@media (max-width: 768px) {
-    #contact_form {
-        max-width: 100%;
-        margin: 1rem auto;
-        padding: 0.75rem;
-    }
-
-    #contact_form form {
-        padding: 1.25rem;
-    }
-
-
-}
-
-@media (max-width: 480px) {
-    #contact_form {
-        padding: 0.5rem;
-    }
-
-    #contact_form form {
-        padding: 1rem;
-        gap: 0.85rem;
-    }
-
-    #contact_form label {
-        font-size: 0.8rem;
-    }
-
-    #contact_form input,
-    #contact_form textarea {
-        padding: 0.65rem;
-        font-size: 0.85rem;
-    }
-
-    #contact_form textarea {
-        min-height: 100px;
-    }
-
-}
-
-/* Très petits écrans */
-@media (max-width: 360px) {
-    #contact_form form {
-        padding: 0.85rem;
-    }
-
-    #contact_form input,
-    #contact_form textarea {
-        padding: 0.6rem;
-        font-size: 0.8rem;
-    }
 }

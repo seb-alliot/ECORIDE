@@ -4,12 +4,12 @@ from django.urls import reverse
 from django.contrib import messages
 from ....models import TrajetProposer, ReservationTrajet
 from ....forms import TerminerTrajetForm
-
+from ...envoi_email.send_email import envoi_email
+from ...securite import reservation_token
 
 def FiniTonCovoiturage(request):
     user = request.user
     trajet_terminer_form = TerminerTrajetForm(request.POST)
-    trajet = TrajetProposer.objects.filter(chauffeur=user).first()
 
     if request.method == "POST" and request.POST.get("form_soumis") == "trajet_terminer_form":
 
@@ -21,8 +21,7 @@ def FiniTonCovoiturage(request):
             return redirect(f"{reverse('MonCompte')}?{request.META['QUERY_STRING']}")
         if trajet_terminer_form.is_valid():
 
-            if request.user == trajet.chauffeur:
-                trajet = get_object_or_404(TrajetProposer, id=trajet_id)
+                trajet = get_object_or_404(TrajetProposer, id=trajet_id, chauffeur=user)
                 # bien mettre trajet.chauffeur et non pas role.chauffeur  ou display comme en html sa ne fonctionne pas, erreur muette
                 statut_trajet = trajet_terminer_form.cleaned_data["etat"]
                 if statut_trajet == "Terminé":
@@ -35,16 +34,14 @@ def FiniTonCovoiturage(request):
                     messages.success(request, "Vous êtes arrivé à bon port !")
 
                     if reservations.exists():
-
+                        site_url = f"http://{get_current_site(request).domain}"
                         for res in reservations:
                             passager = res.passager
                             chauffeur = res.trajet_reserver.chauffeur
                             date = res.trajet_reserver.date
                             trajet = res.trajet_reserver
-                            # Génère un token unique par passager
-                            from ...securite import reservation_token
                             token = reservation_token(passager.username)
-                            site_url = f"http://{get_current_site(request).domain}"
+
                             lien_verification = f"{site_url}{reverse('AvisSatisfaction', kwargs={'trajet_id': trajet.id, 'token': token})}"
                             subject = "Confirmation de fin de covoiturage"
                             context = {
@@ -56,20 +53,12 @@ def FiniTonCovoiturage(request):
                                 "date": date,
                                 "trajet": trajet,
                             }
-                            # Appelle une seule fois pour tout traiter dans Envoi_Email_Terminer
-                            from ...envoi_email.send_email import envoi_email
                             envoi_email(request, to=passager.email, subject=subject, template="style_email/covoit_termine.html", context=context)
                         messages.success(request, "Email envoyé avec succès.")
                         return redirect(f"{reverse('MonCompte')}?{request.META['QUERY_STRING']}")
                 else:
                     messages.error(request, "Aucun trajet trouvé.")
                     return redirect(f"{reverse('MonCompte')}?{request.META['QUERY_STRING']}")
-            else:
-                messages.error(request, "Vous n'êtes pas le conducteur de ce trajet.")
-                return redirect(f"{reverse('MonCompte')}?{request.META['QUERY_STRING']}")
-        else:
-            trajet_terminer_form = TerminerTrajetForm()
-            messages.error(request, "Une erreur est survenue lors de la validation du trajet.")
     else:
         trajet_terminer_form = TerminerTrajetForm()
     return trajet_terminer_form

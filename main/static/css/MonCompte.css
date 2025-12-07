@@ -1,4 +1,3 @@
-
 :root {
   --container-main-width: clamp(200px, 25vw, 450px);
   --deco-gap: clamp(5%, 2vw, 3%);
@@ -12,42 +11,26 @@
   --spacing-md: clamp(8px, 2vw, 10px);
   --tab-vertical-margin: clamp(10px, 1.5vw, 30px);
   --tabs-margin-side: clamp(2%, 3vw, 20%);
-
-  /* Ajout variables pour formulaire trajet */
   --trajet-input-size: clamp(80px, 28vw, 330px);
   --trajet-font-size: clamp(10px, 1.2vw, 20px);
   --trajet-button-font-size: clamp(12px, 1.8vw, 18px);
   --trajet-gap: clamp(5px, 2vw, 15px);
-
-  /* ROLE FORM */
   --role-font-size: clamp(10px, 1.4vw, 20px);
   --role-margin-top: clamp(10px, 2vw, 20px);
   --role-margin-bottom: clamp(10px, 2vw, 25px);
-
   --p-font-size: clamp(14px, 2.2vw, 20px);
-
-  /* VOITURE FORM */
   --voiture-form-gap: 14px;
   --voiture-mere-gap: 10px;
   --voiture-child-gap-default: 2px;
   --voiture-child-gap-large: 4px;
-
-
-
-  /* INFO PERSO */
   --info-perso-gap: clamp(10px, 2vw, 20px);
   --info-perso-margin-top: clamp(5px, 1vw, 15px);
   --info-perso-li-width: clamp(111px, 13vw, 200px);
   --info-perso-font-size: clamp(10px, 1.5vw, 16px);
-
   --ul-padding-left: clamp(10px, 3vw, 25px);
 }
 
-
-h1,
-h2,
-h3,
-h4 {
+h1, h2, h3, h4 {
   margin: var(--spacing-md);
   font-size: clamp(12px, 4vw, 24px);
 }
@@ -114,8 +97,6 @@ h4 {
   overflow-y: auto;
 }
 
-
-
 #label img,
 #covoit_proposer img,
 #label_proposition img {
@@ -129,7 +110,7 @@ h4 {
 }
 
 label#resultat_recherche img,
-#covoit_reserver img{
+#covoit_reserver img {
   margin-right: var(--spacing-md);
   width: var(--img-square-size);
   height: var(--img-square-size);
@@ -142,9 +123,11 @@ label#resultat_recherche img,
   font-size: var(--font-size-small);
 }
 
-#label_proposition{
+#label_proposition {
   height: auto;
   min-width: clamp(150px, 12vw, 200px);
+  background-color: rgb(200, 240, 200);
+  color: black;
 }
 
 #avis_positif {
@@ -160,9 +143,6 @@ div.tabs {
   margin-bottom: var(--tab-vertical-margin);
   margin-left: var(--tabs-margin-side);
   margin-right: var(--tabs-margin-side);
-}
-
-.tabs {
   min-height: clamp(450px, 90vh, 700px);
 }
 
@@ -173,11 +153,16 @@ div.tabs {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: var(--form-width);
+  height: var(--form-height);
+  font-size: var(--form-font-size);
+  border: solid black 1px;
 }
 
 #suppression-compte {
   background-color: rgb(200, 0, 0);
 }
+
 #suppression-compte:hover {
   background-color: black;
   color: rgb(200, 0, 0);
@@ -186,17 +171,18 @@ div.tabs {
 #deconnexion {
   background-color: rgb(255, 165, 0);
 }
+
 #deconnexion a {
   color: black;
 }
+
 #deconnexion:hover {
   background-color: rgb(208, 9, 2);
 }
+
 #deconnexion:hover a {
   color: white;
 }
-
-
 
 #deconnection_user {
   display: flex;
@@ -207,26 +193,9 @@ div.tabs {
   margin-top: var(--deco-gap);
 }
 
-
-/* Container secondaire */
 .photo-fille {
   gap: clamp(5px, 1.5vw, 10px);
   margin-top: 10px;
-}
-
-#deconnexion,
-#suppression-compte {
-  width: var(--form-width);
-  height: var(--form-height);
-  font-size: var(--form-font-size);
-  border: solid black 1px;
-}
-
-
-
-#label_proposition {
-  background-color: rgb(200, 240, 200);
-  color: black;
 }
 
 div.content > ul {
@@ -239,22 +208,19 @@ div.content > ul > li > input[type="radio"] {
   display: none;
 }
 
-/* ROLE FORM */
 #role_form {
   margin-top: var(--role-margin-top);
   margin-bottom: var(--role-margin-bottom);
 }
+
 #role_form label {
   display: none;
 }
-
-
 
 p {
   font-size: var(--p-font-size);
 }
 
-/* VOITURE FORM */
 #voiture_form input,
 #voiture_form select,
 #voiture_form button {
@@ -264,9 +230,11 @@ p {
   gap: var(--voiture-form-gap);
   border-radius: var(--deco-radius);
 }
+
 #voiture_form label {
   display: none;
 }
+
 div.voiture_mere {
   display: flex;
   justify-content: center;
@@ -274,18 +242,13 @@ div.voiture_mere {
   flex-direction: row;
   flex-wrap: wrap;
 }
+
 div.voiture_mere > div {
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: var(--voiture-child-gap-default);
 }
-
-
-
-
-
-
 
 div.content > div > div > ul {
   gap: 10px;
@@ -297,6 +260,7 @@ div.content > div > div > ul {
     flex-direction: column;
     justify-content: center;
   }
+
   div.voiture_mere > div {
     flex-direction: row;
     gap: var(--voiture-child-gap-large);
@@ -309,1832 +273,1438 @@ div.content > div > div > ul {
   }
 }
 
-
-/* ---- HISTORIQUE ---- */
-
-/* Sections d'historique */
+/* HISTORIQUE */
 .history-section {
-    margin-bottom: 2rem;
+  margin-bottom: 2rem;
 }
 
 .history-title {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    font-size: 1.15rem;
-    font-weight: 700;
-    padding: 0.75rem;
-    border-radius: 10px;
-    margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  padding: 0.75rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
 }
 
 .history-title.completed {
-    background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
-    color: #155724;
+  background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+  color: #155724;
 }
 
 .history-title.cancelled {
-    background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
-    color: #721c24;
+  background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+  color: #721c24;
 }
 
 .history-title .icon {
-    font-size: 1.15rem;
+  font-size: 1.15rem;
 }
 
-/* Liste des cartes - SCROLL HORIZONTAL */
 .history-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    gap: 1rem;
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding-bottom: 1rem;
-    scroll-behavior: smooth;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 1rem;
+  scroll-behavior: smooth;
 }
 
-
-
-/* Cartes d'historique */
 .history-card {
-    list-style: none;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
-    overflow: hidden;
-    flex: 0 0 300px; /* Largeur fixe de 300px */
-    min-width: 300px;
+  list-style: none;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  overflow: hidden;
+  flex: 0 0 300px;
+  min-width: 300px;
 }
 
 .history-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 
 .history-content {
-    padding: 1rem;
+  padding: 1rem;
 }
 
-/* Header de la carte */
 .history-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 0.75rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 2px solid #f0f0f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid #f0f0f0;
 }
 
 .driver-name {
-    font-weight: 600;
-    font-size: 0.9rem;
-    color: #333;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #333;
 }
 
 .driver-name em {
-    color: #999;
-    font-style: italic;
+  color: #999;
+  font-style: italic;
 }
 
-/* Badge de statut */
 .history-badge {
-    padding: 0.3rem 0.7rem;
-    border-radius: 15px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: capitalize;
+  padding: 0.3rem 0.7rem;
+  border-radius: 15px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: capitalize;
 }
 
 .history-badge.terminé {
-    background: #d4edda;
-    color: #155724;
+  background: #d4edda;
+  color: #155724;
 }
 
 .history-badge.annulé {
-    background: #f8d7da;
-    color: #721c24;
+  background: #f8d7da;
+  color: #721c24;
 }
 
-/* Itinéraire */
 .history-route {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem;
-    background: #f8f9fa;
-    border-radius: 10px;
-    margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: #f8f9fa;
+  border-radius: 10px;
+  margin-bottom: 0.75rem;
 }
 
 .route-point {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    flex: 1;
-    font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex: 1;
+  font-size: 0.9rem;
 }
 
 .route-point .icon {
-    font-size: 1rem;
+  font-size: 1rem;
 }
 
 .route-arrow {
-    font-size: 1rem;
-    color: #8b6f5c;
-    font-weight: bold;
+  font-size: 1rem;
+  color: #8b6f5c;
+  font-weight: bold;
 }
 
-/* Détails */
 .history-details {
-    display: flex;
-    gap: 0.75rem;
-    margin-bottom: 0.75rem;
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
 }
 
 .detail-item {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    padding: 0.4rem 0.6rem;
-    background: white;
-    border: 2px solid #f0f0f0;
-    border-radius: 6px;
-    flex: 1;
-    font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.6rem;
+  background: white;
+  border: 2px solid #f0f0f0;
+  border-radius: 6px;
+  flex: 1;
+  font-size: 0.85rem;
 }
 
 .detail-item .icon {
-    font-size: 0.95rem;
+  font-size: 0.95rem;
 }
 
-/* Voiture */
 .history-car {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    padding: 0.6rem;
-    background: #f8f9fa;
-    border-radius: 8px;
-    margin-bottom: 0.75rem;
-    font-weight: 500;
-    font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+  font-weight: 500;
+  font-size: 0.85rem;
 }
 
 .history-car .icon {
-    font-size: 1rem;
+  font-size: 1rem;
 }
 
-/* Trajet supprimé */
 .deleted-trip {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    padding: 1.5rem;
-    background: #fff3cd;
-    border-radius: 10px;
-    color: #856404;
-    font-style: italic;
-    font-size: 0.9rem;
-    margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1.5rem;
+  background: #fff3cd;
+  border-radius: 10px;
+  color: #856404;
+  font-style: italic;
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
 }
 
-/* Footer */
 .history-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 0.75rem;
-    border-top: 2px solid #f0f0f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.75rem;
+  border-top: 2px solid #f0f0f0;
 }
 
 .price-info {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
 }
 
 .price-label {
-    font-size: 0.75rem;
-    color: #666;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+  font-size: 0.75rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .price {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #8b6f5c;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #8b6f5c;
 }
 
 .seats-info {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    padding: 0.4rem 0.8rem;
-    background: #e8d5c4;
-    border-radius: 15px;
-    font-weight: 600;
-    font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  background: #e8d5c4;
+  border-radius: 15px;
+  font-weight: 600;
+  font-size: 0.85rem;
 }
 
 .seats-info .icon {
-    font-size: 0.95rem;
+  font-size: 0.95rem;
 }
 
-/* RESPONSIVE */
 @media (max-width: 768px) {
-    .history-card {
-        flex: 0 0 280px;
-        min-width: 280px;
-    }
+  .history-card {
+    flex: 0 0 280px;
+    min-width: 280px;
+  }
 }
 
-
-/* --- reservation --- */
-/* Cache le radio input */
+/* RÉSERVATION */
 .reservation-radio {
-    position: absolute;
-    opacity: 0;
+  position: absolute;
+  opacity: 0;
 }
 
-/* Carte de réservation */
 .reservation-card {
-    list-style: none;
-    position: relative;
+  list-style: none;
+  position: relative;
 }
 
 .reservation-content {
-    display: block;
-    background: white;
-    border-radius: 12px;
-    padding: 1rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border: 3px solid transparent;
-    position: relative;
+  display: block;
+  background: white;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 3px solid transparent;
+  position: relative;
 }
 
 .reservation-content:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-    background-color: rgb(200, 240, 200);
-}
-.reservation-content:checked {
-    background-color: rgb(180, 220, 180);
-}
-/* Réservation sélectionnée */
-.reservation-radio:checked + .reservation-content {
-    border-color: #4ecdc4;
-    background: linear-gradient(135deg, #f8ffff 0%, #ffffff 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  background-color: rgb(200, 240, 200);
 }
 
+.reservation-radio:checked + .reservation-content {
+  border-color: #4ecdc4;
+  background: linear-gradient(135deg, #f8ffff 0%, #ffffff 100%);
+}
 
 .reservation-radio:checked + .reservation-content .selection-indicator {
-    opacity: 1;
-    transform: scale(1);
+  opacity: 1;
+  transform: scale(1);
 }
 
 .selection-indicator .checkmark {
-    color: white;
-    font-size: 1.1rem;
-    font-weight: bold;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
 }
 
-/* Header */
 .reservation-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 0.75rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 2px solid #f0f0f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid #f0f0f0;
 }
 
 .driver-info {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .driver-photo {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid #e8d5c4;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e8d5c4;
 }
 
 .driver-details {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .driver-label {
-    font-size: 0.75rem;
-    color: #666;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+  font-size: 0.75rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
-
-
-/* Badge statut */
 .status-badge {
-    padding: 0.3rem 0.7rem;
-    border-radius: 15px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: capitalize;
+  padding: 0.3rem 0.7rem;
+  border-radius: 15px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: capitalize;
 }
 
 .status-badge.disponible {
-    background: #d4edda;
-    color: #155724;
+  background: #d4edda;
+  color: #155724;
 }
 
 .status-badge.complet {
-    background: #fff3cd;
-    color: #856404;
+  background: #fff3cd;
+  color: #856404;
 }
 
 .status-badge.annulé {
-    background: #f8d7da;
-    color: #721c24;
+  background: #f8d7da;
+  color: #721c24;
 }
 
-/* Itinéraire */
 .reservation-route {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem;
-    background: #f8f9fa;
-    border-radius: 10px;
-    margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: #f8f9fa;
+  border-radius: 10px;
+  margin-bottom: 0.75rem;
 }
 
-.route-point {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    flex: 1;
-    font-size: 0.9rem;
-    font-weight: 500;
-}
-
-.route-point .icon {
-    font-size: 1rem;
-}
-
-.route-arrow {
-    font-size: 1rem;
-    color: #8b6f5c;
-    font-weight: bold;
-}
-
-/* Détails */
 .reservation-details {
-    display: flex;
-    gap: 0.75rem;
-    margin-bottom: 0.75rem;
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
 }
 
-.detail-item {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    padding: 0.4rem 0.6rem;
-    background: white;
-    border: 2px solid #f0f0f0;
-    border-radius: 6px;
-    flex: 1;
-    font-size: 0.85rem;
-}
-
-.detail-item .icon {
-    font-size: 0.95rem;
-}
-
-/* Voiture */
 .reservation-car {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    padding: 0.6rem;
-    background: #f8f9fa;
-    border-radius: 8px;
-    margin-bottom: 0.75rem;
-    font-weight: 500;
-    font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+  font-weight: 500;
+  font-size: 0.85rem;
 }
 
 .reservation-car .icon {
-    font-size: 1rem;
+  font-size: 1rem;
 }
 
-/* Footer */
 .reservation-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding-top: 0.75rem;
-    border-top: 2px solid #f0f0f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-top: 0.75rem;
+  border-top: 2px solid #f0f0f0;
 }
 
 .price-section {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-}
-
-.price-label {
-    font-size: 0.75rem;
-    color: #666;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
 }
 
 .price-value {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #8b6f5c;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #8b6f5c;
 }
 
 .seats-section {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-end;
 }
 
 .seats-available,
 .seats-booked {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    padding: 0.3rem 0.7rem;
-    border-radius: 15px;
-    font-size: 0.8rem;
-    font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 600;
 }
 
 .seats-available {
-    background: #d4edda;
-    color: #155724;
+  background: #d4edda;
+  color: #155724;
 }
 
 .seats-available .full {
-    color: #856404;
+  color: #856404;
 }
 
 .seats-booked {
-    background: #e8d5c4;
-    color: #6b5548;
+  background: #e8d5c4;
+  color: #6b5548;
 }
 
 .seats-available .icon,
 .seats-booked .icon {
-    font-size: 0.9rem;
+  font-size: 0.9rem;
 }
 
-/* RESPONSIVE */
 @media (max-width: 768px) {
-    .reservation-route {
-        flex-direction: column;
-        gap: 0.5rem;
-    }
+  .reservation-route {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
 
-    .route-arrow {
-        transform: rotate(90deg);
-    }
+  .route-arrow {
+    transform: rotate(90deg);
+  }
 
-    .reservation-details {
-        flex-direction: column;
-    }
+  .reservation-details {
+    flex-direction: column;
+  }
 
-    .reservation-footer {
-        flex-direction: column;
-        gap: 1rem;
-    }
+  .reservation-footer {
+    flex-direction: column;
+    gap: 1rem;
+  }
 
-    .seats-section {
-        align-items: flex-start;
-    }
+  .seats-section {
+    align-items: flex-start;
+  }
 }
 
-
-/* ---- Adresse ---- */
-/* Container principal */
+/* ADRESSE */
 .profile-container {
-    max-width: 650px;
-    margin: 1rem auto;
-    padding: 1rem;
+  max-width: 650px;
+  margin: 1rem auto;
+  padding: 1rem;
 }
 
-/* Section photo de profil */
 .profile-photo-section {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
 }
 
 .photo-wrapper {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .profile-photo {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid #e8d5c4;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e8d5c4;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .photo-upload-btn {
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-    padding: 0.4rem 0.8rem;
-    background: #8b6f5c;
-    color: rgb(105, 105, 105);
-    border-radius: 12px;
-    font-weight: 600;
-    font-size: 0.8rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.4rem 0.8rem;
+  background: #8b6f5c;
+  color: rgb(105, 105, 105);
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .photo-upload-btn:hover {
-    background: rgb(200, 240, 200);
-    transform: translateY(-2px);
+  background: rgb(200, 240, 200);
+  transform: translateY(-2px);
 }
 
 .photo-upload-btn .icon {
-    font-size: 0.85rem;
+  font-size: 0.85rem;
 }
 
 #adresse_form label {
-    display: none;
+  display: none;
 }
 
 input#id_photo {
-    display: none;
+  display: none;
 }
 
 #adresse_form input:hover,
 #adresse_form select:hover,
 #adresse_form textarea:hover,
 #adresse_form button:hover {
-    background: rgb(200, 240, 200);
-    transform: translateY(-2px);
+  background: rgb(200, 240, 200);
+  transform: translateY(-2px);
 }
 
-/* Cache l'input file */
 #adresse_form input[type="file"] {
-    position: absolute;
-    opacity: 0;
+  position: absolute;
+  opacity: 0;
 }
 
-/* Formulaire */
 .profile-form {
-    background: white;
-    border-radius: 10px;
-    padding: 1rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+  background: white;
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
 }
 
-/* Sections du formulaire */
 .form-section {
-    margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 
 .section-title {
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: #333;
-    margin-bottom: 0.75rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid #e8d5c4;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #e8d5c4;
 }
 
 .section-title .icon {
-    font-size: 1rem;
+  font-size: 1rem;
 }
 
-/* Rangées de formulaire */
 .form-row {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.6rem;
-    margin-bottom: 0.6rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.6rem;
+  margin-bottom: 0.6rem;
 }
 
 .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 
 .form-group.full-width {
-    grid-column: 1 / -1;
+  grid-column: 1 / -1;
 }
 
 .form-group label {
-    font-weight: 600;
-    font-size: 0.8rem;
-    color: #333;
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: #333;
 }
 
 .form-group input,
 .form-group select,
 .form-group textarea {
-    padding: 0.5rem;
-    border: 2px solid #e0e0e0;
-    border-radius: 6px;
-    font-size: 0.85rem;
-    transition: all 0.3s ease;
-    background: white;
+  padding: 0.5rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+  background: white;
 }
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
-    outline: none;
-    border-color: #8b6f5c;
-    box-shadow: 0 0 0 3px rgba(139, 111, 92, 0.1);
+  outline: none;
+  border-color: #8b6f5c;
+  box-shadow: 0 0 0 3px rgba(139, 111, 92, 0.1);
 }
 
-/* Messages d'erreur */
 .error-message {
-    color: #721c24;
-    font-size: 0.75rem;
-    font-weight: 500;
+  color: #721c24;
+  font-size: 0.75rem;
+  font-weight: 500;
 }
 
-/* Actions du formulaire */
 .form-actions {
-    display: flex;
-    justify-content: center;
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 2px solid #f0f0f0;
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 2px solid #f0f0f0;
 }
 
 .btn-submit {
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-    padding: 0.6rem 1.5rem;
-    background: linear-gradient(135deg, #8b6f5c 0%, #6b5548 100%);
-    color: white;
-    border: none;
-    border-radius: 18px;
-    font-weight: 700;
-    font-size: 0.85rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.6rem 1.5rem;
+  background: linear-gradient(135deg, #8b6f5c 0%, #6b5548 100%);
+  color: white;
+  border: none;
+  border-radius: 18px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .btn-submit:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 
 .btn-submit:active {
-    transform: translateY(0);
+  transform: translateY(0);
 }
 
 .btn-submit .icon {
-    font-size: 0.9rem;
+  font-size: 0.9rem;
 }
 
-/* Actions du compte */
 .account-actions {
-    display: flex;
-    justify-content: center;
-    gap: 0.6rem;
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 2px solid #f0f0f0;
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 2px solid #f0f0f0;
 }
 
-/* RESPONSIVE */
 @media (max-width: 768px) {
-    .profile-container {
-        padding: 0.75rem;
-    }
-
-    .profile-form {
-        padding: 0.75rem;
-    }
-
-    .form-row {
-        grid-template-columns: 1fr;
-    }
-
-    .profile-photo {
-        width: 70px;
-        height: 70px;
-    }
-
-    .btn-submit {
-        width: 100%;
-        justify-content: center;
-    }
-}
-
-
-/* --- Trajet proposer --- */
-.trajets-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    gap: 1rem;
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding-bottom: 1rem;
-    scroll-behavior: smooth;
-}
-
-
-
-
-
-/* --- Preference --- */
-/* Container du véhicule */
-.vehicle-container {
-    max-width: 650px;
-    margin: 1rem auto;
-    padding: 1rem;
-}
-
-/* Titre principal */
-.vehicle-title {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    font-size: 1.15rem;
-    font-weight: 700;
+  .profile-container {
     padding: 0.75rem;
-    margin-bottom: 1rem;
-    background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
-    color: #155724;
-    border-radius: 10px;
+  }
+
+  .profile-form {
+    padding: 0.75rem;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-photo {
+    width: 70px;
+    height: 70px;
+  }
+
+  .btn-submit {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* TRAJETS PROPOSÉS */
+.trajets-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 1rem;
+  scroll-behavior: smooth;
+}
+
+/* PRÉFÉRENCES */
+.vehicle-container {
+  max-width: 650px;
+  margin: 1rem auto;
+  padding: 1rem;
+}
+
+.vehicle-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+  color: #155724;
+  border-radius: 10px;
 }
 
 .vehicle-title .icon {
-    font-size: 1.25rem;
+  font-size: 1.25rem;
 }
 
-/* Formulaire */
 .vehicle-form {
-    background: white;
-    border-radius: 12px;
-    padding: 1rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+  background: white;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
 }
 
-/* Sous-titre de section */
 .section-subtitle {
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: #333;
-    margin-bottom: 0.75rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid #e8d5c4;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #e8d5c4;
 }
 
 .section-subtitle .icon {
-    font-size: 1rem;
-}
-
-/* Section du formulaire */
-.form-section {
-    margin-bottom: 1rem;
-}
-
-/* Rangées de formulaire */
-.form-row {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.6rem;
-    margin-bottom: 0.6rem;
-}
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-}
-
-.form-group.full-width {
-    grid-column: 1 / -1;
-}
-
-.form-group label {
-    font-weight: 600;
-    font-size: 0.8rem;
-    color: #333;
-}
-
-.form-group input,
-.form-group select {
-    padding: 0.5rem;
-    border: 2px solid #e0e0e0;
-    border-radius: 6px;
-    font-size: 0.85rem;
-    transition: all 0.3s ease;
-    background: white;
-}
-
-.form-group input:focus,
-.form-group select:focus {
-    outline: none;
-    border-color: #8b6f5c;
-    box-shadow: 0 0 0 3px rgba(139, 111, 92, 0.1);
+  font-size: 1rem;
 }
 
 .form-group input:hover,
 .form-group select:hover {
-    background: rgb(200, 240, 200);
-    transform: translateY(-1px);
-}
-
-
-
-/* Actions du formulaire */
-.form-actions {
-    display: flex;
-    justify-content: center;
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 2px solid #f0f0f0;
+  background: rgb(200, 240, 200);
+  transform: translateY(-1px);
 }
 
 .btn-add-vehicle {
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-    padding: 0.6rem 1.5rem;
-    background: linear-gradient(135deg, #4ecdc4 0%, #44a8a0 100%);
-    color: white;
-    border: none;
-    border-radius: 18px;
-    font-weight: 700;
-    font-size: 0.85rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.6rem 1.5rem;
+  background: linear-gradient(135deg, #4ecdc4 0%, #44a8a0 100%);
+  color: white;
+  border: none;
+  border-radius: 18px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .btn-add-vehicle:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 
 .btn-add-vehicle:active {
-    transform: translateY(0);
+  transform: translateY(0);
 }
 
 .btn-add-vehicle .icon {
-    font-size: 0.9rem;
+  font-size: 0.9rem;
 }
 
-/* Message pas de préférence */
 .no-preference-message {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    padding: 2rem;
-    text-align: center;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
-    max-width: 500px;
-    margin: 1rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+  text-align: center;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+  max-width: 500px;
+  margin: 1rem auto;
 }
 
 .no-preference-message .icon {
-    font-size: 3rem;
-    opacity: 0.5;
+  font-size: 3rem;
+  opacity: 0.5;
 }
 
 .no-preference-message p {
-    color: #666;
-    font-size: 0.95rem;
+  color: #666;
+  font-size: 0.95rem;
 }
 
-/* RESPONSIVE */
 @media (max-width: 768px) {
-    .vehicle-container {
-        padding: 0.75rem;
-    }
-
-    .vehicle-form {
-        padding: 0.75rem;
-    }
-
-    .form-row {
-        grid-template-columns: 1fr;
-    }
-
-    .btn-add-vehicle {
-        width: 100%;
-        justify-content: center;
-    }
-}
-
-/* --- voiture posseder --- */
-/* Section des voitures possédées */
-.vehicles-owned-section {
-    margin-bottom: 2rem;
-}
-
-/* Titre */
-.vehicles-title {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    font-size: 1rem;
-    font-weight: 700;
+  .vehicle-container {
     padding: 0.75rem;
-    margin-bottom: 1rem;
-    background: linear-gradient(135deg, #e8d5c4 0%, #d4c5b4 100%);
-    color: #6b5548;
-    border-radius: 10px;
-}
+  }
 
-.vehicles-title .icon {
-    font-size: 1.1rem;
-}
+  .vehicle-form {
+    padding: 0.75rem;
+  }
 
-/* Liste des voitures - SCROLL HORIZONTAL */
-.vehicles-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    gap: 1rem;
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding-bottom: 1rem;
-    scroll-behavior: smooth;
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .btn-add-vehicle {
+    width: 100%;
     justify-content: center;
+  }
 }
 
+/* VOITURES POSSÉDÉES */
+.vehicles-owned-section {
+  margin-bottom: 2rem;
+}
 
+.vehicles-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 1rem;
+  scroll-behavior: smooth;
+  justify-content: center;
+}
 
-/* Carte de voiture */
 .vehicle-card {
-    list-style: none;
-    flex: 0 0 280px;
-    min-width: 280px;
-    background: white;
-    border-radius: 12px;
-    padding: 1rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
+  list-style: none;
+  flex: 0 0 280px;
+  min-width: 280px;
+  background: white;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
 }
 
 .vehicle-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 
-/* Header de la carte */
 .vehicle-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 0.75rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 2px solid #f0f0f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid #f0f0f0;
 }
 
 .vehicle-name {
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: #333;
-    margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0;
 }
 
-/* Badge moteur (réutilise le style existant) */
 .engine-badge {
-    padding: 0.3rem 0.7rem;
-    border-radius: 15px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 15px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 
 .engine-badge.electrique,
 .engine-badge.hybride {
-    background: #d4edda;
-    color: #155724;
+  background: #d4edda;
+  color: #155724;
 }
 
 .engine-badge.essence,
 .engine-badge.diesel {
-    background: #fff3cd;
-    color: #856404;
+  background: #fff3cd;
+  color: #856404;
 }
 
-/* Détails de la voiture */
 .vehicle-details {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
-.detail-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.4rem 0.6rem;
-    background: #f8f9fa;
-    border-radius: 8px;
-    font-size: 0.85rem;
-}
-
-.detail-item .icon {
-    font-size: 0.95rem;
-}
-
-/* Message aucune voiture */
 .no-vehicle-message {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 2rem;
-    text-align: center;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
-    min-width: 300px;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 2rem;
+  text-align: center;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+  min-width: 300px;
 }
 
 .no-vehicle-message .icon {
-    font-size: 3rem;
-    opacity: 0.5;
+  font-size: 3rem;
+  opacity: 0.5;
 }
 
 .no-vehicle-message p {
-    color: #666;
-    font-size: 0.9rem;
-    margin: 0;
+  color: #666;
+  font-size: 0.9rem;
+  margin: 0;
 }
 
-/* RESPONSIVE */
 @media (max-width: 768px) {
-    .vehicle-card {
-        flex: 0 0 260px;
-        min-width: 260px;
-    }
+  .vehicle-card {
+    flex: 0 0 260px;
+    min-width: 260px;
+  }
 }
 
-
-/* ---- preference renseignées ---- */
+/* PRÉFÉRENCES RENSEIGNÉES */
 #preference_form label {
-    display: none;
+  display: none;
 }
-#filtre_form input ,  #filtre_form button {
-    width: clamp(70px , 18vw , 300px);
-    height: var(--form-height);
+
+#filtre_form input,
+#filtre_form button {
+  width: clamp(70px, 18vw, 300px);
+  height: var(--form-height);
 }
-#preference_form input, #preference_form select, #preference_form textarea, #preference_form button, form#trajet_form button , form#trajet_form input, form#trajet_form select, form#trajet_form textarea ,
-#adresse_form button , #adresse_form input, #adresse_form select, #adresse_form textarea , #role_form button , #role_form input, #role_form select,
-#id_etat, select#id_etat , #deux_choix, select#id_etat_reservation , button#reservation_annuler, #bouton_terminer{
-    width: var(--form-input-size);
-    height: var(--form-height);
+
+#preference_form input,
+#preference_form select,
+#preference_form textarea,
+#preference_form button,
+form#trajet_form button,
+form#trajet_form input,
+form#trajet_form select,
+form#trajet_form textarea,
+#adresse_form button,
+#adresse_form input,
+#adresse_form select,
+#adresse_form textarea,
+#role_form button,
+#role_form input,
+#role_form select,
+#id_etat,
+select#id_etat,
+#deux_choix,
+select#id_etat_reservation,
+button#reservation_annuler,
+#bouton_terminer {
+  width: var(--form-input-size);
+  height: var(--form-height);
 }
+
 form#etat_form select,
 #reservation_form select,
 select#id_etat {
-    display: flex;
-    justify-self: center;
-    margin: clamp(10px , 2vh, 20px)
-}
-/* Container des préférences */
-.preferences-container {
-    max-width: 650px;
-    margin: 1rem auto;
-    padding: 1rem;
+  display: flex;
+  justify-self: center;
+  margin: clamp(10px, 2vh, 20px)
 }
 
-/* Titre principal */
+.preferences-container {
+  max-width: 650px;
+  margin: 1rem auto;
+  padding: 1rem;
+}
+
 .preferences-title {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    font-size: 1.05rem;
-    font-weight: 700;
-    padding: 0.75rem;
-    margin-bottom: 1rem;
-    background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
-    color: #155724;
-    border-radius: 10px;
-    text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+  color: #155724;
+  border-radius: 10px;
+  text-align: center;
 }
 
 .preferences-title.no-pref {
-    background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
-    color: #856404;
+  background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+  color: #856404;
 }
 
 .preferences-title .icon {
-    font-size: 1.15rem;
+  font-size: 1.15rem;
 }
 
-/* Préférences actuelles - Grille de cartes */
 .current-preferences {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.75rem;
-    margin-bottom: 1.5rem;
-    padding: 1rem;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
 }
 
 .pref-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.4rem;
-    padding: 0.75rem;
-    background: #f8f9fa;
-    border-radius: 10px;
-    text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.75rem;
+  background: #f8f9fa;
+  border-radius: 10px;
+  text-align: center;
 }
 
 .pref-card.full-width {
-    grid-column: 1 / -1;
+  grid-column: 1 / -1;
 }
 
 .pref-icon {
-    font-size: 1.5rem;
+  font-size: 1.5rem;
 }
 
 .pref-label {
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: #666;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .pref-value {
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: #333;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #333;
 }
 
-/* Formulaire */
 .preferences-form {
-    background: white;
-    border-radius: 12px;
-    padding: 1rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
-}
-
-/* Sous-titre */
-.section-subtitle {
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: #333;
-    margin-bottom: 0.75rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid #e8d5c4;
-}
-
-.section-subtitle .icon {
-    font-size: 1rem;
-}
-
-/* Section du formulaire */
-.form-section {
-    margin-bottom: 1rem;
-}
-
-/* Rangées */
-.form-row {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.6rem;
-    margin-bottom: 0.6rem;
-}
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-}
-
-.form-group label {
-    font-weight: 600;
-    font-size: 0.8rem;
-    color: #333;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-    padding: 0.5rem;
-    border: 2px solid #e0e0e0;
-    border-radius: 6px;
-    font-size: 0.85rem;
-    transition: all 0.3s ease;
-    background: white;
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-    outline: none;
-    border-color: #8b6f5c;
-    box-shadow: 0 0 0 3px rgba(139, 111, 92, 0.1);
+  background: white;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
 }
 
 .form-group input:hover,
 .form-group select:hover,
 .form-group textarea:hover {
-    background: rgb(200, 240, 200);
-    transform: translateY(-1px);
+  background: rgb(200, 240, 200);
+  transform: translateY(-1px);
 }
 
 .form-group textarea {
-    min-height: 60px;
-    resize: vertical;
-}
-
-/* Actions */
-.form-actions {
-    display: flex;
-    justify-content: center;
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 2px solid #f0f0f0;
+  min-height: 60px;
+  resize: vertical;
 }
 
 .btn-save-prefs {
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-    padding: 0.6rem 1.5rem;
-    background: linear-gradient(135deg, #8b6f5c 0%, #6b5548 100%);
-    color: white;
-    border: none;
-    border-radius: 18px;
-    font-weight: 700;
-    font-size: 0.85rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.6rem 1.5rem;
+  background: linear-gradient(135deg, #8b6f5c 0%, #6b5548 100%);
+  color: white;
+  border: none;
+  border-radius: 18px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .btn-save-prefs:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 
 .btn-save-prefs:active {
-    transform: translateY(0);
+  transform: translateY(0);
 }
 
 .btn-save-prefs .icon {
-    font-size: 0.9rem;
+  font-size: 0.9rem;
 }
 
-/* RESPONSIVE */
 @media (max-width: 768px) {
-    .preferences-container {
-        padding: 0.75rem;
-    }
-
-    .current-preferences {
-        grid-template-columns: 1fr;
-    }
-
-    .form-row {
-        grid-template-columns: 1fr;
-    }
-
-    .btn-save-prefs {
-        width: 100%;
-        justify-content: center;
-    }
-}
-
-
-
-/* --- Formulaire de trajet proposer --- */
-/* Container principal */
-.propose-trip-container {
-    max-width: 700px;
-    margin: 1rem auto;
-    padding: 1rem;
-}
-
-/* Titre principal */
-.propose-trip-title {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    font-size: 1.15rem;
-    font-weight: 700;
+  .preferences-container {
     padding: 0.75rem;
-    margin-bottom: 1rem;
-    background: linear-gradient(135deg, #4ecdc4 0%, #44a8a0 100%);
-    color: white;
-    border-radius: 10px;
+  }
+
+  .current-preferences {
+    grid-template-columns: 1fr;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .btn-save-prefs {
+    width: 100%;
+    justify-content: center;
+  }
 }
 
-.propose-trip-title .icon {
-    font-size: 1.25rem;
+/* FORMULAIRE TRAJET PROPOSER */
+.propose-trip-container {
+  max-width: 700px;
+  margin: 1rem auto;
+  padding: 1rem;
 }
 
-/* Formulaire */
 #trajet_form label {
-    display: none;
-}
-.propose-trip-form {
-    background: white;
-    border-radius: 12px;
-    padding: 1rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+  display: none;
 }
 
-/* Sections du formulaire */
-.form-section {
-    margin-bottom: 1.5rem;
+.propose-trip-form {
+  background: white;
+  border-radius: 12px;
+  padding: 3rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
 }
 
 .form-section:last-of-type {
-    margin-bottom: 1rem;
-}
-
-/* Sous-titres de section */
-.section-subtitle {
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: #333;
-    margin-bottom: 0.75rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid #e8d5c4;
-}
-
-.section-subtitle .icon {
-    font-size: 1rem;
-}
-
-/* Rangées de formulaire */
-.form-row {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.6rem;
-    margin-bottom: 0.6rem;
+  margin-bottom: 1rem;
 }
 
 .form-row:last-child {
-    margin-bottom: 0;
-}
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-}
-
-.form-group.full-width {
-    grid-column: 1 / -1;
-}
-
-.form-group label {
-    font-weight: 600;
-    font-size: 0.8rem;
-    color: #333;
-}
-
-.form-group input,
-.form-group select {
-    padding: 0.5rem;
-    border: 2px solid #e0e0e0;
-    border-radius: 6px;
-    font-size: 0.85rem;
-    transition: all 0.3s ease;
-    background: white;
-}
-
-.form-group input:focus,
-.form-group select:focus {
-    outline: none;
-    border-color: #4ecdc4;
-    box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.1);
-}
-
-.form-group input:hover,
-.form-group select:hover {
-    background: rgb(200, 240, 200);
-    transform: translateY(-1px);
-}
-
-/* Actions du formulaire */
-.form-actions {
-    display: flex;
-    justify-content: center;
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 2px solid #f0f0f0;
+  margin-bottom: 0;
 }
 
 .btn-propose-trip {
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-    padding: 0.7rem 2rem;
-    background: linear-gradient(135deg, #4ecdc4 0%, #44a8a0 100%);
-    color: white;
-    border: none;
-    border-radius: 20px;
-    font-weight: 700;
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.7rem 2rem;
+  background: linear-gradient(135deg, #4ecdc4 0%, #44a8a0 100%);
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .btn-propose-trip:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 
 .btn-propose-trip:active {
-    transform: translateY(0);
+  transform: translateY(0);
 }
 
 .btn-propose-trip .icon {
-    font-size: 1rem;
+  font-size: 1rem;
 }
 
-/* RESPONSIVE */
 @media (max-width: 768px) {
-    .propose-trip-container {
-        padding: 0.75rem;
-    }
+  .propose-trip-container {
+    padding: 0.75rem;
+  }
 
-    .propose-trip-form {
-        padding: 0.75rem;
-    }
+  .propose-trip-form {
+    padding: 0.75rem;
+  }
 
-    .form-row {
-        grid-template-columns: 1fr;
-    }
+  .form-row {
+    grid-template-columns: 1fr;
+  }
 
-    .btn-propose-trip {
-        width: 100%;
-        justify-content: center;
-    }
+  .btn-propose-trip {
+    width: 100%;
+    justify-content: center;
+  }
 }
 
-/* ===============================================
-    CARTES DE TRAJETS PROPOSÉS - STYLE MODERNE
-   =============================================== */
-
-/* 1. Cachez l'input radio standard */
+/* CARTES TRAJETS */
 .trajet-radio {
-    /* Cachez-le visuellement, mais laissez-le accessible pour les lecteurs d'écran (screen readers) */
-    position: absolute;
-    opacity: 0;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    padding: 0;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
-}
-
-/* 2. Style de base pour la carte (le label) */
-/* --- SÉLECTION DE TRAJET (.trajet-item) --- */
-
-/* 1. Masquage de l'input radio standard */
-.trajet-radio {
-    /* Utilise la même technique que pour les autres inputs radios cachés de votre CSS */
-    position: absolute;
-    opacity: 0;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    padding: 0;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }
 
 .trajet-card {
-    display: flex;
-    flex-direction: column;
-    border: 3px solid transparent;
-    border-radius: 12px;
-    padding: 1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    background: white;
-    position: relative;
+  display: flex;
+  flex-direction: column;
+  border: 3px solid transparent;
+  border-radius: 12px;
+  padding: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  background: white;
+  position: relative;
 }
 
-/* Au lieu de .trajet-radio:checked + .trajet-card */
 .trajet-card:has(.trajet-radio:checked) {
-    border-color: #4ecdc4;
-    background-color: #e6f7eb;
+  border-color: #4ecdc4;
+  background-color: #e6f7eb;
 }
 
 .trajet-card:has(.trajet-radio:checked):hover {
-    background-color: #d8eadb;
+  background-color: #d8eadb;
 }
 
 .trajet-card:has(.trajet-radio:checked) .selection-indicator {
-    background-color: #28a745;
-    opacity: 1;
-    transform: scale(1);
+  background-color: #28a745;
+  opacity: 1;
+  transform: scale(1);
 }
-
 
 div.no-trajets-message {
-    display: flex;
+  display: flex;
 }
+
 div.no-trajets-message > p {
-    text-align: center;
-}
-
-
-
-
-.trajet-card:checked + .trajet-card .selection-indicator {
-    opacity: 1;
-    transform: scale(1);
+  text-align: center;
 }
 
 .selection-indicator .checkmark {
-    color: white;
-    font-size: 1.1rem;
-    font-weight: bold;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: bold;
 }
 
-/* Itinéraire */
 .trajet-route {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 0.75rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 2px solid #f0f0f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid #f0f0f0;
 }
 
 .route-item {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .route-icon {
-    font-size: 1rem;
+  font-size: 1rem;
 }
 
 .route-city {
-    font-weight: 600;
-    font-size: 0.9rem;
-    color: #333;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: #333;
 }
 
 .route-arrow {
-    font-size: 1rem;
-    color: #8b6f5c;
-    font-weight: bold;
-}
-
-/* Informations du trajet */
-.trajet-info {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.6rem;
-    margin-bottom: 0.75rem;
+  font-size: 1rem;
+  color: #8b6f5c;
+  font-weight: bold;
 }
 
 .info-item {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-    padding: 0.5rem;
-    background: white;
-    border: 2px solid #f0f0f0;
-    border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.5rem;
+  background: white;
+  border: 2px solid #f0f0f0;
+  border-radius: 6px;
 }
 
 .info-item.full-width {
-    grid-column: 1 / -1;
+  grid-column: 1 / -1;
 }
 
 .info-item .icon {
-    font-size: 0.95rem;
+  font-size: 0.95rem;
 }
 
 .info-item .label {
-    font-size: 0.7rem;
-    color: #666;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    font-weight: 600;
+  font-size: 0.7rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
 }
 
 .info-item .value {
-    font-size: 0.85rem;
-    color: #333;
-    font-weight: 500;
+  font-size: 0.85rem;
+  color: #333;
+  font-weight: 500;
 }
 
-/* Footer */
 .trajet-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-top: 0.75rem;
-    border-top: 2px solid #f0f0f0;
-    flex-wrap: wrap;
-    gap: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.75rem;
+  border-top: 2px solid #f0f0f0;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .trajet-prix {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
 }
 
 .prix-label {
-    font-size: 0.7rem;
-    color: #666;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    font-weight: 600;
+  font-size: 0.7rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
 }
 
 .prix-value {
-    font-size: 1.15rem;
-    font-weight: 700;
-    color: #8b6f5c;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #8b6f5c;
 }
 
 .trajet-places {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .places-available {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    padding: 0.4rem 0.8rem;
-    background: #d4edda;
-    color: #155724;
-    border-radius: 15px;
-    font-weight: 600;
-    font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  background: #d4edda;
+  color: #155724;
+  border-radius: 15px;
+  font-weight: 600;
+  font-size: 0.8rem;
 }
 
 .places-full {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    padding: 0.4rem 0.8rem;
-    background: #f8d7da;
-    color: #721c24;
-    border-radius: 15px;
-    font-weight: 600;
-    font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  background: #f8d7da;
+  color: #721c24;
+  border-radius: 15px;
+  font-weight: 600;
+  font-size: 0.8rem;
 }
 
 .places-available .icon,
 .places-full .icon {
-    font-size: 0.9rem;
+  font-size: 0.9rem;
 }
 
-/* Badge statut */
 .statut-badge {
-    padding: 0.3rem 0.7rem;
-    border-radius: 15px;
-    font-size: 0.7rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+  padding: 0.3rem 0.7rem;
+  border-radius: 15px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .statut-badge.disponible {
-    background: #d4edda;
-    color: #155724;
+  background: #d4edda;
+  color: #155724;
 }
 
 .statut-badge.annulé {
-    background: #f8d7da;
-    color: #721c24;
+  background: #f8d7da;
+  color: #721c24;
 }
 
 .statut-badge.encour,
 .statut-badge.en_cours {
-    background: #fff3cd;
-    color: #856404;
+  background: #fff3cd;
+  color: #856404;
 }
 
 .statut-badge.terminé {
-    background: #d1ecf1;
-    color: #0c5460;
+  background: #d1ecf1;
+  color: #0c5460;
 }
-/* Indicateur de sélection */
+
 .selection-indicator {
-    position: absolute;
-    top: 0.75rem;
-    right: 0.75rem;
-    width: 28px;
-    height: 28px;
-    background: #4ecdc4;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transform: scale(0);
-    transition: all 0.3s ease;
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 28px;
+  height: 28px;
+  background: #4ecdc4;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.3s ease;
 }
 
-/* RESPONSIVE */
 @media (max-width: 768px) {
-    .trajet-item {
-        flex: 0 0 250px;
-        min-width: 250px;
-    }
+  .trajet-item {
+    flex: 0 0 250px;
+    min-width: 250px;
+  }
 
-    .trajet-card {
-        padding: 0.75rem;
-    }
+  .trajet-card {
+    padding: 0.75rem;
+  }
 
-    .trajet-route {
-        flex-direction: column;
-        gap: 0.5rem;
-    }
+  .trajet-route {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
 
-    .route-arrow {
-        transform: rotate(90deg);
-    }
+  .route-arrow {
+    transform: rotate(90deg);
+  }
 
-    .trajet-info {
-        grid-template-columns: 1fr;
-    }
+  .trajet-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
-    .trajet-footer {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    .vehicle-title , .history-title {
-        font-size: 0.7rem;
-    }
+  .vehicle-title,
+  .history-title {
+    font-size: 0.7rem;
+  }
 }
 
 @media (max-width: 480px) {
-    .prix-value {
-        font-size: 1rem;
-    }
+  .prix-value {
+    font-size: 1rem;
+  }
 }

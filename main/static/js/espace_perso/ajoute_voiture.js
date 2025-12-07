@@ -9,7 +9,7 @@ if (selectModele) {
     selectModele.appendChild(defaultOption)
 }
 
-if (selectMarque !== null) {
+if (selectMarque) {  
     selectMarque.addEventListener('change', changeModel)
 }
 
