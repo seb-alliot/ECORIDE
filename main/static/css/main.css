@@ -14,16 +14,16 @@
   --footer-height: clamp(50px, 8vw, 80px);
   --content-max-width: 1200px;
   --content-side-padding: clamp(10px, 5vw, 40px);
-  --color-primary: #7d6e63;
-  --color-secondary: #b19a8b;
-  --color-background: #faf3e0;
-  --color-hover: rgb(200, 240, 200);
-  --color-text: #000000;
-  --color-light: #f8f8f9fa;
+  --color-primary: #2d6a4f;
+  --color-secondary: #52b788;
+  --color-background: #f4f9f1;
+  --color-hover: #d8f3dc;
+  --color-text: #1b2d1e;
+  --color-light: #e8f5e4;
   --border-radius-sm: 10px;
   --border-radius-lg: 15%;
-  --box-shadow: 6px 6px 10px rgba(0, 0, 0, 0.41);
-  --font-main: Arial, sans-serif;
+  --box-shadow: 0 4px 12px rgba(45, 106, 79, 0.15);
+  --font-main: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 /* Reset */
@@ -99,7 +99,7 @@ main {
 .class_scroll {
   overflow-y: auto;
   width: 100%;
-  scrollbar-color: rgba(150, 200, 150, 1) rgba(220, 220, 220, 0);
+  scrollbar-color: rgba(82, 183, 136, 0.8) rgba(220, 240, 220, 0);
   padding-bottom: var(--spacing-md);
 }
 
@@ -112,10 +112,95 @@ ul.resultat {
   list-style: none;
 }
 
+/* =========== ONGLETS (partagés MonCompte + Modérateur) =========== */
+#page-wrap {
+  width: 100%;
+  margin: 10px auto;
+}
+
+#menu-tab {
+  margin-top: 10px;
+  font-size: var(--font-size-other);
+  color: var(--color-text);
+}
+
+.tab {
+  float: left;
+}
+
+.tab label {
+  padding: var(--spacing-md);
+  background: white;
+  border: solid 1px #b7e4c7;
+  position: relative;
+  left: 2px;
+  border-radius: var(--border-radius-sm);
+  box-shadow: 0 2px 8px rgba(45, 106, 79, 0.1);
+  font-size: var(--font-size-other);
+  top: clamp(3px, 0vw, 5vw);
+}
+
+.tab [type="radio"] {
+  display: none;
+}
+
+.tab [type="radio"]:checked ~ label {
+  background-color: var(--color-hover);
+  color: var(--color-text);
+  z-index: 0;
+  border-bottom: 1px solid white;
+}
+
+.tab [type="radio"]:checked ~ label ~ .content {
+  z-index: 1;
+}
+
+.tab [type="radio"]:checked ~ label ~ .content > * {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.content {
+  position: absolute;
+  top: clamp(15px, 3vw, 25px);
+  margin-bottom: clamp(15px, 3vw, 25px);
+  left: 0;
+  background: #b7e4c7;
+  right: 0;
+  bottom: 0;
+  padding: 10px;
+  border-radius: 5px 10px 10px 10px;
+  box-shadow: 0 4px 12px rgba(45, 106, 79, 0.15);
+  overflow-y: auto;
+}
+
+.tabs {
+  min-height: clamp(600px, 40vw, 800px);
+}
+
+div.tabs {
+  margin: clamp(5px, 1vw, 10px) 10%;
+}
+
+/* Titre section véhicule (partagé MonCompte + Modérateur) */
+.vehicle-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+  color: #155724;
+  border-radius: 10px;
+}
+
 /* Header */
 header {
   padding: var(--spacing-md) var(--spacing-lg);
-  height: clamp(80px, 10vw, 210px);
+  min-height: clamp(80px, 10vw, 210px);
   background-color: var(--color-light);
 }
 
@@ -163,6 +248,7 @@ label#resultat_recherche img,
 
 .photo_default:hover {
   background-color: var(--color-secondary);
+  color: white;
   transform: scale(1.05);
 }
 
@@ -177,13 +263,13 @@ footer {
 
 a {
   text-decoration: none;
-  color: black;
+  color: var(--color-text);
   display: flex;
   justify-content: center;
 }
 
 a:hover {
-  color: #a7c7a5;
+  color: var(--color-primary);
 }
 
 .footer {
@@ -221,9 +307,7 @@ form#etat_form > label,
 button,
 select,
 input {
-  justify-content: center;
-  box-sizing: border-box;
-  border: 1px solid var(--color-text);
+  border: 1px solid var(--color-primary);
   border-radius: var(--border-radius-sm);
   box-shadow: var(--box-shadow);
   text-align: center;
@@ -274,26 +358,36 @@ div#reservation > div > form#reservation_form > select:hover {
   color: var(--color-text);
 }
 
-/* Messages */
-.success {
+/* Messages flash */
+ul.messages {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+ul.messages li {
+  width: 100%;
+  text-align: center;
   font-size: clamp(14px, 2.5vw, 18px);
-  color: green;
+  font-weight: 500;
+  padding: 6px var(--spacing-md);
+}
+
+.success {
+  color: #1a7a4a;
 }
 
 .error {
-  display: flex;
-  justify-content: center;
-  font-size: clamp(14px, 2.5vw, 18px);
-  color: red;
+  color: #c0392b;
 }
 
 .info {
-  display: flex;
-  justify-content: center;
-  font-size: clamp(14px, 2.5vw, 18px);
-  color: blue;
+  color: #2980b9;
 }
 
 /* Présentation */
@@ -344,7 +438,7 @@ div#reservation > div > form#reservation_form > select:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid var(--color-text);
+  border: 1px solid var(--color-primary);
   box-shadow: var(--box-shadow);
   margin-bottom: var(--spacing-lg);
   height: clamp(45px, 5vw, 55px);
@@ -366,7 +460,7 @@ form#demarrer_ou_annuler_form > label {
   text-decoration: none;
   text-align: center;
   font-size: var(--font-size-other);
-  border: 1px solid var(--color-text);
+  border: 1px solid var(--color-primary);
   border-radius: var(--border-radius-sm);
   box-shadow: var(--box-shadow);
   transition: background-color 0.3s, color 0.3s;
@@ -419,7 +513,7 @@ input#id_date,
 
 .resultat label {
   border-radius: 10px;
-  background-color: #f8f9fa;
+  background-color: var(--color-background);
   padding: 10px;
 }
 
@@ -469,10 +563,10 @@ form#filtre_form {
 }
 
 .p_deco {
-  box-shadow: 6px 6px 10px beige;
-  background-color: rgb(120, 180, 120);
-  color: blanchedalmond;
-  text-shadow: 1px 1px 2px black;
+  box-shadow: var(--box-shadow);
+  background-color: var(--color-primary);
+  color: var(--color-light);
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
   font-size: var(--font-size-base--p);
 }
 
@@ -497,11 +591,10 @@ div#reservation > div {
   align-items: center;
   background-color: var(--color-secondary);
   box-shadow: var(--box-shadow);
-  border: solid 2px black;
+  border: solid 2px var(--color-primary);
   width: clamp(250px, 30vw, 300px);
   min-height: clamp(300px, 35vw, 350px);
   padding: var(--spacing-sm);
-  box-sizing: border-box;
   overflow: hidden;
 }
 
@@ -521,39 +614,16 @@ div#reservation > div > img.photo_profile {
   margin-right: 0;
 }
 
-#chauffeur_trajet,
-#prix_trajet {
-  border: solid 2px var(--color-text);
-  width: 100%;
-  justify-content: center;
-  display: flex;
-  background-color: var(--color-hover);
-  font-size: var(--font-size-other);
-  padding: var(--spacing-sm);
-  font-size: clamp(14px, 1.9vw, 15px);
-  margin: var(--spacing-sm);
-}
-
-#chauffeur_trajet {
-  margin-bottom: clamp(-3%, -1vw, -1.5%);
-}
-
-#prix_trajet {
-  margin-top: clamp(-3%, -1vw, -1.5%);
-}
-
 #info_trajet {
-  margin: 0;
   padding: var(--spacing-sm);
-  font-size: var(--font-size-other);
   font-size: clamp(14px, 1.9vw, 15px);
   margin: var(--spacing-sm);
-  background: linear-gradient(135deg, #4ecdc4 0%, #44a8a0 100%);
+  background: linear-gradient(135deg, #52b788 0%, #2d6a4f 100%);
   color: white;
   border-radius: 10px;
   text-align: center;
   line-height: 1.5;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(45, 106, 79, 0.2);
 }
 
 #info_trajet > div {
@@ -564,9 +634,8 @@ div#reservation > div > img.photo_profile {
 
 #info_trajet > div > p {
   text-align: center;
-  font-size: clamp(12px, 1.8vw, 16px);
-  color: var(--color-light);
   font-size: clamp(14px, 1.9vw, 15px);
+  color: var(--color-light);
   margin: var(--spacing-sm);
 }
 
@@ -597,19 +666,19 @@ div#gain_plateforme {
   padding: 1.5rem;
   background: white;
   border-radius: 12px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--box-shadow);
 }
 
 #je_donne_mon_avis::before {
-  content: "⭐ Votre avis compte !";
+  content: "Votre avis compte !";
   display: block;
   text-align: center;
   font-size: 1.2rem;
   font-weight: 700;
-  color: #333;
+  color: var(--color-primary);
   margin-bottom: 1.5rem;
   padding-bottom: 1rem;
-  border-bottom: 2px solid #e8d5c4;
+  border-bottom: 2px solid var(--color-light);
 }
 
 .form-table {
@@ -627,7 +696,7 @@ div#gain_plateforme {
 .form-row label {
   font-weight: 600;
   font-size: 0.95rem;
-  color: #333;
+  color: var(--color-text);
   display: flex;
   align-items: center;
   gap: 0.4rem;
@@ -651,7 +720,7 @@ div#gain_plateforme {
 .form-row select,
 .form-row textarea {
   width: 100%;
-  border: 2px solid #e0e0e0;
+  border: 2px solid #d0e8d8;
   border-radius: 8px;
   font-size: 0.9rem;
   font-family: inherit;
@@ -668,13 +737,13 @@ div#gain_plateforme {
 .form-row select:focus,
 .form-row textarea:focus {
   outline: none;
-  border-color: #4ecdc4;
-  box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.1);
+  border-color: var(--color-secondary);
+  box-shadow: 0 0 0 3px rgba(82, 183, 136, 0.15);
 }
 
 .form-row select:hover,
 .form-row textarea:hover {
-  background: rgb(200, 240, 200);
+  background: var(--color-hover);
   transform: translateY(-1px);
 }
 
@@ -691,7 +760,7 @@ div#gain_plateforme {
   gap: 0.5rem;
   width: 100%;
   margin-top: 1.5rem;
-  background: linear-gradient(135deg, #4ecdc4 0%, #44a8a0 100%);
+  background: linear-gradient(135deg, #52b788 0%, #2d6a4f 100%);
   color: white;
   border: none;
   border-radius: 25px;
@@ -699,12 +768,12 @@ div#gain_plateforme {
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(45, 106, 79, 0.2);
 }
 
 .avis_donner:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px rgba(45, 106, 79, 0.3);
 }
 
 .avis_donner:active {
@@ -738,31 +807,17 @@ div#gain_plateforme {
 }
 
 #mot_de_passe_oublie a,
-button#bouton_note,
-#note_perso,
-#avis_perso {
+button#bouton_note {
   font-size: var(--font-size-base);
   margin-top: var(--spacing-lg);
 }
 
-#note_perso,
-#avis_perso {
-  font-size: clamp(14px, 1.9vw, 15px);
-  margin: var(--spacing-sm);
-}
-
-div#div_avis > div > p {
-  font-size: var(--font-size-base);
-}
-
-#div_avis,
 #note,
 #preference {
   width: 90%;
   font-size: clamp(10px, 1vw, 12px);
 }
 
-div#div_avis > div,
 div#place_a_reserver > div,
 div#place_a_reserver {
   margin: var(--spacing-md);
@@ -829,7 +884,7 @@ h2 {
   background: white;
   border-radius: 12px;
   padding: 1rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--box-shadow);
   cursor: pointer;
   transition: all 0.3s ease;
   border: 3px solid transparent;
@@ -839,12 +894,12 @@ h2 {
 
 .trajet-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 16px rgba(45, 106, 79, 0.2);
 }
 
 .trajet-radio:checked + .trajet-card {
-  border-color: #4ecdc4;
-  background: linear-gradient(135deg, #f8ffff 0%, #ffffff 100%);
+  border-color: var(--color-secondary);
+  background: linear-gradient(135deg, #f4f9f1 0%, #ffffff 100%);
 }
 
 .selection-indicator {
@@ -853,7 +908,7 @@ h2 {
   right: 0.75rem;
   width: 28px;
   height: 28px;
-  background: #4ecdc4;
+  background: var(--color-secondary);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -880,7 +935,7 @@ h2 {
   align-items: flex-start;
   margin-bottom: 0.75rem;
   padding-bottom: 0.75rem;
-  border-bottom: 2px solid #f0f0f0;
+  border-bottom: 2px solid var(--color-light);
 }
 
 .chauffeur-info {
@@ -894,7 +949,7 @@ h2 {
   height: 40px;
   border-radius: 50%;
   overflow: hidden;
-  border: 2px solid #e8d5c4;
+  border: 2px solid var(--color-light);
   flex-shrink: 0;
 }
 
@@ -913,7 +968,7 @@ h2 {
 .chauffeur-name {
   font-weight: 700;
   font-size: 0.95rem;
-  color: #333;
+  color: var(--color-text);
 }
 
 .deleted-user {
@@ -934,7 +989,7 @@ h2 {
 
 .rating-value {
   font-weight: 600;
-  color: #f39c12;
+  color: #e8a020;
 }
 
 .no-rating {
@@ -973,7 +1028,7 @@ h2 {
   align-items: center;
   gap: 0.5rem;
   padding: 0.75rem;
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  background: var(--color-background);
   border-radius: 10px;
 }
 
@@ -991,12 +1046,12 @@ h2 {
 .route-city {
   font-weight: 600;
   font-size: 0.9rem;
-  color: #333;
+  color: var(--color-text);
 }
 
 .route-arrow {
   font-size: 1rem;
-  color: #8b6f5c;
+  color: var(--color-primary);
   font-weight: bold;
 }
 
@@ -1012,7 +1067,7 @@ h2 {
   gap: 0.4rem;
   padding: 0.5rem;
   background: white;
-  border: 2px solid #f0f0f0;
+  border: 2px solid var(--color-light);
   border-radius: 6px;
   font-size: 0.85rem;
 }
@@ -1026,7 +1081,7 @@ h2 {
   justify-content: space-between;
   align-items: center;
   padding: 0.6rem;
-  background: #f8f9fa;
+  background: var(--color-background);
   border-radius: 8px;
 }
 
@@ -1065,7 +1120,7 @@ h2 {
   justify-content: space-between;
   align-items: center;
   padding-top: 0.75rem;
-  border-top: 2px solid #f0f0f0;
+  border-top: 2px solid var(--color-light);
 }
 
 .trajet-prix {
@@ -1076,7 +1131,7 @@ h2 {
 
 .prix-label {
   font-size: 0.75rem;
-  color: #666;
+  color: #557a60;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -1084,7 +1139,7 @@ h2 {
 .prix-value {
   font-size: 1.25rem;
   font-weight: 700;
-  color: #8b6f5c;
+  color: var(--color-primary);
 }
 
 .trajet-places {
@@ -1124,9 +1179,9 @@ h2 {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  background-color: rgb(200, 240, 200);
+  background-color: var(--color-hover);
   border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--box-shadow);
 }
 
 .compact-header {
@@ -1135,7 +1190,7 @@ h2 {
   padding: 0.75rem;
   background: white;
   border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 4px rgba(45, 106, 79, 0.08);
   align-items: center;
 }
 
@@ -1144,7 +1199,7 @@ h2 {
   height: 60px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid #e8d5c4;
+  border: 2px solid var(--color-light);
   flex-shrink: 0;
 }
 
@@ -1157,7 +1212,7 @@ h2 {
 
 .driver-tag {
   font-size: 0.65rem;
-  color: #666;
+  color: #557a60;
   text-transform: uppercase;
   letter-spacing: 0.3px;
   font-weight: 600;
@@ -1167,7 +1222,7 @@ h2 {
   margin: 0;
   font-size: 1rem;
   font-weight: 700;
-  color: #333;
+  color: var(--color-text);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1175,7 +1230,7 @@ h2 {
 
 .rating-compact {
   font-size: 0.75rem;
-  color: #856404;
+  color: #e8a020;
   font-weight: 600;
 }
 
@@ -1184,7 +1239,7 @@ h2 {
   align-items: center;
   gap: 0.5rem;
   padding: 0.6rem;
-  background: #f8f9fa;
+  background: var(--color-background);
   border-radius: 8px;
   justify-content: space-between;
 }
@@ -1202,7 +1257,7 @@ h2 {
 
 .arrow {
   font-size: 1.2rem;
-  color: #8b6f5c;
+  color: var(--color-primary);
   font-weight: bold;
   flex-shrink: 0;
 }
@@ -1220,7 +1275,7 @@ h2 {
   gap: 0.4rem;
   padding: 0.6rem 0.4rem;
   background: white;
-  border: 2px solid #f0f0f0;
+  border: 2px solid var(--color-light);
   border-radius: 8px;
   font-size: 0.85rem;
   font-weight: 600;
@@ -1228,7 +1283,7 @@ h2 {
 }
 
 .info-box:hover {
-  border-color: #8b6f5c;
+  border-color: var(--color-primary);
   transform: translateY(-1px);
 }
 
@@ -1247,7 +1302,7 @@ h2 {
   padding: 0.6rem 0.75rem;
   background: white;
   border-radius: 8px;
-  border: 2px solid #f0f0f0;
+  border: 2px solid var(--color-light);
   font-size: 0.85rem;
   font-weight: 600;
 }
@@ -1264,12 +1319,12 @@ h2 {
 
 .pref-tag {
   padding: 0.3rem 0.6rem;
-  background: #f8f9fa;
+  background: var(--color-background);
   border-radius: 12px;
   font-size: 0.75rem;
   font-weight: 600;
-  color: #333;
-  border: 1px solid #e0e0e0;
+  color: var(--color-text);
+  border: 1px solid var(--color-light);
 }
 
 .pref-tag.full {
@@ -1279,7 +1334,7 @@ h2 {
 .compact-reviews {
   background: white;
   border-radius: 8px;
-  border: 2px solid #f0f0f0;
+  border: 2px solid var(--color-light);
 }
 
 .compact-reviews summary {
@@ -1287,7 +1342,7 @@ h2 {
   cursor: pointer;
   font-weight: 600;
   font-size: 0.85rem;
-  color: #333;
+  color: var(--color-text);
   list-style: none;
   user-select: none;
 }
@@ -1297,7 +1352,7 @@ h2 {
 }
 
 .compact-reviews summary:hover {
-  background: #f8f9fa;
+  background: var(--color-background);
 }
 
 .reviews-content {
@@ -1305,22 +1360,22 @@ h2 {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  border-top: 1px solid #f0f0f0;
+  border-top: 1px solid var(--color-light);
 }
 
 .reviews-content p {
   margin: 0.5rem 0 0;
   padding: 0.5rem;
-  background: #f8f9fa;
+  background: var(--color-background);
   border-radius: 6px;
   font-size: 0.8rem;
   line-height: 1.4;
   font-style: italic;
-  color: #555;
+  color: #557a60;
 }
 
 .compact-booking {
-  background: linear-gradient(135deg, #4ecdc4 0%, #44a8a0 100%);
+  background: linear-gradient(135deg, #52b788 0%, #2d6a4f 100%);
   border-radius: 10px;
   padding: 0.75rem;
 }
@@ -1351,7 +1406,7 @@ h2 {
   gap: 0.3rem;
   padding: 0.6rem 1rem;
   background: white;
-  color: #4ecdc4;
+  color: var(--color-primary);
   border: none;
   border-radius: 20px;
   font-weight: 700;
@@ -1363,7 +1418,7 @@ h2 {
 
 #pop_up_confirmation:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 #pop_up_confirmation .icon {
@@ -1377,7 +1432,7 @@ h2 {
   gap: 0.5rem;
   padding: 0.75rem;
   background: white;
-  color: #4ecdc4;
+  color: var(--color-primary);
   text-decoration: none;
   border-radius: 20px;
   font-weight: 700;
@@ -1387,7 +1442,7 @@ h2 {
 
 .btn-auth-compact:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .compact-footer {
@@ -1397,7 +1452,7 @@ h2 {
   background: white;
   border-radius: 8px;
   font-size: 0.75rem;
-  color: #666;
+  color: #557a60;
 }
 
 /* Contact */
@@ -1411,7 +1466,7 @@ h2 {
   background: white;
   border-radius: 12px;
   padding: 1.5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--box-shadow);
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -1426,7 +1481,7 @@ h2 {
   font-weight: 700;
   margin: 0 0 1rem 0;
   padding: 0.75rem;
-  background: linear-gradient(135deg, #4ecdc4 0%, #44a8a0 100%);
+  background: linear-gradient(135deg, #52b788 0%, #2d6a4f 100%);
   color: white;
   border-radius: 10px;
 }
@@ -1438,7 +1493,7 @@ h2 {
 #contact_form label {
   font-weight: 600;
   font-size: 0.85rem;
-  color: #333;
+  color: var(--color-text);
   margin-bottom: 0.25rem;
   display: block;
 }
@@ -1449,7 +1504,7 @@ h2 {
 #contact_form textarea {
   width: 100%;
   padding: 0.75rem;
-  border: 2px solid #e0e0e0;
+  border: 2px solid #d0e8d8;
   border-radius: 8px;
   font-size: 0.9rem;
   font-family: inherit;
@@ -1460,13 +1515,13 @@ h2 {
 #contact_form input:focus,
 #contact_form textarea:focus {
   outline: none;
-  border-color: #4ecdc4;
-  box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.1);
+  border-color: var(--color-secondary);
+  box-shadow: 0 0 0 3px rgba(82, 183, 136, 0.15);
 }
 
 #contact_form input:hover,
 #contact_form textarea:hover {
-  background: rgb(200, 240, 200);
+  background: var(--color-hover);
   transform: translateY(-1px);
 }
 
@@ -1477,7 +1532,7 @@ h2 {
 }
 
 #contact_form button[type="submit"] {
-  background: linear-gradient(135deg, #4ecdc4 0%, #44a8a0 100%);
+  background: linear-gradient(135deg, #52b788 0%, #2d6a4f 100%);
   color: white;
   border: none;
   border-radius: 25px;
@@ -1485,13 +1540,13 @@ h2 {
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(45, 106, 79, 0.2);
   align-self: center;
 }
 
 #contact_form button[type="submit"]:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px rgba(45, 106, 79, 0.3);
 }
 
 #contact_form .errorlist {
@@ -1510,361 +1565,439 @@ h2 {
   margin-top: 0.25rem;
 }
 
-/* Tabs */
-.page-wrap {
-  /* Styles si nécessaires */
-}
-
-.tabs {
-  /* Styles si nécessaires */
-}
-
-.tab {
-  /* Styles si nécessaires */
-}
-
-.content {
-  /* Styles si nécessaires */
-}
-
-.class_espace {
-  /* Styles si nécessaires */
-}
-
-.espace_bas {
-  /* Styles si nécessaires */
-}
-
-/* Stats graphiques */
-.stats-grid {
-  /* Styles si nécessaires */
-}
-
-.stat-card {
-  /* Styles si nécessaires */
-}
-
-.stat-card.total {
-  /* Styles si nécessaires */
-}
-
-.stat-day {
-  /* Styles si nécessaires */
-}
-
-.stat-info {
-  /* Styles si nécessaires */
-}
-
-.stat-item {
-  /* Styles si nécessaires */
-}
-
-.label {
-  /* Styles si nécessaires */
-}
-
-.graphique-container {
-  /* Styles si nécessaires */
-}
-
-.graph-img {
-  /* Styles si nécessaires */
-}
-
-.no-data {
-  /* Styles si nécessaires */
-}
-
-.no-trajets-message {
-  /* Styles si nécessaires */
-}
-
-/* Véhicules */
-.vehicle-container,
-.propose-trip-container {
-  /* Styles si nécessaires */
-}
-
-.vehicle-title {
-  /* Styles si nécessaires */
-}
-
-.vehicle-form,
-.propose-trip-form {
-  /* Styles si nécessaires */
-}
-
-.form-section {
-  /* Styles si nécessaires */
-}
-
-.section-subtitle,
-.section-title {
-  /* Styles si nécessaires */
-}
-
-.form-group {
-  /* Styles si nécessaires */
-}
-
-.form-group.full-width {
-  /* Styles si nécessaires */
-}
-
-.form-actions {
-  /* Styles si nécessaires */
-}
-
-.btn-add-vehicle,
-.btn-propose-trip,
-.btn-save-prefs,
-.btn-submit {
-  /* Styles si nécessaires */
-}
-
-.no-preference-message,
-.no-vehicle-message {
-  /* Styles si nécessaires */
-}
-
-/* Préférences */
-.preferences-container {
-  /* Styles si nécessaires */
-}
-
-.preferences-title {
-  /* Styles si nécessaires */
-}
-
-.preferences-title.no-pref {
-  /* Styles si nécessaires */
-}
-
-.current-preferences {
-  /* Styles si nécessaires */
-}
-
-.pref-card {
-  /* Styles si nécessaires */
-}
-
-.pref-card.full-width {
-  /* Styles si nécessaires */
-}
-
-.pref-icon,
-.pref-label,
-.pref-value {
-  /* Styles si nécessaires */
-}
-
-.preferences-form {
-  /* Styles si nécessaires */
-}
-
-/* Véhicules possédés */
-.vehicles-owned-section {
-  /* Styles si nécessaires */
-}
-
-.vehicles-list {
-  /* Styles si nécessaires */
-}
-
-.vehicle-card {
-  /* Styles si nécessaires */
-}
-
-.vehicle-header {
-  /* Styles si nécessaires */
-}
-
-.vehicle-name {
-  /* Styles si nécessaires */
-}
-
-.vehicle-details {
-  /* Styles si nécessaires */
-}
-
-.detail-item {
-  /* Styles si nécessaires */
-}
-
 /* Historique */
 .history-section {
-  /* Styles si nécessaires */
+  margin-bottom: 2rem;
+}
+
+.history-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  padding: 0.75rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
 }
 
 .history-title.completed {
-  /* Styles si nécessaires */
+  background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+  color: #155724;
 }
 
 .history-title.cancelled {
-  /* Styles si nécessaires */
+  background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+  color: #721c24;
+}
+
+.history-title .icon {
+  font-size: 1.15rem;
 }
 
 .history-list {
-  /* Styles si nécessaires */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 1rem;
+  scroll-behavior: smooth;
 }
 
 .history-card {
-  /* Styles si nécessaires */
+  list-style: none;
+  background: white;
+  border-radius: 12px;
+  box-shadow: var(--box-shadow);
+  transition: all 0.3s ease;
+  overflow: hidden;
+  flex: 0 0 300px;
+  min-width: 300px;
+}
+
+.history-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(45, 106, 79, 0.2);
 }
 
 .history-content {
-  /* Styles si nécessaires */
+  padding: 1rem;
 }
 
 .history-header {
-  /* Styles si nécessaires */
-}
-
-.driver-info {
-  /* Styles si nécessaires */
-}
-
-.driver-photo {
-  /* Styles si nécessaires */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--color-light);
 }
 
 .driver-name {
-  /* Styles si nécessaires */
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--color-text);
+}
+
+.driver-name em {
+  color: #999;
+  font-style: italic;
 }
 
 .history-badge {
-  /* Styles si nécessaires */
+  padding: 0.3rem 0.7rem;
+  border-radius: 15px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.history-badge.terminé {
+  background: #d4edda;
+  color: #155724;
+}
+
+.history-badge.annulé {
+  background: #f8d7da;
+  color: #721c24;
 }
 
 .history-route {
-  /* Styles si nécessaires */
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: var(--color-background);
+  border-radius: 10px;
+  margin-bottom: 0.75rem;
 }
 
 .route-point {
-  /* Styles si nécessaires */
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex: 1;
+  font-size: 0.9rem;
+}
+
+.route-point .icon {
+  font-size: 1rem;
 }
 
 .history-details {
-  /* Styles si nécessaires */
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.detail-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.6rem;
+  background: white;
+  border: 2px solid var(--color-light);
+  border-radius: 6px;
+  flex: 1;
+  font-size: 0.85rem;
+}
+
+.detail-item .icon {
+  font-size: 0.95rem;
 }
 
 .history-car {
-  /* Styles si nécessaires */
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem;
+  background: var(--color-background);
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+
+.history-car .icon {
+  font-size: 1rem;
+}
+
+.deleted-trip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1.5rem;
+  background: #fff3cd;
+  border-radius: 10px;
+  color: #856404;
+  font-style: italic;
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
 }
 
 .history-footer {
-  /* Styles si nécessaires */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.75rem;
+  border-top: 2px solid var(--color-light);
 }
 
-.price-section,
 .price-info {
-  /* Styles si nécessaires */
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
 }
 
-.price-label,
-.price-value,
+.price-label {
+  font-size: 0.75rem;
+  color: #557a60;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
 .price {
-  /* Styles si nécessaires */
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-primary);
 }
 
-.seats-section,
 .seats-info {
-  /* Styles si nécessaires */
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  background: var(--color-hover);
+  border-radius: 15px;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.seats-info .icon {
+  font-size: 0.95rem;
+}
+
+/* Réservation */
+.reservation-radio {
+  position: absolute;
+  opacity: 0;
+}
+
+.reservation-card {
+  list-style: none;
+  position: relative;
+}
+
+.reservation-content {
+  display: block;
+  background: white;
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: var(--box-shadow);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 3px solid transparent;
+  position: relative;
+}
+
+.reservation-content:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(45, 106, 79, 0.2);
+  background-color: var(--color-hover);
+}
+
+.reservation-radio:checked + .reservation-content {
+  border-color: var(--color-secondary);
+  background: linear-gradient(135deg, #f4f9f1 0%, #ffffff 100%);
+}
+
+.reservation-radio:checked + .reservation-content .selection-indicator {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.reservation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--color-light);
+}
+
+.driver-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.driver-photo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--color-light);
+}
+
+.driver-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.driver-label {
+  font-size: 0.75rem;
+  color: #557a60;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-badge {
+  padding: 0.3rem 0.7rem;
+  border-radius: 15px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.status-badge.disponible {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status-badge.complet {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.status-badge.annulé {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.reservation-route {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: var(--color-background);
+  border-radius: 10px;
+  margin-bottom: 0.75rem;
+}
+
+.reservation-details {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.reservation-car {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.6rem;
+  background: var(--color-background);
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+
+.reservation-car .icon {
+  font-size: 1rem;
+}
+
+.reservation-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding-top: 0.75rem;
+  border-top: 2px solid var(--color-light);
+}
+
+.price-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.price-value {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.seats-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-end;
 }
 
 .seats-available,
 .seats-booked {
-  /* Styles si nécessaires */
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  font-weight: 600;
 }
 
-.full {
-  /* Styles si nécessaires */
+.seats-available {
+  background: #d4edda;
+  color: #155724;
 }
 
-.deleted-trip {
-  /* Styles si nécessaires */
+.seats-available .full {
+  color: #856404;
 }
 
-/* Réservations */
-.reservation-card {
-  /* Styles si nécessaires */
+.seats-booked {
+  background: var(--color-hover);
+  color: var(--color-primary);
 }
 
-.reservation-radio {
-  /* Styles si nécessaires */
-}
-
-.reservation-content {
-  /* Styles si nécessaires */
-}
-
-.reservation-header {
-  /* Styles si nécessaires */
-}
-
-.driver-details {
-  /* Styles si nécessaires */
-}
-
-.driver-label {
-  /* Styles si nécessaires */
-}
-
-.status-badge {
-  /* Styles si nécessaires */
-}
-
-.reservation-route {
-  /* Styles si nécessaires */
-}
-
-.reservation-details {
-  /* Styles si nécessaires */
-}
-
-.reservation-car {
-  /* Styles si nécessaires */
-}
-
-.reservation-footer {
-  /* Styles si nécessaires */
-}
-
-/* Profil */
-.profile-container {
-  /* Styles si nécessaires */
-}
-
-.profile-photo-section {
-  /* Styles si nécessaires */
-}
-
-.photo-wrapper {
-  /* Styles si nécessaires */
-}
-
-.profile-photo {
-  /* Styles si nécessaires */
-}
-
-.photo-upload-btn {
-  /* Styles si nécessaires */
-}
-
-.profile-form {
-  /* Styles si nécessaires */
-}
-
-.error-message {
-  /* Styles si nécessaires */
-}
-
-.account-actions {
-  /* Styles si nécessaires */
+.seats-available .icon,
+.seats-booked .icon {
+  font-size: 0.9rem;
 }
 
 /* Media Queries */
+@media (max-width: 768px) {
+  .reservation-route {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .route-arrow {
+    transform: rotate(90deg);
+  }
+
+  .reservation-details {
+    flex-direction: column;
+  }
+
+  .reservation-footer {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .seats-section {
+    align-items: flex-start;
+  }
+
+  .history-card {
+    flex: 0 0 280px;
+    min-width: 280px;
+  }
+}
+
 @media (max-width: 768px) {
   .trajet-card {
     padding: 0.75rem;

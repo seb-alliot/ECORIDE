@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(wc -l /c/Users/allio/ECORIDE/ECORIDE/main/static/css/*.css)"
+    ]
+  }
+}
