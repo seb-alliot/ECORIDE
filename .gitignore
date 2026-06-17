@@ -55,6 +55,9 @@ script credit
 
 main/media/user/
 
+# Résultat de collectstatic (régénérable, ne doit pas être versionné)
+staticfiles/
+
 # ----------------------------------------------------------------------
 # 4. EXCLUSIONS SPÉCIFIQUES À L'APPLICATION
 # ----------------------------------------------------------------------

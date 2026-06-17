@@ -1,0 +1,4 @@
+# Exclut le CSS/JS tiers de Django admin et les fichiers générés par
+# collectstatic des statistiques de langage GitHub (Linguist).
+staticfiles/** linguist-generated=true
+main/static/admin/** linguist-vendored=true
