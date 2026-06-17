@@ -1,0 +1,126 @@
+/* ===========================================================================
+   EcoRide — Espace modérateur / admin
+   Le système d'onglets vient de components.css. Ici : modération email,
+   statistiques, graphique.
+   =========================================================================== */
+
+/* Conteneurs legacy de la page modérateur */
+.generix1 { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); margin-bottom: var(--space-4); }
+.generix2 { margin-bottom: var(--space-4); }
+.generix3 { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-3); margin-top: var(--space-4); }
+.class_espace { padding: var(--space-3); }
+.espace_bas { margin-bottom: var(--space-5); }
+
+#nbr_mail {
+  text-align: center;
+  font-weight: var(--font-medium);
+  color: var(--color-text-muted);
+}
+
+/* Filtres email (selects) */
+#email_filter_form,
+#email_select_form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+#select_email { gap: var(--space-4); }
+
+/* Formulaire de modération */
+#moderation_form,
+#contact_form {
+  max-width: 640px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Boutons d'action modérateur */
+#bouton_confirmer,
+#bout_reponse_modo,
+#bouton_moderateur,
+#ajouter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-5);
+  font-weight: var(--font-semibold);
+  color: var(--color-text-invert);
+  background: var(--gradient-action);
+  border: none;
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+#bouton_confirmer:hover,
+#bout_reponse_modo:hover,
+#bouton_moderateur:hover,
+#ajouter:hover { transform: translateY(-1px); box-shadow: var(--shadow-lg); }
+
+#refuser {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-5);
+  font-weight: var(--font-semibold);
+  color: #fff;
+  background: var(--color-danger);
+  border: none;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+}
+#refuser:hover { filter: brightness(1.08); }
+
+/* ===== Statistiques (onglet admin) ===== */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+.stat-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--space-4);
+  box-shadow: var(--shadow-sm);
+}
+.stat-card.total {
+  background: var(--gradient-action);
+  color: var(--color-text-invert);
+  border: none;
+}
+.stat-card.total .label,
+.stat-card.total .stat-day { color: rgba(255, 255, 255, .85); }
+.stat-card.total .value { color: #fff; }
+
+.stat-day { font-weight: var(--font-semibold); color: var(--color-primary); margin-bottom: var(--space-3); }
+.stat-info { display: flex; flex-direction: column; gap: var(--space-2); }
+.stat-item { display: flex; align-items: center; justify-content: space-between; gap: var(--space-2); }
+.stat-item .label { font-size: var(--text-sm); color: var(--color-text-muted); }
+.stat-item .value { font-weight: var(--font-bold); color: var(--color-primary); }
+
+/* ===== Graphique ===== */
+.graphique-container {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-sm);
+  text-align: center;
+}
+#graphique-title { color: var(--color-primary); margin-bottom: var(--space-4); }
+.graph-img { margin-inline: auto; border-radius: var(--radius); }
+.no-data { color: var(--color-text-muted); font-style: italic; padding: var(--space-6); }

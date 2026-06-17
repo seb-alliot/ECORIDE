@@ -1,0 +1,73 @@
+/* ===========================================================================
+   EcoRide — Page d'accueil (spécifique)
+   Hero + présentation. Le formulaire de recherche, les résultats et les cartes
+   trajet sont des composants partagés (components.css), car ils apparaissent
+   aussi dans Mon Compte (onglet passager).
+   =========================================================================== */
+
+/* --- Hero --- */
+.hero {
+  position: relative;
+  min-height: clamp(220px, 38vw, 460px);
+  border-radius: var(--radius-lg);
+  margin-block: var(--space-6);
+  background: var(--gradient-hero),
+              url("../photo/route_corse1.avif") center / cover no-repeat;
+  box-shadow: var(--shadow);
+  display: grid;
+  place-items: center;
+  text-align: center;
+  color: var(--color-text-invert);
+  padding: var(--space-6);
+}
+.hero__title {
+  font-size: var(--text-3xl);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, .35);
+}
+.hero__subtitle {
+  margin-top: var(--space-3);
+  font-size: var(--text-lg);
+  font-weight: var(--font-medium);
+  max-width: 40ch;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, .35);
+}
+
+/* --- Présentation (alternance image / texte) --- */
+.presentation {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+.presentation-flex,
+.presentation-flex-reverse {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-sm);
+}
+.presentation-flex-reverse { flex-direction: row-reverse; }
+
+.presentation-flex img,
+.presentation-flex-reverse img {
+  flex: 0 0 clamp(140px, 35%, 360px);
+  width: clamp(140px, 35%, 360px);
+  aspect-ratio: var(--card-img-ratio);
+  object-fit: cover;
+  border-radius: var(--radius);
+}
+.presentation-flex p,
+.presentation-flex-reverse p {
+  font-size: var(--text-lg);
+  color: var(--color-text);
+}
+
+@media (max-width: 640px) {
+  .presentation-flex,
+  .presentation-flex-reverse { flex-direction: column; text-align: center; }
+  .presentation-flex img,
+  .presentation-flex-reverse img { width: 100%; flex-basis: auto; }
+}

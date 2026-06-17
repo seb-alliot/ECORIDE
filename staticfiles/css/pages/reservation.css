@@ -1,0 +1,149 @@
+/* ===========================================================================
+   EcoRide — Page Réservation (carte compacte) + page Avis satisfaction
+   =========================================================================== */
+
+/* ===== Carte de réservation compacte ===== */
+.reservation-compact {
+  max-width: 560px;
+  margin: var(--space-8) auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  box-shadow: var(--shadow);
+}
+
+.compact-header { display: flex; align-items: center; gap: var(--space-4); }
+.compact-header img {
+  width: var(--avatar-lg);
+  height: var(--avatar-lg);
+  max-width: 96px; max-height: 96px;
+  object-fit: cover;
+  border-radius: var(--radius-circle);
+  border: 3px solid var(--color-surface-3);
+}
+.header-info { display: flex; flex-direction: column; gap: var(--space-1); }
+.driver-tag {
+  align-self: flex-start;
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: var(--color-text-muted);
+}
+.header-info h2 { color: var(--color-primary); }
+.rating-compact { color: var(--color-text-muted); font-size: var(--text-sm); }
+
+.compact-route {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  padding: var(--space-3);
+  background: var(--color-surface-2);
+  border-radius: var(--radius);
+}
+.compact-route .route-item { display: flex; align-items: center; gap: var(--space-2); font-weight: var(--font-medium); }
+.compact-route .arrow { color: var(--color-accent); font-weight: var(--font-bold); }
+
+.compact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: var(--space-3);
+}
+.info-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-3);
+  background: var(--color-surface-2);
+  border-radius: var(--radius);
+  text-align: center;
+}
+.info-box .value { font-weight: var(--font-semibold); color: var(--color-primary); }
+
+.compact-car {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  font-weight: var(--font-medium);
+}
+
+.compact-prefs { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.pref-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-1) var(--space-3);
+  background: var(--color-surface-3);
+  color: var(--color-primary);
+  border-radius: var(--radius-pill);
+  font-size: var(--text-sm);
+}
+.pref-tag.full { flex: 1 1 100%; }
+
+.compact-reviews { background: var(--color-surface-2); border-radius: var(--radius); padding: var(--space-3); }
+.compact-reviews summary { cursor: pointer; font-weight: var(--font-medium); color: var(--color-primary); }
+.reviews-content { margin-top: var(--space-3); display: flex; flex-direction: column; gap: var(--space-2); }
+.reviews-content p { font-style: italic; color: var(--color-text-muted); }
+
+.compact-booking { padding-top: var(--space-4); border-top: 1px solid var(--color-border); }
+.booking-flex { display: flex; align-items: center; gap: var(--space-3); }
+.booking-flex select, .booking-flex input { flex: 1 1 auto; }
+
+#pop_up_confirmation,
+.btn-auth-compact {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-5);
+  font-weight: var(--font-semibold);
+  color: var(--color-text-invert);
+  background: var(--gradient-action);
+  border: none;
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+#pop_up_confirmation:hover,
+.btn-auth-compact:hover { transform: translateY(-1px); box-shadow: var(--shadow-lg); color: var(--color-text-invert); }
+.btn-auth-compact { width: 100%; }
+
+.compact-footer { text-align: center; font-size: var(--text-sm); color: var(--color-text-muted); }
+
+/* ===== Page Avis satisfaction ===== */
+#info_trajet { text-align: center; font-weight: var(--font-medium); color: var(--color-primary); }
+
+#je_donne_mon_avis {
+  max-width: 520px;
+  margin: var(--space-6) auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-sm);
+}
+.form-table { display: flex; flex-direction: column; gap: var(--space-4); }
+.form-table .form-row { display: flex; flex-direction: column; gap: var(--space-2); }
+#bouton_note {
+  align-self: center;
+  padding: var(--space-3) var(--space-6);
+  font-weight: var(--font-semibold);
+  color: var(--color-text-invert);
+  background: var(--gradient-action);
+  border: none;
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+}
+#bouton_note:hover { transform: translateY(-1px); box-shadow: var(--shadow-lg); }
