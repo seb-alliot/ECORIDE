@@ -1,25 +1,25 @@
 {% load static %}
 
 <div class="profile-container">
-    <!-- Section photo de profil -->
-    <div class="profile-photo-section">
-        <div class="photo-wrapper">
-            {% if adresse_user.photo %}
-                <img src="{{ adresse_user.photo.url }}" alt="Photo de profil" class="profile-photo">
-            {% else %}
-                <img src="{{ photo_default_url }}" alt="Photo par défaut" class="profile-photo">
-            {% endif %}
-            <label for="{{ adresse_form.photo.id_for_label }}" class="photo-upload-btn">
-                <span class="icon">📷</span>
-                Changer la photo
-            </label>
-            {{ adresse_form.photo }}
-        </div>
-    </div>
-
     <!-- Formulaire d'adresse -->
     <form id="adresse_form" action="{{ queryString|default:"" }}" method="post" enctype="multipart/form-data" class="profile-form">
         {% csrf_token %}
+
+        <!-- Section photo de profil (DOIT être dans le form pour être envoyée) -->
+        <div class="profile-photo-section">
+            <div class="photo-wrapper">
+                {% if adresse_user.photo %}
+                    <img src="{{ adresse_user.photo.url }}" alt="Photo de profil" class="profile-photo">
+                {% else %}
+                    <img src="{{ photo_default_url }}" alt="Photo par défaut" class="profile-photo">
+                {% endif %}
+                <label for="{{ adresse_form.photo.id_for_label }}" class="photo-upload-btn">
+                    <span class="icon">📷</span>
+                    Changer la photo
+                </label>
+                {{ adresse_form.photo }}
+            </div>
+        </div>
 
         <div class="form-section">
             <h3 class="section-title">

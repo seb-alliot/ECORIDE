@@ -99,6 +99,7 @@ select, textarea {
   border: 1px solid var(--color-border-strong);
   border-radius: var(--radius);
   transition: border-color var(--transition), box-shadow var(--transition);
+  text-align: center;
 }
 input:focus, select:focus, textarea:focus {
   border-color: var(--color-accent-soft);
@@ -106,6 +107,11 @@ input:focus, select:focus, textarea:focus {
   outline: none;
 }
 textarea { resize: vertical; min-height: 6rem; }
+
+/* Masque les flèches spinner des inputs number (ex : téléphone) */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
 
 .error-message {
   color: var(--color-danger);
@@ -143,13 +149,16 @@ textarea { resize: vertical; min-height: 6rem; }
 .page-wrap { width: 100%; }
 
 .tabs {
-  position: relative;
   display: flex;
   flex-wrap: wrap;
-  gap: var(--space-2);
-  min-height: clamp(520px, 80vh, 760px);
-  padding-top: var(--space-2);
+  align-items: flex-start;
+  gap: var(--space-1);
 }
+
+/* .tab fond dans le flux : ses enfants (radio, label, content) deviennent
+   des items flex de .tabs, ce qui permet labels en ligne + contenu plein
+   largeur dessous, avec une hauteur libre (la page s'allonge). */
+.tab { display: contents; }
 
 .tab > input[type="radio"] {
   position: absolute;
@@ -158,6 +167,7 @@ textarea { resize: vertical; min-height: 6rem; }
 }
 
 .tab > label {
+  order: 1;                       /* tous les labels d'abord (rangée d'onglets) */
   display: inline-block;
   padding: var(--space-3) var(--space-5);
   font-weight: var(--font-semibold);
@@ -169,8 +179,6 @@ textarea { resize: vertical; min-height: 6rem; }
   border-radius: var(--radius) var(--radius) 0 0;
   cursor: pointer;
   transition: background var(--transition), color var(--transition);
-  position: relative;
-  z-index: 1;
 }
 .tab > label:hover { background: var(--color-surface-2); color: var(--color-primary); }
 
@@ -178,35 +186,25 @@ textarea { resize: vertical; min-height: 6rem; }
   background: var(--color-surface);
   color: var(--color-primary);
   border-color: var(--color-border-strong);
-  z-index: 3;
 }
 .tab > input[type="radio"]:focus-visible ~ label { box-shadow: var(--shadow-focus); }
 
 .content {
-  position: absolute;
-  inset: 56px 0 0 0;  /* sous la rangée d'onglets */
+  order: 2;                       /* le contenu passe sous la rangée de labels */
+  flex: 1 0 100%;
+  display: none;                  /* masqué tant que l'onglet n'est pas actif */
+  min-height: clamp(260px, 40vh, 460px);
+  margin-top: -1px;               /* fusionne avec la bordure du label actif */
   background: var(--color-surface);
   border: 1px solid var(--color-border-strong);
   border-radius: 0 var(--radius-lg) var(--radius-lg) var(--radius-lg);
   box-shadow: var(--shadow);
   padding: var(--space-6);
-  overflow-y: auto;
-  opacity: 0;
-  visibility: hidden;
-  z-index: 0;
-  transition: opacity var(--transition);
 }
-.tab > input[type="radio"]:checked ~ label ~ .content {
-  opacity: 1;
-  visibility: visible;
-  z-index: 2;
-}
+.tab > input[type="radio"]:checked ~ label ~ .content { display: block; }
 
 @media (max-width: 640px) {
-  .tab { flex: 1 1 auto; }
-  .tab > label { width: 100%; text-align: center; border-radius: var(--radius); }
-  .content { position: static; inset: auto; opacity: 1; visibility: visible; margin-top: var(--space-3); }
-  .tab > input[type="radio"]:not(:checked) ~ .content { display: none; }
+  .tab > label { flex: 1 1 auto; text-align: center; border-radius: var(--radius); }
 }
 
 /* --- Recherche de trajet (accueil + onglet passager Mon Compte) --- */

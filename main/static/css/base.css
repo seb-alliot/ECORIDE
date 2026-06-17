@@ -36,7 +36,6 @@ strong, b { font-weight: var(--font-semibold); }
 /* Compat : utilitaires legacy encore présents dans des partials non refondus.
    À retirer quand tous les templates auront des classes sémantiques. */
 .class_flex { display: flex; flex-wrap: wrap; gap: var(--space-3); }
-.class_justify_center { justify-content: center; }
 .class_aligne_items_center { align-items: center; }
 .class_column { display: flex; flex-direction: column; gap: var(--space-3); }
 .display_grid { display: grid; gap: var(--space-4); }

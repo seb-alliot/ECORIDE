@@ -23,12 +23,17 @@ def AjoutTonAdresse(request, adresse_user=None, user=None):
                 messages.success(request, "Vos informations ont été mises à jour.")
                 return redirect(f"{reverse('MonCompte')}?{request.META['QUERY_STRING']}")
             else:
-                if "email" in adresse_form.errors:
-                    messages.error(request, "Cette adresse email est déjà prise.")
-                    return redirect(f"{reverse('MonCompte')}?{request.META['QUERY_STRING']}")
-                else:
+                for erreur in adresse_form.non_field_errors():
+                    messages.error(request, erreur)
+                for champ, erreurs in adresse_form.errors.items():
+                    if champ == "__all__":
+                        continue
+                    libelle = adresse_form.fields[champ].label or champ
+                    for erreur in erreurs:
+                        messages.error(request, f"{libelle} : {erreur}")
+                if not adresse_form.errors:
                     messages.error(request, "Tous les champs sont obligatoires.")
-                    return redirect(f"{reverse('MonCompte')}?{request.META['QUERY_STRING']}")
+                return redirect(f"{reverse('MonCompte')}?{request.META['QUERY_STRING']}")
         else:
             adresse_form = AdresseForm(instance=adresse_user, user=user)
 
