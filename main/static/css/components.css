@@ -135,12 +135,12 @@ input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
   font-size: var(--text-sm);
   font-weight: var(--font-medium);
 }
-.messages .success { background: var(--color-success-bg); color: var(--color-success); }
-.messages .error,
-.messages .danger  { background: var(--color-danger-bg);  color: var(--color-danger); }
-.messages .warning { background: var(--color-warning-bg); color: var(--color-warning); }
+.messages .success { background: var(--color-success-bg); color: var(--color-success); margin: 0.5rem ; }
+.messages .error { margin: 0.5rem ;}
+.messages .danger  { background: var(--color-danger-bg);  color: var(--color-danger); margin: 0.5rem ;}
+.messages .warning { background: var(--color-warning-bg); color: var(--color-warning); margin: 0.5rem ;}
 .messages .info,
-.messages .debug   { background: var(--color-info-bg);    color: var(--color-info); }
+.messages .debug   { background: var(--color-info-bg);    color: var(--color-info); margin: 0.5rem ; }
 
 /* --- Système d'onglets (MonCompte, Modérateur) ---
    Chaque .tab contient un radio caché + un label (bouton) + un .content en
@@ -269,6 +269,7 @@ input[type="number"] { -moz-appearance: textfield; appearance: textfield; }
   cursor: pointer;
   box-shadow: var(--shadow-sm);
   transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+  margin: var(--space-2);
 }
 .trajet-card:hover {
   border-color: var(--color-accent-soft);

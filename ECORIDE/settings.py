@@ -30,7 +30,7 @@ SECRET_KEY = env("DJANGO_SECRET_KEY", default="django-insecure-#&")
 # settings.py
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool("DJANGO_DEBUG", default=True)
 
 ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
@@ -60,7 +60,7 @@ MIDDLEWARE = [
 ]
 
 LOGIN_URL  = 'login/connection1/'
-SITE_URL = f"http://localhost:8000"
+SITE_URL = "http://localhost:8000"
 ROOT_URLCONF = "main.urls"
 TEMPLATES = [
     {

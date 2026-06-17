@@ -17,8 +17,7 @@ def RechercheTrajet(request):
         ville_depart = recherche_form.cleaned_data["ville_depart"]
         ville_arrivee = recherche_form.cleaned_data["ville_arrivee"]
         date = recherche_form.cleaned_data["date"]
-        pseudo = recherche_form.cleaned_data["pseudo"]
-        if pseudo:
+        if pseudo := recherche_form.cleaned_data["pseudo"]:
             trajet4 = trajet4.filter(chauffeur__username__icontains=pseudo)
 
         trajet4 = TrajetProposer.objects.filter(

@@ -12,7 +12,7 @@
   border-radius: var(--radius-lg);
   margin-block: var(--space-6);
   background: var(--gradient-hero),
-              url("../photo/route_corse1.avif") center / cover no-repeat;
+              url("../../photo/route_corse.avif") center / cover no-repeat;
   box-shadow: var(--shadow);
   display: grid;
   place-items: center;

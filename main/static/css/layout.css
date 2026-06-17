@@ -22,7 +22,7 @@
 }
 
 .site-header__logo img {
-  height: clamp(44px, 7vw, 72px);
+  height: clamp(44px, 30vw, 100px);
   width: auto;
 }
 

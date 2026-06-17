@@ -4,7 +4,6 @@ from ....models import CreditUser, AdresseUser
 
 
 def initialisation_template(request):
-    photo_default_url = settings.MEDIA_URL + "photo_default/photo_default.jpg"
     user = request.user
     role = None
     preference = None
@@ -32,9 +31,8 @@ def initialisation_template(request):
         except CreditUser.DoesNotExist:
             credit = None
 
-    context = {
-        #Photo par defaut
-        'photo_default_url': photo_default_url,
+    return {
+        'photo_default_url': f"{settings.MEDIA_URL}photo_default/photo_default.jpg",
 
         #utilisateur
         "credit_superuser": credit_superuser,
@@ -46,4 +44,3 @@ def initialisation_template(request):
         "adresse_user": adresse_user,
         "credit": credit,
     }
-    return context
