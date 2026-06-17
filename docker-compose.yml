@@ -1,0 +1,22 @@
+services:
+  web:
+    build: .
+    container_name: django_app
+    env_file:
+      - .env
+    command: gunicorn --bind 0.0.0.0:8000 --workers 3 ECORIDE.wsgi:application
+    volumes:
+      - static_volume:/app/staticfiles
+      - media_volume:/app/media
+      - ~/ECORIDE/logs:/app/logs
+    ports:
+      # Exposé uniquement en local : le nginx de l'hôte proxy vers ce port.
+      - "127.0.0.1:8010:8000"
+    extra_hosts:
+      # Permet au conteneur d'atteindre Postgres/Mongo installés sur l'hôte VPS.
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+
+volumes:
+  static_volume:
+  media_volume:

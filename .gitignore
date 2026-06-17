@@ -46,8 +46,6 @@ cert.key
 
 manipe_git.txt
 securite.md
-docker-compose.yml
-Dockerfile
 run_docker.sh
 
 fond ecran
