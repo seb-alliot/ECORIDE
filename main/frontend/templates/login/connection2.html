@@ -1,10 +1,15 @@
-{% extends 'index.html' %}
+{% extends 'base.html' %}
 {% load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/pages/auth.css' %}">
+{% endblock style %}
 
 {% block principal %}
 <div id="etape-2-connection">
     <form method="POST" id="login2">
         {% csrf_token %}
+        <h1 class="auth-title">Mot de passe</h1>
         <label for="id_Password" class="label-hidden">Mot de passe</label>
         {{ form.password }}
         {{ form.token_connection}}
@@ -16,8 +21,7 @@
             </div>
         {% endif %}
         <button type="submit">Se connecter</button>
+        <a id="mot_de_passe_oublie" href="{% url 'password_reset' %}">Mot de passe oublié ?</a>
     </form>
-
-    <a id="mot_de_passe_oublie" href="{% url 'password_reset' %}">Mot de passe oublier ?</a>
 </div>
 {% endblock principal %}

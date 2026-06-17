@@ -1,9 +1,12 @@
-{% extends "index.html" %}
+{% extends "base.html" %}
 {% load static %}
 
-{% block principal %}
-    <link rel="stylesheet" href="{% static 'css/faq.css' %}">
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/pages/legal.css' %}">
+{% endblock style %}
 
+{% block principal %}
+<div class="legal">
     <h1>Mentions légales – EcoRide</h1>
 
     <div class="faq-item">
@@ -46,5 +49,5 @@
             Le site est fourni à titre informatif et pédagogique. Il ne saurait engager la responsabilité de son auteur en cas d’erreurs, d’inexactitudes ou d’utilisation des données présentes.
         </p>
     </div>
-
+</div>
 {% endblock %}

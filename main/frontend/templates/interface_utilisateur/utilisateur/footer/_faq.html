@@ -1,10 +1,14 @@
-{% extends "index.html" %}
+{% extends "base.html" %}
 {% load static %}
 
 
 
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/pages/legal.css' %}">
+{% endblock style %}
+
 {% block principal %}
-<link rel="stylesheet" href="{% static 'css/faq.css' %}">
+<div class="legal">
     <h1>FAQ ECORIDE - Projet Covoiturage</h1>
 
         <div class="faq-item">
@@ -56,5 +60,5 @@
             <h3>Q10 : Quelles sont les règles de suppression des utilisateurs ?</h3>
             <p>R : Lorsqu’un utilisateur est supprimé, toutes les données le concernant sont automatiquement annulées, remboursées et définitivement supprimées.</p>
         </div>
-
+</div>
 {% endblock principal %}

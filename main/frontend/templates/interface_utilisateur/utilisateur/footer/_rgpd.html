@@ -1,9 +1,12 @@
-{% extends "index.html" %}
+{% extends "base.html" %}
 {% load static %}
 
-{% block principal %}
-    <link rel="stylesheet" href="{% static 'css/faq.css' %}">
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/pages/legal.css' %}">
+{% endblock style %}
 
+{% block principal %}
+<div class="legal">
     <h1>Politique de confidentialité – EcoRide</h1>
 
     <div class="faq-item">
@@ -21,7 +24,6 @@
         <p>
             Ces informations sont utilisées uniquement pour répondre à votre demande. Elles ne sont ni stockées dans une base de données du site, ni partagées avec des tiers.
         </p>
-    </div>
     </div>
 
     <div class="faq-item">
@@ -77,5 +79,5 @@
             Cette politique de confidentialité est susceptible d’être modifiée à tout moment. Nous vous invitons à la consulter régulièrement.
         </p>
     </div>
-
+</div>
 {% endblock %}

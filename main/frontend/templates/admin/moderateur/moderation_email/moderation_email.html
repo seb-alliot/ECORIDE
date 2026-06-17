@@ -1,75 +1,66 @@
-{% extends "index.html" %}
+{% extends "base.html" %}
 {% load static %}
 
 {% block style %}
-    {% include "css_html/_css_moderateur.html" %}
+    <link rel="stylesheet" href="{% static 'css/pages/moderateur.css' %}">
 {% endblock style %}
 
 {% block principal %}
 <div id="menu-tab">
     <div class="page-wrap">
-    <div class="tabs position_relative">
+    <div class="tabs">
+
+        <!-- Onglet 1 : modération des emails -->
         <div class="tab">
-            <input
-            id="tab-1"
-            checked="checked"
-            name="tab-group-1"
-            type="radio"/>
-            <label for="tab-1">
-                Moderation email
-            </label>
+            <input id="tab-1" name="tab-group-1" type="radio" checked="checked"/>
+            <label for="tab-1">Modération email</label>
 
-            <div class="content position_relative">
-            <div class="generix2 class_espace ">
-                <h1 class="vehicle-title">
-                    <span class="icon">
+            <div class="content">
+                <div class="generix2 class_espace">
+                    <h1 class="vehicle-title">
+                        <span class="icon">📧</span>
                         Choisissez le style d'email à modérer
-                </h1>
-            </div>
+                    </h1>
+                </div>
 
-            <div class="generix2 espace_bas">
-                <p id="nbr_mail">Vous avez {{ emails|length }} email{{ emails|pluralize }} à modérer.</p>
-            </div>
+                <div class="generix2 espace_bas">
+                    <p id="nbr_mail">Vous avez {{ emails|length }} email{{ emails|pluralize }} à modérer.</p>
+                </div>
 
                 <div id="select_email" class="class_column">
                     <div id="enable_select" class="generix3">
-                    <!-- Formulaire pour filtrer les emails -->
-                    {% include "admin/moderateur/moderation_email/structure_moderation/_selection_ton_email_type.html" %}
-                    {% if request.GET.email_type %}
-                            <!-- Selecte pour sélectionner un email, avec conservation du filtre -->
+                        {% include "admin/moderateur/moderation_email/structure_moderation/_selection_ton_email_type.html" %}
+                        {% if request.GET.email_type %}
                             {% include "admin/moderateur/moderation_email/structure_moderation/_selection_le_style_a_moderer.html" %}
-                    {% endif %}
+                        {% endif %}
                     </div>
                     <div>
-                    <!-- Affichage de l'email sélectionné -->
-                    {% if selected_email %}
-                        {% if request.GET.email_type == "Avis negatif" %}
-                            {% include "admin/moderateur/different_bouton/_avis_negatif.html" %}
-                        {% elif request.GET.email_type == "Avis positif" %}
-                            {% include "admin/moderateur/different_bouton/_avis_positif.html" %}
-                        {% elif request.GET.email_type == "Prise de contact" %}
-                            {% include "admin/moderateur/different_bouton/_reponse_modo.html" %}
+                        {% if selected_email %}
+                            {% if request.GET.email_type == "Avis negatif" %}
+                                {% include "admin/moderateur/different_bouton/_avis_negatif.html" %}
+                            {% elif request.GET.email_type == "Avis positif" %}
+                                {% include "admin/moderateur/different_bouton/_avis_positif.html" %}
+                            {% elif request.GET.email_type == "Prise de contact" %}
+                                {% include "admin/moderateur/different_bouton/_reponse_modo.html" %}
+                            {% endif %}
                         {% endif %}
-                    {% endif %}
+                    </div>
                 </div>
             </div>
-            </div>
+        </div>
 
-            {% if admin %}
-            <!--Onglet 2 admin-->
-            <div class="tab">
-                <input
-                id="tab-2"
-                name="tab-group-1"
-                type="radio" />
-                <label for="tab-2">
-                    admin
-                </label>
+        <!-- Onglet 2 : admin (statistiques + graphique) -->
+        {% if admin %}
+        <div class="tab">
+            <input id="tab-2" name="tab-group-1" type="radio"/>
+            <label for="tab-2">Admin</label>
+
             <div class="content">
                 {% include "admin/moderateur/moderation_email/structure_moderation/_graphique_admin.html" %}
             </div>
         </div>
         {% endif %}
+
     </div>
     </div>
 </div>

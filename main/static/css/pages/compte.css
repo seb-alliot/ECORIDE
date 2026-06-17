@@ -1,0 +1,266 @@
+/* ===========================================================================
+   EcoRide — Page Mon Compte
+   Système d'onglets (radios CSS) + profil, véhicules, préférences, adresse,
+   cartes covoiturage / historique / réservation.
+   =========================================================================== */
+
+/* ===== Sections de formulaire partagées ===== */
+.form-section {
+  background: var(--color-surface-2);
+  border-radius: var(--radius);
+  padding: var(--space-5);
+  margin-bottom: var(--space-5);
+}
+.section-title,
+.section-subtitle {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-primary);
+  margin-bottom: var(--space-4);
+}
+.section-subtitle { font-size: var(--text-lg); }
+.full-width { flex: 1 1 100% !important; width: 100%; }
+
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+}
+
+/* Boutons spécifiques compte → style partagé via .btn--primary */
+.btn-submit,
+.btn-save-prefs,
+.btn-add-vehicle,
+.btn-propose-trip,
+#button_role {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-5);
+  font-weight: var(--font-semibold);
+  color: var(--color-text-invert);
+  background: var(--gradient-action);
+  border: none;
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+.btn-submit:hover,
+.btn-save-prefs:hover,
+.btn-add-vehicle:hover,
+.btn-propose-trip:hover,
+#button_role:hover { transform: translateY(-1px); box-shadow: var(--shadow-lg); }
+
+/* ===== Profil / rôle ===== */
+#role_form {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+.history-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  font-size: var(--text-xl);
+  color: var(--color-primary);
+  text-align: center;
+  margin-bottom: var(--space-5);
+}
+.history-title.completed { color: var(--color-success); }
+
+/* ===== Photo de profil ===== */
+.profile-photo-section { display: flex; justify-content: center; margin-bottom: var(--space-6); }
+.photo-wrapper { display: flex; flex-direction: column; align-items: center; gap: var(--space-3); }
+.profile-photo {
+  width: var(--avatar-lg);
+  height: var(--avatar-lg);
+  object-fit: cover;
+  border-radius: var(--radius-circle);
+  border: 4px solid var(--color-surface-3);
+  box-shadow: var(--shadow);
+}
+.photo-upload-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-pill);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--color-primary);
+  cursor: pointer;
+}
+.photo-upload-btn:hover { background: var(--color-surface-2); }
+.photo-wrapper input[type="file"] { display: none; }
+
+/* ===== Préférences ===== */
+.preferences-title { display: flex; align-items: center; gap: var(--space-2); color: var(--color-primary); margin-bottom: var(--space-5); }
+.preferences-title.no-pref { color: var(--color-text-muted); }
+.current-preferences {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+.pref-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-1);
+  text-align: center;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--space-4);
+}
+.pref-card.full-width { grid-column: 1 / -1; }
+.pref-icon { font-size: var(--text-2xl); }
+.pref-label { font-size: var(--text-xs); text-transform: uppercase; letter-spacing: .05em; color: var(--color-text-muted); }
+.pref-value { font-weight: var(--font-semibold); color: var(--color-primary); }
+
+/* ===== Véhicules possédés ===== */
+.vehicles-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+.vehicle-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--space-4);
+  box-shadow: var(--shadow-sm);
+}
+.vehicle-header { display: flex; align-items: center; justify-content: space-between; gap: var(--space-2); margin-bottom: var(--space-3); }
+.vehicle-name { color: var(--color-primary); }
+.vehicle-details { display: flex; flex-wrap: wrap; gap: var(--space-4); font-size: var(--text-sm); color: var(--color-text-muted); }
+.no-vehicle-message { display: flex; flex-direction: column; align-items: center; gap: var(--space-2); padding: var(--space-6); color: var(--color-text-muted); }
+
+/* ===== Cartes covoiturage / historique / réservation (familles partagées) ===== */
+.reservation-card,
+.history-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: var(--space-4);
+}
+.reservation-radio { position: absolute; opacity: 0; pointer-events: none; }
+.reservation-content { display: block; cursor: pointer; }
+.reservation-radio:checked + .reservation-content,
+.reservation-radio:checked ~ .reservation-content {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: var(--radius-lg);
+}
+
+.reservation-header,
+.history-header { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); margin-bottom: var(--space-4); flex-wrap: wrap; }
+
+.driver-info,
+.driver-details { display: flex; align-items: center; gap: var(--space-3); }
+.driver-photo {
+  width: var(--avatar-md); height: var(--avatar-md);
+  object-fit: cover;
+  border-radius: var(--radius-circle);
+  border: 2px solid var(--color-border-strong);
+}
+.driver-name { font-weight: var(--font-semibold); }
+.driver-label { font-size: var(--text-xs); color: var(--color-text-muted); text-transform: uppercase; letter-spacing: .05em; }
+
+.reservation-route,
+.history-route,
+.trajet-route {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  padding: var(--space-3);
+  background: var(--color-surface-2);
+  border-radius: var(--radius);
+  margin-bottom: var(--space-3);
+}
+.route-point { display: flex; align-items: center; gap: var(--space-2); font-weight: var(--font-medium); }
+
+.reservation-details,
+.history-details { display: flex; flex-wrap: wrap; gap: var(--space-4); font-size: var(--text-sm); color: var(--color-text-muted); margin-bottom: var(--space-3); }
+.info-item,
+.datetime-item { display: flex; align-items: center; gap: var(--space-1); }
+
+.reservation-car,
+.history-car { display: flex; align-items: center; gap: var(--space-2); font-size: var(--text-sm); }
+
+.reservation-footer,
+.history-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border);
+}
+
+/* Prix (familles compte) */
+.price-section,
+.price { display: flex; flex-direction: column; }
+.price-label { font-size: var(--text-xs); color: var(--color-text-muted); text-transform: uppercase; letter-spacing: .05em; }
+.price-value { font-size: var(--text-xl); font-weight: var(--font-bold); color: var(--color-primary); }
+
+/* Places */
+.seats-section { display: flex; align-items: center; gap: var(--space-2); font-size: var(--text-sm); }
+.seats-available { color: var(--color-success); font-weight: var(--font-medium); }
+.seats-booked { color: var(--color-text-muted); }
+.full { color: var(--color-danger); font-weight: var(--font-medium); }
+
+/* États historiques */
+.cancelled { color: var(--color-danger); }
+.completed { color: var(--color-success); }
+
+.history-section { margin-bottom: var(--space-6); }
+.history-list { display: flex; flex-direction: column; gap: var(--space-3); }
+
+/* ===== Actions de compte (déconnexion / suppression) ===== */
+.account-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-4);
+  margin-top: var(--space-8);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--color-border);
+}
+#deconnexion {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
+  padding: var(--space-3) var(--space-5);
+  background: var(--color-surface);
+  color: var(--color-primary);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-pill);
+  font-weight: var(--font-semibold);
+  cursor: pointer;
+}
+#deconnexion:hover { background: var(--color-surface-2); }
+#suppression-compte {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
+  padding: var(--space-3) var(--space-5);
+  background: var(--color-danger);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-pill);
+  font-weight: var(--font-semibold);
+  cursor: pointer;
+}
+#suppression-compte:hover { filter: brightness(1.08); }

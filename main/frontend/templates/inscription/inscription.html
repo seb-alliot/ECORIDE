@@ -1,4 +1,9 @@
-{% extends 'index.html' %}
+{% extends 'base.html' %}
+{% load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/pages/auth.css' %}">
+{% endblock style %}
 
 {% block principal %}
     {% include "inscription/inscription-logique/inscriptionform.html" %}

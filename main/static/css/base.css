@@ -1,0 +1,57 @@
+/* ===========================================================================
+   EcoRide — Base : typographie globale, fond, liens, helpers minimaux
+   =========================================================================== */
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  color: var(--color-text);
+  background: var(--color-bg);
+  display: flex;
+  flex-direction: column;
+}
+
+main { flex: 1 0 auto; }
+
+h1 { font-size: var(--text-3xl); }
+h2 { font-size: var(--text-2xl); }
+h3 { font-size: var(--text-xl); }
+h4 { font-size: var(--text-lg); }
+
+a { color: var(--color-accent-strong); transition: color var(--transition); }
+a:hover { color: var(--color-primary); }
+
+strong, b { font-weight: var(--font-semibold); }
+
+::selection { background: var(--color-accent-soft); color: var(--color-text-invert); }
+
+/* Conteneur central réutilisable */
+.container {
+  width: 100%;
+  max-width: var(--content-max);
+  margin-inline: auto;
+  padding-inline: var(--content-pad);
+}
+
+/* Compat : utilitaires legacy encore présents dans des partials non refondus.
+   À retirer quand tous les templates auront des classes sémantiques. */
+.class_flex { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+.class_justify_center { justify-content: center; }
+.class_aligne_items_center { align-items: center; }
+.class_column { display: flex; flex-direction: column; gap: var(--space-3); }
+.display_grid { display: grid; gap: var(--space-4); }
+.class_scroll { overflow: auto; }
+.position_relative { position: relative; }
+.text_decoration_none { text-decoration: none; }
+
+/* Accessibilité : masquer visuellement sans retirer du flux lecteur d'écran */
+.label-hidden,
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}

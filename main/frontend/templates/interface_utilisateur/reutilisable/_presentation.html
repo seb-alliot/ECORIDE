@@ -1,6 +1,6 @@
 {% load static %}
 
-<section id="presentation">
+<section id="presentation" class="section">
     {% block content %}
         <div class="presentation">
             <div class="presentation-flex">
@@ -9,7 +9,7 @@
             </div>
             <div class="presentation-flex-reverse">
                 <img src="{% static 'photo/budget.avif' %}" alt="Trajet économique pour un budget réduit et des déplacements simplifiés">
-                <p>Avec EcoRide, proposé, réservé et organisé vos déplacements en toute simplicité avec la sécurité en plus.</p>
+                <p>Avec EcoRide, proposez, réservez et organisez vos déplacements en toute simplicité, avec la sécurité en plus.</p>
             </div>
             <div class="presentation-flex">
                 <img src="{% static 'photo/covoiturage.avif' %}" alt="Voyager de manière économique et responsable grâce au transport partagé">
@@ -17,3 +17,4 @@
             </div>
         </div>
     {% endblock content %}
+</section>

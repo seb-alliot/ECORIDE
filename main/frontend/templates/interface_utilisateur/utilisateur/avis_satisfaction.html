@@ -1,5 +1,9 @@
-{% extends "index.html" %}
+{% extends "base.html" %}
 {% load static %}
+
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/pages/reservation.css' %}">
+{% endblock style %}
 
 {% block principal %}
     <div class="generix3">

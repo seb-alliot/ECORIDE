@@ -1,0 +1,103 @@
+/* ===========================================================================
+   EcoRide — Design tokens
+   Direction "Nature immersif" : verts profonds, dégradés subtils, fonds pâles.
+   Toute valeur de design (couleur, espacement, typo) vit ici. Aucun composant
+   ne doit coder une couleur ou une taille en dur.
+   =========================================================================== */
+
+:root {
+  /* --- Couleurs de marque --- */
+  --color-primary:        #1b4332;   /* vert profond — header, footer, titres */
+  --color-primary-strong: #143728;
+  --color-primary-soft:   #2d6a4f;
+  --color-accent:         #40916c;   /* vert d'action — boutons, liens */
+  --color-accent-strong:  #2d6a4f;
+  --color-accent-soft:    #52b788;
+  --color-accent-pale:    #b7e4c7;
+
+  /* --- Surfaces & fonds --- */
+  --color-bg:        #f4f9f1;   /* fond de page */
+  --color-surface:   #ffffff;   /* cartes, formulaires */
+  --color-surface-2: #e8f5e4;   /* surfaces secondaires teintées */
+  --color-surface-3: #d8f3dc;
+  --color-border:    #d0e8d8;
+  --color-border-strong: #b7e4c7;
+
+  /* --- Texte --- */
+  --color-text:        #1b2d1e;
+  --color-text-muted:  #557a60;
+  --color-text-invert: #f4f9f1;
+
+  /* --- Couleurs sémantiques (état) --- */
+  --color-success:    #155724;
+  --color-success-bg: #d4edda;
+  --color-danger:     #721c24;
+  --color-danger-bg:  #f8d7da;
+  --color-warning:    #856404;
+  --color-warning-bg: #fff3cd;
+  --color-info:       #0c5460;
+  --color-info-bg:    #d1ecf1;
+
+  /* --- Dégradés --- */
+  --gradient-brand: linear-gradient(135deg, #1b4332 0%, #2d6a4f 55%, #40916c 100%);
+  --gradient-hero:  linear-gradient(160deg, rgba(27,67,50,.75) 0%, rgba(45,106,79,.35) 100%);
+  --gradient-action: linear-gradient(135deg, #2d6a4f 0%, #40916c 100%);
+
+  /* --- Typographie --- */
+  --font-sans: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-heading: "Poppins", -apple-system, "Segoe UI", sans-serif;
+
+  --text-xs:   clamp(0.72rem, 0.7rem + 0.2vw, 0.8rem);
+  --text-sm:   clamp(0.82rem, 0.78rem + 0.3vw, 0.9rem);
+  --text-base: clamp(0.95rem, 0.9rem + 0.4vw, 1.05rem);
+  --text-lg:   clamp(1.1rem, 1rem + 0.6vw, 1.3rem);
+  --text-xl:   clamp(1.35rem, 1.1rem + 1vw, 1.75rem);
+  --text-2xl:  clamp(1.7rem, 1.3rem + 1.8vw, 2.5rem);
+  --text-3xl:  clamp(2.1rem, 1.5rem + 3vw, 3.5rem);
+
+  --font-normal: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  --leading-tight: 1.2;
+  --leading-normal: 1.6;
+
+  /* --- Espacements (échelle 4px) --- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-8: 3rem;
+  --space-10: 4rem;
+  --space-12: 6rem;
+
+  /* --- Rayons --- */
+  --radius-sm: 8px;
+  --radius:    12px;
+  --radius-lg: 18px;
+  --radius-pill: 999px;
+  --radius-circle: 50%;
+
+  /* --- Ombres (douces, teintées vert) --- */
+  --shadow-sm: 0 1px 3px rgba(27, 67, 50, .08);
+  --shadow:    0 4px 12px rgba(45, 106, 79, .15);
+  --shadow-lg: 0 12px 32px rgba(27, 67, 50, .18);
+  --shadow-focus: 0 0 0 3px rgba(82, 183, 136, .35);
+
+  /* --- Médias --- */
+  --avatar-sm: 44px;   /* avatars dans les listes/cartes */
+  --avatar-md: 56px;   /* avatar chauffeur sur carte trajet/réservation */
+  --avatar-lg: clamp(110px, 14vw, 170px);  /* photo de profil (Mon Compte) */
+  --card-img-ratio: 4 / 3;
+
+  /* --- Layout --- */
+  --content-max: 1200px;
+  --content-pad: clamp(1rem, 5vw, 2.5rem);
+  --header-h: clamp(64px, 9vw, 96px);
+
+  /* --- Transitions --- */
+  --transition: 180ms ease;
+  --transition-slow: 320ms ease;
+}

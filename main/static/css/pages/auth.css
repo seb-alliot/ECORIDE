@@ -1,0 +1,78 @@
+/* ===========================================================================
+   EcoRide — Pages d'authentification & formulaires simples
+   Connexion, inscription, contact, réinitialisation de mot de passe.
+   =========================================================================== */
+
+#login1, #login2,
+#inscription,
+#contact-page form,
+#reset_mdp, #validation_email,
+.auth-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  width: 100%;
+  max-width: 440px;
+  margin: var(--space-10) auto;
+  padding: var(--space-6);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow);
+}
+
+.auth-title,
+.contact-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  color: var(--color-primary);
+  text-align: center;
+  margin-bottom: var(--space-2);
+}
+
+/* Boutons des formulaires simples → style primaire plein */
+#login1 button, #login2 button,
+#inscription button,
+#contact-page button,
+#reset_mdp button, #validation_email button {
+  width: 100%;
+  padding: var(--space-3) var(--space-5);
+  font-weight: var(--font-semibold);
+  color: var(--color-text-invert);
+  background: var(--gradient-action);
+  border: none;
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+#login1 button:hover, #login2 button:hover,
+#etape-2-connection button:hover,
+#inscription button:hover,
+#contact-page button:hover,
+#reset_form button:hover, #password_reset_confirm_form button:hover {
+  transform: translateY(-1px); box-shadow: var(--shadow-lg);
+}
+
+/* Liens secondaires (créer un compte, mot de passe oublié) */
+#creer_compte, #mot_de_passe_oublie {
+  display: block;
+  text-align: center;
+  margin: var(--space-3) auto 0;
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--color-accent-strong);
+}
+#creer_compte:hover, #mot_de_passe_oublie:hover { color: var(--color-primary); text-decoration: underline; }
+
+/* Erreurs de formulaire */
+.error {
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-danger-bg);
+  color: var(--color-danger);
+  border-left: 4px solid currentColor;
+  border-radius: var(--radius);
+  font-size: var(--text-sm);
+}

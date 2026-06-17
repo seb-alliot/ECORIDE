@@ -1,21 +1,25 @@
 {% load static %}
 
-<form id="filtre_form" method="GET" class="class_flex class_justify_center">
-    <label for="note">Note du chauffeur</label>
-    {{ filtre_form.note }}
+<form id="filtre_form" method="GET">
+    <div class="form-group">
+        <label for="note">Note du chauffeur</label>
+        {{ filtre_form.note }}
+    </div>
+    <div class="form-group">
+        <label for="temps_trajet">Durée trajet</label>
+        {{ filtre_form.temps_trajet }}
+    </div>
+    <div class="form-group">
+        <label for="prix">Prix maximum</label>
+        {{ filtre_form.prix }}
+    </div>
 
-    <label for="temps_trajet">Durée trajet</label>
-    {{ filtre_form.temps_trajet }}
-
-    <label for="prix">Prix maximum</label>
-    {{ filtre_form.prix }}
-
-    <button type="submit" name="form_trajet" value="filtre_form">Filtrer la recherche</button>
+    <button type="submit" name="form_trajet" value="filtre_form" class="btn btn--secondary">Filtrer la recherche</button>
 </form>
 
 <form id="selection_trajet" method="GET" action="{% url 'reservation' %}">
-    <div id="reservation_btn" class="class_flex class_justify_center">
-        <button type="submit">Réserver</button>
+    <div id="reservation_btn" class="form-actions">
+        <button type="submit" class="btn btn--primary">Réserver</button>
     </div>
 </form>
 

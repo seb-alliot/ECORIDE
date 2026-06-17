@@ -1,7 +1,7 @@
-{% extends 'index.html' %}
+{% extends 'base.html' %}
 {% load static %}
 {% block style %}
-    {% include "css_html/_css_mon_compte.html" %}
+    <link rel="stylesheet" href="{% static 'css/pages/compte.css' %}">
 {% endblock style %}
 
 {% block principal %}
@@ -12,7 +12,7 @@
 
         <div id="menu-tab">
             <div class="page-wrap">
-            <div class="tabs position_relative">
+            <div class="tabs">
                 <!-- factoring des tab retourner via le backend-->
                 <!-- on inclus le tab renvoyer au template de maniere dynamique via add:tab et la boucle -->
                 {% for tab in tabs %}

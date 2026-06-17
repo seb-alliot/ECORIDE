@@ -1,0 +1,73 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="EcoRide est une plateforme innovante de covoiturage qui vous permet de partager vos trajets en voiture.">
+
+    <meta name="google-site-verification" content="55hTLK2eHYbvixFbM_aq6D4SBMNeT9s7a7GurBqs9hM" />
+
+    <link rel="icon" href="{% static 'photo/logo.ico' %}" type="image/x-icon">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    {# CSS global — fondation partagée par toutes les pages #}
+    <link rel="stylesheet" href="{% static 'css/tokens.css' %}">
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/layout.css' %}">
+    <link rel="stylesheet" href="{% static 'css/components.css' %}">
+
+    {% block title %}
+        {% include "interface_utilisateur/reutilisable/_nom_du_site.html" %}
+    {% endblock title %}
+
+    {# CSS spécifique à la page #}
+    {% block style %}{% endblock style %}
+</head>
+
+<body>
+    <header class="site-header">
+        {% block headerContent %}
+        <div class="container site-header__bar">
+            {% block logo %}
+                {% include "interface_utilisateur/reutilisable/_logo.html" %}
+            {% endblock logo %}
+
+            {% block connection %}
+                {% include "interface_utilisateur/reutilisable/_info_user.html" %}
+            {% endblock connection %}
+        </div>
+        {% block msginfo %}
+            {% include "interface_utilisateur/reutilisable/_msginfo.html" %}
+        {% endblock msginfo %}
+        {% endblock headerContent %}
+    </header>
+
+    <main>
+        {% block body %}
+            <div class="container">
+                {% block fondbase %}{% endblock fondbase %}
+                {% block principal %}{% endblock principal %}
+                {% block presentation %}{% endblock presentation %}
+            </div>
+        {% endblock body %}
+    </main>
+
+    <footer class="site-footer">
+        {% block footerContent %}
+            <div class="container site-footer__inner">
+                {% include "interface_utilisateur/reutilisable/_footer.html" %}
+            </div>
+        {% endblock footerContent %}
+    </footer>
+
+{% block script_js %}
+{% endblock script_js %}
+
+</body>
+</html>

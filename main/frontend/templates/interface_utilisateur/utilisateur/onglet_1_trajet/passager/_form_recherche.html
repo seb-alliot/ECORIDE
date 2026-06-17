@@ -1,19 +1,29 @@
-<h2 id="recherche_covoiturage">Rechercher un covoiturage via le formulaire ci dessous</h2>
+<section class="search">
+    <h2 class="search__title" id="recherche_covoiturage">Rechercher un covoiturage</h2>
 
-<form id="recherche_form" method="GET" class="class_flex class_justify_center">
-    {% csrf_token %}
+    <form id="recherche_form" method="GET" class="search__form">
+        {% csrf_token %}
 
-    <label for="ville_depart">Départ</label>
-        {{ recherche_form.ville_depart }}
+        <div class="form-group">
+            <label for="ville_depart">Départ</label>
+            {{ recherche_form.ville_depart }}
+        </div>
 
-    <label for="ville_arrivee">Arrivée</label>
-        {{ recherche_form.ville_arrivee }}
+        <div class="form-group">
+            <label for="ville_arrivee">Arrivée</label>
+            {{ recherche_form.ville_arrivee }}
+        </div>
 
-    <label for="date">Date</label>
-        {{ recherche_form.date }}
+        <div class="form-group">
+            <label for="date">Date</label>
+            {{ recherche_form.date }}
+        </div>
 
-    <label for="chauffeur">Chauffeur</label>
-        {{ recherche_form.pseudo }}
+        <div class="form-group">
+            <label for="chauffeur">Chauffeur</label>
+            {{ recherche_form.pseudo }}
+        </div>
 
-    <button type="submit"name="form_trajet" value="recherche_form">Rechercher</button>
-</form>
+        <button type="submit" name="form_trajet" value="recherche_form" class="btn btn--primary">Rechercher</button>
+    </form>
+</section>
