@@ -11,7 +11,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . /app
 
-EXPOSE 8000
+EXPOSE 8010
 
 # Commande par défaut (gunicorn)
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "ECORIDE.wsgi:application"]
