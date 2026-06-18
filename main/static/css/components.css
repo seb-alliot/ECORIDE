@@ -106,7 +106,7 @@ input:focus, select:focus, textarea:focus {
   box-shadow: var(--shadow-focus);
   outline: none;
 }
-textarea { resize: vertical; min-height: 6rem; }
+textarea { resize: vertical; }   /* la hauteur est pilotée par l'attribut rows du widget */
 
 /* Masque les flèches spinner des inputs number (ex : téléphone) */
 input[type="number"]::-webkit-outer-spin-button,

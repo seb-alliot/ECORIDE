@@ -123,7 +123,7 @@
 .photo-wrapper input[type="file"] { display: none; }
 
 /* ===== Préférences ===== */
-.preferences-title { display: flex; align-items: center; gap: var(--space-2); color: var(--color-primary); margin-bottom: var(--space-5); font-size: var(--text-xl); }
+.preferences-title { display: flex; align-items: center; gap: var(--space-2); color: var(--color-primary); margin-bottom: var(--space-5); font-size: var(--text-xl); justify-content: center; }
 .preferences-title.no-pref { color: var(--color-text-muted); }
 .current-preferences {
   display: grid;
@@ -165,6 +165,24 @@
 .vehicle-name { color: var(--color-primary); }
 .vehicle-details { display: flex; flex-wrap: wrap; gap: var(--space-4); font-size: var(--text-sm); color: var(--color-text-muted); }
 .no-vehicle-message { display: flex; flex-direction: column; align-items: center; gap: var(--space-2); padding: var(--space-6); color: var(--color-text-muted); }
+
+/* ===== Listes de cartes trajet (covoiturage proposé / en cours) ===== */
+.trajets-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--space-5);
+  margin-bottom: var(--space-6);
+}
+.trajet-info { display: flex; flex-wrap: wrap; gap: var(--space-3); font-size: var(--text-sm); }
+.trajet-places { display: flex; align-items: center; gap: var(--space-1); }
+
+/* Ici le radio est IMBRIQUÉ dans .trajet-card (≠ accueil où il précède la carte) :
+   l'état sélectionné se cible via :has() au lieu du sélecteur frère. */
+.trajet-card:has(.trajet-radio:checked) {
+  border-color: var(--color-accent);
+  box-shadow: var(--shadow-lg);
+}
+.trajet-card:has(.trajet-radio:checked) .selection-indicator { opacity: 1; transform: scale(1); }
 
 /* ===== Cartes covoiturage / historique / réservation (familles partagées) ===== */
 .reservation-card,

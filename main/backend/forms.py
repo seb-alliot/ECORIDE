@@ -222,15 +222,11 @@ class TrajetForm(forms.ModelForm):
 
     def clean_ville_depart(self):
         ville_depart = self.cleaned_data.get("ville_depart")
-        if ville_depart:
-            return ville_depart.lower().strip()
-        return None
+        return ville_depart.lower().strip() if ville_depart else None
 
     def clean_ville_arrivee(self):
         ville_arrivee = self.cleaned_data.get("ville_arrivee")
-        if ville_arrivee:
-            return ville_arrivee.lower().strip()
-        return None
+        return ville_arrivee.lower().strip() if ville_arrivee else None
 
     def clean_date(self):
         date = self.cleaned_data.get("date")
@@ -289,15 +285,11 @@ class RechercheTrajetForm(forms.Form):
 
     def clean_ville_depart(self):
         ville_depart = self.cleaned_data.get("ville_depart")
-        if ville_depart:
-            return ville_depart.lower().strip()
-        return None
+        return ville_depart.lower().strip() if ville_depart else None
 
     def clean_ville_arrivee(self):
         ville_arrivee = self.cleaned_data.get("ville_arrivee")
-        if ville_arrivee:
-            return ville_arrivee.lower().strip()
-        return None
+        return ville_arrivee.lower().strip() if ville_arrivee else None
 
     def clean_date(self):
         date = self.cleaned_data.get("date")
@@ -394,6 +386,7 @@ class PreferenceForm(forms.ModelForm):
             "exigences_personnelles": forms.Textarea(
                 attrs={
                     "placeholder": "Exigences particulières",
+                    "rows": 2
                 }
             ),
         }
@@ -402,7 +395,7 @@ class PreferenceForm(forms.ModelForm):
         choices=Preference.EXIGENCES_PARTICULIERES, required=False
     )
     exigences_personnelles = forms.CharField(
-        widget=forms.Textarea(attrs={"placeholder": "Exigences particulières"}),
+        widget=forms.Textarea(attrs={"placeholder": "Exigences particulières", "rows": 2}),
         required=False,
     )
 
@@ -425,10 +418,6 @@ class PreferenceForm(forms.ModelForm):
                 "Les exigences particulières ne doivent pas dépasser 200 caractères."
             )
         return exigences_particulieres
-
-    def __init__(self, *args, **kwargs):
-        super(PreferenceForm, self).__init__(*args, **kwargs)
-        self.fields["exigences_particulieres"].required = False
 
 
 class VoitureForm(forms.ModelForm):
@@ -745,9 +734,8 @@ class ContactForm(forms.Form):
             self.fields["email"].initial = user.email
             self.fields["telephone"].initial = user.adresse_user.telephone
 
-            if user.is_authenticated:
-                for field in ["pseudo", "email", "telephone"]:
-                    self.fields[field].widget.attrs["readonly"] = True
+            for field in ["pseudo", "email", "telephone"]:
+                self.fields[field].widget.attrs["readonly"] = True
 
 class ModerationAvisPositifForm(forms.ModelForm):
     class Meta:
