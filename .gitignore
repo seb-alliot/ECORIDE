@@ -62,5 +62,4 @@ staticfiles/
 
 # Cache dans les sous-dossiers
 main/backend/__pycache__/
-main/backend/migrations/
 main/backend/code/__pycache__/

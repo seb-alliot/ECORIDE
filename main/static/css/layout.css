@@ -26,6 +26,98 @@
   width: auto;
 }
 
+/* --- Liens utilisateur du header (compte, modération, admin) --- */
+#account-admin,
+#account-moderateur {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-2);
+}
+
+.photo_default {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  background: var(--color-surface-2);
+  color: var(--color-primary);
+  font-weight: var(--font-semibold);
+  font-size: var(--text-sm);
+  line-height: 1.2;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+.photo_default:hover {
+  background: var(--color-surface-3);
+  color: var(--color-primary);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+.photo_default > div { display: inline; }   /* "Mon compte : X €" reste inline dans le chip */
+.photo_default br { display: none; }
+
+#gain_plateforme {
+  text-align: right;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  margin-top: var(--space-2);
+}
+
+/* --- Menu burger (mobile uniquement, CSS pur via checkbox) --- */
+.nav-toggle { display: none; }   /* checkbox d'état, jamais affiché */
+.nav-burger { display: none; }   /* burger masqué en desktop */
+
+@media (max-width: 600px) {
+  .site-header__bar { flex-wrap: wrap; align-items: center; }
+
+  .nav-burger {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 46px;
+    height: 46px;
+    padding: var(--space-2);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius);
+    cursor: pointer;
+  }
+  .nav-burger span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background: var(--color-primary);
+    border-radius: 2px;
+    transition: transform var(--transition), opacity var(--transition);
+  }
+  /* Barres → croix quand le menu est ouvert */
+  #nav-toggle:checked ~ .nav-burger span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+  #nav-toggle:checked ~ .nav-burger span:nth-child(2) { opacity: 0; }
+  #nav-toggle:checked ~ .nav-burger span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+  /* Le menu (chips compte/modération/admin) : caché par défaut, déroulé si ouvert */
+  .site-nav {
+    flex: 1 1 100%;
+    display: none;
+    padding-top: var(--space-3);
+  }
+  /* Menu déroulé : liens alignés à droite */
+  #nav-toggle:checked ~ .site-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--space-2);
+  }
+
+  #account-admin,
+  #account-moderateur { flex-direction: column; align-items: flex-end; gap: var(--space-2); }
+  #gain_plateforme { text-align: right; }
+}
+
 /* --- Footer --- */
 .site-footer {
   flex-shrink: 0;

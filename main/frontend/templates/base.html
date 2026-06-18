@@ -38,9 +38,16 @@
                 {% include "interface_utilisateur/reutilisable/_logo.html" %}
             {% endblock logo %}
 
-            {% block connection %}
-                {% include "interface_utilisateur/reutilisable/_info_user.html" %}
-            {% endblock connection %}
+            <input type="checkbox" id="nav-toggle" class="nav-toggle">
+            <label for="nav-toggle" class="nav-burger" aria-label="Ouvrir le menu">
+                <span></span><span></span><span></span>
+            </label>
+
+            <nav class="site-nav">
+                {% block connection %}
+                    {% include "interface_utilisateur/reutilisable/_info_user.html" %}
+                {% endblock connection %}
+            </nav>
         </div>
         {% block msginfo %}
             {% include "interface_utilisateur/reutilisable/_msginfo.html" %}

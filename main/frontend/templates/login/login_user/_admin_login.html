@@ -6,7 +6,7 @@
             <div>
                 <a href="{% url 'MonCompte' %}" class="photo_default">
                     <div>
-                        Mon compte : {{ credit.credit|floatformat:2 }} €
+                        Mon compte : {% if credit.credit %}{{ credit.credit|floatformat:2 }} € {% else %}0.00 €{% endif %}
                     </div>
                 </a>
             </div>
@@ -30,6 +30,6 @@
 
     </div>
     <div id="gain_plateforme">
-        Gain de la plateforme : {{ credit_superuser.credit|floatformat:2 }} €
+        Gain de la plateforme : {% if credit_superuser.credit %}{{ credit_superuser.credit|floatformat:2 }} € {% else %}0.00 €{% endif %}
     </div>
 </div>

@@ -1,3 +1,3 @@
 <a href="{% url 'MonCompte' %}" class="account-pill">
-    Mon compte : {{ credit.credit|floatformat:2 }} €
+    Mon compte : {% if credit.credit %}{{ credit.credit|floatformat:2 }} € {% else %}0.00 €{% endif %}
 </a>

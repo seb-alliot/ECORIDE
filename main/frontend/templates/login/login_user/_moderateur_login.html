@@ -3,7 +3,7 @@
         <div>
             <a href="{% url 'MonCompte' %}" class="photo_default">
                 <div>
-                    Mon compte : {{ credit.credit|floatformat:2 }} €
+                    Mon compte : {% if credit.credit %}{{ credit.credit|floatformat:2 }} € {% else %}0.00 €{% endif %}
                 </div><br>
             </a>
         </div>
