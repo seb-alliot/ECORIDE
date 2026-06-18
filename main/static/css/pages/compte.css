@@ -35,7 +35,10 @@
 .btn-save-prefs,
 .btn-add-vehicle,
 .btn-propose-trip,
-#button_role {
+#button_role,
+#bouton_terminer,
+#deux_choix,
+#reservation_annuler {
   display: inline-flex;
   align-items: center;
   gap: var(--space-2);
@@ -53,7 +56,23 @@
 .btn-save-prefs:hover,
 .btn-add-vehicle:hover,
 .btn-propose-trip:hover,
-#button_role:hover { transform: translateY(-1px); box-shadow: var(--shadow-lg); }
+#button_role:hover,
+#bouton_terminer:hover,
+#deux_choix:hover,
+#reservation_annuler:hover { transform: translateY(-1px); box-shadow: var(--shadow-lg); }
+
+/* Formulaires de changement de statut (covoiturage en cours / proposés / réservations) */
+#trajet_terminer_form,
+#demarrer_ou_annuler_form,
+#reservation_form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+}
+#trajet_terminer_form select,
+#demarrer_ou_annuler_form select,
+#reservation_form select { max-width: 360px; }
 
 /* ===== Profil / rôle ===== */
 #role_form {
