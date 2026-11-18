@@ -30,7 +30,12 @@ SECRET_KEY = env('DJANGO_SECRET_KEY', default='django-insecure-#&')
 
 DEBUG = False
 
-ALLOWED_HOSTS = ["ecoride.test-itsuki.fr", "localhost", "127.0.0.1"]
+# Surchargeable via .env (liste séparée par des virgules), ex. pour un serveur de test :
+# ALLOWED_HOSTS=ecoride.test-itsuki.fr,localhost,127.0.0.1,10.14.237.251
+ALLOWED_HOSTS = env.list(
+    "ALLOWED_HOSTS",
+    default=["ecoride.test-itsuki.fr", "localhost", "127.0.0.1"],
+)
 
 
 
@@ -195,7 +200,11 @@ SECURE_SSL_REDIRECT = False
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 SECURE_BROWSER_XSS_FILTER = True
-CSRF_TRUSTED_ORIGINS = ["https://ecoride.test-itsuki.fr"]
+# Surchargeable via .env, ex. : CSRF_TRUSTED_ORIGINS=https://ecoride.test-itsuki.fr,https://10.14.237.251:8083
+CSRF_TRUSTED_ORIGINS = env.list(
+    "CSRF_TRUSTED_ORIGINS",
+    default=["https://ecoride.test-itsuki.fr"],
+)
 
 # Si nginx, ajoute aussi :
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
